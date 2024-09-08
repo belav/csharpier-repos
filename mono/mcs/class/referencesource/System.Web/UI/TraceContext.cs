@@ -9,23 +9,24 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-namespace System.Web {
+namespace System.Web
+{
     using System;
-// 
-    using System.Web.UI;
-    using System.Web.Handlers;
-    using System.Web.Util;
-    using System.Web.SessionState;
-    using System.Text;
-    using System.Data;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Diagnostics;
-    using System.Security.Permissions;
-    using System.Web.Configuration;
-    using System.Threading;
     using System.ComponentModel;
+    using System.Data;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using System.Web.Configuration;
+    using System.Web.Handlers;
+    using System.Web.SessionState;
+    //
+    using System.Web.UI;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>Captures and presents execution details about a Web request.</para>
@@ -41,36 +42,38 @@ namespace System.Web {
     ///       performance data, tree-structure information, and state management content.</para>
     /// </devdoc>
 
-    public sealed
-        class TraceContext {
-
-        private static DataSet  _masterRequest;
-        private static bool     _writeToDiagnosticsTrace = false;
+    public sealed class TraceContext
+    {
+        private static DataSet _masterRequest;
+        private static bool _writeToDiagnosticsTrace = false;
         private static readonly object EventTraceFinished = new object();
         private EventHandlerList _events = new EventHandlerList();
 
-        private TraceMode       _traceMode;
-        private TraceEnable     _isEnabled;
-        private HttpContext     _context;
-        private DataSet         _requestData;
-        private long            _firstTime;
-        private long            _lastTime;
-        private int             _uniqueIdCounter = 0;
+        private TraceMode _traceMode;
+        private TraceEnable _isEnabled;
+        private HttpContext _context;
+        private DataSet _requestData;
+        private long _firstTime;
+        private long _lastTime;
+        private int _uniqueIdCounter = 0;
         private const string PAGEKEYNAME = "__PAGE";
         private const string NULLSTRING = "<null>"; // this will get HtmlEncoded later...
         private const string NULLIDPREFIX = "__UnassignedID";
-        private ArrayList       _traceRecords;
+        private ArrayList _traceRecords;
 
-        private bool            _endDataCollected;
-        private bool            _writing = false;
+        private bool _endDataCollected;
+        private bool _writing = false;
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.TraceContext'/> class.</para>
         /// </devdoc>
-        public TraceContext(HttpContext context) {
+        public TraceContext(HttpContext context)
+        {
             _traceMode = TraceMode.Default;
             // Always disable trace in retail deployment mode (DevDiv 36396)
-            _isEnabled = DeploymentSection.RetailInternal ? TraceEnable.Disable : TraceEnable.Default;
+            _isEnabled = DeploymentSection.RetailInternal
+                ? TraceEnable.Disable
+                : TraceEnable.Default;
             _context = context;
             _firstTime = -1;
             _lastTime = -1;
@@ -83,15 +86,19 @@ namespace System.Web {
         ///       output to a requesting browser. Trace messages can be sorted in the order they
         ///       were processed, or alphabetically by user-defined category.</para>
         /// </devdoc>
-        public TraceMode TraceMode {
-            get {
+        public TraceMode TraceMode
+        {
+            get
+            {
                 if (_traceMode == TraceMode.Default)
                     return HttpRuntime.Profile.OutputMode;
 
                 return _traceMode;
             }
-            set {
-                if (value < TraceMode.SortByTime || value > TraceMode.Default) {
+            set
+            {
+                if (value < TraceMode.SortByTime || value > TraceMode.Default)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 _traceMode = value;
@@ -106,17 +113,22 @@ namespace System.Web {
         ///       Use this flag to check whether you should output tracing information before
         ///       writing anything to the trace log.</para>
         /// </devdoc>
-        public bool IsEnabled {
-            get {
+        public bool IsEnabled
+        {
+            get
+            {
                 if (_isEnabled == TraceEnable.Default)
                     return HttpRuntime.Profile.IsEnabled;
-                else {
+                else
+                {
                     return (_isEnabled == TraceEnable.Enable) ? true : false;
                 }
             }
-            set {
+            set
+            {
                 // Always disable trace in retail deployment mode (DevDiv 36396)
-                if (DeploymentSection.RetailInternal) {
+                if (DeploymentSection.RetailInternal)
+                {
                     System.Web.Util.Debug.Assert(_isEnabled == TraceEnable.Disable);
                     return;
                 }
@@ -128,142 +140,157 @@ namespace System.Web {
             }
         }
 
-
         /// <devdoc>
         ///    <para>Indicates whether trace information should be output to a Web Forms
         ///       page. This property is used only in application-level tracing situations. You
         ///       can set this property in your application's config.web configuration file which
         ///       resides in the root directory of the application. </para>
         /// </devdoc>
-        internal bool PageOutput {
-            get {
+        internal bool PageOutput
+        {
+            get
+            {
                 if (_isEnabled == TraceEnable.Default)
                     return HttpRuntime.Profile.PageOutput;
-                else {
+                else
+                {
                     return (_isEnabled == TraceEnable.Enable) ? true : false;
                 }
-
             }
         }
 
         // this is used only for error pages, called from Page.HandleError.
-        internal int StatusCode {
-            set {
+        internal int StatusCode
+        {
+            set
+            {
                 VerifyStart();
                 DataRow row = _requestData.Tables[SR.Trace_Request].Rows[0];
                 row[SR.Trace_Status_Code] = value;
             }
         }
 
-
         /// <devdoc>
         ///     Raised after the trace has been finished
         /// </devdoc>
-        public event TraceContextEventHandler TraceFinished {
-            add {
-                _events.AddHandler(EventTraceFinished, value);
-            }
-            remove {
-                _events.RemoveHandler(EventTraceFinished, value);
-            }
+        public event TraceContextEventHandler TraceFinished
+        {
+            add { _events.AddHandler(EventTraceFinished, value); }
+            remove { _events.RemoveHandler(EventTraceFinished, value); }
         }
 
-        private void ApplyTraceMode() {
+        private void ApplyTraceMode()
+        {
             VerifyStart();
             if (TraceMode == TraceMode.SortByCategory)
-                _requestData.Tables[SR.Trace_Trace_Information].DefaultView.Sort = SR.Trace_Category;
+                _requestData.Tables[SR.Trace_Trace_Information].DefaultView.Sort =
+                    SR.Trace_Category;
             else
-                _requestData.Tables[SR.Trace_Trace_Information].DefaultView.Sort = SR.Trace_From_First;
+                _requestData.Tables[SR.Trace_Trace_Information].DefaultView.Sort =
+                    SR.Trace_From_First;
         }
 
-
-        internal void CopySettingsTo(TraceContext tc) {
+        internal void CopySettingsTo(TraceContext tc)
+        {
             tc._traceMode = this._traceMode;
             tc._isEnabled = this._isEnabled;
         }
 
-        internal void OnTraceFinished(TraceContextEventArgs e) {
-            TraceContextEventHandler handler = (TraceContextEventHandler)_events[EventTraceFinished];
-            if (handler != null) {
+        internal void OnTraceFinished(TraceContextEventArgs e)
+        {
+            TraceContextEventHandler handler = (TraceContextEventHandler)
+                _events[EventTraceFinished];
+            if (handler != null)
+            {
                 handler(this, e);
             }
         }
 
-        internal static void SetWriteToDiagnosticsTrace(bool value) {
+        internal static void SetWriteToDiagnosticsTrace(bool value)
+        {
             _writeToDiagnosticsTrace = value;
         }
 
-
         /// <devdoc>
         ///    <para>Writes trace information to the trace log including any
         ///       user defined categories and trace messages.</para>
         /// </devdoc>
-        public void Write(string message) {
+        public void Write(string message)
+        {
             Write(String.Empty, message, null, false, _writeToDiagnosticsTrace);
         }
 
-
         /// <devdoc>
         ///    <para>Writes trace information to the trace log including any
         ///       user defined categories and trace messages.</para>
         /// </devdoc>
-        public void Write(string category, string message) {
+        public void Write(string category, string message)
+        {
             Write(category, message, null, false, _writeToDiagnosticsTrace);
         }
-
 
         /// <devdoc>
         ///    <para>Writes trace information to the trace log including any user defined
         ///       categories,trace messages and error information.</para>
         /// </devdoc>
-        public void Write(string category, string message, Exception errorInfo) {
+        public void Write(string category, string message, Exception errorInfo)
+        {
             Write(category, message, errorInfo, false, _writeToDiagnosticsTrace);
         }
 
-        internal void WriteInternal(string message, bool writeToDiagnostics) {
+        internal void WriteInternal(string message, bool writeToDiagnostics)
+        {
             Write(String.Empty, message, null, false, writeToDiagnostics);
         }
 
-
-        internal void WriteInternal(string category, string message, bool writeToDiagnostics) {
+        internal void WriteInternal(string category, string message, bool writeToDiagnostics)
+        {
             Write(category, message, null, false, writeToDiagnostics);
         }
 
-
         /// <devdoc>
         ///    <para>Writes trace information to the trace log including any
         ///       user defined categories and trace messages. All warnings appear as red text.</para>
         /// </devdoc>
-        public void Warn(string message) {
+        public void Warn(string message)
+        {
             Write(String.Empty, message, null, true, _writeToDiagnosticsTrace);
         }
 
-
         /// <devdoc>
         ///    <para>Writes trace information to the trace log including any
         ///       user defined categories and trace messages. All warnings appear as red text.</para>
         /// </devdoc>
-        public void Warn(string category, string message) {
+        public void Warn(string category, string message)
+        {
             Write(category, message, null, true, _writeToDiagnosticsTrace);
         }
-
 
         /// <devdoc>
         ///    <para>Writes trace information to the trace log including any user defined categories,trace messages and error information. All
         ///       warnings appear as red text. </para>
         /// </devdoc>
-        public void Warn(string category, string message, Exception errorInfo) {
+        public void Warn(string category, string message, Exception errorInfo)
+        {
             Write(category, message, errorInfo, true, _writeToDiagnosticsTrace);
         }
 
-
-        internal void WarnInternal(string category, string message, bool writeToDiagnostics) {
+        internal void WarnInternal(string category, string message, bool writeToDiagnostics)
+        {
             Write(category, message, null, true, writeToDiagnostics);
         }
 
-        void Write(string category, string message, Exception errorInfo, bool isWarning, bool writeToDiagnostics) {
+        void Write(
+            string category,
+            string message,
+            Exception errorInfo,
+            bool isWarning,
+            bool writeToDiagnostics
+        )
+        {
             // Guard against
-            lock(this) {
+            lock (this)
+            {
                 // Bail if trace isn't enabled or this is from our call to System.Diagonostics.Trace below
                 if (!IsEnabled || _writing || _endDataCollected)
                     return;
@@ -282,30 +309,42 @@ namespace System.Web {
                 row[SR.Trace_Category] = category;
                 row[SR.Trace_Message] = message;
                 row[SR.Trace_Warning] = isWarning ? "yes" : "no";
-                if (errorInfo != null) {
+                if (errorInfo != null)
+                {
                     row["ErrorInfoMessage"] = errorInfo.Message;
                     row["ErrorInfoStack"] = errorInfo.StackTrace;
                 }
 
-                if (_firstTime != -1) {
-                    row[SR.Trace_From_First] = (((double)(messagetime - _firstTime)) / Counter.Frequency);
+                if (_firstTime != -1)
+                {
+                    row[SR.Trace_From_First] = (
+                        ((double)(messagetime - _firstTime)) / Counter.Frequency
+                    );
                 }
                 else
                     _firstTime = messagetime;
 
-                if (_lastTime != -1) {
-                    row[SR.Trace_From_Last] = (((double)(messagetime - _lastTime)) / Counter.Frequency);
+                if (_lastTime != -1)
+                {
+                    row[SR.Trace_From_Last] = (
+                        ((double)(messagetime - _lastTime)) / Counter.Frequency
+                    );
                 }
                 _lastTime = messagetime;
                 AddRow(_requestData, SR.Trace_Trace_Information, row);
 
                 string msg = message;
-                if (errorInfo != null) {
+                if (errorInfo != null)
+                {
                     string eMsg = errorInfo.Message;
-                    if (eMsg == null) eMsg = String.Empty;
+                    if (eMsg == null)
+                        eMsg = String.Empty;
                     string eTrace = errorInfo.StackTrace;
-                    if (eTrace == null) eTrace = String.Empty;
-                    StringBuilder str = new StringBuilder(message.Length + eMsg.Length + eTrace.Length);
+                    if (eTrace == null)
+                        eTrace = String.Empty;
+                    StringBuilder str = new StringBuilder(
+                        message.Length + eMsg.Length + eTrace.Length
+                    );
                     str.Append(message);
                     str.Append(" -- ");
                     str.Append(eMsg);
@@ -314,30 +353,41 @@ namespace System.Web {
                     msg = str.ToString();
                 }
 
-                if (writeToDiagnostics) {
+                if (writeToDiagnostics)
+                {
                     _writing = true;
                     System.Diagnostics.Trace.WriteLine(msg, category);
                     _writing = false;
                 }
 
                 // Send to IIS tracing
-                if (_context != null && _context.WorkerRequest != null) {
-                    _context.WorkerRequest.RaiseTraceEvent(isWarning ? IntegratedTraceType.TraceWarn : IntegratedTraceType.TraceWrite, msg);
+                if (_context != null && _context.WorkerRequest != null)
+                {
+                    _context.WorkerRequest.RaiseTraceEvent(
+                        isWarning ? IntegratedTraceType.TraceWarn : IntegratedTraceType.TraceWrite,
+                        msg
+                    );
                 }
-                
             }
 
             // Add the trace record to our collection
             _traceRecords.Add(new TraceContextRecord(category, message, isWarning, errorInfo));
         }
 
-        internal void AddNewControl(string id, string parentId, string type, int viewStateSize, int controlStateSize) {
+        internal void AddNewControl(
+            string id,
+            string parentId,
+            string type,
+            int viewStateSize,
+            int controlStateSize
+        )
+        {
             VerifyStart();
 
             DataRow row = NewRow(_requestData, SR.Trace_Control_Tree);
 
             if (id == null)
-                id = NULLIDPREFIX+(_uniqueIdCounter++);
+                id = NULLIDPREFIX + (_uniqueIdCounter++);
             row[SR.Trace_Control_Id] = id;
 
             if (parentId == null)
@@ -348,19 +398,21 @@ namespace System.Web {
             row[SR.Trace_Viewstate_Size] = viewStateSize;
             row[SR.Trace_Controlstate_Size] = controlStateSize;
             row[SR.Trace_Render_Size] = 0;
-            try {
+            try
+            {
                 AddRow(_requestData, SR.Trace_Control_Tree, row);
             }
-            catch (ConstraintException) {
+            catch (ConstraintException)
+            {
                 throw new HttpException(SR.GetString(SR.Duplicate_id_used, id, "Trace"));
             }
-
         }
 
         /*
          *   Add the render size to the control
          */
-        internal void AddControlSize(String controlId, int renderSize) {
+        internal void AddControlSize(String controlId, int renderSize)
+        {
             VerifyStart();
 
             DataTable dt = _requestData.Tables[SR.Trace_Control_Tree];
@@ -368,13 +420,14 @@ namespace System.Web {
             // find the row for this control
             if (controlId == null)
                 controlId = PAGEKEYNAME;
-            DataRow row = dt.Rows.Find((object) controlId);
+            DataRow row = dt.Rows.Find((object)controlId);
             // if the row is null, we couldn't find it, so we'll just skip this control
             if (row != null)
                 row[SR.Trace_Render_Size] = renderSize;
         }
 
-        internal void AddControlStateSize(String controlId, int viewstateSize, int controlstateSize) {
+        internal void AddControlStateSize(String controlId, int viewstateSize, int controlstateSize)
+        {
             VerifyStart();
 
             DataTable dt = _requestData.Tables[SR.Trace_Control_Tree];
@@ -382,18 +435,19 @@ namespace System.Web {
             // find the row for this control
             if (controlId == null)
                 controlId = PAGEKEYNAME;
-            DataRow row = dt.Rows.Find((object) controlId);
+            DataRow row = dt.Rows.Find((object)controlId);
             // if the row is null, we couldn't find it, so we'll just skip this control
-            if (row != null) {
+            if (row != null)
+            {
                 row[SR.Trace_Viewstate_Size] = viewstateSize;
                 row[SR.Trace_Controlstate_Size] = controlstateSize;
             }
         }
 
-
-        internal void Render(HtmlTextWriter output) {
-            if (PageOutput && _requestData != null) {
-
+        internal void Render(HtmlTextWriter output)
+        {
+            if (PageOutput && _requestData != null)
+            {
                 TraceEnable oldEnabled = _isEnabled;
 
                 _isEnabled = TraceEnable.Disable;
@@ -408,7 +462,9 @@ namespace System.Web {
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTraceTable(_requestData.Tables[SR.Trace_Trace_Information]);
+                table = TraceHandler.CreateTraceTable(
+                    _requestData.Tables[SR.Trace_Trace_Information]
+                );
                 if (table != null)
                     table.RenderControl(output);
 
@@ -416,27 +472,45 @@ namespace System.Web {
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Session_State], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Session_State],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Application_State], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Application_State],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Request_Cookies_Collection], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Request_Cookies_Collection],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Response_Cookies_Collection], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Response_Cookies_Collection],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Headers_Collection], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Headers_Collection],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Response_Headers_Collection], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Response_Headers_Collection],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
@@ -444,17 +518,27 @@ namespace System.Web {
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Querystring_Collection]);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Querystring_Collection]
+                );
                 if (table != null)
                     table.RenderControl(output);
 
-                table = TraceHandler.CreateTable(_requestData.Tables[SR.Trace_Server_Variables], true /*encodeSpaces*/);
+                table = TraceHandler.CreateTable(
+                    _requestData.Tables[SR.Trace_Server_Variables],
+                    true /*encodeSpaces*/
+                );
                 if (table != null)
                     table.RenderControl(output);
 
                 output.Write("<hr width=100% size=1 color=silver>\r\n\r\n");
-                output.Write(SR.GetString(SR.Error_Formatter_CLR_Build) + VersionInfo.ClrVersion +
-                             SR.GetString(SR.Error_Formatter_ASPNET_Build) + VersionInfo.EngineVersion + "\r\n\r\n");
+                output.Write(
+                    SR.GetString(SR.Error_Formatter_CLR_Build)
+                        + VersionInfo.ClrVersion
+                        + SR.GetString(SR.Error_Formatter_ASPNET_Build)
+                        + VersionInfo.EngineVersion
+                        + "\r\n\r\n"
+                );
                 output.Write("</font>\r\n\r\n");
 
                 output.Write("</span>\r\n</div>\r\n");
@@ -463,34 +547,41 @@ namespace System.Web {
             }
         }
 
-        internal DataSet GetData() {
+        internal DataSet GetData()
+        {
             return _requestData;
         }
 
-        internal void VerifyStart() {
+        internal void VerifyStart()
+        {
             // if we have already started, we can skip the lock
-            if (_masterRequest == null) {
+            if (_masterRequest == null)
+            {
                 // otherwise we need to make sure two
                 // requests don't try to call InitMaster at the same time
-                lock(this) {
+                lock (this)
+                {
                     if (_masterRequest == null)
                         InitMaster();
                 }
             }
 
-            if (_requestData == null) {
+            if (_requestData == null)
+            {
                 InitRequest();
             }
         }
 
-        internal void StopTracing() {
+        internal void StopTracing()
+        {
             _endDataCollected = true;
         }
 
         /*
          *   Finalize the request
          */
-        internal void EndRequest() {
+        internal void EndRequest()
+        {
             VerifyStart();
 
             if (_endDataCollected)
@@ -506,14 +597,15 @@ namespace System.Web {
             object obj;
             int i;
 
-
             // Application State info
             _context.Application.Lock();
-            try {
+            try
+            {
                 en = _context.Application.GetEnumerator();
-                while (en.MoveNext()) {
+                while (en.MoveNext())
+                {
                     row = NewRow(_requestData, SR.Trace_Application_State);
-                    temp = (string) en.Current;
+                    temp = (string)en.Current;
 
                     //the key might be null
                     row[SR.Trace_Application_Key] = (temp != null) ? temp : NULLSTRING;
@@ -521,11 +613,13 @@ namespace System.Web {
                     obj = _context.Application[temp];
 
                     // the value could also be null
-                    if (obj != null) {
+                    if (obj != null)
+                    {
                         row[SR.Trace_Type] = obj.GetType();
                         row[SR.Trace_Value] = obj.ToString();
                     }
-                    else {
+                    else
+                    {
                         row[SR.Trace_Type] = NULLSTRING;
                         row[SR.Trace_Value] = NULLSTRING;
                     }
@@ -533,25 +627,32 @@ namespace System.Web {
                     AddRow(_requestData, SR.Trace_Application_State, row);
                 }
             }
-            finally {
+            finally
+            {
                 _context.Application.UnLock();
             }
 
             // request cookie info
             HttpCookieCollection cookieCollection = new HttpCookieCollection();
-            _context.Request.FillInCookiesCollection(cookieCollection, false /*includeResponse */);
+            _context.Request.FillInCookiesCollection(
+                cookieCollection,
+                false /*includeResponse */
+            );
             HttpCookie[] cookies = new HttpCookie[cookieCollection.Count];
             cookieCollection.CopyTo(cookies, 0);
-            for (i = 0; i<cookies.Length; i++) {
+            for (i = 0; i < cookies.Length; i++)
+            {
                 row = NewRow(_requestData, SR.Trace_Request_Cookies_Collection);
                 row[SR.Trace_Name] = cookies[i].Name;
-                if (cookies[i].Values.HasKeys()) {
+                if (cookies[i].Values.HasKeys())
+                {
                     NameValueCollection subvalues = cookies[i].Values;
                     StringBuilder sb = new StringBuilder();
 
                     en = subvalues.GetEnumerator();
-                    while (en.MoveNext()) {
-                        temp = (string) en.Current;
+                    while (en.MoveNext())
+                    {
+                        temp = (string)en.Current;
                         sb.Append("(");
                         sb.Append(temp + "=");
 
@@ -562,7 +663,7 @@ namespace System.Web {
                 else
                     row[SR.Trace_Value] = cookies[i].Value;
 
-                int size =  (cookies[i].Name  == null) ? 0 : cookies[i].Name.Length;
+                int size = (cookies[i].Name == null) ? 0 : cookies[i].Name.Length;
                 size += (cookies[i].Value == null) ? 0 : cookies[i].Value.Length;
 
                 row[SR.Trace_Size] = size + 1; // plus 1 for =
@@ -572,16 +673,19 @@ namespace System.Web {
             // response cookie info
             cookies = new HttpCookie[_context.Response.Cookies.Count];
             _context.Response.Cookies.CopyTo(cookies, 0);
-            for (i = 0; i<cookies.Length; i++) {
+            for (i = 0; i < cookies.Length; i++)
+            {
                 row = NewRow(_requestData, SR.Trace_Response_Cookies_Collection);
                 row[SR.Trace_Name] = cookies[i].Name;
-                if (cookies[i].Values.HasKeys()) {
+                if (cookies[i].Values.HasKeys())
+                {
                     NameValueCollection subvalues = cookies[i].Values;
                     StringBuilder sb = new StringBuilder();
 
                     en = subvalues.GetEnumerator();
-                    while (en.MoveNext()) {
-                        temp = (string) en.Current;
+                    while (en.MoveNext())
+                    {
+                        temp = (string)en.Current;
                         sb.Append("(");
                         sb.Append(temp + "=");
 
@@ -592,7 +696,7 @@ namespace System.Web {
                 else
                     row[SR.Trace_Value] = cookies[i].Value;
 
-                int size =  (cookies[i].Name  == null) ? 0 : cookies[i].Name.Length;
+                int size = (cookies[i].Name == null) ? 0 : cookies[i].Name.Length;
                 size += (cookies[i].Value == null) ? 0 : cookies[i].Value.Length;
 
                 row[SR.Trace_Size] = size + 1; // plus 1 for =
@@ -601,24 +705,28 @@ namespace System.Web {
 
             HttpSessionState session = _context.Session;
             // session state info
-            if (session != null) {
+            if (session != null)
+            {
                 row = _requestData.Tables[SR.Trace_Request].Rows[0];
-                try {
+                try
+                {
                     row[SR.Trace_Session_Id] = HttpUtility.UrlEncode(session.SessionID);
                 }
-                catch {
+                catch
+                {
                     // VSWhidbey 527536
                     // Accessing SessionID can cause creation of the session id, this will throw in the
                     // cross page post scenario, as the response has already been flushed when we try
                     // to add the session cookie, since this is just trace output, we can just not set a session ID.
-                    // 
+                    //
                 }
 
                 en = session.GetEnumerator();
-                while (en.MoveNext()) {
+                while (en.MoveNext())
+                {
                     row = NewRow(_requestData, SR.Trace_Session_State);
 
-                    temp = (string) en.Current;
+                    temp = (string)en.Current;
 
                     // the key could be null
                     row[SR.Trace_Session_Key] = (temp != null) ? temp : NULLSTRING;
@@ -626,11 +734,13 @@ namespace System.Web {
                     obj = session[temp];
 
                     // the value could also be null
-                    if (obj != null) {
+                    if (obj != null)
+                    {
                         row[SR.Trace_Type] = obj.GetType();
                         row[SR.Trace_Value] = obj.ToString();
                     }
-                    else {
+                    else
+                    {
                         row[SR.Trace_Type] = NULLSTRING;
                         row[SR.Trace_Value] = NULLSTRING;
                     }
@@ -647,7 +757,8 @@ namespace System.Web {
          *  Initialize the _masterRequest dataset with the schema we use
          *  to store profiling information
          */
-        private void InitMaster() {
+        private void InitMaster()
+        {
             DataSet tempset = new DataSet();
             tempset.Locale = CultureInfo.InvariantCulture;
 
@@ -675,7 +786,7 @@ namespace System.Web {
             DataColumn[] col = new DataColumn[1];
             col[0] = new DataColumn(SR.Trace_Control_Id, strtype);
             tab.Columns.Add(col[0]);
-            tab.PrimaryKey = col;   // set the control id to be the primary key
+            tab.PrimaryKey = col; // set the control id to be the primary key
 
             tab.Columns.Add(SR.Trace_Type, strtype);
             tab.Columns.Add(SR.Trace_Render_Size, inttype);
@@ -744,11 +855,13 @@ namespace System.Web {
             _masterRequest = tempset;
         }
 
-        private DataRow NewRow(DataSet ds, string table) {
+        private DataRow NewRow(DataSet ds, string table)
+        {
             return ds.Tables[table].NewRow();
         }
 
-        private void AddRow(DataSet ds, string table, DataRow row) {
+        private void AddRow(DataSet ds, string table, DataRow row)
+        {
             ds.Tables[table].Rows.Add(row);
         }
 
@@ -756,7 +869,8 @@ namespace System.Web {
          *  Initialize the given dataset with basic
          *  request information
          */
-        private void InitRequest() {
+        private void InitRequest()
+        {
             // Master request is assumed to be initialized first
             System.Web.Util.Debug.Assert(_masterRequest != null);
 
@@ -773,10 +887,12 @@ namespace System.Web {
             row[SR.Trace_Url] = url;
 
             row[SR.Trace_Request_Type] = _context.Request.HttpMethod;
-            try {
+            try
+            {
                 row[SR.Trace_Request_Encoding] = _context.Request.ContentEncoding.EncodingName;
             }
-            catch {
+            catch
+            {
                 // if we get an exception getting the ContentEncoding, most likely
                 // there's an error in the config file.  Just ignore it so we can finish InitRequest.
             }
@@ -786,19 +902,26 @@ namespace System.Web {
             AddRow(requestData, SR.Trace_Request, row);
 
             // header info
-            try {
+            try
+            {
                 // Bug 867196: Use Request.Unvalidated to ensure request validation will not
                 // be triggered when the entries of the collection are accessed.
-                AddCollectionToRequestData(requestData, SR.Trace_Headers_Collection, _context.Request.Unvalidated.Headers);
+                AddCollectionToRequestData(
+                    requestData,
+                    SR.Trace_Headers_Collection,
+                    _context.Request.Unvalidated.Headers
+                );
             }
-            catch {
+            catch
+            {
                 // ---- exceptions when we fail to get the unvalidated collection
             }
 
             // response header info
             ArrayList headers = _context.Response.GenerateResponseHeaders(false);
             int n = (headers != null) ? headers.Count : 0;
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
+            {
                 HttpResponseHeader h = (HttpResponseHeader)headers[i];
                 row = NewRow(requestData, SR.Trace_Response_Headers_Collection);
                 row[SR.Trace_Name] = h.Name;
@@ -807,29 +930,47 @@ namespace System.Web {
             }
 
             //form info
-            try {
-                AddCollectionToRequestData(requestData, SR.Trace_Form_Collection, _context.Request.Unvalidated.Form);
+            try
+            {
+                AddCollectionToRequestData(
+                    requestData,
+                    SR.Trace_Form_Collection,
+                    _context.Request.Unvalidated.Form
+                );
             }
-            catch {
+            catch
+            {
                 // ---- exceptions when we fail to get the unvalidated collection
             }
 
             //QueryString info
-            try {
-                AddCollectionToRequestData(requestData, SR.Trace_Querystring_Collection, _context.Request.Unvalidated.QueryString);
+            try
+            {
+                AddCollectionToRequestData(
+                    requestData,
+                    SR.Trace_Querystring_Collection,
+                    _context.Request.Unvalidated.QueryString
+                );
             }
-            catch {
+            catch
+            {
                 // ---- exceptions when we fail to get the unvalidated collection
             }
 
             //Server Variable info
-            if (HttpRuntime.HasAppPathDiscoveryPermission()) {
-                AddCollectionToRequestData(requestData, SR.Trace_Server_Variables, _context.Request.ServerVariables);
+            if (HttpRuntime.HasAppPathDiscoveryPermission())
+            {
+                AddCollectionToRequestData(
+                    requestData,
+                    SR.Trace_Server_Variables,
+                    _context.Request.ServerVariables
+                );
             }
 
             _requestData = requestData;
 
-            if (HttpRuntime.UseIntegratedPipeline) {
+            if (HttpRuntime.UseIntegratedPipeline)
+            {
                 // Dev10 914119: When trace is enabled, the request entity is read and no longer
                 // available to IIS.  In integrated mode, we have an API that allows us to reinsert
                 // the entity.  Although it is expensive, performance is not a concern when
@@ -840,10 +981,17 @@ namespace System.Web {
             }
         }
 
-        private void AddCollectionToRequestData(DataSet requestData, string traceCollectionTitle, NameValueCollection collection) {
-            if (null != collection) {
+        private void AddCollectionToRequestData(
+            DataSet requestData,
+            string traceCollectionTitle,
+            NameValueCollection collection
+        )
+        {
+            if (null != collection)
+            {
                 var keys = collection.AllKeys;
-                for (int i = 0; i < keys.Length; i++) {
+                for (int i = 0; i < keys.Length; i++)
+                {
                     var row = NewRow(requestData, traceCollectionTitle);
                     row[SR.Trace_Name] = keys[i];
                     row[SR.Trace_Value] = collection[keys[i]];
@@ -853,6 +1001,3 @@ namespace System.Web {
         }
     }
 }
-
-
-

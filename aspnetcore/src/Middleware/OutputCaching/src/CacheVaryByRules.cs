@@ -18,7 +18,8 @@ public sealed class CacheVaryByRules
     /// <summary>
     /// Gets a dictionary of key-pair values to vary by.
     /// </summary>
-    public IDictionary<string, string> VaryByValues => _varyByValues ??= new Dictionary<string, string>();
+    public IDictionary<string, string> VaryByValues =>
+        _varyByValues ??= new Dictionary<string, string>();
 
     /// <summary>
     /// Gets or sets the list of route value names to vary by.

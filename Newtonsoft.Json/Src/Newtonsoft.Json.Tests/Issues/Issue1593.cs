@@ -59,6 +59,7 @@ namespace Newtonsoft.Json.Tests.Issues
             {
                 Extra = new ExpandoObject();
             }
+
             [JsonExtensionData]
             public ExpandoObject Extra { get; set; }
         }

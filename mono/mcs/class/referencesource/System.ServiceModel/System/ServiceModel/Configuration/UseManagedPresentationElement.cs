@@ -12,15 +12,13 @@ namespace System.ServiceModel.Configuration
     {
         public override Type BindingElementType
         {
-            get
-            {
-                return typeof( UseManagedPresentationBindingElement );
-            }
+            get { return typeof(UseManagedPresentationBindingElement); }
         }
 
         protected internal override BindingElement CreateBindingElement()
         {
-            UseManagedPresentationBindingElement binding = new UseManagedPresentationBindingElement();
+            UseManagedPresentationBindingElement binding =
+                new UseManagedPresentationBindingElement();
             this.ApplyConfiguration(binding);
             return binding;
         }

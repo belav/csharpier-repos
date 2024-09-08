@@ -25,18 +25,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Newtonsoft.Json.Serialization;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
 #if HAVE_CONCURRENT_DICTIONARY
 using System.Collections.Concurrent;
 #endif
-using System.Threading;
-using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Utilities
 {
-    internal class ThreadSafeStore<TKey, TValue> where TKey : notnull
+    internal class ThreadSafeStore<TKey, TValue>
+        where TKey : notnull
     {
 #if HAVE_CONCURRENT_DICTIONARY
         private readonly ConcurrentDictionary<TKey, TValue> _concurrentStore;

@@ -22,22 +22,13 @@ namespace System.ServiceModel.Discovery
 
         public AsyncCompletedEventArgs EventArgs
         {
-            get
-            {
-                return this.eventArgs;
-            }
-            set
-            {
-                this.eventArgs = value;
-            }
+            get { return this.eventArgs; }
+            set { this.eventArgs = value; }
         }
 
         public ManualResetEvent WaitEvent
         {
-            get
-            {
-                return this.waitEvent;
-            }
+            get { return this.waitEvent; }
         }
     }
 }

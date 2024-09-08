@@ -20,7 +20,12 @@ namespace System.ServiceModel.Channels
         string subcode;
 
         // local
-        protected WsrmFault(bool isSenderFault, string subcode, string faultReason, string exceptionMessage)
+        protected WsrmFault(
+            bool isSenderFault,
+            string subcode,
+            string faultReason,
+            string exceptionMessage
+        )
         {
             if (isSenderFault)
             {
@@ -48,10 +53,7 @@ namespace System.ServiceModel.Channels
 
         public override FaultCode Code
         {
-            get
-            {
-                return this.code;
-            }
+            get { return this.code; }
         }
 
         public override bool HasDetail
@@ -59,8 +61,8 @@ namespace System.ServiceModel.Channels
             get
             {
                 // The SOAP 1.1 requires body processing error information to be placed in a detail element
-                // and header processing error information to be placed in a soap fault header.  
-                // Since wsrm header faults relate to header processing, the information in the detail is placed in a 
+                // and header processing error information to be placed in a soap fault header.
+                // Since wsrm header faults relate to header processing, the information in the detail is placed in a
                 // soap fault header in the SOAP 1.1 case.  SOAP 1.2 is not so restrictive. Thus, this flag is set
                 // in CreateMessage if the SOAP version is 1.2.
                 return this.hasDetail;
@@ -69,26 +71,17 @@ namespace System.ServiceModel.Channels
 
         public bool IsRemote
         {
-            get
-            {
-                return this.isRemote;
-            }
+            get { return this.isRemote; }
         }
 
         public override FaultReason Reason
         {
-            get
-            {
-                return this.reason;
-            }
+            get { return this.reason; }
         }
 
         public string Subcode
         {
-            get
-            {
-                return this.subcode;
-            }
+            get { return this.subcode; }
         }
 
         public virtual CommunicationException CreateException()
@@ -121,10 +114,16 @@ namespace System.ServiceModel.Channels
             return fault.CreateException();
         }
 
-        public Message CreateMessage(MessageVersion messageVersion, ReliableMessagingVersion reliableMessagingVersion)
+        public Message CreateMessage(
+            MessageVersion messageVersion,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
         {
             this.SetReliableMessagingVersion(reliableMessagingVersion);
-            string action = WsrmIndex.GetFaultActionString(messageVersion.Addressing, reliableMessagingVersion);
+            string action = WsrmIndex.GetFaultActionString(
+                messageVersion.Addressing,
+                reliableMessagingVersion
+            );
 
             if (messageVersion.Envelope == EnvelopeVersion.Soap11)
             {
@@ -134,8 +133,10 @@ namespace System.ServiceModel.Channels
             {
                 if (this.code.SubCode == null)
                 {
-                    FaultCode subCode = new FaultCode(this.subcode,
-                        WsrmIndex.GetNamespaceString(reliableMessagingVersion));
+                    FaultCode subCode = new FaultCode(
+                        this.subcode,
+                        WsrmIndex.GetNamespaceString(reliableMessagingVersion)
+                    );
                     this.code = new FaultCode(this.code.Name, this.code.Namespace, subCode);
                 }
 
@@ -168,7 +169,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.reliableMessagingVersion == null)
             {
-                throw Fx.AssertAndThrow("Reliable messaging version must not be accessed unless set.");
+                throw Fx.AssertAndThrow(
+                    "Reliable messaging version must not be accessed unless set."
+                );
             }
 
             return this.reliableMessagingVersion;
@@ -176,7 +179,9 @@ namespace System.ServiceModel.Channels
 
         protected abstract void OnFaultMessageCreated(MessageVersion version, Message message);
 
-        protected void SetReliableMessagingVersion(ReliableMessagingVersion reliableMessagingVersion)
+        protected void SetReliableMessagingVersion(
+            ReliableMessagingVersion reliableMessagingVersion
+        )
         {
             if (reliableMessagingVersion == null)
             {
@@ -201,13 +206,14 @@ namespace System.ServiceModel.Channels
     {
         // local
         public WsrmRequiredFault(string faultReason)
-            : base(true, Wsrm11Strings.WsrmRequired, faultReason, null)
-        {
-        }
+            : base(true, Wsrm11Strings.WsrmRequired, faultReason, null) { }
 
         protected override FaultCode Get11Code(FaultCode code, string subcode)
         {
-            return new FaultCode(subcode, WsrmIndex.GetNamespaceString(this.GetReliableMessagingVersion()));
+            return new FaultCode(
+                subcode,
+                WsrmIndex.GetNamespaceString(this.GetReliableMessagingVersion())
+            );
         }
 
         protected override bool Get12HasDetail()
@@ -234,8 +240,15 @@ namespace System.ServiceModel.Channels
         string subcode;
 
         // local
-        protected WsrmHeaderFault(bool isSenderFault, string subcode, string faultReason, string exceptionMessage,
-            UniqueId sequenceID, bool faultsInput, bool faultsOutput)
+        protected WsrmHeaderFault(
+            bool isSenderFault,
+            string subcode,
+            string faultReason,
+            string exceptionMessage,
+            UniqueId sequenceID,
+            bool faultsInput,
+            bool faultsOutput
+        )
             : base(isSenderFault, subcode, faultReason, exceptionMessage)
         {
             this.subcode = subcode;
@@ -245,16 +258,28 @@ namespace System.ServiceModel.Channels
         }
 
         // remote
-        protected WsrmHeaderFault(FaultCode code, string subcode, FaultReason reason, XmlDictionaryReader detailReader,
-            ReliableMessagingVersion reliableMessagingVersion, bool faultsInput, bool faultsOutput)
+        protected WsrmHeaderFault(
+            FaultCode code,
+            string subcode,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion,
+            bool faultsInput,
+            bool faultsOutput
+        )
             : this(code, subcode, reason, faultsInput, faultsOutput)
         {
             this.sequenceID = ParseDetail(detailReader, reliableMessagingVersion);
         }
 
         // remote
-        protected WsrmHeaderFault(FaultCode code, string subcode, FaultReason reason, bool faultsInput,
-            bool faultsOutput)
+        protected WsrmHeaderFault(
+            FaultCode code,
+            string subcode,
+            FaultReason reason,
+            bool faultsInput,
+            bool faultsOutput
+        )
             : base(code, subcode, reason)
         {
             this.subcode = subcode;
@@ -264,62 +289,83 @@ namespace System.ServiceModel.Channels
 
         public bool FaultsInput
         {
-            get
-            {
-                return this.faultsInput;
-            }
+            get { return this.faultsInput; }
         }
 
         public bool FaultsOutput
         {
-            get
-            {
-                return this.faultsOutput;
-            }
+            get { return this.faultsOutput; }
         }
 
         public UniqueId SequenceID
         {
-            get
-            {
-                return this.sequenceID;
-            }
-            protected set
-            {
-                this.sequenceID = value;
-            }
+            get { return this.sequenceID; }
+            protected set { this.sequenceID = value; }
         }
 
-        static WsrmHeaderFault CreateWsrmHeaderFault(ReliableMessagingVersion reliableMessagingVersion, FaultCode code,
-            string subcode, FaultReason reason, XmlDictionaryReader detailReader)
+        static WsrmHeaderFault CreateWsrmHeaderFault(
+            ReliableMessagingVersion reliableMessagingVersion,
+            FaultCode code,
+            string subcode,
+            FaultReason reason,
+            XmlDictionaryReader detailReader
+        )
         {
             // Sender faults.
             if (code.IsSenderFault)
             {
                 if (subcode == WsrmFeb2005Strings.InvalidAcknowledgement)
                 {
-                    return new InvalidAcknowledgementFault(code, reason, detailReader, reliableMessagingVersion);
+                    return new InvalidAcknowledgementFault(
+                        code,
+                        reason,
+                        detailReader,
+                        reliableMessagingVersion
+                    );
                 }
                 else if (subcode == WsrmFeb2005Strings.MessageNumberRollover)
                 {
-                    return new MessageNumberRolloverFault(code, reason, detailReader, reliableMessagingVersion);
+                    return new MessageNumberRolloverFault(
+                        code,
+                        reason,
+                        detailReader,
+                        reliableMessagingVersion
+                    );
                 }
                 else if (subcode == WsrmFeb2005Strings.UnknownSequence)
                 {
-                    return new UnknownSequenceFault(code, reason, detailReader, reliableMessagingVersion);
+                    return new UnknownSequenceFault(
+                        code,
+                        reason,
+                        detailReader,
+                        reliableMessagingVersion
+                    );
                 }
-                else if (reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                else if (
+                    reliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                )
                 {
                     if (subcode == WsrmFeb2005Strings.LastMessageNumberExceeded)
                     {
-                        return new LastMessageNumberExceededFault(code, reason, detailReader, reliableMessagingVersion);
+                        return new LastMessageNumberExceededFault(
+                            code,
+                            reason,
+                            detailReader,
+                            reliableMessagingVersion
+                        );
                     }
                 }
                 else if (reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
                 {
                     if (subcode == Wsrm11Strings.SequenceClosed)
                     {
-                        return new SequenceClosedFault(code, reason, detailReader, reliableMessagingVersion);
+                        return new SequenceClosedFault(
+                            code,
+                            reason,
+                            detailReader,
+                            reliableMessagingVersion
+                        );
                     }
                 }
             }
@@ -327,7 +373,12 @@ namespace System.ServiceModel.Channels
             // Sender or receiver faults.
             if (code.IsSenderFault || code.IsReceiverFault)
             {
-                return new SequenceTerminatedFault(code, reason, detailReader, reliableMessagingVersion);
+                return new SequenceTerminatedFault(
+                    code,
+                    reason,
+                    detailReader,
+                    reliableMessagingVersion
+                );
             }
 
             return null;
@@ -343,25 +394,34 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        static void LookupDetailInformation(ReliableMessagingVersion reliableMessagingVersion, string subcode,
-            out string detailName, out string detailNamespace)
+        static void LookupDetailInformation(
+            ReliableMessagingVersion reliableMessagingVersion,
+            string subcode,
+            out string detailName,
+            out string detailNamespace
+        )
         {
             detailName = null;
             detailNamespace = null;
             string wsrmNs = WsrmIndex.GetNamespaceString(reliableMessagingVersion);
-            bool wsrmFeb2005 = reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
-            bool wsrm11 = reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
+            bool wsrmFeb2005 =
+                reliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
+            bool wsrm11 =
+                reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
 
             if (subcode == WsrmFeb2005Strings.InvalidAcknowledgement)
             {
                 detailName = WsrmFeb2005Strings.SequenceAcknowledgement;
                 detailNamespace = wsrmNs;
             }
-            else if ((subcode == WsrmFeb2005Strings.MessageNumberRollover)
+            else if (
+                (subcode == WsrmFeb2005Strings.MessageNumberRollover)
                 || (subcode == WsrmFeb2005Strings.SequenceTerminated)
                 || (subcode == WsrmFeb2005Strings.UnknownSequence)
                 || (wsrmFeb2005 && (subcode == WsrmFeb2005Strings.LastMessageNumberExceeded))
-                || (wsrm11 && (subcode == Wsrm11Strings.SequenceClosed)))
+                || (wsrm11 && (subcode == Wsrm11Strings.SequenceClosed))
+            )
             {
                 detailName = WsrmFeb2005Strings.Identifier;
                 detailNamespace = wsrmNs;
@@ -377,17 +437,27 @@ namespace System.ServiceModel.Channels
         {
             if (version.Envelope == EnvelopeVersion.Soap11)
             {
-                WsrmSequenceFaultHeader header = new WsrmSequenceFaultHeader(this.GetReliableMessagingVersion(), this);
+                WsrmSequenceFaultHeader header = new WsrmSequenceFaultHeader(
+                    this.GetReliableMessagingVersion(),
+                    this
+                );
                 message.Headers.Add(header);
             }
         }
 
         protected override void OnWriteDetailContents(XmlDictionaryWriter writer)
         {
-            WsrmUtilities.WriteIdentifier(writer, this.GetReliableMessagingVersion(), this.sequenceID);
+            WsrmUtilities.WriteIdentifier(
+                writer,
+                this.GetReliableMessagingVersion(),
+                this.sequenceID
+            );
         }
 
-        static UniqueId ParseDetail(XmlDictionaryReader reader, ReliableMessagingVersion reliableMessagingVersion)
+        static UniqueId ParseDetail(
+            XmlDictionaryReader reader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
         {
             try
             {
@@ -399,8 +469,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static bool TryCreateFault11(ReliableMessagingVersion reliableMessagingVersion, Message message,
-            MessageFault fault, int index, out WsrmHeaderFault wsrmFault)
+        public static bool TryCreateFault11(
+            ReliableMessagingVersion reliableMessagingVersion,
+            Message message,
+            MessageFault fault,
+            int index,
+            out WsrmHeaderFault wsrmFault
+        )
         {
             if (index == -1)
             {
@@ -415,8 +490,10 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            string subcodeName = WsrmSequenceFaultHeader.GetSubcode(message.Headers.GetReaderAtHeader(index),
-                reliableMessagingVersion);
+            string subcodeName = WsrmSequenceFaultHeader.GetSubcode(
+                message.Headers.GetReaderAtHeader(index),
+                reliableMessagingVersion
+            );
 
             if (subcodeName == null)
             {
@@ -427,10 +504,19 @@ namespace System.ServiceModel.Channels
             string detailName;
             string detailNamespace;
 
-            LookupDetailInformation(reliableMessagingVersion, subcodeName, out detailName, out detailNamespace);
+            LookupDetailInformation(
+                reliableMessagingVersion,
+                subcodeName,
+                out detailName,
+                out detailNamespace
+            );
 
-            XmlDictionaryReader detailReader = WsrmSequenceFaultHeader.GetReaderAtDetailContents(detailName,
-                detailNamespace, message.Headers.GetReaderAtHeader(index), reliableMessagingVersion);
+            XmlDictionaryReader detailReader = WsrmSequenceFaultHeader.GetReaderAtDetailContents(
+                detailName,
+                detailNamespace,
+                message.Headers.GetReaderAtHeader(index),
+                reliableMessagingVersion
+            );
 
             if (detailReader == null)
             {
@@ -438,8 +524,13 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            wsrmFault = CreateWsrmHeaderFault(reliableMessagingVersion, fault.Code, subcodeName, fault.Reason,
-                detailReader);
+            wsrmFault = CreateWsrmHeaderFault(
+                reliableMessagingVersion,
+                fault.Code,
+                subcodeName,
+                fault.Reason,
+                detailReader
+            );
             if (wsrmFault != null)
             {
                 message.Headers.UnderstoodHeaders.Add(message.Headers[index]);
@@ -451,8 +542,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static bool TryCreateFault12(ReliableMessagingVersion reliableMessagingVersion, Message message,
-            MessageFault fault, out WsrmHeaderFault wsrmFault)
+        public static bool TryCreateFault12(
+            ReliableMessagingVersion reliableMessagingVersion,
+            Message message,
+            MessageFault fault,
+            out WsrmHeaderFault wsrmFault
+        )
         {
             // All wsrm header faults must be sender or receiver faults.
             if (!fault.Code.IsSenderFault && !fault.Code.IsReceiverFault)
@@ -461,8 +556,14 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            if ((fault.Code.SubCode == null)
-                || (fault.Code.SubCode.Namespace != WsrmIndex.GetNamespaceString(reliableMessagingVersion)) || !fault.HasDetail)
+            if (
+                (fault.Code.SubCode == null)
+                || (
+                    fault.Code.SubCode.Namespace
+                    != WsrmIndex.GetNamespaceString(reliableMessagingVersion)
+                )
+                || !fault.HasDetail
+            )
             {
                 wsrmFault = null;
                 return false;
@@ -470,8 +571,13 @@ namespace System.ServiceModel.Channels
 
             string subcodeName = fault.Code.SubCode.Name;
             XmlDictionaryReader detailReader = fault.GetReaderAtDetailContents();
-            wsrmFault = CreateWsrmHeaderFault(reliableMessagingVersion, fault.Code, subcodeName, fault.Reason,
-                detailReader);
+            wsrmFault = CreateWsrmHeaderFault(
+                reliableMessagingVersion,
+                fault.Code,
+                subcodeName,
+                fault.Reason,
+                detailReader
+            );
 
             return (wsrmFault != null);
         }
@@ -482,21 +588,37 @@ namespace System.ServiceModel.Channels
         SequenceRangeCollection ranges;
 
         public InvalidAcknowledgementFault(UniqueId sequenceID, SequenceRangeCollection ranges)
-            : base(true, WsrmFeb2005Strings.InvalidAcknowledgement, SR.GetString(SR.InvalidAcknowledgementFaultReason),
-            SR.GetString(SR.InvalidAcknowledgementReceived), sequenceID, true, false)
+            : base(
+                true,
+                WsrmFeb2005Strings.InvalidAcknowledgement,
+                SR.GetString(SR.InvalidAcknowledgementFaultReason),
+                SR.GetString(SR.InvalidAcknowledgementReceived),
+                sequenceID,
+                true,
+                false
+            )
         {
             this.ranges = ranges;
         }
 
-        public InvalidAcknowledgementFault(FaultCode code, FaultReason reason,
-            XmlDictionaryReader detailReader, ReliableMessagingVersion reliableMessagingVersion)
+        public InvalidAcknowledgementFault(
+            FaultCode code,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
             : base(code, WsrmFeb2005Strings.InvalidAcknowledgement, reason, true, false)
         {
             UniqueId sequenceId;
             bool final;
 
-            WsrmAcknowledgmentInfo.ReadAck(reliableMessagingVersion, detailReader, out sequenceId, out this.ranges,
-                out final);
+            WsrmAcknowledgmentInfo.ReadAck(
+                reliableMessagingVersion,
+                detailReader,
+                out sequenceId,
+                out this.ranges,
+                out final
+            );
 
             this.SequenceID = sequenceId;
 
@@ -515,7 +637,12 @@ namespace System.ServiceModel.Channels
             XmlDictionaryString wsrmNs = WsrmIndex.GetNamespace(reliableMessagingVersion);
 
             writer.WriteStartElement(wsrmFeb2005Dictionary.SequenceAcknowledgement, wsrmNs);
-            WsrmAcknowledgmentHeader.WriteAckRanges(writer, reliableMessagingVersion, this.SequenceID, this.ranges);
+            WsrmAcknowledgmentHeader.WriteAckRanges(
+                writer,
+                reliableMessagingVersion,
+                this.SequenceID,
+                this.ranges
+            );
             writer.WriteEndElement();
         }
     }
@@ -523,47 +650,80 @@ namespace System.ServiceModel.Channels
     sealed class LastMessageNumberExceededFault : WsrmHeaderFault
     {
         public LastMessageNumberExceededFault(UniqueId sequenceID)
-            : base(true, WsrmFeb2005Strings.LastMessageNumberExceeded, SR.GetString(SR.LastMessageNumberExceededFaultReason),
-            SR.GetString(SR.LastMessageNumberExceeded), sequenceID, false, true)
-        {
-        }
+            : base(
+                true,
+                WsrmFeb2005Strings.LastMessageNumberExceeded,
+                SR.GetString(SR.LastMessageNumberExceededFaultReason),
+                SR.GetString(SR.LastMessageNumberExceeded),
+                sequenceID,
+                false,
+                true
+            ) { }
 
-        public LastMessageNumberExceededFault(FaultCode code, FaultReason reason,
-            XmlDictionaryReader detailReader, ReliableMessagingVersion reliableMessagingVersion)
-            : base(code, WsrmFeb2005Strings.LastMessageNumberExceeded, reason, detailReader, reliableMessagingVersion, false,
-            true)
-        {
-        }
+        public LastMessageNumberExceededFault(
+            FaultCode code,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
+            : base(
+                code,
+                WsrmFeb2005Strings.LastMessageNumberExceeded,
+                reason,
+                detailReader,
+                reliableMessagingVersion,
+                false,
+                true
+            ) { }
     }
 
     sealed class MessageNumberRolloverFault : WsrmHeaderFault
     {
         public MessageNumberRolloverFault(UniqueId sequenceID)
-            : base(true, WsrmFeb2005Strings.MessageNumberRollover, SR.GetString(SR.MessageNumberRolloverFaultReason),
-            SR.GetString(SR.MessageNumberRollover), sequenceID, true, true)
-        {
-        }
+            : base(
+                true,
+                WsrmFeb2005Strings.MessageNumberRollover,
+                SR.GetString(SR.MessageNumberRolloverFaultReason),
+                SR.GetString(SR.MessageNumberRollover),
+                sequenceID,
+                true,
+                true
+            ) { }
 
-        public MessageNumberRolloverFault(FaultCode code, FaultReason reason, XmlDictionaryReader detailReader,
-            ReliableMessagingVersion reliableMessagingVersion)
+        public MessageNumberRolloverFault(
+            FaultCode code,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
             : base(code, WsrmFeb2005Strings.MessageNumberRollover, reason, true, true)
         {
             try
             {
-                this.SequenceID = WsrmUtilities.ReadIdentifier(detailReader, reliableMessagingVersion);
+                this.SequenceID = WsrmUtilities.ReadIdentifier(
+                    detailReader,
+                    reliableMessagingVersion
+                );
 
                 if (reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
                 {
-                    detailReader.ReadStartElement(DXD.Wsrm11Dictionary.MaxMessageNumber,
-                        WsrmIndex.GetNamespace(reliableMessagingVersion));
+                    detailReader.ReadStartElement(
+                        DXD.Wsrm11Dictionary.MaxMessageNumber,
+                        WsrmIndex.GetNamespace(reliableMessagingVersion)
+                    );
 
                     string maxMessageNumberString = detailReader.ReadContentAsString();
                     ulong maxMessageNumber;
-                    if (!UInt64.TryParse(maxMessageNumberString, out maxMessageNumber)
-                        || (maxMessageNumber <= 0))
+                    if (
+                        !UInt64.TryParse(maxMessageNumberString, out maxMessageNumber)
+                        || (maxMessageNumber <= 0)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(
-                            SR.GetString(SR.InvalidSequenceNumber, maxMessageNumber)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.InvalidSequenceNumber, maxMessageNumber)
+                            )
+                        );
                     }
                     // otherwise ignore value
 
@@ -583,8 +743,11 @@ namespace System.ServiceModel.Channels
 
             if (reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
             {
-                writer.WriteStartElement(WsrmFeb2005Strings.Prefix, DXD.Wsrm11Dictionary.MaxMessageNumber,
-                    WsrmIndex.GetNamespace(reliableMessagingVersion));
+                writer.WriteStartElement(
+                    WsrmFeb2005Strings.Prefix,
+                    DXD.Wsrm11Dictionary.MaxMessageNumber,
+                    WsrmIndex.GetNamespace(reliableMessagingVersion)
+                );
                 writer.WriteValue(Int64.MaxValue);
                 writer.WriteEndElement();
             }
@@ -594,67 +757,132 @@ namespace System.ServiceModel.Channels
     sealed class SequenceClosedFault : WsrmHeaderFault
     {
         public SequenceClosedFault(UniqueId sequenceID)
-            : base(true, Wsrm11Strings.SequenceClosed, SR.GetString(SR.SequenceClosedFaultString),
-            null, sequenceID, false, true)
-        {
-        }
+            : base(
+                true,
+                Wsrm11Strings.SequenceClosed,
+                SR.GetString(SR.SequenceClosedFaultString),
+                null,
+                sequenceID,
+                false,
+                true
+            ) { }
 
-        public SequenceClosedFault(FaultCode code, FaultReason reason, XmlDictionaryReader detailReader,
-            ReliableMessagingVersion reliableMessagingVersion)
-            : base(code, Wsrm11Strings.SequenceClosed, reason, detailReader, reliableMessagingVersion, false, true)
-        {
-        }
+        public SequenceClosedFault(
+            FaultCode code,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
+            : base(
+                code,
+                Wsrm11Strings.SequenceClosed,
+                reason,
+                detailReader,
+                reliableMessagingVersion,
+                false,
+                true
+            ) { }
     }
 
     sealed class SequenceTerminatedFault : WsrmHeaderFault
     {
-        SequenceTerminatedFault(bool isSenderFault, UniqueId sequenceID, string faultReason, string exceptionMessage)
-            : base(isSenderFault, WsrmFeb2005Strings.SequenceTerminated, faultReason, exceptionMessage, sequenceID, true, true)
-        {
-        }
+        SequenceTerminatedFault(
+            bool isSenderFault,
+            UniqueId sequenceID,
+            string faultReason,
+            string exceptionMessage
+        )
+            : base(
+                isSenderFault,
+                WsrmFeb2005Strings.SequenceTerminated,
+                faultReason,
+                exceptionMessage,
+                sequenceID,
+                true,
+                true
+            ) { }
 
-        public SequenceTerminatedFault(FaultCode code, FaultReason reason, XmlDictionaryReader detailReader,
-            ReliableMessagingVersion reliableMessagingVersion)
-            : base(code, WsrmFeb2005Strings.SequenceTerminated, reason, detailReader, reliableMessagingVersion, true, true)
-        {
-        }
+        public SequenceTerminatedFault(
+            FaultCode code,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
+            : base(
+                code,
+                WsrmFeb2005Strings.SequenceTerminated,
+                reason,
+                detailReader,
+                reliableMessagingVersion,
+                true,
+                true
+            ) { }
 
-        public static WsrmFault CreateCommunicationFault(UniqueId sequenceID, string faultReason,
-            string exceptionMessage)
+        public static WsrmFault CreateCommunicationFault(
+            UniqueId sequenceID,
+            string faultReason,
+            string exceptionMessage
+        )
         {
             return new SequenceTerminatedFault(false, sequenceID, faultReason, exceptionMessage);
         }
 
         public static WsrmFault CreateMaxRetryCountExceededFault(UniqueId sequenceId)
         {
-            return CreateCommunicationFault(sequenceId, SR.GetString(SR.SequenceTerminatedMaximumRetryCountExceeded), null);
+            return CreateCommunicationFault(
+                sequenceId,
+                SR.GetString(SR.SequenceTerminatedMaximumRetryCountExceeded),
+                null
+            );
         }
 
-        public static WsrmFault CreateProtocolFault(UniqueId sequenceID, string faultReason,
-            string exceptionMessage)
+        public static WsrmFault CreateProtocolFault(
+            UniqueId sequenceID,
+            string faultReason,
+            string exceptionMessage
+        )
         {
             return new SequenceTerminatedFault(true, sequenceID, faultReason, exceptionMessage);
         }
 
         public static WsrmFault CreateQuotaExceededFault(UniqueId sequenceID)
         {
-            return CreateProtocolFault(sequenceID, SR.GetString(SR.SequenceTerminatedQuotaExceededException), null);
+            return CreateProtocolFault(
+                sequenceID,
+                SR.GetString(SR.SequenceTerminatedQuotaExceededException),
+                null
+            );
         }
     }
 
     sealed class UnknownSequenceFault : WsrmHeaderFault
     {
         public UnknownSequenceFault(UniqueId sequenceID)
-            : base(true, WsrmFeb2005Strings.UnknownSequence, SR.GetString(SR.UnknownSequenceFaultReason),
-            SR.GetString(SR.UnknownSequenceMessageReceived), sequenceID, true, true)
-        {
-        }
+            : base(
+                true,
+                WsrmFeb2005Strings.UnknownSequence,
+                SR.GetString(SR.UnknownSequenceFaultReason),
+                SR.GetString(SR.UnknownSequenceMessageReceived),
+                sequenceID,
+                true,
+                true
+            ) { }
 
-        public UnknownSequenceFault(FaultCode code, FaultReason reason, XmlDictionaryReader detailReader,
-            ReliableMessagingVersion reliableMessagingVersion)
-            : base(code, WsrmFeb2005Strings.UnknownSequence, reason, detailReader, reliableMessagingVersion, true, true)
-        {
-        }
+        public UnknownSequenceFault(
+            FaultCode code,
+            FaultReason reason,
+            XmlDictionaryReader detailReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
+            : base(
+                code,
+                WsrmFeb2005Strings.UnknownSequence,
+                reason,
+                detailReader,
+                reliableMessagingVersion,
+                true,
+                true
+            ) { }
 
         public override CommunicationException CreateException()
         {
@@ -678,7 +906,10 @@ namespace System.ServiceModel.Channels
     {
         WsrmFault fault;
 
-        public WsrmSequenceFaultHeader(ReliableMessagingVersion reliableMessagingVersion, WsrmFault fault)
+        public WsrmSequenceFaultHeader(
+            ReliableMessagingVersion reliableMessagingVersion,
+            WsrmFault fault
+        )
             : base(reliableMessagingVersion)
         {
             this.fault = fault;
@@ -686,32 +917,29 @@ namespace System.ServiceModel.Channels
 
         public WsrmFault Fault
         {
-            get
-            {
-                return this.fault;
-            }
+            get { return this.fault; }
         }
 
         public override XmlDictionaryString DictionaryName
         {
-            get
-            {
-                return XD.WsrmFeb2005Dictionary.SequenceFault;
-            }
+            get { return XD.WsrmFeb2005Dictionary.SequenceFault; }
         }
 
         public string Subcode
         {
-            get
-            {
-                return this.fault.Subcode;
-            }
+            get { return this.fault.Subcode; }
         }
 
-        public static XmlDictionaryReader GetReaderAtDetailContents(string detailName, string detailNamespace,
-            XmlDictionaryReader headerReader, ReliableMessagingVersion reliableMessagingVersion)
+        public static XmlDictionaryReader GetReaderAtDetailContents(
+            string detailName,
+            string detailNamespace,
+            XmlDictionaryReader headerReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
         {
-            if (reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 return GetReaderAtDetailContentsFeb2005(detailName, detailNamespace, headerReader);
             }
@@ -721,17 +949,22 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static XmlDictionaryReader GetReaderAtDetailContents11(string detailName, string detailNamespace,
-            XmlDictionaryReader headerReader)
+        public static XmlDictionaryReader GetReaderAtDetailContents11(
+            string detailName,
+            string detailNamespace,
+            XmlDictionaryReader headerReader
+        )
         {
             XmlDictionaryString wsrmNs = DXD.Wsrm11Dictionary.Namespace;
             headerReader.ReadFullStartElement(XD.WsrmFeb2005Dictionary.SequenceFault, wsrmNs);
             headerReader.Skip();
             headerReader.ReadFullStartElement(XD.Message12Dictionary.FaultDetail, wsrmNs);
 
-            if ((headerReader.NodeType != XmlNodeType.Element)
+            if (
+                (headerReader.NodeType != XmlNodeType.Element)
                 || (headerReader.NamespaceURI != detailNamespace)
-                || (headerReader.LocalName != detailName))
+                || (headerReader.LocalName != detailName)
+            )
             {
                 headerReader.Close();
                 return null;
@@ -740,8 +973,11 @@ namespace System.ServiceModel.Channels
             return headerReader;
         }
 
-        public static XmlDictionaryReader GetReaderAtDetailContentsFeb2005(string detailName, string detailNamespace,
-            XmlDictionaryReader headerReader)
+        public static XmlDictionaryReader GetReaderAtDetailContentsFeb2005(
+            string detailName,
+            string detailNamespace,
+            XmlDictionaryReader headerReader
+        )
         {
             try
             {
@@ -754,9 +990,11 @@ namespace System.ServiceModel.Channels
 
                 while (headerReader.Depth > depth)
                 {
-                    if ((headerReader.NodeType == XmlNodeType.Element)
+                    if (
+                        (headerReader.NodeType == XmlNodeType.Element)
                         && (headerReader.NamespaceURI == detailNamespace)
-                        && (headerReader.LocalName == detailName))
+                        && (headerReader.LocalName == detailName)
+                    )
                     {
                         if (buffer != null)
                         {
@@ -803,8 +1041,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static string GetSubcode(XmlDictionaryReader headerReader,
-            ReliableMessagingVersion reliableMessagingVersion)
+        public static string GetSubcode(
+            XmlDictionaryReader headerReader,
+            ReliableMessagingVersion reliableMessagingVersion
+        )
         {
             string subCode = null;
 
@@ -836,18 +1076,30 @@ namespace System.ServiceModel.Channels
             return subCode;
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
-            writer.WriteStartElement(WsrmFeb2005Strings.Prefix, WsrmFeb2005Strings.FaultCode, this.Namespace);
+            writer.WriteStartElement(
+                WsrmFeb2005Strings.Prefix,
+                WsrmFeb2005Strings.FaultCode,
+                this.Namespace
+            );
             writer.WriteXmlnsAttribute(null, this.Namespace);
             writer.WriteQualifiedName(this.Subcode, this.Namespace);
             writer.WriteEndElement();
 
-            bool wsrm11 = this.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
+            bool wsrm11 =
+                this.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
 
             if (wsrm11)
             {
-                writer.WriteStartElement(WsrmFeb2005Strings.Prefix, XD.Message12Dictionary.FaultDetail, this.DictionaryNamespace);
+                writer.WriteStartElement(
+                    WsrmFeb2005Strings.Prefix,
+                    XD.Message12Dictionary.FaultDetail,
+                    this.DictionaryNamespace
+                );
             }
 
             this.fault.WriteDetail(writer);

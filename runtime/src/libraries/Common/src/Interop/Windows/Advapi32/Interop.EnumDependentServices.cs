@@ -9,7 +9,11 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "EnumDependentServicesW", SetLastError = true)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "EnumDependentServicesW",
+            SetLastError = true
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EnumDependentServices(
             SafeServiceHandle serviceHandle,
@@ -17,6 +21,7 @@ internal static partial class Interop
             IntPtr bufferOfENUM_SERVICE_STATUS,
             int bufSize,
             ref int bytesNeeded,
-            ref int numEnumerated);
+            ref int numEnumerated
+        );
     }
 }

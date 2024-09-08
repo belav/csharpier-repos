@@ -26,24 +26,25 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using Microsoft.Build.Logging;
 using Microsoft.Build.Framework;
+using Microsoft.Build.Logging;
 using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Logging
 {
-	[TestFixture]
-	public class LoggerDescriptionTest
-	{
-		[Test]
-		public void CreateLogger ()
-		{
-			new LoggerDescription ("Microsoft.Build.Logging.ConsoleLogger",
-					typeof (ConsoleLogger).Assembly.FullName,
-					null,
-					null,
-					LoggerVerbosity.Normal)
-				.CreateLogger();
-		}
-	}
+    [TestFixture]
+    public class LoggerDescriptionTest
+    {
+        [Test]
+        public void CreateLogger()
+        {
+            new LoggerDescription(
+                "Microsoft.Build.Logging.ConsoleLogger",
+                typeof(ConsoleLogger).Assembly.FullName,
+                null,
+                null,
+                LoggerVerbosity.Normal
+            ).CreateLogger();
+        }
+    }
 }

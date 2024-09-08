@@ -18,18 +18,12 @@ namespace System.Security.Cryptography
 
         public AsnEncodedData Current
         {
-            get
-            {
-                return _asnEncodedDatas[_current];
-            }
+            get { return _asnEncodedDatas[_current]; }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return _asnEncodedDatas[_current];
-            }
+            get { return _asnEncodedDatas[_current]; }
         }
 
         public bool MoveNext()

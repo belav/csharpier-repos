@@ -116,8 +116,12 @@ namespace Moq.Tests
             var positive = false;
             var negative = false;
 
-            mock.When(() => when).SetupSet<string>(x => x.Value = "foo").Callback(s => positive = true);
-            mock.When(() => !when).SetupSet<string>(x => x.Value = "foo").Callback(s => negative = true);
+            mock.When(() => when)
+                .SetupSet<string>(x => x.Value = "foo")
+                .Callback(s => positive = true);
+            mock.When(() => !when)
+                .SetupSet<string>(x => x.Value = "foo")
+                .Callback(s => negative = true);
 
             mock.Object.Value = "foo";
 

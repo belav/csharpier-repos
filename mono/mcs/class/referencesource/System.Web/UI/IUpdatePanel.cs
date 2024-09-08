@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    internal interface IUpdatePanel {
-    }
+namespace System.Web.UI
+{
+    internal interface IUpdatePanel { }
 }

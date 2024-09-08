@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 [Method(MethodName)]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class RestorableProjectsHandler(ProjectTargetFrameworkManager projectTargetFrameworkManager) : ILspServiceRequestHandler<string[]>
+internal sealed class RestorableProjectsHandler(
+    ProjectTargetFrameworkManager projectTargetFrameworkManager
+) : ILspServiceRequestHandler<string[]>
 {
     internal const string MethodName = "workspace/_roslyn_restorableProjects";
 
@@ -27,7 +29,10 @@ internal sealed class RestorableProjectsHandler(ProjectTargetFrameworkManager pr
 
     public bool RequiresLSPSolution => true;
 
-    public Task<string[]> HandleRequestAsync(RequestContext context, CancellationToken cancellationToken)
+    public Task<string[]> HandleRequestAsync(
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         Contract.ThrowIfNull(context.Solution);
 
@@ -39,7 +44,10 @@ internal sealed class RestorableProjectsHandler(ProjectTargetFrameworkManager pr
         foreach (var project in context.Solution.Projects)
         {
             // To restore via the dotnet CLI, we must have a file path and it must be a .NET core project.
-            if (project.FilePath != null && projectTargetFrameworkManager.IsDotnetCoreProject(project.Id))
+            if (
+                project.FilePath != null
+                && projectTargetFrameworkManager.IsDotnetCoreProject(project.Id)
+            )
             {
                 projects.Add(project.FilePath);
             }

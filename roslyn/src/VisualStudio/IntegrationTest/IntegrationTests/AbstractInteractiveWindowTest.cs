@@ -13,9 +13,7 @@ namespace Roslyn.VisualStudio.IntegrationTests
     public abstract class AbstractInteractiveWindowTest : AbstractIntegrationTest
     {
         protected AbstractInteractiveWindowTest(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         public override async Task InitializeAsync()
         {

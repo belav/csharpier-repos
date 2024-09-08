@@ -34,10 +34,7 @@ namespace System.Web.Mvc.Routing
         /// </summary>
         public IDictionary<string, Type> ConstraintMap
         {
-            get
-            {
-                return _inlineConstraintMap;
-            }
+            get { return _inlineConstraintMap; }
         }
 
         private static IDictionary<string, Type> GetDefaultConstraintMap()
@@ -53,20 +50,17 @@ namespace System.Web.Mvc.Routing
                 { "guid", typeof(GuidRouteConstraint) },
                 { "int", typeof(IntRouteConstraint) },
                 { "long", typeof(LongRouteConstraint) },
-
                 // Length constraints
                 { "minlength", typeof(MinLengthRouteConstraint) },
                 { "maxlength", typeof(MaxLengthRouteConstraint) },
                 { "length", typeof(LengthRouteConstraint) },
-                
                 // Min/Max value constraints
                 { "min", typeof(MinRouteConstraint) },
                 { "max", typeof(MaxRouteConstraint) },
                 { "range", typeof(RangeRouteConstraint) },
-
                 // Regex-based constraints
                 { "alpha", typeof(AlphaRouteConstraint) },
-                { "regex", typeof(RegexRouteConstraint) }
+                { "regex", typeof(RegexRouteConstraint) },
             };
         }
 
@@ -85,10 +79,16 @@ namespace System.Web.Mvc.Routing
             string constraintKey;
             string argumentString;
             int indexOfFirstOpenParens = inlineConstraint.IndexOf('(');
-            if (indexOfFirstOpenParens >= 0 && inlineConstraint.EndsWith(")", StringComparison.Ordinal))
+            if (
+                indexOfFirstOpenParens >= 0
+                && inlineConstraint.EndsWith(")", StringComparison.Ordinal)
+            )
             {
                 constraintKey = inlineConstraint.Substring(0, indexOfFirstOpenParens);
-                argumentString = inlineConstraint.Substring(indexOfFirstOpenParens + 1, inlineConstraint.Length - indexOfFirstOpenParens - 2);
+                argumentString = inlineConstraint.Substring(
+                    indexOfFirstOpenParens + 1,
+                    inlineConstraint.Length - indexOfFirstOpenParens - 2
+                );
             }
             else
             {
@@ -109,7 +109,11 @@ namespace System.Web.Mvc.Routing
             if (!typeof(IRouteConstraint).IsAssignableFrom(constraintType))
 #endif
             {
-                throw Error.InvalidOperation(ErrorResources.DefaultInlineConstraintResolver_TypeNotConstraint, constraintType.Name, constraintKey);
+                throw Error.InvalidOperation(
+                    ErrorResources.DefaultInlineConstraintResolver_TypeNotConstraint,
+                    constraintType.Name,
+                    constraintKey
+                );
             }
 
 #if ASPNETWEBAPI
@@ -136,18 +140,30 @@ namespace System.Web.Mvc.Routing
             if (constructors.Length == 1 && constructors[0].GetParameters().Length == 1)
             {
                 activationConstructor = constructors[0];
-                parameters = ConvertArguments(activationConstructor.GetParameters(), new string[] { argumentString });
+                parameters = ConvertArguments(
+                    activationConstructor.GetParameters(),
+                    new string[] { argumentString }
+                );
             }
             else
             {
-                string[] arguments = argumentString.Split(',').Select(argument => argument.Trim()).ToArray();
+                string[] arguments = argumentString
+                    .Split(',')
+                    .Select(argument => argument.Trim())
+                    .ToArray();
 
-                ConstructorInfo[] matchingConstructors = constructors.Where(ci => ci.GetParameters().Length == arguments.Length).ToArray();
+                ConstructorInfo[] matchingConstructors = constructors
+                    .Where(ci => ci.GetParameters().Length == arguments.Length)
+                    .ToArray();
                 int constructorMatches = matchingConstructors.Length;
 
                 if (constructorMatches == 0)
                 {
-                    throw Error.InvalidOperation(ErrorResources.DefaultInlineConstraintResolver_CouldNotFindCtor, constraintType.Name, argumentString.Length);
+                    throw Error.InvalidOperation(
+                        ErrorResources.DefaultInlineConstraintResolver_CouldNotFindCtor,
+                        constraintType.Name,
+                        argumentString.Length
+                    );
                 }
                 else if (constructorMatches == 1)
                 {
@@ -156,7 +172,11 @@ namespace System.Web.Mvc.Routing
                 }
                 else
                 {
-                    throw Error.InvalidOperation(ErrorResources.DefaultInlineConstraintResolver_AmbiguousCtors, constraintType.Name, argumentString.Length);
+                    throw Error.InvalidOperation(
+                        ErrorResources.DefaultInlineConstraintResolver_AmbiguousCtors,
+                        constraintType.Name,
+                        argumentString.Length
+                    );
                 }
             }
 
@@ -170,7 +190,11 @@ namespace System.Web.Mvc.Routing
             {
                 ParameterInfo parameter = parameterInfos[i];
                 Type parameterType = parameter.ParameterType;
-                parameters[i] = Convert.ChangeType(arguments[i], parameterType, CultureInfo.InvariantCulture);
+                parameters[i] = Convert.ChangeType(
+                    arguments[i],
+                    parameterType,
+                    CultureInfo.InvariantCulture
+                );
             }
             return parameters;
         }

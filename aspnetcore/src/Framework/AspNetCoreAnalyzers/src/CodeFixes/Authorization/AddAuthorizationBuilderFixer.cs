@@ -20,19 +20,25 @@ namespace Microsoft.AspNetCore.Analyzers.Authorization.Fixers;
 [ExportCodeFixProvider(LanguageNames.CSharp), Shared]
 public sealed class AddAuthorizationBuilderFixer : CodeFixProvider
 {
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(DiagnosticDescriptors.UseAddAuthorizationBuilder.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(DiagnosticDescriptors.UseAddAuthorizationBuilder.Id);
 
-    public sealed override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
+    public sealed override FixAllProvider GetFixAllProvider() =>
+        WellKnownFixAllProviders.BatchFixer;
 
     public override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = await context
+            .Document.GetSyntaxRootAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (root == null)
         {
             return;
         }
 
-        var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+        var semanticModel = await context
+            .Document.GetSemanticModelAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         if (semanticModel == null)
         {
             return;
@@ -44,22 +50,48 @@ public sealed class AddAuthorizationBuilderFixer : CodeFixProvider
             {
                 const string title = "Use 'AddAuthorizationBuilder'";
                 context.RegisterCodeFix(
-                    CodeAction.Create(title,
-                        cancellationToken => ReplaceWithAddAuthorizationBuilder(diagnostic, root, context.Document, invocation),
-                        equivalenceKey: DiagnosticDescriptors.UseAddAuthorizationBuilder.Id),
-                    diagnostic);
+                    CodeAction.Create(
+                        title,
+                        cancellationToken =>
+                            ReplaceWithAddAuthorizationBuilder(
+                                diagnostic,
+                                root,
+                                context.Document,
+                                invocation
+                            ),
+                        equivalenceKey: DiagnosticDescriptors.UseAddAuthorizationBuilder.Id
+                    ),
+                    diagnostic
+                );
             }
         }
     }
 
-    private static bool CanReplaceWithAddAuthorizationBuilder(Diagnostic diagnostic, SyntaxNode root, [NotNullWhen(true)] out InvocationExpressionSyntax? invocation)
+    private static bool CanReplaceWithAddAuthorizationBuilder(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        [NotNullWhen(true)] out InvocationExpressionSyntax? invocation
+    )
     {
         invocation = null;
 
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
-        if (diagnosticTarget is InvocationExpressionSyntax { ArgumentList.Arguments: { Count: 1 } arguments, Expression: MemberAccessExpressionSyntax { Name.Identifier: { } identifierToken } memberAccessExpression }
-            && arguments[0].Expression is SimpleLambdaExpressionSyntax lambda)
+        if (
+            diagnosticTarget
+                is InvocationExpressionSyntax
+                {
+                    ArgumentList.Arguments: { Count: 1 } arguments,
+                    Expression: MemberAccessExpressionSyntax
+                    {
+                        Name.Identifier: { } identifierToken
+                    } memberAccessExpression
+                }
+            && arguments[0].Expression is SimpleLambdaExpressionSyntax lambda
+        )
         {
             IEnumerable<SyntaxNode> nodes;
 
@@ -73,69 +105,115 @@ public sealed class AddAuthorizationBuilderFixer : CodeFixProvider
             }
             else
             {
-                Debug.Assert(false, "AddAuthorizationBuilderAnalyzer should not have emitted a diagnostic.");
+                Debug.Assert(
+                    false,
+                    "AddAuthorizationBuilderAnalyzer should not have emitted a diagnostic."
+                );
                 return false;
             }
 
-            var addAuthorizationBuilderMethod = memberAccessExpression.ReplaceToken(identifierToken,
-                SyntaxFactory.Identifier("AddAuthorizationBuilder"));
+            var addAuthorizationBuilderMethod = memberAccessExpression.ReplaceToken(
+                identifierToken,
+                SyntaxFactory.Identifier("AddAuthorizationBuilder")
+            );
 
             invocation = SyntaxFactory.InvocationExpression(addAuthorizationBuilderMethod);
 
             foreach (var configureAction in nodes)
             {
-                if (configureAction is InvocationExpressionSyntax { ArgumentList.Arguments: { Count: 2 } configureArguments, Expression: MemberAccessExpressionSyntax { Name.Identifier.Text: "AddPolicy" } })
+                if (
+                    configureAction is InvocationExpressionSyntax
+                    {
+                        ArgumentList.Arguments: { Count: 2 } configureArguments,
+                        Expression: MemberAccessExpressionSyntax
+                        {
+                            Name.Identifier.Text: "AddPolicy"
+                        }
+                    }
+                )
                 {
                     invocation = ChainInvocation(
                         invocation,
                         "AddPolicy",
-                        SyntaxFactory.ArgumentList(
-                            SyntaxFactory.SeparatedList(configureArguments)));
+                        SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(configureArguments))
+                    );
                 }
-                else if (configureAction is AssignmentExpressionSyntax { Left: MemberAccessExpressionSyntax { Name.Identifier.Text: { } assignmentTargetName }, Right: { } assignmentExpression }
-                    && assignmentTargetName is "DefaultPolicy" or "FallbackPolicy" or "InvokeHandlersAfterFailure")
+                else if (
+                    configureAction
+                        is AssignmentExpressionSyntax
+                        {
+                            Left: MemberAccessExpressionSyntax
+                            {
+                                Name.Identifier.Text: { } assignmentTargetName
+                            },
+                            Right: { } assignmentExpression
+                        }
+                    && assignmentTargetName
+                        is "DefaultPolicy"
+                            or "FallbackPolicy"
+                            or "InvokeHandlersAfterFailure"
+                )
                 {
                     invocation = ChainInvocation(
                         invocation,
                         $"Set{assignmentTargetName}",
                         SyntaxFactory.ArgumentList(
                             SyntaxFactory.SingletonSeparatedList(
-                                SyntaxFactory.Argument(assignmentExpression))));
+                                SyntaxFactory.Argument(assignmentExpression)
+                            )
+                        )
+                    );
                 }
             }
 
             return true;
         }
 
-        Debug.Assert(false, "AddAuthorizationBuilderAnalyzer should not have emitted a diagnostic.");
+        Debug.Assert(
+            false,
+            "AddAuthorizationBuilderAnalyzer should not have emitted a diagnostic."
+        );
         return false;
     }
 
     private static InvocationExpressionSyntax ChainInvocation(
         InvocationExpressionSyntax invocation,
         string invokedMemberName,
-        ArgumentListSyntax argumentList)
+        ArgumentListSyntax argumentList
+    )
     {
-        var invocationLeadingTrivia = invocation.GetLeadingTrivia()
+        var invocationLeadingTrivia = invocation
+            .GetLeadingTrivia()
             .Where(trivia => !trivia.IsKind(SyntaxKind.EndOfLineTrivia));
         var newInvocationTrivia = new SyntaxTriviaList(
             SyntaxFactory.EndOfLine(Environment.NewLine),
-            SyntaxFactory.Tab)
-            .AddRange(invocationLeadingTrivia);
+            SyntaxFactory.Tab
+        ).AddRange(invocationLeadingTrivia);
 
         return SyntaxFactory.InvocationExpression(
             SyntaxFactory.MemberAccessExpression(
                 SyntaxKind.SimpleMemberAccessExpression,
                 invocation.WithTrailingTrivia(newInvocationTrivia),
-                SyntaxFactory.IdentifierName(invokedMemberName)),
-           argumentList);
+                SyntaxFactory.IdentifierName(invokedMemberName)
+            ),
+            argumentList
+        );
     }
 
-    private static Task<Document> ReplaceWithAddAuthorizationBuilder(Diagnostic diagnostic, SyntaxNode root, Document document, InvocationExpressionSyntax invocation)
+    private static Task<Document> ReplaceWithAddAuthorizationBuilder(
+        Diagnostic diagnostic,
+        SyntaxNode root,
+        Document document,
+        InvocationExpressionSyntax invocation
+    )
     {
-        var diagnosticTarget = root.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+        var diagnosticTarget = root.FindNode(
+            diagnostic.Location.SourceSpan,
+            getInnermostNodeForTie: true
+        );
 
-        return Task.FromResult(document.WithSyntaxRoot(
-            root.ReplaceNode(diagnosticTarget, invocation)));
+        return Task.FromResult(
+            document.WithSyntaxRoot(root.ReplaceNode(diagnosticTarget, invocation))
+        );
     }
 }

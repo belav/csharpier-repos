@@ -3,8 +3,8 @@
 
 using System.CommandLine.Tests.Utility;
 using System.Drawing;
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Rendering.Tests
@@ -22,11 +22,11 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.CursorLeft = 19;
 
-            terminal.Events
-                    .OfType<TestTerminal.CursorPositionChanged>()
-                    .Select(e => e.Position)
-                    .Should()
-                    .BeEquivalentSequenceTo(new Point(19, 0));
+            terminal
+                .Events.OfType<TestTerminal.CursorPositionChanged>()
+                .Select(e => e.Position)
+                .Should()
+                .BeEquivalentSequenceTo(new Point(19, 0));
         }
 
         [Fact]
@@ -36,11 +36,11 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.CursorTop = 12;
 
-            terminal.Events
-                    .OfType<TestTerminal.CursorPositionChanged>()
-                    .Select(e => e.Position)
-                    .Should()
-                    .BeEquivalentSequenceTo(new Point(0, 12));
+            terminal
+                .Events.OfType<TestTerminal.CursorPositionChanged>()
+                .Select(e => e.Position)
+                .Should()
+                .BeEquivalentSequenceTo(new Point(0, 12));
         }
 
         [Fact]
@@ -50,30 +50,34 @@ namespace System.CommandLine.Rendering.Tests
 
             terminal.IsAnsiTerminal = true;
 
-            terminal.Out.Write($"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move");
+            terminal.Out.Write(
+                $"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move"
+            );
 
-            terminal.Events
-                    .Should()
-                    .BeEquivalentSequenceTo(
-                        new TestTerminal.ContentWritten("before move"),
-                        new TestTerminal.CursorPositionChanged(new Point(2, 4)),
-                        new TestTerminal.ContentWritten("after move"));
+            terminal
+                .Events.Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.ContentWritten("before move"),
+                    new TestTerminal.CursorPositionChanged(new Point(2, 4)),
+                    new TestTerminal.ContentWritten("after move")
+                );
         }
 
         [Fact]
         public void When_not_in_ANSI_mode_and_ANSI_sequences_are_used_to_set_cursor_positions_then_a_CursorPositionChanged_events_is_recorded()
         {
             var terminal = (TestTerminal)GetTerminal();
-            
+
             terminal.IsAnsiTerminal = false;
 
-            var stringWithEscapeSequence = $"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move";
+            var stringWithEscapeSequence =
+                $"before move{Ansi.Cursor.Move.ToLocation(3, 5).EscapeSequence}after move";
 
             terminal.Out.Write(stringWithEscapeSequence);
 
-            terminal.Events
-                    .Should()
-                    .BeEquivalentSequenceTo(new TestTerminal.ContentWritten(stringWithEscapeSequence));
+            terminal
+                .Events.Should()
+                .BeEquivalentSequenceTo(new TestTerminal.ContentWritten(stringWithEscapeSequence));
         }
 
         [Theory]
@@ -87,7 +91,8 @@ namespace System.CommandLine.Rendering.Tests
         [InlineData(OutputMode.NonAnsi, "one\r\ntwo\r\nthree")]
         public void When_a_newline_is_written_by_a_ConsoleRenderer_then_a_cursor_position_is_recorded(
             OutputMode outputMode,
-            string threeLinesOfText)
+            string threeLinesOfText
+        )
         {
             var terminal = (TestTerminal)GetTerminal();
 
@@ -95,20 +100,19 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion(threeLinesOfText, new Region(2, 5, 13, 3));
 
-            terminal.Events
-                   .OfType<TestTerminal.CursorPositionChanged>()
-                   .Select(e => e.Position)
-                   .Should()
-                   .BeEquivalentSequenceTo(
-                       new Point(2, 5),
-                       new Point(2, 6),
-                       new Point(2, 7));
+            terminal
+                .Events.OfType<TestTerminal.CursorPositionChanged>()
+                .Select(e => e.Position)
+                .Should()
+                .BeEquivalentSequenceTo(new Point(2, 5), new Point(2, 6), new Point(2, 7));
         }
 
         [Theory]
         [InlineData(OutputMode.Ansi)]
         [InlineData(OutputMode.NonAnsi)]
-        public void Timeline_allows_replay_of_content_rendering_and_cursor_positions(OutputMode outputMode)
+        public void Timeline_allows_replay_of_content_rendering_and_cursor_positions(
+            OutputMode outputMode
+        )
         {
             var terminal = (TestTerminal)GetTerminal();
 
@@ -118,14 +122,15 @@ namespace System.CommandLine.Rendering.Tests
 
             renderer.RenderToRegion("first line\nsecond line", region);
 
-            terminal.Events
-                    .Where(e => !(e is TestTerminal.AnsiControlCodeWritten))
-                    .Should()
-                    .BeEquivalentSequenceTo(
-                        new TestTerminal.CursorPositionChanged(new Point(1, 3)),
-                        new TestTerminal.ContentWritten("first line "),
-                        new TestTerminal.CursorPositionChanged(new Point(1, 4)),
-                        new TestTerminal.ContentWritten("second line"));
+            terminal
+                .Events.Where(e => !(e is TestTerminal.AnsiControlCodeWritten))
+                .Should()
+                .BeEquivalentSequenceTo(
+                    new TestTerminal.CursorPositionChanged(new Point(1, 3)),
+                    new TestTerminal.ContentWritten("first line "),
+                    new TestTerminal.CursorPositionChanged(new Point(1, 4)),
+                    new TestTerminal.ContentWritten("second line")
+                );
         }
 
         [Fact]
@@ -137,12 +142,17 @@ namespace System.CommandLine.Rendering.Tests
 
             var region = new Region(0, 0, 4, 1);
 
-            renderer.RenderToRegion($"{ForegroundColorSpan.Red()}text{ForegroundColorSpan.Reset()}", region);
+            renderer.RenderToRegion(
+                $"{ForegroundColorSpan.Red()}text{ForegroundColorSpan.Reset()}",
+                region
+            );
 
-            terminal.Events
-                    .Should()
-                    .Contain(e => e is TestTerminal.ContentWritten &&
-                                  ((TestTerminal.ContentWritten)e).Content == "text");
+            terminal
+                .Events.Should()
+                .Contain(e =>
+                    e is TestTerminal.ContentWritten
+                    && ((TestTerminal.ContentWritten)e).Content == "text"
+                );
         }
     }
 }

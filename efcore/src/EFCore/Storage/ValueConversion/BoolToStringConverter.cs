@@ -27,30 +27,32 @@ public class BoolToStringConverter : BoolToTwoValuesConverter<string>
     public BoolToStringConverter(
         string falseValue,
         string trueValue,
-        ConverterMappingHints? mappingHints = null)
+        ConverterMappingHints? mappingHints = null
+    )
         : base(
             Check.NotNull(falseValue, nameof(falseValue)),
             Check.NotNull(trueValue, nameof(trueValue)),
             FromProvider(trueValue),
-            new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length)).With(mappingHints))
-    {
-    }
+            new ConverterMappingHints(size: Math.Max(falseValue.Length, trueValue.Length)).With(
+                mappingHints
+            )
+        ) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
             typeof(bool),
             typeof(string),
             i => new BoolToStringConverter("0", "1", i.MappingHints),
-            new ConverterMappingHints(size: 1));
+            new ConverterMappingHints(size: 1)
+        );
 
     private static Expression<Func<string, bool>> FromProvider(string trueValue)
     {
         var testChar = trueValue.ToUpperInvariant()[0];
 
-        return v => !string.IsNullOrEmpty(v)
-            && v.ToUpperInvariant()[0] == testChar;
+        return v => !string.IsNullOrEmpty(v) && v.ToUpperInvariant()[0] == testChar;
     }
 }

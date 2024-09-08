@@ -8,17 +8,16 @@
  */
 
 
-namespace ThdList {
-    using System.Threading;
+namespace ThdList
+{
     using System;
     using System.IO;
+    using System.Threading;
 
     public class ThdList
     {
-
-        public static int Main (System.String[] Args)
+        public static int Main(System.String[] Args)
         {
-
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             // console synchronization Console.SetOut(TextWriter.Synchronized(Console.Out));
 
@@ -26,7 +25,7 @@ namespace ThdList {
 
             if (Args.Length == 1)
             {
-                if (!Int32.TryParse( Args[0], out iNofThread ))
+                if (!Int32.TryParse(Args[0], out iNofThread))
                 {
                     iNofThread = 2;
                 }
@@ -35,7 +34,6 @@ namespace ThdList {
             {
                 iNofThread = 2;
             }
-
 
             LLThread Mv_LLThread;
 
@@ -47,6 +45,5 @@ namespace ThdList {
             }
             return 100;
         }
-
     }
 }

@@ -1,5 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BenchmarkDotNet.Attributes;
 
 namespace System.CommandLine.Benchmarks.CommandLine
 {
@@ -24,15 +24,12 @@ namespace System.CommandLine.Benchmarks.CommandLine
         private static CliRootCommand BuildCommand()
         {
             CliOption<bool> boolOption = new("--bool", "-b") { Description = "Bool option" };
-            CliOption<string> stringOption = new("--string", "-s") { Description = "String option" };
+            CliOption<string> stringOption =
+                new("--string", "-s") { Description = "String option" };
 
-            CliRootCommand command = new()
-            {
-                boolOption,
-                stringOption
-            };
+            CliRootCommand command = new() { boolOption, stringOption };
 
-            command.SetAction(parseResult => 
+            command.SetAction(parseResult =>
             {
                 bool boolean = parseResult.GetValue(boolOption);
                 string text = parseResult.GetValue(stringOption);

@@ -21,30 +21,45 @@ namespace System.Composition.TypedParts.Discovery
             _metadata = metadata;
         }
 
-        public CompositionContract Contract { get { return _exportKey; } }
+        public CompositionContract Contract
+        {
+            get { return _exportKey; }
+        }
 
-        public IDictionary<string, object> Metadata { get { return _metadata; } }
+        public IDictionary<string, object> Metadata
+        {
+            get { return _metadata; }
+        }
 
-        public DiscoveredPart Part { get { return _part; } set { _part = value; } }
+        public DiscoveredPart Part
+        {
+            get { return _part; }
+            set { _part = value; }
+        }
 
         public ExportDescriptorPromise GetExportDescriptorPromise(
             CompositionContract contract,
-            DependencyAccessor definitionAccessor)
+            DependencyAccessor definitionAccessor
+        )
         {
             return new ExportDescriptorPromise(
-               contract,
-               Part.PartType.Name,
-               Part.IsShared,
-               () => Part.GetDependencies(definitionAccessor),
-               deps =>
-               {
-                   var activator = Part.GetActivator(deps);
-                   return GetExportDescriptor(activator);
-               });
+                contract,
+                Part.PartType.Name,
+                Part.IsShared,
+                () => Part.GetDependencies(definitionAccessor),
+                deps =>
+                {
+                    var activator = Part.GetActivator(deps);
+                    return GetExportDescriptor(activator);
+                }
+            );
         }
 
         protected abstract ExportDescriptor GetExportDescriptor(CompositeActivator partActivator);
 
-        public abstract DiscoveredExport CloseGenericExport(TypeInfo closedPartType, Type[] genericArguments);
+        public abstract DiscoveredExport CloseGenericExport(
+            TypeInfo closedPartType,
+            Type[] genericArguments
+        );
     }
 }

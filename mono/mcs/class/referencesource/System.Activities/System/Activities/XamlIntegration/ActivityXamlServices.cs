@@ -5,25 +5,26 @@
 namespace System.Activities.XamlIntegration
 {
     using System;
+    using System.Activities.Expressions;
+    using System.Activities.Validation;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
-    using System.Xaml;
-    using System.Xml;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Xaml.Permissions;
-    using System.Activities.Expressions;
-    using System.Activities.Validation;
-    using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
     using System.Text;
+    using System.Xaml;
+    using System.Xaml.Permissions;
+    using System.Xml;
 
     public static class ActivityXamlServices
     {
-        static readonly XamlSchemaContext dynamicActivityReaderSchemaContext = new DynamicActivityReaderSchemaContext();
+        static readonly XamlSchemaContext dynamicActivityReaderSchemaContext =
+            new DynamicActivityReaderSchemaContext();
 
         public static Activity Load(Stream stream)
         {
@@ -62,7 +63,7 @@ namespace System.Activities.XamlIntegration
 
             return Load(fileName, new ActivityXamlServicesSettings());
         }
-        
+
         public static Activity Load(string fileName, ActivityXamlServicesSettings settings)
         {
             if (fileName == null)
@@ -125,13 +126,18 @@ namespace System.Activities.XamlIntegration
             {
                 throw FxTrace.Exception.ArgumentNull("xmlReader");
             }
-            
+
             if (settings == null)
             {
                 throw FxTrace.Exception.ArgumentNull("settings");
             }
 
-            using (XamlXmlReader xamlReader = new XamlXmlReader(xmlReader, dynamicActivityReaderSchemaContext))
+            using (
+                XamlXmlReader xamlReader = new XamlXmlReader(
+                    xmlReader,
+                    dynamicActivityReaderSchemaContext
+                )
+            )
             {
                 return Load(xamlReader, settings);
             }
@@ -159,13 +165,19 @@ namespace System.Activities.XamlIntegration
                 throw FxTrace.Exception.ArgumentNull("settings");
             }
 
-            DynamicActivityXamlReader dynamicActivityReader = new DynamicActivityXamlReader(xamlReader);
+            DynamicActivityXamlReader dynamicActivityReader = new DynamicActivityXamlReader(
+                xamlReader
+            );
             object xamlObject = XamlServices.Load(dynamicActivityReader);
             Activity result = xamlObject as Activity;
             if (result == null)
             {
-                throw FxTrace.Exception.Argument("reader", SR.ActivityXamlServicesRequiresActivity(
-                    xamlObject != null ? xamlObject.GetType().FullName : string.Empty));
+                throw FxTrace.Exception.Argument(
+                    "reader",
+                    SR.ActivityXamlServicesRequiresActivity(
+                        xamlObject != null ? xamlObject.GetType().FullName : string.Empty
+                    )
+                );
             }
 
             IDynamicActivity dynamicActivity = result as IDynamicActivity;
@@ -184,7 +196,10 @@ namespace System.Activities.XamlIntegration
                 throw FxTrace.Exception.ArgumentNull("stream");
             }
 
-            return CreateReader(new XamlXmlReader(XmlReader.Create(stream), dynamicActivityReaderSchemaContext), dynamicActivityReaderSchemaContext);
+            return CreateReader(
+                new XamlXmlReader(XmlReader.Create(stream), dynamicActivityReaderSchemaContext),
+                dynamicActivityReaderSchemaContext
+            );
         }
 
         public static XamlReader CreateReader(XamlReader innerReader)
@@ -197,7 +212,10 @@ namespace System.Activities.XamlIntegration
             return new DynamicActivityXamlReader(innerReader);
         }
 
-        public static XamlReader CreateReader(XamlReader innerReader, XamlSchemaContext schemaContext)
+        public static XamlReader CreateReader(
+            XamlReader innerReader,
+            XamlSchemaContext schemaContext
+        )
         {
             if (innerReader == null)
             {
@@ -222,7 +240,10 @@ namespace System.Activities.XamlIntegration
             return new DynamicActivityXamlReader(true, innerReader, null);
         }
 
-        public static XamlReader CreateBuilderReader(XamlReader innerReader, XamlSchemaContext schemaContext)
+        public static XamlReader CreateBuilderReader(
+            XamlReader innerReader,
+            XamlSchemaContext schemaContext
+        )
         {
             if (innerReader == null)
             {
@@ -260,7 +281,8 @@ namespace System.Activities.XamlIntegration
             return FuncFactory.CreateFunc(reader, resultType);
         }
 
-        public static Func<T> CreateFactory<T>(XamlReader reader) where T : class
+        public static Func<T> CreateFactory<T>(XamlReader reader)
+            where T : class
         {
             if (reader == null)
             {
@@ -269,12 +291,17 @@ namespace System.Activities.XamlIntegration
             return FuncFactory.CreateFunc<T>(reader);
         }
 
-        static void Compile(IDynamicActivity dynamicActivity, LocationReferenceEnvironment environment)
+        static void Compile(
+            IDynamicActivity dynamicActivity,
+            LocationReferenceEnvironment environment
+        )
         {
             string language = null;
             if (RequiresCompilation(dynamicActivity, environment, out language))
             {
-                TextExpressionCompiler compiler = new TextExpressionCompiler(GetCompilerSettings(dynamicActivity, language));
+                TextExpressionCompiler compiler = new TextExpressionCompiler(
+                    GetCompilerSettings(dynamicActivity, language)
+                );
                 TextExpressionCompilerResults results = compiler.Compile();
 
                 if (results.HasErrors)
@@ -288,16 +315,25 @@ namespace System.Activities.XamlIntegration
                         messages.Append("\t");
                         if (results.HasSourceInfo)
                         {
-                            messages.Append(string.Concat(" ", SR.ActivityXamlServiceLineString, " ", message.SourceLineNumber, ": "));
+                            messages.Append(
+                                string.Concat(
+                                    " ",
+                                    SR.ActivityXamlServiceLineString,
+                                    " ",
+                                    message.SourceLineNumber,
+                                    ": "
+                                )
+                            );
                         }
                         messages.Append(message.Message);
-
                     }
 
                     messages.Append("\r\n");
                     messages.Append("\r\n");
 
-                    InvalidOperationException exception = new InvalidOperationException(SR.ActivityXamlServicesCompilationFailed(messages.ToString()));
+                    InvalidOperationException exception = new InvalidOperationException(
+                        SR.ActivityXamlServicesCompilationFailed(messages.ToString())
+                    );
 
                     foreach (TextExpressionCompilerError message in results.CompilerMessages)
                     {
@@ -308,12 +344,23 @@ namespace System.Activities.XamlIntegration
 
                 Type compiledExpressionRootType = results.ResultType;
 
-                ICompiledExpressionRoot compiledExpressionRoot = Activator.CreateInstance(compiledExpressionRootType, new object[] { dynamicActivity }) as ICompiledExpressionRoot;
-                CompiledExpressionInvoker.SetCompiledExpressionRootForImplementation(dynamicActivity, compiledExpressionRoot);
+                ICompiledExpressionRoot compiledExpressionRoot =
+                    Activator.CreateInstance(
+                        compiledExpressionRootType,
+                        new object[] { dynamicActivity }
+                    ) as ICompiledExpressionRoot;
+                CompiledExpressionInvoker.SetCompiledExpressionRootForImplementation(
+                    dynamicActivity,
+                    compiledExpressionRoot
+                );
             }
         }
 
-        static bool RequiresCompilation(IDynamicActivity dynamicActivity, LocationReferenceEnvironment environment, out string language)
+        static bool RequiresCompilation(
+            IDynamicActivity dynamicActivity,
+            LocationReferenceEnvironment environment,
+            out string language
+        )
         {
             language = null;
 
@@ -327,7 +374,13 @@ namespace System.Activities.XamlIntegration
 
                 try
                 {
-                    ActivityUtilities.CacheRootMetadata((Activity)dynamicActivity, environment, ProcessActivityTreeOptions.FullCachingOptions, null, ref validationErrors);
+                    ActivityUtilities.CacheRootMetadata(
+                        (Activity)dynamicActivity,
+                        environment,
+                        ProcessActivityTreeOptions.FullCachingOptions,
+                        null,
+                        ref validationErrors
+                    );
                 }
                 catch (Exception e)
                 {
@@ -335,9 +388,15 @@ namespace System.Activities.XamlIntegration
                     {
                         throw;
                     }
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CompiledExpressionsCacheMetadataException(dynamicActivity.Name, e.ToString())));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.CompiledExpressionsCacheMetadataException(
+                                dynamicActivity.Name,
+                                e.ToString()
+                            )
+                        )
+                    );
                 }
-
             }
 
             DynamicActivityVisitor vistor = new DynamicActivityVisitor();
@@ -349,20 +408,33 @@ namespace System.Activities.XamlIntegration
             }
             if (vistor.HasLanguageConflict)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DynamicActivityMultipleExpressionLanguages(vistor.GetConflictingLanguages().AsCommaSeparatedValues())));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.DynamicActivityMultipleExpressionLanguages(
+                            vistor.GetConflictingLanguages().AsCommaSeparatedValues()
+                        )
+                    )
+                );
             }
             language = vistor.Language;
             return true;
         }
 
-        static TextExpressionCompilerSettings GetCompilerSettings(IDynamicActivity dynamicActivity, string language)
+        static TextExpressionCompilerSettings GetCompilerSettings(
+            IDynamicActivity dynamicActivity,
+            string language
+        )
         {
             int lastIndexOfDot = dynamicActivity.Name.LastIndexOf('.');
             int lengthOfName = dynamicActivity.Name.Length;
 
-            string activityName = lastIndexOfDot > 0 ? dynamicActivity.Name.Substring(lastIndexOfDot + 1) : dynamicActivity.Name;
+            string activityName =
+                lastIndexOfDot > 0
+                    ? dynamicActivity.Name.Substring(lastIndexOfDot + 1)
+                    : dynamicActivity.Name;
             activityName += "_CompiledExpressionRoot";
-            string activityNamespace = lastIndexOfDot > 0 ? dynamicActivity.Name.Substring(0, lastIndexOfDot) : null;
+            string activityNamespace =
+                lastIndexOfDot > 0 ? dynamicActivity.Name.Substring(0, lastIndexOfDot) : null;
 
             return new TextExpressionCompilerSettings()
             {
@@ -372,17 +444,16 @@ namespace System.Activities.XamlIntegration
                 RootNamespace = null,
                 GenerateAsPartialClass = false,
                 AlwaysGenerateSource = true,
-                Language = language
+                Language = language,
             };
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we use SecurityCritical methods that do Asserts.",
-            Safe = "Safe because no critical resources are leaked. And we guarantee that the XAML we are accessing is coming from the assembly to which we are asserting access.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we use SecurityCritical methods that do Asserts.",
+            Safe = "Safe because no critical resources are leaked. And we guarantee that the XAML we are accessing is coming from the assembly to which we are asserting access."
+        )]
         [SecuritySafeCritical]
-        public static void InitializeComponent(
-            Type componentType,
-            Object componentInstance
-        )
+        public static void InitializeComponent(Type componentType, Object componentInstance)
         {
             if (componentType == null)
             {
@@ -405,45 +476,88 @@ namespace System.Activities.XamlIntegration
             string beforeInitializeResourceName;
             if (string.IsNullOrWhiteSpace(typeNamespace))
             {
-                beforeInitializeResourceName = string.Format(CultureInfo.InvariantCulture, "{0}_{1}.{2}", typeName, "BeforeInitializeComponentHelper", "txt");
+                beforeInitializeResourceName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}_{1}.{2}",
+                    typeName,
+                    "BeforeInitializeComponentHelper",
+                    "txt"
+                );
             }
             else
             {
-                beforeInitializeResourceName = string.Format(CultureInfo.InvariantCulture, "{0}_{1}_{2}.{3}", typeNamespace, typeName, "BeforeInitializeComponentHelper", "txt");
+                beforeInitializeResourceName = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}_{1}_{2}.{3}",
+                    typeNamespace,
+                    typeName,
+                    "BeforeInitializeComponentHelper",
+                    "txt"
+                );
             }
 
             string beforeInitializeResource = FindResource(resources, beforeInitializeResourceName);
             if (beforeInitializeResource == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BeforeInitializeComponentXBTExtensionResourceNotFound));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.BeforeInitializeComponentXBTExtensionResourceNotFound
+                    )
+                );
             }
 
             // Get the name of the XAML resource from the BeforeInitializeComponentHelper resource.
             string xamlResourceName = null;
             string helperClassName = null;
-            GetContentsOfBeforeInitializeExtensionResource(typesAssembly, beforeInitializeResource, out xamlResourceName, out helperClassName);
+            GetContentsOfBeforeInitializeExtensionResource(
+                typesAssembly,
+                beforeInitializeResource,
+                out xamlResourceName,
+                out helperClassName
+            );
 
             // Now look for the resource containing the XAML.
             string fullXamlResourceName = FindResource(resources, xamlResourceName);
             if (fullXamlResourceName == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.XamlBuildTaskResourceNotFound(xamlResourceName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.XamlBuildTaskResourceNotFound(xamlResourceName)
+                    )
+                );
             }
 
             // Get the schema context for the type.
-            XamlSchemaContext typeSchemaContext = GetXamlSchemaContext(typesAssembly, helperClassName);
+            XamlSchemaContext typeSchemaContext = GetXamlSchemaContext(
+                typesAssembly,
+                helperClassName
+            );
 
-            InitializeComponentFromXamlResource(componentType, fullXamlResourceName, componentInstance, typeSchemaContext);
+            InitializeComponentFromXamlResource(
+                componentType,
+                fullXamlResourceName,
+                componentInstance,
+                typeSchemaContext
+            );
         }
 
         static string FindResource(string[] resources, string partialResourceName)
         {
             bool foundResourceString = false;
             int resourceIndex;
-            for (resourceIndex = 0; (resourceIndex < resources.Length); resourceIndex = (resourceIndex + 1))
+            for (
+                resourceIndex = 0;
+                (resourceIndex < resources.Length);
+                resourceIndex = (resourceIndex + 1)
+            )
             {
                 string resource = resources[resourceIndex];
-                if ((resource.Contains("." + partialResourceName) || resource.Equals(partialResourceName)))
+                if (
+                    (
+                        resource.Contains("." + partialResourceName)
+                        || resource.Equals(partialResourceName)
+                    )
+                )
                 {
                     foundResourceString = true;
                     break;
@@ -456,7 +570,12 @@ namespace System.Activities.XamlIntegration
             return resources[resourceIndex];
         }
 
-        static void GetContentsOfBeforeInitializeExtensionResource(Assembly assembly, string resource, out string xamlResourceName, out string helperClassName)
+        static void GetContentsOfBeforeInitializeExtensionResource(
+            Assembly assembly,
+            string resource,
+            out string xamlResourceName,
+            out string helperClassName
+        )
         {
             Stream beforeInitializeStream = assembly.GetManifestResourceStream(resource);
             using (StreamReader beforeInitializeReader = new StreamReader(beforeInitializeStream))
@@ -466,34 +585,61 @@ namespace System.Activities.XamlIntegration
             }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts,
-            Justification = "The schema context is not critical data because it is exposed through the assembly manifest and we are asserting to go get that data.")]
-        [Fx.Tag.SecurityNote(Critical = "Critical because it Asserts ReflectionPermission(MemberAccess) to the calling assembly.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "The schema context is not critical data because it is exposed through the assembly manifest and we are asserting to go get that data."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because it Asserts ReflectionPermission(MemberAccess) to the calling assembly."
+        )]
         [SecurityCritical]
         static XamlSchemaContext GetXamlSchemaContext(Assembly assembly, string helperClassName)
         {
             XamlSchemaContext typeSchemaContext = null;
-            ReflectionPermission reflectionPerm = new ReflectionPermission(ReflectionPermissionFlag.MemberAccess);
+            ReflectionPermission reflectionPerm = new ReflectionPermission(
+                ReflectionPermissionFlag.MemberAccess
+            );
             reflectionPerm.Assert();
             try
             {
                 Type schemaContextType = assembly.GetType(helperClassName);
                 if (schemaContextType == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SchemaContextFromBeforeInitializeComponentXBTExtensionNotFound(helperClassName)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.SchemaContextFromBeforeInitializeComponentXBTExtensionNotFound(
+                                helperClassName
+                            )
+                        )
+                    );
                 }
 
                 // The "official" BeforeInitializeComponent XBT Extension will not create a generic type for this helper class.
                 // This check is here so that the assembly manifest can't lure us into creating a type with a generic argument from a different assembly.
                 if (schemaContextType.IsGenericType || schemaContextType.IsGenericTypeDefinition)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SchemaContextFromBeforeInitializeComponentXBTExtensionCannotBeGeneric(helperClassName)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.SchemaContextFromBeforeInitializeComponentXBTExtensionCannotBeGeneric(
+                                helperClassName
+                            )
+                        )
+                    );
                 }
 
-                PropertyInfo schemaContextPropertyInfo = schemaContextType.GetProperty("SchemaContext",
-                    BindingFlags.NonPublic | BindingFlags.Static);
-                typeSchemaContext = (XamlSchemaContext)schemaContextPropertyInfo.GetValue(null,
-                    BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetProperty, null, null, null);
+                PropertyInfo schemaContextPropertyInfo = schemaContextType.GetProperty(
+                    "SchemaContext",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
+                typeSchemaContext = (XamlSchemaContext)
+                    schemaContextPropertyInfo.GetValue(
+                        null,
+                        BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.GetProperty,
+                        null,
+                        null,
+                        null
+                    );
             }
             finally
             {
@@ -502,13 +648,26 @@ namespace System.Activities.XamlIntegration
             return typeSchemaContext;
         }
 
-        [SuppressMessage(FxCop.Category.Security, "CA2103:ReviewImperativeSecurity",
-            Justification = "Passing XamlAccessLevel to XamlLoadPermission is okay.")]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts,
-            Justification = "We are asserting to get private access to the componentType only so that we can initialize it.")]
-        [Fx.Tag.SecurityNote(Critical = "Critical because it Asserts XamlLoadPermission(XamlAccessLevel.PrivateAccessTo(type).")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            "CA2103:ReviewImperativeSecurity",
+            Justification = "Passing XamlAccessLevel to XamlLoadPermission is okay."
+        )]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "We are asserting to get private access to the componentType only so that we can initialize it."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because it Asserts XamlLoadPermission(XamlAccessLevel.PrivateAccessTo(type)."
+        )]
         [SecurityCritical]
-        static void InitializeComponentFromXamlResource(Type componentType, string resource, object componentInstance, XamlSchemaContext schemaContext)
+        static void InitializeComponentFromXamlResource(
+            Type componentType,
+            string resource,
+            object componentInstance,
+            XamlSchemaContext schemaContext
+        )
         {
             Stream initializeXaml = componentType.Assembly.GetManifestResourceStream(resource);
             XmlReader xmlReader = null;
@@ -527,7 +686,9 @@ namespace System.Activities.XamlIntegration
                 objectWriter = new XamlObjectWriter(schemaContext, writerSettings);
 
                 // We need the XamlLoadPermission for the assembly we are dealing with.
-                XamlLoadPermission perm = new XamlLoadPermission(XamlAccessLevel.PrivateAccessTo(componentType));
+                XamlLoadPermission perm = new XamlLoadPermission(
+                    XamlAccessLevel.PrivateAccessTo(componentType)
+                );
                 perm.Assert();
                 try
                 {
@@ -559,18 +720,23 @@ namespace System.Activities.XamlIntegration
         {
             static bool serviceModelLoaded;
 
-            const string serviceModelDll = "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
-            const string serviceModelActivitiesDll = "System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+            const string serviceModelDll =
+                "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+            const string serviceModelActivitiesDll =
+                "System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
 
-            const string serviceModelNamespace = "http://schemas.microsoft.com/netfx/2009/xaml/servicemodel";
+            const string serviceModelNamespace =
+                "http://schemas.microsoft.com/netfx/2009/xaml/servicemodel";
 
             // Eventually this will be unnecessary since XAML team has changed the default behavior
             public DynamicActivityReaderSchemaContext()
-                : base(new XamlSchemaContextSettings())
-            {
-            }
+                : base(new XamlSchemaContextSettings()) { }
 
-            protected override XamlType GetXamlType(string xamlNamespace, string name, params XamlType[] typeArguments)
+            protected override XamlType GetXamlType(
+                string xamlNamespace,
+                string name,
+                params XamlType[] typeArguments
+            )
             {
                 XamlType xamlType = base.GetXamlType(xamlNamespace, name, typeArguments);
 
@@ -582,7 +748,7 @@ namespace System.Activities.XamlIntegration
                         Assembly.Load(serviceModelActivitiesDll);
                         serviceModelLoaded = true;
                         xamlType = base.GetXamlType(xamlNamespace, name, typeArguments);
-                    }                        
+                    }
                 }
                 return xamlType;
             }
@@ -596,7 +762,11 @@ namespace System.Activities.XamlIntegration
             {
                 get
                 {
-                    if (this.languages == null || this.languages.Count == 0 || this.languages.Count > 1)
+                    if (
+                        this.languages == null
+                        || this.languages.Count == 0
+                        || this.languages.Count > 1
+                    )
                     {
                         return null;
                     }
@@ -612,18 +782,11 @@ namespace System.Activities.XamlIntegration
                 }
             }
 
-            public bool RequiresCompilation
-            {
-                get;
-                private set;
-            }
+            public bool RequiresCompilation { get; private set; }
 
             public bool HasLanguageConflict
             {
-                get
-                {
-                    return this.languages != null && this.languages.Count > 1;
-                }
+                get { return this.languages != null && this.languages.Count > 1; }
             }
 
             public IEnumerable<string> GetConflictingLanguages()

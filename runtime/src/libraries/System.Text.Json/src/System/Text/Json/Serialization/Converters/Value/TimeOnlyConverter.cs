@@ -10,9 +10,14 @@ namespace System.Text.Json.Serialization.Converters
     {
         private const int MinimumTimeOnlyFormatLength = 8; // hh:mm:ss
         private const int MaximumTimeOnlyFormatLength = 16; // hh:mm:ss.fffffff
-        private const int MaximumEscapedTimeOnlyFormatLength = JsonConstants.MaxExpansionFactorWhileEscaping * MaximumTimeOnlyFormatLength;
+        private const int MaximumEscapedTimeOnlyFormatLength =
+            JsonConstants.MaxExpansionFactorWhileEscaping * MaximumTimeOnlyFormatLength;
 
-        public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeOnly Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.String)
             {
@@ -22,7 +27,11 @@ namespace System.Text.Json.Serialization.Converters
             return ReadCore(ref reader);
         }
 
-        internal override TimeOnly ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override TimeOnly ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             return ReadCore(ref reader);
@@ -32,7 +41,13 @@ namespace System.Text.Json.Serialization.Converters
         {
             Debug.Assert(reader.TokenType is JsonTokenType.String or JsonTokenType.PropertyName);
 
-            if (!JsonHelpers.IsInRangeInclusive(reader.ValueLength, MinimumTimeOnlyFormatLength, MaximumEscapedTimeOnlyFormatLength))
+            if (
+                !JsonHelpers.IsInRangeInclusive(
+                    reader.ValueLength,
+                    MinimumTimeOnlyFormatLength,
+                    MaximumEscapedTimeOnlyFormatLength
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(DataType.TimeOnly);
             }
@@ -51,14 +66,23 @@ namespace System.Text.Json.Serialization.Converters
 
             byte firstChar = source[0];
             int firstSeparator = source.IndexOfAny((byte)'.', (byte)':');
-            if (!JsonHelpers.IsDigit(firstChar) || firstSeparator < 0 || source[firstSeparator] == (byte)'.')
+            if (
+                !JsonHelpers.IsDigit(firstChar)
+                || firstSeparator < 0
+                || source[firstSeparator] == (byte)'.'
+            )
             {
                 // Note: Utf8Parser.TryParse permits leading whitespace, negative values
                 // and numbers of days so we need to exclude these cases here.
                 ThrowHelper.ThrowFormatException(DataType.TimeOnly);
             }
 
-            bool result = Utf8Parser.TryParse(source, out TimeSpan timespan, out int bytesConsumed, 'c');
+            bool result = Utf8Parser.TryParse(
+                source,
+                out TimeSpan timespan,
+                out int bytesConsumed,
+                'c'
+            );
 
             // Note: Utf8Parser.TryParse will return true for invalid input so
             // long as it starts with an integer. Example: "2021-06-18" or
@@ -70,25 +94,47 @@ namespace System.Text.Json.Serialization.Converters
                 ThrowHelper.ThrowFormatException(DataType.TimeOnly);
             }
 
-            Debug.Assert(TimeOnly.MinValue.ToTimeSpan() <= timespan && timespan <= TimeOnly.MaxValue.ToTimeSpan());
+            Debug.Assert(
+                TimeOnly.MinValue.ToTimeSpan() <= timespan
+                    && timespan <= TimeOnly.MaxValue.ToTimeSpan()
+            );
             return TimeOnly.FromTimeSpan(timespan);
         }
 
-        public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TimeOnly value,
+            JsonSerializerOptions options
+        )
         {
             Span<byte> output = stackalloc byte[MaximumTimeOnlyFormatLength];
 
-            bool result = Utf8Formatter.TryFormat(value.ToTimeSpan(), output, out int bytesWritten, 'c');
+            bool result = Utf8Formatter.TryFormat(
+                value.ToTimeSpan(),
+                output,
+                out int bytesWritten,
+                'c'
+            );
             Debug.Assert(result);
 
             writer.WriteStringValue(output.Slice(0, bytesWritten));
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            TimeOnly value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             Span<byte> output = stackalloc byte[MaximumTimeOnlyFormatLength];
 
-            bool result = Utf8Formatter.TryFormat(value.ToTimeSpan(), output, out int bytesWritten, 'c');
+            bool result = Utf8Formatter.TryFormat(
+                value.ToTimeSpan(),
+                output,
+                out int bytesWritten,
+                'c'
+            );
             Debug.Assert(result);
 
             writer.WritePropertyName(output.Slice(0, bytesWritten));

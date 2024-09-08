@@ -79,11 +79,13 @@ namespace System.Reflection.Tests
 
         public class StringValuedAttribute : Attribute
         {
-            public StringValuedAttribute (string s)
+            public StringValuedAttribute(string s)
             {
                 NamedField = s;
             }
-            public StringValuedAttribute () {}
+
+            public StringValuedAttribute() { }
+
             public string NamedProperty
             {
                 get => NamedField;
@@ -95,46 +97,49 @@ namespace System.Reflection.Tests
         internal class ClassWithAttrs
         {
             [StringValuedAttribute("")]
-            public void M1() {}
+            public void M1() { }
 
             [StringValuedAttribute(NamedProperty = "")]
-            public void M2() {}
+            public void M2() { }
 
             [StringValuedAttribute(NamedField = "")]
-            public void M3() {}
+            public void M3() { }
         }
 
         [Fact]
-        public void StringAttributeValueRefEqualsStringEmpty () {
+        public void StringAttributeValueRefEqualsStringEmpty()
+        {
             StringValuedAttribute attr;
-            attr = typeof (ClassWithAttrs).GetMethod("M1")
+            attr = typeof(ClassWithAttrs)
+                .GetMethod("M1")
                 .GetCustomAttributes(typeof(StringValuedAttribute), true)
                 .Cast<StringValuedAttribute>()
                 .Single();
 
             Assert.Same(string.Empty, attr.NamedField);
 
-            attr = typeof (ClassWithAttrs).GetMethod("M2")
+            attr = typeof(ClassWithAttrs)
+                .GetMethod("M2")
                 .GetCustomAttributes(typeof(StringValuedAttribute), true)
                 .Cast<StringValuedAttribute>()
                 .Single();
-            
+
             Assert.Same(string.Empty, attr.NamedField);
 
-
-            attr = typeof (ClassWithAttrs).GetMethod("M3")
+            attr = typeof(ClassWithAttrs)
+                .GetMethod("M3")
                 .GetCustomAttributes(typeof(StringValuedAttribute), true)
                 .Cast<StringValuedAttribute>()
                 .Single();
-            
+
             Assert.Same(string.Empty, attr.NamedField);
         }
 
         [AttributeUsage(AttributeTargets.Parameter)]
-        internal class MyParameterAttribute : Attribute {}
+        internal class MyParameterAttribute : Attribute { }
 
         [AttributeUsage(AttributeTargets.Property)]
-        internal class MyPropertyAttribute : Attribute {}
+        internal class MyPropertyAttribute : Attribute { }
 
         internal sealed class PropertyAsParameterInfo : ParameterInfo
         {
@@ -150,25 +155,41 @@ namespace System.Reflection.Tests
 
             public override object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
-                var constructorAttributes = _constructionParameterInfo?.GetCustomAttributes(attributeType, inherit);
+                var constructorAttributes = _constructionParameterInfo?.GetCustomAttributes(
+                    attributeType,
+                    inherit
+                );
 
                 if (constructorAttributes == null || constructorAttributes is { Length: 0 })
                 {
                     return _underlyingProperty.GetCustomAttributes(attributeType, inherit);
                 }
 
-                var propertyAttributes = _underlyingProperty.GetCustomAttributes(attributeType, inherit);
+                var propertyAttributes = _underlyingProperty.GetCustomAttributes(
+                    attributeType,
+                    inherit
+                );
 
-                var mergedAttributes = new Attribute[constructorAttributes.Length + propertyAttributes.Length];
+                var mergedAttributes = new Attribute[
+                    constructorAttributes.Length + propertyAttributes.Length
+                ];
                 Array.Copy(constructorAttributes, mergedAttributes, constructorAttributes.Length);
-                Array.Copy(propertyAttributes, 0, mergedAttributes, constructorAttributes.Length, propertyAttributes.Length);
+                Array.Copy(
+                    propertyAttributes,
+                    0,
+                    mergedAttributes,
+                    constructorAttributes.Length,
+                    propertyAttributes.Length
+                );
 
                 return mergedAttributes;
             }
 
             public override object[] GetCustomAttributes(bool inherit)
             {
-                var constructorAttributes = _constructionParameterInfo?.GetCustomAttributes(inherit);
+                var constructorAttributes = _constructionParameterInfo?.GetCustomAttributes(
+                    inherit
+                );
 
                 if (constructorAttributes == null || constructorAttributes is { Length: 0 })
                 {
@@ -177,9 +198,17 @@ namespace System.Reflection.Tests
 
                 var propertyAttributes = _underlyingProperty.GetCustomAttributes(inherit);
 
-                var mergedAttributes = new object[constructorAttributes.Length + propertyAttributes.Length];
+                var mergedAttributes = new object[
+                    constructorAttributes.Length + propertyAttributes.Length
+                ];
                 Array.Copy(constructorAttributes, mergedAttributes, constructorAttributes.Length);
-                Array.Copy(propertyAttributes, 0, mergedAttributes, constructorAttributes.Length, propertyAttributes.Length);
+                Array.Copy(
+                    propertyAttributes,
+                    0,
+                    mergedAttributes,
+                    constructorAttributes.Length,
+                    propertyAttributes.Length
+                );
 
                 return mergedAttributes;
             }
@@ -187,7 +216,9 @@ namespace System.Reflection.Tests
             public override IList<CustomAttributeData> GetCustomAttributesData()
             {
                 var attributes = new List<CustomAttributeData>(
-                    _constructionParameterInfo?.GetCustomAttributesData() ?? Array.Empty<CustomAttributeData>());
+                    _constructionParameterInfo?.GetCustomAttributesData()
+                        ?? Array.Empty<CustomAttributeData>()
+                );
                 attributes.AddRange(_underlyingProperty.GetCustomAttributesData());
 
                 return attributes.AsReadOnly();
@@ -206,10 +237,12 @@ namespace System.Reflection.Tests
         }
 
         [Fact]
-        public void CustomAttributeProvider ()
+        public void CustomAttributeProvider()
         {
             var type = typeof(CustomAttributeProviderTestClass);
-            var propertyInfo = type.GetProperty(nameof(CustomAttributeProviderTestClass.IntegerProperty));
+            var propertyInfo = type.GetProperty(
+                nameof(CustomAttributeProviderTestClass.IntegerProperty)
+            );
             var ctorInfo = type.GetConstructor(new Type[] { typeof(int) });
             var ctorParamInfo = ctorInfo.GetParameters()[0];
             var propertyAndParamInfo = new PropertyAsParameterInfo(propertyInfo, ctorParamInfo);

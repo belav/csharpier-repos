@@ -14,9 +14,11 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed partial class SafeCreateHandle : SafeHandle
     {
-        public SafeCreateHandle() : base(IntPtr.Zero, true) { }
+        public SafeCreateHandle()
+            : base(IntPtr.Zero, true) { }
 
-        internal SafeCreateHandle(IntPtr ptr) : base(IntPtr.Zero, true)
+        internal SafeCreateHandle(IntPtr ptr)
+            : base(IntPtr.Zero, true)
         {
             this.SetHandle(ptr);
         }
@@ -30,10 +32,7 @@ namespace Microsoft.Win32.SafeHandles
 
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
     }
 }

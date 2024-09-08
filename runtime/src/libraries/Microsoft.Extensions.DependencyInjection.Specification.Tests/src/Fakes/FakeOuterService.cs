@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
     {
         public FakeOuterService(
             IFakeService singleService,
-            IEnumerable<IFakeMultipleService> multipleServices)
+            IEnumerable<IFakeMultipleService> multipleServices
+        )
         {
             SingleService = singleService;
             MultipleServices = multipleServices;

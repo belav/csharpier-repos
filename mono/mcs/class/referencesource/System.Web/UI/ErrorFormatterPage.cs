@@ -22,17 +22,24 @@
  * Copyright (c) 2003 Microsoft Corporation
  */
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System.Diagnostics.CodeAnalysis;
 
-    [SuppressMessage("Microsoft.MSInternal", "CA910:AlwaysSetViewStateUserKeyToUniqueValue",
-        Justification = "This page does not allow access to sensitive information.")]
-    internal sealed class ErrorFormatterPage : Page {
-        protected internal override void SavePageStateToPersistenceMedium(Object viewState) {
+    [SuppressMessage(
+        "Microsoft.MSInternal",
+        "CA910:AlwaysSetViewStateUserKeyToUniqueValue",
+        Justification = "This page does not allow access to sensitive information."
+    )]
+    internal sealed class ErrorFormatterPage : Page
+    {
+        protected internal override void SavePageStateToPersistenceMedium(Object viewState)
+        {
             // Override and ignore. No need to save view state for this page.
         }
 
-        protected internal override Object LoadPageStateFromPersistenceMedium() {
+        protected internal override Object LoadPageStateFromPersistenceMedium()
+        {
             // Override and ignore. No view state to load for this page.
             return null;
         }

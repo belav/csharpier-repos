@@ -37,7 +37,8 @@ public class Startup
             var appsInfo = ctx.RequestServices.GetRequiredService<TestAppInfo>();
             var response = ctx.Response.ContentType = "text/html;charset=utf-8";
             using var writer = new StringWriter();
-            await writer.WriteAsync(@"<!DOCTYPE html>
+            await writer.WriteAsync(
+                @"<!DOCTYPE html>
 <html>
   <head>
     <title>Blazor test server index</title>
@@ -50,24 +51,29 @@ public class Startup
           <Link>Link</Link>
         </th>
       </tr>
-");
+"
+            );
             foreach (var scenario in appsInfo.Scenarios)
             {
-                await writer.WriteAsync(@$"
+                await writer.WriteAsync(
+                    @$"
       <tr>
         <td>{scenario.Key}</td>
         <td><a href=""{scenario.Value}"">{scenario.Value}</a></td>
       </tr>
-");
+"
+                );
             }
-            await writer.WriteAsync(@"
+            await writer.WriteAsync(
+                @"
     </table>
     <style>
         table, th, td, tr { border: 1px solid black; }
         th { font-weight: bold; }
     <style>
   </body>
-</html>");
+</html>"
+            );
             var content = writer.ToString();
             ctx.Response.ContentLength = content.Length;
             await ctx.Response.WriteAsync(content);

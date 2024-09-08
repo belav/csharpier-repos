@@ -12,7 +12,10 @@ namespace ILCompiler
         internal virtual bool IsComputed() => false;
 
         internal virtual int GetSize() => throw new InvalidOperationException();
+
         internal virtual List<MetadataType> GetTypes() => throw new InvalidOperationException();
-        internal virtual Dictionary<MetadataType, int> GetOffsets() => throw new InvalidOperationException();
+
+        internal virtual Dictionary<MetadataType, int> GetOffsets() =>
+            throw new InvalidOperationException();
     }
 }

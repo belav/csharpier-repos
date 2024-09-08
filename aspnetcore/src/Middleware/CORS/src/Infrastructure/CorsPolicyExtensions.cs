@@ -18,8 +18,8 @@ internal static class CorsPolicyExtensions
 
         if (Uri.TryCreate(origin, UriKind.Absolute, out var originUri))
         {
-            return policy.Origins
-                .Where(o => o.Contains($"://{_WildcardSubdomain}"))
+            return policy
+                .Origins.Where(o => o.Contains($"://{_WildcardSubdomain}"))
                 .Select(CreateDomainUri)
                 .Any(domain => UriHelpers.IsSubdomainOf(originUri, domain));
         }

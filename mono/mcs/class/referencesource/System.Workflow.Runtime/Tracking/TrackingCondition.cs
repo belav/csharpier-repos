@@ -2,27 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Globalization;
-
+using System.Text;
 //using System.Workflow.Activities;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
+using System.Xml.Schema;
 using Hosting = System.Workflow.Runtime.Hosting;
-
 
 namespace System.Workflow.Runtime.Tracking
 {
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class TrackingCondition
     {
         #region Properties
@@ -40,14 +40,15 @@ namespace System.Workflow.Runtime.Tracking
         internal abstract bool Match(object obj);
 
         #endregion
-
     }
 
     /// <summary>
     /// Describes critieria that is used constrain locations.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityTrackingCondition : TrackingCondition
     {
         #region Private Data Members
@@ -62,9 +63,7 @@ namespace System.Workflow.Runtime.Tracking
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ActivityTrackingCondition()
-        {
-        }
+        public ActivityTrackingCondition() { }
 
         /// <summary>
         /// Constuct with a list of property names and a value.
@@ -145,7 +144,9 @@ namespace System.Workflow.Runtime.Tracking
         #endregion
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ComparisonOperator
     {
         Equals = 0,

@@ -26,10 +26,15 @@ namespace System.Collections.ObjectModel
 #if !FEATURE_NETCORE
     [Serializable()]
 #if !MOBILE
-    [TypeForwardedFrom("WindowsBase, Version=3.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "WindowsBase, Version=3.0.0.0, Culture=Neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
 #endif
 #endif
-    public class ReadOnlyObservableCollection<T> : ReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged
+    public class ReadOnlyObservableCollection<T>
+        : ReadOnlyCollection<T>,
+            INotifyCollectionChanged,
+            INotifyPropertyChanged
     {
         #region Constructors
 
@@ -43,10 +48,14 @@ namespace System.Collections.ObjectModel
         /// Initializes a new instance of ReadOnlyObservableCollection that
         /// wraps the given ObservableCollection.
         /// </summary>
-        public ReadOnlyObservableCollection(ObservableCollection<T> list) : base(list)
+        public ReadOnlyObservableCollection(ObservableCollection<T> list)
+            : base(list)
         {
-            ((INotifyCollectionChanged)Items).CollectionChanged += new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
-            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(HandlePropertyChanged);
+            ((INotifyCollectionChanged)Items).CollectionChanged +=
+                new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
+            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(
+                HandlePropertyChanged
+            );
         }
 
         #endregion Constructors
@@ -66,8 +75,8 @@ namespace System.Collections.ObjectModel
         /// </summary>
         event NotifyCollectionChangedEventHandler INotifyCollectionChanged.CollectionChanged
         {
-            add     { CollectionChanged += value; }
-            remove  { CollectionChanged -= value; }
+            add { CollectionChanged += value; }
+            remove { CollectionChanged -= value; }
         }
 
         /// <summary>
@@ -77,7 +86,7 @@ namespace System.Collections.ObjectModel
         /// see <seealso cref="INotifyCollectionChanged"/>
         /// </remarks>
 #if !FEATURE_NETCORE
-        [field:NonSerializedAttribute()]
+        [field: NonSerializedAttribute()]
 #endif
         protected virtual event NotifyCollectionChangedEventHandler CollectionChanged;
 
@@ -101,8 +110,8 @@ namespace System.Collections.ObjectModel
         /// </summary>
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
         {
-            add     { PropertyChanged += value; }
-            remove  { PropertyChanged -= value; }
+            add { PropertyChanged += value; }
+            remove { PropertyChanged -= value; }
         }
 
         /// <summary>
@@ -112,7 +121,7 @@ namespace System.Collections.ObjectModel
         /// see <seealso cref="INotifyPropertyChanged"/>
         /// </remarks>
 #if !FEATURE_NETCORE
-        [field:NonSerializedAttribute()]
+        [field: NonSerializedAttribute()]
 #endif
         protected virtual event PropertyChangedEventHandler PropertyChanged;
 
@@ -164,5 +173,3 @@ namespace System.Collections.ObjectModel
         #endregion Private Fields
     }
 }
-
-

@@ -34,7 +34,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             return ModuleMetadata.CreateFromStream(fileStream, options);
         }
 
-        private ImmutableArray<ModuleMetadata> GetAllModules(ModuleMetadata manifestModule, string assemblyDir)
+        private ImmutableArray<ModuleMetadata> GetAllModules(
+            ModuleMetadata manifestModule,
+            string assemblyDir
+        )
         {
             ArrayBuilder<ModuleMetadata>? moduleBuilder = null;
 
@@ -46,11 +49,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     moduleBuilder.Add(manifestModule);
                 }
 
-                var module = CreateModuleMetadata(PathUtilities.CombineAbsoluteAndRelativePaths(assemblyDir, moduleName)!, prefetchEntireImage: false);
+                var module = CreateModuleMetadata(
+                    PathUtilities.CombineAbsoluteAndRelativePaths(assemblyDir, moduleName)!,
+                    prefetchEntireImage: false
+                );
                 moduleBuilder.Add(module);
             }
 
-            return (moduleBuilder != null) ? moduleBuilder.ToImmutableAndFree() : ImmutableArray.Create(manifestModule);
+            return (moduleBuilder != null)
+                ? moduleBuilder.ToImmutableAndFree()
+                : ImmutableArray.Create(manifestModule);
         }
 
         internal Metadata GetMetadata(string fullPath, MetadataReferenceProperties properties)
@@ -59,7 +67,11 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             FileKey? fileKey = GetUniqueFileKey(fullPath);
 
             Metadata? metadata;
-            if (fileKey.HasValue && _metadataCache.TryGetValue(fileKey.Value, out metadata) && metadata != null)
+            if (
+                fileKey.HasValue
+                && _metadataCache.TryGetValue(fileKey.Value, out metadata)
+                && metadata != null
+            )
             {
                 return metadata;
             }
@@ -90,7 +102,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         /// that can be used as the key to a dictionary.
         /// If a file hasn't changed name or timestamp, we assume
         /// it is unchanged.
-        /// 
+        ///
         /// Returns null if the file doesn't exist or otherwise can't be accessed.
         /// </summary>
         private FileKey? GetUniqueFileKey(string filePath)
@@ -131,7 +143,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             return s_mdCache.GetMetadata(FilePath, Properties);
         }
 
-        protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
+        protected override PortableExecutableReference WithPropertiesImpl(
+            MetadataReferenceProperties properties
+        )
         {
             return new CachingMetadataReference(this.FilePath, properties);
         }

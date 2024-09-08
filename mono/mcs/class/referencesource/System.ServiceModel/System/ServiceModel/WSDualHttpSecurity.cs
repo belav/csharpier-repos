@@ -3,14 +3,15 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
-    using System.ComponentModel;
 
     public sealed class WSDualHttpSecurity
     {
-        static readonly MessageSecurityVersion WSDualMessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+        static readonly MessageSecurityVersion WSDualMessageSecurityVersion =
+            MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
 
         internal const WSDualHttpSecurityMode DefaultMode = WSDualHttpSecurityMode.Message;
 
@@ -18,16 +19,18 @@ namespace System.ServiceModel
         MessageSecurityOverHttp messageSecurity;
 
         public WSDualHttpSecurity()
-            : this(DefaultMode, new MessageSecurityOverHttp())
-        {
-        }
+            : this(DefaultMode, new MessageSecurityOverHttp()) { }
 
         WSDualHttpSecurity(WSDualHttpSecurityMode mode, MessageSecurityOverHttp messageSecurity)
         {
-            Fx.Assert(WSDualHttpSecurityModeHelper.IsDefined(mode), string.Format("Invalid WSDualHttpSecurityMode value: {0}", mode.ToString()));
+            Fx.Assert(
+                WSDualHttpSecurityModeHelper.IsDefined(mode),
+                string.Format("Invalid WSDualHttpSecurityMode value: {0}", mode.ToString())
+            );
 
             this.mode = mode;
-            this.messageSecurity = messageSecurity == null ? new MessageSecurityOverHttp() : messageSecurity;
+            this.messageSecurity =
+                messageSecurity == null ? new MessageSecurityOverHttp() : messageSecurity;
         }
 
         public WSDualHttpSecurityMode Mode
@@ -37,7 +40,9 @@ namespace System.ServiceModel
             {
                 if (!WSDualHttpSecurityModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.mode = value;
             }
@@ -46,17 +51,18 @@ namespace System.ServiceModel
         public MessageSecurityOverHttp Message
         {
             get { return this.messageSecurity; }
-            set
-            {
-                this.messageSecurity = (value == null) ? new MessageSecurityOverHttp() : value;
-            }
+            set { this.messageSecurity = (value == null) ? new MessageSecurityOverHttp() : value; }
         }
 
         internal SecurityBindingElement CreateMessageSecurity()
         {
             if (this.mode == WSDualHttpSecurityMode.Message)
             {
-                return this.messageSecurity.CreateSecurityBindingElement(false, true, WSDualMessageSecurityVersion);
+                return this.messageSecurity.CreateSecurityBindingElement(
+                    false,
+                    true,
+                    WSDualMessageSecurityVersion
+                );
             }
             else
             {
@@ -82,8 +88,7 @@ namespace System.ServiceModel
 
         internal bool InternalShouldSerialize()
         {
-            return this.ShouldSerializeMode()
-                || this.ShouldSerializeMessage();
+            return this.ShouldSerializeMode() || this.ShouldSerializeMessage();
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

@@ -12,16 +12,20 @@ class Program
 
         ObjectFactory factory = ActivatorUtilities.CreateFactory(typeof(ServiceA), Type.EmptyTypes);
         ServiceA serviceA = factory(provider, null) as ServiceA;
-        ServiceB serviceB = ActivatorUtilities.CreateInstance(provider, typeof(ServiceB)) as ServiceB;
+        ServiceB serviceB =
+            ActivatorUtilities.CreateInstance(provider, typeof(ServiceB)) as ServiceB;
         ServiceC serviceC = ActivatorUtilities.CreateInstance<ServiceC>(provider);
-        ServiceD serviceD = ActivatorUtilities.GetServiceOrCreateInstance(provider, typeof(ServiceD)) as ServiceD;
+        ServiceD serviceD =
+            ActivatorUtilities.GetServiceOrCreateInstance(provider, typeof(ServiceD)) as ServiceD;
         ServiceE serviceE = ActivatorUtilities.GetServiceOrCreateInstance<ServiceE>(provider);
 
-        if (serviceA is null ||
-            serviceB is null ||
-            serviceC is null ||
-            serviceD is null ||
-            serviceE is null)
+        if (
+            serviceA is null
+            || serviceB is null
+            || serviceC is null
+            || serviceD is null
+            || serviceE is null
+        )
         {
             return -1;
         }
@@ -30,8 +34,12 @@ class Program
     }
 
     private class ServiceA { }
+
     private class ServiceB { }
+
     private class ServiceC { }
+
     private class ServiceD { }
+
     private class ServiceE { }
 }

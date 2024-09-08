@@ -5,13 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Runtime.General;
-
 using Internal.NativeFormat;
 using Internal.Runtime.Augments;
 using Internal.Runtime.TypeLoader;
 using Internal.TypeSystem;
 using Internal.TypeSystem.NoMetadata;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
@@ -21,10 +19,7 @@ namespace Internal.TypeSystem
         private RuntimeTypeHandle _runtimeTypeHandle;
         public RuntimeTypeHandle RuntimeTypeHandle
         {
-            get
-            {
-                return _runtimeTypeHandle;
-            }
+            get { return _runtimeTypeHandle; }
         }
 
         /// <summary>
@@ -34,7 +29,9 @@ namespace Internal.TypeSystem
         public void SetRuntimeTypeHandleUnsafe(RuntimeTypeHandle runtimeTypeHandle)
         {
             Debug.Assert(!runtimeTypeHandle.IsNull());
-            Debug.Assert(_runtimeTypeHandle.IsNull() || runtimeTypeHandle.Equals(_runtimeTypeHandle));
+            Debug.Assert(
+                _runtimeTypeHandle.IsNull() || runtimeTypeHandle.Equals(_runtimeTypeHandle)
+            );
             Debug.Assert(runtimeTypeHandle.GetHashCode() == GetHashCode());
             _runtimeTypeHandle = runtimeTypeHandle;
         }
@@ -88,7 +85,13 @@ namespace Internal.TypeSystem
                         }
 
                         RuntimeTypeHandle rtth;
-                        if (argumentsRegistered && TypeLoaderEnvironment.Instance.TryLookupConstructedGenericTypeForComponents(new TypeLoaderEnvironment.GenericTypeLookupData(typeAsDefType), out rtth))
+                        if (
+                            argumentsRegistered
+                            && TypeLoaderEnvironment.Instance.TryLookupConstructedGenericTypeForComponents(
+                                new TypeLoaderEnvironment.GenericTypeLookupData(typeAsDefType),
+                                out rtth
+                            )
+                        )
                         {
                             typeAsDefType.SetRuntimeTypeHandleUnsafe(rtth);
                             return true;
@@ -107,12 +110,31 @@ namespace Internal.TypeSystem
                 if (typeAsParameterType.ParameterType.RetrieveRuntimeTypeHandleIfPossible())
                 {
                     RuntimeTypeHandle rtth;
-                    if ((type is ArrayType &&
-                          TypeLoaderEnvironment.TryGetArrayTypeForElementType_LookupOnly(typeAsParameterType.ParameterType.RuntimeTypeHandle, type.IsMdArray, type.IsMdArray ? ((ArrayType)type).Rank : -1, out rtth))
-                           ||
-                        (type is PointerType && TypeLoaderEnvironment.TryGetPointerTypeForTargetType_LookupOnly(typeAsParameterType.ParameterType.RuntimeTypeHandle, out rtth))
-                           ||
-                        (type is ByRefType && TypeLoaderEnvironment.TryGetByRefTypeForTargetType_LookupOnly(typeAsParameterType.ParameterType.RuntimeTypeHandle, out rtth)))
+                    if (
+                        (
+                            type is ArrayType
+                            && TypeLoaderEnvironment.TryGetArrayTypeForElementType_LookupOnly(
+                                typeAsParameterType.ParameterType.RuntimeTypeHandle,
+                                type.IsMdArray,
+                                type.IsMdArray ? ((ArrayType)type).Rank : -1,
+                                out rtth
+                            )
+                        )
+                        || (
+                            type is PointerType
+                            && TypeLoaderEnvironment.TryGetPointerTypeForTargetType_LookupOnly(
+                                typeAsParameterType.ParameterType.RuntimeTypeHandle,
+                                out rtth
+                            )
+                        )
+                        || (
+                            type is ByRefType
+                            && TypeLoaderEnvironment.TryGetByRefTypeForTargetType_LookupOnly(
+                                typeAsParameterType.ParameterType.RuntimeTypeHandle,
+                                out rtth
+                            )
+                        )
+                    )
                     {
                         typeAsParameterType.SetRuntimeTypeHandleUnsafe(rtth);
                         return true;
@@ -143,11 +165,17 @@ namespace Internal.TypeSystem
                         }
                     }
 
-                    if (handlesAvailable
+                    if (
+                        handlesAvailable
                         && TypeLoaderEnvironment.Instance.TryLookupFunctionPointerTypeForComponents(
-                            sig.ReturnType.RuntimeTypeHandle, parameterHandles,
-                            isUnmanaged: (sig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) != 0,
-                            out RuntimeTypeHandle rtth))
+                            sig.ReturnType.RuntimeTypeHandle,
+                            parameterHandles,
+                            isUnmanaged: (
+                                sig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask
+                            ) != 0,
+                            out RuntimeTypeHandle rtth
+                        )
+                    )
                     {
                         functionPointerType.SetRuntimeTypeHandleUnsafe(rtth);
                         return true;
@@ -197,7 +225,10 @@ namespace Internal.TypeSystem
 
         /// Parse the native layout to ensure that the type has proper base type setup.
         /// This is used to generalize out some behavior of NoMetadataTypes which actually use this information
-        internal virtual void ParseBaseType(NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext, NativeParser baseTypeParser)
+        internal virtual void ParseBaseType(
+            NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext,
+            NativeParser baseTypeParser
+        )
         {
             return;
         }
@@ -207,7 +238,10 @@ namespace Internal.TypeSystem
             return ComputeTemplate(GetOrCreateTypeBuilderState(), templateRequired);
         }
 
-        internal static TypeDesc ComputeTemplate(TypeBuilderState state, bool templateRequired = true)
+        internal static TypeDesc ComputeTemplate(
+            TypeBuilderState state,
+            bool templateRequired = true
+        )
         {
             TypeDesc templateType = state.TemplateType;
 

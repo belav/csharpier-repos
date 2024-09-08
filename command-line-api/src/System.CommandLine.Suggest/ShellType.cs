@@ -7,6 +7,6 @@ namespace System.CommandLine.Suggest
     {
         Bash,
         PowerShell,
-        Zsh
+        Zsh,
     }
 }

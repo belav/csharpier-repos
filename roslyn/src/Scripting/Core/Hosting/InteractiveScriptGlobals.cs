@@ -12,13 +12,13 @@ using System.IO;
 namespace Microsoft.CodeAnalysis.Scripting.Hosting
 {
     /// <summary>
-    /// Defines global members that common REPL (Read Eval Print Loop) hosts make available in 
+    /// Defines global members that common REPL (Read Eval Print Loop) hosts make available in
     /// the interactive session.
     /// </summary>
     /// <remarks>
-    /// It is recommended for hosts to expose the members defined by this class and implement 
-    /// the same semantics, so that they can run scripts written against standard hosts. 
-    /// 
+    /// It is recommended for hosts to expose the members defined by this class and implement
+    /// the same semantics, so that they can run scripts written against standard hosts.
+    ///
     /// Specialized hosts that target niche scenarios might choose to not provide this functionality.
     /// </remarks>
     public class InteractiveScriptGlobals

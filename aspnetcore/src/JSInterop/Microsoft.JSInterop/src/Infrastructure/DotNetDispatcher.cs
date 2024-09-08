@@ -13,7 +13,9 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Internal;
 using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
-[assembly: MetadataUpdateHandler(typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher.MetadataUpdateHandler))]
+[assembly: MetadataUpdateHandler(
+    typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher.MetadataUpdateHandler)
+)]
 
 namespace Microsoft.JSInterop.Infrastructure;
 
@@ -24,15 +26,30 @@ public static class DotNetDispatcher
 {
     private const string DisposeDotNetObjectReferenceMethodName = "__Dispose";
 
-    internal static readonly JsonEncodedText DotNetObjectRefKey = JsonEncodedText.Encode("__dotNetObject");
+    internal static readonly JsonEncodedText DotNetObjectRefKey = JsonEncodedText.Encode(
+        "__dotNetObject"
+    );
 
-    private static readonly ConcurrentDictionary<AssemblyKey, IReadOnlyDictionary<string, (MethodInfo, Type[])>> _cachedMethodsByAssembly = new();
+    private static readonly ConcurrentDictionary<
+        AssemblyKey,
+        IReadOnlyDictionary<string, (MethodInfo, Type[])>
+    > _cachedMethodsByAssembly = new();
 
-    private static readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, (MethodInfo, Type[])>> _cachedMethodsByType = new();
+    private static readonly ConcurrentDictionary<
+        Type,
+        IReadOnlyDictionary<string, (MethodInfo, Type[])>
+    > _cachedMethodsByType = new();
 
-    private static readonly ConcurrentDictionary<Type, Func<object, Task>> _cachedConvertToTaskByType = new();
+    private static readonly ConcurrentDictionary<
+        Type,
+        Func<object, Task>
+    > _cachedConvertToTaskByType = new();
 
-    private static readonly MethodInfo _taskConverterMethodInfo = typeof(DotNetDispatcher).GetMethod(nameof(CreateValueTaskConverter), BindingFlags.NonPublic | BindingFlags.Static)!;
+    private static readonly MethodInfo _taskConverterMethodInfo =
+        typeof(DotNetDispatcher).GetMethod(
+            nameof(CreateValueTaskConverter),
+            BindingFlags.NonPublic | BindingFlags.Static
+        )!;
 
     /// <summary>
     /// Receives a call from JS to .NET, locating and invoking the specified method.
@@ -41,8 +58,16 @@ public static class DotNetDispatcher
     /// <param name="invocationInfo">The <see cref="DotNetInvocationInfo"/>.</param>
     /// <param name="argsJson">A JSON representation of the parameters.</param>
     /// <returns>A JSON representation of the return value, or null.</returns>
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained.")]
-    public static string? Invoke(JSRuntime jsRuntime, in DotNetInvocationInfo invocationInfo, [StringSyntax(StringSyntaxAttribute.Json)] string argsJson)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained."
+    )]
+    public static string? Invoke(
+        JSRuntime jsRuntime,
+        in DotNetInvocationInfo invocationInfo,
+        [StringSyntax(StringSyntaxAttribute.Json)] string argsJson
+    )
     {
         // This method doesn't need [JSInvokable] because the platform is responsible for having
         // some way to dispatch calls here. The logic inside here is the thing that checks whether
@@ -71,8 +96,16 @@ public static class DotNetDispatcher
     /// <param name="invocationInfo">The <see cref="DotNetInvocationInfo"/>.</param>
     /// <param name="argsJson">A JSON representation of the parameters.</param>
     /// <returns>A JSON representation of the return value, or null.</returns>
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained.")]
-    public static void BeginInvokeDotNet(JSRuntime jsRuntime, DotNetInvocationInfo invocationInfo, [StringSyntax(StringSyntaxAttribute.Json)] string argsJson)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained."
+    )]
+    public static void BeginInvokeDotNet(
+        JSRuntime jsRuntime,
+        DotNetInvocationInfo invocationInfo,
+        [StringSyntax(StringSyntaxAttribute.Json)] string argsJson
+    )
     {
         // This method doesn't need [JSInvokable] because the platform is responsible for having
         // some way to dispatch calls here. The logic inside here is the thing that checks whether
@@ -109,42 +142,73 @@ public static class DotNetDispatcher
         else if (syncException != null)
         {
             // Threw synchronously, let's respond.
-            jsRuntime.EndInvokeDotNet(invocationInfo, new DotNetInvocationResult(syncException.SourceException, "InvocationFailure"));
+            jsRuntime.EndInvokeDotNet(
+                invocationInfo,
+                new DotNetInvocationResult(syncException.SourceException, "InvocationFailure")
+            );
         }
         else if (syncResult is Task task)
         {
             // Returned a task - we need to continue that task and then report an exception
             // or return the value.
-            task.ContinueWith(t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo), TaskScheduler.Current);
-
+            task.ContinueWith(
+                t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo),
+                TaskScheduler.Current
+            );
         }
         else if (syncResult is ValueTask valueTaskResult)
         {
-            valueTaskResult.AsTask().ContinueWith(t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo), TaskScheduler.Current);
+            valueTaskResult
+                .AsTask()
+                .ContinueWith(
+                    t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo),
+                    TaskScheduler.Current
+                );
         }
-        else if (syncResult?.GetType() is { IsGenericType: true } syncResultType
-            && syncResultType.GetGenericTypeDefinition() == typeof(ValueTask<>))
+        else if (
+            syncResult?.GetType() is { IsGenericType: true } syncResultType
+            && syncResultType.GetGenericTypeDefinition() == typeof(ValueTask<>)
+        )
         {
             // It's a ValueTask<T>. We'll coerce it to a Task so that we can attach a continuation.
             var innerTask = GetTaskByType(syncResultType.GenericTypeArguments[0], syncResult);
 
-            innerTask!.ContinueWith(t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo), TaskScheduler.Current);
+            innerTask!.ContinueWith(
+                t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo),
+                TaskScheduler.Current
+            );
         }
         else
         {
-            var syncResultJson = JsonSerializer.Serialize(syncResult, jsRuntime.JsonSerializerOptions);
+            var syncResultJson = JsonSerializer.Serialize(
+                syncResult,
+                jsRuntime.JsonSerializerOptions
+            );
             var dispatchResult = new DotNetInvocationResult(syncResultJson);
             jsRuntime.EndInvokeDotNet(invocationInfo, dispatchResult);
         }
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained.")]
-    private static void EndInvokeDotNetAfterTask(Task task, JSRuntime jsRuntime, in DotNetInvocationInfo invocationInfo)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained."
+    )]
+    private static void EndInvokeDotNetAfterTask(
+        Task task,
+        JSRuntime jsRuntime,
+        in DotNetInvocationInfo invocationInfo
+    )
     {
         if (task.Exception != null)
         {
-            var exceptionDispatchInfo = ExceptionDispatchInfo.Capture(task.Exception.GetBaseException());
-            var dispatchResult = new DotNetInvocationResult(exceptionDispatchInfo.SourceException, "InvocationFailure");
+            var exceptionDispatchInfo = ExceptionDispatchInfo.Capture(
+                task.Exception.GetBaseException()
+            );
+            var dispatchResult = new DotNetInvocationResult(
+                exceptionDispatchInfo.SourceException,
+                "InvocationFailure"
+            );
             jsRuntime.EndInvokeDotNet(invocationInfo, dispatchResult);
         }
 
@@ -153,7 +217,12 @@ public static class DotNetDispatcher
         jsRuntime.EndInvokeDotNet(invocationInfo, new DotNetInvocationResult(resultJson));
     }
 
-    private static object? InvokeSynchronously(JSRuntime jsRuntime, in DotNetInvocationInfo callInfo, IDotNetObjectReference? objectReference, string argsJson)
+    private static object? InvokeSynchronously(
+        JSRuntime jsRuntime,
+        in DotNetInvocationInfo callInfo,
+        IDotNetObjectReference? objectReference,
+        string argsJson
+    )
     {
         var assemblyName = callInfo.AssemblyName;
         var methodIdentifier = callInfo.MethodIdentifier;
@@ -170,10 +239,18 @@ public static class DotNetDispatcher
         {
             if (assemblyName != null)
             {
-                throw new ArgumentException($"For instance method calls, '{nameof(assemblyName)}' should be null. Value received: '{assemblyName}'.");
+                throw new ArgumentException(
+                    $"For instance method calls, '{nameof(assemblyName)}' should be null. Value received: '{assemblyName}'."
+                );
             }
 
-            if (string.Equals(DisposeDotNetObjectReferenceMethodName, methodIdentifier, StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    DisposeDotNetObjectReferenceMethodName,
+                    methodIdentifier,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 // The client executed dotNetObjectReference.dispose(). Dispose the reference and exit.
                 objectReference.Dispose();
@@ -211,8 +288,17 @@ public static class DotNetDispatcher
         }
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained.")]
-    internal static object?[] ParseArguments(JSRuntime jsRuntime, string methodIdentifier, string arguments, Type[] parameterTypes)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "We expect application code is configured to ensure return types of JSInvokable methods are retained."
+    )]
+    internal static object?[] ParseArguments(
+        JSRuntime jsRuntime,
+        string methodIdentifier,
+        string arguments,
+        Type[] parameterTypes
+    )
     {
         if (parameterTypes.Length == 0)
         {
@@ -235,28 +321,45 @@ public static class DotNetDispatcher
             var suppliedArgs = new object?[parameterTypes.Length];
 
             var index = 0;
-            while (index < parameterTypes.Length && reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+            while (
+                index < parameterTypes.Length
+                && reader.Read()
+                && reader.TokenType != JsonTokenType.EndArray
+            )
             {
                 var parameterType = parameterTypes[index];
-                if (reader.TokenType == JsonTokenType.StartObject && IsIncorrectDotNetObjectRefUse(parameterType, reader))
+                if (
+                    reader.TokenType == JsonTokenType.StartObject
+                    && IsIncorrectDotNetObjectRefUse(parameterType, reader)
+                )
                 {
-                    throw new InvalidOperationException($"In call to '{methodIdentifier}', parameter of type '{parameterType.Name}' at index {(index + 1)} must be declared as type 'DotNetObjectRef<{parameterType.Name}>' to receive the incoming value.");
+                    throw new InvalidOperationException(
+                        $"In call to '{methodIdentifier}', parameter of type '{parameterType.Name}' at index {(index + 1)} must be declared as type 'DotNetObjectRef<{parameterType.Name}>' to receive the incoming value."
+                    );
                 }
 
-                suppliedArgs[index] = JsonSerializer.Deserialize(ref reader, parameterType, jsRuntime.JsonSerializerOptions);
+                suppliedArgs[index] = JsonSerializer.Deserialize(
+                    ref reader,
+                    parameterType,
+                    jsRuntime.JsonSerializerOptions
+                );
                 index++;
             }
 
             if (index < parameterTypes.Length)
             {
                 // If we parsed fewer parameters, we can always make a definitive claim about how many parameters were received.
-                throw new ArgumentException($"The call to '{methodIdentifier}' expects '{parameterTypes.Length}' parameters, but received '{index}'.");
+                throw new ArgumentException(
+                    $"The call to '{methodIdentifier}' expects '{parameterTypes.Length}' parameters, but received '{index}'."
+                );
             }
 
             if (!reader.Read() || reader.TokenType != JsonTokenType.EndArray)
             {
                 // Either we received more parameters than we expected or the JSON is malformed.
-                throw new JsonException($"Unexpected JSON token {reader.TokenType}. Ensure that the call to `{methodIdentifier}' is supplied with exactly '{parameterTypes.Length}' parameters.");
+                throw new JsonException(
+                    $"Unexpected JSON token {reader.TokenType}. Ensure that the call to `{methodIdentifier}' is supplied with exactly '{parameterTypes.Length}' parameters."
+                );
             }
 
             return suppliedArgs;
@@ -267,12 +370,16 @@ public static class DotNetDispatcher
                 // Check for incorrect use of DotNetObjectRef<T> at the top level. We know it's
                 // an incorrect use if there's a object that looks like { '__dotNetObject': <some number> },
                 // but we aren't assigning to DotNetObjectRef{T}.
-                if (jsonReader.Read() &&
-                    jsonReader.TokenType == JsonTokenType.PropertyName &&
-                    jsonReader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes))
+                if (
+                    jsonReader.Read()
+                    && jsonReader.TokenType == JsonTokenType.PropertyName
+                    && jsonReader.ValueTextEquals(DotNetObjectRefKey.EncodedUtf8Bytes)
+                )
                 {
                     // The JSON payload has the shape we expect from a DotNetObjectRef instance.
-                    return !parameterType.IsGenericType || parameterType.GetGenericTypeDefinition() != typeof(DotNetObjectReference<>);
+                    return !parameterType.IsGenericType
+                        || parameterType.GetGenericTypeDefinition()
+                            != typeof(DotNetObjectReference<>);
                 }
 
                 return false;
@@ -348,44 +455,68 @@ public static class DotNetDispatcher
         jsRuntime.ReceiveByteArray(id, data);
     }
 
-    private static (MethodInfo, Type[]) GetCachedMethodInfo(AssemblyKey assemblyKey, string methodIdentifier)
+    private static (MethodInfo, Type[]) GetCachedMethodInfo(
+        AssemblyKey assemblyKey,
+        string methodIdentifier
+    )
     {
         if (string.IsNullOrWhiteSpace(assemblyKey.AssemblyName))
         {
-            throw new ArgumentException($"Property '{nameof(AssemblyKey.AssemblyName)}' cannot be null, empty, or whitespace.", nameof(assemblyKey));
+            throw new ArgumentException(
+                $"Property '{nameof(AssemblyKey.AssemblyName)}' cannot be null, empty, or whitespace.",
+                nameof(assemblyKey)
+            );
         }
 
         if (string.IsNullOrWhiteSpace(methodIdentifier))
         {
-            throw new ArgumentException("Cannot be null, empty, or whitespace.", nameof(methodIdentifier));
+            throw new ArgumentException(
+                "Cannot be null, empty, or whitespace.",
+                nameof(methodIdentifier)
+            );
         }
 
-        var assemblyMethods = _cachedMethodsByAssembly.GetOrAdd(assemblyKey, ScanAssemblyForCallableMethods);
+        var assemblyMethods = _cachedMethodsByAssembly.GetOrAdd(
+            assemblyKey,
+            ScanAssemblyForCallableMethods
+        );
         if (assemblyMethods.TryGetValue(methodIdentifier, out var result))
         {
             return result;
         }
         else
         {
-            throw new ArgumentException($"The assembly '{assemblyKey.AssemblyName}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].");
+            throw new ArgumentException(
+                $"The assembly '{assemblyKey.AssemblyName}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")]."
+            );
         }
     }
 
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
         "IL2060:MakeGenericMethod",
-        Justification = "https://github.com/mono/linker/issues/1727")]
+        Justification = "https://github.com/mono/linker/issues/1727"
+    )]
     private static Task GetTaskByType(Type type, object obj)
     {
-        var converterDelegate = _cachedConvertToTaskByType.GetOrAdd(type, (Type t, MethodInfo taskConverterMethodInfo) =>
-            taskConverterMethodInfo.MakeGenericMethod(t).CreateDelegate<Func<object, Task>>(), _taskConverterMethodInfo);
+        var converterDelegate = _cachedConvertToTaskByType.GetOrAdd(
+            type,
+            (Type t, MethodInfo taskConverterMethodInfo) =>
+                taskConverterMethodInfo.MakeGenericMethod(t).CreateDelegate<Func<object, Task>>(),
+            _taskConverterMethodInfo
+        );
 
         return converterDelegate.Invoke(obj);
     }
 
-    private static Task CreateValueTaskConverter<[DynamicallyAccessedMembers(LinkerFlags.JsonSerialized)] T>(object result) => ((ValueTask<T>)result).AsTask();
+    private static Task CreateValueTaskConverter<
+        [DynamicallyAccessedMembers(LinkerFlags.JsonSerialized)] T
+    >(object result) => ((ValueTask<T>)result).AsTask();
 
-    private static (MethodInfo methodInfo, Type[] parameterTypes) GetCachedMethodInfo(IDotNetObjectReference objectReference, string methodIdentifier)
+    private static (MethodInfo methodInfo, Type[] parameterTypes) GetCachedMethodInfo(
+        IDotNetObjectReference objectReference,
+        string methodIdentifier
+    )
     {
         var type = objectReference.Value.GetType();
 
@@ -400,29 +531,40 @@ public static class DotNetDispatcher
         }
         else
         {
-            throw new ArgumentException($"The type '{type.Name}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].");
+            throw new ArgumentException(
+                $"The type '{type.Name}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")]."
+            );
         }
 
-        static Dictionary<string, (MethodInfo, Type[])> ScanTypeForCallableMethods([DynamicallyAccessedMembers(JSInvokable)] Type type)
+        static Dictionary<string, (MethodInfo, Type[])> ScanTypeForCallableMethods(
+            [DynamicallyAccessedMembers(JSInvokable)] Type type
+        )
         {
             var result = new Dictionary<string, (MethodInfo, Type[])>(StringComparer.Ordinal);
 
             foreach (var method in type.GetMethods(BindingFlags.Instance | BindingFlags.Public))
             {
-                if (method.ContainsGenericParameters || !method.IsDefined(typeof(JSInvokableAttribute), inherit: false))
+                if (
+                    method.ContainsGenericParameters
+                    || !method.IsDefined(typeof(JSInvokableAttribute), inherit: false)
+                )
                 {
                     continue;
                 }
 
-                var identifier = method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier ?? method.Name!;
+                var identifier =
+                    method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier
+                    ?? method.Name!;
                 var parameterTypes = GetParameterTypes(method);
 
                 if (result.ContainsKey(identifier))
                 {
-                    throw new InvalidOperationException($"The type {type.Name} contains more than one " +
-                        $"[JSInvokable] method with identifier '{identifier}'. All [JSInvokable] methods within the same " +
-                        "type must have different identifiers. You can pass a custom identifier as a parameter to " +
-                        $"the [JSInvokable] attribute.");
+                    throw new InvalidOperationException(
+                        $"The type {type.Name} contains more than one "
+                            + $"[JSInvokable] method with identifier '{identifier}'. All [JSInvokable] methods within the same "
+                            + "type must have different identifiers. You can pass a custom identifier as a parameter to "
+                            + $"the [JSInvokable] attribute."
+                    );
                 }
 
                 result.Add(identifier, (method, parameterTypes));
@@ -432,10 +574,24 @@ public static class DotNetDispatcher
         }
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "We expect application code is configured to ensure JSInvokable methods are retained. https://github.com/dotnet/aspnetcore/issues/29946")]
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072", Justification = "We expect application code is configured to ensure JSInvokable methods are retained. https://github.com/dotnet/aspnetcore/issues/29946")]
-    [UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "We expect application code is configured to ensure JSInvokable methods are retained. https://github.com/dotnet/aspnetcore/issues/29946")]
-    private static Dictionary<string, (MethodInfo, Type[])> ScanAssemblyForCallableMethods(AssemblyKey assemblyKey)
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026",
+        Justification = "We expect application code is configured to ensure JSInvokable methods are retained. https://github.com/dotnet/aspnetcore/issues/29946"
+    )]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2072",
+        Justification = "We expect application code is configured to ensure JSInvokable methods are retained. https://github.com/dotnet/aspnetcore/issues/29946"
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2075",
+        Justification = "We expect application code is configured to ensure JSInvokable methods are retained. https://github.com/dotnet/aspnetcore/issues/29946"
+    )]
+    private static Dictionary<string, (MethodInfo, Type[])> ScanAssemblyForCallableMethods(
+        AssemblyKey assemblyKey
+    )
     {
         // TODO: Consider looking first for assembly-level attributes (i.e., if there are any,
         // only use those) to avoid scanning, especially for framework assemblies.
@@ -445,20 +601,27 @@ public static class DotNetDispatcher
         {
             foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
             {
-                if (method.ContainsGenericParameters || !method.IsDefined(typeof(JSInvokableAttribute), inherit: false))
+                if (
+                    method.ContainsGenericParameters
+                    || !method.IsDefined(typeof(JSInvokableAttribute), inherit: false)
+                )
                 {
                     continue;
                 }
 
-                var identifier = method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier ?? method.Name;
+                var identifier =
+                    method.GetCustomAttribute<JSInvokableAttribute>(false)!.Identifier
+                    ?? method.Name;
                 var parameterTypes = GetParameterTypes(method);
 
                 if (result.ContainsKey(identifier))
                 {
-                    throw new InvalidOperationException($"The assembly '{assemblyKey.AssemblyName}' contains more than one " +
-                        $"[JSInvokable] method with identifier '{identifier}'. All [JSInvokable] methods within the same " +
-                        $"assembly must have different identifiers. You can pass a custom identifier as a parameter to " +
-                        $"the [JSInvokable] attribute.");
+                    throw new InvalidOperationException(
+                        $"The assembly '{assemblyKey.AssemblyName}' contains more than one "
+                            + $"[JSInvokable] method with identifier '{identifier}'. All [JSInvokable] methods within the same "
+                            + $"assembly must have different identifiers. You can pass a custom identifier as a parameter to "
+                            + $"the [JSInvokable] attribute."
+                    );
                 }
 
                 result.Add(identifier, (method, parameterTypes));
@@ -506,7 +669,9 @@ public static class DotNetDispatcher
         }
 
         return assembly
-            ?? throw new ArgumentException($"There is no loaded assembly with the name '{assemblyKey.AssemblyName}'.");
+            ?? throw new ArgumentException(
+                $"There is no loaded assembly with the name '{assemblyKey.AssemblyName}'."
+            );
     }
 
     // don't point the MetadataUpdateHandlerAttribute at the DotNetDispatcher class, since the attribute has

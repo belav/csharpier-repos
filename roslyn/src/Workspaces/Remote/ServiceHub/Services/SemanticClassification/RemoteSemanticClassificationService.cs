@@ -11,12 +11,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteSemanticClassificationService : BrokeredServiceBase, IRemoteSemanticClassificationService
+    internal sealed partial class RemoteSemanticClassificationService
+        : BrokeredServiceBase,
+            IRemoteSemanticClassificationService
     {
         internal sealed class Factory : FactoryBase<IRemoteSemanticClassificationService>
         {
-            protected override IRemoteSemanticClassificationService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteSemanticClassificationService(arguments);
+            protected override IRemoteSemanticClassificationService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteSemanticClassificationService(arguments);
         }
 
         public ValueTask<SerializableClassifiedSpans> GetClassificationsAsync(
@@ -26,36 +29,53 @@ namespace Microsoft.CodeAnalysis.Remote
             ClassificationType type,
             ClassificationOptions options,
             bool isFullyLoaded,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(solutionChecksum, async solution =>
-            {
-                var document = solution.GetDocument(documentId) ?? await solution.GetSourceGeneratedDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
-                Contract.ThrowIfNull(document);
-
-                if (options.ForceFrozenPartialSemanticsForCrossProcessOperations)
+            return RunServiceAsync(
+                solutionChecksum,
+                async solution =>
                 {
-                    // Frozen partial semantics is not automatically passed to OOP, so enable it explicitly when desired
-                    document = document.WithFrozenPartialSemantics(cancellationToken);
-                }
+                    var document =
+                        solution.GetDocument(documentId)
+                        ?? await solution
+                            .GetSourceGeneratedDocumentAsync(documentId, cancellationToken)
+                            .ConfigureAwait(false);
+                    Contract.ThrowIfNull(document);
 
-                using var _ = Classifier.GetPooledList(out var temp);
-                await AbstractClassificationService.AddClassificationsInCurrentProcessAsync(
-                    document, spans, type, options, temp, cancellationToken).ConfigureAwait(false);
+                    if (options.ForceFrozenPartialSemanticsForCrossProcessOperations)
+                    {
+                        // Frozen partial semantics is not automatically passed to OOP, so enable it explicitly when desired
+                        document = document.WithFrozenPartialSemantics(cancellationToken);
+                    }
 
-                if (isFullyLoaded)
-                {
-                    // Once fully loaded, there's no need for us to keep around any of the data we cached in-memory
-                    // during the time the solution was loading.
-                    lock (_cachedData)
-                        _cachedData.Clear();
+                    using var _ = Classifier.GetPooledList(out var temp);
+                    await AbstractClassificationService
+                        .AddClassificationsInCurrentProcessAsync(
+                            document,
+                            spans,
+                            type,
+                            options,
+                            temp,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
-                    // Enqueue this document into our work queue to fully classify and cache.
-                    _workQueue.AddWork((document, type, options));
-                }
+                    if (isFullyLoaded)
+                    {
+                        // Once fully loaded, there's no need for us to keep around any of the data we cached in-memory
+                        // during the time the solution was loading.
+                        lock (_cachedData)
+                            _cachedData.Clear();
 
-                return SerializableClassifiedSpans.Dehydrate(temp.ToImmutableArray());
-            }, cancellationToken);
+                        // Enqueue this document into our work queue to fully classify and cache.
+                        _workQueue.AddWork((document, type, options));
+                    }
+
+                    return SerializableClassifiedSpans.Dehydrate(temp.ToImmutableArray());
+                },
+                cancellationToken
+            );
         }
     }
 }

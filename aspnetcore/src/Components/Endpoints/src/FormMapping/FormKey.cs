@@ -8,11 +8,15 @@ namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 internal readonly struct FormKey(ReadOnlyMemory<char> value) : IEquatable<FormKey>
 {
-    private readonly int _hashCode = string.GetHashCode(value.Span, StringComparison.OrdinalIgnoreCase);
+    private readonly int _hashCode = string.GetHashCode(
+        value.Span,
+        StringComparison.OrdinalIgnoreCase
+    );
 
     public ReadOnlyMemory<char> Value { get; } = value;
 
-    public override readonly bool Equals(object? obj) => obj is FormKey prefix && Value.Equals(prefix.Value);
+    public override readonly bool Equals(object? obj) =>
+        obj is FormKey prefix && Value.Equals(prefix.Value);
 
     public readonly bool Equals(FormKey other) =>
         MemoryExtensions.Equals(Value.Span, other.Value.Span, StringComparison.OrdinalIgnoreCase);

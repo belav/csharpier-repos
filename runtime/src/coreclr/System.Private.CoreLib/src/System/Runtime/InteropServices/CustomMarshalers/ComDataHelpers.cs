@@ -8,7 +8,10 @@ namespace System.Runtime.InteropServices.CustomMarshalers
     internal static class ComDataHelpers
     {
         [SupportedOSPlatform("windows")]
-        public static TView GetOrCreateManagedViewFromComData<T, TView>(object comObject, Func<T, TView> createCallback)
+        public static TView GetOrCreateManagedViewFromComData<T, TView>(
+            object comObject,
+            Func<T, TView> createCallback
+        )
         {
             object key = typeof(TView);
 

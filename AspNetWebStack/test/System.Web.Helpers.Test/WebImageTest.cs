@@ -13,38 +13,60 @@ namespace System.Web.Helpers.Test
 {
     public class WebImageTest
     {
-        private static readonly byte[] _JpgImageBytes = TestFile.Create("LambdaFinal.jpg").ReadAllBytes();
+        private static readonly byte[] _JpgImageBytes = TestFile
+            .Create("LambdaFinal.jpg")
+            .ReadAllBytes();
         private static readonly byte[] _BmpImageBytes = TestFile.Create("logo.bmp").ReadAllBytes();
-        private static readonly byte[] _PngImageBytes = TestFile.Create("NETLogo.png").ReadAllBytes();
+        private static readonly byte[] _PngImageBytes = TestFile
+            .Create("NETLogo.png")
+            .ReadAllBytes();
         private static readonly byte[] _IcoImageBytes = TestFile.Create("Test.ico").ReadAllBytes();
 
         [Fact]
         public void ConstructorThrowsWhenFilePathIsNull()
         {
-            Assert.ThrowsArgument(() =>
-                                                    new WebImage(GetContext(), s => new byte[] { }, filePath: null), "filePath", "Value cannot be null or an empty string.");
+            Assert.ThrowsArgument(
+                () => new WebImage(GetContext(), s => new byte[] { }, filePath: null),
+                "filePath",
+                "Value cannot be null or an empty string."
+            );
         }
 
         [Fact]
         public void ConstructorThrowsWhenFilePathIsEmpty()
         {
-            Assert.ThrowsArgument(() =>
-                                                    new WebImage(GetContext(), s => new byte[] { }, filePath: String.Empty), "filePath", "Value cannot be null or an empty string.");
+            Assert.ThrowsArgument(
+                () => new WebImage(GetContext(), s => new byte[] { }, filePath: String.Empty),
+                "filePath",
+                "Value cannot be null or an empty string."
+            );
         }
 
         [Fact]
         public void ConstructorThrowsWhenFilePathIsInvalid()
         {
-            Assert.Throws<DirectoryNotFoundException>(() =>
-                                                               new WebImage(GetContext(), s => { throw new DirectoryNotFoundException(); }, @"x:\this\does\not\exist.jpg"));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    new WebImage(
+                        GetContext(),
+                        s =>
+                        {
+                            throw new DirectoryNotFoundException();
+                        },
+                        @"x:\this\does\not\exist.jpg"
+                    )
+            );
         }
 
         [Fact]
         public void ConstructorThrowsWhenFileContentIsInvalid()
         {
             byte[] imageContent = new byte[] { 32, 111, 209, 138, 76, 32 };
-            Assert.ThrowsArgument(() => new WebImage(imageContent), "content",
-                                                    "An image could not be constructed from the content provided.");
+            Assert.ThrowsArgument(
+                () => new WebImage(imageContent),
+                "content",
+                "An image could not be constructed from the content provided."
+            );
         }
 
         [Fact]
@@ -82,7 +104,10 @@ namespace System.Web.Helpers.Test
 
             byte[] returnedContent = image.GetBytes();
 
-            Assert.False(ReferenceEquals(_PngImageBytes, returnedContent), "GetBytes should clone array.");
+            Assert.False(
+                ReferenceEquals(_PngImageBytes, returnedContent),
+                "GetBytes should clone array."
+            );
             Assert.Equal(_PngImageBytes, returnedContent);
         }
 
@@ -140,7 +165,10 @@ namespace System.Web.Helpers.Test
 
             byte[] returnedContent = image.GetBytes();
 
-            Assert.False(ReferenceEquals(originalContent, returnedContent), "GetBytes with string null should clone array.");
+            Assert.False(
+                ReferenceEquals(originalContent, returnedContent),
+                "GetBytes with string null should clone array."
+            );
             Assert.Equal(originalContent, returnedContent);
         }
 
@@ -152,7 +180,10 @@ namespace System.Web.Helpers.Test
 
             byte[] returnedContent = image.GetBytes("jpeg");
 
-            Assert.False(ReferenceEquals(originalContent, returnedContent), "GetBytes with string null should clone array.");
+            Assert.False(
+                ReferenceEquals(originalContent, returnedContent),
+                "GetBytes with string null should clone array."
+            );
             Assert.Equal(originalContent, returnedContent);
         }
 
@@ -165,7 +196,10 @@ namespace System.Web.Helpers.Test
             // Request different format
             byte[] returnedContent = image.GetBytes("jpg");
 
-            Assert.False(ReferenceEquals(originalContent, returnedContent), "GetBytes with string format should clone array.");
+            Assert.False(
+                ReferenceEquals(originalContent, returnedContent),
+                "GetBytes with string format should clone array."
+            );
             using (MemoryStream stream = new MemoryStream(returnedContent))
             {
                 using (Image tempImage = Image.FromStream(stream))
@@ -184,7 +218,10 @@ namespace System.Web.Helpers.Test
 
             byte[] returnedContent = image.GetBytes("bmp");
 
-            Assert.False(ReferenceEquals(originalContent, returnedContent), "GetBytes with string format should clone array.");
+            Assert.False(
+                ReferenceEquals(originalContent, returnedContent),
+                "GetBytes with string format should clone array."
+            );
             Assert.Equal(originalContent, returnedContent);
         }
 
@@ -215,7 +252,8 @@ namespace System.Web.Helpers.Test
             Assert.ThrowsArgument(
                 () => image.GetBytes("bmpx"),
                 "format",
-                "\"bmpx\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc.");
+                "\"bmpx\" is invalid image format. Valid values are image format names like: \"JPEG\", \"BMP\", \"GIF\", \"PNG\", etc."
+            );
         }
 
         [Fact]
@@ -262,9 +300,11 @@ namespace System.Web.Helpers.Test
 
         [Theory]
         [PropertyData("GetImageFromRequestDeterminesMimeTypeFromExtensionData")]
-        public void GetImageFromRequestDeterminesMimeTypeFromExtension(string fileName,
-                                                                       byte[] content,
-                                                                       string expectedExtension)
+        public void GetImageFromRequestDeterminesMimeTypeFromExtension(
+            string fileName,
+            byte[] content,
+            string expectedExtension
+        )
         {
             // Arrange
             Mock<HttpPostedFileBase> postedFile = new Mock<HttpPostedFileBase>();
@@ -356,13 +396,22 @@ namespace System.Web.Helpers.Test
         public void ResizePreservesResolution()
         {
             MemoryStream output = null;
-            Action<string, byte[]> saveAction = (_, content) => { output = new MemoryStream(content); };
+            Action<string, byte[]> saveAction = (_, content) =>
+            {
+                output = new MemoryStream(content);
+            };
 
             WebImage image = new WebImage(_PngImageBytes);
 
             image.Resize(100, 50, preserveAspectRatio: true, preventEnlarge: true);
 
-            image.Save(GetContext(), saveAction, @"x:\ResizePreservesResolution.jpg", "jpeg", forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                @"x:\ResizePreservesResolution.jpg",
+                "jpeg",
+                forceWellKnownExtension: true
+            );
             using (Image original = Image.FromStream(new MemoryStream(_PngImageBytes)))
             {
                 using (Image modified = Image.FromStream(output))
@@ -379,7 +428,10 @@ namespace System.Web.Helpers.Test
             // Arrange
             WebImage image = new WebImage(_PngImageBytes);
             MemoryStream output = null;
-            Action<string, byte[]> saveAction = (_, content) => { output = new MemoryStream(content); };
+            Action<string, byte[]> saveAction = (_, content) =>
+            {
+                output = new MemoryStream(content);
+            };
 
             // Act
             image.Resize(200, 100, preserveAspectRatio: true, preventEnlarge: true);
@@ -449,12 +501,14 @@ namespace System.Web.Helpers.Test
             Assert.ThrowsArgumentGreaterThan(
                 () => image.Resize(-1, 100, preserveAspectRatio: true, preventEnlarge: true),
                 "width",
-                "0");
+                "0"
+            );
 
             Assert.ThrowsArgumentGreaterThan(
                 () => image.Resize(100, -1, preserveAspectRatio: true, preventEnlarge: true),
                 "height",
-                "0");
+                "0"
+            );
         }
 
         [Fact]
@@ -508,25 +562,13 @@ namespace System.Web.Helpers.Test
         {
             WebImage image = new WebImage(_JpgImageBytes);
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(
-                () => image.Crop(top: -1),
-                "top",
-                "0");
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => image.Crop(top: -1), "top", "0");
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(
-                () => image.Crop(left: -1),
-                "left",
-                "0");
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => image.Crop(left: -1), "left", "0");
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(
-                () => image.Crop(bottom: -1),
-                "bottom",
-                "0");
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => image.Crop(bottom: -1), "bottom", "0");
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(
-                () => image.Crop(right: -1),
-                "right",
-                "0");
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => image.Crop(right: -1), "right", "0");
         }
 
         [Fact]
@@ -584,7 +626,13 @@ namespace System.Web.Helpers.Test
         public void AddTextWatermarkPreservesImageDimension()
         {
             WebImage image = new WebImage(_JpgImageBytes);
-            image.AddTextWatermark("Plan9", fontSize: 16, horizontalAlign: "Left", verticalAlign: "Bottom", opacity: 50);
+            image.AddTextWatermark(
+                "Plan9",
+                fontSize: 16,
+                horizontalAlign: "Left",
+                verticalAlign: "Bottom",
+                opacity: 50
+            );
 
             Assert.Equal(634, image.Width);
             Assert.Equal(489, image.Height);
@@ -594,7 +642,13 @@ namespace System.Web.Helpers.Test
         public void AddTextWatermarkParsesHexColorCorrectly()
         {
             WebImage image = new WebImage(_JpgImageBytes);
-            image.AddTextWatermark("Plan9", fontSize: 16, fontColor: "#FF0000", horizontalAlign: "Center", verticalAlign: "Middle");
+            image.AddTextWatermark(
+                "Plan9",
+                fontSize: 16,
+                fontColor: "#FF0000",
+                horizontalAlign: "Center",
+                verticalAlign: "Middle"
+            );
 
             Assert.Equal(634, image.Width);
             Assert.Equal(489, image.Height);
@@ -604,7 +658,13 @@ namespace System.Web.Helpers.Test
         public void AddTextWatermarkParsesShortHexColorCorrectly()
         {
             WebImage image = new WebImage(_JpgImageBytes);
-            image.AddTextWatermark("Plan9", fontSize: 16, fontColor: "#F00", horizontalAlign: "Center", verticalAlign: "Middle");
+            image.AddTextWatermark(
+                "Plan9",
+                fontSize: 16,
+                fontColor: "#F00",
+                horizontalAlign: "Center",
+                verticalAlign: "Middle"
+            );
 
             Assert.Equal(634, image.Width);
             Assert.Equal(489, image.Height);
@@ -625,7 +685,11 @@ namespace System.Web.Helpers.Test
         {
             WebImage image = new WebImage(_JpgImageBytes);
 
-            Assert.ThrowsArgumentOutOfRange(() => image.AddTextWatermark("Plan9", opacity: -1), "opacity", "Value must be between 0 and 100.");
+            Assert.ThrowsArgumentOutOfRange(
+                () => image.AddTextWatermark("Plan9", opacity: -1),
+                "opacity",
+                "Value must be between 0 and 100."
+            );
         }
 
         [Fact]
@@ -633,16 +697,18 @@ namespace System.Web.Helpers.Test
         {
             WebImage image = new WebImage(_JpgImageBytes);
 
-            Assert.ThrowsArgumentOutOfRange(() => image.AddTextWatermark("Plan9", opacity: 155), "opacity", "Value must be between 0 and 100.");
+            Assert.ThrowsArgumentOutOfRange(
+                () => image.AddTextWatermark("Plan9", opacity: 155),
+                "opacity",
+                "Value must be between 0 and 100."
+            );
         }
 
         [Fact]
         public void AddTextWatermarkThrowsOnEmptyText()
         {
             WebImage image = new WebImage(_JpgImageBytes);
-            Assert.ThrowsArgumentNullOrEmptyString(
-                () => image.AddTextWatermark(""),
-                "text");
+            Assert.ThrowsArgumentNullOrEmptyString(() => image.AddTextWatermark(""), "text");
         }
 
         [Fact]
@@ -651,7 +717,8 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_JpgImageBytes);
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", fontColor: "super"),
-                "The \"fontColor\" value is invalid. Valid values are names like \"White\", \"Black\", or \"DarkBlue\", or hexadecimal values in the form \"#RRGGBB\" or \"#RGB\".");
+                "The \"fontColor\" value is invalid. Valid values are names like \"White\", \"Black\", or \"DarkBlue\", or hexadecimal values in the form \"#RRGGBB\" or \"#RGB\"."
+            );
         }
 
         [Fact]
@@ -660,7 +727,8 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_JpgImageBytes);
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", fontColor: "#XXX"),
-                "The \"fontColor\" value is invalid. Valid values are names like \"White\", \"Black\", or \"DarkBlue\", or hexadecimal values in the form \"#RRGGBB\" or \"#RGB\".");
+                "The \"fontColor\" value is invalid. Valid values are names like \"White\", \"Black\", or \"DarkBlue\", or hexadecimal values in the form \"#RRGGBB\" or \"#RGB\"."
+            );
         }
 
         [Fact]
@@ -669,7 +737,8 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_JpgImageBytes);
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", fontColor: "#F000"),
-                "The \"fontColor\" value is invalid. Valid values are names like \"White\", \"Black\", or \"DarkBlue\", or hexadecimal values in the form \"#RRGGBB\" or \"#RGB\".");
+                "The \"fontColor\" value is invalid. Valid values are names like \"White\", \"Black\", or \"DarkBlue\", or hexadecimal values in the form \"#RRGGBB\" or \"#RGB\"."
+            );
         }
 
         [Fact]
@@ -678,7 +747,8 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_JpgImageBytes);
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", horizontalAlign: "Justify"),
-                "The \"horizontalAlign\" value is invalid. Valid values are: \"Right\", \"Left\", and \"Center\".");
+                "The \"horizontalAlign\" value is invalid. Valid values are: \"Right\", \"Left\", and \"Center\"."
+            );
         }
 
         [Fact]
@@ -687,7 +757,8 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_JpgImageBytes);
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", verticalAlign: "NotSet"),
-                "The \"verticalAlign\" value is invalid. Valid values are: \"Top\", \"Bottom\", and \"Middle\".");
+                "The \"verticalAlign\" value is invalid. Valid values are: \"Top\", \"Bottom\", and \"Middle\"."
+            );
         }
 
         [Fact]
@@ -697,7 +768,8 @@ namespace System.Web.Helpers.Test
             Assert.ThrowsArgumentGreaterThanOrEqualTo(
                 () => image.AddTextWatermark("p9", padding: -10),
                 "padding",
-                "0");
+                "0"
+            );
         }
 
         [Fact]
@@ -707,12 +779,14 @@ namespace System.Web.Helpers.Test
             Assert.ThrowsArgumentGreaterThan(
                 () => image.AddTextWatermark("p9", fontSize: -10),
                 "fontSize",
-                "0");
+                "0"
+            );
 
             Assert.ThrowsArgumentGreaterThan(
                 () => image.AddTextWatermark("p9", fontSize: 0),
                 "fontSize",
-                "0");
+                "0"
+            );
         }
 
         [Fact]
@@ -722,7 +796,8 @@ namespace System.Web.Helpers.Test
 
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", fontStyle: "something"),
-                "The \"fontStyle\" value is invalid. Valid values are: \"Regular\", \"Bold\", \"Italic\", \"Underline\", and \"Strikeout\".");
+                "The \"fontStyle\" value is invalid. Valid values are: \"Regular\", \"Bold\", \"Italic\", \"Underline\", and \"Strikeout\"."
+            );
         }
 
         [Fact]
@@ -732,7 +807,8 @@ namespace System.Web.Helpers.Test
 
             Assert.Throws<ArgumentException>(
                 () => image.AddTextWatermark("p9", fontFamily: "something"),
-                "The \"fontFamily\" value is invalid. Valid values are font family names like: \"Arial\", \"Times New Roman\", etc. Make sure that the font family you are trying to use is installed on the server.");
+                "The \"fontFamily\" value is invalid. Valid values are font family names like: \"Arial\", \"Times New Roman\", etc. Make sure that the font family you are trying to use is installed on the server."
+            );
         }
 
         [Fact]
@@ -740,7 +816,13 @@ namespace System.Web.Helpers.Test
         {
             WebImage watermark = new WebImage(_BmpImageBytes);
             WebImage image = new WebImage(_JpgImageBytes);
-            image.AddImageWatermark(watermark, horizontalAlign: "LEFT", verticalAlign: "top", opacity: 50, padding: 10);
+            image.AddImageWatermark(
+                watermark,
+                horizontalAlign: "LEFT",
+                verticalAlign: "top",
+                opacity: 50,
+                padding: 10
+            );
 
             Assert.Equal(634, image.Width);
             Assert.Equal(489, image.Height);
@@ -751,7 +833,13 @@ namespace System.Web.Helpers.Test
         {
             WebImage watermark = new WebImage(_BmpImageBytes);
             WebImage image = new WebImage(_JpgImageBytes);
-            image.AddImageWatermark(watermark, horizontalAlign: "LEFT", verticalAlign: "top", opacity: 30, padding: 10);
+            image.AddImageWatermark(
+                watermark,
+                horizontalAlign: "LEFT",
+                verticalAlign: "top",
+                opacity: 30,
+                padding: 10
+            );
             image.AddTextWatermark("plan9");
 
             Assert.Equal(634, image.Width);
@@ -763,7 +851,15 @@ namespace System.Web.Helpers.Test
         {
             WebImage watermark = new WebImage(_BmpImageBytes);
             WebImage image = new WebImage(_JpgImageBytes);
-            image.AddImageWatermark(watermark, width: 54, height: 22, horizontalAlign: "LEFT", verticalAlign: "top", opacity: 50, padding: 10);
+            image.AddImageWatermark(
+                watermark,
+                width: 54,
+                height: 22,
+                horizontalAlign: "LEFT",
+                verticalAlign: "top",
+                opacity: 50,
+                padding: 10
+            );
 
             Assert.Equal(108, watermark.Width);
             Assert.Equal(44, watermark.Height);
@@ -776,7 +872,8 @@ namespace System.Web.Helpers.Test
 
             Assert.ThrowsArgumentNull(
                 () => image.AddImageWatermark(watermarkImage: null),
-                "watermarkImage");
+                "watermarkImage"
+            );
         }
 
         [Fact]
@@ -787,10 +884,14 @@ namespace System.Web.Helpers.Test
 
             string message = "Watermark width and height must both be positive or both be zero.";
             Assert.Throws<ArgumentException>(
-                () => image.AddImageWatermark(watermark, width: 0, height: 22), message);
+                () => image.AddImageWatermark(watermark, width: 0, height: 22),
+                message
+            );
 
             Assert.Throws<ArgumentException>(
-                () => image.AddImageWatermark(watermark, width: 100, height: 0), message);
+                () => image.AddImageWatermark(watermark, width: 100, height: 0),
+                message
+            );
         }
 
         [Fact]
@@ -799,9 +900,17 @@ namespace System.Web.Helpers.Test
             WebImage watermark = new WebImage(_BmpImageBytes);
             WebImage image = new WebImage(_JpgImageBytes);
 
-            Assert.ThrowsArgumentOutOfRange(() => image.AddImageWatermark(watermark, opacity: -1), "opacity", "Value must be between 0 and 100.");
+            Assert.ThrowsArgumentOutOfRange(
+                () => image.AddImageWatermark(watermark, opacity: -1),
+                "opacity",
+                "Value must be between 0 and 100."
+            );
 
-            Assert.ThrowsArgumentOutOfRange(() => image.AddImageWatermark(watermark, opacity: 120), "opacity", "Value must be between 0 and 100.");
+            Assert.ThrowsArgumentOutOfRange(
+                () => image.AddImageWatermark(watermark, opacity: 120),
+                "opacity",
+                "Value must be between 0 and 100."
+            );
         }
 
         [Fact]
@@ -813,12 +922,14 @@ namespace System.Web.Helpers.Test
             Assert.ThrowsArgumentGreaterThanOrEqualTo(
                 () => image.AddImageWatermark(watermark, width: -1),
                 "width",
-                "0");
+                "0"
+            );
 
             Assert.ThrowsArgumentGreaterThanOrEqualTo(
                 () => image.AddImageWatermark(watermark, height: -1),
                 "height",
-                "0");
+                "0"
+            );
         }
 
         [Fact]
@@ -829,7 +940,8 @@ namespace System.Web.Helpers.Test
 
             Assert.Throws<ArgumentException>(
                 () => image.AddImageWatermark(watermark, horizontalAlign: "horizontal"),
-                "The \"horizontalAlign\" value is invalid. Valid values are: \"Right\", \"Left\", and \"Center\".");
+                "The \"horizontalAlign\" value is invalid. Valid values are: \"Right\", \"Left\", and \"Center\"."
+            );
         }
 
         [Fact]
@@ -840,7 +952,8 @@ namespace System.Web.Helpers.Test
 
             Assert.Throws<ArgumentException>(
                 () => image.AddImageWatermark(watermark, verticalAlign: "vertical"),
-                "The \"verticalAlign\" value is invalid. Valid values are: \"Top\", \"Bottom\", and \"Middle\".");
+                "The \"verticalAlign\" value is invalid. Valid values are: \"Top\", \"Bottom\", and \"Middle\"."
+            );
         }
 
         [Fact]
@@ -852,7 +965,8 @@ namespace System.Web.Helpers.Test
             Assert.ThrowsArgumentGreaterThanOrEqualTo(
                 () => image.AddImageWatermark(watermark, padding: -10),
                 "padding",
-                "0");
+                "0"
+            );
         }
 
         [Fact]
@@ -876,7 +990,22 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_BmpImageBytes);
 
             Assert.Throws<DirectoryNotFoundException>(
-                () => image.AddImageWatermark(context, s => { throw new DirectoryNotFoundException(); }, @"x:\path\does\not\exist", width: 0, height: 0, horizontalAlign: "Right", verticalAlign: "Bottom", opacity: 100, padding: 5));
+                () =>
+                    image.AddImageWatermark(
+                        context,
+                        s =>
+                        {
+                            throw new DirectoryNotFoundException();
+                        },
+                        @"x:\path\does\not\exist",
+                        width: 0,
+                        height: 0,
+                        horizontalAlign: "Right",
+                        verticalAlign: "Bottom",
+                        opacity: 100,
+                        padding: 5
+                    )
+            );
         }
 
         [Fact]
@@ -885,7 +1014,22 @@ namespace System.Web.Helpers.Test
             var context = GetContext();
             WebImage image = new WebImage(_BmpImageBytes);
             Assert.Throws<FileNotFoundException>(
-                () => image.AddImageWatermark(context, s => { throw new FileNotFoundException(); }, @"x:\there-is-no-file.jpg", width: 0, height: 0, horizontalAlign: "Right", verticalAlign: "Bottom", opacity: 100, padding: 5));
+                () =>
+                    image.AddImageWatermark(
+                        context,
+                        s =>
+                        {
+                            throw new FileNotFoundException();
+                        },
+                        @"x:\there-is-no-file.jpg",
+                        width: 0,
+                        height: 0,
+                        horizontalAlign: "Right",
+                        verticalAlign: "Bottom",
+                        opacity: 100,
+                        padding: 5
+                    )
+            );
         }
 
         [Fact]
@@ -895,9 +1039,21 @@ namespace System.Web.Helpers.Test
 
             WebImage image = new WebImage(_BmpImageBytes);
             Assert.ThrowsArgument(
-                () => image.AddImageWatermark(context, s => _JpgImageBytes, watermarkImageFilePath: null, width: 0, height: 0, horizontalAlign: "Right", verticalAlign: "Bottom", opacity: 100, padding: 5),
+                () =>
+                    image.AddImageWatermark(
+                        context,
+                        s => _JpgImageBytes,
+                        watermarkImageFilePath: null,
+                        width: 0,
+                        height: 0,
+                        horizontalAlign: "Right",
+                        verticalAlign: "Bottom",
+                        opacity: 100,
+                        padding: 5
+                    ),
                 "filePath",
-                "Value cannot be null or an empty string.");
+                "Value cannot be null or an empty string."
+            );
         }
 
         [Fact]
@@ -906,9 +1062,21 @@ namespace System.Web.Helpers.Test
             var context = GetContext();
             WebImage image = new WebImage(_BmpImageBytes);
             Assert.ThrowsArgument(
-                () => image.AddImageWatermark(context, s => _JpgImageBytes, watermarkImageFilePath: null, width: 0, height: 0, horizontalAlign: "Right", verticalAlign: "Bottom", opacity: 100, padding: 5),
+                () =>
+                    image.AddImageWatermark(
+                        context,
+                        s => _JpgImageBytes,
+                        watermarkImageFilePath: null,
+                        width: 0,
+                        height: 0,
+                        horizontalAlign: "Right",
+                        verticalAlign: "Bottom",
+                        opacity: 100,
+                        padding: 5
+                    ),
                 "filePath",
-                "Value cannot be null or an empty string.");
+                "Value cannot be null or an empty string."
+            );
         }
 
         [Fact]
@@ -921,7 +1089,19 @@ namespace System.Web.Helpers.Test
 
             // Act
             var watermarkedWithImageArgument = image.AddImageWatermark(watermark).GetBytes();
-            var watermarkedWithFilePathArgument = image.AddImageWatermark(context, (name) => _JpgImageBytes, @"x:\jpegimage.jpg", width: 0, height: 0, horizontalAlign: "Right", verticalAlign: "Bottom", opacity: 100, padding: 5).GetBytes();
+            var watermarkedWithFilePathArgument = image
+                .AddImageWatermark(
+                    context,
+                    (name) => _JpgImageBytes,
+                    @"x:\jpegimage.jpg",
+                    width: 0,
+                    height: 0,
+                    horizontalAlign: "Right",
+                    verticalAlign: "Bottom",
+                    opacity: 100,
+                    padding: 5
+                )
+                .GetBytes();
 
             Assert.Equal(watermarkedWithImageArgument, watermarkedWithFilePathArgument);
         }
@@ -934,11 +1114,23 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_BmpImageBytes);
             string newFileName = @"x:\newImage.bmp";
 
-            image.Save(GetContext(), saveAction, newFileName, imageFormat: null, forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                newFileName,
+                imageFormat: null,
+                forceWellKnownExtension: true
+            );
 
             image.RotateLeft();
             // just verify this does not throw
-            image.Save(GetContext(), saveAction, newFileName, imageFormat: null, forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                newFileName,
+                imageFormat: null,
+                forceWellKnownExtension: true
+            );
         }
 
         [Fact]
@@ -951,8 +1143,16 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(originalContent);
 
             Assert.ThrowsArgumentNullOrEmptyString(
-                () => image.Save(GetContext(), saveAction, filePath: null, imageFormat: null, forceWellKnownExtension: true),
-                "filePath");
+                () =>
+                    image.Save(
+                        GetContext(),
+                        saveAction,
+                        filePath: null,
+                        imageFormat: null,
+                        forceWellKnownExtension: true
+                    ),
+                "filePath"
+            );
         }
 
         [Fact]
@@ -962,8 +1162,16 @@ namespace System.Web.Helpers.Test
             WebImage image = new WebImage(_BmpImageBytes);
 
             Assert.ThrowsArgumentNullOrEmptyString(
-                () => image.Save(GetContext(), saveAction, filePath: String.Empty, imageFormat: null, forceWellKnownExtension: true),
-                "filePath");
+                () =>
+                    image.Save(
+                        GetContext(),
+                        saveAction,
+                        filePath: String.Empty,
+                        imageFormat: null,
+                        forceWellKnownExtension: true
+                    ),
+                "filePath"
+            );
         }
 
         [Fact]
@@ -973,11 +1181,20 @@ namespace System.Web.Helpers.Test
             // Use rooted path so we by pass using HttpContext
             var specifiedOutputFile = @"C:\some-dir\foo.jpg";
             string actualOutputFile = null;
-            Action<string, byte[]> saveAction = (fileName, content) => { actualOutputFile = fileName; };
+            Action<string, byte[]> saveAction = (fileName, content) =>
+            {
+                actualOutputFile = fileName;
+            };
 
             // Act
             WebImage image = new WebImage(_PngImageBytes);
-            image.Save(GetContext(), saveAction, filePath: specifiedOutputFile, imageFormat: null, forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                filePath: specifiedOutputFile,
+                imageFormat: null,
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(".png", Path.GetExtension(actualOutputFile));
@@ -990,11 +1207,20 @@ namespace System.Web.Helpers.Test
             // Use rooted path so we by pass using HttpContext
             var specifiedOutputFile = @"x:\some-dir\foo.jpg";
             string actualOutputFile = null;
-            Action<string, byte[]> saveAction = (fileName, content) => { actualOutputFile = fileName; };
+            Action<string, byte[]> saveAction = (fileName, content) =>
+            {
+                actualOutputFile = fileName;
+            };
 
             // Act
             WebImage image = new WebImage(_PngImageBytes);
-            image.Save(GetContext(), saveAction, filePath: specifiedOutputFile, imageFormat: null, forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                filePath: specifiedOutputFile,
+                imageFormat: null,
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(".png", Path.GetExtension(actualOutputFile));
@@ -1007,11 +1233,20 @@ namespace System.Web.Helpers.Test
             // Use rooted path so we by pass using HttpContext
             var specifiedOutputFile = @"x:\some-dir\foo.exe";
             string actualOutputFile = null;
-            Action<string, byte[]> saveAction = (fileName, content) => { actualOutputFile = fileName; };
+            Action<string, byte[]> saveAction = (fileName, content) =>
+            {
+                actualOutputFile = fileName;
+            };
 
             // Act
             WebImage image = new WebImage(_BmpImageBytes);
-            image.Save(GetContext(), saveAction, filePath: specifiedOutputFile, imageFormat: "jpg", forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                filePath: specifiedOutputFile,
+                imageFormat: "jpg",
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(".jpeg", Path.GetExtension(actualOutputFile));
@@ -1025,11 +1260,20 @@ namespace System.Web.Helpers.Test
             // Use rooted path so we by pass using HttpContext
             var specifiedOutputFile = @"x:\some-dir\foo";
             string actualOutputFile = null;
-            Action<string, byte[]> saveAction = (fileName, content) => { actualOutputFile = fileName; };
+            Action<string, byte[]> saveAction = (fileName, content) =>
+            {
+                actualOutputFile = fileName;
+            };
 
             // Act
             WebImage image = new WebImage(_BmpImageBytes);
-            image.Save(GetContext(), saveAction, filePath: specifiedOutputFile, imageFormat: "jpg", forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                filePath: specifiedOutputFile,
+                imageFormat: "jpg",
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(".jpeg", Path.GetExtension(actualOutputFile));
@@ -1042,11 +1286,20 @@ namespace System.Web.Helpers.Test
             // Use rooted path so we by pass using HttpContext
             var specifiedOutputFile = @"x:\some-dir\foo.jpg";
             string actualOutputFile = null;
-            Action<string, byte[]> saveAction = (fileName, content) => { actualOutputFile = fileName; };
+            Action<string, byte[]> saveAction = (fileName, content) =>
+            {
+                actualOutputFile = fileName;
+            };
 
             // Act
             WebImage image = new WebImage(_BmpImageBytes);
-            image.Save(GetContext(), saveAction, filePath: specifiedOutputFile, imageFormat: "jpg", forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                filePath: specifiedOutputFile,
+                imageFormat: "jpg",
+                forceWellKnownExtension: true
+            );
 
             // Assert
             Assert.Equal(specifiedOutputFile, actualOutputFile);
@@ -1059,11 +1312,20 @@ namespace System.Web.Helpers.Test
             // Use rooted path so we by pass using HttpContext
             var specifiedOutputFile = @"x:\some-dir\foo.exe";
             string actualOutputFile = null;
-            Action<string, byte[]> saveAction = (fileName, content) => { actualOutputFile = fileName; };
+            Action<string, byte[]> saveAction = (fileName, content) =>
+            {
+                actualOutputFile = fileName;
+            };
 
             // Act
             WebImage image = new WebImage(_BmpImageBytes);
-            image.Save(GetContext(), saveAction, filePath: specifiedOutputFile, imageFormat: "jpg", forceWellKnownExtension: false);
+            image.Save(
+                GetContext(),
+                saveAction,
+                filePath: specifiedOutputFile,
+                imageFormat: "jpg",
+                forceWellKnownExtension: false
+            );
 
             // Assert
             Assert.Equal(specifiedOutputFile, actualOutputFile);
@@ -1082,14 +1344,23 @@ namespace System.Web.Helpers.Test
             // Arrange
             string savePath = @"x:\some-dir\image.png";
             MemoryStream stream = null;
-            Action<string, byte[]> saveAction = (path, content) => { stream = new MemoryStream(content); };
+            Action<string, byte[]> saveAction = (path, content) =>
+            {
+                stream = new MemoryStream(content);
+            };
             var image = new WebImage(_PngImageBytes);
 
-            // Act 
+            // Act
             image.FlipVertical().FlipHorizontal();
 
             // Assert
-            image.Save(GetContext(), saveAction, savePath, imageFormat: null, forceWellKnownExtension: true);
+            image.Save(
+                GetContext(),
+                saveAction,
+                savePath,
+                imageFormat: null,
+                forceWellKnownExtension: true
+            );
 
             using (Image savedImage = Image.FromStream(stream))
             {
@@ -1114,7 +1385,7 @@ namespace System.Web.Helpers.Test
             return httpContext.Object;
         }
 
-        // Test stream that pretends it can't seek. 
+        // Test stream that pretends it can't seek.
         private class TestStream : Stream
         {
             private MemoryStream _memoryStream;

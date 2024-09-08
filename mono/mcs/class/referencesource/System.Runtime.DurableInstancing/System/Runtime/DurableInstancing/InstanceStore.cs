@@ -22,16 +22,11 @@ namespace System.Runtime.DurableInstancing
         Guid[] ownerKeysToScan = new Guid[0];
         int ownerKeysIndexToScan = 0;
 
-        protected InstanceStore()
-        {
-        }
+        protected InstanceStore() { }
 
         object ThisLock
         {
-            get
-            {
-                return this.owners;
-            }
+            get { return this.owners; }
         }
 
         public InstanceOwner DefaultInstanceOwner { get; set; }
@@ -61,11 +56,21 @@ namespace System.Runtime.DurableInstancing
         }
 
         [Fx.Tag.Throws.Timeout("The operation timed out; the InstanceHandle is no longer valid.")]
-        [Fx.Tag.Throws(typeof(OperationCanceledException), "The operation was canceled; the InstanceHandle is no longer valid.")]
+        [Fx.Tag.Throws(
+            typeof(OperationCanceledException),
+            "The operation was canceled; the InstanceHandle is no longer valid."
+        )]
         [Fx.Tag.Throws(typeof(InstancePersistenceException), "A command failed.")]
-        [Fx.Tag.Throws(typeof(TransactionException), "The transaction in use for the command failed.")]
+        [Fx.Tag.Throws(
+            typeof(TransactionException),
+            "The transaction in use for the command failed."
+        )]
         [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle))]
-        public InstanceView Execute(InstanceHandle handle, InstancePersistenceCommand command, TimeSpan timeout)
+        public InstanceView Execute(
+            InstanceHandle handle,
+            InstancePersistenceCommand command,
+            TimeSpan timeout
+        )
         {
             if (command == null)
             {
@@ -81,11 +86,22 @@ namespace System.Runtime.DurableInstancing
             }
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-            return InstancePersistenceContext.OuterExecute(handle, command, Transaction.Current, timeout);
+            return InstancePersistenceContext.OuterExecute(
+                handle,
+                command,
+                Transaction.Current,
+                timeout
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Execute")]
-        public IAsyncResult BeginExecute(InstanceHandle handle, InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginExecute(
+            InstanceHandle handle,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (command == null)
             {
@@ -101,19 +117,37 @@ namespace System.Runtime.DurableInstancing
             }
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 
-            return InstancePersistenceContext.BeginOuterExecute(handle, command, Transaction.Current, timeout, callback, state);
+            return InstancePersistenceContext.BeginOuterExecute(
+                handle,
+                command,
+                Transaction.Current,
+                timeout,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "Execute")]
-        [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle), Conditional = "!result.IsCompleted")]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Free",
+            CancelDeclaringType = typeof(InstanceHandle),
+            Conditional = "!result.IsCompleted"
+        )]
         public InstanceView EndExecute(IAsyncResult result)
         {
             return InstancePersistenceContext.EndOuterExecute(result);
         }
 
         [Fx.Tag.Throws.Timeout("The operation timed out.")]
-        [Fx.Tag.Throws(typeof(OperationCanceledException), "The operation was canceled; the InstanceHandle is no longer valid.")]
-        [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle), Conditional = "timeout != TimeSpan.Zero")]
+        [Fx.Tag.Throws(
+            typeof(OperationCanceledException),
+            "The operation was canceled; the InstanceHandle is no longer valid."
+        )]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Free",
+            CancelDeclaringType = typeof(InstanceHandle),
+            Conditional = "timeout != TimeSpan.Zero"
+        )]
         public List<InstancePersistenceEvent> WaitForEvents(InstanceHandle handle, TimeSpan timeout)
         {
             // This has to block on something... might as well be the async result, if the caller is already willing to waste a thread.
@@ -123,7 +157,12 @@ namespace System.Runtime.DurableInstancing
         }
 
         [Fx.Tag.InheritThrows(From = "WaitForEvents")]
-        public IAsyncResult BeginWaitForEvents(InstanceHandle handle, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForEvents(
+            InstanceHandle handle,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (handle == null)
             {
@@ -139,7 +178,11 @@ namespace System.Runtime.DurableInstancing
         }
 
         [Fx.Tag.InheritThrows(From = "WaitForEvents")]
-        [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle), Conditional = "!result.IsCompleted")]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Free",
+            CancelDeclaringType = typeof(InstanceHandle),
+            Conditional = "!result.IsCompleted"
+        )]
         public List<InstancePersistenceEvent> EndWaitForEvents(IAsyncResult result)
         {
             return InstanceHandle.EndWaitForEvents(result);
@@ -161,7 +204,10 @@ namespace System.Runtime.DurableInstancing
             lock (ThisLock)
             {
                 WeakReference ownerReference;
-                if (!this.owners.TryGetValue(owner.InstanceOwnerId, out ownerReference) || !object.ReferenceEquals(ownerReference.Target, owner))
+                if (
+                    !this.owners.TryGetValue(owner.InstanceOwnerId, out ownerReference)
+                    || !object.ReferenceEquals(ownerReference.Target, owner)
+                )
                 {
                     throw Fx.Exception.Argument("owner", SRCore.OwnerBelongsToWrongStore);
                 }
@@ -200,7 +246,10 @@ namespace System.Runtime.DurableInstancing
             lock (ThisLock)
             {
                 WeakReference ownerReference;
-                if (!this.owners.TryGetValue(owner.InstanceOwnerId, out ownerReference) || !object.ReferenceEquals(ownerReference.Target, owner))
+                if (
+                    !this.owners.TryGetValue(owner.InstanceOwnerId, out ownerReference)
+                    || !object.ReferenceEquals(ownerReference.Target, owner)
+                )
                 {
                     throw Fx.Exception.Argument("owner", SRCore.OwnerBelongsToWrongStore);
                 }
@@ -226,25 +275,40 @@ namespace System.Runtime.DurableInstancing
             return null;
         }
 
-        protected virtual void OnFreeInstanceHandle(InstanceHandle instanceHandle, object userContext)
-        {
-        }
+        protected virtual void OnFreeInstanceHandle(
+            InstanceHandle instanceHandle,
+            object userContext
+        ) { }
 
         [Fx.Tag.InheritThrows(From = "Execute")]
         [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle))]
-        protected internal virtual bool TryCommand(InstancePersistenceContext context, InstancePersistenceCommand command, TimeSpan timeout)
+        protected internal virtual bool TryCommand(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout
+        )
         {
             return EndTryCommand(BeginTryCommand(context, command, timeout, null, null));
         }
 
         [Fx.Tag.InheritThrows(From = "TryCommand")]
-        protected internal virtual IAsyncResult BeginTryCommand(InstancePersistenceContext context, InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state)
+        protected internal virtual IAsyncResult BeginTryCommand(
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult<bool>(false, callback, state);
         }
 
         [Fx.Tag.InheritThrows(From = "TryCommand")]
-        [Fx.Tag.Blocking(CancelMethod = "Free", CancelDeclaringType = typeof(InstanceHandle), Conditional = "!result.IsCompleted")]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Free",
+            CancelDeclaringType = typeof(InstanceHandle),
+            Conditional = "!result.IsCompleted"
+        )]
         protected internal virtual bool EndTryCommand(IAsyncResult result)
         {
             return CompletedAsyncResult<bool>.End(result);
@@ -254,7 +318,10 @@ namespace System.Runtime.DurableInstancing
         {
             lock (ThisLock)
             {
-                return this.owners.Values.Select(weakReference => (InstanceOwner)weakReference.Target).Where(owner => owner != null).ToArray();
+                return this
+                    .owners.Values.Select(weakReference => (InstanceOwner)weakReference.Target)
+                    .Where(owner => owner != null)
+                    .ToArray();
             }
         }
 
@@ -268,7 +335,10 @@ namespace System.Runtime.DurableInstancing
             lock (ThisLock)
             {
                 WeakReference ownerReference;
-                if (!this.owners.TryGetValue(owner.InstanceOwnerId, out ownerReference) || !object.ReferenceEquals(ownerReference.Target, owner))
+                if (
+                    !this.owners.TryGetValue(owner.InstanceOwnerId, out ownerReference)
+                    || !object.ReferenceEquals(ownerReference.Target, owner)
+                )
                 {
                     throw Fx.Exception.Argument("owner", SRCore.OwnerBelongsToWrongStore);
                 }
@@ -293,7 +363,9 @@ namespace System.Runtime.DurableInstancing
                     }
                     else if (owner.OwnerToken != lockToken)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.StoreReportedConflictingLockTokens));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(SRCore.StoreReportedConflictingLockTokens)
+                        );
                     }
                 }
                 else
@@ -330,46 +402,89 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        internal void PendHandleToEvent(InstanceHandle handle, InstancePersistenceEvent persistenceEvent, InstanceOwner owner)
+        internal void PendHandleToEvent(
+            InstanceHandle handle,
+            InstancePersistenceEvent persistenceEvent,
+            InstanceOwner owner
+        )
         {
             lock (ThisLock)
             {
-                Fx.Assert(this.owners.ContainsKey(owner.InstanceOwnerId), "InstanceHandle called PendHandleToEvent on wrong InstanceStore!!");
-                Fx.Assert(object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner), "How did multiple of the same owner become simultaneously active?");
+                Fx.Assert(
+                    this.owners.ContainsKey(owner.InstanceOwnerId),
+                    "InstanceHandle called PendHandleToEvent on wrong InstanceStore!!"
+                );
+                Fx.Assert(
+                    object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner),
+                    "How did multiple of the same owner become simultaneously active?"
+                );
 
                 InstanceNormalEvent normal = GetOwnerEventHelper(persistenceEvent, owner);
-                Fx.Assert(!normal.PendingHandles.Contains(handle), "Should not have already pended the handle.");
-                Fx.Assert(!normal.BoundHandles.Contains(handle), "Should not be able to pend an already-bound handle.");
+                Fx.Assert(
+                    !normal.PendingHandles.Contains(handle),
+                    "Should not have already pended the handle."
+                );
+                Fx.Assert(
+                    !normal.BoundHandles.Contains(handle),
+                    "Should not be able to pend an already-bound handle."
+                );
                 normal.PendingHandles.Add(handle);
             }
         }
 
-        internal InstancePersistenceEvent AddHandleToEvent(InstanceHandle handle, InstancePersistenceEvent persistenceEvent, InstanceOwner owner)
+        internal InstancePersistenceEvent AddHandleToEvent(
+            InstanceHandle handle,
+            InstancePersistenceEvent persistenceEvent,
+            InstanceOwner owner
+        )
         {
             lock (ThisLock)
             {
-                Fx.Assert(this.owners.ContainsKey(owner.InstanceOwnerId), "InstanceHandle called AddHandleToEvent on wrong InstanceStore!!");
-                Fx.Assert(object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner), "How did multiple instances of the same owner become simultaneously active?");
+                Fx.Assert(
+                    this.owners.ContainsKey(owner.InstanceOwnerId),
+                    "InstanceHandle called AddHandleToEvent on wrong InstanceStore!!"
+                );
+                Fx.Assert(
+                    object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner),
+                    "How did multiple instances of the same owner become simultaneously active?"
+                );
 
                 InstanceNormalEvent normal = GetOwnerEventHelper(persistenceEvent, owner);
-                Fx.Assert(normal.PendingHandles.Contains(handle), "Should have already pended the handle.");
-                Fx.Assert(!normal.BoundHandles.Contains(handle), "Should not be able to add a handle to an event twice.");
+                Fx.Assert(
+                    normal.PendingHandles.Contains(handle),
+                    "Should have already pended the handle."
+                );
+                Fx.Assert(
+                    !normal.BoundHandles.Contains(handle),
+                    "Should not be able to add a handle to an event twice."
+                );
                 normal.BoundHandles.Add(handle);
                 normal.PendingHandles.Remove(handle);
                 return normal.IsSignaled ? normal : null;
             }
         }
 
-        internal List<InstancePersistenceEvent> SelectSignaledEvents(IEnumerable<XName> eventNames, InstanceOwner owner)
+        internal List<InstancePersistenceEvent> SelectSignaledEvents(
+            IEnumerable<XName> eventNames,
+            InstanceOwner owner
+        )
         {
             List<InstancePersistenceEvent> readyEvents = null;
             lock (ThisLock)
             {
-                Fx.Assert(this.owners.ContainsKey(owner.InstanceOwnerId), "InstanceHandle called SelectSignaledEvents on wrong InstanceStore!!");
-                Fx.Assert(object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner), "How did multiple instances of the same owner become simultaneously active?");
+                Fx.Assert(
+                    this.owners.ContainsKey(owner.InstanceOwnerId),
+                    "InstanceHandle called SelectSignaledEvents on wrong InstanceStore!!"
+                );
+                Fx.Assert(
+                    object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner),
+                    "How did multiple instances of the same owner become simultaneously active?"
+                );
 
                 // Entry must exist since it is still registered by the handle.
-                foreach (InstanceNormalEvent normal in eventNames.Select(name => owner.Events[name]))
+                foreach (
+                    InstanceNormalEvent normal in eventNames.Select(name => owner.Events[name])
+                )
                 {
                     if (normal.IsSignaled)
                     {
@@ -384,21 +499,41 @@ namespace System.Runtime.DurableInstancing
             return readyEvents;
         }
 
-        internal void RemoveHandleFromEvents(InstanceHandle handle, IEnumerable<XName> eventNames, InstanceOwner owner)
+        internal void RemoveHandleFromEvents(
+            InstanceHandle handle,
+            IEnumerable<XName> eventNames,
+            InstanceOwner owner
+        )
         {
             lock (ThisLock)
             {
-                Fx.Assert(this.owners.ContainsKey(owner.InstanceOwnerId), "InstanceHandle called RemoveHandleFromEvents on wrong InstanceStore!!");
-                Fx.Assert(object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner), "How did multiple instances of the same owner become simultaneously active in RemoveHandleFromEvents?");
+                Fx.Assert(
+                    this.owners.ContainsKey(owner.InstanceOwnerId),
+                    "InstanceHandle called RemoveHandleFromEvents on wrong InstanceStore!!"
+                );
+                Fx.Assert(
+                    object.ReferenceEquals(this.owners[owner.InstanceOwnerId].Target, owner),
+                    "How did multiple instances of the same owner become simultaneously active in RemoveHandleFromEvents?"
+                );
 
                 // Entry must exist since it is still registered by the handle.
-                foreach (InstanceNormalEvent normal in eventNames.Select(name => owner.Events[name]))
+                foreach (
+                    InstanceNormalEvent normal in eventNames.Select(name => owner.Events[name])
+                )
                 {
-                    Fx.Assert(normal.BoundHandles.Contains(handle) || normal.PendingHandles.Contains(handle), "Event should still have handle registration.");
+                    Fx.Assert(
+                        normal.BoundHandles.Contains(handle)
+                            || normal.PendingHandles.Contains(handle),
+                        "Event should still have handle registration."
+                    );
 
                     normal.PendingHandles.Remove(handle);
                     normal.BoundHandles.Remove(handle);
-                    if (!normal.IsSignaled && normal.BoundHandles.Count == 0 && normal.PendingHandles.Count == 0)
+                    if (
+                        !normal.IsSignaled
+                        && normal.BoundHandles.Count == 0
+                        && normal.PendingHandles.Count == 0
+                    )
                     {
                         owner.Events.Remove(normal.Name);
                     }
@@ -407,7 +542,10 @@ namespace System.Runtime.DurableInstancing
         }
 
         // Must be called under ThisLock.  Doesn't validate the InstanceOwner.
-        InstanceNormalEvent GetOwnerEventHelper(InstancePersistenceEvent persistenceEvent, InstanceOwner owner)
+        InstanceNormalEvent GetOwnerEventHelper(
+            InstancePersistenceEvent persistenceEvent,
+            InstanceOwner owner
+        )
         {
             InstanceNormalEvent normal;
             if (!owner.Events.TryGetValue(persistenceEvent.Name, out normal))
@@ -430,7 +568,9 @@ namespace System.Runtime.DurableInstancing
                 {
                     throw;
                 }
-                throw Fx.Exception.AsError(new CallbackException(SRCore.OnFreeInstanceHandleThrew, exception));
+                throw Fx.Exception.AsError(
+                    new CallbackException(SRCore.OnFreeInstanceHandleThrew, exception)
+                );
             }
         }
 

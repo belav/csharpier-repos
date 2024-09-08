@@ -36,7 +36,9 @@ internal sealed class DefaultClaimUidExtractor : IClaimUidExtractor
         return Convert.ToBase64String(claimUidBytes);
     }
 
-    public static IList<string>? GetUniqueIdentifierParameters(IEnumerable<ClaimsIdentity> claimsIdentities)
+    public static IList<string>? GetUniqueIdentifierParameters(
+        IEnumerable<ClaimsIdentity> claimsIdentities
+    )
     {
         var identitiesList = claimsIdentities as List<ClaimsIdentity>;
         if (identitiesList == null)
@@ -52,40 +54,33 @@ internal sealed class DefaultClaimUidExtractor : IClaimUidExtractor
                 continue;
             }
 
-            var subClaim = identity.FindFirst(
-                claim => string.Equals("sub", claim.Type, StringComparison.Ordinal));
+            var subClaim = identity.FindFirst(claim =>
+                string.Equals("sub", claim.Type, StringComparison.Ordinal)
+            );
             if (subClaim != null && !string.IsNullOrEmpty(subClaim.Value))
             {
-                return new string[]
-                {
-                        subClaim.Type,
-                        subClaim.Value,
-                        subClaim.Issuer
-                };
+                return new string[] { subClaim.Type, subClaim.Value, subClaim.Issuer };
             }
 
-            var nameIdentifierClaim = identity.FindFirst(
-                claim => string.Equals(ClaimTypes.NameIdentifier, claim.Type, StringComparison.Ordinal));
+            var nameIdentifierClaim = identity.FindFirst(claim =>
+                string.Equals(ClaimTypes.NameIdentifier, claim.Type, StringComparison.Ordinal)
+            );
             if (nameIdentifierClaim != null && !string.IsNullOrEmpty(nameIdentifierClaim.Value))
             {
                 return new string[]
                 {
-                        nameIdentifierClaim.Type,
-                        nameIdentifierClaim.Value,
-                        nameIdentifierClaim.Issuer
+                    nameIdentifierClaim.Type,
+                    nameIdentifierClaim.Value,
+                    nameIdentifierClaim.Issuer,
                 };
             }
 
-            var upnClaim = identity.FindFirst(
-                claim => string.Equals(ClaimTypes.Upn, claim.Type, StringComparison.Ordinal));
+            var upnClaim = identity.FindFirst(claim =>
+                string.Equals(ClaimTypes.Upn, claim.Type, StringComparison.Ordinal)
+            );
             if (upnClaim != null && !string.IsNullOrEmpty(upnClaim.Value))
             {
-                return new string[]
-                {
-                        upnClaim.Type,
-                        upnClaim.Value,
-                        upnClaim.Issuer
-                };
+                return new string[] { upnClaim.Type, upnClaim.Value, upnClaim.Issuer };
             }
         }
 

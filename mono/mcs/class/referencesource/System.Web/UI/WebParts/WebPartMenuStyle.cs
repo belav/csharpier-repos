@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -17,14 +17,16 @@ namespace System.Web.UI.WebControls.WebParts {
 
     /// <devdoc>
     /// </devdoc>
-    public sealed class WebPartMenuStyle : TableStyle, ICustomTypeDescriptor {
-
+    public sealed class WebPartMenuStyle : TableStyle, ICustomTypeDescriptor
+    {
         private const int PROP_SHADOWCOLOR = 0x00200000;
 
-        public WebPartMenuStyle() : this(null) {
-        }
+        public WebPartMenuStyle()
+            : this(null) { }
 
-        public WebPartMenuStyle(StateBag bag) : base(bag) {
+        public WebPartMenuStyle(StateBag bag)
+            : base(bag)
+        {
             CellPadding = 1;
             CellSpacing = 0;
         }
@@ -32,19 +34,23 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(typeof(Color), ""),
-        TypeConverterAttribute(typeof(WebColorConverter)),
-        WebSysDescription(SR.WebPartMenuStyle_ShadowColor)
+            WebCategory("Appearance"),
+            DefaultValue(typeof(Color), ""),
+            TypeConverterAttribute(typeof(WebColorConverter)),
+            WebSysDescription(SR.WebPartMenuStyle_ShadowColor)
         ]
-        public Color ShadowColor {
-            get {
-                if (IsSet(PROP_SHADOWCOLOR)) {
+        public Color ShadowColor
+        {
+            get
+            {
+                if (IsSet(PROP_SHADOWCOLOR))
+                {
                     return (Color)(ViewState["ShadowColor"]);
                 }
                 return Color.Empty;
             }
-            set {
+            set
+            {
                 ViewState["ShadowColor"] = value;
                 SetBit(PROP_SHADOWCOLOR);
             }
@@ -53,48 +59,61 @@ namespace System.Web.UI.WebControls.WebParts {
         /// <devdoc>
         /// </devdoc>
         [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        EditorBrowsable(EditorBrowsableState.Never)
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public override HorizontalAlign HorizontalAlign {
-            get {
-                return base.HorizontalAlign;
-            }
-            set {
-            }
+        public override HorizontalAlign HorizontalAlign
+        {
+            get { return base.HorizontalAlign; }
+            set { }
         }
 
         /// <internalonly/>
-        protected override void FillStyleAttributes(CssStyleCollection attributes, IUrlResolutionService urlResolver) {
+        protected override void FillStyleAttributes(
+            CssStyleCollection attributes,
+            IUrlResolutionService urlResolver
+        )
+        {
             base.FillStyleAttributes(attributes, urlResolver);
 
             Color shadowColor = ShadowColor;
-            if (shadowColor.IsEmpty == false) {
+            if (shadowColor.IsEmpty == false)
+            {
                 string colorValue = ColorTranslator.ToHtml(shadowColor);
-                string filterValue = "progid:DXImageTransform.Microsoft.Shadow(color='" + colorValue + "', Direction=135, Strength=3)";
+                string filterValue =
+                    "progid:DXImageTransform.Microsoft.Shadow(color='"
+                    + colorValue
+                    + "', Direction=135, Strength=3)";
 
                 attributes.Add(HtmlTextWriterStyle.Filter, filterValue);
             }
         }
 
         /// <internalonly/>
-        public override void CopyFrom(Style s) {
-            if (s != null && !s.IsEmpty) {
+        public override void CopyFrom(Style s)
+        {
+            if (s != null && !s.IsEmpty)
+            {
                 base.CopyFrom(s);
 
-                if (s is WebPartMenuStyle) {
+                if (s is WebPartMenuStyle)
+                {
                     WebPartMenuStyle ms = (WebPartMenuStyle)s;
 
                     // Only copy the BackImageUrl if it isn't in the source Style's registered CSS class
-                    if (s.RegisteredCssClass.Length != 0) {
-                        if (ms.IsSet(PROP_SHADOWCOLOR)) {
+                    if (s.RegisteredCssClass.Length != 0)
+                    {
+                        if (ms.IsSet(PROP_SHADOWCOLOR))
+                        {
                             ViewState.Remove("ShadowColor");
                             ClearBit(PROP_SHADOWCOLOR);
                         }
                     }
-                    else {
-                        if (ms.IsSet(PROP_SHADOWCOLOR)) {
+                    else
+                    {
+                        if (ms.IsSet(PROP_SHADOWCOLOR))
+                        {
                             this.ShadowColor = ms.ShadowColor;
                         }
                     }
@@ -103,9 +122,12 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         /// <internalonly/>
-        public override void MergeWith(Style s) {
-            if (s != null && !s.IsEmpty) {
-                if (IsEmpty) {
+        public override void MergeWith(Style s)
+        {
+            if (s != null && !s.IsEmpty)
+            {
+                if (IsEmpty)
+                {
                     // merge into an empty style is equivalent to a copy,
                     // which is more efficient
                     CopyFrom(s);
@@ -114,12 +136,14 @@ namespace System.Web.UI.WebControls.WebParts {
 
                 base.MergeWith(s);
 
-                if (s is WebPartMenuStyle) {
+                if (s is WebPartMenuStyle)
+                {
                     WebPartMenuStyle ms = (WebPartMenuStyle)s;
 
                     // Since we're already copying the registered CSS class in base.MergeWith, we don't
                     // need to any attributes that would be included in that class.
-                    if (s.RegisteredCssClass.Length == 0) {
+                    if (s.RegisteredCssClass.Length == 0)
+                    {
                         if (ms.IsSet(PROP_SHADOWCOLOR) && !this.IsSet(PROP_SHADOWCOLOR))
                             this.ShadowColor = ms.ShadowColor;
                     }
@@ -128,8 +152,10 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         /// <internalonly/>
-        public override void Reset() {
-            if (IsSet(PROP_SHADOWCOLOR)) {
+        public override void Reset()
+        {
+            if (IsSet(PROP_SHADOWCOLOR))
+            {
                 ViewState.Remove("ShadowColor");
             }
 
@@ -137,87 +163,117 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         #region ICustomTypeDesciptor implementation
-        System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes() {
+        System.ComponentModel.AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
             return TypeDescriptor.GetAttributes(this, true);
         }
 
-        string ICustomTypeDescriptor.GetClassName() {
+        string ICustomTypeDescriptor.GetClassName()
+        {
             return TypeDescriptor.GetClassName(this, true);
         }
 
-        string ICustomTypeDescriptor.GetComponentName() {
+        string ICustomTypeDescriptor.GetComponentName()
+        {
             return TypeDescriptor.GetComponentName(this, true);
         }
 
-        TypeConverter ICustomTypeDescriptor.GetConverter() {
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
             return TypeDescriptor.GetConverter(this, true);
         }
 
-        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent() {
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
             return TypeDescriptor.GetDefaultEvent(this, true);
         }
 
-        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty() {
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
             return TypeDescriptor.GetDefaultProperty(this, true);
         }
 
-        object ICustomTypeDescriptor.GetEditor(Type editorBaseType) {
+        object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
             return TypeDescriptor.GetEditor(this, editorBaseType, true);
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents() {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
             return TypeDescriptor.GetEvents(this, true);
         }
 
-        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes) {
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
             return TypeDescriptor.GetEvents(this, attributes, true);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties() {
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
             return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
 
-        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes) {
-            PropertyDescriptorCollection oldProperties = TypeDescriptor.GetProperties(GetType(), attributes);
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            PropertyDescriptorCollection oldProperties = TypeDescriptor.GetProperties(
+                GetType(),
+                attributes
+            );
             PropertyDescriptor[] newProperties = new PropertyDescriptor[oldProperties.Count];
 
             PropertyDescriptor oldPaddingProperty = oldProperties["CellPadding"];
-            PropertyDescriptor newPaddingProperty =
-                TypeDescriptor.CreateProperty(GetType(), oldPaddingProperty, new DefaultValueAttribute(1));
+            PropertyDescriptor newPaddingProperty = TypeDescriptor.CreateProperty(
+                GetType(),
+                oldPaddingProperty,
+                new DefaultValueAttribute(1)
+            );
 
             PropertyDescriptor oldSpacingProperty = oldProperties["CellSpacing"];
-            PropertyDescriptor newSpacingProperty =
-                TypeDescriptor.CreateProperty(GetType(), oldSpacingProperty, new DefaultValueAttribute(0));
+            PropertyDescriptor newSpacingProperty = TypeDescriptor.CreateProperty(
+                GetType(),
+                oldSpacingProperty,
+                new DefaultValueAttribute(0)
+            );
 
             PropertyDescriptor oldFontProperty = oldProperties["Font"];
-            PropertyDescriptor newFontProperty =
-                TypeDescriptor.CreateProperty(GetType(), oldFontProperty,
-                    new BrowsableAttribute(false),
-                    new ThemeableAttribute(false),
-                    new EditorBrowsableAttribute(EditorBrowsableState.Never));
+            PropertyDescriptor newFontProperty = TypeDescriptor.CreateProperty(
+                GetType(),
+                oldFontProperty,
+                new BrowsableAttribute(false),
+                new ThemeableAttribute(false),
+                new EditorBrowsableAttribute(EditorBrowsableState.Never)
+            );
 
             PropertyDescriptor oldForeColorProperty = oldProperties["ForeColor"];
-            PropertyDescriptor newForeColorProperty =
-                TypeDescriptor.CreateProperty(GetType(), oldForeColorProperty,
-                    new BrowsableAttribute(false),
-                    new ThemeableAttribute(false),
-                    new EditorBrowsableAttribute(EditorBrowsableState.Never));
+            PropertyDescriptor newForeColorProperty = TypeDescriptor.CreateProperty(
+                GetType(),
+                oldForeColorProperty,
+                new BrowsableAttribute(false),
+                new ThemeableAttribute(false),
+                new EditorBrowsableAttribute(EditorBrowsableState.Never)
+            );
 
-            for (int i = 0; i < oldProperties.Count; i++) {
+            for (int i = 0; i < oldProperties.Count; i++)
+            {
                 PropertyDescriptor property = oldProperties[i];
-                if (property == oldPaddingProperty) {
+                if (property == oldPaddingProperty)
+                {
                     newProperties[i] = newPaddingProperty;
                 }
-                else if (property == oldSpacingProperty) {
+                else if (property == oldSpacingProperty)
+                {
                     newProperties[i] = newSpacingProperty;
                 }
-                else if (property == oldFontProperty) {
+                else if (property == oldFontProperty)
+                {
                     newProperties[i] = newFontProperty;
                 }
-                else if (property == oldForeColorProperty) {
+                else if (property == oldForeColorProperty)
+                {
                     newProperties[i] = newForeColorProperty;
                 }
-                else {
+                else
+                {
                     newProperties[i] = property;
                 }
             }
@@ -225,7 +281,8 @@ namespace System.Web.UI.WebControls.WebParts {
             return new PropertyDescriptorCollection(newProperties, true);
         }
 
-        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd) {
+        object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
             return this;
         }
         #endregion //ICustomTypeDescriptor implementation

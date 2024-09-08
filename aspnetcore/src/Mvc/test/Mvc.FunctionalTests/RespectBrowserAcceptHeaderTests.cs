@@ -10,11 +10,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 /// <summary>
 /// These tests are for scenarios when <see cref="MvcOptions.RespectBrowserAcceptHeader"/> is <c>True</c>(default is False).
 /// </summary>
-public class RespectBrowserAcceptHeaderTests : IClassFixture<MvcTestFixture<FormatterWebSite.StartupWithRespectBrowserAcceptHeader>>
+public class RespectBrowserAcceptHeaderTests
+    : IClassFixture<MvcTestFixture<FormatterWebSite.StartupWithRespectBrowserAcceptHeader>>
 {
-    public RespectBrowserAcceptHeaderTests(MvcTestFixture<FormatterWebSite.StartupWithRespectBrowserAcceptHeader> fixture)
+    public RespectBrowserAcceptHeaderTests(
+        MvcTestFixture<FormatterWebSite.StartupWithRespectBrowserAcceptHeader> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -27,7 +32,10 @@ public class RespectBrowserAcceptHeaderTests : IClassFixture<MvcTestFixture<Form
     public async Task ReturnStringFromAction_StringOutputFormatterDoesNotWriteTheResponse()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "RespectBrowserAcceptHeader/ReturnString");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "RespectBrowserAcceptHeader/ReturnString"
+        );
         request.Headers.Accept.ParseAdd("text/html, application/json, image/jpeg, */*; q=.2");
 
         // Act
@@ -37,7 +45,10 @@ public class RespectBrowserAcceptHeaderTests : IClassFixture<MvcTestFixture<Form
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotNull(response.Content);
         Assert.NotNull(response.Content.Headers.ContentType);
-        Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+        Assert.Equal(
+            "application/json; charset=utf-8",
+            response.Content.Headers.ContentType.ToString()
+        );
         var responseData = await response.Content.ReadAsStringAsync();
         Assert.Equal("\"Hello World!\"", responseData);
     }
@@ -46,7 +57,10 @@ public class RespectBrowserAcceptHeaderTests : IClassFixture<MvcTestFixture<Form
     public async Task ReturnStringFromAction_AcceptHeaderWithTextPlain_WritesTextPlainResponse()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Get, "RespectBrowserAcceptHeader/ReturnString");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            "RespectBrowserAcceptHeader/ReturnString"
+        );
         request.Headers.Accept.ParseAdd("text/plain; charset=utf-8");
 
         // Act

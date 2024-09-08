@@ -20,10 +20,9 @@ public class CertificateValidatedContext : ResultContext<CertificateAuthenticati
     public CertificateValidatedContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        CertificateAuthenticationOptions options)
-        : base(context, scheme, options)
-    {
-    }
+        CertificateAuthenticationOptions options
+    )
+        : base(context, scheme, options) { }
 
     /// <summary>
     /// The certificate to validate.

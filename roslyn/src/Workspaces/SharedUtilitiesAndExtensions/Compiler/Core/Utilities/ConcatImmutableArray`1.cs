@@ -11,24 +11,23 @@ using Microsoft.CodeAnalysis;
 
 namespace Roslyn.Utilities
 {
-    internal readonly struct ConcatImmutableArray<T>(ImmutableArray<T> first, ImmutableArray<T> second) : IEnumerable<T>
+    internal readonly struct ConcatImmutableArray<T>(
+        ImmutableArray<T> first,
+        ImmutableArray<T> second
+    ) : IEnumerable<T>
     {
         public int Length => first.Length + second.Length;
 
-        public bool Any(Func<T, bool> predicate)
-            => first.Any(predicate) || second.Any(predicate);
+        public bool Any(Func<T, bool> predicate) => first.Any(predicate) || second.Any(predicate);
 
-        public Enumerator GetEnumerator()
-            => new(first, second);
+        public Enumerator GetEnumerator() => new(first, second);
 
-        public ImmutableArray<T> ToImmutableArray()
-            => first.NullToEmpty().AddRange(second.NullToEmpty());
+        public ImmutableArray<T> ToImmutableArray() =>
+            first.NullToEmpty().AddRange(second.NullToEmpty());
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public struct Enumerator(ImmutableArray<T> first, ImmutableArray<T> second) : IEnumerator<T>
         {
@@ -50,12 +49,9 @@ namespace Roslyn.Utilities
                 return _current.MoveNext();
             }
 
-            readonly void IDisposable.Dispose()
-            {
-            }
+            readonly void IDisposable.Dispose() { }
 
-            void IEnumerator.Reset()
-                => throw new NotSupportedException();
+            void IEnumerator.Reset() => throw new NotSupportedException();
         }
     }
 }

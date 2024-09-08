@@ -33,11 +33,16 @@ namespace Microsoft.Extensions.Http
         {
             var testMeterFactory = new TestMeterFactory();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient("Test")
-                .UseSocketsHttpHandler(b => b.Configure((handler, provider) =>
-                {
-                    handler.MeterFactory = testMeterFactory;
-                }));
+            serviceCollection
+                .AddHttpClient("Test")
+                .UseSocketsHttpHandler(b =>
+                    b.Configure(
+                        (handler, provider) =>
+                        {
+                            handler.MeterFactory = testMeterFactory;
+                        }
+                    )
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
@@ -52,7 +57,8 @@ namespace Microsoft.Extensions.Http
         public void HttpClientHandler_Configured()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient("Test")
+            serviceCollection
+                .AddHttpClient("Test")
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler());
 
             var services = serviceCollection.BuildServiceProvider();
@@ -70,8 +76,11 @@ namespace Microsoft.Extensions.Http
         {
             var testMeterFactory = new TestMeterFactory();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient("Test")
-                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { MeterFactory = testMeterFactory });
+            serviceCollection
+                .AddHttpClient("Test")
+                .ConfigurePrimaryHttpMessageHandler(
+                    () => new HttpClientHandler { MeterFactory = testMeterFactory }
+                );
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();
@@ -95,6 +104,7 @@ namespace Microsoft.Extensions.Http
         private sealed class TestMeterFactory : IMeterFactory
         {
             public Meter Create(MeterOptions options) => throw new System.NotImplementedException();
+
             public void Dispose() => throw new System.NotImplementedException();
         }
     }

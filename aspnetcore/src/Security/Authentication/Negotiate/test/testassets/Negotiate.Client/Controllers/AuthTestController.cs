@@ -26,7 +26,10 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("Anonymous/Unrestricted")]
-    public async Task<IActionResult> AnonymousUnrestricted([FromQuery] string server, [FromQuery] string protocol)
+    public async Task<IActionResult> AnonymousUnrestricted(
+        [FromQuery] string server,
+        [FromQuery] string protocol
+    )
     {
         var client = CreateSocketHttpClient(server);
         client.DefaultRequestVersion = GetProtocolVersion(protocol);
@@ -34,9 +37,16 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Unrestricted");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out var actionResult)
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status200OK,
+                result.StatusCode,
+                body,
+                out var actionResult
+            )
             || HasWrongProtocol(protocol, result.Version, out actionResult)
-            || HasUser(body, out actionResult))
+            || HasUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -46,7 +56,10 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("Anonymous/Authorized")]
-    public async Task<IActionResult> AnonymousAuthorized([FromQuery] string server, [FromQuery] string protocol)
+    public async Task<IActionResult> AnonymousAuthorized(
+        [FromQuery] string server,
+        [FromQuery] string protocol
+    )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
         var client = CreateSocketHttpClient(server);
@@ -55,8 +68,14 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Authorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status401Unauthorized, result.StatusCode, body, out var actionResult)
-            || HasWrongProtocol(protocol, result.Version, out actionResult))
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status401Unauthorized,
+                result.StatusCode,
+                body,
+                out var actionResult
+            ) || HasWrongProtocol(protocol, result.Version, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -73,7 +92,10 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("DefaultCredentials/Authorized")]
-    public async Task<IActionResult> DefaultCredentialsAuthorized([FromQuery] string server, [FromQuery] string protocol)
+    public async Task<IActionResult> DefaultCredentialsAuthorized(
+        [FromQuery] string server,
+        [FromQuery] string protocol
+    )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
         // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
@@ -83,10 +105,17 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Authorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out var actionResult)
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status200OK,
+                result.StatusCode,
+                body,
+                out var actionResult
+            )
             // Automatic downgrade to HTTP/1.1
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -96,7 +125,11 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("AfterAuth/Unrestricted/Persist")]
-    public async Task<IActionResult> AfterAuthUnrestrictedPersist([FromQuery] string server, [FromQuery] string protocol1, [FromQuery] string protocol2)
+    public async Task<IActionResult> AfterAuthUnrestrictedPersist(
+        [FromQuery] string server,
+        [FromQuery] string protocol1,
+        [FromQuery] string protocol2
+    )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
         // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
@@ -106,20 +139,34 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Authorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out var actionResult)
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status200OK,
+                result.StatusCode,
+                body,
+                out var actionResult
+            )
             // Automatic downgrade to HTTP/1.1
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
 
-        result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "auth/Unrestricted") { Version = GetProtocolVersion(protocol2) });
+        result = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "auth/Unrestricted")
+            {
+                Version = GetProtocolVersion(protocol2),
+            }
+        );
         body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out actionResult)
+        if (
+            HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out actionResult)
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -129,7 +176,11 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("AfterAuth/Unrestricted/NonPersist")]
-    public async Task<IActionResult> AfterAuthUnrestrictedNonPersist([FromQuery] string server, [FromQuery] string protocol1, [FromQuery] string protocol2)
+    public async Task<IActionResult> AfterAuthUnrestrictedNonPersist(
+        [FromQuery] string server,
+        [FromQuery] string protocol1,
+        [FromQuery] string protocol2
+    )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
         // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
@@ -139,20 +190,34 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Authorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out var actionResult)
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status200OK,
+                result.StatusCode,
+                body,
+                out var actionResult
+            )
             // Automatic downgrade to HTTP/1.1
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
 
-        result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "auth/Unrestricted") { Version = GetProtocolVersion(protocol2) });
+        result = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "auth/Unrestricted")
+            {
+                Version = GetProtocolVersion(protocol2),
+            }
+        );
         body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out actionResult)
+        if (
+            HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out actionResult)
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || HasUser(body, out actionResult))
+            || HasUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -162,7 +227,11 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("AfterAuth/Authorized/NonPersist")]
-    public async Task<IActionResult> AfterAuthAuthorizedNonPersist([FromQuery] string server, [FromQuery] string protocol1, [FromQuery] string protocol2)
+    public async Task<IActionResult> AfterAuthAuthorizedNonPersist(
+        [FromQuery] string server,
+        [FromQuery] string protocol1,
+        [FromQuery] string protocol2
+    )
     {
         // Note WinHttpHandler cannot disable default credentials on localhost.
         // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
@@ -172,20 +241,34 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Authorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out var actionResult)
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status200OK,
+                result.StatusCode,
+                body,
+                out var actionResult
+            )
             // Automatic downgrade to HTTP/1.1
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
 
-        result = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "auth/Authorized") { Version = GetProtocolVersion(protocol2) });
+        result = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "auth/Authorized")
+            {
+                Version = GetProtocolVersion(protocol2),
+            }
+        );
         body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out actionResult)
+        if (
+            HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out actionResult)
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -195,7 +278,10 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("Unauthorized")]
-    public async Task<IActionResult> Unauthorized([FromQuery] string server, [FromQuery] string protocol)
+    public async Task<IActionResult> Unauthorized(
+        [FromQuery] string server,
+        [FromQuery] string protocol
+    )
     {
         var client = CreateWinHttpClient(server, useDefaultCredentials: true);
         client.DefaultRequestVersion = GetProtocolVersion(protocol);
@@ -203,8 +289,14 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Unauthorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status401Unauthorized, result.StatusCode, body, out var actionResult)
-            || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)) // HTTP/2 downgrades.
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status401Unauthorized,
+                result.StatusCode,
+                body,
+                out var actionResult
+            ) || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
+        ) // HTTP/2 downgrades.
         {
             return actionResult;
         }
@@ -221,7 +313,10 @@ public class AuthTestController : ControllerBase
 
     [HttpGet]
     [Route("AfterAuth/Unauthorized")]
-    public async Task<IActionResult> AfterAuthUnauthorized([FromQuery] string server, [FromQuery] string protocol)
+    public async Task<IActionResult> AfterAuthUnauthorized(
+        [FromQuery] string server,
+        [FromQuery] string protocol
+    )
     {
         var client = CreateWinHttpClient(server, useDefaultCredentials: true);
         client.DefaultRequestVersion = GetProtocolVersion(protocol);
@@ -229,10 +324,17 @@ public class AuthTestController : ControllerBase
         var result = await client.GetAsync("auth/Authorized");
         var body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status200OK, result.StatusCode, body, out var actionResult)
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status200OK,
+                result.StatusCode,
+                body,
+                out var actionResult
+            )
             // Automatic downgrade to HTTP/1.1
             || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
-            || MissingUser(body, out actionResult))
+            || MissingUser(body, out actionResult)
+        )
         {
             return actionResult;
         }
@@ -240,8 +342,14 @@ public class AuthTestController : ControllerBase
         result = await client.GetAsync("auth/Unauthorized");
         body = await result.Content.ReadAsStringAsync();
 
-        if (HasWrongStatusCode(StatusCodes.Status401Unauthorized, result.StatusCode, body, out actionResult)
-            || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)) // HTTP/2 downgrades.
+        if (
+            HasWrongStatusCode(
+                StatusCodes.Status401Unauthorized,
+                result.StatusCode,
+                body,
+                out actionResult
+            ) || HasWrongProtocol(Http11Protocol, result.Version, out actionResult)
+        ) // HTTP/2 downgrades.
         {
             return actionResult;
         }
@@ -256,7 +364,12 @@ public class AuthTestController : ControllerBase
         return Ok();
     }
 
-    private bool HasWrongStatusCode(int expected, HttpStatusCode actual, string body, out IActionResult actionResult)
+    private bool HasWrongStatusCode(
+        int expected,
+        HttpStatusCode actual,
+        string body,
+        out IActionResult actionResult
+    )
     {
         if (expected != (int)actual)
         {
@@ -269,8 +382,10 @@ public class AuthTestController : ControllerBase
 
     private bool HasWrongProtocol(string expected, Version actual, out IActionResult actionResult)
     {
-        if ((expected == Http11Protocol && actual != new Version(1, 1))
-            || (expected == Http2Protocol && actual != new Version(2, 0)))
+        if (
+            (expected == Http11Protocol && actual != new Version(1, 1))
+            || (expected == Http2Protocol && actual != new Version(2, 0))
+        )
         {
             actionResult = StatusCode(StatusCode604WrongProtocol, actual.ToString());
             return true;
@@ -324,11 +439,14 @@ public class AuthTestController : ControllerBase
     // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade HTTP/2. WinHttpHandler does.
     private HttpClient CreateSocketHttpClient(string remote, bool useDefaultCredentials = false)
     {
-        return new HttpClient(new HttpClientHandler()
-        {
-            UseDefaultCredentials = useDefaultCredentials,
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-        })
+        return new HttpClient(
+            new HttpClientHandler()
+            {
+                UseDefaultCredentials = useDefaultCredentials,
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+            }
+        )
         {
             BaseAddress = new Uri(remote),
         };
@@ -338,13 +456,16 @@ public class AuthTestController : ControllerBase
     private HttpClient CreateWinHttpClient(string remote, bool useDefaultCredentials = false)
     {
         // WinHttpHandler always uses default credentials on localhost
-        return new HttpClient(new WinHttpHandler()
+        return new HttpClient(
+            new WinHttpHandler()
+            {
+                ServerCredentials = CredentialCache.DefaultCredentials,
+                ServerCertificateValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+            }
+        )
         {
-            ServerCredentials = CredentialCache.DefaultCredentials,
-            ServerCertificateValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-        })
-        {
-            BaseAddress = new Uri(remote)
+            BaseAddress = new Uri(remote),
         };
     }
 
@@ -352,9 +473,12 @@ public class AuthTestController : ControllerBase
     {
         switch (protocol)
         {
-            case "HTTP/1.1": return new Version(1, 1);
-            case "HTTP/2": return new Version(2, 0);
-            default: throw new NotImplementedException(Request.Protocol);
+            case "HTTP/1.1":
+                return new Version(1, 1);
+            case "HTTP/2":
+                return new Version(2, 0);
+            default:
+                throw new NotImplementedException(Request.Protocol);
         }
     }
 }

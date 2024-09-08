@@ -6,15 +6,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
+using System.Linq;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Diagnostics.Tools.RuntimeClient;
-using System.Threading;
-using System.Linq;
-using System.Reflection;
-using System.Security.Principal;
 
 // modified version of same code in dotnet/diagnostics for testing
 namespace Tracing.Tests.Common
@@ -54,7 +54,13 @@ namespace Tracing.Tests.Common
             }
         }
 
-        public static async Task<bool> RunSubprocess(Assembly currentAssembly, Dictionary<string,string> environment, Func<Task> beforeExecution = null, Func<int, Task> duringExecution = null, Func<Task> afterExecution = null)
+        public static async Task<bool> RunSubprocess(
+            Assembly currentAssembly,
+            Dictionary<string, string> environment,
+            Func<Task> beforeExecution = null,
+            Func<int, Task> duringExecution = null,
+            Func<Task> afterExecution = null
+        )
         {
             bool fSuccess = true;
             using (var process = new Process())
@@ -67,34 +73,46 @@ namespace Tracing.Tests.Common
 
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.Environment.Add("DOTNET_StressLog",   "1");    // Turn on stresslog for subprocess
+                process.StartInfo.Environment.Add("DOTNET_StressLog", "1"); // Turn on stresslog for subprocess
                 process.StartInfo.Environment.Add("DOTNET_LogFacility", "1000"); // Diagnostics Server Log Facility
-                process.StartInfo.Environment.Add("DOTNET_LogLevel",    "10");   // Log everything
+                process.StartInfo.Environment.Add("DOTNET_LogLevel", "10"); // Log everything
                 foreach ((string key, string value) in environment)
                     process.StartInfo.Environment.Add(key, value);
                 process.StartInfo.FileName = Process.GetCurrentProcess().MainModule.FileName;
-                process.StartInfo.Arguments = TestLibrary.Utilities.IsNativeAot ? "0" : $"{new Uri(currentAssembly.Location).LocalPath} 0";
+                process.StartInfo.Arguments = TestLibrary.Utilities.IsNativeAot
+                    ? "0"
+                    : $"{new Uri(currentAssembly.Location).LocalPath} 0";
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardInput = true;
                 process.StartInfo.RedirectStandardError = true;
 
-                Logger.logger.Log($"running sub-process: {process.StartInfo.FileName} {process.StartInfo.Arguments}");
+                Logger.logger.Log(
+                    $"running sub-process: {process.StartInfo.FileName} {process.StartInfo.Arguments}"
+                );
                 DateTime startTime = DateTime.Now;
-                process.OutputDataReceived += new DataReceivedEventHandler((s,e) =>
-                {
-                    if (!string.IsNullOrEmpty(e.Data))
+                process.OutputDataReceived += new DataReceivedEventHandler(
+                    (s, e) =>
                     {
-                        stdoutSb.Append($"\n\t{(DateTime.Now - startTime).TotalSeconds,5:f1}s: {e.Data}");
+                        if (!string.IsNullOrEmpty(e.Data))
+                        {
+                            stdoutSb.Append(
+                                $"\n\t{(DateTime.Now - startTime).TotalSeconds, 5:f1}s: {e.Data}"
+                            );
+                        }
                     }
-                });
+                );
 
-                process.ErrorDataReceived += new DataReceivedEventHandler((s,e) =>
-                {
-                    if (!string.IsNullOrEmpty(e.Data))
+                process.ErrorDataReceived += new DataReceivedEventHandler(
+                    (s, e) =>
                     {
-                        stderrSb.Append($"\n\t{(DateTime.Now - startTime).TotalSeconds,5:f1}s: {e.Data}");
+                        if (!string.IsNullOrEmpty(e.Data))
+                        {
+                            stderrSb.Append(
+                                $"\n\t{(DateTime.Now - startTime).TotalSeconds, 5:f1}s: {e.Data}"
+                            );
+                        }
                     }
-                });
+                );
 
                 process.EnableRaisingEvents = true;
                 fSuccess &= process.Start();
@@ -120,7 +138,9 @@ namespace Tracing.Tests.Common
 
                 while (!EventPipeClient.ListAvailablePorts().Contains(process.Id))
                 {
-                    Logger.logger.Log($"Standard Diagnostics Server connection not created yet -> try again in 100 ms");
+                    Logger.logger.Log(
+                        $"Standard Diagnostics Server connection not created yet -> try again in 100 ms"
+                    );
                     await Task.Delay(100);
                 }
 
@@ -144,7 +164,7 @@ namespace Tracing.Tests.Common
                     Logger.logger.Log(e.ToString());
                     Logger.logger.Log($"Calling process.Kill()");
                     process.Kill();
-                    fSuccess=false;
+                    fSuccess = false;
                 }
                 finally
                 {
@@ -153,7 +173,6 @@ namespace Tracing.Tests.Common
                     Logger.logger.Log($"Subprocess stderr: {stderrSb.ToString()}");
                     Logger.logger.Log($"----------------------------------------");
                 }
-
 
                 if (afterExecution != null)
                     await afterExecution();
@@ -189,7 +208,6 @@ namespace Tracing.Tests.Common
         public byte CommandId;
         public UInt16 Reserved = 0x0000;
 
-
         // Helper expression to quickly get V1 magic string for comparison
         // should be 14 bytes long
         public static byte[] DotnetIpcV1 => Encoding.ASCII.GetBytes("DOTNET_IPC_V1" + '\0');
@@ -218,13 +236,13 @@ namespace Tracing.Tests.Common
                 Size = reader.ReadUInt16(),
                 CommandSet = reader.ReadByte(),
                 CommandId = reader.ReadByte(),
-                Reserved = reader.ReadUInt16()
+                Reserved = reader.ReadUInt16(),
             };
 
             return header;
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             return $"{{ Magic={Magic}; Size={Size}; CommandSet={CommandSet}; CommandId={CommandId}; Reserved={Reserved} }}";
         }
@@ -232,8 +250,7 @@ namespace Tracing.Tests.Common
 
     public class IpcMessage
     {
-        public IpcMessage()
-        { }
+        public IpcMessage() { }
 
         public IpcMessage(IpcHeader header, byte[] payload)
         {
@@ -242,9 +259,7 @@ namespace Tracing.Tests.Common
         }
 
         public IpcMessage(byte commandSet, byte commandId, byte[] payload = null)
-        : this(new IpcHeader(commandSet, commandId), payload)
-        {
-        }
+            : this(new IpcHeader(commandSet, commandId), payload) { }
 
         public byte[] Payload { get; private set; } = null;
         public IpcHeader Header { get; private set; } = default;
@@ -275,12 +290,14 @@ namespace Tracing.Tests.Common
             using (var reader = new BinaryReader(stream, Encoding.UTF8, true))
             {
                 message.Header = IpcHeader.TryParse(reader);
-                message.Payload = reader.ReadBytes(message.Header.Size - IpcHeader.HeaderSizeInBytes);
+                message.Payload = reader.ReadBytes(
+                    message.Header.Size - IpcHeader.HeaderSizeInBytes
+                );
                 return message;
             }
         }
 
-        override public string ToString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append($"{{ Header={Header.ToString()}; ");
@@ -423,7 +440,9 @@ namespace Tracing.Tests.Common
 
     public class ConnectionHelper
     {
-        private static string IpcRootPath { get; } = OperatingSystem.IsWindows() ? @"\\.\pipe\" : Path.GetTempPath();
+        private static string IpcRootPath { get; } =
+            OperatingSystem.IsWindows() ? @"\\.\pipe\" : Path.GetTempPath();
+
         public static Stream GetStandardTransport(int processId)
         {
             try
@@ -443,11 +462,20 @@ namespace Tracing.Tests.Common
             {
                 string pipeName = $"dotnet-diagnostic-{processId}";
                 var namedPipe = new NamedPipeClientStream(
-                    ".", pipeName, PipeDirection.InOut, PipeOptions.None, TokenImpersonationLevel.Impersonation);
+                    ".",
+                    pipeName,
+                    PipeDirection.InOut,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.Impersonation
+                );
                 namedPipe.Connect(3);
                 return namedPipe;
             }
-            else if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || OperatingSystem.IsTvOS())
+            else if (
+                OperatingSystem.IsAndroid()
+                || OperatingSystem.IsIOS()
+                || OperatingSystem.IsTvOS()
+            )
             {
                 TcpClient client = new TcpClient("127.0.0.1", 9000);
                 return client.GetStream();
@@ -457,22 +485,31 @@ namespace Tracing.Tests.Common
                 string ipcPort;
                 try
                 {
-                    ipcPort = Directory.GetFiles(IpcRootPath, $"dotnet-diagnostic-{processId}-*-socket") // Try best match.
-                                .OrderByDescending(f => new FileInfo(f).LastWriteTime)
-                                .FirstOrDefault();
+                    ipcPort = Directory
+                        .GetFiles(IpcRootPath, $"dotnet-diagnostic-{processId}-*-socket") // Try best match.
+                        .OrderByDescending(f => new FileInfo(f).LastWriteTime)
+                        .FirstOrDefault();
                     if (ipcPort == null)
                     {
-                        throw new Exception($"Process {processId} not running compatible .NET Core runtime.");
+                        throw new Exception(
+                            $"Process {processId} not running compatible .NET Core runtime."
+                        );
                     }
                 }
                 catch (InvalidOperationException)
                 {
-                    throw new Exception($"Process {processId} not running compatible .NET Core runtime.");
+                    throw new Exception(
+                        $"Process {processId} not running compatible .NET Core runtime."
+                    );
                 }
                 string path = Path.Combine(IpcRootPath, ipcPort);
                 var remoteEP = new UnixDomainSocketEndPoint(path);
 
-                var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                var socket = new Socket(
+                    AddressFamily.Unix,
+                    SocketType.Stream,
+                    ProtocolType.Unspecified
+                );
                 socket.Connect(remoteEP);
                 return new NetworkStream(socket, ownsSocket: true);
             }

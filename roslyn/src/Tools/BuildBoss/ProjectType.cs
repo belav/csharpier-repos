@@ -18,6 +18,6 @@ namespace BuildBoss
         Basic,
         Shared,
         Tool,
-        Unknown
+        Unknown,
     }
 }

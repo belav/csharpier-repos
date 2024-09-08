@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -18,11 +18,14 @@ namespace System.Web.UI.WebControls.WebParts {
     using System.Web.UI.WebControls;
 
     [
-    Bindable(false),
-    Designer("System.Web.UI.Design.WebControls.WebParts.EditorPartDesigner, " + AssemblyRef.SystemDesign),
+        Bindable(false),
+        Designer(
+            "System.Web.UI.Design.WebControls.WebParts.EditorPartDesigner, "
+                + AssemblyRef.SystemDesign
+        ),
     ]
-    public abstract class EditorPart : Part {
-
+    public abstract class EditorPart : Part
+    {
         private WebPart _webPartToEdit;
         private WebPartManager _webPartManager;
         private EditorZoneBase _zone;
@@ -32,28 +35,33 @@ namespace System.Web.UI.WebControls.WebParts {
         /// An editor part may decide that it should not be shown based on the state
         /// or the type of web part it is associated with.
         /// </devdoc>
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public virtual bool Display {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual bool Display
+        {
+            get
+            {
                 // Always want EditorPart to be visible at design time (VSWhidbey 458247)
-                if (DesignMode) {
+                if (DesignMode)
+                {
                     return true;
                 }
 
-                if (WebPartToEdit != null) {
+                if (WebPartToEdit != null)
+                {
                     // Do not display EditorParts for a ProxyWebPart, regardless of the value
                     // of AllowEdit, IsShared, and PersonalizationScope
-                    if (WebPartToEdit is ProxyWebPart) {
+                    if (WebPartToEdit is ProxyWebPart)
+                    {
                         return false;
                     }
 
-                    if (!WebPartToEdit.AllowEdit &&
-                        WebPartToEdit.IsShared &&
-                        WebPartManager != null &&
-                        WebPartManager.Personalization.Scope == PersonalizationScope.User) {
+                    if (
+                        !WebPartToEdit.AllowEdit
+                        && WebPartToEdit.IsShared
+                        && WebPartManager != null
+                        && WebPartManager.Personalization.Scope == PersonalizationScope.User
+                    )
+                    {
                         return false;
                     }
 
@@ -65,40 +73,37 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        [
-        Browsable(false),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
-        public string DisplayTitle {
-            get {
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string DisplayTitle
+        {
+            get
+            {
                 string displayTitle = Title;
-                if (String.IsNullOrEmpty(displayTitle)) {
+                if (String.IsNullOrEmpty(displayTitle))
+                {
                     displayTitle = SR.GetString(SR.Part_Untitled);
                 }
                 return displayTitle;
             }
         }
 
-        protected WebPartManager WebPartManager {
-            get {
-                return _webPartManager;
-            }
+        protected WebPartManager WebPartManager
+        {
+            get { return _webPartManager; }
         }
 
         /// <devdoc>
         /// The web part that is being edited by this editor part.  Set by the EditorZoneBase after
         /// the EditorPart is added to the zone's control collection.
         /// </devdoc>
-        protected WebPart WebPartToEdit {
-            get {
-                return _webPartToEdit;
-            }
+        protected WebPart WebPartToEdit
+        {
+            get { return _webPartToEdit; }
         }
 
-        protected EditorZoneBase Zone {
-            get {
-                return _zone;
-            }
+        protected EditorZoneBase Zone
+        {
+            get { return _zone; }
         }
 
         /// <devdoc>
@@ -108,54 +113,80 @@ namespace System.Web.UI.WebControls.WebParts {
         public abstract bool ApplyChanges();
 
         // If custom errors are enabled, we do not want to render the exception message to the browser. (VSWhidbey 381646)
-        internal string CreateErrorMessage(string exceptionMessage) {
-            if (Context != null && Context.IsCustomErrorEnabled) {
+        internal string CreateErrorMessage(string exceptionMessage)
+        {
+            if (Context != null && Context.IsCustomErrorEnabled)
+            {
                 return SR.GetString(SR.EditorPart_ErrorSettingProperty);
             }
-            else {
-                return SR.GetString(SR.EditorPart_ErrorSettingPropertyWithExceptionMessage, exceptionMessage);
+            else
+            {
+                return SR.GetString(
+                    SR.EditorPart_ErrorSettingPropertyWithExceptionMessage,
+                    exceptionMessage
+                );
             }
         }
 
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        protected override IDictionary GetDesignModeState() {
+        protected override IDictionary GetDesignModeState()
+        {
             IDictionary state = new HybridDictionary(1);
             state["Zone"] = Zone;
             return state;
         }
 
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
-            if (Zone == null) {
+            if (Zone == null)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.EditorPart_MustBeInZone, ID));
             }
 
             // Need to set Visible=false so postback is handled correctly for child controls
             // i.e. CheckBox child controls will always be set to false after postback unless
             // they are marked as not visible
-            if (Display == false) {
+            if (Display == false)
+            {
                 Visible = false;
             }
         }
 
-        private void RenderDisplayName(HtmlTextWriter writer, string displayName, string associatedClientID) {
-            if (Zone != null) {
+        private void RenderDisplayName(
+            HtmlTextWriter writer,
+            string displayName,
+            string associatedClientID
+        )
+        {
+            if (Zone != null)
+            {
                 Zone.LabelStyle.AddAttributesToRender(writer, this);
             }
             writer.AddAttribute(HtmlTextWriterAttribute.For, associatedClientID);
             writer.RenderBeginTag(HtmlTextWriterTag.Label);
             writer.WriteEncodedText(displayName);
-            writer.RenderEndTag();  // Label
+            writer.RenderEndTag(); // Label
         }
 
-        internal void RenderPropertyEditors(HtmlTextWriter writer, string[] propertyDisplayNames, string[] propertyDescriptions,
-                                            WebControl[] propertyEditors, string[] errorMessages) {
+        internal void RenderPropertyEditors(
+            HtmlTextWriter writer,
+            string[] propertyDisplayNames,
+            string[] propertyDescriptions,
+            WebControl[] propertyEditors,
+            string[] errorMessages
+        )
+        {
             Debug.Assert(propertyDisplayNames.Length == propertyEditors.Length);
             Debug.Assert(propertyDisplayNames.Length == errorMessages.Length);
-            Debug.Assert(propertyDescriptions == null || (propertyDescriptions.Length == propertyDisplayNames.Length));
+            Debug.Assert(
+                propertyDescriptions == null
+                    || (propertyDescriptions.Length == propertyDisplayNames.Length)
+            );
 
-            if (propertyDisplayNames.Length == 0) {
+            if (propertyDisplayNames.Length == 0)
+            {
                 return;
             }
 
@@ -163,34 +194,42 @@ namespace System.Web.UI.WebControls.WebParts {
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "4");
             writer.RenderBeginTag(HtmlTextWriterTag.Table);
 
-            for (int i = 0; i < propertyDisplayNames.Length; i++) {
+            for (int i = 0; i < propertyDisplayNames.Length; i++)
+            {
                 WebControl editUIControl = propertyEditors[i];
-                if (Zone != null && !Zone.EditUIStyle.IsEmpty) {
+                if (Zone != null && !Zone.EditUIStyle.IsEmpty)
+                {
                     editUIControl.ApplyStyle(Zone.EditUIStyle);
                 }
 
-                string propertyDescription = (propertyDescriptions != null) ? propertyDescriptions[i] : null;
-                if (!String.IsNullOrEmpty(propertyDescription)) {
+                string propertyDescription =
+                    (propertyDescriptions != null) ? propertyDescriptions[i] : null;
+                if (!String.IsNullOrEmpty(propertyDescription))
+                {
                     writer.AddAttribute(HtmlTextWriterAttribute.Title, propertyDescription);
                 }
 
                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
 
-                if (editUIControl is CheckBox) {
+                if (editUIControl is CheckBox)
+                {
                     editUIControl.RenderControl(writer);
                     writer.Write("&nbsp;");
                     RenderDisplayName(writer, propertyDisplayNames[i], editUIControl.ClientID);
                 }
-                else {
+                else
+                {
                     string associatedClientID;
                     CompositeControl compositeControl = editUIControl as CompositeControl;
-                    if (compositeControl != null) {
+                    if (compositeControl != null)
+                    {
                         // The <label for> tag should point to the first child control of the
                         // composite control. (VSWhidbey 372756)
                         associatedClientID = compositeControl.Controls[0].ClientID;
                     }
-                    else {
+                    else
+                    {
                         // The <label for> tag should point to the editUIControl itself.
                         associatedClientID = editUIControl.ClientID;
                     }
@@ -204,44 +243,52 @@ namespace System.Web.UI.WebControls.WebParts {
                 writer.WriteLine();
 
                 string errorMessage = errorMessages[i];
-                if (!String.IsNullOrEmpty(errorMessage)) {
-                    if (Zone != null && !Zone.ErrorStyle.IsEmpty) {
+                if (!String.IsNullOrEmpty(errorMessage))
+                {
+                    if (Zone != null && !Zone.ErrorStyle.IsEmpty)
+                    {
                         Zone.ErrorStyle.AddAttributesToRender(writer, this);
                     }
 
                     writer.RenderBeginTag(HtmlTextWriterTag.Span);
                     writer.WriteEncodedText(errorMessage);
-                    writer.RenderEndTag();  // Span
+                    writer.RenderEndTag(); // Span
                     writer.WriteBreak();
                     writer.WriteLine();
                 }
 
-                writer.RenderEndTag();  // Td
-                writer.RenderEndTag();  // Tr
+                writer.RenderEndTag(); // Td
+                writer.RenderEndTag(); // Tr
             }
 
-            writer.RenderEndTag();  // Table
+            writer.RenderEndTag(); // Table
         }
 
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        protected override void SetDesignModeState(IDictionary data) {
-            if (data != null) {
+        protected override void SetDesignModeState(IDictionary data)
+        {
+            if (data != null)
+            {
                 object o = data["Zone"];
-                if (o != null) {
+                if (o != null)
+                {
                     SetZone((EditorZoneBase)o);
                 }
             }
         }
 
-        internal void SetWebPartToEdit(WebPart webPartToEdit) {
+        internal void SetWebPartToEdit(WebPart webPartToEdit)
+        {
             _webPartToEdit = webPartToEdit;
         }
 
-        internal void SetWebPartManager(WebPartManager webPartManager) {
+        internal void SetWebPartManager(WebPartManager webPartManager)
+        {
             _webPartManager = webPartManager;
         }
 
-        internal void SetZone(EditorZoneBase zone) {
+        internal void SetZone(EditorZoneBase zone)
+        {
             _zone = zone;
         }
 

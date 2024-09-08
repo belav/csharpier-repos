@@ -33,8 +33,8 @@ namespace System.Net.NetworkInformation.Tests
             // We cannot test this via RemoteInvoke() as that calls Environment.Exit()
             // and forces quit even when foreground threads are running.
             NetworkChange.NetworkAddressChanged += _addressHandler;
-            {
-            };
+            { }
+            ;
         }
 
         [Fact]
@@ -50,7 +50,10 @@ namespace System.Net.NetworkInformation.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void NetworkAvailabilityChanged_NetworkAddressChanged_AddAndRemove_Success(bool addAddressFirst, bool removeAddressFirst)
+        public void NetworkAvailabilityChanged_NetworkAddressChanged_AddAndRemove_Success(
+            bool addAddressFirst,
+            bool removeAddressFirst
+        )
         {
             if (addAddressFirst)
             {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,62 +38,65 @@ using Mono.Xml.XPath2;
 
 namespace Mono.Xml.XPath2
 {
-	public class XQueryCompileOptions
-	{
-		public XQueryCompileOptions ()
-			: this (new NameTable (), null)
-		{
-		}
+    public class XQueryCompileOptions
+    {
+        public XQueryCompileOptions()
+            : this(new NameTable(), null) { }
 
-		public XQueryCompileOptions (XmlNameTable nameTable, CultureInfo defaultCollation)
-		{
-			this.nameTable = nameTable;
-			this.defaultCollation = defaultCollation;
-			if (this.defaultCollation == null)
-				this.defaultCollation = CultureInfo.InvariantCulture;
+        public XQueryCompileOptions(XmlNameTable nameTable, CultureInfo defaultCollation)
+        {
+            this.nameTable = nameTable;
+            this.defaultCollation = defaultCollation;
+            if (this.defaultCollation == null)
+                this.defaultCollation = CultureInfo.InvariantCulture;
 
-			knownCollections = new Hashtable ();
-		}
+            knownCollections = new Hashtable();
+        }
 
-		XmlNameTable nameTable;
-		XmlQueryDialect compat;
-		CultureInfo defaultCollation;
-		Hashtable knownCollections;
-		bool xqueryFlagger;
-		bool xqueryStaticFlagger;
+        XmlNameTable nameTable;
+        XmlQueryDialect compat;
+        CultureInfo defaultCollation;
+        Hashtable knownCollections;
+        bool xqueryFlagger;
+        bool xqueryStaticFlagger;
 
-		// XPath 1.0 Compatibility Mode.
-		public XmlQueryDialect Compatibility {
-			get { return compat; }
-			set { compat = value; }
-		}
+        // XPath 1.0 Compatibility Mode.
+        public XmlQueryDialect Compatibility
+        {
+            get { return compat; }
+            set { compat = value; }
+        }
 
-		public XmlNameTable NameTable {
-			get { return nameTable; }
-			set { nameTable = value; }
-		}
+        public XmlNameTable NameTable
+        {
+            get { return nameTable; }
+            set { nameTable = value; }
+        }
 
-		public CultureInfo DefaultCollation {
-			get { return defaultCollation; }
-			set { defaultCollation = value; }
-		}
+        public CultureInfo DefaultCollation
+        {
+            get { return defaultCollation; }
+            set { defaultCollation = value; }
+        }
 
-		// FIXME: implement
-		public bool XQueryFlagger {
-			get { return xqueryFlagger; }
-			set { xqueryFlagger = value; }
-		}
+        // FIXME: implement
+        public bool XQueryFlagger
+        {
+            get { return xqueryFlagger; }
+            set { xqueryFlagger = value; }
+        }
 
-		// FIXME: implement
-		public bool XQueryStaticFlagger {
-			get { return xqueryStaticFlagger; }
-			set { xqueryStaticFlagger = value; }
-		}
+        // FIXME: implement
+        public bool XQueryStaticFlagger
+        {
+            get { return xqueryStaticFlagger; }
+            set { xqueryStaticFlagger = value; }
+        }
 
-		// FIXME: implement
-		public Hashtable KnownCollections {
-			get { return knownCollections; }
-		}
-	}
+        // FIXME: implement
+        public Hashtable KnownCollections
+        {
+            get { return knownCollections; }
+        }
+    }
 }
-

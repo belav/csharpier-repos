@@ -11,8 +11,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void ReceiveAllAsync_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync(new CancellationToken(true)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IReceivableSourceBlock<int>)null).ReceiveAllAsync()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    ((IReceivableSourceBlock<int>)null).ReceiveAllAsync(new CancellationToken(true))
+            );
         }
 
         [Fact]
@@ -99,7 +106,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             var source = new BufferBlock<int>();
 
-            int producedTotal = 0, consumedTotal = 0;
+            int producedTotal = 0,
+                consumedTotal = 0;
             await Task.WhenAll(
                 Task.Run(async () =>
                 {
@@ -124,7 +132,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     {
                         await e.DisposeAsync();
                     }
-                }));
+                })
+            );
 
             Assert.Equal(producedTotal, consumedTotal);
         }
@@ -159,7 +168,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void ReceiveAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(bool sameEnumerable, bool dispose)
+        public void ReceiveAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(
+            bool sameEnumerable,
+            bool dispose
+        )
         {
             var source = new BufferBlock<int>();
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();
@@ -167,7 +179,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             for (int i = 0; i < 10; i++)
             {
                 Assert.True(source.Post(i));
-                IAsyncEnumerator<int> e = (sameEnumerable ? enumerable : source.ReceiveAllAsync()).GetAsyncEnumerator();
+                IAsyncEnumerator<int> e = (
+                    sameEnumerable ? enumerable : source.ReceiveAllAsync()
+                ).GetAsyncEnumerator();
                 ValueTask<bool> vt = e.MoveNextAsync();
                 Assert.True(vt.IsCompletedSuccessfully);
                 Assert.True(vt.Result);
@@ -184,18 +198,24 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task ReceiveAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(bool sameEnumerable)
+        public async Task ReceiveAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(
+            bool sameEnumerable
+        )
         {
             var source = new BufferBlock<int>();
 
             IAsyncEnumerable<int> enumerable = source.ReceiveAllAsync();
 
             IAsyncEnumerator<int> e1 = enumerable.GetAsyncEnumerator();
-            IAsyncEnumerator<int> e2 = (sameEnumerable ? enumerable : source.ReceiveAllAsync()).GetAsyncEnumerator();
+            IAsyncEnumerator<int> e2 = (
+                sameEnumerable ? enumerable : source.ReceiveAllAsync()
+            ).GetAsyncEnumerator();
             Assert.NotSame(e1, e2);
 
-            ValueTask<bool> vt1, vt2;
-            int producerTotal = 0, consumerTotal = 0;
+            ValueTask<bool> vt1,
+                vt2;
+            int producerTotal = 0,
+                consumerTotal = 0;
             for (int i = 0; i < 10; i++)
             {
                 vt1 = e1.MoveNextAsync();

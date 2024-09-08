@@ -10,8 +10,10 @@ namespace System.Data
         DbType DbType { get; set; }
         ParameterDirection Direction { get; set; }
         bool IsNullable { get; }
+
         [AllowNull]
         string ParameterName { get; set; }
+
         [AllowNull]
         string SourceColumn { get; set; }
         DataRowVersion SourceVersion { get; set; }

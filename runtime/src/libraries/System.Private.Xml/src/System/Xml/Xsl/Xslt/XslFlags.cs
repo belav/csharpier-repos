@@ -16,7 +16,13 @@ namespace System.Xml.Xsl
         Nodeset = 0x0010,
         Rtf = 0x0020,
         TypeFilter = AnyType,
-        AnyType = XslFlags.String | XslFlags.Number | XslFlags.Boolean | XslFlags.Node | XslFlags.Nodeset | XslFlags.Rtf,
+        AnyType =
+            XslFlags.String
+            | XslFlags.Number
+            | XslFlags.Boolean
+            | XslFlags.Node
+            | XslFlags.Nodeset
+            | XslFlags.Rtf,
 
         // Focus flags. These flags indicate which of the three focus values (context item, context position,
         // context size) are required for calculation of the expression.

@@ -22,8 +22,7 @@ internal class StubVsServiceExporter<T> : StubVsServiceExporter<T, T>
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public StubVsServiceExporter(
         [Import(typeof(SAsyncServiceProvider))] IAsyncServiceProvider2 asyncServiceProvider,
-        JoinableTaskContext joinableTaskContext)
-        : base(asyncServiceProvider, joinableTaskContext)
-    {
-    }
+        JoinableTaskContext joinableTaskContext
+    )
+        : base(asyncServiceProvider, joinableTaskContext) { }
 }

@@ -17,7 +17,7 @@ namespace System.Tests
         [Fact]
         public void FromByte()
         {
-            byte[] testValues = { byte.MinValue, byte.MaxValue, };
+            byte[] testValues = { byte.MinValue, byte.MaxValue };
             bool[] expectedValues = { false, true };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
@@ -25,7 +25,18 @@ namespace System.Tests
         [Fact]
         public void FromDecimal()
         {
-            decimal[] testValues = { decimal.MaxValue, decimal.MinValue, decimal.One, decimal.Zero, 0m, 0.0m, 1.5m, -1.5m, 500.00m };
+            decimal[] testValues =
+            {
+                decimal.MaxValue,
+                decimal.MinValue,
+                decimal.One,
+                decimal.Zero,
+                0m,
+                0.0m,
+                1.5m,
+                -1.5m,
+                500.00m,
+            };
             bool[] expectedValues = { true, true, true, false, false, false, true, true, true };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
@@ -33,8 +44,40 @@ namespace System.Tests
         [Fact]
         public void FromDouble()
         {
-            double[] testValues = { double.Epsilon, double.MaxValue, double.MinValue, double.NaN, double.NegativeInfinity, double.PositiveInfinity, 0d, 0.0, 1.5, -1.5, 1.5e300, -1.7e-500, -1.7e300, -1.7e-320 };
-            bool[] expectedValues = { true, true, true, true, true, true, false, false, true, true, true, false, true, true };
+            double[] testValues =
+            {
+                double.Epsilon,
+                double.MaxValue,
+                double.MinValue,
+                double.NaN,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                0d,
+                0.0,
+                1.5,
+                -1.5,
+                1.5e300,
+                -1.7e-500,
+                -1.7e300,
+                -1.7e-320,
+            };
+            bool[] expectedValues =
+            {
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+            };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
 
@@ -58,19 +101,34 @@ namespace System.Tests
         public void FromInt64()
         {
             long[] testValues = { long.MinValue, long.MaxValue, 0 };
-            bool[] expectedValues = { true, true, false, };
+            bool[] expectedValues = { true, true, false };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
 
         [Fact]
         public void FromString()
         {
-            string[] testValues = { null, "True", "true ", " true", " true ", " false ", " false", "false ", "False" };
+            string[] testValues =
+            {
+                null,
+                "True",
+                "true ",
+                " true",
+                " true ",
+                " false ",
+                " false",
+                "false ",
+                "False",
+            };
             bool[] expectedValues = { false, true, true, true, true, false, false, false, false };
             VerifyFromString(Convert.ToBoolean, Convert.ToBoolean, testValues, expectedValues);
 
             string[] invalidValues = { "Hello" };
-            VerifyFromStringThrows<FormatException>(Convert.ToBoolean, Convert.ToBoolean, invalidValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToBoolean,
+                Convert.ToBoolean,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -81,7 +139,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToBoolean, Convert.ToBoolean, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToBoolean, Convert.ToBoolean, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToBoolean,
+                Convert.ToBoolean,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -95,8 +157,40 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { float.Epsilon, float.MaxValue, float.MinValue, float.NaN, float.NegativeInfinity, float.PositiveInfinity, 0f, 0.0f, 1.5f, -1.5f, 1.5e30f, -1.7e-100f, -1.7e30f, -1.7e-40f, };
-            bool[] expectedValues = { true, true, true, true, true, true, false, false, true, true, true, false, true, true, };
+            float[] testValues =
+            {
+                float.Epsilon,
+                float.MaxValue,
+                float.MinValue,
+                float.NaN,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                0f,
+                0.0f,
+                1.5f,
+                -1.5f,
+                1.5e30f,
+                -1.7e-100f,
+                -1.7e30f,
+                -1.7e-40f,
+            };
+            bool[] expectedValues =
+            {
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+            };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
 

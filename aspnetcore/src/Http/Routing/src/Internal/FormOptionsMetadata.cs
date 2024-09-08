@@ -13,7 +13,8 @@ internal class FormOptionsMetadata(
     int? multipartBoundaryLengthLimit = null,
     int? multipartHeadersCountLimit = null,
     int? multipartHeadersLengthLimit = null,
-    long? multipartBodyLengthLimit = null) : IFormOptionsMetadata
+    long? multipartBodyLengthLimit = null
+) : IFormOptionsMetadata
 {
     public bool? BufferBody { get; } = bufferBody;
     public int? MemoryBufferThreshold { get; } = memoryBufferThreshold;

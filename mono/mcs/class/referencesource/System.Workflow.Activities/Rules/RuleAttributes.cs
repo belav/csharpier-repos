@@ -6,24 +6,36 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Workflow.ComponentModel;
-using System.Workflow.ComponentModel.Compiler;
 using System.Reflection;
 using System.Workflow.Activities.Common;
-
+using System.Workflow.ComponentModel;
+using System.Workflow.ComponentModel.Compiler;
 
 namespace System.Workflow.Activities.Rules
 {
     public enum RuleAttributeTarget
     {
         Parameter,
-        This
+        This,
     }
 
     public abstract class RuleAttribute : Attribute
     {
-        internal abstract bool Validate(RuleValidation validation, MemberInfo member, Type contextType, ParameterInfo[] parameters);
-        internal abstract void Analyze(RuleAnalysis analysis, MemberInfo member, CodeExpression targetExpression, RulePathQualifier targetQualifier, CodeExpressionCollection argumentExpressions, ParameterInfo[] parameters, List<CodeExpression> attributedExpressions);
+        internal abstract bool Validate(
+            RuleValidation validation,
+            MemberInfo member,
+            Type contextType,
+            ParameterInfo[] parameters
+        );
+        internal abstract void Analyze(
+            RuleAnalysis analysis,
+            MemberInfo member,
+            CodeExpression targetExpression,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argumentExpressions,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExpressions
+        );
     }
 
     public abstract class RuleReadWriteAttribute : RuleAttribute
@@ -47,7 +59,12 @@ namespace System.Workflow.Activities.Rules
             get { return attributeTarget; }
         }
 
-        internal override bool Validate(RuleValidation validation, MemberInfo member, Type contextType, ParameterInfo[] parameters)
+        internal override bool Validate(
+            RuleValidation validation,
+            MemberInfo member,
+            Type contextType,
+            ParameterInfo[] parameters
+        )
         {
             ValidationError error = null;
             string message = null;
@@ -94,8 +111,16 @@ namespace System.Workflow.Activities.Rules
 
                 if (!found)
                 {
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.InvalidRuleAttributeParameter, firstPart, member.Name);
-                    error = new ValidationError(message, ErrorNumbers.Error_InvalidRuleAttributeParameter);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.InvalidRuleAttributeParameter,
+                        firstPart,
+                        member.Name
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_InvalidRuleAttributeParameter
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = this;
                     validation.AddError(error);
                     return false;
@@ -121,7 +146,10 @@ namespace System.Workflow.Activities.Rules
                 if (parts[i] == "*")
                 {
                     // The "*" occurred in the middle of the path, which is a no-no.
-                    error = new ValidationError(Messages.InvalidWildCardInPathQualifier, ErrorNumbers.Error_InvalidWildCardInPathQualifier);
+                    error = new ValidationError(
+                        Messages.InvalidWildCardInPathQualifier,
+                        ErrorNumbers.Error_InvalidWildCardInPathQualifier
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = this;
                     validation.AddError(error);
                     valid = false;
@@ -133,7 +161,11 @@ namespace System.Workflow.Activities.Rules
                     currentType = currentType.GetElementType();
 
                 // Make sure the member exists in the current type.
-                BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
+                BindingFlags bindingFlags =
+                    BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.FlattenHierarchy;
                 if (validation.AllowInternalMembers(currentType))
                     bindingFlags |= BindingFlags.NonPublic;
 
@@ -151,8 +183,15 @@ namespace System.Workflow.Activities.Rules
                     }
                     else
                     {
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.UpdateUnknownFieldOrProperty, parts[i]);
-                        error = new ValidationError(message, ErrorNumbers.Error_UnknownFieldOrProperty);
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.UpdateUnknownFieldOrProperty,
+                            parts[i]
+                        );
+                        error = new ValidationError(
+                            message,
+                            ErrorNumbers.Error_UnknownFieldOrProperty
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = this;
                         validation.AddError(error);
                         valid = false;
@@ -164,7 +203,14 @@ namespace System.Workflow.Activities.Rules
             return valid;
         }
 
-        internal void AnalyzeReadWrite(RuleAnalysis analysis, CodeExpression targetExpression, RulePathQualifier targetQualifier, CodeExpressionCollection argumentExpressions, ParameterInfo[] parameters, List<CodeExpression> attributedExpressions)
+        internal void AnalyzeReadWrite(
+            RuleAnalysis analysis,
+            CodeExpression targetExpression,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argumentExpressions,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExpressions
+        )
         {
             if (string.IsNullOrEmpty(attributePath))
             {
@@ -197,7 +243,13 @@ namespace System.Workflow.Activities.Rules
                     if (suffix.StartsWith(optionalPrefix, StringComparison.Ordinal))
                         suffix = suffix.Substring(optionalPrefix.Length);
 
-                    RuleExpressionWalker.AnalyzeUsage(analysis, targetExpression, isRead, isWrite, new RulePathQualifier(suffix, targetQualifier));
+                    RuleExpressionWalker.AnalyzeUsage(
+                        analysis,
+                        targetExpression,
+                        isRead,
+                        isWrite,
+                        new RulePathQualifier(suffix, targetQualifier)
+                    );
                     attributedExpressions.Add(targetExpression);
                 }
                 else if (attributeTarget == RuleAttributeTarget.Parameter)
@@ -217,11 +269,18 @@ namespace System.Workflow.Activities.Rules
                     }
 
                     // Find the ParameterInfo that corresponds to this attribute path.
-                    ParameterInfo param = Array.Find<ParameterInfo>(parameters,
-                                                                    delegate(ParameterInfo p) { return p.Name == paramName; });
+                    ParameterInfo param = Array.Find<ParameterInfo>(
+                        parameters,
+                        delegate(ParameterInfo p)
+                        {
+                            return p.Name == paramName;
+                        }
+                    );
                     if (param != null)
                     {
-                        RulePathQualifier qualifier = string.IsNullOrEmpty(suffix) ? null : new RulePathQualifier(suffix, null);
+                        RulePathQualifier qualifier = string.IsNullOrEmpty(suffix)
+                            ? null
+                            : new RulePathQualifier(suffix, null);
 
                         // 99.9% of the time, the parameter usage attribute only applies to one argument.  However,
                         // if this attribute corresponds to the last parameter, then just assume that all the trailing
@@ -236,7 +295,13 @@ namespace System.Workflow.Activities.Rules
                         for (int i = param.Position; i < end; ++i)
                         {
                             CodeExpression argExpr = argumentExpressions[i];
-                            RuleExpressionWalker.AnalyzeUsage(analysis, argExpr, isRead, isWrite, qualifier);
+                            RuleExpressionWalker.AnalyzeUsage(
+                                analysis,
+                                argExpr,
+                                isRead,
+                                isWrite,
+                                qualifier
+                            );
                             attributedExpressions.Add(argExpr);
                         }
                     }
@@ -249,22 +314,33 @@ namespace System.Workflow.Activities.Rules
     public sealed class RuleReadAttribute : RuleReadWriteAttribute
     {
         public RuleReadAttribute(string path, RuleAttributeTarget target)
-            : base(path, target)
-        {
-        }
+            : base(path, target) { }
 
         public RuleReadAttribute(string path)
-            : base(path, RuleAttributeTarget.This)
-        {
-        }
+            : base(path, RuleAttributeTarget.This) { }
 
-        internal override void Analyze(RuleAnalysis analysis, MemberInfo member, CodeExpression targetExpression, RulePathQualifier targetQualifier, CodeExpressionCollection argumentExpressions, ParameterInfo[] parameters, List<CodeExpression> attributedExpressions)
+        internal override void Analyze(
+            RuleAnalysis analysis,
+            MemberInfo member,
+            CodeExpression targetExpression,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argumentExpressions,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExpressions
+        )
         {
             // A RuleRead attribute is only applicable if we're analyzing for reads.
             if (analysis.ForWrites)
                 return;
 
-            base.AnalyzeReadWrite(analysis, targetExpression, targetQualifier, argumentExpressions, parameters, attributedExpressions);
+            base.AnalyzeReadWrite(
+                analysis,
+                targetExpression,
+                targetQualifier,
+                argumentExpressions,
+                parameters,
+                attributedExpressions
+            );
         }
     }
 
@@ -272,25 +348,35 @@ namespace System.Workflow.Activities.Rules
     public sealed class RuleWriteAttribute : RuleReadWriteAttribute
     {
         public RuleWriteAttribute(string path, RuleAttributeTarget target)
-            : base(path, target)
-        {
-        }
+            : base(path, target) { }
 
         public RuleWriteAttribute(string path)
-            : base(path, RuleAttributeTarget.This)
-        {
-        }
+            : base(path, RuleAttributeTarget.This) { }
 
-        internal override void Analyze(RuleAnalysis analysis, MemberInfo member, CodeExpression targetExpression, RulePathQualifier targetQualifier, CodeExpressionCollection argumentExpressions, ParameterInfo[] parameters, List<CodeExpression> attributedExpressions)
+        internal override void Analyze(
+            RuleAnalysis analysis,
+            MemberInfo member,
+            CodeExpression targetExpression,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argumentExpressions,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExpressions
+        )
         {
             // A RuleWrite attribute is only applicable if we're analyzing for writes.
             if (!analysis.ForWrites)
                 return;
 
-            base.AnalyzeReadWrite(analysis, targetExpression, targetQualifier, argumentExpressions, parameters, attributedExpressions);
+            base.AnalyzeReadWrite(
+                analysis,
+                targetExpression,
+                targetQualifier,
+                argumentExpressions,
+                parameters,
+                attributedExpressions
+            );
         }
     }
-
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = true)]
     public sealed class RuleInvokeAttribute : RuleAttribute
@@ -307,7 +393,12 @@ namespace System.Workflow.Activities.Rules
             get { return methodInvoked; }
         }
 
-        internal override bool Validate(RuleValidation validation, MemberInfo member, Type contextType, ParameterInfo[] parameters)
+        internal override bool Validate(
+            RuleValidation validation,
+            MemberInfo member,
+            Type contextType,
+            ParameterInfo[] parameters
+        )
         {
             Stack<MemberInfo> methodStack = new Stack<MemberInfo>();
             methodStack.Push(member);
@@ -319,7 +410,12 @@ namespace System.Workflow.Activities.Rules
             return result;
         }
 
-        private bool ValidateInvokeAttribute(RuleValidation validation, MemberInfo member, Type contextType, Stack<MemberInfo> methodStack)
+        private bool ValidateInvokeAttribute(
+            RuleValidation validation,
+            MemberInfo member,
+            Type contextType,
+            Stack<MemberInfo> methodStack
+        )
         {
             string message;
             ValidationError error;
@@ -327,8 +423,18 @@ namespace System.Workflow.Activities.Rules
             if (string.IsNullOrEmpty(methodInvoked))
             {
                 // Invoked method or property name was null or empty.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.AttributeMethodNotFound, member.Name, this.GetType().Name, Messages.NullValue);
-                error = new ValidationError(message, ErrorNumbers.Warning_RuleAttributeNoMatch, true);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.AttributeMethodNotFound,
+                    member.Name,
+                    this.GetType().Name,
+                    Messages.NullValue
+                );
+                error = new ValidationError(
+                    message,
+                    ErrorNumbers.Warning_RuleAttributeNoMatch,
+                    true
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = this;
                 validation.AddError(error);
                 return false;
@@ -338,13 +444,31 @@ namespace System.Workflow.Activities.Rules
 
             // Go through all the methods and properties on the target context,
             // looking for all the ones that match the name on the attribute.
-            MemberInfo[] members = contextType.GetMember(methodInvoked, MemberTypes.Method | MemberTypes.Property, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            MemberInfo[] members = contextType.GetMember(
+                methodInvoked,
+                MemberTypes.Method | MemberTypes.Property,
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.FlattenHierarchy
+            );
 
             if (members == null || members.Length == 0)
             {
                 // Invoked method or property didn't exist.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.AttributeMethodNotFound, member.Name, this.GetType().Name, methodInvoked);
-                error = new ValidationError(message, ErrorNumbers.Warning_RuleAttributeNoMatch, true);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.AttributeMethodNotFound,
+                    member.Name,
+                    this.GetType().Name,
+                    methodInvoked
+                );
+                error = new ValidationError(
+                    message,
+                    ErrorNumbers.Warning_RuleAttributeNoMatch,
+                    true
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = this;
                 validation.AddError(error);
                 valid = false;
@@ -363,15 +487,24 @@ namespace System.Workflow.Activities.Rules
                         {
                             foreach (RuleAttribute invokedRuleAttr in attrs)
                             {
-                                RuleReadWriteAttribute readWriteAttr = invokedRuleAttr as RuleReadWriteAttribute;
+                                RuleReadWriteAttribute readWriteAttr =
+                                    invokedRuleAttr as RuleReadWriteAttribute;
                                 if (readWriteAttr != null)
                                 {
                                     // This read/write attribute may not specify a target of "Parameter", since
                                     // we can't map from the invoker's parameters to the invokee's parameters.
                                     if (readWriteAttr.Target == RuleAttributeTarget.Parameter)
                                     {
-                                        message = string.Format(CultureInfo.CurrentCulture, Messages.InvokeAttrRefersToParameterAttribute, mi.Name);
-                                        error = new ValidationError(message, ErrorNumbers.Error_InvokeAttrRefersToParameterAttribute, true);
+                                        message = string.Format(
+                                            CultureInfo.CurrentCulture,
+                                            Messages.InvokeAttrRefersToParameterAttribute,
+                                            mi.Name
+                                        );
+                                        error = new ValidationError(
+                                            message,
+                                            ErrorNumbers.Error_InvokeAttrRefersToParameterAttribute,
+                                            true
+                                        );
                                         error.UserData[RuleUserDataKeys.ErrorObject] = this;
                                         validation.AddError(error);
                                         valid = false;
@@ -384,8 +517,14 @@ namespace System.Workflow.Activities.Rules
                                 }
                                 else
                                 {
-                                    RuleInvokeAttribute invokeAttr = (RuleInvokeAttribute)invokedRuleAttr;
-                                    invokeAttr.ValidateInvokeAttribute(validation, mi, contextType, methodStack);
+                                    RuleInvokeAttribute invokeAttr =
+                                        (RuleInvokeAttribute)invokedRuleAttr;
+                                    invokeAttr.ValidateInvokeAttribute(
+                                        validation,
+                                        mi,
+                                        contextType,
+                                        methodStack
+                                    );
                                 }
                             }
                         }
@@ -398,21 +537,55 @@ namespace System.Workflow.Activities.Rules
             return valid;
         }
 
-        internal override void Analyze(RuleAnalysis analysis, MemberInfo member, CodeExpression targetExpression, RulePathQualifier targetQualifier, CodeExpressionCollection argumentExpressions, ParameterInfo[] parameters, List<CodeExpression> attributedExpressions)
+        internal override void Analyze(
+            RuleAnalysis analysis,
+            MemberInfo member,
+            CodeExpression targetExpression,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argumentExpressions,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExpressions
+        )
         {
             Stack<MemberInfo> methodStack = new Stack<MemberInfo>();
             methodStack.Push(member);
 
-            AnalyzeInvokeAttribute(analysis, member.DeclaringType, methodStack, targetExpression, targetQualifier, argumentExpressions, parameters, attributedExpressions);
+            AnalyzeInvokeAttribute(
+                analysis,
+                member.DeclaringType,
+                methodStack,
+                targetExpression,
+                targetQualifier,
+                argumentExpressions,
+                parameters,
+                attributedExpressions
+            );
 
             methodStack.Pop();
         }
 
-        private void AnalyzeInvokeAttribute(RuleAnalysis analysis, Type contextType, Stack<MemberInfo> methodStack, CodeExpression targetExpression, RulePathQualifier targetQualifier, CodeExpressionCollection argumentExpressions, ParameterInfo[] parameters, List<CodeExpression> attributedExpressions)
+        private void AnalyzeInvokeAttribute(
+            RuleAnalysis analysis,
+            Type contextType,
+            Stack<MemberInfo> methodStack,
+            CodeExpression targetExpression,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argumentExpressions,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExpressions
+        )
         {
             // Go through all the methods and properties on the target context,
             // looking for all the ones that match the name on the attribute.
-            MemberInfo[] members = contextType.GetMember(methodInvoked, MemberTypes.Method | MemberTypes.Property, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+            MemberInfo[] members = contextType.GetMember(
+                methodInvoked,
+                MemberTypes.Method | MemberTypes.Property,
+                BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.FlattenHierarchy
+            );
 
             for (int m = 0; m < members.Length; ++m)
             {
@@ -429,16 +602,34 @@ namespace System.Workflow.Activities.Rules
                         {
                             RuleAttribute ruleAttr = ruleAttrs[i];
 
-                            RuleReadWriteAttribute readWriteAttr = ruleAttr as RuleReadWriteAttribute;
+                            RuleReadWriteAttribute readWriteAttr =
+                                ruleAttr as RuleReadWriteAttribute;
                             if (readWriteAttr != null)
                             {
                                 // Just analyze the read/write attribute normally.
-                                readWriteAttr.Analyze(analysis, mi, targetExpression, targetQualifier, argumentExpressions, parameters, attributedExpressions);
+                                readWriteAttr.Analyze(
+                                    analysis,
+                                    mi,
+                                    targetExpression,
+                                    targetQualifier,
+                                    argumentExpressions,
+                                    parameters,
+                                    attributedExpressions
+                                );
                             }
                             else
                             {
                                 RuleInvokeAttribute invokeAttr = (RuleInvokeAttribute)ruleAttr;
-                                invokeAttr.AnalyzeInvokeAttribute(analysis, contextType, methodStack, targetExpression, targetQualifier, argumentExpressions, parameters, attributedExpressions);
+                                invokeAttr.AnalyzeInvokeAttribute(
+                                    analysis,
+                                    contextType,
+                                    methodStack,
+                                    targetExpression,
+                                    targetQualifier,
+                                    argumentExpressions,
+                                    parameters,
+                                    attributedExpressions
+                                );
                             }
                         }
                     }

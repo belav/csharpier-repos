@@ -22,36 +22,58 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
     using System.Linq;
     using static CodeFixHelpers;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseIndexOperator), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseIndexOperator
+        ),
+        Shared
+    ]
     internal class CSharpUseIndexOperatorCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseIndexOperatorCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseIndexOperatorCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(IDEDiagnosticIds.UseIndexOperatorDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Use_index_operator, nameof(CSharpAnalyzersResources.Use_index_operator));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Use_index_operator,
+                nameof(CSharpAnalyzersResources.Use_index_operator)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             // Process diagnostics from innermost to outermost in case any are nested.
-            foreach (var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start))
+            foreach (
+                var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start)
+            )
             {
-                var node = diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var node = diagnostic.Location.FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
 
                 editor.ReplaceNode(
                     node,
-                    (currentNode, _) => IndexExpression(((BinaryExpressionSyntax)currentNode).Right));
+                    (currentNode, _) => IndexExpression(((BinaryExpressionSyntax)currentNode).Right)
+                );
             }
 
             return Task.CompletedTask;

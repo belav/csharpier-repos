@@ -16,125 +16,136 @@
 
 using System;
 using System.Reflection;
-
 using NUnit.Framework;
 
 namespace Castle.DynamicProxy.Tests
 {
-	[TestFixture]
-	public class CovariantReturnsTestCase : BasePEVerifyTestCase
-	{
-		// DynamicProxy's current implementation for covariant returns support expects to see override methods
-		// before the overridden methods. That is, we rely on a specific behavior of .NET Reflection, and this test
-		// codifies that assumption. If it ever breaks, we'll need to adjust our implementation accordingly.
-		[Test]
-		public void Reflection_returns_methods_from_a_derived_class_before_methods_from_its_base_class()
-		{
-			var derivedType = typeof(DerivedClassWithStringInsteadOfObject);
-			var baseType = typeof(BaseClassWithObject);
-			Assume.That(derivedType.BaseType == baseType);
+    [TestFixture]
+    public class CovariantReturnsTestCase : BasePEVerifyTestCase
+    {
+        // DynamicProxy's current implementation for covariant returns support expects to see override methods
+        // before the overridden methods. That is, we rely on a specific behavior of .NET Reflection, and this test
+        // codifies that assumption. If it ever breaks, we'll need to adjust our implementation accordingly.
+        [Test]
+        public void Reflection_returns_methods_from_a_derived_class_before_methods_from_its_base_class()
+        {
+            var derivedType = typeof(DerivedClassWithStringInsteadOfObject);
+            var baseType = typeof(BaseClassWithObject);
+            Assume.That(derivedType.BaseType == baseType);
 
-			var derivedMethod = derivedType.GetMethod("Method");
-			var baseMethod = baseType.GetMethod("Method");
-			Assume.That(derivedMethod != baseMethod);
+            var derivedMethod = derivedType.GetMethod("Method");
+            var baseMethod = baseType.GetMethod("Method");
+            Assume.That(derivedMethod != baseMethod);
 
-			var methods = derivedType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
-			var derivedMethodIndex = Array.FindIndex(methods, m => m.Name == "Method" && m.DeclaringType == derivedType);
-			var baseMethodIndex = Array.FindIndex(methods, m => m.Name == "Method" && m.DeclaringType == baseType);
-			Assume.That(derivedMethodIndex >= 0);
-			Assume.That(baseMethodIndex >= 0);
+            var methods = derivedType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            var derivedMethodIndex = Array.FindIndex(
+                methods,
+                m => m.Name == "Method" && m.DeclaringType == derivedType
+            );
+            var baseMethodIndex = Array.FindIndex(
+                methods,
+                m => m.Name == "Method" && m.DeclaringType == baseType
+            );
+            Assume.That(derivedMethodIndex >= 0);
+            Assume.That(baseMethodIndex >= 0);
 
-			Assert.IsTrue(derivedMethodIndex < baseMethodIndex);
-		}
+            Assert.IsTrue(derivedMethodIndex < baseMethodIndex);
+        }
 
-		[Theory]
-		[TestCase(typeof(DerivedClassWithInterfaceInsteadOfObject))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfObject))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfInterface))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfGenericArg))]
-		[TestCase(typeof(BottleOfWater))]
-		public void Can_proxy_type_having_method_with_covariant_return(Type classToProxy)
-		{
-			_ = generator.CreateClassProxy(classToProxy, new StandardInterceptor());
-		}
+        [Theory]
+        [TestCase(typeof(DerivedClassWithInterfaceInsteadOfObject))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfObject))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfInterface))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfGenericArg))]
+        [TestCase(typeof(BottleOfWater))]
+        public void Can_proxy_type_having_method_with_covariant_return(Type classToProxy)
+        {
+            _ = generator.CreateClassProxy(classToProxy, new StandardInterceptor());
+        }
 
-		[Theory]
-		[TestCase(typeof(DerivedClassWithInterfaceInsteadOfObject), typeof(IComparable))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfObject), typeof(string))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfInterface), typeof(string))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfGenericArg), typeof(string))]
-		[TestCase(typeof(BottleOfWater), typeof(Glass<Water>))]
-		public void Proxied_method_has_correct_return_type(Type classToProxy, Type expectedMethodReturnType)
-		{
-			var proxy = generator.CreateClassProxy(classToProxy, new StandardInterceptor());
-			var method = proxy.GetType().GetMethod("Method");
-			Assert.AreEqual(expectedMethodReturnType, method.ReturnType);
-		}
+        [Theory]
+        [TestCase(typeof(DerivedClassWithInterfaceInsteadOfObject), typeof(IComparable))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfObject), typeof(string))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfInterface), typeof(string))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfGenericArg), typeof(string))]
+        [TestCase(typeof(BottleOfWater), typeof(Glass<Water>))]
+        public void Proxied_method_has_correct_return_type(
+            Type classToProxy,
+            Type expectedMethodReturnType
+        )
+        {
+            var proxy = generator.CreateClassProxy(classToProxy, new StandardInterceptor());
+            var method = proxy.GetType().GetMethod("Method");
+            Assert.AreEqual(expectedMethodReturnType, method.ReturnType);
+        }
 
-		[Theory]
-		[TestCase(typeof(DerivedClassWithInterfaceInsteadOfObject))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfObject))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfInterface))]
-		[TestCase(typeof(DerivedClassWithStringInsteadOfGenericArg))]
-		public void Can_invoke_method_with_covariant_return(Type classToProxy)
-		{
-			var proxy = generator.CreateClassProxy(classToProxy, new StandardInterceptor());
-			var method = proxy.GetType().GetMethod("Method");
-			var returnValue = method.Invoke(proxy, null);
-			Assert.AreEqual(expected: classToProxy.Name, returnValue);
-		}
+        [Theory]
+        [TestCase(typeof(DerivedClassWithInterfaceInsteadOfObject))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfObject))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfInterface))]
+        [TestCase(typeof(DerivedClassWithStringInsteadOfGenericArg))]
+        public void Can_invoke_method_with_covariant_return(Type classToProxy)
+        {
+            var proxy = generator.CreateClassProxy(classToProxy, new StandardInterceptor());
+            var method = proxy.GetType().GetMethod("Method");
+            var returnValue = method.Invoke(proxy, null);
+            Assert.AreEqual(expected: classToProxy.Name, returnValue);
+        }
 
-		public class BaseClassWithObject
-		{
-			public virtual object Method() => nameof(BaseClassWithObject);
-		}
+        public class BaseClassWithObject
+        {
+            public virtual object Method() => nameof(BaseClassWithObject);
+        }
 
-		public class DerivedClassWithInterfaceInsteadOfObject : BaseClassWithObject
-		{
-			public override IComparable Method() => nameof(DerivedClassWithInterfaceInsteadOfObject);
-		}
+        public class DerivedClassWithInterfaceInsteadOfObject : BaseClassWithObject
+        {
+            public override IComparable Method() =>
+                nameof(DerivedClassWithInterfaceInsteadOfObject);
+        }
 
-		public class DerivedClassWithStringInsteadOfObject : BaseClassWithObject
-		{
-			public override string Method() => nameof(DerivedClassWithStringInsteadOfObject);
-		}
+        public class DerivedClassWithStringInsteadOfObject : BaseClassWithObject
+        {
+            public override string Method() => nameof(DerivedClassWithStringInsteadOfObject);
+        }
 
-		public class BaseClassWithInterface
-		{
-			public virtual IComparable Method() => nameof(BaseClassWithInterface);
-		}
+        public class BaseClassWithInterface
+        {
+            public virtual IComparable Method() => nameof(BaseClassWithInterface);
+        }
 
-		public class DerivedClassWithStringInsteadOfInterface : BaseClassWithInterface
-		{
-			public override string Method() => nameof(DerivedClassWithStringInsteadOfInterface);
-		}
+        public class DerivedClassWithStringInsteadOfInterface : BaseClassWithInterface
+        {
+            public override string Method() => nameof(DerivedClassWithStringInsteadOfInterface);
+        }
 
-		public class BaseClassWithGenericArg<T> where T : IComparable
-		{
-			public virtual T Method() => default(T);
-		}
+        public class BaseClassWithGenericArg<T>
+            where T : IComparable
+        {
+            public virtual T Method() => default(T);
+        }
 
-		public class DerivedClassWithStringInsteadOfGenericArg : BaseClassWithGenericArg<IComparable>
-		{
-			public override string Method() => nameof(DerivedClassWithStringInsteadOfGenericArg);
-		}
+        public class DerivedClassWithStringInsteadOfGenericArg
+            : BaseClassWithGenericArg<IComparable>
+        {
+            public override string Method() => nameof(DerivedClassWithStringInsteadOfGenericArg);
+        }
 
-		public interface Glass<out T> { }
+        public interface Glass<out T> { }
 
-		public class Liquid { }
+        public class Liquid { }
 
-		public class Water : Liquid { }
+        public class Water : Liquid { }
 
-		public class BottleOfLiquid
-		{
-			public virtual Glass<Liquid> Method() => default(Glass<Liquid>);
-		}
+        public class BottleOfLiquid
+        {
+            public virtual Glass<Liquid> Method() => default(Glass<Liquid>);
+        }
 
-		public class BottleOfWater : BottleOfLiquid
-		{
-			public override Glass<Water> Method() => default(Glass<Water>);
-		}
-	}
+        public class BottleOfWater : BottleOfLiquid
+        {
+            public override Glass<Water> Method() => default(Glass<Water>);
+        }
+    }
 }
 
 #endif

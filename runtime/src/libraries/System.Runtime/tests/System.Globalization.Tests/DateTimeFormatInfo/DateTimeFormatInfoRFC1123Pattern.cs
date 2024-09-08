@@ -10,9 +10,21 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> RFC1123Pattern_TestData()
         {
-            yield return new object[] { DateTimeFormatInfo.InvariantInfo, "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'" };
-            yield return new object[] { new CultureInfo("en-US").DateTimeFormat, "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'" };
-            yield return new object[] { new CultureInfo("ja-JP").DateTimeFormat, "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'" };
+            yield return new object[]
+            {
+                DateTimeFormatInfo.InvariantInfo,
+                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
+            };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").DateTimeFormat,
+                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
+            };
+            yield return new object[]
+            {
+                new CultureInfo("ja-JP").DateTimeFormat,
+                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
+            };
         }
 
         [Theory]

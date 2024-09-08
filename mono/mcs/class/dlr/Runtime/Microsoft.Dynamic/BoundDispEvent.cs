@@ -1,20 +1,19 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
+using System;
+using Microsoft;
 #if !SILVERLIGHT // ComObject
 
 #if CODEPLEX_40
@@ -31,16 +30,20 @@ using System.Security;
 using System.Security.Permissions;
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
-    internal sealed class BoundDispEvent : DynamicObject {
+    internal sealed class BoundDispEvent : DynamicObject
+    {
         private object _rcw;
         private Guid _sourceIid;
         private int _dispid;
 
-        internal BoundDispEvent(object rcw, Guid sourceIid, int dispid) {
+        internal BoundDispEvent(object rcw, Guid sourceIid, int dispid)
+        {
             _rcw = rcw;
             _sourceIid = sourceIid;
             _dispid = dispid;
@@ -53,13 +56,20 @@ namespace Microsoft.Scripting {
         /// <param name="handler">The handler for the operation.</param>
         /// <param name="result">The result of the operation.</param>
         /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
-        public override bool TryBinaryOperation(BinaryOperationBinder binder, object handler, out object result) {
-            if (binder.Operation == ExpressionType.AddAssign) {
+        public override bool TryBinaryOperation(
+            BinaryOperationBinder binder,
+            object handler,
+            out object result
+        )
+        {
+            if (binder.Operation == ExpressionType.AddAssign)
+            {
                 result = InPlaceAdd(handler);
                 return true;
             }
 
-            if (binder.Operation == ExpressionType.SubtractAssign) {
+            if (binder.Operation == ExpressionType.SubtractAssign)
+            {
                 result = InPlaceSubtract(handler);
                 return true;
             }
@@ -68,12 +78,15 @@ namespace Microsoft.Scripting {
             return false;
         }
 
-        private static void VerifyHandler(object handler) {
-            if (handler is Delegate && handler.GetType() != typeof(Delegate)) {
+        private static void VerifyHandler(object handler)
+        {
+            if (handler is Delegate && handler.GetType() != typeof(Delegate))
+            {
                 return; // delegate
             }
 
-            if (handler is IDynamicMetaObjectProvider) {
+            if (handler is IDynamicMetaObjectProvider)
+            {
                 return; // IDMOP
             }
 
@@ -90,7 +103,8 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        private object InPlaceAdd(object handler) {
+        private object InPlaceAdd(object handler)
+        {
             ContractUtils.RequiresNotNull(handler, "handler");
             VerifyHandler(handler);
 
@@ -100,7 +114,11 @@ namespace Microsoft.Scripting {
 
             new PermissionSet(PermissionState.Unrestricted).Demand();
 
-            ComEventSink comEventSink = ComEventSink.FromRuntimeCallableWrapper(_rcw, _sourceIid, true);
+            ComEventSink comEventSink = ComEventSink.FromRuntimeCallableWrapper(
+                _rcw,
+                _sourceIid,
+                true
+            );
             comEventSink.AddHandler(_dispid, handler);
             return this;
         }
@@ -115,7 +133,8 @@ namespace Microsoft.Scripting {
 #else
         [SecuritySafeCritical]
 #endif
-        private object InPlaceSubtract(object handler) {
+        private object InPlaceSubtract(object handler)
+        {
             ContractUtils.RequiresNotNull(handler, "handler");
             VerifyHandler(handler);
 
@@ -125,8 +144,13 @@ namespace Microsoft.Scripting {
 
             new PermissionSet(PermissionState.Unrestricted).Demand();
 
-            ComEventSink comEventSink = ComEventSink.FromRuntimeCallableWrapper(_rcw, _sourceIid, false);
-            if (comEventSink != null) {
+            ComEventSink comEventSink = ComEventSink.FromRuntimeCallableWrapper(
+                _rcw,
+                _sourceIid,
+                false
+            );
+            if (comEventSink != null)
+            {
                 comEventSink.RemoveHandler(_dispid, handler);
             }
 

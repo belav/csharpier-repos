@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,33 +27,35 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+    public sealed class WebResourceAttribute : Attribute
+    {
+        public WebResourceAttribute(string webResource, string contentType)
+        {
+            this.webResource = webResource;
+            this.contentType = contentType;
+        }
 
-	[AttributeUsage (AttributeTargets.Assembly, AllowMultiple = true)]
-	public sealed class WebResourceAttribute : Attribute
-	{
-		public WebResourceAttribute (string webResource, string contentType)
-		{
-			this.webResource = webResource;
-			this.contentType = contentType;
-		}
+        public string ContentType
+        {
+            get { return contentType; }
+        }
 
-		
-		public string ContentType {
-			get { return contentType; }
-		}
+        public bool PerformSubstitution
+        {
+            get { return performSubstitution; }
+            set { performSubstitution = value; }
+        }
 
-		public bool PerformSubstitution {
-			get { return performSubstitution; }
-			set { performSubstitution = value; }
-		}
+        public string WebResource
+        {
+            get { return webResource; }
+        }
 
-		public string WebResource {
-			get { return webResource; }
-		}
-
-
-		bool performSubstitution;
-		string webResource, contentType;
-	}
+        bool performSubstitution;
+        string webResource,
+            contentType;
+    }
 }

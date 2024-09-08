@@ -11,17 +11,14 @@ namespace System.Xml
     // This is not possible with XmlTextWriter. But this class inherits XmlTextWriter.
     internal sealed class XmlDOMTextWriter : XmlTextWriter
     {
-        public XmlDOMTextWriter(Stream w, Encoding? encoding) : base(w, encoding)
-        {
-        }
+        public XmlDOMTextWriter(Stream w, Encoding? encoding)
+            : base(w, encoding) { }
 
-        public XmlDOMTextWriter(string filename, Encoding? encoding) : base(filename, encoding)
-        {
-        }
+        public XmlDOMTextWriter(string filename, Encoding? encoding)
+            : base(filename, encoding) { }
 
-        public XmlDOMTextWriter(TextWriter w) : base(w)
-        {
-        }
+        public XmlDOMTextWriter(TextWriter w)
+            : base(w) { }
 
         // Overrides the baseclass implementation so that emptystring prefixes do
         // do not fail if namespace is not specified.

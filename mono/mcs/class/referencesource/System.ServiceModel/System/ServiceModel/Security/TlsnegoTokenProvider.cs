@@ -28,10 +28,7 @@ namespace System.ServiceModel.Security
 
         public SecurityTokenAuthenticator ServerTokenAuthenticator
         {
-            get
-            {
-                return this.serverTokenAuthenticator;
-            }
+            get { return this.serverTokenAuthenticator; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -41,10 +38,7 @@ namespace System.ServiceModel.Security
 
         public SecurityTokenProvider ClientTokenProvider
         {
-            get
-            {
-                return this.clientTokenProvider;
-            }
+            get { return this.clientTokenProvider; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -58,7 +52,11 @@ namespace System.ServiceModel.Security
             X509SecurityToken result = token as X509SecurityToken;
             if (result == null && token != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TokenProviderReturnedBadToken, token.GetType().ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TokenProviderReturnedBadToken, token.GetType().ToString())
+                    )
+                );
             }
             return result;
         }
@@ -70,18 +68,24 @@ namespace System.ServiceModel.Security
             {
                 clientCertificate = null;
             }
-            else 
+            else
             {
                 clientCertificate = token.Certificate;
             }
             TlsSspiNegotiation tlsNegotiation = null;
-            if(LocalAppContextSwitches.DisableUsingServicePointManagerSecurityProtocols)
+            if (LocalAppContextSwitches.DisableUsingServicePointManagerSecurityProtocols)
             {
-                tlsNegotiation = new TlsSspiNegotiation(String.Empty, SchProtocols.Ssl3Client | SchProtocols.TlsClient, clientCertificate);
+                tlsNegotiation = new TlsSspiNegotiation(
+                    String.Empty,
+                    SchProtocols.Ssl3Client | SchProtocols.TlsClient,
+                    clientCertificate
+                );
             }
             else
             {
-                var protocol = (SchProtocols)System.Net.ServicePointManager.SecurityProtocol & SchProtocols.ClientMask;
+                var protocol =
+                    (SchProtocols)System.Net.ServicePointManager.SecurityProtocol
+                    & SchProtocols.ClientMask;
                 tlsNegotiation = new TlsSspiNegotiation(String.Empty, protocol, clientCertificate);
             }
             return new SspiNegotiationTokenProviderState(tlsNegotiation);
@@ -90,22 +94,33 @@ namespace System.ServiceModel.Security
         // overrides
         public override XmlDictionaryString NegotiationValueType
         {
-            get 
+            get
             {
-                if (this.StandardsManager.MessageSecurityVersion.TrustVersion == TrustVersion.WSTrustFeb2005)
+                if (
+                    this.StandardsManager.MessageSecurityVersion.TrustVersion
+                    == TrustVersion.WSTrustFeb2005
+                )
                 {
                     return XD.TrustApr2004Dictionary.TlsnegoValueTypeUri;
                 }
-                else if (this.StandardsManager.MessageSecurityVersion.TrustVersion == TrustVersion.WSTrust13)
+                else if (
+                    this.StandardsManager.MessageSecurityVersion.TrustVersion
+                    == TrustVersion.WSTrust13
+                )
                 {
                     return DXD.TrustDec2005Dictionary.TlsnegoValueTypeUri;
                 }
                 // Not supported
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException()
+                );
             }
         }
 
-        protected override bool CreateNegotiationStateCompletesSynchronously(EndpointAddress target, Uri via)
+        protected override bool CreateNegotiationStateCompletesSynchronously(
+            EndpointAddress target,
+            Uri via
+        )
         {
             if (this.ClientTokenProvider == null)
             {
@@ -117,12 +132,22 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override IAsyncResult BeginCreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginCreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureEndpointAddressDoesNotRequireEncryption(target);
             if (this.ClientTokenProvider == null)
             {
-                return new CompletedAsyncResult<SspiNegotiationTokenProviderState>(CreateTlsSspiState(null), callback, state);
+                return new CompletedAsyncResult<SspiNegotiationTokenProviderState>(
+                    CreateTlsSspiState(null),
+                    callback,
+                    state
+                );
             }
             else
             {
@@ -130,7 +155,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override SspiNegotiationTokenProviderState EndCreateNegotiationState(IAsyncResult result)
+        protected override SspiNegotiationTokenProviderState EndCreateNegotiationState(
+            IAsyncResult result
+        )
         {
             if (result is CompletedAsyncResult<SspiNegotiationTokenProviderState>)
             {
@@ -142,7 +169,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override SspiNegotiationTokenProviderState CreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout)
+        protected override SspiNegotiationTokenProviderState CreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout
+        )
         {
             EnsureEndpointAddressDoesNotRequireEncryption(target);
             X509SecurityToken clientToken;
@@ -158,17 +189,23 @@ namespace System.ServiceModel.Security
             return CreateTlsSspiState(clientToken);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(ISspiNegotiation sspiNegotiation)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(
+            ISspiNegotiation sspiNegotiation
+        )
         {
             TlsSspiNegotiation tlsNegotiation = (TlsSspiNegotiation)sspiNegotiation;
             if (tlsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                );
             }
             X509Certificate2 serverCert = tlsNegotiation.RemoteCertificate;
             if (serverCert == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.ServerCertificateNotProvided)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.ServerCertificateNotProvided))
+                );
             }
             ReadOnlyCollection<IAuthorizationPolicy> authzPolicies;
             if (this.ServerTokenAuthenticator != null)
@@ -188,11 +225,17 @@ namespace System.ServiceModel.Security
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (this.ClientTokenProvider != null)
             {
-                SecurityUtils.OpenTokenProviderIfRequired(this.ClientTokenProvider, timeoutHelper.RemainingTime());
+                SecurityUtils.OpenTokenProviderIfRequired(
+                    this.ClientTokenProvider,
+                    timeoutHelper.RemainingTime()
+                );
             }
             if (this.ServerTokenAuthenticator != null)
             {
-                SecurityUtils.OpenTokenAuthenticatorIfRequired(this.ServerTokenAuthenticator, timeoutHelper.RemainingTime());
+                SecurityUtils.OpenTokenAuthenticatorIfRequired(
+                    this.ServerTokenAuthenticator,
+                    timeoutHelper.RemainingTime()
+                );
             }
             base.OnOpen(timeoutHelper.RemainingTime());
         }
@@ -202,12 +245,18 @@ namespace System.ServiceModel.Security
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (this.clientTokenProvider != null)
             {
-                SecurityUtils.CloseTokenProviderIfRequired(this.ClientTokenProvider, timeoutHelper.RemainingTime());
+                SecurityUtils.CloseTokenProviderIfRequired(
+                    this.ClientTokenProvider,
+                    timeoutHelper.RemainingTime()
+                );
                 this.clientTokenProvider = null;
             }
             if (this.serverTokenAuthenticator != null)
             {
-                SecurityUtils.CloseTokenAuthenticatorIfRequired(this.ServerTokenAuthenticator, timeoutHelper.RemainingTime());
+                SecurityUtils.CloseTokenAuthenticatorIfRequired(
+                    this.ServerTokenAuthenticator,
+                    timeoutHelper.RemainingTime()
+                );
                 this.serverTokenAuthenticator = null;
             }
             base.OnClose(timeoutHelper.RemainingTime());
@@ -230,15 +279,28 @@ namespace System.ServiceModel.Security
 
         class CreateSspiStateAsyncResult : AsyncResult
         {
-            static readonly AsyncCallback getTokensCallback = Fx.ThunkCallback(new AsyncCallback(GetTokensCallback));
+            static readonly AsyncCallback getTokensCallback = Fx.ThunkCallback(
+                new AsyncCallback(GetTokensCallback)
+            );
             TlsnegoTokenProvider tlsTokenProvider;
             SspiNegotiationTokenProviderState sspiState;
 
-            public CreateSspiStateAsyncResult(EndpointAddress target, Uri via, TlsnegoTokenProvider tlsTokenProvider, TimeSpan timeout, AsyncCallback callback, object state)
+            public CreateSspiStateAsyncResult(
+                EndpointAddress target,
+                Uri via,
+                TlsnegoTokenProvider tlsTokenProvider,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.tlsTokenProvider = tlsTokenProvider;
-                IAsyncResult result = this.tlsTokenProvider.ClientTokenProvider.BeginGetToken(timeout, getTokensCallback, this);
+                IAsyncResult result = this.tlsTokenProvider.ClientTokenProvider.BeginGetToken(
+                    timeout,
+                    getTokensCallback,
+                    this
+                );
                 if (!result.CompletedSynchronously)
                 {
                     return;
@@ -255,17 +317,22 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                CreateSspiStateAsyncResult typedResult = (CreateSspiStateAsyncResult)result.AsyncState;
+                CreateSspiStateAsyncResult typedResult = (CreateSspiStateAsyncResult)
+                    result.AsyncState;
                 try
                 {
-                    SecurityToken token = typedResult.tlsTokenProvider.ClientTokenProvider.EndGetToken(result);
+                    SecurityToken token =
+                        typedResult.tlsTokenProvider.ClientTokenProvider.EndGetToken(result);
                     X509SecurityToken clientToken = TlsnegoTokenProvider.ValidateToken(token);
-                    typedResult.sspiState = typedResult.tlsTokenProvider.CreateTlsSspiState(clientToken);
+                    typedResult.sspiState = typedResult.tlsTokenProvider.CreateTlsSspiState(
+                        clientToken
+                    );
                     typedResult.Complete(false);
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
 
                     typedResult.Complete(false, e);
                 }
@@ -273,7 +340,8 @@ namespace System.ServiceModel.Security
 
             public static SspiNegotiationTokenProviderState End(IAsyncResult result)
             {
-                CreateSspiStateAsyncResult asyncResult = AsyncResult.End<CreateSspiStateAsyncResult>(result);
+                CreateSspiStateAsyncResult asyncResult =
+                    AsyncResult.End<CreateSspiStateAsyncResult>(result);
                 return asyncResult.sspiState;
             }
         }

@@ -11,14 +11,13 @@ namespace System.ComponentModel
     /// </summary>
     public abstract class ContainerFilterService
     {
-        protected ContainerFilterService()
-        {
-        }
+        protected ContainerFilterService() { }
 
         /// <summary>
         /// Filters the components collection by optionally returning a new, modified collection.
         /// The default implementation returns the input collection, thereby performing no filtering.
         /// </summary>
-        public virtual ComponentCollection FilterComponents(ComponentCollection components) => components;
+        public virtual ComponentCollection FilterComponents(ComponentCollection components) =>
+            components;
     }
 }

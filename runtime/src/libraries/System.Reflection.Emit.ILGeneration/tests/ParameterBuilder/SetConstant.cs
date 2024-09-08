@@ -11,11 +11,20 @@ namespace System.Reflection.Emit.Tests
         public void NullableValueType_DoesNotThrow()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder methodBuilder = type.DefineMethod("TestMethod", MethodAttributes.Public, typeof(void), new Type[] { typeof(int?) });
+            MethodBuilder methodBuilder = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                typeof(void),
+                new Type[] { typeof(int?) }
+            );
             ILGenerator generator = methodBuilder.GetILGenerator();
             generator.Emit(OpCodes.Ret);
 
-            ParameterBuilder parameter = methodBuilder.DefineParameter(1, ParameterAttributes.HasDefault, "paramName");
+            ParameterBuilder parameter = methodBuilder.DefineParameter(
+                1,
+                ParameterAttributes.HasDefault,
+                "paramName"
+            );
             parameter.SetConstant(null);
         }
     }

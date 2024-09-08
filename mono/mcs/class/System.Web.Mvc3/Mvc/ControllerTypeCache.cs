@@ -1,22 +1,27 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
-    internal sealed class ControllerTypeCache {
-
+    internal sealed class ControllerTypeCache
+    {
         private const string _typeCacheName = "MVC-ControllerTypeCache.xml";
 
         private Dictionary<string, ILookup<string, Type>> _cache;
         private object _lockObj = new object();
 
-        internal int Count {
-            get {
+        internal int Count
+        {
+            get
+            {
                 int count = 0;
-                foreach (var lookup in _cache.Values) {
-                    foreach (var grouping in lookup) {
+                foreach (var lookup in _cache.Values)
+                {
+                    foreach (var grouping in lookup)
+                    {
                         count += grouping.Count();
                     }
                 }
@@ -24,41 +29,66 @@
             }
         }
 
-        public void EnsureInitialized(IBuildManager buildManager) {
-            if (_cache == null) {
-                lock (_lockObj) {
-                    if (_cache == null) {
-                        List<Type> controllerTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(_typeCacheName, IsControllerType, buildManager);
+        public void EnsureInitialized(IBuildManager buildManager)
+        {
+            if (_cache == null)
+            {
+                lock (_lockObj)
+                {
+                    if (_cache == null)
+                    {
+                        List<Type> controllerTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(
+                            _typeCacheName,
+                            IsControllerType,
+                            buildManager
+                        );
                         var groupedByName = controllerTypes.GroupBy(
                             t => t.Name.Substring(0, t.Name.Length - "Controller".Length),
-                            StringComparer.OrdinalIgnoreCase);
+                            StringComparer.OrdinalIgnoreCase
+                        );
                         _cache = groupedByName.ToDictionary(
                             g => g.Key,
-                            g => g.ToLookup(t => t.Namespace ?? String.Empty, StringComparer.OrdinalIgnoreCase),
-                            StringComparer.OrdinalIgnoreCase);
+                            g =>
+                                g.ToLookup(
+                                    t => t.Namespace ?? String.Empty,
+                                    StringComparer.OrdinalIgnoreCase
+                                ),
+                            StringComparer.OrdinalIgnoreCase
+                        );
                     }
                 }
             }
         }
 
-        public ICollection<Type> GetControllerTypes(string controllerName, HashSet<string> namespaces) {
+        public ICollection<Type> GetControllerTypes(
+            string controllerName,
+            HashSet<string> namespaces
+        )
+        {
             HashSet<Type> matchingTypes = new HashSet<Type>();
 
             ILookup<string, Type> nsLookup;
-            if (_cache.TryGetValue(controllerName, out nsLookup)) {
+            if (_cache.TryGetValue(controllerName, out nsLookup))
+            {
                 // this friendly name was located in the cache, now cycle through namespaces
-                if (namespaces != null) {
-                    foreach (string requestedNamespace in namespaces) {
-                        foreach (var targetNamespaceGrouping in nsLookup) {
-                            if (IsNamespaceMatch(requestedNamespace, targetNamespaceGrouping.Key)) {
+                if (namespaces != null)
+                {
+                    foreach (string requestedNamespace in namespaces)
+                    {
+                        foreach (var targetNamespaceGrouping in nsLookup)
+                        {
+                            if (IsNamespaceMatch(requestedNamespace, targetNamespaceGrouping.Key))
+                            {
                                 matchingTypes.UnionWith(targetNamespaceGrouping);
                             }
                         }
                     }
                 }
-                else {
+                else
+                {
                     // if the namespaces parameter is null, search *every* namespace
-                    foreach (var nsGroup in nsLookup) {
+                    foreach (var nsGroup in nsLookup)
+                    {
                         matchingTypes.UnionWith(nsGroup);
                     }
                 }
@@ -67,49 +97,69 @@
             return matchingTypes;
         }
 
-        internal static bool IsControllerType(Type t) {
-            return
-                t != null &&
-                t.IsPublic &&
-                t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) &&
-                !t.IsAbstract &&
-                typeof(IController).IsAssignableFrom(t);
+        internal static bool IsControllerType(Type t)
+        {
+            return t != null
+                && t.IsPublic
+                && t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
+                && !t.IsAbstract
+                && typeof(IController).IsAssignableFrom(t);
         }
 
-        internal static bool IsNamespaceMatch(string requestedNamespace, string targetNamespace) {
+        internal static bool IsNamespaceMatch(string requestedNamespace, string targetNamespace)
+        {
             // degenerate cases
-            if (requestedNamespace == null) {
+            if (requestedNamespace == null)
+            {
                 return false;
             }
-            else if (requestedNamespace.Length == 0) {
+            else if (requestedNamespace.Length == 0)
+            {
                 return true;
             }
 
-            if (!requestedNamespace.EndsWith(".*", StringComparison.OrdinalIgnoreCase)) {
+            if (!requestedNamespace.EndsWith(".*", StringComparison.OrdinalIgnoreCase))
+            {
                 // looking for exact namespace match
-                return String.Equals(requestedNamespace, targetNamespace, StringComparison.OrdinalIgnoreCase);
+                return String.Equals(
+                    requestedNamespace,
+                    targetNamespace,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
-            else {
+            else
+            {
                 // looking for exact or sub-namespace match
-                requestedNamespace = requestedNamespace.Substring(0, requestedNamespace.Length - ".*".Length);
-                if (!targetNamespace.StartsWith(requestedNamespace, StringComparison.OrdinalIgnoreCase)) {
+                requestedNamespace = requestedNamespace.Substring(
+                    0,
+                    requestedNamespace.Length - ".*".Length
+                );
+                if (
+                    !targetNamespace.StartsWith(
+                        requestedNamespace,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                {
                     return false;
                 }
 
-                if (requestedNamespace.Length == targetNamespace.Length) {
+                if (requestedNamespace.Length == targetNamespace.Length)
+                {
                     // exact match
                     return true;
                 }
-                else if (targetNamespace[requestedNamespace.Length] == '.') {
+                else if (targetNamespace[requestedNamespace.Length] == '.')
+                {
                     // good prefix match, e.g. requestedNamespace = "Foo.Bar" and targetNamespace = "Foo.Bar.Baz"
                     return true;
                 }
-                else {
+                else
+                {
                     // bad prefix match, e.g. requestedNamespace = "Foo.Bar" and targetNamespace = "Foo.Bar2"
                     return false;
                 }
             }
         }
-
     }
 }

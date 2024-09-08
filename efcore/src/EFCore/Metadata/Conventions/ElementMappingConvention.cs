@@ -28,7 +28,10 @@ public class ElementMappingConvention : IModelFinalizingConvention
     protected virtual ProviderConventionSetBuilderDependencies Dependencies { get; }
 
     /// <inheritdoc />
-    public void ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+    public void ProcessModelFinalizing(
+        IConventionModelBuilder modelBuilder,
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
@@ -42,7 +45,9 @@ public class ElementMappingConvention : IModelFinalizingConvention
                 var typeMapping = Dependencies.TypeMappingSource.FindMapping((IProperty)property);
                 if (typeMapping is { ElementTypeMapping: not null })
                 {
-                    property.SetElementType(property.ClrType.TryGetElementType(typeof(IEnumerable<>)));
+                    property.SetElementType(
+                        property.ClrType.TryGetElementType(typeof(IEnumerable<>))
+                    );
                 }
             }
 

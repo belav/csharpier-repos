@@ -5,7 +5,5 @@ namespace System.ServiceModel.Channels
 {
     using System;
 
-    public interface IInputSessionChannel : IInputChannel, ISessionChannel<IInputSession>
-    {
-    }
+    public interface IInputSessionChannel : IInputChannel, ISessionChannel<IInputSession> { }
 }

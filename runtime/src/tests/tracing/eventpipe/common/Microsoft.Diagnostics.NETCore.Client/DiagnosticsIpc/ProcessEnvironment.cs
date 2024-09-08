@@ -11,9 +11,13 @@ namespace Microsoft.Diagnostics.NETCore.Client
 {
     internal class ProcessEnvironmentHelper
     {
-        private const int CopyBufferSize = (16 << 10) /* 16KiB */;
+        private const int CopyBufferSize = (
+            16 << 10
+        ) /* 16KiB */
+        ;
 
-        private ProcessEnvironmentHelper() {}
+        private ProcessEnvironmentHelper() { }
+
         public static ProcessEnvironmentHelper Parse(byte[] payload)
         {
             ProcessEnvironmentHelper helper = new ProcessEnvironmentHelper();
@@ -31,7 +35,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return ReadEnvironmentCore(memoryStream);
         }
 
-        public async Task<Dictionary<string,string>> ReadEnvironmentAsync(Stream continuation, CancellationToken token = default(CancellationToken))
+        public async Task<Dictionary<string, string>> ReadEnvironmentAsync(
+            Stream continuation,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             using var memoryStream = new MemoryStream();
             await continuation.CopyToAsync(memoryStream, CopyBufferSize, token);
@@ -44,7 +51,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             byte[] envBlock = stream.ToArray();
 
             if (envBlock.Length != (long)ExpectedSizeInBytes)
-                throw new ApplicationException($"ProcessEnvironment continuation length did not match expected length. Expected: {ExpectedSizeInBytes} bytes, Received: {envBlock.Length} bytes");
+                throw new ApplicationException(
+                    $"ProcessEnvironment continuation length did not match expected length. Expected: {ExpectedSizeInBytes} bytes, Received: {envBlock.Length} bytes"
+                );
 
             var env = new Dictionary<string, string>();
             int cursor = 0;
@@ -54,12 +63,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 string pair = IpcHelpers.ReadString(envBlock, ref cursor);
                 int equalsIdx = pair.IndexOf('=');
-                env[pair.Substring(0, equalsIdx)] = equalsIdx != pair.Length - 1 ? pair.Substring(equalsIdx + 1) : "";
+                env[pair.Substring(0, equalsIdx)] =
+                    equalsIdx != pair.Length - 1 ? pair.Substring(equalsIdx + 1) : "";
             }
 
             return env;
         }
-
 
         private UInt32 ExpectedSizeInBytes { get; set; }
         private UInt16 Future { get; set; }

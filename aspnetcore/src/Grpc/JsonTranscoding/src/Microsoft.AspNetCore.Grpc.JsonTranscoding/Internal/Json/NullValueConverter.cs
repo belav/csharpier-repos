@@ -12,7 +12,11 @@ internal sealed class NullValueConverter : JsonConverter<NullValue>
 {
     public override bool HandleNull => true;
 
-    public override NullValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override NullValue Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         switch (reader.TokenType)
         {
@@ -23,7 +27,9 @@ internal sealed class NullValueConverter : JsonConverter<NullValue>
                 }
                 else
                 {
-                    throw new InvalidOperationException($"Invalid enum value: {reader.GetString()} for enum type: google.protobuf.NullValue");
+                    throw new InvalidOperationException(
+                        $"Invalid enum value: {reader.GetString()} for enum type: google.protobuf.NullValue"
+                    );
                 }
             case JsonTokenType.Number:
                 return (NullValue)reader.GetInt32();
@@ -34,7 +40,11 @@ internal sealed class NullValueConverter : JsonConverter<NullValue>
         }
     }
 
-    public override void Write(Utf8JsonWriter writer, NullValue value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        NullValue value,
+        JsonSerializerOptions options
+    )
     {
         writer.WriteNullValue();
     }

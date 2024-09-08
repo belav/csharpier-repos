@@ -14,49 +14,45 @@ namespace System
     {
         private TMetadata _metadata;
 
-        public Lazy(Func<T> valueFactory, TMetadata metadata) : 
-            base(valueFactory)
+        public Lazy(Func<T> valueFactory, TMetadata metadata)
+            : base(valueFactory)
         {
             this._metadata = metadata;
         }
 
-        public Lazy(TMetadata metadata) :
-            base()
+        public Lazy(TMetadata metadata)
+            : base()
         {
             this._metadata = metadata;
         }
 
-
-        public Lazy(TMetadata metadata, bool isThreadSafe) : 
-            base(isThreadSafe)
+        public Lazy(TMetadata metadata, bool isThreadSafe)
+            : base(isThreadSafe)
         {
             this._metadata = metadata;
         }
 
-        public Lazy(Func<T> valueFactory, TMetadata metadata, bool isThreadSafe) :
-            base(valueFactory, isThreadSafe)
+        public Lazy(Func<T> valueFactory, TMetadata metadata, bool isThreadSafe)
+            : base(valueFactory, isThreadSafe)
         {
             this._metadata = metadata;
         }
 
-        public Lazy(TMetadata metadata, LazyThreadSafetyMode mode) :
-            base(mode)
+        public Lazy(TMetadata metadata, LazyThreadSafetyMode mode)
+            : base(mode)
         {
             this._metadata = metadata;
         }
 
-        public Lazy(Func<T> valueFactory, TMetadata metadata, LazyThreadSafetyMode mode) :
-            base(valueFactory, mode)
+        public Lazy(Func<T> valueFactory, TMetadata metadata, LazyThreadSafetyMode mode)
+            : base(valueFactory, mode)
         {
             this._metadata = metadata;
         }
 
         public TMetadata Metadata
         {
-            get
-            {
-                return this._metadata;
-            }
+            get { return this._metadata; }
         }
     }
 }

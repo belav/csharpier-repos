@@ -10,8 +10,11 @@ namespace System.IO.Tests
 {
     public class RandomAccess_Read : RandomAccess_Base<int>
     {
-        protected override int MethodUnderTest(SafeFileHandle handle, byte[] bytes, long fileOffset)
-            => RandomAccess.Read(handle, bytes, fileOffset);
+        protected override int MethodUnderTest(
+            SafeFileHandle handle,
+            byte[] bytes,
+            long fileOffset
+        ) => RandomAccess.Read(handle, bytes, fileOffset);
 
         [Theory]
         [MemberData(nameof(GetSyncAsyncOptions))]
@@ -19,7 +22,9 @@ namespace System.IO.Tests
         {
             using (SafeFileHandle handle = GetHandleToExistingFile(FileAccess.Write, options))
             {
-                Assert.Throws<UnauthorizedAccessException>(() => RandomAccess.Read(handle, new byte[1], 0));
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => RandomAccess.Read(handle, new byte[1], 0)
+                );
             }
         }
 
@@ -30,7 +35,9 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             File.WriteAllBytes(filePath, new byte[1]);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options)
+            )
             {
                 Assert.Equal(0, RandomAccess.Read(handle, Array.Empty<byte>(), fileOffset: 0));
             }
@@ -43,7 +50,9 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             File.WriteAllBytes(filePath, new byte[1] { 3 });
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options)
+            )
             {
                 Span<byte> stackAllocated = stackalloc byte[2];
                 Assert.Equal(1, RandomAccess.Read(handle, stackAllocated, fileOffset: 0));
@@ -58,7 +67,9 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             File.WriteAllBytes(filePath, new byte[100]);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options)
+            )
             {
                 long eof = RandomAccess.GetLength(handle);
                 Assert.Equal(0, RandomAccess.Read(handle, new byte[1], fileOffset: eof + 1));
@@ -74,7 +85,9 @@ namespace System.IO.Tests
             byte[] expected = RandomNumberGenerator.GetBytes(fileSize);
             File.WriteAllBytes(filePath, expected);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options)
+            )
             {
                 byte[] actual = new byte[fileSize + 1];
                 int current = 0;
@@ -82,7 +95,10 @@ namespace System.IO.Tests
 
                 do
                 {
-                    Span<byte> buffer = actual.AsSpan(total, Math.Min(actual.Length - total, fileSize / 4));
+                    Span<byte> buffer = actual.AsSpan(
+                        total,
+                        Math.Min(actual.Length - total, fileSize / 4)
+                    );
 
                     current = RandomAccess.Read(handle, buffer, fileOffset: total);
 

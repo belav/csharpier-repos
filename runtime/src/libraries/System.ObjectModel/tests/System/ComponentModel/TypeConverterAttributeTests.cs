@@ -27,7 +27,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullStringNetCore_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeName", () => new TypeConverterAttribute((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeName",
+                () => new TypeConverterAttribute((string)null)
+            );
         }
 
         [Theory]
@@ -41,7 +44,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullTypeNetCore_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new TypeConverterAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new TypeConverterAttribute((Type)null)
+            );
         }
 
         [Fact]
@@ -55,15 +61,29 @@ namespace System.ComponentModel.Tests
             var attribute = new TypeConverterAttribute("typeName");
             yield return new object[] { attribute, attribute, true };
             yield return new object[] { attribute, new TypeConverterAttribute("typeName"), true };
-            yield return new object[] { attribute, new TypeConverterAttribute("otherTypeName"), false };
+            yield return new object[]
+            {
+                attribute,
+                new TypeConverterAttribute("otherTypeName"),
+                false,
+            };
 
-            yield return new object[] { new TypeConverterAttribute("typeName"), new object(), false };
+            yield return new object[]
+            {
+                new TypeConverterAttribute("typeName"),
+                new object(),
+                false,
+            };
             yield return new object[] { new TypeConverterAttribute("typeName"), null, false };
         }
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equal_Invoke_ReturnsExpected(TypeConverterAttribute attribute, object other, bool expected)
+        public void Equal_Invoke_ReturnsExpected(
+            TypeConverterAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

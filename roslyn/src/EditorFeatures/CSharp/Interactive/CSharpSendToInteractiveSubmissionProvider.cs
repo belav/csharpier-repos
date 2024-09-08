@@ -21,24 +21,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSendToInteractiveSubmissionProvider()
-        {
-        }
+        public CSharpSendToInteractiveSubmissionProvider() { }
 
         protected override bool CanParseSubmission(string code)
         {
             var options = CSharpInteractiveEvaluatorLanguageInfoProvider.Instance.ParseOptions;
-            var tree = SyntaxFactory.ParseSyntaxTree(SourceText.From(code, encoding: null, SourceHashAlgorithms.Default), options);
-            return tree.HasCompilationUnitRoot &&
-                !tree.GetDiagnostics().Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error);
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                SourceText.From(code, encoding: null, SourceHashAlgorithms.Default),
+                options
+            );
+            return tree.HasCompilationUnitRoot
+                && !tree.GetDiagnostics()
+                    .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error);
         }
 
-        protected override IEnumerable<TextSpan> GetExecutableSyntaxTreeNodeSelection(TextSpan selectionSpan, SyntaxNode root)
+        protected override IEnumerable<TextSpan> GetExecutableSyntaxTreeNodeSelection(
+            TextSpan selectionSpan,
+            SyntaxNode root
+        )
         {
             var expandedNode = GetSyntaxNodeForSubmission(selectionSpan, root);
-            return expandedNode != null
-                ? [expandedNode.Span]
-                : Array.Empty<TextSpan>();
+            return expandedNode != null ? [expandedNode.Span] : Array.Empty<TextSpan>();
         }
 
         /// <summary>
@@ -46,7 +49,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
         /// </summary>
         /// <param name="selectionSpan">Selection that user has originally made.</param>
         /// <param name="root">Root of the syntax tree.</param>
-        private static SyntaxNode? GetSyntaxNodeForSubmission(TextSpan selectionSpan, SyntaxNode root)
+        private static SyntaxNode? GetSyntaxNodeForSubmission(
+            TextSpan selectionSpan,
+            SyntaxNode root
+        )
         {
             GetSelectedTokens(selectionSpan, root, out var startToken, out var endToken);
 
@@ -97,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
             }
 
             candidate = node.GetAncestorsOrThis<SyntaxNode>()
-                .Where(IsSubmissionNode).FirstOrDefault();
+                .Where(IsSubmissionNode)
+                .FirstOrDefault();
             if (candidate != null)
             {
                 return candidate;
@@ -119,12 +126,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
             TextSpan selectionSpan,
             SyntaxNode root,
             out SyntaxToken startToken,
-            out SyntaxToken endToken)
+            out SyntaxToken endToken
+        )
         {
             endToken = root.FindTokenOnLeftOfPosition(selectionSpan.End);
-            startToken = selectionSpan.Length == 0
-                ? endToken
-                : root.FindTokenOnRightOfPosition(selectionSpan.Start);
+            startToken =
+                selectionSpan.Length == 0
+                    ? endToken
+                    : root.FindTokenOnRightOfPosition(selectionSpan.Start);
         }
     }
 }

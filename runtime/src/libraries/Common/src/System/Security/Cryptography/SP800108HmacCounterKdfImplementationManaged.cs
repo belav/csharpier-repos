@@ -13,14 +13,19 @@ namespace System.Security.Cryptography
 #if !NET7_0_OR_GREATER && NET
     [UnsupportedOSPlatform("browser")]
 #endif
-    internal sealed partial class SP800108HmacCounterKdfImplementationManaged : SP800108HmacCounterKdfImplementationBase
+    internal sealed partial class SP800108HmacCounterKdfImplementationManaged
+        : SP800108HmacCounterKdfImplementationBase
     {
         private byte[] _key;
         private int _keyReferenceCount = 1;
         private int _disposed;
         private readonly HashAlgorithmName _hashAlgorithm;
 
-        internal override void DeriveBytes(ReadOnlySpan<byte> label, ReadOnlySpan<byte> context, Span<byte> destination)
+        internal override void DeriveBytes(
+            ReadOnlySpan<byte> label,
+            ReadOnlySpan<byte> context,
+            Span<byte> destination
+        )
         {
             byte[] key = IncrementAndAcquireKey();
 
@@ -34,7 +39,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        internal override void DeriveBytes(ReadOnlySpan<char> label, ReadOnlySpan<char> context, Span<byte> destination)
+        internal override void DeriveBytes(
+            ReadOnlySpan<char> label,
+            ReadOnlySpan<char> context,
+            Span<byte> destination
+        )
         {
             byte[] key = IncrementAndAcquireKey();
 
@@ -78,13 +87,18 @@ namespace System.Security.Cryptography
 
                 if (current == 0)
                 {
-                    throw new ObjectDisposedException(nameof(SP800108HmacCounterKdfImplementationManaged));
+                    throw new ObjectDisposedException(
+                        nameof(SP800108HmacCounterKdfImplementationManaged)
+                    );
                 }
 
                 Debug.Assert(current > 0);
                 int incrementedCount = checked(current + 1);
 
-                if (Interlocked.CompareExchange(ref _keyReferenceCount, incrementedCount, current) == current)
+                if (
+                    Interlocked.CompareExchange(ref _keyReferenceCount, incrementedCount, current)
+                    == current
+                )
                 {
                     return _key;
                 }

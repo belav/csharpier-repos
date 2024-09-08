@@ -26,7 +26,10 @@ public class HtmlFormattableStringTest
     public void HtmlFormattableString_EmptyArgsAndCulture()
     {
         // Arrange
-        var formattableString = new HtmlFormattableString(CultureInfo.CurrentCulture, "Hello, World!");
+        var formattableString = new HtmlFormattableString(
+            CultureInfo.CurrentCulture,
+            "Hello, World!"
+        );
 
         // Act
         var result = HtmlContentToString(formattableString);
@@ -39,7 +42,13 @@ public class HtmlFormattableStringTest
     public void HtmlFormattableString_MultipleArguments()
     {
         // Arrange
-        var formattableString = new HtmlFormattableString("{0} {1} {2} {3}!", "First", "Second", "Third", "Fourth");
+        var formattableString = new HtmlFormattableString(
+            "{0} {1} {2} {3}!",
+            "First",
+            "Second",
+            "Third",
+            "Fourth"
+        );
 
         // Act
         var result = HtmlContentToString(formattableString);
@@ -47,7 +56,8 @@ public class HtmlFormattableStringTest
         // Assert
         Assert.Equal(
             "HtmlEncode[[First]] HtmlEncode[[Second]] HtmlEncode[[Third]] HtmlEncode[[Fourth]]!",
-            result);
+            result
+        );
     }
 
     [Fact]
@@ -87,7 +97,8 @@ public class HtmlFormattableStringTest
         var formattableString = new HtmlFormattableString(
             "Happy {0}, {1}!",
             new HtmlString("Birthday"),
-            new HtmlContentBuilder().Append("Billy"));
+            new HtmlContentBuilder().Append("Billy")
+        );
 
         // Act
         var result = HtmlContentToString(formattableString);
@@ -113,7 +124,12 @@ public class HtmlFormattableStringTest
     public void HtmlFormattableString_With3Arguments()
     {
         // Arrange
-        var formattableString = new HtmlFormattableString("0x{0:X} - {1} equivalent for {2}.", 50, "hex", 50);
+        var formattableString = new HtmlFormattableString(
+            "0x{0:X} - {1} equivalent for {2}.",
+            50,
+            "hex",
+            50
+        );
 
         // Act
         var result = HtmlContentToString(formattableString);
@@ -121,7 +137,8 @@ public class HtmlFormattableStringTest
         // Assert
         Assert.Equal(
             "0xHtmlEncode[[32]] - HtmlEncode[[hex]] equivalent for HtmlEncode[[50]].",
-            result);
+            result
+        );
     }
 
     [Fact]
@@ -134,8 +151,7 @@ public class HtmlFormattableStringTest
         var result = HtmlContentToString(formattableString);
 
         // Assert
-        Assert.Equal(
-            "HtmlEncode[[Hello]]       World!", result);
+        Assert.Equal("HtmlEncode[[Hello]]       World!", result);
     }
 
     [Fact]
@@ -161,16 +177,18 @@ public class HtmlFormattableStringTest
             1.1,
             2.98,
             145.82,
-            32.86);
+            32.86
+        );
 
         // Act
         var result = HtmlContentToString(formattableString);
 
         // Assert
         Assert.Equal(
-            "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] " +
-                "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
-            result);
+            "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] "
+                + "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
+            result
+        );
     }
 
     [Fact]

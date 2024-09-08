@@ -19,10 +19,9 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     public EventTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -75,9 +74,7 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var other = Browser.Exists(By.Id("other"));
 
         // Mouse over the button and then back off
-        var actions = new Actions(Browser)
-            .MoveToElement(input)
-            .MoveToElement(other);
+        var actions = new Actions(Browser).MoveToElement(input).MoveToElement(other);
 
         actions.Perform();
         Browser.Equal("mouseover,mouseout,", () => output.Text);
@@ -94,12 +91,14 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Assert.Equal(string.Empty, output.Text);
 
         // Mouse enter the button and then mouse leave
-        Browser.ExecuteJavaScript($@"
+        Browser.ExecuteJavaScript(
+            $@"
             var mouseEnterElement = document.getElementById('mouseenter_input');
             var mouseEnterEvent = new MouseEvent('mouseenter');
             var mouseLeaveEvent = new MouseEvent('mouseleave');
             mouseEnterElement.dispatchEvent(mouseEnterEvent);
-            mouseEnterElement.dispatchEvent(mouseLeaveEvent);");
+            mouseEnterElement.dispatchEvent(mouseLeaveEvent);"
+        );
 
         Browser.Equal("mouseenter,mouseleave,", () => output.Text);
     }
@@ -115,12 +114,14 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Assert.Equal(string.Empty, output.Text);
 
         // Pointer enter the button and then pointer leave
-        Browser.ExecuteJavaScript($@"
+        Browser.ExecuteJavaScript(
+            $@"
             var pointerEnterElement = document.getElementById('pointerenter_input');
             var pointerEnterEvent = new PointerEvent('pointerenter');
             var pointerLeaveEvent = new PointerEvent('pointerleave');
             pointerEnterElement.dispatchEvent(pointerEnterEvent);
-            pointerEnterElement.dispatchEvent(pointerLeaveEvent);");
+            pointerEnterElement.dispatchEvent(pointerLeaveEvent);"
+        );
 
         Browser.Equal("pointerenter,pointerleave,", () => output.Text);
     }
@@ -136,9 +137,7 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Assert.Equal(string.Empty, output.Text);
 
         // Move a little bit
-        var actions = new Actions(Browser)
-            .MoveToElement(input)
-            .MoveToElement(input, 10, 10);
+        var actions = new Actions(Browser).MoveToElement(input).MoveToElement(input, 10, 10);
 
         actions.Perform();
         Browser.Contains("mousemove,", () => output.Text);
@@ -276,7 +275,10 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var appElement = Browser.MountTestComponent<EventPreventDefaultComponent>();
 
         appElement.FindElement(By.Id("form-1-button")).Click();
-        Browser.Equal("Event was handled", () => appElement.FindElement(By.Id("event-handled")).Text);
+        Browser.Equal(
+            "Event was handled",
+            () => appElement.FindElement(By.Id("event-handled")).Text
+        );
     }
 
     [Fact]
@@ -343,7 +345,9 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     [InlineData("#disabled-button")]
     [InlineData("#disabled-button span")]
     [InlineData("#disabled-textarea")]
-    public void InteractiveElementWithDisabledAttributeDoesNotRespondToMouseEvents(string elementSelector)
+    public void InteractiveElementWithDisabledAttributeDoesNotRespondToMouseEvents(
+        string elementSelector
+    )
     {
         Browser.MountTestComponent<EventDisablingComponent>();
         var element = Browser.Exists(By.CssSelector(elementSelector));
@@ -369,10 +373,11 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         SendKeysSequentially(input, "abc");
         Browser.Equal("abc", () => input.GetAttribute("value"));
         Browser.Equal(
-            "Change event on item First with value a\n" +
-            "Change event on item First with value ab\n" +
-            "Change event on item First with value abc",
-            () => eventLog.Text.Trim().Replace("\r\n", "\n"));
+            "Change event on item First with value a\n"
+                + "Change event on item First with value ab\n"
+                + "Change event on item First with value abc",
+            () => eventLog.Text.Trim().Replace("\r\n", "\n")
+        );
     }
 
     [Fact]
@@ -382,9 +387,10 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var errorLog = Browser.Exists(By.Id("web-component-error-log"));
 
         Browser.Exists(By.Id("add-web-component")).Click();
-        var expectedMessage = _serverFixture.ExecutionMode == ExecutionMode.Client
-            ? "Assertion failed - heap is currently locked"
-            : "There was an exception invoking 'SomeMethodThatDoesntNeedToExistForThisTest' on assembly 'SomeAssembly'";
+        var expectedMessage =
+            _serverFixture.ExecutionMode == ExecutionMode.Client
+                ? "Assertion failed - heap is currently locked"
+                : "There was an exception invoking 'SomeMethodThatDoesntNeedToExistForThisTest' on assembly 'SomeAssembly'";
 
         Browser.Contains(expectedMessage, () => errorLog.Text);
     }
@@ -416,8 +422,13 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Assert.Equal(string.Empty, output.Text);
 
         // We can trigger a pointer event and receive a PointerEventArgs
-        new Actions(Browser).Click(elem).Perform();
-        Browser.Equal("Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse", () => output.Text);
+        new Actions(Browser)
+            .Click(elem)
+            .Perform();
+        Browser.Equal(
+            "Microsoft.AspNetCore.Components.Web.PointerEventArgs:mouse",
+            () => output.Text
+        );
 
         // We can trigger a drag event and receive a DragEventArgs *on the same handler delegate*
         Browser.FindElement(By.Id("clear_event_log")).Click();

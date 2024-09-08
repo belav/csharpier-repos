@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 //
 // RoleClaimProvider.cs
 //
@@ -18,7 +18,7 @@ namespace System.Web.Security
     /// This internal class is used to wrap role claims that are served up by the RolePrincipal.  They need to be kept distinct from other claims.
     /// ClaimsIdentity has a property the holds this type.
     /// made on parameters.
-    /// </summary>    
+    /// </summary>
 
     internal class RoleClaimProvider
     {
@@ -27,8 +27,8 @@ namespace System.Web.Security
 
         public RoleClaimProvider(RolePrincipal rolePrincipal, ClaimsIdentity subject)
         {
-            _rolePrincipal  = rolePrincipal;
-            _subject        = subject;
+            _rolePrincipal = rolePrincipal;
+            _subject = subject;
         }
 
         public IEnumerable<Claim> Claims
@@ -37,7 +37,14 @@ namespace System.Web.Security
             {
                 foreach (string role in _rolePrincipal.GetRoles())
                 {
-                    yield return new Claim(_subject.RoleClaimType, role, ClaimValueTypes.String, _rolePrincipal.ProviderName, _rolePrincipal.ProviderName, _subject);
+                    yield return new Claim(
+                        _subject.RoleClaimType,
+                        role,
+                        ClaimValueTypes.String,
+                        _rolePrincipal.ProviderName,
+                        _rolePrincipal.ProviderName,
+                        _subject
+                    );
                 }
             }
         }

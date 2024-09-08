@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
                 Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyTls(null, s_fourByteLabel, s_emptySeed));
+                    () => ecdh.DeriveKeyTls(null, s_fourByteLabel, s_emptySeed)
+                );
             }
         }
 
@@ -32,7 +33,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 Assert.ThrowsAny<ArgumentException>(
-                    () => alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed));
+                    () => alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed)
+                );
             }
         }
 
@@ -43,7 +45,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyTls(publicKey, null, s_emptySeed));
+                    () => ecdh.DeriveKeyTls(publicKey, null, s_emptySeed)
+                );
             }
         }
 
@@ -54,7 +57,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, null));
+                    () => ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, null)
+                );
             }
         }
 
@@ -70,7 +74,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
                 Assert.ThrowsAny<CryptographicException>(
-                    () => ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, seed));
+                    () => ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, seed)
+                );
             }
         }
 
@@ -98,7 +103,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 byte[] aliceDerived = alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed);
-                byte[] aliceDerivedAgain = alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed);
+                byte[] aliceDerivedAgain = alice.DeriveKeyTls(
+                    bobPublic,
+                    s_fourByteLabel,
+                    s_emptySeed
+                );
 
                 Assert.Equal(aliceDerived, aliceDerivedAgain);
             }
@@ -126,7 +135,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
                 byte[] aliceDerived = alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed);
-                byte[] aliceSelfDerived = alice.DeriveKeyTls(alicePublic, s_fourByteLabel, s_emptySeed);
+                byte[] aliceSelfDerived = alice.DeriveKeyTls(
+                    alicePublic,
+                    s_fourByteLabel,
+                    s_emptySeed
+                );
 
                 // Alice and Alice is HASH(aaG) != HASH(abG)
                 // (Except for the fantastically small chance that Alice == Bob)
@@ -175,17 +188,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         {
             return new object[][]
             {
-                 new object[]
-                 {
-                     "slithy toves",
-                     "3D5DCEF2B35E73523C34802175875CC241A966D2DEB89041540650478D300A70F822AF7F9D70A31BA4B67D100F4A1620",
-                 },
-
-                 new object[]
-                 {
-                     "Hello, World!",
-                     "ED83A7CF14C6F1577FE7AD90F1D78D36AFF5D2612B78A70E5FD000660E4A3B00DFF9B7C118C29A3D32536A89A5481C00",
-                 },
+                new object[]
+                {
+                    "slithy toves",
+                    "3D5DCEF2B35E73523C34802175875CC241A966D2DEB89041540650478D300A70F822AF7F9D70A31BA4B67D100F4A1620",
+                },
+                new object[]
+                {
+                    "Hello, World!",
+                    "ED83A7CF14C6F1577FE7AD90F1D78D36AFF5D2612B78A70E5FD000660E4A3B00DFF9B7C118C29A3D32536A89A5481C00",
+                },
             };
         }
 

@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
 internal abstract class AsyncIOOperation : IValueTaskSource<int>, IValueTaskSource
 {
-    private static readonly Action<object?> CallbackCompleted = _ => { Debug.Assert(false, "Should not be invoked"); };
+    private static readonly Action<object?> CallbackCompleted = _ =>
+    {
+        Debug.Assert(false, "Should not be invoked");
+    };
 
     private Action<object?>? _continuation;
     private object? _state;
@@ -28,7 +31,12 @@ internal abstract class AsyncIOOperation : IValueTaskSource<int>, IValueTaskSour
         return _exception != null ? ValueTaskSourceStatus.Succeeded : ValueTaskSourceStatus.Faulted;
     }
 
-    public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+    public void OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    )
     {
         if (_state != null)
         {
@@ -37,7 +45,11 @@ internal abstract class AsyncIOOperation : IValueTaskSource<int>, IValueTaskSour
 
         _state = state;
 
-        var previousContinuation = Interlocked.CompareExchange(ref _continuation, continuation, null);
+        var previousContinuation = Interlocked.CompareExchange(
+            ref _continuation,
+            continuation,
+            null
+        );
 
         if (previousContinuation != null)
         {
@@ -101,7 +113,10 @@ internal abstract class AsyncIOOperation : IValueTaskSource<int>, IValueTaskSour
             if (hr != NativeMethods.HR_OK && !IsSuccessfulResult(hr))
             {
                 // Treat all errors as the client disconnect
-                _exception = new ConnectionResetException("The client has disconnected", Marshal.GetExceptionForHR(hr)!);
+                _exception = new ConnectionResetException(
+                    "The client has disconnected",
+                    Marshal.GetExceptionForHR(hr)!
+                );
             }
         }
         else

@@ -19,25 +19,32 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
         {
             // Ensure parts do not specify views with differing cases. This is not supported
             // at runtime and we should flag at as such for precompiled views.
-            var duplicates = provider.CompiledItems
-                .GroupBy(i => i.Identifier, StringComparer.OrdinalIgnoreCase)
+            var duplicates = provider
+                .CompiledItems.GroupBy(i => i.Identifier, StringComparer.OrdinalIgnoreCase)
                 .FirstOrDefault(g => g.Count() > 1);
 
             if (duplicates != null)
             {
-                var viewsDifferingInCase = string.Join(Environment.NewLine, duplicates.Select(d => d.Identifier));
+                var viewsDifferingInCase = string.Join(
+                    Environment.NewLine,
+                    duplicates.Select(d => d.Identifier)
+                );
 
                 var message = string.Join(
                     Environment.NewLine,
                     Resources.RazorViewCompiler_ViewPathsDifferOnlyInCase,
-                    viewsDifferingInCase);
+                    viewsDifferingInCase
+                );
                 throw new InvalidOperationException(message);
             }
 
             foreach (var item in provider.CompiledItems)
             {
                 var compiledItem = item;
-                if (_hotReloadedViews is not null && _hotReloadedViews.TryGetValue(item.Identifier, out var hotReloadedType))
+                if (
+                    _hotReloadedViews is not null
+                    && _hotReloadedViews.TryGetValue(item.Identifier, out var hotReloadedType)
+                )
                 {
                     // Determine if a hot reload update is available for this view.
                     compiledItem = new HotReloadRazorCompiledItem(item, hotReloadedType);
@@ -73,6 +80,7 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
     private sealed class HotReloadRazorCompiledItem : RazorCompiledItem
     {
         private readonly RazorCompiledItem _previous;
+
         public HotReloadRazorCompiledItem(RazorCompiledItem previous, Type type)
         {
             _previous = previous;

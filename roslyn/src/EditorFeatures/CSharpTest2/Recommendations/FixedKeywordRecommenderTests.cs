@@ -15,92 +15,103 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInsideEmptyMethod()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestInsideUnsafeBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                unsafe {
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    unsafe {
+                        $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterFixed()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                unsafe {
-                    fixed (int* = bar) {
-                    }
-                    $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    unsafe {
+                        fixed (int* = bar) {
+                        }
+                        $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterFixed()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                fixed (int* = bar) {
-                  }
-                  $$
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    fixed (int* = bar) {
+                      }
+                      $$
+                    """
+                )
+            );
         }
 
         [Fact]
@@ -110,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -120,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 struct S {
                     $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -130,7 +143,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 record struct S {
                     $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -140,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 unsafe struct S {
                     $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -151,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 unsafe struct S {
                     struct T {
                       $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -162,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 struct S {
                     unsafe struct T {
                       $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -172,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 unsafe struct S {
                     static $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52296")]
@@ -190,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52296")]
@@ -208,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

@@ -9,8 +9,13 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "All generic type parameters are required")]
-    public abstract partial class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType> : ParserBase
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes",
+        Justification = "All generic type parameters are required"
+    )]
+    public abstract partial class TokenizerBackedParser<TTokenizer, TSymbol, TSymbolType>
+        : ParserBase
         where TTokenizer : Tokenizer<TSymbol, TSymbolType>
         where TSymbol : SymbolBase<TSymbolType>
     {
@@ -39,7 +44,12 @@ namespace System.Web.Razor.Parser
 
         protected SourceLocation CurrentLocation
         {
-            get { return (EndOfFile || CurrentSymbol == null) ? Context.Source.Location : CurrentSymbol.Start; }
+            get
+            {
+                return (EndOfFile || CurrentSymbol == null)
+                    ? Context.Source.Location
+                    : CurrentSymbol.Start;
+            }
         }
 
         protected bool EndOfFile
@@ -47,13 +57,18 @@ namespace System.Web.Razor.Parser
             get { return Tokenizer.EndOfFile; }
         }
 
-        protected abstract LanguageCharacteristics<TTokenizer, TSymbol, TSymbolType> Language { get; }
+        protected abstract LanguageCharacteristics<
+            TTokenizer,
+            TSymbol,
+            TSymbolType
+        > Language { get; }
 
-        protected virtual void HandleEmbeddedTransition()
-        {
-        }
+        protected virtual void HandleEmbeddedTransition() { }
 
-        protected virtual bool IsAtEmbeddedTransition(bool allowTemplatesAndComments, bool allowTransitions)
+        protected virtual bool IsAtEmbeddedTransition(
+            bool allowTemplatesAndComments,
+            bool allowTransitions
+        )
         {
             return false;
         }
@@ -82,7 +97,9 @@ namespace System.Web.Razor.Parser
 
         private TokenizerView<TTokenizer, TSymbol, TSymbolType> InitTokenizer()
         {
-            return _tokenizer = new TokenizerView<TTokenizer, TSymbol, TSymbolType>(Language.CreateTokenizer(Context.Source));
+            return _tokenizer = new TokenizerView<TTokenizer, TSymbol, TSymbolType>(
+                Language.CreateTokenizer(Context.Source)
+            );
         }
     }
 }

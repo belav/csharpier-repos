@@ -22,22 +22,17 @@ public class TestServiceProvider : IServiceProvider, IKeyedServiceProvider
         }
     }
 
-    public object? GetService(Type serviceType)
-        => _factories.TryGetValue(serviceType, out var factory)
-            ? factory()
-            : null;
+    public object? GetService(Type serviceType) =>
+        _factories.TryGetValue(serviceType, out var factory) ? factory() : null;
 
-    public object? GetKeyedService(Type serviceType, object? serviceKey)
-        => KeyedFactories.TryGetValue((serviceType, serviceKey), out var factory)
-            ? factory()
-            : null;
+    public object? GetKeyedService(Type serviceType, object? serviceKey) =>
+        KeyedFactories.TryGetValue((serviceType, serviceKey), out var factory) ? factory() : null;
 
-    internal void AddService<T>(T value)
-        => _factories.Add(typeof(T), () => value);
+    internal void AddService<T>(T value) => _factories.Add(typeof(T), () => value);
 
-    internal void AddKeyedService<T>(T value, object serviceKey)
-        => KeyedFactories.Add((typeof(T), serviceKey), () => value);
+    internal void AddKeyedService<T>(T value, object serviceKey) =>
+        KeyedFactories.Add((typeof(T), serviceKey), () => value);
 
-    public object GetRequiredKeyedService(Type serviceType, object? serviceKey)
-        => throw new NotImplementedException();
+    public object GetRequiredKeyedService(Type serviceType, object? serviceKey) =>
+        throw new NotImplementedException();
 }

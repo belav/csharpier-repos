@@ -16,7 +16,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 internal static class StringUtilities
 {
-    public static unsafe string GetAsciiOrUTF8StringNonNullCharacters(this ReadOnlySpan<byte> span, Encoding defaultEncoding)
+    public static unsafe string GetAsciiOrUTF8StringNonNullCharacters(
+        this ReadOnlySpan<byte> span,
+        Encoding defaultEncoding
+    )
     {
         if (span.IsEmpty)
         {
@@ -25,7 +28,11 @@ internal static class StringUtilities
 
         fixed (byte* source = &MemoryMarshal.GetReference(span))
         {
-            var resultString = string.Create(span.Length, (IntPtr)source, s_getAsciiOrUTF8StringNonNullCharacters);
+            var resultString = string.Create(
+                span.Length,
+                (IntPtr)source,
+                s_getAsciiOrUTF8StringNonNullCharacters
+            );
 
             // If resultString is marked, perform UTF-8 encoding
             if (resultString[0] == '\0')
@@ -50,7 +57,10 @@ internal static class StringUtilities
         }
     }
 
-    private static readonly unsafe SpanAction<char, IntPtr> s_getAsciiOrUTF8StringNonNullCharacters = (Span<char> buffer, IntPtr state) =>
+    private static readonly unsafe SpanAction<
+        char,
+        IntPtr
+    > s_getAsciiOrUTF8StringNonNullCharacters = (Span<char> buffer, IntPtr state) =>
     {
         fixed (char* output = &MemoryMarshal.GetReference(buffer))
         {
@@ -77,7 +87,10 @@ internal static class StringUtilities
         }
     }
 
-    private static readonly unsafe SpanAction<char, IntPtr> s_getAsciiStringNonNullCharacters = (Span<char> buffer, IntPtr state) =>
+    private static readonly unsafe SpanAction<char, IntPtr> s_getAsciiStringNonNullCharacters = (
+        Span<char> buffer,
+        IntPtr state
+    ) =>
     {
         fixed (char* output = &MemoryMarshal.GetReference(buffer))
         {
@@ -103,7 +116,10 @@ internal static class StringUtilities
         }
     }
 
-    private static readonly unsafe SpanAction<char, IntPtr> s_getLatin1StringNonNullCharacters = (Span<char> buffer, IntPtr state) =>
+    private static readonly unsafe SpanAction<char, IntPtr> s_getLatin1StringNonNullCharacters = (
+        Span<char> buffer,
+        IntPtr state
+    ) =>
     {
         fixed (char* output = &MemoryMarshal.GetReference(buffer))
         {
@@ -201,7 +217,8 @@ internal static class StringUtilities
                 Vector.Widen(
                     vector,
                     out Unsafe.AsRef<Vector<short>>(output),
-                    out Unsafe.AsRef<Vector<short>>(output + Vector<short>.Count));
+                    out Unsafe.AsRef<Vector<short>>(output + Vector<short>.Count)
+                );
 
                 input += Vector<sbyte>.Count;
                 output += Vector<sbyte>.Count;
@@ -397,7 +414,8 @@ internal static class StringUtilities
                 Vector.Widen(
                     vector,
                     out Unsafe.AsRef<Vector<ushort>>(output),
-                    out Unsafe.AsRef<Vector<ushort>>(output + Vector<ushort>.Count));
+                    out Unsafe.AsRef<Vector<ushort>>(output + Vector<ushort>.Count)
+                );
 
                 input += Vector<byte>.Count;
                 output += Vector<byte>.Count;
@@ -411,7 +429,10 @@ internal static class StringUtilities
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool BytesOrdinalEqualsStringAndAscii(string previousValue, ReadOnlySpan<byte> newValue)
+    public static bool BytesOrdinalEqualsStringAndAscii(
+        string previousValue,
+        ReadOnlySpan<byte> newValue
+    )
     {
         // previousValue is a previously materialized string which *must* have already passed validation.
         Debug.Assert(IsValidHeaderString(previousValue));
@@ -420,7 +441,12 @@ internal static class StringUtilities
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static unsafe void WidenFourAsciiBytesToUtf16AndWriteToBuffer(char* output, byte* input, int value, Vector128<sbyte> zero)
+    private static unsafe void WidenFourAsciiBytesToUtf16AndWriteToBuffer(
+        char* output,
+        byte* input,
+        int value,
+        Vector128<sbyte> zero
+    )
     {
         // BMI2 could be used, but this variant is faster on both Intel and AMD.
         if (Sse2.X64.IsSupported)
@@ -448,7 +474,10 @@ internal static class StringUtilities
             {
                 return false;
             }
-            new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true).GetByteCount(value);
+            new UTF8Encoding(
+                encoderShouldEmitUTF8Identifier: false,
+                throwOnInvalidBytes: true
+            ).GetByteCount(value);
             return !value.Contains('\0');
         }
         catch (ArgumentOutOfRangeException)
@@ -479,7 +508,13 @@ internal static class StringUtilities
         return string.Create(length, (str, separator, number), s_populateSpanWithHexSuffix);
     }
 
-    private static readonly SpanAction<char, (string? str, char separator, uint number)> s_populateSpanWithHexSuffix = (Span<char> buffer, (string? str, char separator, uint number) tuple) =>
+    private static readonly SpanAction<
+        char,
+        (string? str, char separator, uint number)
+    > s_populateSpanWithHexSuffix = (
+        Span<char> buffer,
+        (string? str, char separator, uint number) tuple
+    ) =>
     {
         var (tupleStr, tupleSeparator, tupleNumber) = tuple;
 
@@ -498,23 +533,42 @@ internal static class StringUtilities
             // The constant inline vectors are read from the data section without any additional
             // moves. See https://github.com/dotnet/runtime/issues/44115 Case 1.1 for further details.
 
-            var lowNibbles = Ssse3.Shuffle(Vector128.CreateScalarUnsafe(tupleNumber).AsByte(), Vector128.Create(
-                0xF, 0xF, 3, 0xF,
-                0xF, 0xF, 2, 0xF,
-                0xF, 0xF, 1, 0xF,
-                0xF, 0xF, 0, 0xF
-            ).AsByte());
+            var lowNibbles = Ssse3.Shuffle(
+                Vector128.CreateScalarUnsafe(tupleNumber).AsByte(),
+                Vector128
+                    .Create(0xF, 0xF, 3, 0xF, 0xF, 0xF, 2, 0xF, 0xF, 0xF, 1, 0xF, 0xF, 0xF, 0, 0xF)
+                    .AsByte()
+            );
 
-            var highNibbles = Sse2.ShiftRightLogical(Sse2.ShiftRightLogical128BitLane(lowNibbles, 2).AsInt32(), 4).AsByte();
+            var highNibbles = Sse2.ShiftRightLogical(
+                    Sse2.ShiftRightLogical128BitLane(lowNibbles, 2).AsInt32(),
+                    4
+                )
+                .AsByte();
             var indices = Sse2.And(Sse2.Or(lowNibbles, highNibbles), Vector128.Create((byte)0xF));
 
             // Lookup the hex values at the positions of the indices
-            var hex = Ssse3.Shuffle(Vector128.Create(
-                (byte)'0', (byte)'1', (byte)'2', (byte)'3',
-                (byte)'4', (byte)'5', (byte)'6', (byte)'7',
-                (byte)'8', (byte)'9', (byte)'A', (byte)'B',
-                (byte)'C', (byte)'D', (byte)'E', (byte)'F'
-            ), indices);
+            var hex = Ssse3.Shuffle(
+                Vector128.Create(
+                    (byte)'0',
+                    (byte)'1',
+                    (byte)'2',
+                    (byte)'3',
+                    (byte)'4',
+                    (byte)'5',
+                    (byte)'6',
+                    (byte)'7',
+                    (byte)'8',
+                    (byte)'9',
+                    (byte)'A',
+                    (byte)'B',
+                    (byte)'C',
+                    (byte)'D',
+                    (byte)'E',
+                    (byte)'F'
+                ),
+                indices
+            );
 
             // The high bytes (0x00) of the chars have also been converted to ascii hex '0', so clear them out.
             hex = Sse2.And(hex, Vector128.Create((ushort)0xFF).AsByte());
@@ -523,8 +577,10 @@ internal static class StringUtilities
             // Sse2.Store((byte*)(p + i), chars.AsByte());
             Unsafe.WriteUnaligned(
                 ref Unsafe.As<char, byte>(
-                    ref Unsafe.Add(ref MemoryMarshal.GetReference(buffer), i)),
-                hex);
+                    ref Unsafe.Add(ref MemoryMarshal.GetReference(buffer), i)
+                ),
+                hex
+            );
         }
         else
         {
@@ -602,8 +658,7 @@ internal static class StringUtilities
         return (((short)(check - 0x0101) | check) & HighBits) == 0;
     }
 
-    private static bool CheckBytesInAsciiRange(sbyte check)
-        => check > 0;
+    private static bool CheckBytesInAsciiRange(sbyte check) => check > 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)] // Needs a push
     private static bool CheckBytesNotNull(Vector<byte> check)
@@ -636,6 +691,5 @@ internal static class StringUtilities
         return ((check - 0x0101) & ~check & HighBits) == 0;
     }
 
-    private static bool CheckBytesNotNull(sbyte check)
-        => check != 0;
+    private static bool CheckBytesNotNull(sbyte check) => check != 0;
 }

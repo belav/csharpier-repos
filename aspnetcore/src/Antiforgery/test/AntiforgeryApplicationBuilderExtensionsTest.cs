@@ -28,7 +28,10 @@ public class AntiforgeryApplicationBuilderExtensionsTest
 
         await app(httpContext);
 
-        antiforgeryService.Verify(antiforgeryService => antiforgeryService.ValidateRequestAsync(httpContext), Times.AtMostOnce());
+        antiforgeryService.Verify(
+            antiforgeryService => antiforgeryService.ValidateRequestAsync(httpContext),
+            Times.AtMostOnce()
+        );
     }
 
     [Fact]
@@ -42,9 +45,10 @@ public class AntiforgeryApplicationBuilderExtensionsTest
         Assert.False(builder.Properties.ContainsKey("__AntiforgeryMiddlewareSet"));
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddAntiforgery' in the application startup code.",
-            exception.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddAntiforgery' in the application startup code.",
+            exception.Message
+        );
     }
 
     private IServiceProvider CreateServices(IAntiforgery? antiforgeryService = null)

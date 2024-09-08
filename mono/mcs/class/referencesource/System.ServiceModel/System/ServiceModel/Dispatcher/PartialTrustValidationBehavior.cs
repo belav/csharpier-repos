@@ -3,16 +3,16 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
-    using System.Xml;
+    using System.Collections.ObjectModel;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.MsmqIntegration;
-    using System.Runtime;
+    using System.Xml;
 
     class PartialTrustValidationBehavior : IServiceBehavior, IEndpointBehavior
     {
@@ -50,9 +50,20 @@ namespace System.ServiceModel.Dispatcher
             ValidateEndpoint(endpoint);
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters) { }
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher) { }
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) { }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
+
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        ) { }
 
         #endregion
 
@@ -72,8 +83,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters) { }
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) { }
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        public void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        ) { }
 
         #endregion
 
@@ -99,18 +119,19 @@ namespace System.ServiceModel.Dispatcher
                 typeof(MsmqTransportBindingElement),
                 typeof(NamedPipeTransportBindingElement),
                 typeof(OneWayBindingElement),
-#pragma warning disable 0618                
+#pragma warning disable 0618
                 typeof(PeerCustomResolverBindingElement),
                 typeof(PeerTransportBindingElement),
                 typeof(PnrpPeerResolverBindingElement),
-#pragma warning restore 0618                
+#pragma warning restore 0618
                 typeof(ReliableSessionBindingElement),
                 typeof(SymmetricSecurityBindingElement),
                 typeof(TransportSecurityBindingElement),
                 typeof(MtomMessageEncodingBindingElement),
-            }; 
-            
+            };
+
             Binding binding;
+
             internal BindingValidator(Binding binding)
             {
                 this.binding = binding;
@@ -118,7 +139,10 @@ namespace System.ServiceModel.Dispatcher
 
             internal void Validate()
             {
-                Fx.Assert(binding != null, "BindingValidator was not constructed with a valid Binding instance");
+                Fx.Assert(
+                    binding != null,
+                    "BindingValidator was not constructed with a valid Binding instance"
+                );
 
                 Type bindingType = binding.GetType();
                 if (IsUnsupportedBindingType(bindingType))
@@ -128,7 +152,9 @@ namespace System.ServiceModel.Dispatcher
 
                 // special-case error message for WSHttpBindings
                 bool isWSHttpBinding = typeof(WSHttpBinding).IsAssignableFrom(bindingType);
-                string sr = isWSHttpBinding ? SR.FullTrustOnlyBindingElementSecurityCheckWSHttpBinding1 : SR.FullTrustOnlyBindingElementSecurityCheck1;
+                string sr = isWSHttpBinding
+                    ? SR.FullTrustOnlyBindingElementSecurityCheckWSHttpBinding1
+                    : SR.FullTrustOnlyBindingElementSecurityCheck1;
 
                 BindingElementCollection elements = binding.CreateBindingElements();
                 foreach (BindingElement element in elements)
@@ -160,8 +186,11 @@ namespace System.ServiceModel.Dispatcher
                 }
                 return false;
             }
-            
-            static readonly PermissionSet fullTrust = new PermissionSet(PermissionState.Unrestricted);
+
+            static readonly PermissionSet fullTrust = new PermissionSet(
+                PermissionState.Unrestricted
+            );
+
             void UnsupportedSecurityCheck(string resource, Type type)
             {
                 try
@@ -173,8 +202,6 @@ namespace System.ServiceModel.Dispatcher
                     throw new InvalidOperationException(SR.GetString(resource, binding.Name, type));
                 }
             }
-
         }
     }
-
 }

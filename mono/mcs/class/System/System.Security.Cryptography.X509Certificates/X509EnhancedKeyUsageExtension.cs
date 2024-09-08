@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,173 +30,185 @@
 
 #if MONO_SECURITY_ALIAS
 extern alias MonoSecurity;
-using MonoSecurity::Mono.Security;
 #else
 using Mono.Security;
 #endif
 
-using System.Text;
+using System.Text;using MonoSecurity::Mono.Security;
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509EnhancedKeyUsageExtension : X509Extension
+    {
+        internal const string oid = "2.5.29.37";
+        internal const string friendlyName = "Enhanced Key Usage";
 
-	public sealed class X509EnhancedKeyUsageExtension : X509Extension {
+        private OidCollection _enhKeyUsage;
+        private AsnDecodeStatus _status;
 
-		internal const string oid = "2.5.29.37";
-		internal const string friendlyName = "Enhanced Key Usage";
+        // constructors
 
-		private OidCollection _enhKeyUsage;
-		private AsnDecodeStatus _status;
+        public X509EnhancedKeyUsageExtension()
+        {
+            _oid = new Oid(oid, friendlyName);
+        }
 
-		// constructors
+        public X509EnhancedKeyUsageExtension(AsnEncodedData encodedEnhancedKeyUsages, bool critical)
+        {
+            // ignore the Oid provided by encodedKeyUsage (our rules!)
+            _oid = new Oid(oid, friendlyName);
+            _raw = encodedEnhancedKeyUsages.RawData;
+            base.Critical = critical;
+            _status = Decode(this.RawData);
+        }
 
-		public X509EnhancedKeyUsageExtension ()
-		{
-			_oid = new Oid (oid, friendlyName);
-		}
+        public X509EnhancedKeyUsageExtension(OidCollection enhancedKeyUsages, bool critical)
+        {
+            if (enhancedKeyUsages == null)
+                throw new ArgumentNullException("enhancedKeyUsages");
 
-		public X509EnhancedKeyUsageExtension (AsnEncodedData encodedEnhancedKeyUsages, bool critical)
-		{
-			// ignore the Oid provided by encodedKeyUsage (our rules!)
-			_oid = new Oid (oid, friendlyName);
-			_raw = encodedEnhancedKeyUsages.RawData;
-			base.Critical = critical;
-			_status = Decode (this.RawData);
-		}
+            _oid = new Oid(oid, friendlyName);
+            base.Critical = critical;
+            _enhKeyUsage = new OidCollection();
+            foreach (Oid o in enhancedKeyUsages)
+            {
+                _enhKeyUsage.Add(o);
+            }
+            RawData = Encode();
+        }
 
-		public X509EnhancedKeyUsageExtension (OidCollection enhancedKeyUsages, bool critical)
-		{
-			if (enhancedKeyUsages == null)
-				throw new ArgumentNullException ("enhancedKeyUsages");
+        // properties
 
-			_oid = new Oid (oid, friendlyName);
-			base.Critical = critical;
-			_enhKeyUsage = new OidCollection();
-			foreach (Oid o in enhancedKeyUsages) {
-				_enhKeyUsage.Add(o);
-			}
-			RawData = Encode ();
-		}
+        public OidCollection EnhancedKeyUsages
+        {
+            get
+            {
+                switch (_status)
+                {
+                    case AsnDecodeStatus.Ok:
+                    case AsnDecodeStatus.InformationNotAvailable:
 
-		// properties
+                        OidCollection oids = new OidCollection();
+                        if (_enhKeyUsage != null)
+                        {
+                            foreach (Oid o in _enhKeyUsage)
+                            {
+                                oids.Add(o);
+                            }
+                        }
+                        return oids;
+                    default:
+                        throw new CryptographicException("Badly encoded extension.");
+                }
+            }
+        }
 
-		public OidCollection EnhancedKeyUsages {
-			get {
-				switch (_status) {
-				case AsnDecodeStatus.Ok:
-				case AsnDecodeStatus.InformationNotAvailable:
+        // methods
 
-					OidCollection oids = new OidCollection();
-					if (_enhKeyUsage != null) {
-						foreach(Oid o in _enhKeyUsage) {
-							oids.Add(o);
-						}
-					}
-					return oids;
-				default:
-					throw new CryptographicException ("Badly encoded extension.");
-				}
-			}
-		}
+        public override void CopyFrom(AsnEncodedData asnEncodedData)
+        {
+            if (asnEncodedData == null)
+                throw new ArgumentNullException("encodedData");
 
-		// methods
+            X509Extension ex = (asnEncodedData as X509Extension);
+            if (ex == null)
+                throw new ArgumentException(Locale.GetText("Wrong type."), "asnEncodedData");
 
-		public override void CopyFrom (AsnEncodedData asnEncodedData) 
-		{
-			if (asnEncodedData == null)
-				throw new ArgumentNullException ("encodedData");
+            if (ex._oid == null)
+                _oid = new Oid(oid, friendlyName);
+            else
+                _oid = new Oid(ex._oid);
 
-			X509Extension ex = (asnEncodedData as X509Extension);
-			if (ex == null)
-				throw new ArgumentException (Locale.GetText ("Wrong type."), "asnEncodedData");
+            RawData = ex.RawData;
+            base.Critical = ex.Critical;
+            // and we deal with the rest later
+            _status = Decode(this.RawData);
+        }
 
-			if (ex._oid == null)
-				_oid = new Oid (oid, friendlyName);
-			else 
-				_oid = new Oid (ex._oid);
+        // internal
 
-			RawData = ex.RawData;
-			base.Critical = ex.Critical;
-			// and we deal with the rest later
-			_status = Decode (this.RawData);
-		}
+        internal AsnDecodeStatus Decode(byte[] extension)
+        {
+            if ((extension == null) || (extension.Length == 0))
+                return AsnDecodeStatus.BadAsn;
+            if (extension[0] != 0x30)
+                return AsnDecodeStatus.BadTag;
 
-		// internal
+            if (_enhKeyUsage == null)
+                _enhKeyUsage = new OidCollection();
 
-		internal AsnDecodeStatus Decode (byte[] extension)
-		{
-			if ((extension == null) || (extension.Length == 0))
-				return AsnDecodeStatus.BadAsn;
-			if (extension [0] != 0x30)
-				return AsnDecodeStatus.BadTag;
+            try
+            {
+                ASN1 ex = new ASN1(extension);
+                if (ex.Tag != 0x30)
+                    throw new CryptographicException(Locale.GetText("Invalid ASN.1 Tag"));
+                for (int i = 0; i < ex.Count; i++)
+                {
+                    _enhKeyUsage.Add(new Oid(ASN1Convert.ToOid(ex[i])));
+                }
+            }
+            catch
+            {
+                return AsnDecodeStatus.BadAsn;
+            }
 
-			if (_enhKeyUsage == null)
-				_enhKeyUsage = new OidCollection ();
+            return AsnDecodeStatus.Ok;
+        }
 
-			try {
-				ASN1 ex = new ASN1 (extension);
-				if (ex.Tag != 0x30)
-					throw new CryptographicException (Locale.GetText ("Invalid ASN.1 Tag"));
-				for (int i=0; i < ex.Count; i++) {
-					_enhKeyUsage.Add (new Oid (ASN1Convert.ToOid (ex [i])));
-				}
-			}
-			catch {
-				return AsnDecodeStatus.BadAsn;
-			}
+        internal byte[] Encode()
+        {
+            ASN1 ex = new ASN1(0x30);
+            foreach (Oid o in _enhKeyUsage)
+            {
+                ex.Add(ASN1Convert.FromOid(o.Value));
+            }
+            return ex.GetBytes();
+        }
 
-			return AsnDecodeStatus.Ok;
-		}
+        internal override string ToString(bool multiLine)
+        {
+            switch (_status)
+            {
+                case AsnDecodeStatus.BadAsn:
+                    return String.Empty;
+                case AsnDecodeStatus.BadTag:
+                case AsnDecodeStatus.BadLength:
+                    return FormatUnkownData(_raw);
+                case AsnDecodeStatus.InformationNotAvailable:
+                    return "Information Not Available";
+            }
 
-		internal byte[] Encode ()
-		{
-			ASN1 ex = new ASN1 (0x30);
-			foreach (Oid o in _enhKeyUsage) {
-				ex.Add (ASN1Convert.FromOid (o.Value));
-			}
-			return ex.GetBytes ();
-		}
+            if (_oid.Value != oid)
+                return String.Format("Unknown Key Usage ({0})", _oid.Value);
+            if (_enhKeyUsage.Count == 0)
+                return "Information Not Available";
 
-		internal override string ToString (bool multiLine)
-		{
-			switch (_status) {
-			case AsnDecodeStatus.BadAsn:
-				return String.Empty;
-			case AsnDecodeStatus.BadTag:
-			case AsnDecodeStatus.BadLength:
-				return FormatUnkownData (_raw);
-			case AsnDecodeStatus.InformationNotAvailable:
-				return "Information Not Available";
-			}
+            StringBuilder sb = new StringBuilder();
 
-			if (_oid.Value != oid)
-				return String.Format ("Unknown Key Usage ({0})", _oid.Value);
-			if (_enhKeyUsage.Count == 0)
-				return "Information Not Available";
+            for (int i = 0; i < _enhKeyUsage.Count; i++)
+            {
+                Oid o = _enhKeyUsage[i];
+                switch (o.Value)
+                {
+                    case "1.3.6.1.5.5.7.3.1":
+                        sb.Append("Server Authentication (");
+                        break;
+                    default:
+                        sb.Append("Unknown Key Usage (");
+                        break;
+                }
+                sb.Append(o.Value);
+                sb.Append(")");
 
-			StringBuilder sb = new StringBuilder ();
+                if (multiLine)
+                    sb.Append(Environment.NewLine);
+                else if (i != (_enhKeyUsage.Count - 1))
+                    sb.Append(", ");
+            }
 
-			for (int i=0; i < _enhKeyUsage.Count; i++) {
-				Oid o = _enhKeyUsage [i];
-				switch (o.Value) {
-				case "1.3.6.1.5.5.7.3.1":
-					sb.Append ("Server Authentication (");
-					break;
-				default:
-					sb.Append ("Unknown Key Usage (");
-					break;
-				}
-				sb.Append (o.Value);
-				sb.Append (")");
-
-				if (multiLine)
-					sb.Append (Environment.NewLine);
-				else if (i != (_enhKeyUsage.Count - 1))
-					sb.Append (", ");
-			}
-
-			return sb.ToString ();
-		}
-	}
+            return sb.ToString();
+        }
+    }
 }
 
 #endif

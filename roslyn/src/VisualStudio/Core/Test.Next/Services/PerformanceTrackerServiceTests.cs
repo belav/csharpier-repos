@@ -46,7 +46,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 ? TestMinSampleSizeForSpanAnalysis
                 : TestMinSampleSizeForDocumentAnalysis;
 
-            var service = new PerformanceTrackerService(TestMinSampleSizeForDocumentAnalysis, TestMinSampleSizeForSpanAnalysis);
+            var service = new PerformanceTrackerService(
+                TestMinSampleSizeForDocumentAnalysis,
+                TestMinSampleSizeForSpanAnalysis
+            );
 
             // Verify analyzer infos reported when sampleSize >= minSampleSize
             var sampleSize = minSampleSize + 1;
@@ -77,15 +80,24 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var analyzerInfos = GetAnalyzerInfos(to: 200, forSpanAnalysis);
 
-            VerifyAnalyzerInfo(analyzerInfos, "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 89.2416 : 54.48,
-                stddev: forSpanAnalysis ? 78.8177 : 21.8163001442628);
-            VerifyAnalyzerInfo(analyzerInfos, "CSharpInlineDeclarationDiagnosticAnalyzer",
+                stddev: forSpanAnalysis ? 78.8177 : 21.8163001442628
+            );
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "CSharpInlineDeclarationDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 48.4284 : 26.6686092715232,
-                stddev: forSpanAnalysis ? 38.5010107523771 : 9.2987133054884);
-            VerifyAnalyzerInfo(analyzerInfos, "VisualBasicRemoveUnnecessaryCastDiagnosticAnalyzer",
+                stddev: forSpanAnalysis ? 38.5010107523771 : 9.2987133054884
+            );
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "VisualBasicRemoveUnnecessaryCastDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 26.8618181818182 : 23.277619047619,
-                stddev: forSpanAnalysis ? 6.62917030049974 : 7.25464266261805);
+                stddev: forSpanAnalysis ? 6.62917030049974 : 7.25464266261805
+            );
         }
 
         [Theory, CombinatorialData]
@@ -93,15 +105,24 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var analyzerInfos = GetAnalyzerInfos(to: 300, forSpanAnalysis);
 
-            VerifyAnalyzerInfo(analyzerInfos, "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 75.3678260869565 : 58.4542358078603,
-                stddev: forSpanAnalysis ? 64.7106979026339 : 18.4245217226717);
-            VerifyAnalyzerInfo(analyzerInfos, "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer",
+                stddev: forSpanAnalysis ? 64.7106979026339 : 18.4245217226717
+            );
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer",
                 mean: forSpanAnalysis ? 0.375 : 29.0622535211268,
-                stddev: forSpanAnalysis ? 0.144592142784807 : 9.13728667060397);
-            VerifyAnalyzerInfo(analyzerInfos, "CSharpInlineDeclarationDiagnosticAnalyzer",
+                stddev: forSpanAnalysis ? 0.144592142784807 : 9.13728667060397
+            );
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "CSharpInlineDeclarationDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 37.6895652173913 : 28.7935371179039,
-                stddev: forSpanAnalysis ? 29.5179969292277 : 7.99261581900397);
+                stddev: forSpanAnalysis ? 29.5179969292277 : 7.99261581900397
+            );
         }
 
         [Theory, CombinatorialData]
@@ -110,15 +131,24 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             // data starting to rolling at 300 data points
             var analyzerInfos = GetAnalyzerInfos(to: 400, forSpanAnalysis);
 
-            VerifyAnalyzerInfo(analyzerInfos, "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "CSharpRemoveUnnecessaryCastDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 0.24304347826087 : 51.1698695652174,
-                stddev: forSpanAnalysis ? 0.1511123654363 : 17.3819563479479);
-            VerifyAnalyzerInfo(analyzerInfos, "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer",
+                stddev: forSpanAnalysis ? 0.1511123654363 : 17.3819563479479
+            );
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "VisualBasic.UseAutoProperty.UseAutoPropertyAnalyzer",
                 mean: forSpanAnalysis ? 44.5428571428571 : 29.2597857142857,
-                stddev: forSpanAnalysis ? 34.6949934844539 : 9.21213873850298);
-            VerifyAnalyzerInfo(analyzerInfos, "InlineDeclaration.CSharpInlineDeclarationDiagnosticAnalyzer",
+                stddev: forSpanAnalysis ? 34.6949934844539 : 9.21213873850298
+            );
+            VerifyAnalyzerInfo(
+                analyzerInfos,
+                "InlineDeclaration.CSharpInlineDeclarationDiagnosticAnalyzer",
                 mean: forSpanAnalysis ? 0.842608695652174 : 23.9764782608696,
-                stddev: forSpanAnalysis ? 0.312682894617701 : 7.43956680199015);
+                stddev: forSpanAnalysis ? 0.312682894617701 : 7.43956680199015
+            );
         }
 
         [Fact]
@@ -133,22 +163,42 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             Assert.True(analyzerInfo2.PIISafeAnalyzerId == "test".GetHashCode().ToString());
         }
 
-        private static void VerifyAnalyzerInfo(List<AnalyzerInfoForPerformanceReporting> analyzerInfos, string analyzerName, double mean, double stddev)
+        private static void VerifyAnalyzerInfo(
+            List<AnalyzerInfoForPerformanceReporting> analyzerInfos,
+            string analyzerName,
+            double mean,
+            double stddev
+        )
         {
             var analyzerInfo = analyzerInfos.Single(i => i.AnalyzerId.Contains(analyzerName));
-            Assert.True(analyzerInfo.PIISafeAnalyzerId.IndexOf(analyzerName, StringComparison.OrdinalIgnoreCase) >= 0);
+            Assert.True(
+                analyzerInfo.PIISafeAnalyzerId.IndexOf(
+                    analyzerName,
+                    StringComparison.OrdinalIgnoreCase
+                ) >= 0
+            );
             Assert.Equal(mean, analyzerInfo.Average, precision: 4);
             Assert.Equal(stddev, analyzerInfo.AdjustedStandardDeviation, precision: 4);
         }
 
-        private static List<AnalyzerInfoForPerformanceReporting> GetAnalyzerInfos(int to, bool forSpanAnalysis)
+        private static List<AnalyzerInfoForPerformanceReporting> GetAnalyzerInfos(
+            int to,
+            bool forSpanAnalysis
+        )
         {
-            var service = new PerformanceTrackerService(TestMinSampleSizeForDocumentAnalysis, TestMinSampleSizeForSpanAnalysis);
+            var service = new PerformanceTrackerService(
+                TestMinSampleSizeForDocumentAnalysis,
+                TestMinSampleSizeForSpanAnalysis
+            );
             ReadTestFileAndAddSnapshots(service, to, forSpanAnalysis);
             return GenerateReport(service, forSpanAnalysis);
         }
 
-        private static void ReadTestFileAndAddSnapshots(PerformanceTrackerService service, int to, bool forSpanAnalysis)
+        private static void ReadTestFileAndAddSnapshots(
+            PerformanceTrackerService service,
+            int to,
+            bool forSpanAnalysis
+        )
         {
             var testFile = ReadTestFile(@"TestFiles\analyzer_input.csv");
 
@@ -162,7 +212,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             }
         }
 
-        private static List<AnalyzerInfoForPerformanceReporting> GenerateReport(PerformanceTrackerService service, bool forSpanAnalysis)
+        private static List<AnalyzerInfoForPerformanceReporting> GenerateReport(
+            PerformanceTrackerService service,
+            bool forSpanAnalysis
+        )
         {
             var analyzerInfos = new List<AnalyzerInfoForPerformanceReporting>();
             service.GenerateReport(analyzerInfos, forSpanAnalysis);
@@ -170,7 +223,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             return analyzerInfos;
         }
 
-        private static IEnumerable<AnalyzerPerformanceInfo> CreateSnapshots(Dictionary<string, double[]> matrix, int index)
+        private static IEnumerable<AnalyzerPerformanceInfo> CreateSnapshots(
+            Dictionary<string, double[]> matrix,
+            int index
+        )
         {
             foreach (var kv in matrix)
             {
@@ -180,11 +236,17 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                     continue;
                 }
 
-                yield return new AnalyzerPerformanceInfo(kv.Key, true, TimeSpan.FromMilliseconds(timeSpan));
+                yield return new AnalyzerPerformanceInfo(
+                    kv.Key,
+                    true,
+                    TimeSpan.FromMilliseconds(timeSpan)
+                );
             }
         }
 
-        private static (Dictionary<string, double[]> matrix, int dataCount) CreateMatrix(string testFile)
+        private static (Dictionary<string, double[]> matrix, int dataCount) CreateMatrix(
+            string testFile
+        )
         {
             var matrix = new Dictionary<string, double[]>();
 
@@ -207,7 +269,14 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
                 for (var j = 0; j < data.Length; j++)
                 {
                     double result;
-                    if (!double.TryParse(data[j], NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result))
+                    if (
+                        !double.TryParse(
+                            data[j],
+                            NumberStyles.Float | NumberStyles.AllowThousands,
+                            CultureInfo.InvariantCulture,
+                            out result
+                        )
+                    )
                     {
                         // no data for this analyzer for this particular run
                         result = double.NaN;
@@ -247,7 +316,9 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
             {
                 if (stream == null)
                 {
-                    throw new InvalidOperationException($"Resource '{resourceName}' not found in {assembly.FullName}.");
+                    throw new InvalidOperationException(
+                        $"Resource '{resourceName}' not found in {assembly.FullName}."
+                    );
                 }
 
                 using (var reader = new StreamReader(stream))
@@ -261,7 +332,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Services
         {
             var convert = name.Replace(@"\", ".");
 
-            return assembly.GetManifestResourceNames().Where(n => n.EndsWith(convert, StringComparison.OrdinalIgnoreCase)).First();
+            return assembly
+                .GetManifestResourceNames()
+                .Where(n => n.EndsWith(convert, StringComparison.OrdinalIgnoreCase))
+                .First();
         }
     }
 }

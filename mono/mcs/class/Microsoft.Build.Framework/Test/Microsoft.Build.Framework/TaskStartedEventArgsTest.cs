@@ -28,26 +28,28 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
-	[TestFixture]
-	public class TaskStartedEventArgsTest {
-		[Test]
-		public void AssignmentTest ()
-		{
-			TaskStartedEventArgs tsea;
-			string message = "message";
-			string helpKeyword = "helpKeyword";
-			string projectFile = "projectFile";
-			string taskFile = "taskFile";
-			string taskName = "taskName";
-			
-			tsea = new TaskStartedEventArgs (message, helpKeyword, projectFile, taskFile, taskName);
-			
-			Assert.AreEqual (message, tsea.Message, "Message");
-			Assert.AreEqual (helpKeyword, tsea.HelpKeyword, "HelpKeyword");
-			Assert.AreEqual (projectFile, tsea.ProjectFile, "ProjectFile");
-			Assert.AreEqual (taskFile, tsea.TaskFile, "TaskFile");
-			Assert.AreEqual (taskName, tsea.TaskName, "TaskName");
-		}
-	}
+namespace MonoTests.Microsoft.Build.Framework
+{
+    [TestFixture]
+    public class TaskStartedEventArgsTest
+    {
+        [Test]
+        public void AssignmentTest()
+        {
+            TaskStartedEventArgs tsea;
+            string message = "message";
+            string helpKeyword = "helpKeyword";
+            string projectFile = "projectFile";
+            string taskFile = "taskFile";
+            string taskName = "taskName";
+
+            tsea = new TaskStartedEventArgs(message, helpKeyword, projectFile, taskFile, taskName);
+
+            Assert.AreEqual(message, tsea.Message, "Message");
+            Assert.AreEqual(helpKeyword, tsea.HelpKeyword, "HelpKeyword");
+            Assert.AreEqual(projectFile, tsea.ProjectFile, "ProjectFile");
+            Assert.AreEqual(taskFile, tsea.TaskFile, "TaskFile");
+            Assert.AreEqual(taskName, tsea.TaskName, "TaskName");
+        }
+    }
 }

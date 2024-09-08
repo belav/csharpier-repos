@@ -9,7 +9,12 @@ internal static partial class Interop
 {
     internal static partial class Kernel32
     {
-        [LibraryImport(Libraries.Kernel32, EntryPoint = "CreateNamedPipeW",  SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Kernel32,
+            EntryPoint = "CreateNamedPipeW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial SafePipeHandle CreateNamedPipe(
             string pipeName,
             int openMode,
@@ -18,6 +23,7 @@ internal static partial class Interop
             int outBufferSize,
             int inBufferSize,
             int defaultTimeout,
-            ref SECURITY_ATTRIBUTES securityAttributes);
+            ref SECURITY_ATTRIBUTES securityAttributes
+        );
     }
 }

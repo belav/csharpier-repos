@@ -1,12 +1,12 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Text;
-    using System.Drawing;
-    using System.Windows.Forms;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Text;
+    using System.Windows.Forms;
 
     #region Class DynamicActionMessageFilter
     //Behavior needs coordinates in client coordinate system
@@ -20,9 +20,7 @@ namespace System.Workflow.ComponentModel.Design
 
         private bool infoTipSet = false;
 
-        internal DynamicActionMessageFilter()
-        {
-        }
+        internal DynamicActionMessageFilter() { }
         #endregion
 
         #region Properties and Methods
@@ -80,7 +78,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.Initialize(parentView);
 
-            IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+            IServiceContainer serviceContainer =
+                GetService(typeof(IServiceContainer)) as IServiceContainer;
             if (serviceContainer != null)
             {
                 serviceContainer.RemoveService(typeof(DynamicActionMessageFilter));
@@ -92,7 +91,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             try
             {
-                IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+                IServiceContainer serviceContainer =
+                    GetService(typeof(IServiceContainer)) as IServiceContainer;
                 if (serviceContainer != null)
                     serviceContainer.RemoveService(typeof(DynamicActionMessageFilter));
             }
@@ -129,7 +129,10 @@ namespace System.Workflow.ComponentModel.Design
                         for (int j = 0; j < action.Buttons.Count; j++)
                         {
                             Rectangle buttonBounds = GetButtonBounds(i, j);
-                            if (buttonBounds.Contains(clientPoint) && action.Buttons[j].State == ActionButton.States.Disabled)
+                            if (
+                                buttonBounds.Contains(clientPoint)
+                                && action.Buttons[j].State == ActionButton.States.Disabled
+                            )
                                 return true;
                         }
 
@@ -189,8 +192,10 @@ namespace System.Workflow.ComponentModel.Design
                             if (buttonContainsPoint && infoTip.Length == 0)
                                 infoTip = actionButton.Description;
 
-                            if (actionButton.State != ActionButton.States.Disabled &&
-                                actionButton.State != ActionButton.States.Pressed)
+                            if (
+                                actionButton.State != ActionButton.States.Disabled
+                                && actionButton.State != ActionButton.States.Pressed
+                            )
                             {
                                 if (buttonContainsPoint)
                                     actionButton.State = ActionButton.States.Highlight;
@@ -261,7 +266,10 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 Rectangle buttonBounds = GetButtonBounds(i, j);
 
-                                if (buttonBounds.Contains(clientPoint) && action.ActionType != DynamicAction.ActionTypes.TwoState)
+                                if (
+                                    buttonBounds.Contains(clientPoint)
+                                    && action.ActionType != DynamicAction.ActionTypes.TwoState
+                                )
                                     actionButton.State = ActionButton.States.Highlight;
                                 else if (actionButton.State == ActionButton.States.Highlight)
                                     actionButton.State = ActionButton.States.Normal;
@@ -294,7 +302,11 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-        protected override bool OnPaintWorkflowAdornments(PaintEventArgs e, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected override bool OnPaintWorkflowAdornments(
+            PaintEventArgs e,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             for (int i = 0; i < this.actions.Count; i++)
             {
@@ -322,7 +334,12 @@ namespace System.Workflow.ComponentModel.Design
             DynamicAction action = this.actions[actionIndex];
 
             bounds.Inflate(-action.DockMargin.Width, -action.DockMargin.Height);
-            return new Rectangle(ActivityDesignerPaint.GetRectangleFromAlignment(action.DockAlignment, bounds, action.Bounds.Size).Location, action.Bounds.Size);
+            return new Rectangle(
+                ActivityDesignerPaint
+                    .GetRectangleFromAlignment(action.DockAlignment, bounds, action.Bounds.Size)
+                    .Location,
+                action.Bounds.Size
+            );
         }
 
         private Rectangle GetButtonBounds(int actionIndex, int buttonIndex)
@@ -348,7 +365,10 @@ namespace System.Workflow.ComponentModel.Design
                     else
                     {
                         Rectangle rectangle = ParentView.ViewPortRectangle;
-                        double distance = DesignerGeometryHelper.DistanceFromPointToRectangle(point, actionBounds);
+                        double distance = DesignerGeometryHelper.DistanceFromPointToRectangle(
+                            point,
+                            actionBounds
+                        );
                         if (distance > rectangle.Width / 3 || distance > rectangle.Height / 3)
                         {
                             transparency = 0.3f;
@@ -368,10 +388,7 @@ namespace System.Workflow.ComponentModel.Design
 
         private bool IsButtonDragged
         {
-            get
-            {
-                return (this.draggedActionIndex >= 0 && this.draggedButtonIndex >= 0);
-            }
+            get { return (this.draggedActionIndex >= 0 && this.draggedButtonIndex >= 0); }
         }
 
         private void SetDraggedButton(int actionIndex, int buttonIndex)
@@ -383,7 +400,8 @@ namespace System.Workflow.ComponentModel.Design
             if (this.draggedActionIndex >= 0 && this.draggedButtonIndex >= 0)
             {
                 if (this.draggedActionIndex < this.actions.Count)
-                    this.actions[this.draggedActionIndex].Buttons[this.draggedButtonIndex].State = ActionButton.States.Highlight;
+                    this.actions[this.draggedActionIndex].Buttons[this.draggedButtonIndex].State =
+                        ActionButton.States.Highlight;
 
                 this.draggedActionIndex = -1;
                 this.draggedButtonIndex = -1;
@@ -406,10 +424,37 @@ namespace System.Workflow.ComponentModel.Design
     {
         #region Members and constructor
         private static float DefaultTransparency = 0.0f;
-        private static Size[] Sizes = new Size[] { new Size(20, 20), new Size(24, 24), new Size(28, 28), new Size(32, 32), new Size(36, 36) };
-        private static Size[] Margins = new Size[] { new Size(1, 1), new Size(1, 1), new Size(2, 2), new Size(2, 2), new Size(3, 3) };
-        internal enum ButtonSizes { Small = 0, SmallMedium = 1, Medium = 2, MediumLarge = 3, Large = 4 };
-        internal enum ActionTypes { Standard = 1, TwoState = 2 };
+        private static Size[] Sizes = new Size[]
+        {
+            new Size(20, 20),
+            new Size(24, 24),
+            new Size(28, 28),
+            new Size(32, 32),
+            new Size(36, 36),
+        };
+        private static Size[] Margins = new Size[]
+        {
+            new Size(1, 1),
+            new Size(1, 1),
+            new Size(2, 2),
+            new Size(2, 2),
+            new Size(3, 3),
+        };
+
+        internal enum ButtonSizes
+        {
+            Small = 0,
+            SmallMedium = 1,
+            Medium = 2,
+            MediumLarge = 3,
+            Large = 4,
+        };
+
+        internal enum ActionTypes
+        {
+            Standard = 1,
+            TwoState = 2,
+        };
 
         private ItemList<ActionButton> buttons = null;
         private ButtonSizes buttonSizeType = ButtonSizes.Medium;
@@ -450,40 +495,23 @@ namespace System.Workflow.ComponentModel.Design
         #region Properties and Methods
         internal IList<ActionButton> Buttons
         {
-            get
-            {
-                return this.buttons;
-            }
+            get { return this.buttons; }
         }
 
         internal Size DockMargin
         {
-            get
-            {
-                return this.dockMargin;
-            }
-
-            set
-            {
-                this.dockMargin = value;
-            }
+            get { return this.dockMargin; }
+            set { this.dockMargin = value; }
         }
 
         internal ActionTypes ActionType
         {
-            get
-            {
-                return this.actionType;
-            }
+            get { return this.actionType; }
         }
 
         internal ButtonSizes ButtonSize
         {
-            get
-            {
-                return this.buttonSizeType;
-            }
-
+            get { return this.buttonSizeType; }
             set
             {
                 if (this.buttonSizeType == value)
@@ -497,11 +525,7 @@ namespace System.Workflow.ComponentModel.Design
 
         internal DesignerContentAlignment DockAlignment
         {
-            get
-            {
-                return this.dockAlignment;
-            }
-
+            get { return this.dockAlignment; }
             set
             {
                 if (this.dockAlignment == value)
@@ -513,11 +537,7 @@ namespace System.Workflow.ComponentModel.Design
 
         internal float Transparency
         {
-            get
-            {
-                return this.transparency;
-            }
-
+            get { return this.transparency; }
             set
             {
                 if (this.transparency == value)
@@ -532,7 +552,13 @@ namespace System.Workflow.ComponentModel.Design
             if (this.transparency == 0 || this.buttons.Count == 0)
                 return;
 
-            ActivityDesignerPaint.Draw3DButton(graphics, null, Bounds, this.transparency - 0.1f, ButtonState.Normal);
+            ActivityDesignerPaint.Draw3DButton(
+                graphics,
+                null,
+                Bounds,
+                this.transparency - 0.1f,
+                ButtonState.Normal
+            );
 
             for (int i = 0; i < this.buttons.Count; i++)
             {
@@ -541,22 +567,50 @@ namespace System.Workflow.ComponentModel.Design
                 if (button.StateImages.Length == 1)
                 {
                     Image buttonImage = button.StateImages[0];
-                    if (button.State == ActionButton.States.Normal || button.State == ActionButton.States.Disabled)
+                    if (
+                        button.State == ActionButton.States.Normal
+                        || button.State == ActionButton.States.Disabled
+                    )
                     {
                         buttonBounds.Inflate(-2, -2);
-                        ActivityDesignerPaint.DrawImage(graphics, buttonImage, buttonBounds, new Rectangle(Point.Empty, buttonImage.Size), DesignerContentAlignment.Fill, transparency, (button.State == ActionButton.States.Disabled));
+                        ActivityDesignerPaint.DrawImage(
+                            graphics,
+                            buttonImage,
+                            buttonBounds,
+                            new Rectangle(Point.Empty, buttonImage.Size),
+                            DesignerContentAlignment.Fill,
+                            transparency,
+                            (button.State == ActionButton.States.Disabled)
+                        );
                     }
                     else
                     {
-                        ButtonState state = (button.State == ActionButton.States.Highlight) ? ButtonState.Normal : ButtonState.Pushed;
-                        ActivityDesignerPaint.Draw3DButton(graphics, buttonImage, buttonBounds, this.transparency, state);
+                        ButtonState state =
+                            (button.State == ActionButton.States.Highlight)
+                                ? ButtonState.Normal
+                                : ButtonState.Pushed;
+                        ActivityDesignerPaint.Draw3DButton(
+                            graphics,
+                            buttonImage,
+                            buttonBounds,
+                            this.transparency,
+                            state
+                        );
                     }
                 }
                 else
                 {
                     Image buttonImage = this.buttons[i].StateImages[(int)this.buttons[i].State];
                     buttonBounds.Inflate(-2, -2);
-                    ActivityDesignerPaint.DrawImage(graphics, buttonImage, buttonBounds, new Rectangle(Point.Empty, buttonImage.Size), DesignerContentAlignment.Fill, this.transparency, false);
+                    ActivityDesignerPaint.DrawImage(
+                        graphics,
+                        buttonImage,
+                        buttonBounds,
+                        new Rectangle(Point.Empty, buttonImage.Size),
+                        DesignerContentAlignment.Fill,
+                        this.transparency,
+                        false
+                    );
                 }
             }
         }
@@ -567,8 +621,12 @@ namespace System.Workflow.ComponentModel.Design
             {
                 Size size = Size.Empty;
                 int buttonCount = Math.Max(1, this.buttons.Count);
-                size.Width = (2 * borderSize.Width) + (buttonCount * this.buttonSize.Width) + ((buttonCount + 1) * this.margin.Width);
-                size.Height = (2 * borderSize.Height) + this.buttonSize.Height + (2 * this.margin.Height);
+                size.Width =
+                    (2 * borderSize.Width)
+                    + (buttonCount * this.buttonSize.Width)
+                    + ((buttonCount + 1) * this.margin.Width);
+                size.Height =
+                    (2 * borderSize.Height) + this.buttonSize.Height + (2 * this.margin.Height);
                 return new Rectangle(Point.Empty, size);
             }
         }
@@ -579,7 +637,10 @@ namespace System.Workflow.ComponentModel.Design
                 throw new ArgumentOutOfRangeException("buttonIndex");
 
             Rectangle rectangle = Rectangle.Empty;
-            rectangle.X = this.borderSize.Width + (buttonIndex * this.buttonSize.Width) + ((buttonIndex + 1) * this.margin.Width);
+            rectangle.X =
+                this.borderSize.Width
+                + (buttonIndex * this.buttonSize.Width)
+                + ((buttonIndex + 1) * this.margin.Width);
             rectangle.Y = this.borderSize.Height + this.margin.Height;
             rectangle.Size = this.buttonSize;
             return rectangle;
@@ -592,7 +653,13 @@ namespace System.Workflow.ComponentModel.Design
     internal sealed class ActionButton : IDisposable
     {
         #region Members, Constructor and Destruction
-        internal enum States { Normal = 0, Highlight = 1, Pressed = 2, Disabled = 3 };
+        internal enum States
+        {
+            Normal = 0,
+            Highlight = 1,
+            Pressed = 2,
+            Disabled = 3,
+        };
 
         internal event EventHandler StateChanged;
 
@@ -605,19 +672,13 @@ namespace System.Workflow.ComponentModel.Design
             StateImages = stateImages;
         }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
         #endregion
 
         #region Properties and Methods
         internal Image[] StateImages
         {
-            get
-            {
-                return this.stateImages;
-            }
-
+            get { return this.stateImages; }
             set
             {
                 if (value == null)
@@ -638,11 +699,7 @@ namespace System.Workflow.ComponentModel.Design
 
         internal States State
         {
-            get
-            {
-                return this.buttonState;
-            }
-
+            get { return this.buttonState; }
             set
             {
                 if (this.buttonState == value)
@@ -657,15 +714,8 @@ namespace System.Workflow.ComponentModel.Design
 
         internal string Description
         {
-            get
-            {
-                return this.description;
-            }
-
-            set
-            {
-                this.description = value;
-            }
+            get { return this.description; }
+            set { this.description = value; }
         }
         #endregion
     }

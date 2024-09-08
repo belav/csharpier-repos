@@ -15,7 +15,8 @@ public static class ModelBinderProviderExtensions
     /// </summary>
     /// <param name="list">The list of <see cref="IModelBinderProvider"/>s.</param>
     /// <typeparam name="TModelBinderProvider">The type to remove.</typeparam>
-    public static void RemoveType<TModelBinderProvider>(this IList<IModelBinderProvider> list) where TModelBinderProvider : IModelBinderProvider
+    public static void RemoveType<TModelBinderProvider>(this IList<IModelBinderProvider> list)
+        where TModelBinderProvider : IModelBinderProvider
     {
         ArgumentNullException.ThrowIfNull(list);
 

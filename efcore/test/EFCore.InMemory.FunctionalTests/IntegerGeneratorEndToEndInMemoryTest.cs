@@ -31,10 +31,8 @@ public class IntegerGeneratorEndToEndInMemoryTest
         using var context = new BronieContext(serviceProvider);
         for (var i = 0; i < 50; i++)
         {
-            context.Add(
-                new Pegasus { Name = "Rainbow Dash " + i });
-            context.Add(
-                new Pegasus { Name = "Fluttershy " + i });
+            context.Add(new Pegasus { Name = "Rainbow Dash " + i });
+            context.Add(new Pegasus { Name = "Fluttershy " + i });
         }
 
         context.SaveChanges();
@@ -66,10 +64,8 @@ public class IntegerGeneratorEndToEndInMemoryTest
         using var context = new BronieContext(serviceProvider);
         for (var i = 0; i < 50; i++)
         {
-            await context.AddAsync(
-                new Pegasus { Name = "Rainbow Dash " + i });
-            await context.AddAsync(
-                new Pegasus { Name = "Fluttershy " + i });
+            await context.AddAsync(new Pegasus { Name = "Rainbow Dash " + i });
+            await context.AddAsync(new Pegasus { Name = "Fluttershy " + i });
         }
 
         await context.SaveChangesAsync();
@@ -118,8 +114,8 @@ public class IntegerGeneratorEndToEndInMemoryTest
             _serviceProvider = serviceProvider;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(BronieContext))
                 .UseInternalServiceProvider(_serviceProvider);
 

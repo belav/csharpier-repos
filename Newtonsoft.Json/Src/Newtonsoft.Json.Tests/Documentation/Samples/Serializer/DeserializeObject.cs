@@ -54,7 +54,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'Email': 'james@example.com',
               'Active': true,
               'CreatedDate': '2013-01-20T00:00:00Z',

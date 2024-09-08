@@ -14,30 +14,59 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.MakeTypeAbstract
 {
-    internal abstract class AbstractMakeTypeAbstractCodeFixProvider<TTypeDeclarationSyntax> : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractMakeTypeAbstractCodeFixProvider<TTypeDeclarationSyntax>
+        : SyntaxEditorBasedCodeFixProvider
         where TTypeDeclarationSyntax : SyntaxNode
     {
-        protected abstract bool IsValidRefactoringContext(SyntaxNode? node, [NotNullWhen(true)] out TTypeDeclarationSyntax? typeDeclaration);
+        protected abstract bool IsValidRefactoringContext(
+            SyntaxNode? node,
+            [NotNullWhen(true)] out TTypeDeclarationSyntax? typeDeclaration
+        );
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            if (IsValidRefactoringContext(context.Diagnostics[0].Location?.FindNode(context.CancellationToken), out _))
+            if (
+                IsValidRefactoringContext(
+                    context.Diagnostics[0].Location?.FindNode(context.CancellationToken),
+                    out _
+                )
+            )
             {
-                RegisterCodeFix(context, CodeFixesResources.Make_class_abstract, CodeFixesResources.Make_class_abstract);
+                RegisterCodeFix(
+                    context,
+                    CodeFixesResources.Make_class_abstract,
+                    CodeFixesResources.Make_class_abstract
+                );
             }
 
             return Task.CompletedTask;
         }
 
-        protected sealed override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor,
-            CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected sealed override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             for (var i = 0; i < diagnostics.Length; i++)
             {
-                if (IsValidRefactoringContext(diagnostics[i].Location?.FindNode(cancellationToken), out var typeDeclaration))
+                if (
+                    IsValidRefactoringContext(
+                        diagnostics[i].Location?.FindNode(cancellationToken),
+                        out var typeDeclaration
+                    )
+                )
                 {
-                    editor.ReplaceNode(typeDeclaration,
-                        (currentTypeDeclaration, generator) => generator.WithModifiers(currentTypeDeclaration, generator.GetModifiers(currentTypeDeclaration).WithIsAbstract(true)));
+                    editor.ReplaceNode(
+                        typeDeclaration,
+                        (currentTypeDeclaration, generator) =>
+                            generator.WithModifiers(
+                                currentTypeDeclaration,
+                                generator.GetModifiers(currentTypeDeclaration).WithIsAbstract(true)
+                            )
+                    );
                 }
             }
 

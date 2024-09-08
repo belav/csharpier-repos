@@ -4,15 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Xml;
 
     /*         <!--
         trace Attributes:
@@ -31,53 +32,63 @@ namespace System.Web.Configuration {
         />
  */
 
-    public sealed class TraceSection : ConfigurationSection {
+    public sealed class TraceSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled", 
-                                        typeof(bool), 
-                                        false, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propLocalOnly =
-            new ConfigurationProperty("localOnly", 
-                                        typeof(bool), 
-                                        true, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propMostRecent =
-            new ConfigurationProperty("mostRecent", 
-                                        typeof(bool), 
-                                        false, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propPageOutput =
-            new ConfigurationProperty("pageOutput", 
-                                        typeof(bool), 
-                                        false, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propLocalOnly = new ConfigurationProperty(
+            "localOnly",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propRequestLimit =
-            new ConfigurationProperty("requestLimit",
-                                        typeof(int),
-                                        10,
-                                        null,
-                                        StdValidatorsAndConverters.PositiveIntegerValidator,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propMostRecent = new ConfigurationProperty(
+            "mostRecent",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propMode =
-            new ConfigurationProperty("traceMode", 
-                                        typeof(TraceDisplayMode), 
-                                        TraceDisplayMode.SortByTime, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propPageOutput = new ConfigurationProperty(
+            "pageOutput",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propRequestLimit = new ConfigurationProperty(
+            "requestLimit",
+            typeof(int),
+            10,
+            null,
+            StdValidatorsAndConverters.PositiveIntegerValidator,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propMode = new ConfigurationProperty(
+            "traceMode",
+            typeof(TraceDisplayMode),
+            TraceDisplayMode.SortByTime,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _writeToDiagnosticTrace =
-            new ConfigurationProperty("writeToDiagnosticsTrace", 
-                                        typeof(bool), 
-                                        false, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "writeToDiagnosticsTrace",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
 
-        static TraceSection() {
+        static TraceSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propEnabled);
@@ -89,84 +100,61 @@ namespace System.Web.Configuration {
             _properties.Add(_writeToDiagnosticTrace);
         }
 
-        public TraceSection() {
-        }
+        public TraceSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = false)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("mostRecent", DefaultValue = false)]
-        public bool MostRecent {
-            get {
-                return (bool)base[_propMostRecent];
-            }
-            set {
-                base[_propMostRecent] = value;
-            }
+        public bool MostRecent
+        {
+            get { return (bool)base[_propMostRecent]; }
+            set { base[_propMostRecent] = value; }
         }
 
         [ConfigurationProperty("localOnly", DefaultValue = true)]
-        public bool LocalOnly {
-            get {
-                return (bool)base[_propLocalOnly];
-            }
-            set {
-                base[_propLocalOnly] = value;
-            }
+        public bool LocalOnly
+        {
+            get { return (bool)base[_propLocalOnly]; }
+            set { base[_propLocalOnly] = value; }
         }
 
         [ConfigurationProperty("pageOutput", DefaultValue = false)]
-        public bool PageOutput {
-            get {
-                return (bool)base[_propPageOutput];
-            }
-            set {
-                base[_propPageOutput] = value;
-            }
+        public bool PageOutput
+        {
+            get { return (bool)base[_propPageOutput]; }
+            set { base[_propPageOutput] = value; }
         }
 
         [ConfigurationProperty("requestLimit", DefaultValue = 10)]
         [IntegerValidator(MinValue = 0)]
-        public int RequestLimit {
-            get {
-                return (int)base[_propRequestLimit];
-            }
-            set {
-                base[_propRequestLimit] = value;
-            }
+        public int RequestLimit
+        {
+            get { return (int)base[_propRequestLimit]; }
+            set { base[_propRequestLimit] = value; }
         }
 
         [ConfigurationProperty("traceMode", DefaultValue = TraceDisplayMode.SortByTime)]
-        public TraceDisplayMode TraceMode {
-            get {
-                return (TraceDisplayMode)base[_propMode];
-            }
-            set {
-                base[_propMode] = value;
-            }
+        public TraceDisplayMode TraceMode
+        {
+            get { return (TraceDisplayMode)base[_propMode]; }
+            set { base[_propMode] = value; }
         }
 
         [ConfigurationProperty("writeToDiagnosticsTrace", DefaultValue = false)]
-        public bool WriteToDiagnosticsTrace {
-            get {
-                return (bool)base[_writeToDiagnosticTrace];
-            }
-            set {
-                base[_writeToDiagnosticTrace] = value;
-            }
+        public bool WriteToDiagnosticsTrace
+        {
+            get { return (bool)base[_writeToDiagnosticTrace]; }
+            set { base[_writeToDiagnosticTrace] = value; }
         }
     }
 }

@@ -28,7 +28,6 @@ namespace System.Data
         // Defines the singleton instance for the Resources ETW provider
         internal static readonly SqlEventSource Log = new SqlEventSource();
 
-
         /// <summary>
         /// Keyword definitions.  These represent logical groups of events that can be turned on and off independently
         /// Often each task has a keyword, but where tasks are determined by subsystem, keywords are determined by
@@ -47,30 +46,44 @@ namespace System.Data
             public const EventTask ExecuteCommand = (EventTask)1;
         }
 
-        private SqlEventSource() 
-        {
-        }
+        private SqlEventSource() { }
 
-        // unfortunately these are not marked as Start/Stop opcodes.  The reason is that we dont want them to participate in 
-        // the EventSource activity IDs (because they currently don't use tasks and this simply confuses the logic) and 
-        // because of versioning requirements we don't have ActivityOptions capability (because mscorlib and System.Data version 
+        // unfortunately these are not marked as Start/Stop opcodes.  The reason is that we dont want them to participate in
+        // the EventSource activity IDs (because they currently don't use tasks and this simply confuses the logic) and
+        // because of versioning requirements we don't have ActivityOptions capability (because mscorlib and System.Data version
         // at different rates)  Sigh...
         [Event(SqlEventSource.BeginExecuteEventId, Keywords = Keywords.SqlClient)]
-        public void BeginExecute(int objectId, string dataSource, string database, string commandText)
+        public void BeginExecute(
+            int objectId,
+            string dataSource,
+            string database,
+            string commandText
+        )
         {
-            // we do not use unsafe code for better performance optization here because optimized helpers make the code unsafe where that would not be the case otherwise. 
-            // This introduces the question of partial trust, which is complex in the SQL case (there are a lot of scenarios and SQL has special security support).   
-            WriteEvent(SqlEventSource.BeginExecuteEventId, objectId, dataSource, database, commandText);
+            // we do not use unsafe code for better performance optization here because optimized helpers make the code unsafe where that would not be the case otherwise.
+            // This introduces the question of partial trust, which is complex in the SQL case (there are a lot of scenarios and SQL has special security support).
+            WriteEvent(
+                SqlEventSource.BeginExecuteEventId,
+                objectId,
+                dataSource,
+                database,
+                commandText
+            );
         }
 
-        // unfortunately these are not marked as Start/Stop opcodes.  The reason is that we dont want them to participate in 
-        // the EventSource activity IDs (because they currently don't use tasks and this simply confuses the logic) and 
-        // because of versioning requirements we don't have ActivityOptions capability (because mscorlib and System.Data version 
+        // unfortunately these are not marked as Start/Stop opcodes.  The reason is that we dont want them to participate in
+        // the EventSource activity IDs (because they currently don't use tasks and this simply confuses the logic) and
+        // because of versioning requirements we don't have ActivityOptions capability (because mscorlib and System.Data version
         // at different rates)  Sigh...
         [Event(SqlEventSource.EndExecuteEventId, Keywords = Keywords.SqlClient)]
         public void EndExecute(int objectId, int compositeState, int sqlExceptionNumber)
         {
-            WriteEvent(SqlEventSource.EndExecuteEventId, objectId, compositeState, sqlExceptionNumber);
+            WriteEvent(
+                SqlEventSource.EndExecuteEventId,
+                objectId,
+                compositeState,
+                sqlExceptionNumber
+            );
         }
     }
 }

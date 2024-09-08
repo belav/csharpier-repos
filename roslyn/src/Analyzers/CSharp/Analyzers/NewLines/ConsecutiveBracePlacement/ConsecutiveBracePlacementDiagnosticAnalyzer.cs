@@ -14,35 +14,53 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConsecutiveBracePlacementDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConsecutiveBracePlacementDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConsecutiveBracePlacementDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId,
-                   EnforceOnBuildValues.ConsecutiveBracePlacement,
-                   CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
-                   new LocalizableResourceString(
-                       nameof(CSharpAnalyzersResources.Consecutive_braces_must_not_have_a_blank_between_them), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId,
+                EnforceOnBuildValues.ConsecutiveBracePlacement,
+                CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces,
+                new LocalizableResourceString(
+                    nameof(
+                        CSharpAnalyzersResources.Consecutive_braces_must_not_have_a_blank_between_them
+                    ),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SyntaxTreeWithoutSemanticsAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterCompilationStartAction(context =>
-                context.RegisterSyntaxTreeAction(treeContext => AnalyzeTree(treeContext, context.Compilation.Options)));
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterCompilationStartAction(context =>
+                context.RegisterSyntaxTreeAction(treeContext =>
+                    AnalyzeTree(treeContext, context.Compilation.Options)
+                )
+            );
 
-        private void AnalyzeTree(SyntaxTreeAnalysisContext context, CompilationOptions compilationOptions)
+        private void AnalyzeTree(
+            SyntaxTreeAnalysisContext context,
+            CompilationOptions compilationOptions
+        )
         {
             var option = context.GetCSharpAnalyzerOptions().AllowBlankLinesBetweenConsecutiveBraces;
-            if (option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification))
+            if (
+                option.Value || ShouldSkipAnalysis(context, compilationOptions, option.Notification)
+            )
                 return;
 
             using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var stack);
             Recurse(context, option.Notification, stack);
         }
 
-        private void Recurse(SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, ArrayBuilder<SyntaxNode> stack)
+        private void Recurse(
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            ArrayBuilder<SyntaxNode> stack
+        )
         {
             var tree = context.Tree;
             var cancellationToken = context.CancellationToken;
@@ -59,7 +77,10 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                 stack.RemoveLast();
 
                 // Don't bother analyzing nodes that have syntax errors in them.
-                if (current.ContainsDiagnostics && current.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
+                if (
+                    current.ContainsDiagnostics
+                    && current.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error)
+                )
                     continue;
 
                 foreach (var child in current.ChildNodesAndTokens())
@@ -75,23 +96,33 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             }
         }
 
-        private void ProcessToken(SyntaxTreeAnalysisContext context, NotificationOption2 notificationOption, SourceText text, SyntaxToken token)
+        private void ProcessToken(
+            SyntaxTreeAnalysisContext context,
+            NotificationOption2 notificationOption,
+            SourceText text,
+            SyntaxToken token
+        )
         {
             if (!HasExcessBlankLinesAfter(text, token, out var secondBrace, out _))
                 return;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                secondBrace.GetLocation(),
-                notificationOption,
-                additionalLocations: null,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    secondBrace.GetLocation(),
+                    notificationOption,
+                    additionalLocations: null,
+                    properties: null
+                )
+            );
         }
 
         public static bool HasExcessBlankLinesAfter(
-            SourceText text, SyntaxToken token,
+            SourceText text,
+            SyntaxToken token,
             out SyntaxToken secondBrace,
-            out SyntaxTrivia endOfLineTrivia)
+            out SyntaxTrivia endOfLineTrivia
+        )
         {
             secondBrace = default;
             endOfLineTrivia = default;
@@ -124,7 +155,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                     return false;
             }
 
-            endOfLineTrivia = secondBrace.LeadingTrivia.Last(t => t.IsKind(SyntaxKind.EndOfLineTrivia));
+            endOfLineTrivia = secondBrace.LeadingTrivia.Last(t =>
+                t.IsKind(SyntaxKind.EndOfLineTrivia)
+            );
             return endOfLineTrivia != default;
         }
 

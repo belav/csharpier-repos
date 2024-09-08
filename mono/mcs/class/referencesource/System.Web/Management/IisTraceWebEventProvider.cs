@@ -4,25 +4,32 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Management {
+namespace System.Web.Management
+{
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Provider;
-    using System.Collections.Specialized;
-    using System.Web.Util;
-    using System.Web.Hosting;
     using System.Security.Permissions;
+    using System.Web.Hosting;
+    using System.Web.Util;
 
     ////////////
     // Events
     ////////////
 
-    public sealed class IisTraceWebEventProvider  : WebEventProvider {
-
-        public IisTraceWebEventProvider() {
+    public sealed class IisTraceWebEventProvider : WebEventProvider
+    {
+        public IisTraceWebEventProvider()
+        {
             // only supported on IIS version 7 and later
             HttpContext context = HttpContext.Current;
-            if (context != null) {
-                if (!HttpRuntime.UseIntegratedPipeline && !(context.WorkerRequest is ISAPIWorkerRequestInProcForIIS7)) {
+            if (context != null)
+            {
+                if (
+                    !HttpRuntime.UseIntegratedPipeline
+                    && !(context.WorkerRequest is ISAPIWorkerRequestInProcForIIS7)
+                )
+                {
                     throw new PlatformNotSupportedException(SR.GetString(SR.Requires_Iis_7));
                 }
             }
@@ -36,23 +43,17 @@ namespace System.Web.Management {
             ProviderUtil.CheckUnrecognizedAttributes(config, name);
         }
 
-
         public override void ProcessEvent(WebBaseEvent eventRaised)
         {
             HttpContext context = HttpContext.Current;
-            if (context != null) {
+            if (context != null)
+            {
                 context.WorkerRequest.RaiseTraceEvent(eventRaised);
             }
         }
-        
 
-        public override void Flush() {
-        }
+        public override void Flush() { }
 
-
-        public override void Shutdown() {
-        }
+        public override void Shutdown() { }
     }
-
 }
-

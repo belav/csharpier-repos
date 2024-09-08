@@ -7,6 +7,4 @@ namespace Microsoft.AspNetCore.Mvc.Localization;
 /// An <see cref="IHtmlLocalizer"/> that provides localized HTML content.
 /// </summary>
 /// <typeparam name="TResource">The <see cref="System.Type"/> to scope the resource names.</typeparam>
-public interface IHtmlLocalizer<TResource> : IHtmlLocalizer
-{
-}
+public interface IHtmlLocalizer<TResource> : IHtmlLocalizer { }

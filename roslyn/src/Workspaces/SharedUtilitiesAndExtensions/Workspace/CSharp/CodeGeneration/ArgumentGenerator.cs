@@ -20,10 +20,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return (ArgumentSyntax)argument;
         }
 
-        public static ArgumentListSyntax GenerateArgumentList(IList<SyntaxNode> arguments)
-            => SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(arguments.Select(GenerateArgument)));
+        public static ArgumentListSyntax GenerateArgumentList(IList<SyntaxNode> arguments) =>
+            SyntaxFactory.ArgumentList(
+                SyntaxFactory.SeparatedList(arguments.Select(GenerateArgument))
+            );
 
-        public static BracketedArgumentListSyntax GenerateBracketedArgumentList(IList<SyntaxNode> arguments)
-            => SyntaxFactory.BracketedArgumentList(SyntaxFactory.SeparatedList(arguments.Select(GenerateArgument)));
+        public static BracketedArgumentListSyntax GenerateBracketedArgumentList(
+            IList<SyntaxNode> arguments
+        ) =>
+            SyntaxFactory.BracketedArgumentList(
+                SyntaxFactory.SeparatedList(arguments.Select(GenerateArgument))
+            );
     }
 }

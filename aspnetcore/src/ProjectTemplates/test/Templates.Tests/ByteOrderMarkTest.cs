@@ -27,9 +27,7 @@ public class ByteOrderMarkTest : LoggedTest
         }
     }
 
-    public ByteOrderMarkTest()
-    {
-    }
+    public ByteOrderMarkTest() { }
 
     [Theory]
     [InlineData("Web.ProjectTemplates")]
@@ -78,8 +76,12 @@ public class ByteOrderMarkTest : LoggedTest
 
         var nonBOMFilesPresent = false;
 
-        var files = (IEnumerable<string>)Directory.GetFiles(templateDirectoryPath, "*.cshtml", SearchOption.AllDirectories);
-        files = files.Concat(Directory.GetFiles(templateDirectoryPath, "*.razor", SearchOption.AllDirectories));
+        var files =
+            (IEnumerable<string>)
+                Directory.GetFiles(templateDirectoryPath, "*.cshtml", SearchOption.AllDirectories);
+        files = files.Concat(
+            Directory.GetFiles(templateDirectoryPath, "*.razor", SearchOption.AllDirectories)
+        );
 
         foreach (var file in files)
         {
@@ -91,7 +93,11 @@ public class ByteOrderMarkTest : LoggedTest
 
             // Check for UTF8 BOM 0xEF,0xBB,0xBF
             var expectedBytes = Encoding.UTF8.GetPreamble();
-            if (bytes[0] != expectedBytes[0] || bytes[1] != expectedBytes[1] || bytes[2] != expectedBytes[2])
+            if (
+                bytes[0] != expectedBytes[0]
+                || bytes[1] != expectedBytes[1]
+                || bytes[2] != expectedBytes[2]
+            )
             {
                 Output.WriteLine($"File {filePath} does not have UTF-8 BOM characters.");
                 nonBOMFilesPresent = true;

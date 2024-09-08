@@ -8,7 +8,10 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Append<TSource>(this IEnumerable<TSource> source, TSource element)
+        public static IEnumerable<TSource> Append<TSource>(
+            this IEnumerable<TSource> source,
+            TSource element
+        )
         {
             if (source == null)
             {
@@ -20,7 +23,10 @@ namespace System.Linq
                 : new AppendPrepend1Iterator<TSource>(source, element, appending: true);
         }
 
-        public static IEnumerable<TSource> Prepend<TSource>(this IEnumerable<TSource> source, TSource element)
+        public static IEnumerable<TSource> Prepend<TSource>(
+            this IEnumerable<TSource> source,
+            TSource element
+        )
         {
             if (source == null)
             {
@@ -86,7 +92,8 @@ namespace System.Linq
         /// Represents the insertion of an item before or after an <see cref="IEnumerable{TSource}"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        private sealed partial class AppendPrepend1Iterator<TSource> : AppendPrependIterator<TSource>
+        private sealed partial class AppendPrepend1Iterator<TSource>
+            : AppendPrependIterator<TSource>
         {
             private readonly TSource _item;
             private readonly bool _appending;
@@ -98,7 +105,8 @@ namespace System.Linq
                 _appending = appending;
             }
 
-            public override Iterator<TSource> Clone() => new AppendPrepend1Iterator<TSource>(_source, _item, _appending);
+            public override Iterator<TSource> Clone() =>
+                new AppendPrepend1Iterator<TSource>(_source, _item, _appending);
 
             public override bool MoveNext()
             {
@@ -140,11 +148,23 @@ namespace System.Linq
             {
                 if (_appending)
                 {
-                    return new AppendPrependN<TSource>(_source, null, new SingleLinkedNode<TSource>(_item).Add(item), prependCount: 0, appendCount: 2);
+                    return new AppendPrependN<TSource>(
+                        _source,
+                        null,
+                        new SingleLinkedNode<TSource>(_item).Add(item),
+                        prependCount: 0,
+                        appendCount: 2
+                    );
                 }
                 else
                 {
-                    return new AppendPrependN<TSource>(_source, new SingleLinkedNode<TSource>(_item), new SingleLinkedNode<TSource>(item), prependCount: 1, appendCount: 1);
+                    return new AppendPrependN<TSource>(
+                        _source,
+                        new SingleLinkedNode<TSource>(_item),
+                        new SingleLinkedNode<TSource>(item),
+                        prependCount: 1,
+                        appendCount: 1
+                    );
                 }
             }
 
@@ -152,11 +172,23 @@ namespace System.Linq
             {
                 if (_appending)
                 {
-                    return new AppendPrependN<TSource>(_source, new SingleLinkedNode<TSource>(item), new SingleLinkedNode<TSource>(_item), prependCount: 1, appendCount: 1);
+                    return new AppendPrependN<TSource>(
+                        _source,
+                        new SingleLinkedNode<TSource>(item),
+                        new SingleLinkedNode<TSource>(_item),
+                        prependCount: 1,
+                        appendCount: 1
+                    );
                 }
                 else
                 {
-                    return new AppendPrependN<TSource>(_source, new SingleLinkedNode<TSource>(_item).Add(item), null, prependCount: 2, appendCount: 0);
+                    return new AppendPrependN<TSource>(
+                        _source,
+                        new SingleLinkedNode<TSource>(_item).Add(item),
+                        null,
+                        prependCount: 2,
+                        appendCount: 0
+                    );
                 }
             }
         }
@@ -173,7 +205,13 @@ namespace System.Linq
             private readonly int _appendCount;
             private SingleLinkedNode<TSource>? _node;
 
-            public AppendPrependN(IEnumerable<TSource> source, SingleLinkedNode<TSource>? prepended, SingleLinkedNode<TSource>? appended, int prependCount, int appendCount)
+            public AppendPrependN(
+                IEnumerable<TSource> source,
+                SingleLinkedNode<TSource>? prepended,
+                SingleLinkedNode<TSource>? appended,
+                int prependCount,
+                int appendCount
+            )
                 : base(source)
             {
                 Debug.Assert(prepended != null || appended != null);
@@ -188,7 +226,14 @@ namespace System.Linq
                 _appendCount = appendCount;
             }
 
-            public override Iterator<TSource> Clone() => new AppendPrependN<TSource>(_source, _prepended, _appended, _prependCount, _appendCount);
+            public override Iterator<TSource> Clone() =>
+                new AppendPrependN<TSource>(
+                    _source,
+                    _prepended,
+                    _appended,
+                    _prependCount,
+                    _appendCount
+                );
 
             public override bool MoveNext()
             {
@@ -220,7 +265,9 @@ namespace System.Linq
                             return false;
                         }
 
-                        _enumerator = ((IEnumerable<TSource>)_appended.ToArray(_appendCount)).GetEnumerator();
+                        _enumerator = (
+                            (IEnumerable<TSource>)_appended.ToArray(_appendCount)
+                        ).GetEnumerator();
                         _state = 4;
                         goto case 4;
                     case 4:
@@ -233,14 +280,28 @@ namespace System.Linq
 
             public override AppendPrependIterator<TSource> Append(TSource item)
             {
-                var appended = _appended != null ? _appended.Add(item) : new SingleLinkedNode<TSource>(item);
-                return new AppendPrependN<TSource>(_source, _prepended, appended, _prependCount, _appendCount + 1);
+                var appended =
+                    _appended != null ? _appended.Add(item) : new SingleLinkedNode<TSource>(item);
+                return new AppendPrependN<TSource>(
+                    _source,
+                    _prepended,
+                    appended,
+                    _prependCount,
+                    _appendCount + 1
+                );
             }
 
             public override AppendPrependIterator<TSource> Prepend(TSource item)
             {
-                var prepended = _prepended != null ? _prepended.Add(item) : new SingleLinkedNode<TSource>(item);
-                return new AppendPrependN<TSource>(_source, prepended, _appended, _prependCount + 1, _appendCount);
+                var prepended =
+                    _prepended != null ? _prepended.Add(item) : new SingleLinkedNode<TSource>(item);
+                return new AppendPrependN<TSource>(
+                    _source,
+                    prepended,
+                    _appended,
+                    _prependCount + 1,
+                    _appendCount
+                );
             }
         }
     }

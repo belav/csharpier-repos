@@ -131,9 +131,7 @@ namespace System.ComponentModel.Tests
                 return null;
             }
 
-            return _designers.TryGetValue(component, out var designer)
-                ? designer
-                : null;
+            return _designers.TryGetValue(component, out var designer) ? designer : null;
         }
 
         public object GetService(Type serviceType)

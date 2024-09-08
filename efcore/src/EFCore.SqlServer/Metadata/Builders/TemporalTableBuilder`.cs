@@ -19,9 +19,7 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
     /// </summary>
     [EntityFrameworkInternal]
     public TemporalTableBuilder(EntityTypeBuilder entityTypeBuilder)
-        : base(entityTypeBuilder)
-    {
-    }
+        : base(entityTypeBuilder) { }
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -32,8 +30,8 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name)
-        => (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name);
+    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name) =>
+        (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name);
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -45,6 +43,6 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
     /// <param name="name">The name of the history table.</param>
     /// <param name="schema">The schema of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name, string? schema)
-        => (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
+    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name, string? schema) =>
+        (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
 }

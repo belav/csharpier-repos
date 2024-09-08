@@ -54,51 +54,62 @@ public class WebSocketClient
     public async Task<WebSocket> ConnectAsync(Uri uri, CancellationToken cancellationToken)
     {
         WebSocketFeature? webSocketFeature = null;
-        var contextBuilder = new HttpContextBuilder(_application, AllowSynchronousIO, PreserveExecutionContext);
-        contextBuilder.Configure((context, reader) =>
-        {
-            var request = context.Request;
-            var scheme = uri.Scheme;
-            scheme = (scheme == "ws") ? "http" : scheme;
-            scheme = (scheme == "wss") ? "https" : scheme;
-            request.Scheme = scheme;
-            if (!request.Host.HasValue)
+        var contextBuilder = new HttpContextBuilder(
+            _application,
+            AllowSynchronousIO,
+            PreserveExecutionContext
+        );
+        contextBuilder.Configure(
+            (context, reader) =>
             {
-                request.Host = uri.IsDefaultPort
-                    ? new HostString(HostString.FromUriComponent(uri).Host)
-                    : HostString.FromUriComponent(uri);
-            }
-            request.Path = PathString.FromUriComponent(uri);
-            request.PathBase = PathString.Empty;
-            if (request.Path.StartsWithSegments(_pathBase, out var remainder))
-            {
-                request.Path = remainder;
-                request.PathBase = _pathBase;
-            }
-            request.QueryString = QueryString.FromUriComponent(uri);
-            request.Headers.Add(HeaderNames.Connection, new string[] { "Upgrade" });
-            request.Headers.Add(HeaderNames.Upgrade, new string[] { "websocket" });
-            request.Headers.Add(HeaderNames.SecWebSocketVersion, new string[] { "13" });
-            request.Headers.Add(HeaderNames.SecWebSocketKey, new string[] { CreateRequestKey() });
-            if (SubProtocols.Any())
-            {
-                request.Headers.Add(HeaderNames.SecWebSocketProtocol, SubProtocols.ToArray());
-            }
+                var request = context.Request;
+                var scheme = uri.Scheme;
+                scheme = (scheme == "ws") ? "http" : scheme;
+                scheme = (scheme == "wss") ? "https" : scheme;
+                request.Scheme = scheme;
+                if (!request.Host.HasValue)
+                {
+                    request.Host = uri.IsDefaultPort
+                        ? new HostString(HostString.FromUriComponent(uri).Host)
+                        : HostString.FromUriComponent(uri);
+                }
+                request.Path = PathString.FromUriComponent(uri);
+                request.PathBase = PathString.Empty;
+                if (request.Path.StartsWithSegments(_pathBase, out var remainder))
+                {
+                    request.Path = remainder;
+                    request.PathBase = _pathBase;
+                }
+                request.QueryString = QueryString.FromUriComponent(uri);
+                request.Headers.Add(HeaderNames.Connection, new string[] { "Upgrade" });
+                request.Headers.Add(HeaderNames.Upgrade, new string[] { "websocket" });
+                request.Headers.Add(HeaderNames.SecWebSocketVersion, new string[] { "13" });
+                request.Headers.Add(
+                    HeaderNames.SecWebSocketKey,
+                    new string[] { CreateRequestKey() }
+                );
+                if (SubProtocols.Any())
+                {
+                    request.Headers.Add(HeaderNames.SecWebSocketProtocol, SubProtocols.ToArray());
+                }
 
-            request.Body = Stream.Null;
+                request.Body = Stream.Null;
 
-            // WebSocket
-            webSocketFeature = new WebSocketFeature(context);
-            context.Features.Set<IHttpWebSocketFeature>(webSocketFeature);
+                // WebSocket
+                webSocketFeature = new WebSocketFeature(context);
+                context.Features.Set<IHttpWebSocketFeature>(webSocketFeature);
 
-            ConfigureRequest?.Invoke(context.Request);
-        });
+                ConfigureRequest?.Invoke(context.Request);
+            }
+        );
 
         var httpContext = await contextBuilder.SendAsync(cancellationToken);
 
         if (httpContext.Response.StatusCode != StatusCodes.Status101SwitchingProtocols)
         {
-            throw new InvalidOperationException("Incomplete handshake, status code: " + httpContext.Response.StatusCode);
+            throw new InvalidOperationException(
+                "Incomplete handshake, status code: " + httpContext.Response.StatusCode
+            );
         }
 
         Debug.Assert(webSocketFeature != null);

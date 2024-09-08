@@ -43,7 +43,9 @@ public class BringUpTest_StructFldAddr
         rp.a = a;
         rp.b = b;
         int y = StructFldAddr(rp);
-        if (y == 5) return Pass;
-        else return Fail;
+        if (y == 5)
+            return Pass;
+        else
+            return Fail;
     }
 }

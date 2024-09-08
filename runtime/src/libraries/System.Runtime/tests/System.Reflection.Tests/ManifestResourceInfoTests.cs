@@ -11,7 +11,9 @@ namespace System.Reflection.Tests
         public void FileName()
         {
             Assembly assembly = typeof(ManifestResourceInfoTests).GetTypeInfo().Assembly;
-            ManifestResourceInfo manifestResourceInfo = assembly.GetManifestResourceInfo("ResourceTextFile.txt");
+            ManifestResourceInfo manifestResourceInfo = assembly.GetManifestResourceInfo(
+                "ResourceTextFile.txt"
+            );
             Assert.Null(manifestResourceInfo.FileName);
         }
 
@@ -19,7 +21,9 @@ namespace System.Reflection.Tests
         public void ReferencedAssembly()
         {
             Assembly assembly = typeof(ManifestResourceInfoTests).GetTypeInfo().Assembly;
-            ManifestResourceInfo manifestResourceInfo = assembly.GetManifestResourceInfo("ResourceTextFile.txt");
+            ManifestResourceInfo manifestResourceInfo = assembly.GetManifestResourceInfo(
+                "ResourceTextFile.txt"
+            );
             Assert.Null(manifestResourceInfo.ReferencedAssembly);
         }
 
@@ -27,8 +31,13 @@ namespace System.Reflection.Tests
         public void ResourceLocation()
         {
             Assembly assembly = typeof(ManifestResourceInfoTests).GetTypeInfo().Assembly;
-            ManifestResourceInfo manifestResourceInfo = assembly.GetManifestResourceInfo("ResourceTextFile.txt");
-            Assert.Equal("Embedded, ContainedInManifestFile", manifestResourceInfo.ResourceLocation.ToString());
+            ManifestResourceInfo manifestResourceInfo = assembly.GetManifestResourceInfo(
+                "ResourceTextFile.txt"
+            );
+            Assert.Equal(
+                "Embedded, ContainedInManifestFile",
+                manifestResourceInfo.ResourceLocation.ToString()
+            );
         }
     }
 }

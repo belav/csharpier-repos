@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc;
 /// </summary>
 public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
 {
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
     private Func<ActionContext, IActionResult> _invalidModelStateResponseFactory = default!;
 
     /// <summary>
@@ -24,7 +25,9 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
     public Func<ActionContext, IActionResult> InvalidModelStateResponseFactory
     {
         get => _invalidModelStateResponseFactory;
-        set => _invalidModelStateResponseFactory = value ?? throw new ArgumentNullException(nameof(value));
+        set =>
+            _invalidModelStateResponseFactory =
+                value ?? throw new ArgumentNullException(nameof(value));
     }
 
     /// <summary>
@@ -89,9 +92,11 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
     /// Use of this feature can be disabled by resetting <see cref="SuppressMapClientErrors"/>.
     /// </para>
     /// </summary>
-    public IDictionary<int, ClientErrorData> ClientErrorMapping { get; } = new Dictionary<int, ClientErrorData>();
+    public IDictionary<int, ClientErrorData> ClientErrorMapping { get; } =
+        new Dictionary<int, ClientErrorData>();
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

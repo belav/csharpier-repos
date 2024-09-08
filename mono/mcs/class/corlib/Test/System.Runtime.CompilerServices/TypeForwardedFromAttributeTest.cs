@@ -27,22 +27,26 @@
 //
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.CompilerServices {
-
-	public class TypeForwardedFromAttributeTest
-	{
-		[Test]
-		public void CtorTest ()
-		{
-			var a = new TypeForwardedFromAttribute ("System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a");
-			Assert.AreEqual ("System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a", a.AssemblyFullName);
-		}
-	}
+namespace MonoTests.System.Runtime.CompilerServices
+{
+    public class TypeForwardedFromAttributeTest
+    {
+        [Test]
+        public void CtorTest()
+        {
+            var a = new TypeForwardedFromAttribute(
+                "System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            );
+            Assert.AreEqual(
+                "System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                a.AssemblyFullName
+            );
+        }
+    }
 }
-

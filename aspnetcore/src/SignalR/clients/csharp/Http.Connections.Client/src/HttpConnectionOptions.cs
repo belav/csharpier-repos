@@ -68,7 +68,11 @@ public class HttpConnectionOptions
     /// Gets or sets a delegate for wrapping or replacing the <see cref="WebSocket"/>
     /// that will be used for the WebSocket transport.
     /// </summary>
-    public Func<WebSocketConnectionContext, CancellationToken, ValueTask<WebSocket>>? WebSocketFactory { get; set; }
+    public Func<
+        WebSocketConnectionContext,
+        CancellationToken,
+        ValueTask<WebSocket>
+    >? WebSocketFactory { get; set; }
 
     /// <summary>
     /// Gets or sets a collection of headers that will be sent with HTTP requests.
@@ -122,9 +126,21 @@ public class HttpConnectionOptions
     // We initialize these lazily based on the state of the options specified here.
     // Though these are mutable it's extremely rare that they would be mutated past the
     // call to initialize the routerware.
-    internal PipeOptions TransportPipeOptions => _transportPipeOptions ??= new PipeOptions(pauseWriterThreshold: TransportMaxBufferSize, resumeWriterThreshold: TransportMaxBufferSize / 2, readerScheduler: PipeScheduler.ThreadPool, useSynchronizationContext: false);
+    internal PipeOptions TransportPipeOptions =>
+        _transportPipeOptions ??= new PipeOptions(
+            pauseWriterThreshold: TransportMaxBufferSize,
+            resumeWriterThreshold: TransportMaxBufferSize / 2,
+            readerScheduler: PipeScheduler.ThreadPool,
+            useSynchronizationContext: false
+        );
 
-    internal PipeOptions AppPipeOptions => _appPipeOptions ??= new PipeOptions(pauseWriterThreshold: ApplicationMaxBufferSize, resumeWriterThreshold: ApplicationMaxBufferSize / 2, readerScheduler: PipeScheduler.ThreadPool, useSynchronizationContext: false);
+    internal PipeOptions AppPipeOptions =>
+        _appPipeOptions ??= new PipeOptions(
+            pauseWriterThreshold: ApplicationMaxBufferSize,
+            resumeWriterThreshold: ApplicationMaxBufferSize / 2,
+            readerScheduler: PipeScheduler.ThreadPool,
+            useSynchronizationContext: false
+        );
 
     /// <summary>
     /// Gets or sets a collection of client certificates that will be sent with HTTP requests.

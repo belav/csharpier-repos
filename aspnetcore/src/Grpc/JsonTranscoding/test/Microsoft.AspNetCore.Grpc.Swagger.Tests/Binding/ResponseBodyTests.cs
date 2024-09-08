@@ -64,13 +64,18 @@ public class ResponseBodyTests
         Assert.Equal("string", enumSchema.Type);
         Assert.Equal(5, enumSchema.Enum.Count);
 
-        var enumValues = enumSchema.Enum.Select(e => ((OpenApiString)e).Value).OrderBy(s => s).ToList();
-        Assert.Collection(enumValues,
+        var enumValues = enumSchema
+            .Enum.Select(e => ((OpenApiString)e).Value)
+            .OrderBy(s => s)
+            .ToList();
+        Assert.Collection(
+            enumValues,
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_BAR", v),
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_BAZ", v),
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_FOO", v),
             v => Assert.Equal("ENUM_WITHOUT_MESSAGE_NEG", v),
-            v => Assert.Equal("ENUM_WITHOUT_MESSAGE_UNSPECIFIED", v));
+            v => Assert.Equal("ENUM_WITHOUT_MESSAGE_UNSPECIFIED", v)
+        );
     }
 
     [Fact]

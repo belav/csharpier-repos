@@ -17,9 +17,7 @@ public class HttpGetAttribute : HttpMethodAttribute
     /// Creates a new <see cref="HttpGetAttribute"/>.
     /// </summary>
     public HttpGetAttribute()
-        : base(_supportedMethods)
-    {
-    }
+        : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpGetAttribute"/> with the given route template.

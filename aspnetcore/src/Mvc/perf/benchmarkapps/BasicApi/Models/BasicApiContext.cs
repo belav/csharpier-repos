@@ -8,9 +8,7 @@ namespace BasicApi.Models
     public class BasicApiContext : DbContext
     {
         public BasicApiContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Category> Categories { get; set; }
 
@@ -150,35 +148,155 @@ namespace BasicApi.Models
             id = -1;
             var images = new[]
             {
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id--}_1.png" },
-                new { Id = id, PetId = id, Url = $"http://example.com/pets/{id}_1.png" },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id--}_1.png",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Url = $"http://example.com/pets/{id}_1.png",
+                },
             };
 
             id = -1;
             var tags = new[]
             {
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id--, Name = "Tag1" },
-                new { Id = id, PetId = id, Name = "Tag1" },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id--,
+                    Name = "Tag1",
+                },
+                new
+                {
+                    Id = id,
+                    PetId = id,
+                    Name = "Tag1",
+                },
             };
 
             modelBuilder.Entity<Category>().HasData(categories);

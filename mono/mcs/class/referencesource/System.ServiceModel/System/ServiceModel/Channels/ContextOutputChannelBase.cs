@@ -8,12 +8,11 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
 
-    abstract class ContextOutputChannelBase<TChannel> : LayeredChannel<TChannel> where TChannel : class, IOutputChannel
-    {           
+    abstract class ContextOutputChannelBase<TChannel> : LayeredChannel<TChannel>
+        where TChannel : class, IOutputChannel
+    {
         protected ContextOutputChannelBase(ChannelManagerBase channelManager, TChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {                       
-        }
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress RemoteAddress
         {
@@ -25,30 +24,36 @@ namespace System.ServiceModel.Channels
             get { return this.InnerChannel.Via; }
         }
 
-        protected abstract ContextProtocol ContextProtocol
-        {
-            get;
-        }
+        protected abstract ContextProtocol ContextProtocol { get; }
 
-        protected abstract bool IsClient
-        {
-            get;            
-        }
+        protected abstract bool IsClient { get; }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new SendAsyncResult(message, this, this.ContextProtocol, timeout, callback, state);
+            return new SendAsyncResult(
+                message,
+                this,
+                this.ContextProtocol,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
         {
             return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
-        }        
+        }
 
         public void EndSend(IAsyncResult result)
         {
             SendAsyncResult.End(result);
-        }        
+        }
 
         public override T GetProperty<T>()
         {
@@ -73,10 +78,17 @@ namespace System.ServiceModel.Channels
                 this.ContextProtocol.OnOutgoingMessage(message, null);
                 if (CorrelationCallbackMessageProperty.TryGet(message, out callback))
                 {
-                    ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(callback, message, this.IsClient);
+                    ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(
+                        callback,
+                        message,
+                        this.IsClient
+                    );
                     if (callback.IsFullyDefined)
                     {
-                        sendMessage = callback.FinalizeCorrelation(message, timeoutHelper.RemainingTime());
+                        sendMessage = callback.FinalizeCorrelation(
+                            message,
+                            timeoutHelper.RemainingTime()
+                        );
                     }
                 }
             }
@@ -97,20 +109,30 @@ namespace System.ServiceModel.Channels
         public void Send(Message message)
         {
             this.Send(message, this.DefaultSendTimeout);
-        }        
+        }
 
         class SendAsyncResult : AsyncResult
         {
-            static AsyncCallback onFinalizeCorrelation = Fx.ThunkCallback(new AsyncCallback(OnFinalizeCorrelationCompletedCallback));
-            static AsyncCallback onSend = Fx.ThunkCallback(new AsyncCallback(OnSendCompletedCallback));
+            static AsyncCallback onFinalizeCorrelation = Fx.ThunkCallback(
+                new AsyncCallback(OnFinalizeCorrelationCompletedCallback)
+            );
+            static AsyncCallback onSend = Fx.ThunkCallback(
+                new AsyncCallback(OnSendCompletedCallback)
+            );
             ContextOutputChannelBase<TChannel> channel;
             CorrelationCallbackMessageProperty correlationCallback;
             Message message;
             Message sendMessage;
             TimeoutHelper timeoutHelper;
 
-            public SendAsyncResult(Message message, ContextOutputChannelBase<TChannel> channel, ContextProtocol contextProtocol,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            public SendAsyncResult(
+                Message message,
+                ContextOutputChannelBase<TChannel> channel,
+                ContextProtocol contextProtocol,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
@@ -121,13 +143,27 @@ namespace System.ServiceModel.Channels
                 if (message != null)
                 {
                     contextProtocol.OnOutgoingMessage(message, null);
-                    if (CorrelationCallbackMessageProperty.TryGet(message, out this.correlationCallback))
+                    if (
+                        CorrelationCallbackMessageProperty.TryGet(
+                            message,
+                            out this.correlationCallback
+                        )
+                    )
                     {
-                        ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(this.correlationCallback, message, this.channel.IsClient);
+                        ContextExchangeCorrelationHelper.AddOutgoingCorrelationCallbackData(
+                            this.correlationCallback,
+                            message,
+                            this.channel.IsClient
+                        );
 
                         if (this.correlationCallback.IsFullyDefined)
                         {
-                            IAsyncResult result = this.correlationCallback.BeginFinalizeCorrelation(this.message, this.timeoutHelper.RemainingTime(), onFinalizeCorrelation, this);
+                            IAsyncResult result = this.correlationCallback.BeginFinalizeCorrelation(
+                                this.message,
+                                this.timeoutHelper.RemainingTime(),
+                                onFinalizeCorrelation,
+                                this
+                            );
                             if (result.CompletedSynchronously)
                             {
                                 if (OnFinalizeCorrelationCompleted(result))
@@ -137,14 +173,18 @@ namespace System.ServiceModel.Channels
                             }
 
                             shouldSend = false;
-                        }                        
+                        }
                     }
                 }
 
                 if (shouldSend)
                 {
                     IAsyncResult result = this.channel.InnerChannel.BeginSend(
-                        this.message, this.timeoutHelper.RemainingTime(), onSend, this);
+                        this.message,
+                        this.timeoutHelper.RemainingTime(),
+                        onSend,
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         OnSendCompleted(result);
@@ -226,14 +266,21 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     sendResult = this.channel.InnerChannel.BeginSend(
-                        this.sendMessage, this.timeoutHelper.RemainingTime(), onSend, this);
+                        this.sendMessage,
+                        this.timeoutHelper.RemainingTime(),
+                        onSend,
+                        this
+                    );
                     throwing = false;
                 }
                 finally
                 {
                     if (throwing)
                     {
-                        if (this.message != null && !object.ReferenceEquals(this.message, this.sendMessage))
+                        if (
+                            this.message != null
+                            && !object.ReferenceEquals(this.message, this.sendMessage)
+                        )
                         {
                             this.sendMessage.Close();
                         }
@@ -257,7 +304,10 @@ namespace System.ServiceModel.Channels
                 }
                 finally
                 {
-                    if (this.message != null && !object.ReferenceEquals(this.message, this.sendMessage))
+                    if (
+                        this.message != null
+                        && !object.ReferenceEquals(this.message, this.sendMessage)
+                    )
                     {
                         this.sendMessage.Close();
                     }

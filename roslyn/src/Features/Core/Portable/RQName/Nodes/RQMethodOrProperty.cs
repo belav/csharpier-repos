@@ -13,15 +13,19 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         RQUnconstructedType containingType,
         RQMethodPropertyOrEventName memberName,
         int typeParameterCount,
-        IList<RQParameter> parameters) : RQMethodPropertyOrEvent(containingType, memberName)
+        IList<RQParameter> parameters
+    ) : RQMethodPropertyOrEvent(containingType, memberName)
     {
         public readonly int TypeParameterCount = typeParameterCount;
-        public readonly ReadOnlyCollection<RQParameter> Parameters = new ReadOnlyCollection<RQParameter>(parameters);
+        public readonly ReadOnlyCollection<RQParameter> Parameters =
+            new ReadOnlyCollection<RQParameter>(parameters);
 
         protected override void AppendChildren(List<SimpleTreeNode> childList)
         {
             base.AppendChildren(childList);
-            childList.Add(new SimpleGroupNode(RQNameStrings.TypeVarCnt, TypeParameterCount.ToString()));
+            childList.Add(
+                new SimpleGroupNode(RQNameStrings.TypeVarCnt, TypeParameterCount.ToString())
+            );
             var paramNodes = Parameters.Select(param => param.ToSimpleTree()).ToList();
             childList.Add(new SimpleGroupNode(RQNameStrings.Params, paramNodes));
         }

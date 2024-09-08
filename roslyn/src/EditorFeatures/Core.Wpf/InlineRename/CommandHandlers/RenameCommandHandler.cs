@@ -6,14 +6,14 @@ using System;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using Microsoft.CodeAnalysis.ErrorReporting;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Notification;
+using Microsoft.CodeAnalysis.Shared.TestHooks;
+using Microsoft.CodeAnalysis.Telemetry;
 using Microsoft.VisualStudio.Commanding;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
-using Microsoft.CodeAnalysis.Notification;
-using Microsoft.CodeAnalysis.ErrorReporting;
-using Microsoft.CodeAnalysis.Telemetry;
-using Microsoft.CodeAnalysis.Shared.TestHooks;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
@@ -35,17 +35,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public RenameCommandHandler(
             IThreadingContext threadingContext,
             InlineRenameService renameService,
-            IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider)
-            : base(threadingContext, renameService, asynchronousOperationListenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
+        )
+            : base(threadingContext, renameService, asynchronousOperationListenerProvider) { }
 
-        protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView)
-            => GetAdornment(textView) switch
+        protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView) =>
+            GetAdornment(textView) switch
             {
                 RenameDashboard dashboard => dashboard.ShouldReceiveKeyboardNavigation,
                 RenameFlyout => true, // Always receive keyboard navigation for the inline adornment
-                _ => false
+                _ => false,
             };
 
         protected override void SetFocusToTextView(ITextView textView)
@@ -105,26 +104,38 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 // Session.Commit can throw if it can't commit
                 // rename operation.
                 // handle that case gracefully
-                var notificationService = activeSession.Workspace.Services.GetService<INotificationService>();
-                notificationService?.SendNotification(ex.Message, title: EditorFeaturesResources.Rename, severity: NotificationSeverity.Error);
+                var notificationService =
+                    activeSession.Workspace.Services.GetService<INotificationService>();
+                notificationService?.SendNotification(
+                    ex.Message,
+                    title: EditorFeaturesResources.Rename,
+                    severity: NotificationSeverity.Error
+                );
             }
             catch (Exception ex) when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
             {
                 // Show a nice error to the user via an info bar
-                var errorReportingService = activeSession.Workspace.Services.GetService<IErrorReportingService>();
+                var errorReportingService =
+                    activeSession.Workspace.Services.GetService<IErrorReportingService>();
                 if (errorReportingService is null)
                 {
                     return;
                 }
 
                 errorReportingService.ShowGlobalErrorInfo(
-                    message: string.Format(EditorFeaturesWpfResources.Error_performing_rename_0, ex.Message),
+                    message: string.Format(
+                        EditorFeaturesWpfResources.Error_performing_rename_0,
+                        ex.Message
+                    ),
                     TelemetryFeatureName.InlineRename,
                     ex,
                     new InfoBarUI(
                         WorkspacesResources.Show_Stack_Trace,
                         InfoBarUI.UIKind.HyperLink,
-                        () => errorReportingService.ShowDetailedErrorInfo(ex), closeAfterAction: true));
+                        () => errorReportingService.ShowDetailedErrorInfo(ex),
+                        closeAfterAction: true
+                    )
+                );
             }
         }
     }

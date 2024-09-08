@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
     internal record class EditorConfigFile<T>(string? FilePath, ImmutableArray<T> Options)
         where T : EditorConfigOption
     {
-
-        private readonly Lazy<ImmutableArray<Section>> _sections = new(() => Options.SelectAsArray(x => x.Section).Distinct());
+        private readonly Lazy<ImmutableArray<Section>> _sections =
+            new(() => Options.SelectAsArray(x => x.Section).Distinct());
 
         public ImmutableArray<Section> Sections => _sections.Value;
 
@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         /// </summary>
         public bool TryGetSectionForLanguage(
             Language language,
-            [NotNullWhen(true)] out Section? sectionResult)
-            => TryGetSectionForLanguage(language, SectionMatch.ExactLanguageMatch, out sectionResult);
+            [NotNullWhen(true)] out Section? sectionResult
+        ) => TryGetSectionForLanguage(language, SectionMatch.ExactLanguageMatch, out sectionResult);
 
         /// <summary>
         /// Attempts to find a section of the editorconfig file that applies to the given language for the given criteria.
@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         public bool TryGetSectionForLanguage(
             Language language,
             SectionMatch matchKind,
-            [NotNullWhen(true)] out Section? sectionResult)
+            [NotNullWhen(true)] out Section? sectionResult
+        )
         {
             sectionResult = Sections
                 .Select(section => (matchKind: section.GetMatchKind(language), section))
@@ -55,14 +56,19 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         /// </summary>
         public bool TryGetSectionForFilePath(
             string filePath,
-            [NotNullWhen(true)] out Section? sectionResult)
+            [NotNullWhen(true)] out Section? sectionResult
+        )
         {
             if (FilePath is null)
             {
                 throw new InvalidOperationException("No path was given for this editorconfig file");
             }
 
-            return TryGetSectionForFilePath(filePath, SectionMatch.ExactLanguageMatch, out sectionResult);
+            return TryGetSectionForFilePath(
+                filePath,
+                SectionMatch.ExactLanguageMatch,
+                out sectionResult
+            );
         }
 
         /// <summary>
@@ -71,7 +77,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         public bool TryGetSectionForFilePath(
             string filePath,
             SectionMatch matchKind,
-            [NotNullWhen(true)] out Section? sectionResult)
+            [NotNullWhen(true)] out Section? sectionResult
+        )
         {
             if (FilePath is null)
             {

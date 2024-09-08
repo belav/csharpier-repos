@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,62 +29,75 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using System.Xml;
+using System.Configuration.Internal;
 using System.IO;
 using System.Text;
-using System.Configuration.Internal;
+using System.Xml;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    internal abstract class ConfigInfo
+    {
+        public string Name;
+        public string TypeName;
+        protected Type Type;
+        string streamName;
+        public ConfigInfo Parent;
+        public IInternalConfigHost ConfigHost;
 
-	internal abstract class ConfigInfo
-	{
-		public string Name;
-		public string TypeName;
-		protected Type Type;
-		string streamName;
-		public ConfigInfo Parent;
-		public IInternalConfigHost ConfigHost;
-		
-		public virtual object CreateInstance ()
-		{
-			if (Type == null) Type = ConfigHost.GetConfigType (TypeName, true);
-			return Activator.CreateInstance (Type, true);
-		}
-		
-		public string XPath {
-			get {
-				StringBuilder path = new StringBuilder (Name);
-				ConfigInfo cinfo = Parent;
-				while (cinfo != null) {
-					path.Insert (0, cinfo.Name + "/");
-					cinfo = cinfo.Parent;
-				}
-				return path.ToString ();
-			}
-		}
-		
-		public string StreamName {
-			get { return streamName; }
-			set { streamName = value; }
-		}
-		
-		public abstract bool HasConfigContent (Configuration cfg);
-		public abstract bool HasDataContent (Configuration cfg);
-		
-		protected void ThrowException (string text, XmlReader reader)
-		{
-//			IXmlLineInfo li = reader as IXmlLineInfo;
-			throw new ConfigurationErrorsException (text, reader);
-		}
-		
-		public abstract void ReadConfig (Configuration cfg, string streamName, XmlReader reader);
-		public abstract void WriteConfig (Configuration cfg, XmlWriter writer, ConfigurationSaveMode mode);
-		public abstract void ReadData (Configuration config, XmlReader reader, bool overrideAllowed);
-		public abstract void WriteData (Configuration config, XmlWriter writer, ConfigurationSaveMode mode);
-		
-		internal abstract void Merge (ConfigInfo data);
+        public virtual object CreateInstance()
+        {
+            if (Type == null)
+                Type = ConfigHost.GetConfigType(TypeName, true);
+            return Activator.CreateInstance(Type, true);
+        }
 
-		internal abstract bool HasValues (Configuration config, ConfigurationSaveMode mode);
-		internal abstract void ResetModified (Configuration config);
-	}
+        public string XPath
+        {
+            get
+            {
+                StringBuilder path = new StringBuilder(Name);
+                ConfigInfo cinfo = Parent;
+                while (cinfo != null)
+                {
+                    path.Insert(0, cinfo.Name + "/");
+                    cinfo = cinfo.Parent;
+                }
+                return path.ToString();
+            }
+        }
+
+        public string StreamName
+        {
+            get { return streamName; }
+            set { streamName = value; }
+        }
+
+        public abstract bool HasConfigContent(Configuration cfg);
+        public abstract bool HasDataContent(Configuration cfg);
+
+        protected void ThrowException(string text, XmlReader reader)
+        {
+            //			IXmlLineInfo li = reader as IXmlLineInfo;
+            throw new ConfigurationErrorsException(text, reader);
+        }
+
+        public abstract void ReadConfig(Configuration cfg, string streamName, XmlReader reader);
+        public abstract void WriteConfig(
+            Configuration cfg,
+            XmlWriter writer,
+            ConfigurationSaveMode mode
+        );
+        public abstract void ReadData(Configuration config, XmlReader reader, bool overrideAllowed);
+        public abstract void WriteData(
+            Configuration config,
+            XmlWriter writer,
+            ConfigurationSaveMode mode
+        );
+
+        internal abstract void Merge(ConfigInfo data);
+
+        internal abstract bool HasValues(Configuration config, ConfigurationSaveMode mode);
+        internal abstract void ResetModified(Configuration config);
+    }
 }

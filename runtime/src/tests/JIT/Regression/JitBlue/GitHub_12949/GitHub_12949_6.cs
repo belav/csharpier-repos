@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public interface IGet 
+public interface IGet
 {
     int Get();
 }
@@ -15,10 +15,14 @@ public struct R : IGet
     public double d;
     public int a;
 
-    public int Get() { return a; }
+    public int Get()
+    {
+        return a;
+    }
 }
 
-public class X<K> where K: IGet
+public class X<K>
+    where K : IGet
 {
     public X(K r)
     {
@@ -28,7 +32,8 @@ public class X<K> where K: IGet
 
     public void Assert(bool b)
     {
-        if (!b) throw new Exception("bad!");
+        if (!b)
+            throw new Exception("bad!");
     }
 
     public int Test()

@@ -15,24 +15,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-	[TestFixture]
-	public class XmlProcessingInstructionTests
-	{
-		XmlDocument document;
-		XmlProcessingInstruction pi;
+    [TestFixture]
+    public class XmlProcessingInstructionTests
+    {
+        XmlDocument document;
+        XmlProcessingInstruction pi;
 
-		[SetUp]
-		public void GetReady ()
-		{
-			document = new XmlDocument ();
-		}
+        [SetUp]
+        public void GetReady()
+        {
+            document = new XmlDocument();
+        }
 
-		[Test]
-		public void InnerAndOuterXml ()
-		{
-			pi = document.CreateProcessingInstruction ("foo", "bar");
-			Assert.AreEqual (String.Empty, pi.InnerXml);
-			Assert.AreEqual ("<?foo bar?>", pi.OuterXml);
-		}
-	}
+        [Test]
+        public void InnerAndOuterXml()
+        {
+            pi = document.CreateProcessingInstruction("foo", "bar");
+            Assert.AreEqual(String.Empty, pi.InnerXml);
+            Assert.AreEqual("<?foo bar?>", pi.OuterXml);
+        }
+    }
 }

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -23,7 +23,6 @@ namespace System.Linq.Parallel
     /// </summary>
     internal class ParallelEnumerableWrapper : ParallelQuery<object>
     {
-
         private readonly IEnumerable m_source; // The wrapped enumerable object.
 
         //-----------------------------------------------------------------------------------
@@ -47,7 +46,7 @@ namespace System.Linq.Parallel
             return new EnumerableWrapperWeakToStrong(m_source).GetEnumerator();
         }
     }
-    
+
     /// <summary>
     /// A simple implementation of the ParallelQuery{T} interface which wraps an
     /// underlying IEnumerable{T}, such that it can be used in parallel queries.
@@ -55,7 +54,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="T"></typeparam>
     internal class ParallelEnumerableWrapper<T> : ParallelQuery<T>
     {
-
         private readonly IEnumerable<T> m_wrappedEnumerable; // The wrapped enumerable object.
 
         //-----------------------------------------------------------------------------------

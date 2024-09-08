@@ -13,14 +13,22 @@ namespace System.ComponentModel.Composition
     {
         private readonly List<ImportDefinition> _importDefinitions = new List<ImportDefinition>();
         private readonly List<ExportDefinition> _exportDefinitions = new List<ExportDefinition>();
-        private Dictionary<ImportDefinition, object> _importValues = new Dictionary<ImportDefinition, object>();
+        private Dictionary<ImportDefinition, object> _importValues =
+            new Dictionary<ImportDefinition, object>();
 
-        public ImportingComposablePart(ImportCardinality cardinality, bool isRecomposable, params string[] contractNames)
-            : this((string)null, cardinality, isRecomposable, contractNames)
-        {
-        }
+        public ImportingComposablePart(
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            params string[] contractNames
+        )
+            : this((string)null, cardinality, isRecomposable, contractNames) { }
 
-        public ImportingComposablePart(string exportContractName, ImportCardinality cardinality, bool isRecomposable, params string[] contractNames)
+        public ImportingComposablePart(
+            string exportContractName,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            params string[] contractNames
+        )
         {
             if (exportContractName != null)
             {
@@ -31,10 +39,12 @@ namespace System.ComponentModel.Composition
 
             foreach (string contractName in contractNames)
             {
-                var definition = ImportDefinitionFactory.Create(contractName,
-                                                                cardinality,
-                                                                isRecomposable,
-                                                                false);
+                var definition = ImportDefinitionFactory.Create(
+                    contractName,
+                    cardinality,
+                    isRecomposable,
+                    false
+                );
 
                 _importDefinitions.Add(definition);
             }
@@ -60,11 +70,7 @@ namespace System.ComponentModel.Composition
             get { return new Dictionary<string, object>(); }
         }
 
-        public int ImportSatisfiedCount
-        {
-            get;
-            private set;
-        }
+        public int ImportSatisfiedCount { get; private set; }
 
         public void ResetImportSatisfiedCount()
         {
@@ -138,5 +144,4 @@ namespace System.ComponentModel.Composition
             return exportedValues.ToArray();
         }
     }
-
 }

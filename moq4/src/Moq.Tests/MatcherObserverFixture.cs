@@ -51,9 +51,7 @@ namespace Moq.Tests
         {
             using (var outer = MatcherObserver.Activate())
             {
-                using (var inner = MatcherObserver.Activate())
-                {
-                }
+                using (var inner = MatcherObserver.Activate()) { }
                 _ = CreateMatch();
                 Assert.True(outer.TryGetLastMatch(out var match));
 

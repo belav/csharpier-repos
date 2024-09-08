@@ -6,7 +6,6 @@
 
 namespace System.Net.Configuration
 {
-
     using System;
     using System.Configuration;
     using System.Security.Permissions;
@@ -14,32 +13,24 @@ namespace System.Net.Configuration
     [ConfigurationCollection(typeof(AuthenticationModuleElement))]
     public sealed class AuthenticationModuleElementCollection : ConfigurationElementCollection
     {
-        public AuthenticationModuleElementCollection() 
-        {
-        }
-        
+        public AuthenticationModuleElementCollection() { }
+
         public AuthenticationModuleElement this[int index]
         {
-            get
-            {
-                return (AuthenticationModuleElement)BaseGet(index);
-            }
+            get { return (AuthenticationModuleElement)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
                 {
                     BaseRemoveAt(index);
                 }
-                BaseAdd(index,value);
+                BaseAdd(index, value);
             }
         }
-         
+
         public new AuthenticationModuleElement this[string name]
         {
-            get
-            {
-                return (AuthenticationModuleElement)BaseGet(name);
-            }
+            get { return (AuthenticationModuleElement)BaseGet(name); }
             set
             {
                 if (BaseGet(name) != null)
@@ -49,7 +40,7 @@ namespace System.Net.Configuration
                 BaseAdd(value);
             }
         }
-         
+
         public void Add(AuthenticationModuleElement element)
         {
             BaseAdd(element);
@@ -60,12 +51,12 @@ namespace System.Net.Configuration
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() 
+        protected override ConfigurationElement CreateNewElement()
         {
             return new AuthenticationModuleElement();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             if (element == null)
                 throw new ArgumentNullException("element");
@@ -76,15 +67,15 @@ namespace System.Net.Configuration
         {
             return BaseIndexOf(element);
         }
-         
-        public void Remove(AuthenticationModuleElement element) 
+
+        public void Remove(AuthenticationModuleElement element)
         {
             if (element == null)
                 throw new ArgumentNullException("element");
             BaseRemove(element.Key);
         }
 
-        public void Remove(string name) 
+        public void Remove(string name)
         {
             BaseRemove(name);
         }
@@ -93,9 +84,5 @@ namespace System.Net.Configuration
         {
             BaseRemoveAt(index);
         }
-
-    } 
-
+    }
 }
-
-

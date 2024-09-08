@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     public class DD
@@ -11,6 +12,7 @@ namespace DefaultNamespace
         {
             return new float[7];
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

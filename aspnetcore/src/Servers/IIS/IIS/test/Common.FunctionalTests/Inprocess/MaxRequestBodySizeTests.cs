@@ -4,33 +4,35 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
-
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests.InProcess;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests.InProcess;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests.InProcess;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests.InProcess;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 public class MaxRequestBodySizeTests : IISFunctionalTestBase
 {
-    public MaxRequestBodySizeTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public MaxRequestBodySizeTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     [RequiresNewHandler]
@@ -41,7 +43,10 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult.HttpClient.PostAsync("/ReadRequestBody", new StringContent("test"));
+        var result = await deploymentResult.HttpClient.PostAsync(
+            "/ReadRequestBody",
+            new StringContent("test")
+        );
         Assert.Equal(HttpStatusCode.RequestEntityTooLarge, result.StatusCode);
     }
 
@@ -58,14 +63,21 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
                     .GetOrAdd("security")
                     .GetOrAdd("requestFiltering")
                     .GetOrAdd("requestLimits", "maxAllowedContentLength", "1");
-            });
+            }
+        );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult.HttpClient.PostAsync("/ReadRequestBody", new StringContent("test"));
+        var result = await deploymentResult.HttpClient.PostAsync(
+            "/ReadRequestBody",
+            new StringContent("test")
+        );
 
         // IIS either returns a 404 or a 413 based on versions of IIS.
         // Check for both as we don't know which specific patch version.
-        Assert.True(result.StatusCode == HttpStatusCode.NotFound || result.StatusCode == HttpStatusCode.RequestEntityTooLarge);
+        Assert.True(
+            result.StatusCode == HttpStatusCode.NotFound
+                || result.StatusCode == HttpStatusCode.RequestEntityTooLarge
+        );
     }
 
     [ConditionalFact]
@@ -81,10 +93,14 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
                     .GetOrAdd("security")
                     .GetOrAdd("requestFiltering")
                     .GetOrAdd("requestLimits", "maxAllowedContentLength", "100000000");
-            });
+            }
+        );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult.HttpClient.PostAsync("/ReadRequestBodyLarger", new StringContent(new string('a', 100000000)));
+        var result = await deploymentResult.HttpClient.PostAsync(
+            "/ReadRequestBodyLarger",
+            new StringContent(new string('a', 100000000))
+        );
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
     }
@@ -102,10 +118,14 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
                     .GetOrAdd("security")
                     .GetOrAdd("requestFiltering")
                     .GetOrAdd("requestLimits", "maxAllowedContentLength", "4294967295");
-            });
+            }
+        );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult.HttpClient.PostAsync("/ReadRequestBodyLarger", new StringContent(new string('a', 10000)));
+        var result = await deploymentResult.HttpClient.PostAsync(
+            "/ReadRequestBodyLarger",
+            new StringContent(new string('a', 10000))
+        );
 
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
     }
@@ -124,7 +144,8 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
                 $"Content-Length: 30000001",
                 "Host: localhost",
                 "",
-                "A");
+                "A"
+            );
             var requestLine = await connection.ReadLineAsync();
             Assert.True(requestLine.Contains("404") || requestLine.Contains("413"));
         }
@@ -148,19 +169,29 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
                     .GetOrAdd("security")
                     .GetOrAdd("requestFiltering")
                     .GetOrAdd("requestLimits", "maxAllowedContentLength", "1");
-            });
+            }
+        );
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        var result = await deploymentResult.HttpClient.PostAsync("/IncreaseRequestLimit", new StringContent("1"));
+        var result = await deploymentResult.HttpClient.PostAsync(
+            "/IncreaseRequestLimit",
+            new StringContent("1")
+        );
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
 
         StopServer();
 
         if (deploymentParameters.ServerType == ServerType.IISExpress)
         {
-            Assert.Single(TestSink.Writes, w => w.Message.Contains("Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength." +
-                " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS." +
-                " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."));
+            Assert.Single(
+                TestSink.Writes,
+                w =>
+                    w.Message.Contains(
+                        "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
+                            + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
+                            + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
+                    )
+            );
         }
     }
 }

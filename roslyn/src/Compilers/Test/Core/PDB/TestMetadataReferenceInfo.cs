@@ -29,7 +29,8 @@ namespace Roslyn.Test.Utilities.PDB
             MemoryStream emitStream,
             Compilation compilation,
             TestMetadataReference metadataReference,
-            string fullPath)
+            string fullPath
+        )
         {
             _emitStream = emitStream;
             _peReader = new PEReader(emitStream);
@@ -46,10 +47,15 @@ namespace Roslyn.Test.Utilities.PDB
                 metadataReader.GetGuid(moduleDefinition.Mvid),
                 metadataReference.Properties.Aliases,
                 metadataReference.Properties.Kind,
-                metadataReference.Properties.EmbedInteropTypes);
+                metadataReference.Properties.EmbedInteropTypes
+            );
         }
 
-        public static TestMetadataReferenceInfo Create(Compilation compilation, string fullPath, EmitOptions emitOptions)
+        public static TestMetadataReferenceInfo Create(
+            Compilation compilation,
+            string fullPath,
+            EmitOptions emitOptions
+        )
         {
             var emitStream = compilation.EmitToStream(emitOptions);
 
@@ -60,7 +66,8 @@ namespace Roslyn.Test.Utilities.PDB
                 emitStream,
                 compilation,
                 metadataReference,
-                fullPath);
+                fullPath
+            );
         }
 
         protected virtual void Dispose(bool disposing)

@@ -102,7 +102,9 @@ public class Utf8BufferTextWriterTests
         textWriter.Flush();
         Assert.Equal(4004, bufferWriter.Position);
 
-        var result = Encoding.UTF8.GetString(bufferWriter.CurrentSegment.Slice(0, bufferWriter.Position).ToArray());
+        var result = Encoding.UTF8.GetString(
+            bufferWriter.CurrentSegment.Slice(0, bufferWriter.Position).ToArray()
+        );
         Assert.Equal(2004, result.Length);
 
         Assert.Equal('[', result[0]);
@@ -279,15 +281,17 @@ public class Utf8BufferTextWriterTests
 
         // Verify the output
         var allSegments = bufferWriter.GetSegments().Select(s => s.ToArray()).ToArray();
-        Assert.Collection(allSegments,
-            seg => Assert.Equal(new byte[] { 0x61, 0xE3, 0x81, 0x84, 0x62 }, seg),  // "aいb"
-            seg => Assert.Equal(new byte[] { 0xE3, 0x82, 0x8D, 0x63, 0x64 }, seg),  // "ろcd"
-            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xAF }, seg),              // "は"
-            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xAB, 0x65 }, seg),        // "にe"
-            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xBB, 0x66 }, seg),        // "ほf"
-            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xB8 }, seg),              // "へ"
-            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xA9, 0x67, 0x68 }, seg),        // "どgh"
-            seg => Assert.Equal(new byte[] { 0x69, 0xF0, 0x90, 0x80, 0x80 }, seg));       // "i\uD800\uDC00"
+        Assert.Collection(
+            allSegments,
+            seg => Assert.Equal(new byte[] { 0x61, 0xE3, 0x81, 0x84, 0x62 }, seg), // "aいb"
+            seg => Assert.Equal(new byte[] { 0xE3, 0x82, 0x8D, 0x63, 0x64 }, seg), // "ろcd"
+            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xAF }, seg), // "は"
+            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xAB, 0x65 }, seg), // "にe"
+            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xBB, 0x66 }, seg), // "ほf"
+            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xB8 }, seg), // "へ"
+            seg => Assert.Equal(new byte[] { 0xE3, 0x81, 0xA9, 0x67, 0x68 }, seg), // "どgh"
+            seg => Assert.Equal(new byte[] { 0x69, 0xF0, 0x90, 0x80, 0x80 }, seg)
+        ); // "i\uD800\uDC00"
 
         Assert.Equal(testString, Encoding.UTF8.GetString(bufferWriter.ToArray()));
     }
@@ -365,7 +369,10 @@ public class Utf8BufferTextWriterTests
         public Memory<byte> GetMemory(int sizeHint = 0)
         {
             // Need special handling for sizeHint == 0, because for that we want to enter the if even if there are "sizeHint" (i.e. 0) bytes left :).
-            if ((sizeHint == 0 && CurrentSegment.Length == Position) || (CurrentSegment.Length - Position < sizeHint))
+            if (
+                (sizeHint == 0 && CurrentSegment.Length == Position)
+                || (CurrentSegment.Length - Position < sizeHint)
+            )
             {
                 if (Position > 0)
                 {

@@ -24,17 +24,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
     internal class CollectionTypeElement : ModelFunctionTypeElement
     {
         private ModelFunctionTypeElement _typeSubElement = null;
-        
+
         #region constructor
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal CollectionTypeElement(SchemaElement parentElement)
-            : base(parentElement)
-        {
-
-        }
+            : base(parentElement) { }
         #endregion
 
         internal ModelFunctionTypeElement SubElement
@@ -97,7 +94,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return false;
         }
 
-
         protected void HandleCollectionTypeElement(XmlReader reader)
         {
             Debug.Assert(reader != null);
@@ -141,18 +137,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _typeSubElement.ResolveTopLevelNames();
             }
 
-            // Can't be "else if" because element could have attribute AND sub-element, 
+            // Can't be "else if" because element could have attribute AND sub-element,
             // in which case semantic validation won't work unless it has resolved both (so _type is not null)
-            if( _unresolvedType != null) 
+            if (_unresolvedType != null)
             {
                 base.ResolveTopLevelNames();
             }
-
         }
 
         internal override void WriteIdentity(StringBuilder builder)
         {
-
             if (UnresolvedType != null && !UnresolvedType.Trim().Equals(String.Empty))
             {
                 builder.Append("Collection(" + UnresolvedType + ")");
@@ -171,8 +165,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 return _typeUsage;
             }
-            Debug.Assert(_typeSubElement != null, "For attributes typeusage should have been resolved");
-            
+            Debug.Assert(
+                _typeSubElement != null,
+                "For attributes typeusage should have been resolved"
+            );
+
             if (_typeSubElement != null)
             {
                 CollectionType collectionType = new CollectionType(_typeSubElement.GetTypeUsage());
@@ -183,29 +180,45 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return _typeUsage;
         }
 
-        internal override bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal override bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             if (_typeUsage == null)
             {
                 if (_typeSubElement != null) //Has sub-elements
                 {
-                    return _typeSubElement.ResolveNameAndSetTypeUsage(convertedItemCache, newGlobalItems);
+                    return _typeSubElement.ResolveNameAndSetTypeUsage(
+                        convertedItemCache,
+                        newGlobalItems
+                    );
                 }
                 else //Does not have sub-elements; try to resolve
                 {
                     if (_type is ScalarType) //Create and store type usage for scalar type
                     {
                         _typeUsageBuilder.ValidateAndSetTypeUsage(_type as ScalarType, false);
-                        _typeUsage = TypeUsage.Create(new CollectionType(_typeUsageBuilder.TypeUsage));
+                        _typeUsage = TypeUsage.Create(
+                            new CollectionType(_typeUsageBuilder.TypeUsage)
+                        );
                         return true;
                     }
-                    else  //Try to resolve edm type. If not now, it will resolve in the second pass
+                    else //Try to resolve edm type. If not now, it will resolve in the second pass
                     {
-                        EdmType edmType = (EdmType)Converter.LoadSchemaElement(_type, _type.Schema.ProviderManifest, convertedItemCache, newGlobalItems);
+                        EdmType edmType = (EdmType)
+                            Converter.LoadSchemaElement(
+                                _type,
+                                _type.Schema.ProviderManifest,
+                                convertedItemCache,
+                                newGlobalItems
+                            );
                         if (edmType != null)
                         {
                             _typeUsageBuilder.ValidateAndSetTypeUsage(edmType, false); //use typeusagebuilder so dont lose facet information
-                            _typeUsage = TypeUsage.Create(new CollectionType(_typeUsageBuilder.TypeUsage));
+                            _typeUsage = TypeUsage.Create(
+                                new CollectionType(_typeUsageBuilder.TypeUsage)
+                            );
                         }
 
                         return _typeUsage != null;

@@ -45,14 +45,17 @@ internal static partial class Interop
                     // failure (unexpected)
                     return false;
                 }
-            }
-            while (true);
+            } while (true);
         }
 
         [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetEGid")]
         private static partial uint GetEGid();
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetGroups", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetGroups",
+            SetLastError = true
+        )]
         private static unsafe partial int GetGroups(int ngroups, uint* groups);
     }
 }

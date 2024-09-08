@@ -13,11 +13,13 @@ public class CheckViewData : ViewComponent
         var metadata = ViewData.ModelMetadata;
         var writer = ViewContext.Writer;
         writer.WriteLine("<h5>Check View Data view component</h5>");
-        writer.WriteLine($"<div class=\"col-md-3\">MetadataKind: '{ metadata.MetadataKind }'</div>");
-        writer.WriteLine($"<div class=\"col-md-3\">ModelType: '{ metadata.ModelType.Name }'</div>");
+        writer.WriteLine($"<div class=\"col-md-3\">MetadataKind: '{metadata.MetadataKind}'</div>");
+        writer.WriteLine($"<div class=\"col-md-3\">ModelType: '{metadata.ModelType.Name}'</div>");
         if (metadata.MetadataKind == ModelMetadataKind.Property)
         {
-            writer.WriteLine($"<div class=\"col-md-3\">PropertyName: '{ metadata.PropertyName }'</div>");
+            writer.WriteLine(
+                $"<div class=\"col-md-3\">PropertyName: '{metadata.PropertyName}'</div>"
+            );
         }
 
         return View();

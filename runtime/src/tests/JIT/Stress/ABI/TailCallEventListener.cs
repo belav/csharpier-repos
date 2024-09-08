@@ -39,7 +39,8 @@ namespace ABIStress
                         string failReason = GetData("FailReason");
                         lock (FailureReasons)
                         {
-                            FailureReasons[failReason] = FailureReasons.GetValueOrDefault(failReason) + 1;
+                            FailureReasons[failReason] =
+                                FailureReasons.GetValueOrDefault(failReason) + 1;
                         }
                     }
                     break;

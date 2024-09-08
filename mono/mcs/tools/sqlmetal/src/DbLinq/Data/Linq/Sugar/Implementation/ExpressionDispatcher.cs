@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -30,14 +30,12 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Mapping;
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Data.Linq.Sugar.Implementation;
 using DbLinq.Factory;
-
 
 namespace DbLinq.Data.Linq.Sugar.Implementation
 {
@@ -60,7 +58,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="requestingExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual Expression CreateTableExpression(Expression requestingExpression, BuilderContext builderContext)
+        public virtual Expression CreateTableExpression(
+            Expression requestingExpression,
+            BuilderContext builderContext
+        )
         {
             var callExpression = (MethodCallExpression)requestingExpression;
             var requestingType = callExpression.Arguments[0].Type;
@@ -73,7 +74,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="requestingExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        public virtual Expression GetTable(Expression requestingExpression, BuilderContext builderContext)
+        public virtual Expression GetTable(
+            Expression requestingExpression,
+            BuilderContext builderContext
+        )
         {
             var callExpression = (MethodCallExpression)requestingExpression;
             var requestingType = callExpression.Arguments[0].Type;
@@ -97,10 +101,19 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             var selectGroupExpression = selectExpression as GroupExpression;
             if (selectGroupExpression != null)
             {
-                lambdaSelectExpression = CutOutOperands(selectGroupExpression.GroupedExpression, builderContext);
-                var lambdaSelectKeyExpression = CutOutOperands(selectGroupExpression.KeyExpression, builderContext);
-                lambdaSelectExpression = BuildSelectGroup(lambdaSelectExpression, lambdaSelectKeyExpression,
-                                                          builderContext);
+                lambdaSelectExpression = CutOutOperands(
+                    selectGroupExpression.GroupedExpression,
+                    builderContext
+                );
+                var lambdaSelectKeyExpression = CutOutOperands(
+                    selectGroupExpression.KeyExpression,
+                    builderContext
+                );
+                lambdaSelectExpression = BuildSelectGroup(
+                    lambdaSelectExpression,
+                    lambdaSelectKeyExpression,
+                    builderContext
+                );
             }
             else
                 lambdaSelectExpression = CutOutOperands(selectExpression, builderContext);
@@ -119,21 +132,39 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="selectKey"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual LambdaExpression BuildSelectGroup(LambdaExpression select, LambdaExpression selectKey,
-                                                            BuilderContext builderContext)
+        protected virtual LambdaExpression BuildSelectGroup(
+            LambdaExpression select,
+            LambdaExpression selectKey,
+            BuilderContext builderContext
+        )
         {
             var dataRecordParameter = Expression.Parameter(typeof(IDataRecord), "dataRecord");
-            var mappingContextParameter = Expression.Parameter(typeof(MappingContext), "mappingContext");
+            var mappingContextParameter = Expression.Parameter(
+                typeof(MappingContext),
+                "mappingContext"
+            );
             var kType = selectKey.Body.Type;
             var lType = select.Body.Type;
             var groupingType = typeof(LineGrouping<,>).MakeGenericType(kType, lType);
             var groupingCtor = groupingType.GetConstructor(new[] { kType, lType });
-            var invokeSelectKey = Expression.Invoke(selectKey, dataRecordParameter, mappingContextParameter);
-            var invokeSelect = Expression.Invoke(select, dataRecordParameter, mappingContextParameter);
+            var invokeSelectKey = Expression.Invoke(
+                selectKey,
+                dataRecordParameter,
+                mappingContextParameter
+            );
+            var invokeSelect = Expression.Invoke(
+                select,
+                dataRecordParameter,
+                mappingContextParameter
+            );
             var newLineGrouping = Expression.New(groupingCtor, invokeSelectKey, invokeSelect);
             var iGroupingType = typeof(IGrouping<,>).MakeGenericType(kType, lType);
             var newIGrouping = Expression.Convert(newLineGrouping, iGroupingType);
-            var lambda = Expression.Lambda(newIGrouping, dataRecordParameter, mappingContextParameter);
+            var lambda = Expression.Lambda(
+                newIGrouping,
+                dataRecordParameter,
+                mappingContextParameter
+            );
             return lambda;
         }
 
@@ -145,11 +176,22 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// </summary>
         /// <param name="selectExpression"></param>
         /// <param name="builderContext"></param>
-        protected virtual LambdaExpression CutOutOperands(Expression selectExpression, BuilderContext builderContext)
+        protected virtual LambdaExpression CutOutOperands(
+            Expression selectExpression,
+            BuilderContext builderContext
+        )
         {
             var dataRecordParameter = Expression.Parameter(typeof(IDataRecord), "dataRecord");
-            var mappingContextParameter = Expression.Parameter(typeof(MappingContext), "mappingContext");
-            var expression = CutOutOperands(selectExpression, dataRecordParameter, mappingContextParameter, builderContext);
+            var mappingContextParameter = Expression.Parameter(
+                typeof(MappingContext),
+                "mappingContext"
+            );
+            var expression = CutOutOperands(
+                selectExpression,
+                dataRecordParameter,
+                mappingContextParameter,
+                builderContext
+            );
             return Expression.Lambda(expression, dataRecordParameter, mappingContextParameter);
         }
 
@@ -162,9 +204,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="mappingContextParameter"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression CutOutOperands(Expression expression,
-                                                    ParameterExpression dataRecordParameter, ParameterExpression mappingContextParameter,
-                                                    BuilderContext builderContext)
+        protected virtual Expression CutOutOperands(
+            Expression expression,
+            ParameterExpression dataRecordParameter,
+            ParameterExpression mappingContextParameter,
+            BuilderContext builderContext
+        )
         {
             // two options: we cut and return
             if (GetCutOutOperand(expression, builderContext))
@@ -174,26 +219,46 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 // in this case, we convert it into its declared columns
                 if (expression is TableExpression)
                 {
-                    return GetOutputTableReader((TableExpression)expression, dataRecordParameter,
-                                                mappingContextParameter, builderContext);
+                    return GetOutputTableReader(
+                        (TableExpression)expression,
+                        dataRecordParameter,
+                        mappingContextParameter,
+                        builderContext
+                    );
                 }
                 // for EntitySets, we have a special EntitySet builder
                 if (expression is EntitySetExpression)
                 {
-                    return GetEntitySetBuilder((EntitySetExpression) expression, dataRecordParameter,
-                                               mappingContextParameter, builderContext);
+                    return GetEntitySetBuilder(
+                        (EntitySetExpression)expression,
+                        dataRecordParameter,
+                        mappingContextParameter,
+                        builderContext
+                    );
                     // TODO record EntitySet information, so we can initalize it with owner
                 }
                 // then, the result is registered
-                return GetOutputValueReader(expression, dataRecordParameter, mappingContextParameter, builderContext);
+                return GetOutputValueReader(
+                    expression,
+                    dataRecordParameter,
+                    mappingContextParameter,
+                    builderContext
+                );
             }
             // or we dig down
             var operands = new List<Expression>();
             foreach (var operand in expression.GetOperands())
             {
-                operands.Add(operand == null 
-                    ? null
-                    : CutOutOperands(operand, dataRecordParameter, mappingContextParameter, builderContext));
+                operands.Add(
+                    operand == null
+                        ? null
+                        : CutOutOperands(
+                            operand,
+                            dataRecordParameter,
+                            mappingContextParameter,
+                            builderContext
+                        )
+                );
             }
             return expression.ChangeOperands(operands);
         }
@@ -225,7 +290,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression CheckTableExpression(Expression expression, BuilderContext builderContext)
+        protected virtual Expression CheckTableExpression(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             if (expression is TableExpression)
                 return GetSelectTableExpression((TableExpression)expression, builderContext);
@@ -239,12 +307,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="tableExpression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression GetSelectTableExpression(TableExpression tableExpression, BuilderContext builderContext)
+        protected virtual Expression GetSelectTableExpression(
+            TableExpression tableExpression,
+            BuilderContext builderContext
+        )
         {
             var bindings = new List<MemberBinding>();
             foreach (var columnExpression in RegisterAllColumns(tableExpression, builderContext))
             {
-                var binding = Expression.Bind((MethodInfo) columnExpression.MemberInfo, columnExpression);
+                var binding = Expression.Bind(
+                    (MethodInfo)columnExpression.MemberInfo,
+                    columnExpression
+                );
                 bindings.Add(binding);
             }
             var newExpression = Expression.New(tableExpression.Type);

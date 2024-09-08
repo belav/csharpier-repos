@@ -14,16 +14,22 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
     internal abstract class AbstractMemberAccessExpressionSimplifier<
         TExpressionSyntax,
         TMemberAccessExpressionSyntax,
-        TThisExpressionSyntax>
+        TThisExpressionSyntax
+    >
         where TExpressionSyntax : SyntaxNode
         where TMemberAccessExpressionSyntax : TExpressionSyntax
         where TThisExpressionSyntax : TExpressionSyntax
     {
         protected abstract ISyntaxFacts SyntaxFacts { get; }
         protected abstract ISpeculationAnalyzer GetSpeculationAnalyzer(
-            SemanticModel semanticModel, TMemberAccessExpressionSyntax memberAccessExpression, CancellationToken cancellationToken);
+            SemanticModel semanticModel,
+            TMemberAccessExpressionSyntax memberAccessExpression,
+            CancellationToken cancellationToken
+        );
 
-        protected abstract bool MayCauseParseDifference(TMemberAccessExpressionSyntax memberAccessExpression);
+        protected abstract bool MayCauseParseDifference(
+            TMemberAccessExpressionSyntax memberAccessExpression
+        );
 
         /// <summary>
         /// Checks a member access expression <c>expr.Name</c> and, if it is of the form <c>this.Name</c> or
@@ -35,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
             SimplifierOptions simplifierOptions,
             [NotNullWhen(true)] out TThisExpressionSyntax? thisExpression,
             out NotificationOption2 notificationOption,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             notificationOption = NotificationOption2.Silent;
             thisExpression = null;
@@ -47,7 +54,9 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
             if (!syntaxFacts.IsSimpleMemberAccessExpression(memberAccessExpression))
                 return false;
 
-            thisExpression = syntaxFacts.GetExpressionOfMemberAccessExpression(memberAccessExpression) as TThisExpressionSyntax;
+            thisExpression =
+                syntaxFacts.GetExpressionOfMemberAccessExpression(memberAccessExpression)
+                as TThisExpressionSyntax;
             if (!syntaxFacts.IsThisExpression(thisExpression))
                 return false;
 
@@ -55,21 +64,40 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
             if (symbolInfo.Symbol == null)
                 return false;
 
-            if (!simplifierOptions.TryGetQualifyMemberAccessOption(symbolInfo.Symbol.Kind, out var optionValue))
+            if (
+                !simplifierOptions.TryGetQualifyMemberAccessOption(
+                    symbolInfo.Symbol.Kind,
+                    out var optionValue
+                )
+            )
                 return false;
 
             // We always simplify a static accesses off of this/me.  Otherwise, we fall back to whatever the user's option is.
             if (!symbolInfo.Symbol.IsStatic && optionValue.Value)
                 return false;
 
-            var speculationAnalyzer = GetSpeculationAnalyzer(semanticModel, memberAccessExpression, cancellationToken);
-            var newSymbolInfo = speculationAnalyzer.SpeculativeSemanticModel.GetSymbolInfo(speculationAnalyzer.ReplacedExpression, cancellationToken);
-            if (!symbolInfo.Symbol.Equals(newSymbolInfo.Symbol, SymbolEqualityComparer.IncludeNullability))
+            var speculationAnalyzer = GetSpeculationAnalyzer(
+                semanticModel,
+                memberAccessExpression,
+                cancellationToken
+            );
+            var newSymbolInfo = speculationAnalyzer.SpeculativeSemanticModel.GetSymbolInfo(
+                speculationAnalyzer.ReplacedExpression,
+                cancellationToken
+            );
+            if (
+                !symbolInfo.Symbol.Equals(
+                    newSymbolInfo.Symbol,
+                    SymbolEqualityComparer.IncludeNullability
+                )
+            )
                 return false;
 
             notificationOption = optionValue.Notification;
-            return !semanticModel.SyntaxTree.OverlapsHiddenPosition(memberAccessExpression.Span, cancellationToken) &&
-                   !MayCauseParseDifference(memberAccessExpression);
+            return !semanticModel.SyntaxTree.OverlapsHiddenPosition(
+                    memberAccessExpression.Span,
+                    cancellationToken
+                ) && !MayCauseParseDifference(memberAccessExpression);
         }
     }
 }

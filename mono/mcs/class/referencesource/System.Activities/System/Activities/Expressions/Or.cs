@@ -11,8 +11,11 @@ namespace System.Activities.Expressions
     using System.Linq.Expressions;
     using System.Runtime;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotMatchKeywords,
-        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [Or])")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotMatchKeywords,
+        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [Or])"
+    )]
     public sealed class Or<TLeft, TRight, TResult> : CodeActivity<TResult>
     {
         //Lock is not needed for operationFunction here. The reason is that delegates for a given Or<TLeft, TRight, TResult> are the same.
@@ -21,19 +24,11 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TLeft> Left
-        {
-            get;
-            set;
-        }
+        public InArgument<TLeft> Left { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TRight> Right
-        {
-            get;
-            set;
-        }
+        public InArgument<TRight> Right { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
@@ -42,7 +37,13 @@ namespace System.Activities.Expressions
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!BinaryExpressionHelper.TryGenerateLinqDelegate(ExpressionType.Or, out operationFunction, out validationError))
+                if (
+                    !BinaryExpressionHelper.TryGenerateLinqDelegate(
+                        ExpressionType.Or,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }

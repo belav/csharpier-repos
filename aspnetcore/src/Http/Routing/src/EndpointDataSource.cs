@@ -46,13 +46,22 @@ public abstract class EndpointDataSource
             // Supporting arbitrary Endpoints just to add group metadata would require changing the Endpoint type breaking any real scenario.
             if (endpoint is not RouteEndpoint routeEndpoint)
             {
-                throw new NotSupportedException(Resources.FormatMapGroup_CustomEndpointUnsupported(endpoint.GetType()));
+                throw new NotSupportedException(
+                    Resources.FormatMapGroup_CustomEndpointUnsupported(endpoint.GetType())
+                );
             }
 
             // Make the full route pattern visible to IEndpointConventionBuilder extension methods called on the group.
             // This includes patterns from any parent groups.
-            var fullRoutePattern = RoutePatternFactory.Combine(context.Prefix, routeEndpoint.RoutePattern);
-            var routeEndpointBuilder = new RouteEndpointBuilder(routeEndpoint.RequestDelegate, fullRoutePattern, routeEndpoint.Order)
+            var fullRoutePattern = RoutePatternFactory.Combine(
+                context.Prefix,
+                routeEndpoint.RoutePattern
+            );
+            var routeEndpointBuilder = new RouteEndpointBuilder(
+                routeEndpoint.RequestDelegate,
+                fullRoutePattern,
+                routeEndpoint.Order
+            )
             {
                 DisplayName = routeEndpoint.DisplayName,
                 ApplicationServices = context.ApplicationServices,
@@ -140,7 +149,10 @@ public abstract class EndpointDataSource
 
         return sb.ToString();
 
-        static void FormatValues(StringBuilder sb, IEnumerable<KeyValuePair<string, object?>> values)
+        static void FormatValues(
+            StringBuilder sb,
+            IEnumerable<KeyValuePair<string, object?>> values
+        )
         {
             var isFirst = true;
 

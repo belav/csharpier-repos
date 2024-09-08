@@ -41,28 +41,140 @@ namespace System.Web.Http.ApiExplorer
                 object controllerType = typeof(ItemController);
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Item?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Put, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Item/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Item?name={name}&series={series}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Item",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Put,
+                        RelativePath = "Item",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Item/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
                 controllerType = typeof(OverloadsController);
                 expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/{id}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 0},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/{id}?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}&age={age}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/{id}?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Overloads", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Overloads?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Overloads/{id}?name={name}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Overloads/{id}?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 3}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 0,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/{id}?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}&age={age}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/{id}?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Overloads",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Overloads?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Overloads/{id}?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Overloads/{id}?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 3,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -70,12 +182,20 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("VerifyDescription_OnDefaultRoute_PropertyData")]
-        public void VerifyDescription_OnDefaultRoute(Type controllerType, List<object> expectedResults)
+        public void VerifyDescription_OnDefaultRoute(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -89,10 +209,38 @@ namespace System.Web.Http.ApiExplorer
                 object controllerType = typeof(ItemController);
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "myitem?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "myitem", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Put, RelativePath = "myitem", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "myitem/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "myitem?name={name}&series={series}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "myitem",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Put,
+                        RelativePath = "myitem",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "myitem/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -100,12 +248,20 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("VerifyDescription_OnRouteWithControllerOnDefaults_PropertyData")]
-        public void VerifyDescription_OnRouteWithControllerOnDefaults(Type controllerType, List<object> expectedResults)
+        public void VerifyDescription_OnRouteWithControllerOnDefaults(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "myitem/{id}", new { controller = "Item", id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "myitem/{id}",
+                new { controller = "Item", id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -119,28 +275,140 @@ namespace System.Web.Http.ApiExplorer
                 object controllerType = typeof(ItemController);
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Item/GetItem?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Item/PostItem", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Put, RelativePath = "Item/PostItem", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Item/RemoveItem/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Item/GetItem?name={name}&series={series}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Item/PostItem",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Put,
+                        RelativePath = "Item/PostItem",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Item/RemoveItem/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
                 controllerType = typeof(OverloadsController);
                 expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/Get/{id}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/Get", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 0},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/Get?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAndId/{id}?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAndAge?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAgeAndSsn?name={name}&age={age}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameIdAndSsn/{id}?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAndSsn?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Overloads/Post", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Overloads/ActionDefaultedToPost?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Overloads/Delete/{id}?name={name}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Overloads/Delete/{id}?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 3}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/Get/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/Get",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 0,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/Get?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAndId/{id}?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAndAge?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAgeAndSsn?name={name}&age={age}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameIdAndSsn/{id}?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAndSsn?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Overloads/Post",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Overloads/ActionDefaultedToPost?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Overloads/Delete/{id}?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Overloads/Delete/{id}?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 3,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -148,12 +416,20 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("VerifyDescription_OnRouteWithActionVariable_PropertyData")]
-        public void VerifyDescription_OnRouteWithActionVariable(Type controllerType, List<object> expectedResults)
+        public void VerifyDescription_OnRouteWithActionVariable(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{action}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -167,7 +443,14 @@ namespace System.Web.Http.ApiExplorer
                 object controllerType = typeof(ItemController);
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Item/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Item/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -175,12 +458,20 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("VerifyDescription_On_RouteWithActionOnDefaults_PropertyData")]
-        public void VerifyDescription_On_RouteWithActionOnDefaults(Type controllerType, List<object> expectedResults)
+        public void VerifyDescription_On_RouteWithActionOnDefaults(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { action = "RemoveItem", id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { action = "RemoveItem", id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -192,9 +483,14 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(OverloadsController);
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { action = "ActionThatDoesNotExist", id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { action = "ActionThatDoesNotExist", id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -206,9 +502,14 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(OverloadsController);
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "mycontroller/{id}", new { controller = "ControllerThatDoesNotExist", id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "mycontroller/{id}",
+                new { controller = "ControllerThatDoesNotExist", id = RouteParameter.Optional }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -220,9 +521,18 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(ItemController);
             HttpConfiguration config = new HttpConfiguration();
-            IHttpRoute matchingRoute = config.Routes.MapHttpRoute("Item", "Item/{id}", new { id = RouteParameter.Optional, controller = "Item" });
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            IHttpRoute matchingRoute = config.Routes.MapHttpRoute(
+                "Item",
+                "Item/{id}",
+                new { id = RouteParameter.Optional, controller = "Item" }
+            );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -234,10 +544,38 @@ namespace System.Web.Http.ApiExplorer
             }
             List<object> expectedResults = new List<object>
             {
-                new { HttpMethod = HttpMethod.Get, RelativePath = "Item?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                new { HttpMethod = HttpMethod.Post, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                new { HttpMethod = HttpMethod.Put, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                new { HttpMethod = HttpMethod.Delete, RelativePath = "Item/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 1}
+                new
+                {
+                    HttpMethod = HttpMethod.Get,
+                    RelativePath = "Item?name={name}&series={series}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 2,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Post,
+                    RelativePath = "Item",
+                    HasRequestFormatters = true,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 1,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Put,
+                    RelativePath = "Item",
+                    HasRequestFormatters = true,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 1,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Delete,
+                    RelativePath = "Item/{id}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = false,
+                    NumberOfParameters = 1,
+                },
             };
             ApiExplorerHelper.VerifyApiDescriptions(descriptions, expectedResults);
         }
@@ -247,8 +585,13 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(AmbiguousActionController);
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -256,7 +599,14 @@ namespace System.Web.Http.ApiExplorer
 
             List<object> expectedResults = new List<object>
             {
-                new { HttpMethod = HttpMethod.Post, RelativePath = "AmbiguousAction/{id}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1}
+                new
+                {
+                    HttpMethod = HttpMethod.Post,
+                    RelativePath = "AmbiguousAction/{id}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 1,
+                },
             };
             ApiExplorerHelper.VerifyApiDescriptions(descriptions, expectedResults);
         }
@@ -266,9 +616,18 @@ namespace System.Web.Http.ApiExplorer
         {
             Type controllerType = typeof(ItemController);
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Custom", "{majorVersion}/{minorVersion}/custom", new { controller = "Item" });
-            config.Routes.MapHttpRoute("Default", "{version}/{controller}/{id}", new { id = RouteParameter.Optional });
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            config.Routes.MapHttpRoute(
+                "Custom",
+                "{majorVersion}/{minorVersion}/custom",
+                new { controller = "Item" }
+            );
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{version}/{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -276,14 +635,70 @@ namespace System.Web.Http.ApiExplorer
 
             List<object> expectedResults = new List<object>
             {
-                new { HttpMethod = HttpMethod.Get, RelativePath = "{majorVersion}/{minorVersion}/custom?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 4},
-                new { HttpMethod = HttpMethod.Post, RelativePath = "{majorVersion}/{minorVersion}/custom", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 3},
-                new { HttpMethod = HttpMethod.Put, RelativePath = "{majorVersion}/{minorVersion}/custom", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 3},
-                new { HttpMethod = HttpMethod.Delete, RelativePath = "{majorVersion}/{minorVersion}/custom?id={id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 3},
-                new { HttpMethod = HttpMethod.Get, RelativePath = "{version}/Item?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                new { HttpMethod = HttpMethod.Post, RelativePath = "{version}/Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 2},
-                new { HttpMethod = HttpMethod.Put, RelativePath = "{version}/Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 2},
-                new { HttpMethod = HttpMethod.Delete, RelativePath = "{version}/Item/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 2}
+                new
+                {
+                    HttpMethod = HttpMethod.Get,
+                    RelativePath = "{majorVersion}/{minorVersion}/custom?name={name}&series={series}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 4,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Post,
+                    RelativePath = "{majorVersion}/{minorVersion}/custom",
+                    HasRequestFormatters = true,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 3,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Put,
+                    RelativePath = "{majorVersion}/{minorVersion}/custom",
+                    HasRequestFormatters = true,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 3,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Delete,
+                    RelativePath = "{majorVersion}/{minorVersion}/custom?id={id}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = false,
+                    NumberOfParameters = 3,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Get,
+                    RelativePath = "{version}/Item?name={name}&series={series}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 3,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Post,
+                    RelativePath = "{version}/Item",
+                    HasRequestFormatters = true,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 2,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Put,
+                    RelativePath = "{version}/Item",
+                    HasRequestFormatters = true,
+                    HasResponseFormatters = true,
+                    NumberOfParameters = 2,
+                },
+                new
+                {
+                    HttpMethod = HttpMethod.Delete,
+                    RelativePath = "{version}/Item/{id}",
+                    HasRequestFormatters = false,
+                    HasResponseFormatters = false,
+                    NumberOfParameters = 2,
+                },
             };
             ApiExplorerHelper.VerifyApiDescriptions(descriptions, expectedResults);
         }

@@ -6,5 +6,5 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 public enum AspNetEnvironment
 {
     Development,
-    Production
+    Production,
 }

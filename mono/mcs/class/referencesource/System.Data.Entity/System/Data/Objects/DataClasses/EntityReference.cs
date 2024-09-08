@@ -48,22 +48,22 @@ namespace System.Data.Objects.DataClasses
         // ------------
 
         /// <summary>
-        /// The default constructor is required for some serialization scenarios. It should not be used to 
+        /// The default constructor is required for some serialization scenarios. It should not be used to
         /// create new EntityReferences. Use the GetRelatedReference or GetRelatedEnd methods on the RelationshipManager
         /// class instead.
         /// </summary>
-        internal EntityReference()
-        {
-        }
+        internal EntityReference() { }
 
-        internal EntityReference(IEntityWrapper wrappedOwner, RelationshipNavigation navigation, IRelationshipFixer relationshipFixer)
-            : base(wrappedOwner, navigation, relationshipFixer)
-        {
-        }
+        internal EntityReference(
+            IEntityWrapper wrappedOwner,
+            RelationshipNavigation navigation,
+            IRelationshipFixer relationshipFixer
+        )
+            : base(wrappedOwner, navigation, relationshipFixer) { }
 
         /// <summary>
         /// Returns the EntityKey of the target entity associated with this EntityReference.
-        /// 
+        ///
         /// Is non-null in the following scenarios:
         /// (a) Entities are tracked by a context and an Unchanged or Added client-side relationships exists for this EntityReference's owner with the
         ///     same RelationshipName and source role. This relationship could have been created explicitly by the user (e.g. by setting
@@ -72,14 +72,14 @@ namespace System.Data.Objects.DataClasses
         ///     occurs that would set it to null, as described below.
         /// (c) Entities are detached and the EntityKey is explicitly set to non-null by the user.
         /// (d) Entity graph was created using a NoTracking query with full span
-        /// 
+        ///
         /// Is null in the following scenarios:
         /// (a) Entities are tracked by a context but there is no Unchanged or Added client-side relationship for this EntityReference's owner with the
         ///     same RelationshipName and source role.
         /// (b) Entities are tracked by a context and a relationship exists, but the target entity has a temporary key (i.e. it is Added) or the key
         ///     is one of the special keys
         /// (c) Entities are detached and the relationship was explicitly created by the user.
-        /// </summary>   
+        /// </summary>
         [DataMember]
         public EntityKey EntityKey
         {
@@ -89,7 +89,10 @@ namespace System.Data.Objects.DataClasses
             {
                 if (this.ObjectContext != null && !UsingNoTracking)
                 {
-                    Debug.Assert(this.WrappedOwner.Entity != null, "Unexpected null Owner on EntityReference attached to a context");
+                    Debug.Assert(
+                        this.WrappedOwner.Entity != null,
+                        "Unexpected null Owner on EntityReference attached to a context"
+                    );
 
                     EntityKey attachedKey = null;
 
@@ -110,7 +113,10 @@ namespace System.Data.Objects.DataClasses
                         if (IsForeignKey)
                         {
                             // For dependent ends, return the value of the cached foreign key if it is not conceptually null
-                            if (IsDependentEndOfReferentialConstraint(false) && _cachedForeignKey != null)
+                            if (
+                                IsDependentEndOfReferentialConstraint(false)
+                                && _cachedForeignKey != null
+                            )
                             {
                                 if (!ForeignKeyFactory.IsConceptualNullKey(_cachedForeignKey))
                                 {
@@ -128,21 +134,39 @@ namespace System.Data.Objects.DataClasses
                         {
                             // There could still be an Added or Unchanged relationship with a stub entry
                             EntityKey ownerKey = WrappedOwner.EntityKey;
-                            foreach (RelationshipEntry relationshipEntry in this.ObjectContext.ObjectStateManager.FindRelationshipsByKey(ownerKey))
+                            foreach (
+                                RelationshipEntry relationshipEntry in this.ObjectContext.ObjectStateManager.FindRelationshipsByKey(
+                                    ownerKey
+                                )
+                            )
                             {
                                 // We only care about the relationships that match the AssociationSet and source role for the owner of this EntityReference
-                                if (relationshipEntry.State != EntityState.Deleted &&
-                                    relationshipEntry.IsSameAssociationSetAndRole((AssociationSet)RelationshipSet, (AssociationEndMember)this.FromEndProperty, ownerKey))
+                                if (
+                                    relationshipEntry.State != EntityState.Deleted
+                                    && relationshipEntry.IsSameAssociationSetAndRole(
+                                        (AssociationSet)RelationshipSet,
+                                        (AssociationEndMember)this.FromEndProperty,
+                                        ownerKey
+                                    )
+                                )
                                 {
-                                    Debug.Assert(attachedKey == null, "Found more than one non-Deleted relationship for the same AssociationSet and source role");
-                                    attachedKey = relationshipEntry.RelationshipWrapper.GetOtherEntityKey(ownerKey);
+                                    Debug.Assert(
+                                        attachedKey == null,
+                                        "Found more than one non-Deleted relationship for the same AssociationSet and source role"
+                                    );
+                                    attachedKey =
+                                        relationshipEntry.RelationshipWrapper.GetOtherEntityKey(
+                                            ownerKey
+                                        );
                                     // key should never be temporary or special since it came from a key entry
                                 }
                             }
                         }
                     }
-                    Debug.Assert(attachedKey == null || IsValidEntityKeyType(attachedKey),
-                        "Unexpected temporary or special key");
+                    Debug.Assert(
+                        attachedKey == null || IsValidEntityKeyType(attachedKey),
+                        "Unexpected temporary or special key"
+                    );
                     return attachedKey;
                 }
                 else
@@ -150,15 +174,16 @@ namespace System.Data.Objects.DataClasses
                     return DetachedEntityKey;
                 }
             }
-            set
-            {
-                SetEntityKey(value, forceFixup: false);
-            }
+            set { SetEntityKey(value, forceFixup: false); }
         }
 
         internal void SetEntityKey(EntityKey value, bool forceFixup)
         {
-            if (value != null && value == EntityKey && (ReferenceValue.Entity != null || (ReferenceValue.Entity == null && !forceFixup)))
+            if (
+                value != null
+                && value == EntityKey
+                && (ReferenceValue.Entity != null || (ReferenceValue.Entity == null && !forceFixup))
+            )
             {
                 // "no-op" -- this is not really no-op in the attached case, because at a minimum we have to do a key lookup,
                 // worst case we have to review all relationships for the owner entity
@@ -172,9 +197,12 @@ namespace System.Data.Objects.DataClasses
 
             if (this.ObjectContext != null && !UsingNoTracking)
             {
-                Debug.Assert(this.WrappedOwner.Entity != null, "Unexpected null Owner on EntityReference attached to a context");
+                Debug.Assert(
+                    this.WrappedOwner.Entity != null,
+                    "Unexpected null Owner on EntityReference attached to a context"
+                );
 
-                // null is a valid value for the EntityKey, but temporary and special keys are not    
+                // null is a valid value for the EntityKey, but temporary and special keys are not
                 // devnote: Can't check this on detached references because this property could be set to a temp key during deserialization,
                 //          if the key hasn't finished deserializing yet.
                 if (value != null && !IsValidEntityKeyType(value))
@@ -198,7 +226,13 @@ namespace System.Data.Objects.DataClasses
                     // Verify that the key has the right EntitySet for this RelationshipSet
                     EntitySet targetEntitySet = value.GetEntitySet(ObjectContext.MetadataWorkspace);
                     CheckRelationEntitySet(targetEntitySet);
-                    value.ValidateEntityKey(ObjectContext.MetadataWorkspace, targetEntitySet, true /*isArgumentException */, "value");
+                    value.ValidateEntityKey(
+                        ObjectContext.MetadataWorkspace,
+                        targetEntitySet,
+                        true /*isArgumentException */
+                        ,
+                        "value"
+                    );
 
                     ObjectStateManager manager = this.ObjectContext.ObjectStateManager;
 
@@ -235,7 +269,11 @@ namespace System.Data.Objects.DataClasses
 
                     if (addNewRelationship)
                     {
-                        EntityKey ownerKey = ValidateOwnerWithRIConstraints(targetEntry == null ? null : targetEntry.WrappedEntity, value, checkBothEnds: true);
+                        EntityKey ownerKey = ValidateOwnerWithRIConstraints(
+                            targetEntry == null ? null : targetEntry.WrappedEntity,
+                            value,
+                            checkBothEnds: true
+                        );
 
                         // Verify that the owner is in a valid state for adding a relationship
                         ValidateStateForAdd(this.WrappedOwner);
@@ -249,7 +287,11 @@ namespace System.Data.Objects.DataClasses
                         manager.TransactionManager.EntityBeingReparented = WrappedOwner.Entity;
                         try
                         {
-                            ClearCollectionOrRef(null, null, /*doCascadeDelete*/ false);
+                            ClearCollectionOrRef(
+                                null,
+                                null, /*doCascadeDelete*/
+                                false
+                            );
                         }
                         finally
                         {
@@ -268,13 +310,22 @@ namespace System.Data.Objects.DataClasses
                         }
                         else
                         {
-                            RelationshipWrapper wrapper = new RelationshipWrapper((AssociationSet)RelationshipSet, RelationshipNavigation.From, ownerKey, RelationshipNavigation.To, value);
+                            RelationshipWrapper wrapper = new RelationshipWrapper(
+                                (AssociationSet)RelationshipSet,
+                                RelationshipNavigation.From,
+                                ownerKey,
+                                RelationshipNavigation.To,
+                                value
+                            );
                             // Add the relationship in the unchanged state if
                             EntityState relationshipState = EntityState.Added;
 
                             // If this is an unchanged/modified dependent end of a relationship and we are allowing the EntityKey to be set
                             // create the relationship in the Unchanged state because the state must "match" the dependent end state
-                            if (!ownerKey.IsTemporary && IsDependentEndOfReferentialConstraint(false))
+                            if (
+                                !ownerKey.IsTemporary
+                                && IsDependentEndOfReferentialConstraint(false)
+                            )
                             {
                                 relationshipState = EntityState.Unchanged;
                             }
@@ -299,23 +350,31 @@ namespace System.Data.Objects.DataClasses
         /// </summary>
         internal bool AttemptToNullFKsOnRefOrKeySetToNull()
         {
-            if (ReferenceValue.Entity == null &&
-                WrappedOwner.Entity != null &&
-                WrappedOwner.Context != null &&
-                !UsingNoTracking &&
-                IsForeignKey)
+            if (
+                ReferenceValue.Entity == null
+                && WrappedOwner.Entity != null
+                && WrappedOwner.Context != null
+                && !UsingNoTracking
+                && IsForeignKey
+            )
             {
                 // For identifying relationships, we throw, since we cannot set primary key values to null, unless
                 // the entity is in the Added state.
-                if (WrappedOwner.ObjectStateEntry.State != EntityState.Added &&
-                    IsDependentEndOfReferentialConstraint(checkIdentifying: true))
+                if (
+                    WrappedOwner.ObjectStateEntry.State != EntityState.Added
+                    && IsDependentEndOfReferentialConstraint(checkIdentifying: true)
+                )
                 {
                     throw EntityUtil.CannotChangeReferentialConstraintProperty();
                 }
 
                 // For unloaded FK relationships in the context we attempt to null FK values here, which will
                 // delete the relationship.
-                RemoveFromLocalCache(EntityWrapperFactory.NullWrapper, resetIsLoaded: true, preserveForeignKey: false);
+                RemoveFromLocalCache(
+                    EntityWrapperFactory.NullWrapper,
+                    resetIsLoaded: true,
+                    preserveForeignKey: false
+                );
 
                 return true;
             }
@@ -326,39 +385,42 @@ namespace System.Data.Objects.DataClasses
         {
             get
             {
-                Debug.Assert(this.ObjectContext != null && !UsingNoTracking, "Should only need to access AttachedEntityKey property on attached EntityReferences");
+                Debug.Assert(
+                    this.ObjectContext != null && !UsingNoTracking,
+                    "Should only need to access AttachedEntityKey property on attached EntityReferences"
+                );
                 return this.EntityKey;
             }
         }
 
         internal EntityKey DetachedEntityKey
         {
-            get
-            {
-                return _detachedEntityKey;
-            }
-            set
-            {
-                _detachedEntityKey = value;
-            }
+            get { return _detachedEntityKey; }
+            set { _detachedEntityKey = value; }
         }
 
         internal EntityKey CachedForeignKey
         {
-            get
-            {
-                return EntityKey ?? _cachedForeignKey;
-            }
+            get { return EntityKey ?? _cachedForeignKey; }
         }
 
         internal void SetCachedForeignKey(EntityKey newForeignKey, EntityEntry source)
         {
-            if (this.ObjectContext != null && this.ObjectContext.ObjectStateManager != null &&  // are we attached?
-                source != null && // do we have an entry?
-                _cachedForeignKey != null && !ForeignKeyFactory.IsConceptualNullKey(_cachedForeignKey) // do we have an fk?
-                && _cachedForeignKey != newForeignKey) // is the FK different from the one that we already have?
+            if (
+                this.ObjectContext != null
+                && this.ObjectContext.ObjectStateManager != null
+                && // are we attached?
+                source != null
+                && // do we have an entry?
+                _cachedForeignKey != null
+                && !ForeignKeyFactory.IsConceptualNullKey(_cachedForeignKey) // do we have an fk?
+                && _cachedForeignKey != newForeignKey
+            ) // is the FK different from the one that we already have?
             {
-                this.ObjectContext.ObjectStateManager.RemoveEntryFromForeignKeyIndex(_cachedForeignKey, source);
+                this.ObjectContext.ObjectStateManager.RemoveEntryFromForeignKeyIndex(
+                    _cachedForeignKey,
+                    source
+                );
             }
             _cachedForeignKey = newForeignKey;
         }
@@ -381,56 +443,84 @@ namespace System.Data.Objects.DataClasses
             }
         }
 
-        internal abstract IEntityWrapper CachedValue
-        {
-            get;
-        }
+        internal abstract IEntityWrapper CachedValue { get; }
 
-        internal abstract IEntityWrapper ReferenceValue
-        {
-            get;
-            set;
-        }
+        internal abstract IEntityWrapper ReferenceValue { get; set; }
 
-
-        internal EntityKey ValidateOwnerWithRIConstraints(IEntityWrapper targetEntity, EntityKey targetEntityKey, bool checkBothEnds)
+        internal EntityKey ValidateOwnerWithRIConstraints(
+            IEntityWrapper targetEntity,
+            EntityKey targetEntityKey,
+            bool checkBothEnds
+        )
         {
             EntityKey ownerKey = WrappedOwner.EntityKey;
 
             // Check if Referential Constraints are violated
-            if ((object)ownerKey != null &&
-                !ownerKey.IsTemporary &&
-                IsDependentEndOfReferentialConstraint(checkIdentifying: true))
+            if (
+                (object)ownerKey != null
+                && !ownerKey.IsTemporary
+                && IsDependentEndOfReferentialConstraint(checkIdentifying: true)
+            )
             {
-                Debug.Assert(CachedForeignKey != null || EntityKey == null, "CachedForeignKey should not be null if EntityKey is not null.");
-                ValidateSettingRIConstraints(targetEntity,
-                                             targetEntityKey == null,
-                                             (this.CachedForeignKey != null && this.CachedForeignKey != targetEntityKey));
+                Debug.Assert(
+                    CachedForeignKey != null || EntityKey == null,
+                    "CachedForeignKey should not be null if EntityKey is not null."
+                );
+                ValidateSettingRIConstraints(
+                    targetEntity,
+                    targetEntityKey == null,
+                    (this.CachedForeignKey != null && this.CachedForeignKey != targetEntityKey)
+                );
             }
             else if (checkBothEnds && targetEntity != null && targetEntity.Entity != null)
             {
-                EntityReference otherEnd = GetOtherEndOfRelationship(targetEntity) as EntityReference;
+                EntityReference otherEnd =
+                    GetOtherEndOfRelationship(targetEntity) as EntityReference;
                 if (otherEnd != null)
                 {
-                    otherEnd.ValidateOwnerWithRIConstraints(WrappedOwner, ownerKey, checkBothEnds: false);
+                    otherEnd.ValidateOwnerWithRIConstraints(
+                        WrappedOwner,
+                        ownerKey,
+                        checkBothEnds: false
+                    );
                 }
             }
-
 
             return ownerKey;
         }
 
-        internal void ValidateSettingRIConstraints(IEntityWrapper targetEntity, bool settingToNull, bool changingForeignKeyValue)
+        internal void ValidateSettingRIConstraints(
+            IEntityWrapper targetEntity,
+            bool settingToNull,
+            bool changingForeignKeyValue
+        )
         {
-            bool isNoTracking = targetEntity != null && targetEntity.MergeOption == MergeOption.NoTracking;
+            bool isNoTracking =
+                targetEntity != null && targetEntity.MergeOption == MergeOption.NoTracking;
 
-            if (settingToNull ||                    // setting the principle to null
-                changingForeignKeyValue ||          // existing key does not match incoming key
-                (targetEntity != null &&
-                 !isNoTracking &&
-                                 (targetEntity.ObjectStateEntry == null ||  // setting to a detached principle
-                                 (EntityKey == null && targetEntity.ObjectStateEntry.State == EntityState.Deleted || // setting to a deleted principle
-                                 (CachedForeignKey == null && targetEntity.ObjectStateEntry.State == EntityState.Added)))))    // setting to an added principle
+            if (
+                settingToNull
+                || // setting the principle to null
+                changingForeignKeyValue
+                || // existing key does not match incoming key
+                (
+                    targetEntity != null
+                    && !isNoTracking
+                    && (
+                        targetEntity.ObjectStateEntry == null
+                        || // setting to a detached principle
+                        (
+                            EntityKey == null
+                                && targetEntity.ObjectStateEntry.State == EntityState.Deleted
+                            || // setting to a deleted principle
+                            (
+                                CachedForeignKey == null
+                                && targetEntity.ObjectStateEntry.State == EntityState.Added
+                            )
+                        )
+                    )
+                )
+            ) // setting to an added principle
             {
                 throw EntityUtil.CannotChangeReferentialConstraintProperty();
             }
@@ -441,10 +531,7 @@ namespace System.Data.Objects.DataClasses
         /// </summary>
         internal override bool CanDeferredLoad
         {
-            get
-            {
-                return IsEmpty();
-            }
+            get { return IsEmpty(); }
         }
 
         /// <summary>
@@ -458,27 +545,50 @@ namespace System.Data.Objects.DataClasses
         /// <param name="changedFKs">If non-null, then keeps track of FKs that have already been set such that an exception can be thrown if we find conflicting values</param>
         /// <param name="forceChange">If true, then the property setter is called even if FK values already match,
         ///                           which causes the FK properties to be marked as modified.</param>
-        internal void UpdateForeignKeyValues(IEntityWrapper dependentEntity, IEntityWrapper principalEntity, Dictionary<int, object> changedFKs, bool forceChange)
+        internal void UpdateForeignKeyValues(
+            IEntityWrapper dependentEntity,
+            IEntityWrapper principalEntity,
+            Dictionary<int, object> changedFKs,
+            bool forceChange
+        )
         {
             Debug.Assert(dependentEntity.Entity != null, "dependentEntity.Entity == null");
             Debug.Assert(principalEntity.Entity != null, "principalEntity.Entity == null");
-            Debug.Assert(this.IsForeignKey, "cannot update foreign key values if the relationship is not a FK");
-            ReferentialConstraint constraint = ((AssociationType)this.RelationMetadata).ReferentialConstraints[0];
+            Debug.Assert(
+                this.IsForeignKey,
+                "cannot update foreign key values if the relationship is not a FK"
+            );
+            ReferentialConstraint constraint = (
+                (AssociationType)this.RelationMetadata
+            ).ReferentialConstraints[0];
             Debug.Assert(constraint != null, "null constraint");
 
-            bool isUnchangedDependent = (object)WrappedOwner.EntityKey != null &&
-                                        !WrappedOwner.EntityKey.IsTemporary &&
-                                        IsDependentEndOfReferentialConstraint(checkIdentifying: true);
+            bool isUnchangedDependent =
+                (object)WrappedOwner.EntityKey != null
+                && !WrappedOwner.EntityKey.IsTemporary
+                && IsDependentEndOfReferentialConstraint(checkIdentifying: true);
 
             ObjectStateManager stateManager = ObjectContext.ObjectStateManager;
             stateManager.TransactionManager.BeginForeignKeyUpdate(this);
             try
             {
-                EntitySet principalEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[ToEndMember.Name].EntitySet;
-                StateManagerTypeMetadata principalTypeMetadata = stateManager.GetOrAddStateManagerTypeMetadata(principalEntity.IdentityType, principalEntitySet);
+                EntitySet principalEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[ToEndMember.Name]
+                    .EntitySet;
+                StateManagerTypeMetadata principalTypeMetadata =
+                    stateManager.GetOrAddStateManagerTypeMetadata(
+                        principalEntity.IdentityType,
+                        principalEntitySet
+                    );
 
-                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[FromEndProperty.Name].EntitySet;
-                StateManagerTypeMetadata dependentTypeMetadata = stateManager.GetOrAddStateManagerTypeMetadata(dependentEntity.IdentityType, dependentEntitySet);
+                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[FromEndProperty.Name]
+                    .EntitySet;
+                StateManagerTypeMetadata dependentTypeMetadata =
+                    stateManager.GetOrAddStateManagerTypeMetadata(
+                        dependentEntity.IdentityType,
+                        dependentEntitySet
+                    );
 
                 var principalProps = constraint.FromProperties;
                 int numValues = principalProps.Count;
@@ -491,15 +601,30 @@ namespace System.Data.Objects.DataClasses
                 }
                 for (int i = 0; i < numValues; i++)
                 {
-                    int principalOrdinal = principalTypeMetadata.GetOrdinalforOLayerMemberName(principalProps[i].Name);
-                    object value = principalTypeMetadata.Member(principalOrdinal).GetValue(principalEntity.Entity);
-                    int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(constraint.ToProperties[i].Name);
-                    bool valueChanging = !ByValueEqualityComparer.Default.Equals(dependentTypeMetadata.Member(dependentOrdinal).GetValue(dependentEntity.Entity), value);
+                    int principalOrdinal = principalTypeMetadata.GetOrdinalforOLayerMemberName(
+                        principalProps[i].Name
+                    );
+                    object value = principalTypeMetadata
+                        .Member(principalOrdinal)
+                        .GetValue(principalEntity.Entity);
+                    int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(
+                        constraint.ToProperties[i].Name
+                    );
+                    bool valueChanging = !ByValueEqualityComparer.Default.Equals(
+                        dependentTypeMetadata
+                            .Member(dependentOrdinal)
+                            .GetValue(dependentEntity.Entity),
+                        value
+                    );
                     if (forceChange || valueChanging)
                     {
                         if (isUnchangedDependent)
                         {
-                            ValidateSettingRIConstraints(principalEntity, settingToNull: value == null, changingForeignKeyValue: valueChanging);
+                            ValidateSettingRIConstraints(
+                                principalEntity,
+                                settingToNull: value == null,
+                                changingForeignKeyValue: valueChanging
+                            );
                         }
                         // If we're tracking FK values that have already been set, then compare the value we are about to set
                         // to the value we previously set for this ordinal, if such a value exists.  If they don't match then
@@ -509,9 +634,20 @@ namespace System.Data.Objects.DataClasses
                             object previouslySetValue;
                             if (changedFKs.TryGetValue(dependentOrdinal, out previouslySetValue))
                             {
-                                if (!ByValueEqualityComparer.Default.Equals(previouslySetValue, value))
+                                if (
+                                    !ByValueEqualityComparer.Default.Equals(
+                                        previouslySetValue,
+                                        value
+                                    )
+                                )
                                 {
-                                    throw new InvalidOperationException(System.Data.Entity.Strings.Update_ReferentialConstraintIntegrityViolation);
+                                    throw new InvalidOperationException(
+                                        System
+                                            .Data
+                                            .Entity
+                                            .Strings
+                                            .Update_ReferentialConstraintIntegrityViolation
+                                    );
                                 }
                             }
                             else
@@ -524,28 +660,41 @@ namespace System.Data.Objects.DataClasses
                             dependentTypeMetadata.Member(dependentOrdinal),
                             -1,
                             dependentEntity.Entity,
-                            value);
+                            value
+                        );
                     }
 
                     if (numValues > 1)
                     {
                         int keyIndex = Array.IndexOf(keyNames, principalProps[i].Name);
-                        Debug.Assert(keyIndex >= 0 && keyIndex < numValues, "Could not find constraint prop name in entity set key names");
+                        Debug.Assert(
+                            keyIndex >= 0 && keyIndex < numValues,
+                            "Could not find constraint prop name in entity set key names"
+                        );
                         values[keyIndex] = value;
                     }
                     else
                     {
-                        SetCachedForeignKey(new EntityKey(principalEntitySet, value), dependentEntity.ObjectStateEntry);
+                        SetCachedForeignKey(
+                            new EntityKey(principalEntitySet, value),
+                            dependentEntity.ObjectStateEntry
+                        );
                     }
                 }
 
                 if (numValues > 1)
                 {
-                    SetCachedForeignKey(new EntityKey(principalEntitySet, values), dependentEntity.ObjectStateEntry);
+                    SetCachedForeignKey(
+                        new EntityKey(principalEntitySet, values),
+                        dependentEntity.ObjectStateEntry
+                    );
                 }
                 if (WrappedOwner.ObjectStateEntry != null)
                 {
-                    stateManager.ForgetEntryWithConceptualNull(WrappedOwner.ObjectStateEntry, resetAllKeys: false);
+                    stateManager.ForgetEntryWithConceptualNull(
+                        WrappedOwner.ObjectStateEntry,
+                        resetAllKeys: false
+                    );
                 }
             }
             finally
@@ -567,22 +716,37 @@ namespace System.Data.Objects.DataClasses
             Debug.Assert(dependentEntity.Entity != null, "dependentEntity.Entity == null");
             Debug.Assert(principalKey != null, "principalKey == null");
             Debug.Assert(!principalKey.IsTemporary, "Cannot update from a temp key");
-            Debug.Assert(this.IsForeignKey, "cannot update foreign key values if the relationship is not a FK");
-            ReferentialConstraint constraint = ((AssociationType)this.RelationMetadata).ReferentialConstraints[0];
+            Debug.Assert(
+                this.IsForeignKey,
+                "cannot update foreign key values if the relationship is not a FK"
+            );
+            ReferentialConstraint constraint = (
+                (AssociationType)this.RelationMetadata
+            ).ReferentialConstraints[0];
             Debug.Assert(constraint != null, "null constraint");
 
             ObjectStateManager stateManager = ObjectContext.ObjectStateManager;
             stateManager.TransactionManager.BeginForeignKeyUpdate(this);
             try
             {
-                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[FromEndProperty.Name].EntitySet;
-                StateManagerTypeMetadata dependentTypeMetadata = stateManager.GetOrAddStateManagerTypeMetadata(dependentEntity.IdentityType, dependentEntitySet);
+                EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                    .AssociationSetEnds[FromEndProperty.Name]
+                    .EntitySet;
+                StateManagerTypeMetadata dependentTypeMetadata =
+                    stateManager.GetOrAddStateManagerTypeMetadata(
+                        dependentEntity.IdentityType,
+                        dependentEntitySet
+                    );
 
                 for (int i = 0; i < constraint.FromProperties.Count; i++)
                 {
                     object value = principalKey.FindValueByName(constraint.FromProperties[i].Name);
-                    int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(constraint.ToProperties[i].Name);
-                    object currentValue = dependentTypeMetadata.Member(dependentOrdinal).GetValue(dependentEntity.Entity);
+                    int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(
+                        constraint.ToProperties[i].Name
+                    );
+                    object currentValue = dependentTypeMetadata
+                        .Member(dependentOrdinal)
+                        .GetValue(dependentEntity.Entity);
                     if (!ByValueEqualityComparer.Default.Equals(currentValue, value))
                     {
                         dependentEntity.SetCurrentValue(
@@ -590,14 +754,18 @@ namespace System.Data.Objects.DataClasses
                             dependentTypeMetadata.Member(dependentOrdinal),
                             -1,
                             dependentEntity.Entity,
-                            value);
+                            value
+                        );
                     }
                 }
 
                 SetCachedForeignKey(principalKey, dependentEntity.ObjectStateEntry);
                 if (WrappedOwner.ObjectStateEntry != null)
                 {
-                    stateManager.ForgetEntryWithConceptualNull(WrappedOwner.ObjectStateEntry, resetAllKeys: false);
+                    stateManager.ForgetEntryWithConceptualNull(
+                        WrappedOwner.ObjectStateEntry,
+                        resetAllKeys: false
+                    );
                 }
             }
             finally
@@ -608,16 +776,17 @@ namespace System.Data.Objects.DataClasses
 
         internal object GetDependentEndOfReferentialConstraint(object relatedValue)
         {
-            return IsDependentEndOfReferentialConstraint(checkIdentifying: false) ?
-                WrappedOwner.Entity :
-                relatedValue;
+            return IsDependentEndOfReferentialConstraint(checkIdentifying: false)
+                ? WrappedOwner.Entity
+                : relatedValue;
         }
 
         internal bool NavigationPropertyIsNullOrMissing()
         {
             Debug.Assert(RelationshipNavigation != null, "null RelationshipNavigation");
 
-            return !TargetAccessor.HasProperty || WrappedOwner.GetNavigationPropertyValue(this) == null;
+            return !TargetAccessor.HasProperty
+                || WrappedOwner.GetNavigationPropertyValue(this) == null;
         }
 
         /// <summary>
@@ -632,9 +801,15 @@ namespace System.Data.Objects.DataClasses
             ObjectStateManager stateManager = ObjectContext.ObjectStateManager;
             EntityEntry entry = WrappedOwner.ObjectStateEntry;
             TransactionManager transManager = stateManager.TransactionManager;
-            if (!transManager.IsGraphUpdate && !transManager.IsAttachTracking && !transManager.IsRelatedEndAdd)
+            if (
+                !transManager.IsGraphUpdate
+                && !transManager.IsAttachTracking
+                && !transManager.IsRelatedEndAdd
+            )
             {
-                ReferentialConstraint constraint = ((AssociationType)RelationMetadata).ReferentialConstraints.Single();
+                ReferentialConstraint constraint = (
+                    (AssociationType)RelationMetadata
+                ).ReferentialConstraints.Single();
                 if (TargetRoleName == constraint.FromRole.Name) // Only do this on the dependent end
                 {
                     if (transManager.IsDetaching)
@@ -644,28 +819,50 @@ namespace System.Data.Objects.DataClasses
                         // Perf note: The dependent currently gets added when it is being detached and is then
                         // removed again later in the process.  The code could be optimized to prevent this.
                         Debug.Assert(entry != null, "State entry must exist while detaching.");
-                        EntityKey foreignKey = ForeignKeyFactory.CreateKeyFromForeignKeyValues(entry, this);
+                        EntityKey foreignKey = ForeignKeyFactory.CreateKeyFromForeignKeyValues(
+                            entry,
+                            this
+                        );
                         if (foreignKey != null)
                         {
                             stateManager.AddEntryContainingForeignKeyToIndex(foreignKey, entry);
                         }
                     }
-                    else if (!ReferenceEquals(stateManager.EntityInvokingFKSetter, WrappedOwner.Entity) && !transManager.IsForeignKeyUpdate)
+                    else if (
+                        !ReferenceEquals(stateManager.EntityInvokingFKSetter, WrappedOwner.Entity)
+                        && !transManager.IsForeignKeyUpdate
+                    )
                     {
                         transManager.BeginForeignKeyUpdate(this);
                         try
                         {
                             bool unableToNull = true;
-                            bool canSetModifiedProps = entry != null && (entry.State == EntityState.Modified || entry.State == EntityState.Unchanged);
-                            EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet).AssociationSetEnds[FromEndProperty.Name].EntitySet;
-                            StateManagerTypeMetadata dependentTypeMetadata = stateManager.GetOrAddStateManagerTypeMetadata(WrappedOwner.IdentityType, dependentEntitySet);
+                            bool canSetModifiedProps =
+                                entry != null
+                                && (
+                                    entry.State == EntityState.Modified
+                                    || entry.State == EntityState.Unchanged
+                                );
+                            EntitySet dependentEntitySet = ((AssociationSet)RelationshipSet)
+                                .AssociationSetEnds[FromEndProperty.Name]
+                                .EntitySet;
+                            StateManagerTypeMetadata dependentTypeMetadata =
+                                stateManager.GetOrAddStateManagerTypeMetadata(
+                                    WrappedOwner.IdentityType,
+                                    dependentEntitySet
+                                );
 
                             for (int i = 0; i < constraint.FromProperties.Count; i++)
                             {
                                 string propertyName = constraint.ToProperties[i].Name;
-                                int dependentOrdinal = dependentTypeMetadata.GetOrdinalforOLayerMemberName(propertyName);
-                                StateManagerMemberMetadata member = dependentTypeMetadata.Member(dependentOrdinal);
-                                
+                                int dependentOrdinal =
+                                    dependentTypeMetadata.GetOrdinalforOLayerMemberName(
+                                        propertyName
+                                    );
+                                StateManagerMemberMetadata member = dependentTypeMetadata.Member(
+                                    dependentOrdinal
+                                );
+
                                 // This is a check for nullability in o-space. However, o-space nullability is not the
                                 // same as nullability of the underlying type. In particular, one difference is that when
                                 // attribute-based mapping is used then a property can be marked as not nullable in o-space
@@ -682,7 +879,8 @@ namespace System.Data.Objects.DataClasses
                                             dependentTypeMetadata.Member(dependentOrdinal),
                                             -1,
                                             WrappedOwner.Entity,
-                                            null);
+                                            null
+                                        );
                                     }
                                     else
                                     {
@@ -692,7 +890,12 @@ namespace System.Data.Objects.DataClasses
                                         // This case can happen because fixup in the entity can set the FK to null while processing
                                         // a RelatedEnd operation.  This will be detected by DetectChanges, but when performing
                                         // RelatedEnd operations the user is not required to call DetectChanges.
-                                        if (canSetModifiedProps && WrappedOwner.ObjectStateEntry.OriginalValues.GetValue(dependentOrdinal) != null)
+                                        if (
+                                            canSetModifiedProps
+                                            && WrappedOwner.ObjectStateEntry.OriginalValues.GetValue(
+                                                dependentOrdinal
+                                            ) != null
+                                        )
                                         {
                                             entry.SetModifiedProperty(propertyName);
                                         }
@@ -719,7 +922,10 @@ namespace System.Data.Objects.DataClasses
                                     EntityKey realKey = CachedForeignKey;
                                     if (realKey == null)
                                     {
-                                        realKey = ForeignKeyFactory.CreateKeyFromForeignKeyValues(entry, this);
+                                        realKey = ForeignKeyFactory.CreateKeyFromForeignKeyValues(
+                                            entry,
+                                            this
+                                        );
                                     }
 
                                     // Note that the realKey can still be null here for a situation where the key is marked not nullable
@@ -730,7 +936,10 @@ namespace System.Data.Objects.DataClasses
                                     // a concurrency token, the value we have for it is not used at all for the delete.
                                     if (realKey != null)
                                     {
-                                        SetCachedForeignKey(ForeignKeyFactory.CreateConceptualNullKey(realKey), entry);
+                                        SetCachedForeignKey(
+                                            ForeignKeyFactory.CreateConceptualNullKey(realKey),
+                                            entry
+                                        );
                                         stateManager.RememberEntryWithConceptualNull(entry);
                                     }
                                 }

@@ -8,9 +8,16 @@ namespace System.Configuration
 {
     public sealed class InfiniteTimeSpanConverter : ConfigurationConverterBase
     {
-        private static readonly TypeConverter s_timeSpanConverter = TypeDescriptor.GetConverter(typeof(TimeSpan));
+        private static readonly TypeConverter s_timeSpanConverter = TypeDescriptor.GetConverter(
+            typeof(TimeSpan)
+        );
 
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
         {
             ValidateType(value, typeof(TimeSpan));
 

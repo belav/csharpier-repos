@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// For a sample on how to list all formats which are considered, please visit
 /// http://msdn.microsoft.com/en-us/library/aszyst2c(v=vs.110).aspx
 /// </remarks>
-public class DateTimeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class DateTimeRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class DateTimeRouteConstraint : IRouteConstraint
 #endif
@@ -33,10 +36,10 @@ internal class DateTimeRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -58,7 +61,12 @@ internal class DateTimeRouteConstraint : IRouteConstraint
 
     private static bool CheckConstraintCore(string? valueString)
     {
-        return DateTime.TryParse(valueString, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+        return DateTime.TryParse(
+            valueString,
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out _
+        );
     }
 
 #if !COMPONENTS

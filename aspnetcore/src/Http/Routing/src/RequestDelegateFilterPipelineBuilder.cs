@@ -14,22 +14,30 @@ namespace Microsoft.AspNetCore.Routing;
 
 internal static class RequestDelegateFilterPipelineBuilder
 {
-    public static RequestDelegate Create(RequestDelegate requestDelegate, RequestDelegateFactoryOptions options)
+    public static RequestDelegate Create(
+        RequestDelegate requestDelegate,
+        RequestDelegateFactoryOptions options
+    )
     {
         Debug.Assert(options.EndpointBuilder != null);
 
-        var serviceProvider = options.ServiceProvider ?? options.EndpointBuilder.ApplicationServices;
-        var jsonOptions = serviceProvider?.GetService<IOptions<JsonOptions>>()?.Value ?? new JsonOptions();
+        var serviceProvider =
+            options.ServiceProvider ?? options.EndpointBuilder.ApplicationServices;
+        var jsonOptions =
+            serviceProvider?.GetService<IOptions<JsonOptions>>()?.Value ?? new JsonOptions();
         var jsonSerializerOptions = jsonOptions.SerializerOptions;
 
         var factoryContext = new EndpointFilterFactoryContext
         {
             MethodInfo = requestDelegate.Method,
-            ApplicationServices = options.EndpointBuilder.ApplicationServices
+            ApplicationServices = options.EndpointBuilder.ApplicationServices,
         };
-        var jsonTypeInfo = (JsonTypeInfo<object>)jsonSerializerOptions.GetReadOnlyTypeInfo(typeof(object));
+        var jsonTypeInfo =
+            (JsonTypeInfo<object>)jsonSerializerOptions.GetReadOnlyTypeInfo(typeof(object));
 
-        EndpointFilterDelegate filteredInvocation = async (EndpointFilterInvocationContext context) =>
+        EndpointFilterDelegate filteredInvocation = async (
+            EndpointFilterInvocationContext context
+        ) =>
         {
             if (context.HttpContext.Response.StatusCode < 400)
             {
@@ -53,7 +61,12 @@ internal static class RequestDelegateFilterPipelineBuilder
 
         return async (HttpContext httpContext) =>
         {
-            var obj = await filteredInvocation(new DefaultEndpointFilterInvocationContext(httpContext, new object[] { httpContext }));
+            var obj = await filteredInvocation(
+                new DefaultEndpointFilterInvocationContext(
+                    httpContext,
+                    new object[] { httpContext }
+                )
+            );
             if (obj is not null)
             {
                 await ExecuteHandlerHelper.ExecuteReturnAsync(obj, httpContext, jsonTypeInfo);

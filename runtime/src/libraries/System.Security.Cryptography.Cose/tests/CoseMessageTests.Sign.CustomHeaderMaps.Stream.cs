@@ -15,65 +15,131 @@ namespace System.Security.Cryptography.Cose.Tests
 
     public abstract class CoseMessageTests_SignStream_Async : CoseMessageTests_SignStream
     {
-        internal abstract Task<byte[]> SignDetachedAsync(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null);
+        internal abstract Task<byte[]> SignDetachedAsync(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        );
 
-        internal override byte[] Sign(byte[] content, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null, bool isDetached = false)
+        internal override byte[] Sign(
+            byte[] content,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null,
+            bool isDetached = false
+        )
         {
             Assert.False(isDetached);
 
             if (content == null)
             {
-                return SignDetachedAsync(null!, signer, protectedHeaders, unprotectedHeaders, associatedData).GetAwaiter().GetResult();
+                return SignDetachedAsync(
+                        null!,
+                        signer,
+                        protectedHeaders,
+                        unprotectedHeaders,
+                        associatedData
+                    )
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             using Stream stream = GetTestStream(content);
-            return SignDetachedAsync(stream, signer, protectedHeaders, unprotectedHeaders, associatedData).GetAwaiter().GetResult();
+            return SignDetachedAsync(
+                    stream,
+                    signer,
+                    protectedHeaders,
+                    unprotectedHeaders,
+                    associatedData
+                )
+                .GetAwaiter()
+                .GetResult();
         }
 
         [Fact]
         public async Task SignAsyncWithUnseekableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () => SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash)));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "detachedContent",
+                () => SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            );
         }
 
         [Fact]
         public async Task SignAsyncWithUnreadableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () => SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash)));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "detachedContent",
+                () => SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            );
         }
     }
 
     public abstract class CoseMessageTests_SignStream_Sync : CoseMessageTests_SignStream
     {
-        internal abstract byte[] SignDetached(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null);
+        internal abstract byte[] SignDetached(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        );
 
-        internal override byte[] Sign(byte[] content, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null, bool isDetached = false)
+        internal override byte[] Sign(
+            byte[] content,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null,
+            bool isDetached = false
+        )
         {
             Assert.False(isDetached);
 
             if (content == null)
             {
-                return SignDetached(null!, signer, protectedHeaders, unprotectedHeaders, associatedData);
+                return SignDetached(
+                    null!,
+                    signer,
+                    protectedHeaders,
+                    unprotectedHeaders,
+                    associatedData
+                );
             }
 
             using Stream stream = GetTestStream(content);
-            return SignDetached(stream, signer, protectedHeaders, unprotectedHeaders, associatedData);
+            return SignDetached(
+                stream,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData
+            );
         }
 
         [Fact]
         public void SignWithUnseekableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            Assert.Throws<ArgumentException>("detachedContent", () => SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash)));
+            Assert.Throws<ArgumentException>(
+                "detachedContent",
+                () => SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            );
         }
 
         [Fact]
         public void SignWithUnreadableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            Assert.Throws<ArgumentException>("detachedContent", () => SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash)));
+            Assert.Throws<ArgumentException>(
+                "detachedContent",
+                () => SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            );
         }
     }
 }

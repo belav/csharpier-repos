@@ -5,10 +5,12 @@ namespace System.ServiceModel.Channels
 {
     using System.CodeDom;
     using System.Xml;
-    
+
     static class SecurityAttributeGenerationHelper
     {
-        public static CodeAttributeDeclaration FindOrCreateAttributeDeclaration<T>(CodeAttributeDeclarationCollection attributes)
+        public static CodeAttributeDeclaration FindOrCreateAttributeDeclaration<T>(
+            CodeAttributeDeclarationCollection attributes
+        )
             where T : Attribute
         {
             if (attributes == null)
@@ -26,7 +28,11 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        public static void CreateOrOverridePropertyDeclaration<V>(CodeAttributeDeclaration attribute, string propertyName, V value)
+        public static void CreateOrOverridePropertyDeclaration<V>(
+            CodeAttributeDeclaration attribute,
+            string propertyName,
+            V value
+        )
         {
             if (attribute == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("attribute");
@@ -37,16 +43,21 @@ namespace System.ServiceModel.Channels
 
             if (value is TimeSpan)
                 newValue = new CodeObjectCreateExpression(
-                    typeof(TimeSpan), 
-                    new CodePrimitiveExpression(((TimeSpan)(object)value).Ticks));
+                    typeof(TimeSpan),
+                    new CodePrimitiveExpression(((TimeSpan)(object)value).Ticks)
+                );
             else if (value is Enum)
                 newValue = new CodeFieldReferenceExpression(
                     new CodeTypeReferenceExpression(typeof(V)),
-                    ((object)value).ToString());
+                    ((object)value).ToString()
+                );
             else
                 newValue = new CodePrimitiveExpression((object)value);
 
-            CodeAttributeArgument attributeProperty = TryGetAttributeProperty(attribute, propertyName);
+            CodeAttributeArgument attributeProperty = TryGetAttributeProperty(
+                attribute,
+                propertyName
+            );
 
             if (attributeProperty == null)
             {
@@ -57,7 +68,10 @@ namespace System.ServiceModel.Channels
                 attributeProperty.Value = newValue;
         }
 
-        public static CodeAttributeArgument TryGetAttributeProperty(CodeAttributeDeclaration attribute, string propertyName)
+        public static CodeAttributeArgument TryGetAttributeProperty(
+            CodeAttributeDeclaration attribute,
+            string propertyName
+        )
         {
             if (attribute == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("attribute");

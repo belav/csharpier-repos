@@ -17,11 +17,15 @@ namespace ILCompiler
             _fallbackAlgorithm = fallbackAlgorithm;
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType defType, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType defType,
+            InstanceLayoutKind layoutKind
+        )
         {
             var type = (TypeWithRepeatedFields)defType;
 
-            ComputedInstanceFieldLayout layoutFromMetadata = _fallbackAlgorithm.ComputeInstanceLayout(type.MetadataType, layoutKind);
+            ComputedInstanceFieldLayout layoutFromMetadata =
+                _fallbackAlgorithm.ComputeInstanceLayout(type.MetadataType, layoutKind);
 
             FieldAndOffset[] offsets = layoutFromMetadata.Offsets;
 
@@ -51,28 +55,42 @@ namespace ILCompiler
                 FieldAlignment = layoutFromMetadata.FieldAlignment,
                 FieldSize = layoutFromMetadata.FieldSize,
                 Offsets = offsets,
-                LayoutAbiStable = layoutFromMetadata.LayoutAbiStable
+                LayoutAbiStable = layoutFromMetadata.LayoutAbiStable,
             };
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        )
         {
-            return _fallbackAlgorithm.ComputeStaticFieldLayout(((TypeWithRepeatedFields)defType).MetadataType, layoutKind);
+            return _fallbackAlgorithm.ComputeStaticFieldLayout(
+                ((TypeWithRepeatedFields)defType).MetadataType,
+                layoutKind
+            );
         }
 
         public override bool ComputeContainsGCPointers(DefType type)
         {
-            return _fallbackAlgorithm.ComputeContainsGCPointers(((TypeWithRepeatedFields)type).MetadataType);
+            return _fallbackAlgorithm.ComputeContainsGCPointers(
+                ((TypeWithRepeatedFields)type).MetadataType
+            );
         }
 
         public override bool ComputeIsUnsafeValueType(DefType type)
         {
-            return _fallbackAlgorithm.ComputeIsUnsafeValueType(((TypeWithRepeatedFields)type).MetadataType);
+            return _fallbackAlgorithm.ComputeIsUnsafeValueType(
+                ((TypeWithRepeatedFields)type).MetadataType
+            );
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
-            return _fallbackAlgorithm.ComputeValueTypeShapeCharacteristics(((TypeWithRepeatedFields)type).MetadataType);
+            return _fallbackAlgorithm.ComputeValueTypeShapeCharacteristics(
+                ((TypeWithRepeatedFields)type).MetadataType
+            );
         }
     }
 }

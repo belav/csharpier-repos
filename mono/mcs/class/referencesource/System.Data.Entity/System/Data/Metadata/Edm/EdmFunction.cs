@@ -17,11 +17,20 @@ namespace System.Data.Metadata.Edm
     /// <summary>
     /// Class for representing a function
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     public sealed class EdmFunction : EdmType
     {
         #region Constructors
-        internal EdmFunction(string name, string namespaceName, DataSpace dataSpace, EdmFunctionPayload payload)
+        internal EdmFunction(
+            string name,
+            string namespaceName,
+            DataSpace dataSpace,
+            EdmFunctionPayload payload
+        )
             : base(name, namespaceName, dataSpace)
         {
             //---- name of the 'schema'
@@ -31,21 +40,72 @@ namespace System.Data.Metadata.Edm
 
             FunctionParameter[] returnParameters = payload.ReturnParameters;
 
-           Debug.Assert(returnParameters.All((returnParameter) => returnParameter != null), "All return parameters must be non-null");
-           Debug.Assert(returnParameters.All((returnParameter) => returnParameter.Mode == ParameterMode.ReturnValue), "Return parameter in a function must have the ParameterMode equal to ReturnValue.");
-            
+            Debug.Assert(
+                returnParameters.All((returnParameter) => returnParameter != null),
+                "All return parameters must be non-null"
+            );
+            Debug.Assert(
+                returnParameters.All(
+                    (returnParameter) => returnParameter.Mode == ParameterMode.ReturnValue
+                ),
+                "Return parameter in a function must have the ParameterMode equal to ReturnValue."
+            );
+
             _returnParameters = new ReadOnlyMetadataCollection<FunctionParameter>(
                 returnParameters
-                    .Select((returnParameter) => SafeLink<EdmFunction>.BindChild<FunctionParameter>(this, FunctionParameter.DeclaringFunctionLinker, returnParameter))
-                    .ToList());
-            
-            if (payload.IsAggregate.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.Aggregate, payload.IsAggregate.Value);
-            if (payload.IsBuiltIn.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.BuiltIn, payload.IsBuiltIn.Value);
-            if (payload.IsNiladic.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.NiladicFunction, payload.IsNiladic.Value);
-            if (payload.IsComposable.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.IsComposable, payload.IsComposable.Value);
-            if (payload.IsFromProviderManifest.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.IsFromProviderManifest, payload.IsFromProviderManifest.Value);
-            if (payload.IsCachedStoreFunction.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.IsCachedStoreFunction, payload.IsCachedStoreFunction.Value);
-            if (payload.IsFunctionImport.HasValue) SetFunctionAttribute(ref _functionAttributes, FunctionAttributes.IsFunctionImport, payload.IsFunctionImport.Value);
+                    .Select(
+                        (returnParameter) =>
+                            SafeLink<EdmFunction>.BindChild<FunctionParameter>(
+                                this,
+                                FunctionParameter.DeclaringFunctionLinker,
+                                returnParameter
+                            )
+                    )
+                    .ToList()
+            );
+
+            if (payload.IsAggregate.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.Aggregate,
+                    payload.IsAggregate.Value
+                );
+            if (payload.IsBuiltIn.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.BuiltIn,
+                    payload.IsBuiltIn.Value
+                );
+            if (payload.IsNiladic.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.NiladicFunction,
+                    payload.IsNiladic.Value
+                );
+            if (payload.IsComposable.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.IsComposable,
+                    payload.IsComposable.Value
+                );
+            if (payload.IsFromProviderManifest.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.IsFromProviderManifest,
+                    payload.IsFromProviderManifest.Value
+                );
+            if (payload.IsCachedStoreFunction.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.IsCachedStoreFunction,
+                    payload.IsCachedStoreFunction.Value
+                );
+            if (payload.IsFunctionImport.HasValue)
+                SetFunctionAttribute(
+                    ref _functionAttributes,
+                    FunctionAttributes.IsFunctionImport,
+                    payload.IsFunctionImport.Value
+                );
 
             if (payload.ParameterTypeSemantics.HasValue)
             {
@@ -59,7 +119,10 @@ namespace System.Data.Metadata.Edm
 
             if (payload.EntitySets != null)
             {
-                Debug.Assert(_returnParameters.Count == payload.EntitySets.Length, "The number of entity sets should match the number of return parameters");
+                Debug.Assert(
+                    _returnParameters.Count == payload.EntitySets.Length,
+                    "The number of entity sets should match the number of return parameters"
+                );
                 _entitySets = new ReadOnlyMetadataCollection<EntitySet>(payload.EntitySets);
             }
             else
@@ -67,7 +130,10 @@ namespace System.Data.Metadata.Edm
                 var list = new List<EntitySet>();
                 if (_returnParameters.Count != 0)
                 {
-                    Debug.Assert(_returnParameters.Count == 1, "If there was more than one result set payload.EntitySets should not have been null");
+                    Debug.Assert(
+                        _returnParameters.Count == 1,
+                        "If there was more than one result set payload.EntitySets should not have been null"
+                    );
                     list.Add(null);
                 }
                 _entitySets = new ReadOnlyMetadataCollection<EntitySet>(list);
@@ -87,15 +153,24 @@ namespace System.Data.Metadata.Edm
                     {
                         throw EntityUtil.CollectionParameterElementIsNull("parameters");
                     }
-                    Debug.Assert(parameter.Mode != ParameterMode.ReturnValue, "No function parameter can have ParameterMode equal to ReturnValue.");
+                    Debug.Assert(
+                        parameter.Mode != ParameterMode.ReturnValue,
+                        "No function parameter can have ParameterMode equal to ReturnValue."
+                    );
                 }
 
                 // Populate the parameters
-                _parameters = new SafeLinkCollection<EdmFunction, FunctionParameter>(this, FunctionParameter.DeclaringFunctionLinker, new MetadataCollection<FunctionParameter>(payload.Parameters));
+                _parameters = new SafeLinkCollection<EdmFunction, FunctionParameter>(
+                    this,
+                    FunctionParameter.DeclaringFunctionLinker,
+                    new MetadataCollection<FunctionParameter>(payload.Parameters)
+                );
             }
             else
             {
-                _parameters = new ReadOnlyMetadataCollection<FunctionParameter>(new MetadataCollection<FunctionParameter>());
+                _parameters = new ReadOnlyMetadataCollection<FunctionParameter>(
+                    new MetadataCollection<FunctionParameter>()
+                );
             }
         }
 
@@ -117,17 +192,17 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.EdmFunction; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.EdmFunction; }
+        }
 
         /// <summary>
-        /// Returns the full name of this type, which is namespace + "." + name. 
+        /// Returns the full name of this type, which is namespace + "." + name.
         /// </summary>
         public override string FullName
         {
-            get
-            {
-                return _fullName;
-            }
+            get { return _fullName; }
         }
 
         /// <summary>
@@ -135,10 +210,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public ReadOnlyMetadataCollection<FunctionParameter> Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return _parameters; }
         }
 
         /// <summary>
@@ -148,7 +220,8 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                return this.IsModelDefinedFunction && !String.IsNullOrEmpty(this.CommandTextAttribute);
+                return this.IsModelDefinedFunction
+                    && !String.IsNullOrEmpty(this.CommandTextAttribute);
             }
         }
 
@@ -159,24 +232,18 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.EntitySet, false)]
         internal EntitySet EntitySet
         {
-            get
-            {
-                return _entitySets.Count != 0 ? _entitySets[0] : null;
-            }
+            get { return _entitySets.Count != 0 ? _entitySets[0] : null; }
         }
 
         /// <summary>
         /// For function imports, indicates the entity sets to which the return parameters are bound.
-        /// The number of elements in the collection matches the number of return parameters. 
+        /// The number of elements in the collection matches the number of return parameters.
         /// A null element in the collection indicates that the corresponding are not bound to an entity set.
         /// </summary>
         [MetadataProperty(BuiltInTypeKind.EntitySet, true)]
         internal ReadOnlyMetadataCollection<EntitySet> EntitySets
         {
-            get
-            {
-                return _entitySets;
-            }
+            get { return _entitySets; }
         }
 
         /// <summary>
@@ -185,10 +252,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.FunctionParameter, false)]
         public FunctionParameter ReturnParameter
         {
-            get
-            {
-                return _returnParameters.FirstOrDefault();
-            }
+            get { return _returnParameters.FirstOrDefault(); }
         }
 
         /// <summary>
@@ -197,12 +261,9 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.FunctionParameter, true)]
         public ReadOnlyMetadataCollection<FunctionParameter> ReturnParameters
         {
-            get
-            {
-                return _returnParameters;
-            }
+            get { return _returnParameters; }
         }
-        
+
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         internal string StoreFunctionNameAttribute
         {
@@ -219,89 +280,69 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(PrimitiveTypeKind.Boolean, false)]
         internal bool AggregateAttribute
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.Aggregate);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.Aggregate); }
         }
 
         [MetadataProperty(PrimitiveTypeKind.Boolean, false)]
         internal bool BuiltInAttribute
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.BuiltIn);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.BuiltIn); }
         }
 
         [MetadataProperty(PrimitiveTypeKind.Boolean, false)]
         internal bool IsFromProviderManifest
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.IsFromProviderManifest);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.IsFromProviderManifest); }
         }
 
         [MetadataProperty(PrimitiveTypeKind.Boolean, false)]
         internal bool NiladicFunctionAttribute
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.NiladicFunction);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.NiladicFunction); }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Composable")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Composable"
+        )]
         [MetadataProperty(PrimitiveTypeKind.Boolean, false)]
         public bool IsComposableAttribute
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.IsComposable);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.IsComposable); }
         }
 
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         public string CommandTextAttribute
         {
-            get
-            {
-                return _commandTextAttribute;
-            }
+            get { return _commandTextAttribute; }
         }
 
         internal bool IsCachedStoreFunction
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.IsCachedStoreFunction);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.IsCachedStoreFunction); }
         }
 
         internal bool IsModelDefinedFunction
         {
             get
             {
-                return this.DataSpace == DataSpace.CSpace && !IsCachedStoreFunction && !IsFromProviderManifest && !IsFunctionImport;
+                return this.DataSpace == DataSpace.CSpace
+                    && !IsCachedStoreFunction
+                    && !IsFromProviderManifest
+                    && !IsFunctionImport;
             }
         }
 
         internal bool IsFunctionImport
         {
-            get
-            {
-                return GetFunctionAttribute(FunctionAttributes.IsFunctionImport);
-            }
+            get { return GetFunctionAttribute(FunctionAttributes.IsFunctionImport); }
         }
 
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         internal string Schema
         {
-            get
-            {
-                return _schemaName;
-            }
+            get { return _schemaName; }
         }
         #endregion
 
@@ -335,28 +376,33 @@ namespace System.Data.Metadata.Edm
             }
 
             EdmFunction.BuildIdentity(
-                builder, 
-                FullName, 
+                builder,
+                FullName,
                 Parameters,
                 (param) => param.TypeUsage,
-                (param) => param.Mode);
+                (param) => param.Mode
+            );
         }
 
         /// <summary>
         /// Builds identity based on the functionName and parameter types. All parameters are assumed to be <see cref="ParameterMode.In"/>.
         /// Returns string in the form of "functionName (param1, param2, ... paramN)".
         /// </summary>
-        internal static string BuildIdentity(string functionName, IEnumerable<TypeUsage> functionParameters)
+        internal static string BuildIdentity(
+            string functionName,
+            IEnumerable<TypeUsage> functionParameters
+        )
         {
             StringBuilder identity = new StringBuilder();
-            
+
             BuildIdentity(
-                identity, 
-                functionName, 
+                identity,
+                functionName,
                 functionParameters,
                 (param) => param,
-                (param) => ParameterMode.In);
-            
+                (param) => ParameterMode.In
+            );
+
             return identity.ToString();
         }
 
@@ -364,11 +410,13 @@ namespace System.Data.Metadata.Edm
         /// Builds identity based on the functionName and parameters metadata.
         /// Returns string in the form of "functionName (param1, param2, ... paramN)".
         /// </summary>
-        internal static void BuildIdentity<TParameterMetadata>(StringBuilder builder, 
-                                                               string functionName, 
-                                                               IEnumerable<TParameterMetadata> functionParameters,
-                                                               Func<TParameterMetadata, TypeUsage> getParameterTypeUsage,
-                                                               Func<TParameterMetadata, ParameterMode> getParameterMode)
+        internal static void BuildIdentity<TParameterMetadata>(
+            StringBuilder builder,
+            string functionName,
+            IEnumerable<TParameterMetadata> functionParameters,
+            Func<TParameterMetadata, TypeUsage> getParameterTypeUsage,
+            Func<TParameterMetadata, ParameterMode> getParameterMode
+        )
         {
             //
             // Note: some callers depend on the format of the returned identity string.
@@ -376,14 +424,20 @@ namespace System.Data.Metadata.Edm
 
             // Start with the function name
             builder.Append(functionName);
-            
+
             // Then add the string representing the list of parameters
             builder.Append('(');
             bool first = true;
             foreach (TParameterMetadata parameter in functionParameters)
             {
-                if (first) { first = false; }
-                else { builder.Append(","); }
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    builder.Append(",");
+                }
                 builder.Append(Helper.ToString(getParameterMode(parameter)));
                 builder.Append(' ');
                 getParameterTypeUsage(parameter).BuildIdentity(builder);
@@ -396,7 +450,11 @@ namespace System.Data.Metadata.Edm
             return attribute == (attribute & _functionAttributes);
         }
 
-        private static void SetFunctionAttribute(ref FunctionAttributes field, FunctionAttributes attribute, bool isSet)
+        private static void SetFunctionAttribute(
+            ref FunctionAttributes field,
+            FunctionAttributes attribute,
+            bool isSet
+        )
         {
             if (isSet)
             {

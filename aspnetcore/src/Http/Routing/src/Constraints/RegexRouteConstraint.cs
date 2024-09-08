@@ -43,17 +43,23 @@ internal class RegexRouteConstraint : IRouteConstraint
     /// </summary>
     /// <param name="regexPattern">A string containing the regex pattern.</param>
     public RegexRouteConstraint(
-        [StringSyntax(StringSyntaxAttribute.Regex, RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase)]
-        string regexPattern)
+        [StringSyntax(
+            StringSyntaxAttribute.Regex,
+            RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase
+        )]
+            string regexPattern
+    )
     {
         ArgumentNullException.ThrowIfNull(regexPattern);
 
         // Create regex instance lazily to avoid compiling regexes at app startup. Delay creation until Constraint is first evaluated.
         // The regex instance is created by a delegate here to allow the regex engine to be trimmed when this constructor is trimmed.
-        _regexFactory = () => new Regex(
-            regexPattern,
-            RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase,
-            RegexMatchTimeout);
+        _regexFactory = () =>
+            new Regex(
+                regexPattern,
+                RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase,
+                RegexMatchTimeout
+            );
     }
 
     /// <summary>
@@ -82,17 +88,16 @@ internal class RegexRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
         ArgumentNullException.ThrowIfNull(values);
 
-        if (values.TryGetValue(routeKey, out var routeValue)
-            && routeValue != null)
+        if (values.TryGetValue(routeKey, out var routeValue) && routeValue != null)
         {
             var parameterValueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture)!;
 

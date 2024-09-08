@@ -11,10 +11,10 @@ namespace System.IO.Tests
 
         protected override bool IsDirectory => true;
 
-        protected override UnixFileMode GetMode(string path)
-            => new DirectoryInfo(path).UnixFileMode;
+        protected override UnixFileMode GetMode(string path) =>
+            new DirectoryInfo(path).UnixFileMode;
 
-        protected override void SetMode(string path, UnixFileMode mode)
-            => new DirectoryInfo(path).UnixFileMode = mode;
+        protected override void SetMode(string path, UnixFileMode mode) =>
+            new DirectoryInfo(path).UnixFileMode = mode;
     }
 }

@@ -28,21 +28,27 @@
 using Microsoft.Build.Framework;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Framework {
-	[TestFixture]
-	public class TaskCommandLineEventArgsTest {
-		[Test]
-		public void TestAssignment ()
-		{
-			string commandLine = "commandLine";
-			string taskName = "taskName";
-			MessageImportance importance = MessageImportance.High;
+namespace MonoTests.Microsoft.Build.Framework
+{
+    [TestFixture]
+    public class TaskCommandLineEventArgsTest
+    {
+        [Test]
+        public void TestAssignment()
+        {
+            string commandLine = "commandLine";
+            string taskName = "taskName";
+            MessageImportance importance = MessageImportance.High;
 
-			TaskCommandLineEventArgs tcle = new TaskCommandLineEventArgs (commandLine, taskName, importance);
+            TaskCommandLineEventArgs tcle = new TaskCommandLineEventArgs(
+                commandLine,
+                taskName,
+                importance
+            );
 
-			Assert.AreEqual (commandLine, tcle.CommandLine, "A1");
-			Assert.AreEqual (taskName, tcle.TaskName, "A2");
-			Assert.AreEqual (commandLine, tcle.Message, "A3");
-		}
-	}
+            Assert.AreEqual(commandLine, tcle.CommandLine, "A1");
+            Assert.AreEqual(taskName, tcle.TaskName, "A2");
+            Assert.AreEqual(commandLine, tcle.Message, "A3");
+        }
+    }
 }

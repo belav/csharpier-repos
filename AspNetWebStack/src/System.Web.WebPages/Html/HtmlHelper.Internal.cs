@@ -26,7 +26,11 @@ namespace System.Web.WebPages.Html
             return UnwrapPossibleArrayType(value, type, CultureInfo.InvariantCulture);
         }
 
-        private static object UnwrapPossibleArrayType(object value, Type destinationType, CultureInfo culture)
+        private static object UnwrapPossibleArrayType(
+            object value,
+            Type destinationType,
+            CultureInfo culture
+        )
         {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
@@ -41,10 +45,17 @@ namespace System.Web.WebPages.Html
                 if (valueAsArray != null)
                 {
                     // case 1: both destination + source type are arrays, so convert each element
-                    IList converted = Array.CreateInstance(destinationElementType, valueAsArray.Length);
+                    IList converted = Array.CreateInstance(
+                        destinationElementType,
+                        valueAsArray.Length
+                    );
                     for (int i = 0; i < valueAsArray.Length; i++)
                     {
-                        converted[i] = ConvertSimpleType(valueAsArray.GetValue(i), destinationElementType, culture);
+                        converted[i] = ConvertSimpleType(
+                            valueAsArray.GetValue(i),
+                            destinationElementType,
+                            culture
+                        );
                     }
                     return converted;
                 }
@@ -75,7 +86,11 @@ namespace System.Web.WebPages.Html
             return ConvertSimpleType(value, destinationType, culture);
         }
 
-        private static object ConvertSimpleType(object value, Type destinationType, CultureInfo culture)
+        private static object ConvertSimpleType(
+            object value,
+            Type destinationType,
+            CultureInfo culture
+        )
         {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
@@ -97,22 +112,36 @@ namespace System.Web.WebPages.Html
             }
             if (!(canConvertFrom || converter.CanConvertTo(destinationType)))
             {
-                string message = String.Format(CultureInfo.CurrentCulture, WebPageResources.HtmlHelper_NoConverterExists,
-                                               value.GetType().FullName, destinationType.FullName);
+                string message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.HtmlHelper_NoConverterExists,
+                    value.GetType().FullName,
+                    destinationType.FullName
+                );
                 throw new InvalidOperationException(message);
             }
 
             try
             {
-                object convertedValue = (canConvertFrom)
-                                            ? converter.ConvertFrom(context: null, culture: culture, value: value)
-                                            : converter.ConvertTo(context: null, culture: culture, value: value, destinationType: destinationType);
+                object convertedValue =
+                    (canConvertFrom)
+                        ? converter.ConvertFrom(context: null, culture: culture, value: value)
+                        : converter.ConvertTo(
+                            context: null,
+                            culture: culture,
+                            value: value,
+                            destinationType: destinationType
+                        );
                 return convertedValue;
             }
             catch (Exception ex)
             {
-                string message = String.Format(CultureInfo.CurrentUICulture, WebPageResources.HtmlHelper_ConversionThrew,
-                                               value.GetType().FullName, destinationType.FullName);
+                string message = String.Format(
+                    CultureInfo.CurrentUICulture,
+                    WebPageResources.HtmlHelper_ConversionThrew,
+                    value.GetType().FullName,
+                    destinationType.FullName
+                );
                 throw new InvalidOperationException(message, ex);
             }
         }

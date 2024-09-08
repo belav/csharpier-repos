@@ -14,19 +14,29 @@ namespace System.Reflection
 
             Type? declaringType = f.DeclaringType;
             if (declaringType != null && declaringType.IsGenericType)
-                throw new ArgumentException(SR.Format(
-                    SR.Argument_FieldDeclaringTypeGeneric,
-                    f.Name, declaringType.GetGenericTypeDefinition()));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_FieldDeclaringTypeGeneric,
+                        f.Name,
+                        declaringType.GetGenericTypeDefinition()
+                    )
+                );
 
             return f;
         }
 
-        public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle, RuntimeTypeHandle declaringType)
+        public static FieldInfo GetFieldFromHandle(
+            RuntimeFieldHandle handle,
+            RuntimeTypeHandle declaringType
+        )
         {
             if (handle.IsNullHandle())
                 throw new ArgumentException(SR.Argument_InvalidHandle);
 
-            return RuntimeType.GetFieldInfo(declaringType.GetRuntimeType(), handle.GetRuntimeFieldInfo());
+            return RuntimeType.GetFieldInfo(
+                declaringType.GetRuntimeType(),
+                handle.GetRuntimeFieldInfo()
+            );
         }
     }
 }

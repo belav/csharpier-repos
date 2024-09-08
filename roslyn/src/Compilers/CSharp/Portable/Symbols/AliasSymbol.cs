@@ -47,12 +47,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal abstract class AliasSymbol : Symbol
     {
-        private readonly ImmutableArray<Location> _locations;  // NOTE: can be empty for the "global" alias.
+        private readonly ImmutableArray<Location> _locations; // NOTE: can be empty for the "global" alias.
         private readonly string _aliasName;
         private readonly bool _isExtern;
         private readonly Symbol _containingSymbol;
 
-        protected AliasSymbol(string aliasName, Symbol containingSymbol, ImmutableArray<Location> locations, bool isExtern)
+        protected AliasSymbol(
+            string aliasName,
+            Symbol containingSymbol,
+            ImmutableArray<Location> locations,
+            bool isExtern
+        )
         {
             Debug.Assert(locations.Length == 1 || (locations.IsEmpty && aliasName == "global")); // It looks like equality implementation depends on this condition.
             Debug.Assert(containingSymbol is not null);
@@ -67,12 +72,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // to. This alias symbol is returned only when binding "global::" (special case code).
         internal static AliasSymbol CreateGlobalNamespaceAlias(NamespaceSymbol globalNamespace)
         {
-            return new AliasSymbolFromResolvedTarget(globalNamespace, "global", globalNamespace, ImmutableArray<Location>.Empty, isExtern: false);
+            return new AliasSymbolFromResolvedTarget(
+                globalNamespace,
+                "global",
+                globalNamespace,
+                ImmutableArray<Location>.Empty,
+                isExtern: false
+            );
         }
 
-        internal static AliasSymbol CreateCustomDebugInfoAlias(NamespaceOrTypeSymbol targetSymbol, SyntaxToken aliasToken, Symbol containingSymbol, bool isExtern)
+        internal static AliasSymbol CreateCustomDebugInfoAlias(
+            NamespaceOrTypeSymbol targetSymbol,
+            SyntaxToken aliasToken,
+            Symbol containingSymbol,
+            bool isExtern
+        )
         {
-            return new AliasSymbolFromResolvedTarget(targetSymbol, aliasToken.ValueText, containingSymbol, ImmutableArray.Create(aliasToken.GetLocation()), isExtern);
+            return new AliasSymbolFromResolvedTarget(
+                targetSymbol,
+                aliasToken.ValueText,
+                containingSymbol,
+                ImmutableArray.Create(aliasToken.GetLocation()),
+                isExtern
+            );
         }
 
         internal AliasSymbol ToNewSubmission(CSharpCompilation compilation)
@@ -86,41 +108,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             var expandedGlobalNamespace = compilation.GlobalNamespace;
-            var expandedNamespace = Imports.ExpandPreviousSubmissionNamespace((NamespaceSymbol)previousTarget, expandedGlobalNamespace);
-            return new AliasSymbolFromResolvedTarget(expandedNamespace, Name, ContainingSymbol, _locations, _isExtern);
+            var expandedNamespace = Imports.ExpandPreviousSubmissionNamespace(
+                (NamespaceSymbol)previousTarget,
+                expandedGlobalNamespace
+            );
+            return new AliasSymbolFromResolvedTarget(
+                expandedNamespace,
+                Name,
+                ContainingSymbol,
+                _locations,
+                _isExtern
+            );
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return _aliasName;
-            }
+            get { return _aliasName; }
         }
 
         public override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.Alias;
-            }
+            get { return SymbolKind.Alias; }
         }
 
         /// <summary>
         /// Gets the <see cref="NamespaceOrTypeSymbol"/> for the
         /// namespace or type referenced by the alias.
         /// </summary>
-        public abstract NamespaceOrTypeSymbol Target
-        {
-            get;
-        }
+        public abstract NamespaceOrTypeSymbol Target { get; }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _locations;
-            }
+            get { return _locations; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
@@ -135,49 +154,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override bool IsExtern
         {
-            get
-            {
-                return _isExtern;
-            }
+            get { return _isExtern; }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
         public override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -191,10 +192,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -205,13 +203,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingSymbol;
-            }
+            get { return _containingSymbol; }
         }
 
-        internal override TResult Accept<TArg, TResult>(CSharpSymbolVisitor<TArg, TResult> visitor, TArg a)
+        internal override TResult Accept<TArg, TResult>(
+            CSharpSymbolVisitor<TArg, TResult> visitor,
+            TArg a
+        )
         {
             return visitor.VisitAlias(this, a);
         }
@@ -227,7 +225,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // basesBeingResolved is only used to break circular references.
-        internal abstract NamespaceOrTypeSymbol GetAliasTarget(ConsList<TypeSymbol>? basesBeingResolved);
+        internal abstract NamespaceOrTypeSymbol GetAliasTarget(
+            ConsList<TypeSymbol>? basesBeingResolved
+        );
 
         internal void CheckConstraints(BindingDiagnosticBag diagnostics)
         {
@@ -236,7 +236,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var corLibrary = this.ContainingAssembly.CorLibrary;
                 var conversions = corLibrary.TypeConversions;
-                target.CheckAllConstraints(DeclaringCompilation, conversions, GetFirstLocation(), diagnostics);
+                target.CheckAllConstraints(
+                    DeclaringCompilation,
+                    conversions,
+                    GetFirstLocation(),
+                    diagnostics
+                );
             }
         }
 
@@ -254,18 +259,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             AliasSymbol? other = obj as AliasSymbol;
 
-            return (object?)other != null &&
-                Equals(this.TryGetFirstLocation(), other.TryGetFirstLocation()) &&
-                Equals(this.ContainingSymbol, other.ContainingSymbol, compareKind);
+            return (object?)other != null
+                && Equals(this.TryGetFirstLocation(), other.TryGetFirstLocation())
+                && Equals(this.ContainingSymbol, other.ContainingSymbol, compareKind);
         }
 
-        public override int GetHashCode()
-            => this.TryGetFirstLocation()?.GetHashCode() ?? Name.GetHashCode();
+        public override int GetHashCode() =>
+            this.TryGetFirstLocation()?.GetHashCode() ?? Name.GetHashCode();
 
-        internal abstract override bool RequiresCompletion
-        {
-            get;
-        }
+        internal abstract override bool RequiresCompletion { get; }
 
         protected override ISymbol CreateISymbol()
         {
@@ -282,16 +284,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // lazy binding
         private BindingDiagnosticBag? _aliasTargetDiagnostics;
 
-        internal AliasSymbolFromSyntax(SourceNamespaceSymbol containingSymbol, UsingDirectiveSyntax syntax)
-            : base(syntax.Alias!.Name.Identifier.ValueText, containingSymbol, ImmutableArray.Create(syntax.Alias!.Name.Identifier.GetLocation()), isExtern: false)
+        internal AliasSymbolFromSyntax(
+            SourceNamespaceSymbol containingSymbol,
+            UsingDirectiveSyntax syntax
+        )
+            : base(
+                syntax.Alias!.Name.Identifier.ValueText,
+                containingSymbol,
+                ImmutableArray.Create(syntax.Alias!.Name.Identifier.GetLocation()),
+                isExtern: false
+            )
         {
             Debug.Assert(syntax.Alias is object);
 
             _directive = syntax.GetReference();
         }
 
-        internal AliasSymbolFromSyntax(SourceNamespaceSymbol containingSymbol, ExternAliasDirectiveSyntax syntax)
-            : base(syntax.Identifier.ValueText, containingSymbol, ImmutableArray.Create(syntax.Identifier.GetLocation()), isExtern: true)
+        internal AliasSymbolFromSyntax(
+            SourceNamespaceSymbol containingSymbol,
+            ExternAliasDirectiveSyntax syntax
+        )
+            : base(
+                syntax.Identifier.ValueText,
+                containingSymbol,
+                ImmutableArray.Create(syntax.Identifier.GetLocation()),
+                isExtern: true
+            )
         {
             _directive = syntax.GetReference();
         }
@@ -302,14 +320,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override NamespaceOrTypeSymbol Target
         {
-            get
-            {
-                return GetAliasTarget(basesBeingResolved: null);
-            }
+            get { return GetAliasTarget(basesBeingResolved: null); }
         }
 
         // basesBeingResolved is only used to break circular references.
-        internal override NamespaceOrTypeSymbol GetAliasTarget(ConsList<TypeSymbol>? basesBeingResolved)
+        internal override NamespaceOrTypeSymbol GetAliasTarget(
+            ConsList<TypeSymbol>? basesBeingResolved
+        )
         {
             if (!_state.HasComplete(CompletionPart.AliasTarget))
             {
@@ -319,14 +336,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 NamespaceOrTypeSymbol symbol = this.IsExtern
                     ? ResolveExternAliasTarget(newDiagnostics)
-                    : ResolveAliasTarget((UsingDirectiveSyntax)_directive.GetSyntax(), newDiagnostics, basesBeingResolved);
+                    : ResolveAliasTarget(
+                        (UsingDirectiveSyntax)_directive.GetSyntax(),
+                        newDiagnostics,
+                        basesBeingResolved
+                    );
 
                 if (Interlocked.CompareExchange(ref _aliasTarget, symbol, null) is null)
                 {
                     // Note: It's important that we don't call newDiagnosticsToReadOnlyAndFree here. That call
-                    // can force the prompt evaluation of lazy initialized diagnostics.  That in turn can 
+                    // can force the prompt evaluation of lazy initialized diagnostics.  That in turn can
                     // call back into GetAliasTarget on the same thread resulting in a dead lock scenario.
-                    bool won = Interlocked.Exchange(ref _aliasTargetDiagnostics, newDiagnostics) == null;
+                    bool won =
+                        Interlocked.Exchange(ref _aliasTargetDiagnostics, newDiagnostics) == null;
                     Debug.Assert(won, "Only one thread can win the alias target CompareExchange");
 
                     _state.NotePartComplete(CompletionPart.AliasTarget);
@@ -370,22 +392,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private NamespaceOrTypeSymbol ResolveAliasTarget(
             UsingDirectiveSyntax usingDirective,
             BindingDiagnosticBag diagnostics,
-            ConsList<TypeSymbol>? basesBeingResolved)
+            ConsList<TypeSymbol>? basesBeingResolved
+        )
         {
             if (usingDirective.UnsafeKeyword != default)
             {
-                MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(diagnostics, usingDirective.UnsafeKeyword);
+                MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(
+                    diagnostics,
+                    usingDirective.UnsafeKeyword
+                );
             }
             else if (usingDirective.NamespaceOrType is not NameSyntax)
             {
-                MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(diagnostics, usingDirective.NamespaceOrType);
+                MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(
+                    diagnostics,
+                    usingDirective.NamespaceOrType
+                );
             }
 
             var syntax = usingDirective.NamespaceOrType;
             var flags = BinderFlags.SuppressConstraintChecks | BinderFlags.SuppressObsoleteChecks;
             if (usingDirective.UnsafeKeyword != default)
             {
-                this.CheckUnsafeModifier(DeclarationModifiers.Unsafe, usingDirective.UnsafeKeyword.GetLocation(), diagnostics);
+                this.CheckUnsafeModifier(
+                    DeclarationModifiers.Unsafe,
+                    usingDirective.UnsafeKeyword.GetLocation(),
+                    diagnostics
+                );
                 flags |= BinderFlags.UnsafeRegion;
             }
             else
@@ -397,27 +430,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     flags |= BinderFlags.UnsafeRegion;
             }
 
-            var declarationBinder = ContainingSymbol.DeclaringCompilation
-                .GetBinderFactory(syntax.SyntaxTree)
+            var declarationBinder = ContainingSymbol
+                .DeclaringCompilation.GetBinderFactory(syntax.SyntaxTree)
                 .GetBinder(syntax)
                 .WithAdditionalFlags(flags);
 
-            var annotatedNamespaceOrType = declarationBinder.BindNamespaceOrTypeSymbol(syntax, diagnostics, basesBeingResolved);
+            var annotatedNamespaceOrType = declarationBinder.BindNamespaceOrTypeSymbol(
+                syntax,
+                diagnostics,
+                basesBeingResolved
+            );
 
             // `using X = RefType?;` is not legal.
-            if (usingDirective.NamespaceOrType is NullableTypeSyntax nullableType &&
-                annotatedNamespaceOrType.TypeWithAnnotations.NullableAnnotation == NullableAnnotation.Annotated &&
-                annotatedNamespaceOrType.TypeWithAnnotations.Type?.IsReferenceType is true)
+            if (
+                usingDirective.NamespaceOrType is NullableTypeSyntax nullableType
+                && annotatedNamespaceOrType.TypeWithAnnotations.NullableAnnotation
+                    == NullableAnnotation.Annotated
+                && annotatedNamespaceOrType.TypeWithAnnotations.Type?.IsReferenceType is true
+            )
             {
-                diagnostics.Add(ErrorCode.ERR_BadNullableReferenceTypeInUsingAlias, nullableType.QuestionToken.GetLocation());
+                diagnostics.Add(
+                    ErrorCode.ERR_BadNullableReferenceTypeInUsingAlias,
+                    nullableType.QuestionToken.GetLocation()
+                );
             }
 
             var namespaceOrType = annotatedNamespaceOrType.NamespaceOrTypeSymbol;
-            if (namespaceOrType is TypeSymbol { IsNativeIntegerWrapperType: true } &&
-                (usingDirective.NamespaceOrType.IsNint || usingDirective.NamespaceOrType.IsNuint))
+            if (
+                namespaceOrType is TypeSymbol { IsNativeIntegerWrapperType: true }
+                && (usingDirective.NamespaceOrType.IsNint || usingDirective.NamespaceOrType.IsNuint)
+            )
             {
                 // using X = nint;
-                MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(diagnostics, usingDirective.NamespaceOrType);
+                MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(
+                    diagnostics,
+                    usingDirective.NamespaceOrType
+                );
             }
 
             return namespaceOrType;
@@ -433,7 +481,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly NamespaceOrTypeSymbol _aliasTarget;
 
-        internal AliasSymbolFromResolvedTarget(NamespaceOrTypeSymbol target, string aliasName, Symbol containingSymbol, ImmutableArray<Location> locations, bool isExtern)
+        internal AliasSymbolFromResolvedTarget(
+            NamespaceOrTypeSymbol target,
+            string aliasName,
+            Symbol containingSymbol,
+            ImmutableArray<Location> locations,
+            bool isExtern
+        )
             : base(aliasName, containingSymbol, locations, isExtern)
         {
             _aliasTarget = target;
@@ -445,13 +499,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override NamespaceOrTypeSymbol Target
         {
-            get
-            {
-                return _aliasTarget;
-            }
+            get { return _aliasTarget; }
         }
 
-        internal override NamespaceOrTypeSymbol GetAliasTarget(ConsList<TypeSymbol>? basesBeingResolved)
+        internal override NamespaceOrTypeSymbol GetAliasTarget(
+            ConsList<TypeSymbol>? basesBeingResolved
+        )
         {
             return _aliasTarget;
         }

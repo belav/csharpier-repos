@@ -27,8 +27,12 @@ public static class MvcApiExplorerMvcCoreBuilderExtensions
     // Internal for testing.
     internal static void AddApiExplorerServices(IServiceCollection services)
     {
-        services.TryAddSingleton<IApiDescriptionGroupCollectionProvider, ApiDescriptionGroupCollectionProvider>();
+        services.TryAddSingleton<
+            IApiDescriptionGroupCollectionProvider,
+            ApiDescriptionGroupCollectionProvider
+        >();
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApiDescriptionProvider, DefaultApiDescriptionProvider>());
+            ServiceDescriptor.Transient<IApiDescriptionProvider, DefaultApiDescriptionProvider>()
+        );
     }
 }

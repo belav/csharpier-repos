@@ -9,6 +9,9 @@ namespace System.Web.Http.Controllers
 {
     public interface IHttpActionInvoker
     {
-        Task<HttpResponseMessage> InvokeActionAsync(HttpActionContext actionContext, CancellationToken cancellationToken);
+        Task<HttpResponseMessage> InvokeActionAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        );
     }
 }

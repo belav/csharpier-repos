@@ -20,16 +20,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteExtractMostSignificantBitsTest()
         {
-            Vector64<byte> vector = Vector64.Create(
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80
-            );
+            Vector64<byte> vector = Vector64.Create(0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80);
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10101010u, result);
@@ -38,16 +29,12 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleExtractMostSignificantBitsTest()
         {
-            Vector64<double> vector = Vector64.Create(
-                +1.0
-            );
+            Vector64<double> vector = Vector64.Create(+1.0);
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b0u, result);
 
-            vector = Vector64.Create(
-                -0.0
-            );
+            vector = Vector64.Create(-0.0);
 
             result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1u, result);
@@ -56,12 +43,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16ExtractMostSignificantBitsTest()
         {
-            Vector64<short> vector = Vector64.Create(
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000
-            ).AsInt16();
+            Vector64<short> vector = Vector64.Create(0x0001, 0x8000, 0x0001, 0x8000).AsInt16();
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1010u, result);
@@ -70,10 +52,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32ExtractMostSignificantBitsTest()
         {
-            Vector64<int> vector = Vector64.Create(
-                0x00000001U,
-                0x80000000U
-            ).AsInt32();
+            Vector64<int> vector = Vector64.Create(0x00000001U, 0x80000000U).AsInt32();
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10u, result);
@@ -82,16 +61,12 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64ExtractMostSignificantBitsTest()
         {
-            Vector64<long> vector = Vector64.Create(
-                0x0000000000000001UL
-            ).AsInt64();
+            Vector64<long> vector = Vector64.Create(0x0000000000000001UL).AsInt64();
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b0u, result);
 
-            vector = Vector64.Create(
-                0x8000000000000000UL
-            ).AsInt64();
+            vector = Vector64.Create(0x8000000000000000UL).AsInt64();
 
             result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1u, result);
@@ -102,26 +77,19 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                Vector64<nint> vector = Vector64.Create(
-                    0x0000000000000001UL
-                ).AsNInt();
+                Vector64<nint> vector = Vector64.Create(0x0000000000000001UL).AsNInt();
 
                 uint result = Vector64.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b0u, result);
 
-                vector = Vector64.Create(
-                    0x8000000000000000UL
-                ).AsNInt();
+                vector = Vector64.Create(0x8000000000000000UL).AsNInt();
 
                 result = Vector64.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b1u, result);
             }
             else
             {
-                Vector64<nint> vector = Vector64.Create(
-                    0x00000001U,
-                    0x80000000U
-                ).AsNInt();
+                Vector64<nint> vector = Vector64.Create(0x00000001U, 0x80000000U).AsNInt();
 
                 uint result = Vector64.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10u, result);
@@ -133,26 +101,19 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                Vector64<nuint> vector = Vector64.Create(
-                    0x0000000000000001UL
-                ).AsNUInt();
+                Vector64<nuint> vector = Vector64.Create(0x0000000000000001UL).AsNUInt();
 
                 uint result = Vector64.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b0u, result);
 
-                vector = Vector64.Create(
-                    0x8000000000000000UL
-                ).AsNUInt();
+                vector = Vector64.Create(0x8000000000000000UL).AsNUInt();
 
                 result = Vector64.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b1u, result);
             }
             else
             {
-                Vector64<nuint> vector = Vector64.Create(
-                    0x00000001U,
-                    0x80000000U
-                ).AsNUInt();
+                Vector64<nuint> vector = Vector64.Create(0x00000001U, 0x80000000U).AsNUInt();
 
                 uint result = Vector64.ExtractMostSignificantBits(vector);
                 Assert.Equal(0b10u, result);
@@ -162,16 +123,9 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteExtractMostSignificantBitsTest()
         {
-            Vector64<sbyte> vector = Vector64.Create(
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80,
-                0x01,
-                0x80
-            ).AsSByte();
+            Vector64<sbyte> vector = Vector64
+                .Create(0x01, 0x80, 0x01, 0x80, 0x01, 0x80, 0x01, 0x80)
+                .AsSByte();
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10101010u, result);
@@ -180,10 +134,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleExtractMostSignificantBitsTest()
         {
-            Vector64<float> vector = Vector64.Create(
-                +1.0f,
-                -0.0f
-            );
+            Vector64<float> vector = Vector64.Create(+1.0f, -0.0f);
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10u, result);
@@ -192,12 +143,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16ExtractMostSignificantBitsTest()
         {
-            Vector64<ushort> vector = Vector64.Create(
-                0x0001,
-                0x8000,
-                0x0001,
-                0x8000
-            );
+            Vector64<ushort> vector = Vector64.Create(0x0001, 0x8000, 0x0001, 0x8000);
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1010u, result);
@@ -206,10 +152,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32ExtractMostSignificantBitsTest()
         {
-            Vector64<uint> vector = Vector64.Create(
-                0x00000001U,
-                0x80000000U
-            );
+            Vector64<uint> vector = Vector64.Create(0x00000001U, 0x80000000U);
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b10u, result);
@@ -218,16 +161,12 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64ExtractMostSignificantBitsTest()
         {
-            Vector64<ulong> vector = Vector64.Create(
-                0x0000000000000001UL
-            );
+            Vector64<ulong> vector = Vector64.Create(0x0000000000000001UL);
 
             uint result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b0u, result);
 
-            vector = Vector64.Create(
-                0x8000000000000000UL
-            );
+            vector = Vector64.Create(0x8000000000000000UL);
 
             result = Vector64.ExtractMostSignificantBits(vector);
             Assert.Equal(0b1u, result);
@@ -236,16 +175,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteLoadTest()
         {
-            byte* value = stackalloc byte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            byte* value = stackalloc byte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64<byte> vector = Vector64.Load(value);
 
@@ -258,9 +188,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleLoadTest()
         {
-            double* value = stackalloc double[1] {
-                0,
-            };
+            double* value = stackalloc double[1] { 0 };
 
             Vector64<double> vector = Vector64.Load(value);
 
@@ -273,12 +201,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16LoadTest()
         {
-            short* value = stackalloc short[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            short* value = stackalloc short[4] { 0, 1, 2, 3 };
 
             Vector64<short> vector = Vector64.Load(value);
 
@@ -291,10 +214,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32LoadTest()
         {
-            int* value = stackalloc int[2] {
-                0,
-                1,
-            };
+            int* value = stackalloc int[2] { 0, 1 };
 
             Vector64<int> vector = Vector64.Load(value);
 
@@ -307,9 +227,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64LoadTest()
         {
-            long* value = stackalloc long[1] {
-                0,
-            };
+            long* value = stackalloc long[1] { 0 };
 
             Vector64<long> vector = Vector64.Load(value);
 
@@ -324,9 +242,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[1] {
-                    0,
-                };
+                nint* value = stackalloc nint[1] { 0 };
 
                 Vector64<nint> vector = Vector64.Load(value);
 
@@ -337,10 +253,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[2] {
-                    0,
-                    1,
-                };
+                nint* value = stackalloc nint[2] { 0, 1 };
 
                 Vector64<nint> vector = Vector64.Load(value);
 
@@ -356,9 +269,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[1] {
-                    0,
-                };
+                nuint* value = stackalloc nuint[1] { 0 };
 
                 Vector64<nuint> vector = Vector64.Load(value);
 
@@ -369,10 +280,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[2] {
-                    0,
-                    1,
-                };
+                nuint* value = stackalloc nuint[2] { 0, 1 };
 
                 Vector64<nuint> vector = Vector64.Load(value);
 
@@ -386,16 +294,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteLoadTest()
         {
-            sbyte* value = stackalloc sbyte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            sbyte* value = stackalloc sbyte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64<sbyte> vector = Vector64.Load(value);
 
@@ -408,10 +307,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleLoadTest()
         {
-            float* value = stackalloc float[2] {
-                0,
-                1,
-            };
+            float* value = stackalloc float[2] { 0, 1 };
 
             Vector64<float> vector = Vector64.Load(value);
 
@@ -424,12 +320,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16LoadTest()
         {
-            ushort* value = stackalloc ushort[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ushort* value = stackalloc ushort[4] { 0, 1, 2, 3 };
 
             Vector64<ushort> vector = Vector64.Load(value);
 
@@ -442,10 +333,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32LoadTest()
         {
-            uint* value = stackalloc uint[2] {
-                0,
-                1,
-            };
+            uint* value = stackalloc uint[2] { 0, 1 };
 
             Vector64<uint> vector = Vector64.Load(value);
 
@@ -458,9 +346,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64LoadTest()
         {
-            ulong* value = stackalloc ulong[1] {
-                0,
-            };
+            ulong* value = stackalloc ulong[1] { 0 };
 
             Vector64<ulong> vector = Vector64.Load(value);
 
@@ -1127,16 +1013,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteLoadUnsafeTest()
         {
-            byte* value = stackalloc byte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            byte* value = stackalloc byte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64<byte> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1149,9 +1026,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleLoadUnsafeTest()
         {
-            double* value = stackalloc double[1] {
-                0,
-            };
+            double* value = stackalloc double[1] { 0 };
 
             Vector64<double> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1164,12 +1039,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16LoadUnsafeTest()
         {
-            short* value = stackalloc short[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            short* value = stackalloc short[4] { 0, 1, 2, 3 };
 
             Vector64<short> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1182,10 +1052,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32LoadUnsafeTest()
         {
-            int* value = stackalloc int[2] {
-                0,
-                1,
-            };
+            int* value = stackalloc int[2] { 0, 1 };
 
             Vector64<int> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1198,9 +1065,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64LoadUnsafeTest()
         {
-            long* value = stackalloc long[1] {
-                0,
-            };
+            long* value = stackalloc long[1] { 0 };
 
             Vector64<long> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1215,9 +1080,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[1] {
-                    0,
-                };
+                nint* value = stackalloc nint[1] { 0 };
 
                 Vector64<nint> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1228,10 +1091,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[2] {
-                    0,
-                    1,
-                };
+                nint* value = stackalloc nint[2] { 0, 1 };
 
                 Vector64<nint> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1247,9 +1107,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[1] {
-                    0,
-                };
+                nuint* value = stackalloc nuint[1] { 0 };
 
                 Vector64<nuint> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1260,10 +1118,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[2] {
-                    0,
-                    1,
-                };
+                nuint* value = stackalloc nuint[2] { 0, 1 };
 
                 Vector64<nuint> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1277,16 +1132,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteLoadUnsafeTest()
         {
-            sbyte* value = stackalloc sbyte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            sbyte* value = stackalloc sbyte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64<sbyte> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1299,10 +1145,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleLoadUnsafeTest()
         {
-            float* value = stackalloc float[2] {
-                0,
-                1,
-            };
+            float* value = stackalloc float[2] { 0, 1 };
 
             Vector64<float> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1315,12 +1158,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16LoadUnsafeTest()
         {
-            ushort* value = stackalloc ushort[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ushort* value = stackalloc ushort[4] { 0, 1, 2, 3 };
 
             Vector64<ushort> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1333,10 +1171,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32LoadUnsafeTest()
         {
-            uint* value = stackalloc uint[2] {
-                0,
-                1,
-            };
+            uint* value = stackalloc uint[2] { 0, 1 };
 
             Vector64<uint> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1349,9 +1184,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64LoadUnsafeTest()
         {
-            ulong* value = stackalloc ulong[1] {
-                0,
-            };
+            ulong* value = stackalloc ulong[1] { 0 };
 
             Vector64<ulong> vector = Vector64.LoadUnsafe(ref value[0]);
 
@@ -1364,17 +1197,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteLoadUnsafeIndexTest()
         {
-            byte* value = stackalloc byte[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            byte* value = stackalloc byte[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
             Vector64<byte> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1387,10 +1210,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleLoadUnsafeIndexTest()
         {
-            double* value = stackalloc double[1 + 1] {
-                0,
-                1,
-            };
+            double* value = stackalloc double[1 + 1] { 0, 1 };
 
             Vector64<double> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1403,13 +1223,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16LoadUnsafeIndexTest()
         {
-            short* value = stackalloc short[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            short* value = stackalloc short[4 + 1] { 0, 1, 2, 3, 4 };
 
             Vector64<short> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1422,11 +1236,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32LoadUnsafeIndexTest()
         {
-            int* value = stackalloc int[2 + 1] {
-                0,
-                1,
-                2,
-            };
+            int* value = stackalloc int[2 + 1] { 0, 1, 2 };
 
             Vector64<int> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1439,10 +1249,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64LoadUnsafeIndexTest()
         {
-            long* value = stackalloc long[1 + 1] {
-                0,
-                1,
-            };
+            long* value = stackalloc long[1 + 1] { 0, 1 };
 
             Vector64<long> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1457,10 +1264,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[1 + 1] {
-                    0,
-                    1,
-                };
+                nint* value = stackalloc nint[1 + 1] { 0, 1 };
 
                 Vector64<nint> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1471,11 +1275,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[2 + 1] {
-                    0,
-                    1,
-                    2,
-                };
+                nint* value = stackalloc nint[2 + 1] { 0, 1, 2 };
 
                 Vector64<nint> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1491,10 +1291,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[1 + 1] {
-                    0,
-                    1,
-                };
+                nuint* value = stackalloc nuint[1 + 1] { 0, 1 };
 
                 Vector64<nuint> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1505,11 +1302,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[2 + 1] {
-                    0,
-                    1,
-                    2,
-                };
+                nuint* value = stackalloc nuint[2 + 1] { 0, 1, 2 };
 
                 Vector64<nuint> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1523,17 +1316,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteLoadUnsafeIndexTest()
         {
-            sbyte* value = stackalloc sbyte[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            sbyte* value = stackalloc sbyte[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
             Vector64<sbyte> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1546,11 +1329,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleLoadUnsafeIndexTest()
         {
-            float* value = stackalloc float[2 + 1] {
-                0,
-                1,
-                2,
-            };
+            float* value = stackalloc float[2 + 1] { 0, 1, 2 };
 
             Vector64<float> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1563,13 +1342,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16LoadUnsafeIndexTest()
         {
-            ushort* value = stackalloc ushort[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            ushort* value = stackalloc ushort[4 + 1] { 0, 1, 2, 3, 4 };
 
             Vector64<ushort> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1582,11 +1355,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32LoadUnsafeIndexTest()
         {
-            uint* value = stackalloc uint[2 + 1] {
-                0,
-                1,
-                2,
-            };
+            uint* value = stackalloc uint[2 + 1] { 0, 1, 2 };
 
             Vector64<uint> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1599,10 +1368,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64LoadUnsafeIndexTest()
         {
-            ulong* value = stackalloc ulong[1 + 1] {
-                0,
-                1,
-            };
+            ulong* value = stackalloc ulong[1 + 1] { 0, 1 };
 
             Vector64<ulong> vector = Vector64.LoadUnsafe(ref value[0], 1);
 
@@ -1955,7 +1721,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector64ByteShuffleOneInputTest()
         {
             Vector64<byte> vector = Vector64.Create((byte)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector64<byte> result = Vector64.Shuffle(vector, Vector64.Create((byte)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector64<byte> result = Vector64.Shuffle(
+                vector,
+                Vector64.Create((byte)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector64<byte>.Count; index++)
             {
@@ -1991,7 +1760,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         public void Vector64SByteShuffleOneInputTest()
         {
             Vector64<sbyte> vector = Vector64.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8);
-            Vector64<sbyte> result = Vector64.Shuffle(vector, Vector64.Create((sbyte)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector64<sbyte> result = Vector64.Shuffle(
+                vector,
+                Vector64.Create((sbyte)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector64<sbyte>.Count; index++)
             {
@@ -2038,7 +1810,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64ByteShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<byte> result = Vector64.Shuffle(Vector64.Create((byte)1, 2, 3, 4, 5, 6, 7, 8), Vector64.Create((byte)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector64<byte> result = Vector64.Shuffle(
+                Vector64.Create((byte)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector64.Create((byte)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector64<byte>.Count; index++)
             {
@@ -2049,7 +1824,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64Int16ShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<short> result = Vector64.Shuffle(Vector64.Create((short)1, 2, 3, 4), Vector64.Create((short)3, 2, 1, 0));
+            Vector64<short> result = Vector64.Shuffle(
+                Vector64.Create((short)1, 2, 3, 4),
+                Vector64.Create((short)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector64<short>.Count; index++)
             {
@@ -2060,7 +1838,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64Int32ShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<int> result = Vector64.Shuffle(Vector64.Create((int)1, 2), Vector64.Create((int)1, 0));
+            Vector64<int> result = Vector64.Shuffle(
+                Vector64.Create((int)1, 2),
+                Vector64.Create((int)1, 0)
+            );
 
             for (int index = 0; index < Vector64<int>.Count; index++)
             {
@@ -2071,7 +1852,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64SByteShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<sbyte> result = Vector64.Shuffle(Vector64.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8), Vector64.Create((sbyte)7, 6, 5, 4, 3, 2, 1, 0));
+            Vector64<sbyte> result = Vector64.Shuffle(
+                Vector64.Create((sbyte)1, 2, 3, 4, 5, 6, 7, 8),
+                Vector64.Create((sbyte)7, 6, 5, 4, 3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector64<sbyte>.Count; index++)
             {
@@ -2082,7 +1866,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64SingleShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<float> result = Vector64.Shuffle(Vector64.Create((float)1, 2), Vector64.Create((int)1, 0));
+            Vector64<float> result = Vector64.Shuffle(
+                Vector64.Create((float)1, 2),
+                Vector64.Create((int)1, 0)
+            );
 
             for (int index = 0; index < Vector64<float>.Count; index++)
             {
@@ -2093,7 +1880,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64UInt16ShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<ushort> result = Vector64.Shuffle(Vector64.Create((ushort)1, 2, 3, 4), Vector64.Create((ushort)3, 2, 1, 0));
+            Vector64<ushort> result = Vector64.Shuffle(
+                Vector64.Create((ushort)1, 2, 3, 4),
+                Vector64.Create((ushort)3, 2, 1, 0)
+            );
 
             for (int index = 0; index < Vector64<ushort>.Count; index++)
             {
@@ -2104,7 +1894,10 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void Vector64UInt32ShuffleOneInputWithDirectVectorTest()
         {
-            Vector64<uint> result = Vector64.Shuffle(Vector64.Create((uint)1, 2), Vector64.Create((uint)1, 0));
+            Vector64<uint> result = Vector64.Shuffle(
+                Vector64.Create((uint)1, 2),
+                Vector64.Create((uint)1, 0)
+            );
 
             for (int index = 0; index < Vector64<uint>.Count; index++)
             {
@@ -2374,16 +2167,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteStoreTest()
         {
-            byte* value = stackalloc byte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            byte* value = stackalloc byte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64.Create((byte)0x1).Store(value);
 
@@ -2396,9 +2180,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleStoreTest()
         {
-            double* value = stackalloc double[1] {
-                0,
-            };
+            double* value = stackalloc double[1] { 0 };
 
             Vector64.Create((double)0x1).Store(value);
 
@@ -2411,12 +2193,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16StoreTest()
         {
-            short* value = stackalloc short[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            short* value = stackalloc short[4] { 0, 1, 2, 3 };
 
             Vector64.Create((short)0x1).Store(value);
 
@@ -2429,10 +2206,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32StoreTest()
         {
-            int* value = stackalloc int[2] {
-                0,
-                1,
-            };
+            int* value = stackalloc int[2] { 0, 1 };
 
             Vector64.Create((int)0x1).Store(value);
 
@@ -2445,9 +2219,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64StoreTest()
         {
-            long* value = stackalloc long[1] {
-                0,
-            };
+            long* value = stackalloc long[1] { 0 };
 
             Vector64.Create((long)0x1).Store(value);
 
@@ -2462,9 +2234,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[1] {
-                    0,
-                };
+                nint* value = stackalloc nint[1] { 0 };
 
                 Vector64.Create((nint)0x1).Store(value);
 
@@ -2475,10 +2245,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[2] {
-                    0,
-                    1,
-                };
+                nint* value = stackalloc nint[2] { 0, 1 };
 
                 Vector64.Create((nint)0x1).Store(value);
 
@@ -2494,9 +2261,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[1] {
-                    0,
-                };
+                nuint* value = stackalloc nuint[1] { 0 };
 
                 Vector64.Create((nuint)0x1).Store(value);
 
@@ -2507,10 +2272,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[2] {
-                    0,
-                    1,
-                };
+                nuint* value = stackalloc nuint[2] { 0, 1 };
 
                 Vector64.Create((nuint)0x1).Store(value);
 
@@ -2524,16 +2286,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteStoreTest()
         {
-            sbyte* value = stackalloc sbyte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            sbyte* value = stackalloc sbyte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64.Create((sbyte)0x1).Store(value);
 
@@ -2546,10 +2299,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleStoreTest()
         {
-            float* value = stackalloc float[2] {
-                0,
-                1,
-            };
+            float* value = stackalloc float[2] { 0, 1 };
 
             Vector64.Create((float)0x1).Store(value);
 
@@ -2562,12 +2312,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16StoreTest()
         {
-            ushort* value = stackalloc ushort[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ushort* value = stackalloc ushort[4] { 0, 1, 2, 3 };
 
             Vector64.Create((ushort)0x1).Store(value);
 
@@ -2580,10 +2325,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32StoreTest()
         {
-            uint* value = stackalloc uint[2] {
-                0,
-                1,
-            };
+            uint* value = stackalloc uint[2] { 0, 1 };
 
             Vector64.Create((uint)0x1).Store(value);
 
@@ -2596,9 +2338,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64StoreTest()
         {
-            ulong* value = stackalloc ulong[1] {
-                0,
-            };
+            ulong* value = stackalloc ulong[1] { 0 };
 
             Vector64.Create((ulong)0x1).Store(value);
 
@@ -3265,16 +3005,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteStoreUnsafeTest()
         {
-            byte* value = stackalloc byte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            byte* value = stackalloc byte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64.Create((byte)0x1).StoreUnsafe(ref value[0]);
 
@@ -3287,9 +3018,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleStoreUnsafeTest()
         {
-            double* value = stackalloc double[1] {
-                0,
-            };
+            double* value = stackalloc double[1] { 0 };
 
             Vector64.Create((double)0x1).StoreUnsafe(ref value[0]);
 
@@ -3302,12 +3031,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16StoreUnsafeTest()
         {
-            short* value = stackalloc short[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            short* value = stackalloc short[4] { 0, 1, 2, 3 };
 
             Vector64.Create((short)0x1).StoreUnsafe(ref value[0]);
 
@@ -3320,10 +3044,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32StoreUnsafeTest()
         {
-            int* value = stackalloc int[2] {
-                0,
-                1,
-            };
+            int* value = stackalloc int[2] { 0, 1 };
 
             Vector64.Create((int)0x1).StoreUnsafe(ref value[0]);
 
@@ -3336,9 +3057,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64StoreUnsafeTest()
         {
-            long* value = stackalloc long[1] {
-                0,
-            };
+            long* value = stackalloc long[1] { 0 };
 
             Vector64.Create((long)0x1).StoreUnsafe(ref value[0]);
 
@@ -3353,9 +3072,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[1] {
-                    0,
-                };
+                nint* value = stackalloc nint[1] { 0 };
 
                 Vector64.Create((nint)0x1).StoreUnsafe(ref value[0]);
 
@@ -3366,10 +3083,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[2] {
-                    0,
-                    1,
-                };
+                nint* value = stackalloc nint[2] { 0, 1 };
 
                 Vector64.Create((nint)0x1).StoreUnsafe(ref value[0]);
 
@@ -3385,9 +3099,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[1] {
-                    0,
-                };
+                nuint* value = stackalloc nuint[1] { 0 };
 
                 Vector64.Create((nuint)0x1).StoreUnsafe(ref value[0]);
 
@@ -3398,10 +3110,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[2] {
-                    0,
-                    1,
-                };
+                nuint* value = stackalloc nuint[2] { 0, 1 };
 
                 Vector64.Create((nuint)0x1).StoreUnsafe(ref value[0]);
 
@@ -3415,16 +3124,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteStoreUnsafeTest()
         {
-            sbyte* value = stackalloc sbyte[8] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-            };
+            sbyte* value = stackalloc sbyte[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             Vector64.Create((sbyte)0x1).StoreUnsafe(ref value[0]);
 
@@ -3437,10 +3137,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleStoreUnsafeTest()
         {
-            float* value = stackalloc float[2] {
-                0,
-                1,
-            };
+            float* value = stackalloc float[2] { 0, 1 };
 
             Vector64.Create((float)0x1).StoreUnsafe(ref value[0]);
 
@@ -3453,12 +3150,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16StoreUnsafeTest()
         {
-            ushort* value = stackalloc ushort[4] {
-                0,
-                1,
-                2,
-                3,
-            };
+            ushort* value = stackalloc ushort[4] { 0, 1, 2, 3 };
 
             Vector64.Create((ushort)0x1).StoreUnsafe(ref value[0]);
 
@@ -3471,10 +3163,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32StoreUnsafeTest()
         {
-            uint* value = stackalloc uint[2] {
-                0,
-                1,
-            };
+            uint* value = stackalloc uint[2] { 0, 1 };
 
             Vector64.Create((uint)0x1).StoreUnsafe(ref value[0]);
 
@@ -3487,9 +3176,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64StoreUnsafeTest()
         {
-            ulong* value = stackalloc ulong[1] {
-                0,
-            };
+            ulong* value = stackalloc ulong[1] { 0 };
 
             Vector64.Create((ulong)0x1).StoreUnsafe(ref value[0]);
 
@@ -3502,17 +3189,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64ByteStoreUnsafeIndexTest()
         {
-            byte* value = stackalloc byte[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            byte* value = stackalloc byte[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
             Vector64.Create((byte)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3525,10 +3202,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64DoubleStoreUnsafeIndexTest()
         {
-            double* value = stackalloc double[1 + 1] {
-                0,
-                1,
-            };
+            double* value = stackalloc double[1 + 1] { 0, 1 };
 
             Vector64.Create((double)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3541,13 +3215,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int16StoreUnsafeIndexTest()
         {
-            short* value = stackalloc short[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            short* value = stackalloc short[4 + 1] { 0, 1, 2, 3, 4 };
 
             Vector64.Create((short)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3560,11 +3228,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int32StoreUnsafeIndexTest()
         {
-            int* value = stackalloc int[2 + 1] {
-                0,
-                1,
-                2,
-            };
+            int* value = stackalloc int[2 + 1] { 0, 1, 2 };
 
             Vector64.Create((int)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3577,10 +3241,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64Int64StoreUnsafeIndexTest()
         {
-            long* value = stackalloc long[1 + 1] {
-                0,
-                1,
-            };
+            long* value = stackalloc long[1 + 1] { 0, 1 };
 
             Vector64.Create((long)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3595,10 +3256,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nint* value = stackalloc nint[1 + 1] {
-                    0,
-                    1,
-                };
+                nint* value = stackalloc nint[1 + 1] { 0, 1 };
 
                 Vector64.Create((nint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3609,11 +3267,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nint* value = stackalloc nint[2 + 1] {
-                    0,
-                    1,
-                    2,
-                };
+                nint* value = stackalloc nint[2 + 1] { 0, 1, 2 };
 
                 Vector64.Create((nint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3629,10 +3283,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             if (Environment.Is64BitProcess)
             {
-                nuint* value = stackalloc nuint[1 + 1] {
-                    0,
-                    1,
-                };
+                nuint* value = stackalloc nuint[1 + 1] { 0, 1 };
 
                 Vector64.Create((nuint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3643,11 +3294,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             }
             else
             {
-                nuint* value = stackalloc nuint[2 + 1] {
-                    0,
-                    1,
-                    2,
-                };
+                nuint* value = stackalloc nuint[2 + 1] { 0, 1, 2 };
 
                 Vector64.Create((nuint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3661,17 +3308,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SByteStoreUnsafeIndexTest()
         {
-            sbyte* value = stackalloc sbyte[8 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-            };
+            sbyte* value = stackalloc sbyte[8 + 1] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
             Vector64.Create((sbyte)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3684,11 +3321,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64SingleStoreUnsafeIndexTest()
         {
-            float* value = stackalloc float[2 + 1] {
-                0,
-                1,
-                2,
-            };
+            float* value = stackalloc float[2 + 1] { 0, 1, 2 };
 
             Vector64.Create((float)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3701,13 +3334,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt16StoreUnsafeIndexTest()
         {
-            ushort* value = stackalloc ushort[4 + 1] {
-                0,
-                1,
-                2,
-                3,
-                4,
-            };
+            ushort* value = stackalloc ushort[4 + 1] { 0, 1, 2, 3, 4 };
 
             Vector64.Create((ushort)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3720,11 +3347,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt32StoreUnsafeIndexTest()
         {
-            uint* value = stackalloc uint[2 + 1] {
-                0,
-                1,
-                2,
-            };
+            uint* value = stackalloc uint[2 + 1] { 0, 1, 2 };
 
             Vector64.Create((uint)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3737,10 +3360,7 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public unsafe void Vector64UInt64StoreUnsafeIndexTest()
         {
-            ulong* value = stackalloc ulong[1 + 1] {
-                0,
-                1,
-            };
+            ulong* value = stackalloc ulong[1 + 1] { 0, 1 };
 
             Vector64.Create((ulong)0x1).StoreUnsafe(ref value[0], 1);
 
@@ -3898,14 +3518,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             {
                 double.CopySign(double.NaN, -0.0), // -qnan same as double.NaN
                 double.CopySign(double.NaN, +0.0), // +qnan
-                double.CopySign(snan, -0.0),       // -snan
-                double.CopySign(snan, +0.0),       // +snan
+                double.CopySign(snan, -0.0), // -snan
+                double.CopySign(snan, +0.0), // +snan
             };
 
             // all Vector<double> NaNs .Equals compare the same, but == compare as different
-            foreach(var i in nans)
+            foreach (var i in nans)
             {
-                foreach(var j in nans)
+                foreach (var j in nans)
                 {
                     Assert.True(Vector64.Create(i).Equals(Vector64.Create(j)));
                     Assert.False(Vector64.Create(i) == Vector64.Create(j));
@@ -3922,14 +3542,14 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
             {
                 float.CopySign(float.NaN, -0.0f), // -qnan same as float.NaN
                 float.CopySign(float.NaN, +0.0f), // +qnan
-                float.CopySign(snan, -0.0f),      // -snan
-                float.CopySign(snan, +0.0f),      // +snan
+                float.CopySign(snan, -0.0f), // -snan
+                float.CopySign(snan, +0.0f), // +snan
             };
 
             // all Vector<float> NaNs .Equals compare the same, but == compare as different
-            foreach(var i in nans)
+            foreach (var i in nans)
             {
-                foreach(var j in nans)
+                foreach (var j in nans)
                 {
                     Assert.True(Vector64.Create(i).Equals(Vector64.Create(j)));
                     Assert.False(Vector64.Create(i) == Vector64.Create(j));
@@ -3994,7 +3614,9 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             Assert.True(Vector64<T>.IsSupported);
 
-            MethodInfo methodInfo = typeof(Vector64<T>).GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector64<T>)
+                .GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.True((bool)methodInfo.Invoke(null, null));
         }
 
@@ -4018,7 +3640,9 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             Assert.False(Vector64<T>.IsSupported);
 
-            MethodInfo methodInfo = typeof(Vector64<T>).GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector64<T>)
+                .GetProperty("IsSupported", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.False((bool)methodInfo.Invoke(null, null));
         }
 
@@ -4063,7 +3687,9 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         {
             Assert.Equal(Vector64<T>.One, Vector64.Create(T.One));
 
-            MethodInfo methodInfo = typeof(Vector64<T>).GetProperty("One", BindingFlags.Public | BindingFlags.Static).GetMethod;
+            MethodInfo methodInfo = typeof(Vector64<T>)
+                .GetProperty("One", BindingFlags.Public | BindingFlags.Static)
+                .GetMethod;
             Assert.Equal((Vector64<T>)methodInfo.Invoke(null, null), Vector64.Create(T.One));
         }
     }

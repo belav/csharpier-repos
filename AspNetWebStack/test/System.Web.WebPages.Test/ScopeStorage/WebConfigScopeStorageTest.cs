@@ -42,18 +42,38 @@ namespace System.Web.WebPages.Test
             var stateStorage = GetWebConfigScopeStorage();
 
             // Act and Assert
-            Assert.Throws<NotSupportedException>(() => stateStorage["foo"] = "some value", "Storage scope is read only.");
-            Assert.Throws<NotSupportedException>(() => stateStorage.Add("foo", "value"), "Storage scope is read only.");
-            Assert.Throws<NotSupportedException>(() => stateStorage.Remove("foo"), "Storage scope is read only.");
-            Assert.Throws<NotSupportedException>(() => stateStorage.Clear(), "Storage scope is read only.");
-            Assert.Throws<NotSupportedException>(() => stateStorage.Remove(new KeyValuePair<object, object>("foo", "bar")), "Storage scope is read only.");
+            Assert.Throws<NotSupportedException>(
+                () => stateStorage["foo"] = "some value",
+                "Storage scope is read only."
+            );
+            Assert.Throws<NotSupportedException>(
+                () => stateStorage.Add("foo", "value"),
+                "Storage scope is read only."
+            );
+            Assert.Throws<NotSupportedException>(
+                () => stateStorage.Remove("foo"),
+                "Storage scope is read only."
+            );
+            Assert.Throws<NotSupportedException>(
+                () => stateStorage.Clear(),
+                "Storage scope is read only."
+            );
+            Assert.Throws<NotSupportedException>(
+                () => stateStorage.Remove(new KeyValuePair<object, object>("foo", "bar")),
+                "Storage scope is read only."
+            );
         }
 
         [Fact]
         public void WebConfigStateAllowsEnumeratingOverConfigItems()
         {
             // Arrange
-            var dictionary = new Dictionary<string, string> { { "a", "b" }, { "c", "d" }, { "x12", "y34" } };
+            var dictionary = new Dictionary<string, string>
+            {
+                { "a", "b" },
+                { "c", "d" },
+                { "x12", "y34" },
+            };
             var stateStorage = GetWebConfigScopeStorage(dictionary);
 
             // Act and Assert
@@ -69,12 +89,20 @@ namespace System.Web.WebPages.Test
             values.Add("foo1", "bar1");
 
             // Now mess it up
-            // We are simulating what might happen in rare cases (probably during app-start and high load) - 
+            // We are simulating what might happen in rare cases (probably during app-start and high load) -
             // the AppSettings NameValueCollection gets messed up internally, however keep functioning normally.
-            // The duplication in AllKeys cause the bug https://aspnetwebstack.codeplex.com/workitem/912, 
-            var entryType = typeof(NameObjectCollectionBase).GetNestedType("NameObjectEntry", BindingFlags.NonPublic);
-            var entry = entryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)[0].Invoke(new object[] { "foo1", "bar2" });
-            var entriesArray = (ArrayList)typeof(NameObjectCollectionBase).GetField("_entriesArray", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(values);
+            // The duplication in AllKeys cause the bug https://aspnetwebstack.codeplex.com/workitem/912,
+            var entryType = typeof(NameObjectCollectionBase).GetNestedType(
+                "NameObjectEntry",
+                BindingFlags.NonPublic
+            );
+            var entry = entryType
+                .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)[0]
+                .Invoke(new object[] { "foo1", "bar2" });
+            var entriesArray = (ArrayList)
+                typeof(NameObjectCollectionBase)
+                    .GetField("_entriesArray", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .GetValue(values);
             entriesArray.Add(entry);
             Assert.Equal(2, values.AllKeys.Length);
 
@@ -85,7 +113,9 @@ namespace System.Web.WebPages.Test
             Assert.Equal("bar1", stateStorage["foo1"]);
         }
 
-        private WebConfigScopeDictionary GetWebConfigScopeStorage(IDictionary<string, string> values = null)
+        private WebConfigScopeDictionary GetWebConfigScopeStorage(
+            IDictionary<string, string> values = null
+        )
         {
             NameValueCollection collection = new NameValueCollection();
             if (values == null)

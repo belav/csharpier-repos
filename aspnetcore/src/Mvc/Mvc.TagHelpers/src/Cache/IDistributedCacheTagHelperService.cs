@@ -20,5 +20,9 @@ public interface IDistributedCacheTagHelperService
     /// <param name="key">The key in the storage.</param>
     /// <param name="options">The <see cref="DistributedCacheEntryOptions"/>.</param>
     /// <returns>A cached or new content for the cache tag helper.</returns>
-    Task<IHtmlContent> ProcessContentAsync(TagHelperOutput output, CacheTagKey key, DistributedCacheEntryOptions options);
+    Task<IHtmlContent> ProcessContentAsync(
+        TagHelperOutput output,
+        CacheTagKey key,
+        DistributedCacheEntryOptions options
+    );
 }

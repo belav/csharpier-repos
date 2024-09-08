@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -26,7 +27,9 @@ namespace DefaultNamespace
             int a = (Int32)f();
             Console.WriteLine("a was: " + a);
             if (a == -1)
-                Console.WriteLine("\n\tBug #1: a shouldn't be -1!  Widened from a unsigned short to an int shouldn't give a negative!\n");
+                Console.WriteLine(
+                    "\n\tBug #1: a shouldn't be -1!  Widened from a unsigned short to an int shouldn't give a negative!\n"
+                );
             else
             {
                 Console.WriteLine("pass");

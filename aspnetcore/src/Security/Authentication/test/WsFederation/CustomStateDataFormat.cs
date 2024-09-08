@@ -11,7 +11,9 @@ public class CustomStateDataFormat : ISecureDataFormat<AuthenticationProperties>
     public const string ValidStateData = "ValidStateData";
 
     private string lastSavedAuthenticationProperties;
-    private readonly DataContractSerializer serializer = new DataContractSerializer(typeof(AuthenticationProperties));
+    private readonly DataContractSerializer serializer = new DataContractSerializer(
+        typeof(AuthenticationProperties)
+    );
 
     public string Protect(AuthenticationProperties data)
     {

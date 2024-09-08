@@ -80,24 +80,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
 
         private void TestEmit(DebugInformationFormat format)
         {
-            var script = CSharpScript.Create("1 + 2", options: ScriptOptions.Default.WithEmitDebugInformation(true));
+            var script = CSharpScript.Create(
+                "1 + 2",
+                options: ScriptOptions.Default.WithEmitDebugInformation(true)
+            );
             var compilation = script.GetCompilation();
-            var emitOptions = ScriptBuilder.GetEmitOptions(emitDebugInformation: true).WithDebugInformationFormat(format);
+            var emitOptions = ScriptBuilder
+                .GetEmitOptions(emitDebugInformation: true)
+                .WithDebugInformationFormat(format);
 
             var peStream = new MemoryStream();
             var pdbStream = new MemoryStream();
-            var emitResult = ScriptBuilder.Emit(peStream, pdbStream, compilation, emitOptions, cancellationToken: default);
+            var emitResult = ScriptBuilder.Emit(
+                peStream,
+                pdbStream,
+                compilation,
+                emitOptions,
+                cancellationToken: default
+            );
 
             peStream.Position = 0;
             pdbStream.Position = 0;
 
             PdbValidation.ValidateDebugDirectory(
                 peStream,
-                portablePdbStreamOpt: (format == DebugInformationFormat.PortablePdb) ? pdbStream : null,
+                portablePdbStreamOpt: (format == DebugInformationFormat.PortablePdb)
+                    ? pdbStream
+                    : null,
                 pdbPath: compilation.AssemblyName + ".pdb",
                 hashAlgorithm: default,
                 hasEmbeddedPdb: false,
-                isDeterministic: false);
+                isDeterministic: false
+            );
         }
 
         [Fact]
@@ -167,7 +181,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         {
             var state = ScriptingTestHelpers.RunScriptWithOutput(
                 CSharpScript.Create("System.Console.WriteLine(0);"),
-                "0");
+                "0"
+            );
             Assert.Null(state.ReturnValue);
         }
 
@@ -175,15 +190,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
         public async Task TestRunExpressionStatement()
         {
             var state = await CSharpScript.RunAsync(
-@"int F() { return 1; }
-F();");
+                @"int F() { return 1; }
+F();"
+            );
             Assert.Null(state.ReturnValue);
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/170")]
         public async Task TestRunDynamicVoidScriptWithTerminatingSemicolon()
         {
-            await CSharpScript.RunAsync(@"
+            await CSharpScript.RunAsync(
+                @"
 class SomeClass
 {
     public void Do()
@@ -191,14 +208,21 @@ class SomeClass
     }
 }
 dynamic d = new SomeClass();
-d.Do();"
-, ScriptOptions.Default.WithReferences(MscorlibRef, SystemRef, SystemCoreRef, CSharpRef));
+d.Do();",
+                ScriptOptions.Default.WithReferences(
+                    MscorlibRef,
+                    SystemRef,
+                    SystemCoreRef,
+                    CSharpRef
+                )
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/170")]
         public async Task TestRunDynamicVoidScriptWithoutTerminatingSemicolon()
         {
-            await CSharpScript.RunAsync(@"
+            await CSharpScript.RunAsync(
+                @"
 class SomeClass
 {
     public void Do()
@@ -206,8 +230,14 @@ class SomeClass
     }
 }
 dynamic d = new SomeClass();
-d.Do()"
-, ScriptOptions.Default.WithReferences(MscorlibRef, SystemRef, SystemCoreRef, CSharpRef));
+d.Do()",
+                ScriptOptions.Default.WithReferences(
+                    MscorlibRef,
+                    SystemRef,
+                    SystemCoreRef,
+                    CSharpRef
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/6676")]
@@ -217,16 +247,20 @@ d.Do()"
 
             try
             {
-                var state = CSharpScript.RunAsync(@"if (true)
- System.Console.WriteLine(true)", globals: new ScriptTests());
+                var state = CSharpScript.RunAsync(
+                    @"if (true)
+ System.Console.WriteLine(true)",
+                    globals: new ScriptTests()
+                );
             }
             catch (CompilationErrorException ex)
             {
                 exceptionThrown = true;
                 ex.Diagnostics.Verify(
-                // (2,32): error CS1002: ; expected
-                //  System.Console.WriteLine(true)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 32));
+                    // (2,32): error CS1002: ; expected
+                    //  System.Console.WriteLine(true)
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(2, 32)
+                );
             }
 
             Assert.True(exceptionThrown);
@@ -235,25 +269,34 @@ d.Do()"
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/6676")]
         public void TestRunEmbeddedStatementFollowedBySemicolon()
         {
-            var state = CSharpScript.RunAsync(@"if (true)
-System.Console.WriteLine(true);", globals: new ScriptTests());
+            var state = CSharpScript.RunAsync(
+                @"if (true)
+System.Console.WriteLine(true);",
+                globals: new ScriptTests()
+            );
             Assert.Null(state.Exception);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/6676")]
         public void TestRunStatementFollowedBySpace()
         {
-            var state = CSharpScript.RunAsync(@"System.Console.WriteLine(true) ", globals: new ScriptTests());
+            var state = CSharpScript.RunAsync(
+                @"System.Console.WriteLine(true) ",
+                globals: new ScriptTests()
+            );
             Assert.Null(state.Exception);
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/6676")]
         public void TestRunStatementFollowedByNewLineNoSemicolon()
         {
-            var state = CSharpScript.RunAsync(@"
+            var state = CSharpScript.RunAsync(
+                @"
 System.Console.WriteLine(true)
 
-", globals: new ScriptTests());
+",
+                globals: new ScriptTests()
+            );
             Assert.Null(state.Exception);
         }
 
@@ -264,18 +307,22 @@ System.Console.WriteLine(true)
 
             try
             {
-                var state = CSharpScript.RunAsync(@"if (e) a = b 
-throw e;", globals: new ScriptTests());
+                var state = CSharpScript.RunAsync(
+                    @"if (e) a = b 
+throw e;",
+                    globals: new ScriptTests()
+                );
             }
             catch (CompilationErrorException ex)
             {
                 exceptionThrown = true;
-                // Verify that it produces a single ExpectedSemicolon error. 
+                // Verify that it produces a single ExpectedSemicolon error.
                 // No duplicates for the same error.
                 ex.Diagnostics.Verify(
-                // (1,13): error CS1002: ; expected
-                // if (e) a = b 
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13));
+                    // (1,13): error CS1002: ; expected
+                    // if (e) a = b
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 13)
+                );
             }
 
             Assert.True(exceptionThrown);
@@ -303,7 +350,10 @@ throw e;", globals: new ScriptTests());
             var script = CSharpScript.Create("X + Y");
 
             // Global variables passed to a script without a global type
-            await Assert.ThrowsAsync<ArgumentException>("globals", () => script.RunAsync(new Globals { X = 1, Y = 2 }));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "globals",
+                () => script.RunAsync(new Globals { X = 1, Y = 2 })
+            );
         }
 
         [Fact]
@@ -321,7 +371,10 @@ throw e;", globals: new ScriptTests());
             var script = CSharpScript.Create("X + Y", globalsType: typeof(Globals));
 
             //  The globals of type 'System.Object' is not assignable to 'Microsoft.CodeAnalysis.CSharp.Scripting.Test.ScriptTests+Globals'
-            await Assert.ThrowsAsync<ArgumentException>("globals", () => script.RunAsync(new object()));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "globals",
+                () => script.RunAsync(new object())
+            );
         }
 
         [Fact]
@@ -329,7 +382,10 @@ throw e;", globals: new ScriptTests());
         {
             var state = await CSharpScript.RunAsync("X + Y", globals: new Globals());
 
-            await Assert.ThrowsAsync<ArgumentNullException>("previousState", () => state.Script.RunFromAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "previousState",
+                () => state.Script.RunFromAsync(null)
+            );
         }
 
         [Fact]
@@ -338,7 +394,10 @@ throw e;", globals: new ScriptTests());
             var state1 = await CSharpScript.RunAsync("X + Y + 1", globals: new Globals());
             var state2 = await CSharpScript.RunAsync("X + Y + 2", globals: new Globals());
 
-            await Assert.ThrowsAsync<ArgumentException>("previousState", () => state1.Script.RunFromAsync(state2));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "previousState",
+                () => state1.Script.RunFromAsync(state2)
+            );
         }
 
         [Fact]
@@ -352,12 +411,7 @@ throw e;", globals: new ScriptTests());
         [Fact]
         public async Task TestRepl()
         {
-            var submissions = new[]
-            {
-                "int x = 100;",
-                "int y = x * x;",
-                "x + y"
-            };
+            var submissions = new[] { "int x = 100;", "int y = x * x;", "x + y" };
 
             var state = await CSharpScript.RunAsync("");
             foreach (var submission in submissions)
@@ -385,20 +439,31 @@ throw e;", globals: new ScriptTests());
         {
             var globals = new Globals { X = 10, Y = 20 };
 
-            var script =
-                CSharpScript.Create(
-                    "var a = '1';",
-                    globalsType: globals.GetType()).
-                ContinueWith("var b = 2u;").
-                ContinueWith("var a = 3m;").
-                ContinueWith("var x = a + b;").
-                ContinueWith("var X = Y;");
+            var script = CSharpScript
+                .Create("var a = '1';", globalsType: globals.GetType())
+                .ContinueWith("var b = 2u;")
+                .ContinueWith("var a = 3m;")
+                .ContinueWith("var x = a + b;")
+                .ContinueWith("var X = Y;");
 
             var state = await script.RunAsync(globals);
 
             AssertEx.Equal(new[] { "a", "b", "a", "x", "X" }, state.Variables.Select(v => v.Name));
-            AssertEx.Equal(new object[] { '1', 2u, 3m, 5m, 20 }, state.Variables.Select(v => v.Value));
-            AssertEx.Equal(new Type[] { typeof(char), typeof(uint), typeof(decimal), typeof(decimal), typeof(int) }, state.Variables.Select(v => v.Type));
+            AssertEx.Equal(
+                new object[] { '1', 2u, 3m, 5m, 20 },
+                state.Variables.Select(v => v.Value)
+            );
+            AssertEx.Equal(
+                new Type[]
+                {
+                    typeof(char),
+                    typeof(uint),
+                    typeof(decimal),
+                    typeof(decimal),
+                    typeof(int),
+                },
+                state.Variables.Select(v => v.Type)
+            );
 
             Assert.Equal(3m, state.GetVariable("a").Value);
             Assert.Equal(2u, state.GetVariable("b").Value);
@@ -431,11 +496,13 @@ throw e;", globals: new ScriptTests());
         [Fact]
         public async Task ScriptVariable_SetValue_Errors()
         {
-            var state = await CSharpScript.RunAsync(@"
+            var state = await CSharpScript.RunAsync(
+                @"
 var x = 1;
 readonly var y = 2;
 const int z = 3;
-");
+"
+            );
 
             Assert.False(state.GetVariable("x").IsReadOnly);
             Assert.True(state.GetVariable("y").IsReadOnly);
@@ -468,7 +535,10 @@ const int z = 3;
         [Fact]
         public async Task StaticDelegate0()
         {
-            var state0 = await CSharpScript.RunAsync("static int Add(int x, int y) => x + y;", options: ScriptOptions.Default.WithLanguageVersion(LanguageVersion.Preview));
+            var state0 = await CSharpScript.RunAsync(
+                "static int Add(int x, int y) => x + y;",
+                options: ScriptOptions.Default.WithLanguageVersion(LanguageVersion.Preview)
+            );
             var state1 = await state0.ContinueWithAsync("System.Func<int, int, int> adder = Add;");
             var state2 = await state1.ContinueWithAsync("adder(1, 1)");
             Assert.Equal(2, state2.ReturnValue);
@@ -477,7 +547,9 @@ const int z = 3;
         [Fact]
         public async Task StaticDelegate1()
         {
-            var state0 = await CSharpScript.RunAsync("class Id<T> { static T Core(T t) => t; public static System.Func<T, T> Get => Core; }");
+            var state0 = await CSharpScript.RunAsync(
+                "class Id<T> { static T Core(T t) => t; public static System.Func<T, T> Get => Core; }"
+            );
             var state1 = await state0.ContinueWithAsync("Id<int>.Get(1)");
             Assert.Equal(1, state1.ReturnValue);
         }
@@ -485,7 +557,9 @@ const int z = 3;
         [Fact]
         public async Task StaticDelegate2()
         {
-            var state0 = await CSharpScript.RunAsync("class Id { static T Core<T>(T t) => t; public static System.Func<T, T> Get<T>() => Core; }");
+            var state0 = await CSharpScript.RunAsync(
+                "class Id { static T Core<T>(T t) => t; public static System.Func<T, T> Get<T>() => Core; }"
+            );
             var state1 = await state0.ContinueWithAsync("Id.Get<int>()(1)");
             Assert.Equal(1, state1.ReturnValue);
         }
@@ -502,14 +576,20 @@ const int z = 3;
         [Fact]
         public void NoReturn()
         {
-            Assert.Null(ScriptingTestHelpers.EvaluateScriptWithOutput(
-                CSharpScript.Create("System.Console.WriteLine();"), ""));
+            Assert.Null(
+                ScriptingTestHelpers.EvaluateScriptWithOutput(
+                    CSharpScript.Create("System.Console.WriteLine();"),
+                    ""
+                )
+            );
         }
 
         [Fact]
         public async Task ReturnAwait()
         {
-            var script = CSharpScript.Create<int>("return await System.Threading.Tasks.Task.FromResult(42);");
+            var script = CSharpScript.Create<int>(
+                "return await System.Threading.Tasks.Task.FromResult(42);"
+            );
             var result = await script.EvaluateAsync();
             Assert.Equal(42, result);
         }
@@ -517,12 +597,14 @@ const int z = 3;
         [Fact]
         public async Task ReturnInNestedScopeNoTrailingExpression()
         {
-            var script = CSharpScript.Create(@"
+            var script = CSharpScript.Create(
+                @"
 bool condition = false;
 if (condition)
 {
     return 1;
-}");
+}"
+            );
             var result = await script.EvaluateAsync();
             Assert.Null(result);
         }
@@ -530,23 +612,27 @@ if (condition)
         [Fact]
         public async Task ReturnInNestedScopeWithTrailingVoidExpression()
         {
-            var script = CSharpScript.Create(@"
+            var script = CSharpScript.Create(
+                @"
 bool condition = false;
 if (condition)
 {
     return 1;
 }
-System.Console.WriteLine();");
+System.Console.WriteLine();"
+            );
             var result = await script.EvaluateAsync();
             Assert.Null(result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 bool condition = true;
 if (condition)
 {
     return 1;
 }
-System.Console.WriteLine();");
+System.Console.WriteLine();"
+            );
 
             Assert.Equal(1, ScriptingTestHelpers.EvaluateScriptWithOutput(script, ""));
         }
@@ -554,23 +640,27 @@ System.Console.WriteLine();");
         [Fact]
         public async Task ReturnInNestedScopeWithTrailingVoidExpressionAsInt()
         {
-            var script = CSharpScript.Create<int>(@"
+            var script = CSharpScript.Create<int>(
+                @"
 bool condition = false;
 if (condition)
 {
     return 1;
 }
-System.Console.WriteLine();");
+System.Console.WriteLine();"
+            );
             var result = await script.EvaluateAsync();
             Assert.Equal(0, result);
 
-            script = CSharpScript.Create<int>(@"
+            script = CSharpScript.Create<int>(
+                @"
 bool condition = false;
 if (condition)
 {
     return 1;
 }
-System.Console.WriteLine()");
+System.Console.WriteLine()"
+            );
 
             Assert.Equal(0, ScriptingTestHelpers.EvaluateScriptWithOutput(script, ""));
         }
@@ -578,23 +668,27 @@ System.Console.WriteLine()");
         [Fact]
         public async Task ReturnIntWithTrailingDoubleExpression()
         {
-            var script = CSharpScript.Create(@"
+            var script = CSharpScript.Create(
+                @"
 bool condition = false;
 if (condition)
 {
     return 1;
 }
-1.1");
+1.1"
+            );
             var result = await script.EvaluateAsync();
             Assert.Equal(1.1, result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 bool condition = true;
 if (condition)
 {
     return 1;
 }
-1.1");
+1.1"
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(1, result);
         }
@@ -602,19 +696,23 @@ if (condition)
         [Fact]
         public async Task ReturnGenericAsInterface()
         {
-            var script = CSharpScript.Create<IEnumerable<int>>(@"
+            var script = CSharpScript.Create<IEnumerable<int>>(
+                @"
 if (false)
 {
     return new System.Collections.Generic.List<int> { 1, 2, 3 };
-}");
+}"
+            );
             var result = await script.EvaluateAsync();
             Assert.Null(result);
 
-            script = CSharpScript.Create<IEnumerable<int>>(@"
+            script = CSharpScript.Create<IEnumerable<int>>(
+                @"
 if (true)
 {
     return new System.Collections.Generic.List<int> { 1, 2, 3 };
-}");
+}"
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(new List<int> { 1, 2, 3 }, result);
         }
@@ -622,19 +720,23 @@ if (true)
         [Fact]
         public async Task ReturnNullable()
         {
-            var script = CSharpScript.Create<int?>(@"
+            var script = CSharpScript.Create<int?>(
+                @"
 if (false)
 {
     return 42;
-}");
+}"
+            );
             var result = await script.EvaluateAsync();
             Assert.False(result.HasValue);
 
-            script = CSharpScript.Create<int?>(@"
+            script = CSharpScript.Create<int?>(
+                @"
 if (true)
 {
     return 42;
-}");
+}"
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(42, result);
         }
@@ -643,16 +745,20 @@ if (true)
         public async Task ReturnInLoadedFile()
         {
             var resolver = TestSourceReferenceResolver.Create(
-                KeyValuePairUtil.Create("a.csx", "return 42;"));
+                KeyValuePairUtil.Create("a.csx", "return 42;")
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
 
             var script = CSharpScript.Create("#load \"a.csx\"", options);
             var result = await script.EvaluateAsync();
             Assert.Equal(42, result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
--1", options);
+-1",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(42, result);
         }
@@ -661,21 +767,28 @@ if (true)
         public async Task ReturnInLoadedFileTrailingExpression()
         {
             var resolver = TestSourceReferenceResolver.Create(
-                KeyValuePairUtil.Create("a.csx", @"
+                KeyValuePairUtil.Create(
+                    "a.csx",
+                    @"
 if (false)
 {
     return 42;
 }
-1"));
+1"
+                )
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
 
             var script = CSharpScript.Create("#load \"a.csx\"", options);
             var result = await script.EvaluateAsync();
             Assert.Null(result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
-2", options);
+2",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(2, result);
         }
@@ -684,21 +797,28 @@ if (false)
         public void ReturnInLoadedFileTrailingVoidExpression()
         {
             var resolver = TestSourceReferenceResolver.Create(
-                KeyValuePairUtil.Create("a.csx", @"
+                KeyValuePairUtil.Create(
+                    "a.csx",
+                    @"
 if (false)
 {
     return 1;
 }
-System.Console.WriteLine(42)"));
+System.Console.WriteLine(42)"
+                )
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
 
             var script = CSharpScript.Create("#load \"a.csx\"", options);
             var result = ScriptingTestHelpers.EvaluateScriptWithOutput(script, "42");
             Assert.Null(result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
-2", options);
+2",
+                options
+            );
             result = ScriptingTestHelpers.EvaluateScriptWithOutput(script, "42");
             Assert.Equal(2, result);
         }
@@ -708,9 +828,13 @@ System.Console.WriteLine(42)"));
         {
             var resolver = TestSourceReferenceResolver.Create(
                 KeyValuePairUtil.Create("a.csx", "1"),
-                KeyValuePairUtil.Create("b.csx", @"
+                KeyValuePairUtil.Create(
+                    "b.csx",
+                    @"
 #load ""a.csx""
-2"));
+2"
+                )
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
             var script = CSharpScript.Create("#load \"b.csx\"", options);
             var result = await script.EvaluateAsync();
@@ -718,22 +842,30 @@ System.Console.WriteLine(42)"));
 
             resolver = TestSourceReferenceResolver.Create(
                 KeyValuePairUtil.Create("a.csx", "1"),
-                KeyValuePairUtil.Create("b.csx", "2"));
+                KeyValuePairUtil.Create("b.csx", "2")
+            );
             options = ScriptOptions.Default.WithSourceResolver(resolver);
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
-#load ""b.csx""", options);
+#load ""b.csx""",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Null(result);
 
             resolver = TestSourceReferenceResolver.Create(
                 KeyValuePairUtil.Create("a.csx", "1"),
-                KeyValuePairUtil.Create("b.csx", "2"));
+                KeyValuePairUtil.Create("b.csx", "2")
+            );
             options = ScriptOptions.Default.WithSourceResolver(resolver);
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
 #load ""b.csx""
-3", options);
+3",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(3, result);
         }
@@ -743,9 +875,13 @@ System.Console.WriteLine(42)"));
         {
             var resolver = TestSourceReferenceResolver.Create(
                 KeyValuePairUtil.Create("a.csx", "return 1;"),
-                KeyValuePairUtil.Create("b.csx", @"
+                KeyValuePairUtil.Create(
+                    "b.csx",
+                    @"
 #load ""a.csx""
-2"));
+2"
+                )
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
             var script = CSharpScript.Create("#load \"b.csx\"", options);
             var result = await script.EvaluateAsync();
@@ -753,22 +889,30 @@ System.Console.WriteLine(42)"));
 
             resolver = TestSourceReferenceResolver.Create(
                 KeyValuePairUtil.Create("a.csx", "return 1;"),
-                KeyValuePairUtil.Create("b.csx", "2"));
+                KeyValuePairUtil.Create("b.csx", "2")
+            );
             options = ScriptOptions.Default.WithSourceResolver(resolver);
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
-#load ""b.csx""", options);
+#load ""b.csx""",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(1, result);
 
             resolver = TestSourceReferenceResolver.Create(
                 KeyValuePairUtil.Create("a.csx", "return 1;"),
-                KeyValuePairUtil.Create("b.csx", "2"));
+                KeyValuePairUtil.Create("b.csx", "2")
+            );
             options = ScriptOptions.Default.WithSourceResolver(resolver);
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
 #load ""b.csx""
-return 3;", options);
+return 3;",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(1, result);
         }
@@ -777,29 +921,39 @@ return 3;", options);
         public async Task LoadedFileWithReturnAndGoto()
         {
             var resolver = TestSourceReferenceResolver.Create(
-                KeyValuePairUtil.Create("a.csx", @"
+                KeyValuePairUtil.Create(
+                    "a.csx",
+                    @"
 goto EOF;
 NEXT:
 return 1;
 EOF:;
-2"));
+2"
+                )
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
 
-            var script = CSharpScript.Create(@"
+            var script = CSharpScript.Create(
+                @"
 #load ""a.csx""
 goto NEXT;
 return 3;
-NEXT:;", options);
+NEXT:;",
+                options
+            );
             var result = await script.EvaluateAsync();
             Assert.Null(result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 #load ""a.csx""
 L1: goto EOF;
 L2: return 3;
 EOF:
 EOF2: ;
-4", options);
+4",
+                options
+            );
             result = await script.EvaluateAsync();
             Assert.Equal(4, result);
         }
@@ -811,13 +965,15 @@ EOF2: ;
             var result = await script.EvaluateAsync();
             Assert.Null(result);
 
-            script = CSharpScript.Create(@"
+            script = CSharpScript.Create(
+                @"
 var b = true;
 if (b)
 {
     return;
 }
-b");
+b"
+            );
             result = await script.EvaluateAsync();
             Assert.Null(result);
         }
@@ -826,14 +982,21 @@ b");
         public async Task LoadedFileWithVoidReturn()
         {
             var resolver = TestSourceReferenceResolver.Create(
-                KeyValuePairUtil.Create("a.csx", @"
+                KeyValuePairUtil.Create(
+                    "a.csx",
+                    @"
 var i = 42;
 return;
-i = -1;"));
+i = -1;"
+                )
+            );
             var options = ScriptOptions.Default.WithSourceResolver(resolver);
-            var script = CSharpScript.Create<int>(@"
+            var script = CSharpScript.Create<int>(
+                @"
 #load ""a.csx""
-i", options);
+i",
+                options
+            );
             var result = await script.EvaluateAsync();
             Assert.Equal(0, result);
         }
@@ -844,96 +1007,192 @@ i", options);
             var code = "throw new System.Exception();";
             try
             {
-                var opts = ScriptOptions.Default.WithEmitDebugInformation(true).WithFilePath("debug.csx").WithFileEncoding(null);
+                var opts = ScriptOptions
+                    .Default.WithEmitDebugInformation(true)
+                    .WithFilePath("debug.csx")
+                    .WithFileEncoding(null);
                 var script = await CSharpScript.RunAsync(code, opts);
             }
             catch (CompilationErrorException ex)
             {
                 //  CS8055: Cannot emit debug information for a source text without encoding.
-                ex.Diagnostics.Verify(Diagnostic(ErrorCode.ERR_EncodinglessSyntaxTree, code).WithLocation(1, 1));
+                ex.Diagnostics.Verify(
+                    Diagnostic(ErrorCode.ERR_EncodinglessSyntaxTree, code).WithLocation(1, 1)
+                );
             }
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromString_CodeFromFile_WithEmitDebugInformation_WithFileEncoding_ResultInPdbEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(true).WithFilePath("debug.csx").WithFileEncoding(Encoding.UTF8);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts), line: 1, column: 1, filename: "debug.csx");
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(true)
+                .WithFilePath("debug.csx")
+                .WithFileEncoding(Encoding.UTF8);
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts),
+                line: 1,
+                column: 1,
+                filename: "debug.csx"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         public Task Pdb_CreateFromString_CodeFromFile_WithoutEmitDebugInformation_WithoutFileEncoding_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFilePath(null).WithFileEncoding(null);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts));
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(false)
+                .WithFilePath(null)
+                .WithFileEncoding(null);
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         public Task Pdb_CreateFromString_CodeFromFile_WithoutEmitDebugInformation_WithFileEncoding_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFilePath("debug.csx").WithFileEncoding(Encoding.UTF8);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts));
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(false)
+                .WithFilePath("debug.csx")
+                .WithFileEncoding(Encoding.UTF8);
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromStream_CodeFromFile_WithEmitDebugInformation_ResultInPdbEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(true).WithFilePath("debug.csx");
-            return VerifyStackTraceAsync(() => CSharpScript.Create(new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")), opts), line: 1, column: 1, filename: "debug.csx");
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(true)
+                .WithFilePath("debug.csx");
+            return VerifyStackTraceAsync(
+                () =>
+                    CSharpScript.Create(
+                        new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
+                        opts
+                    ),
+                line: 1,
+                column: 1,
+                filename: "debug.csx"
+            );
         }
 
         [Fact]
         public Task Pdb_CreateFromStream_CodeFromFile_WithoutEmitDebugInformation_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFilePath("debug.csx");
-            return VerifyStackTraceAsync(() => CSharpScript.Create(new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")), opts));
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(false)
+                .WithFilePath("debug.csx");
+            return VerifyStackTraceAsync(
+                () =>
+                    CSharpScript.Create(
+                        new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
+                        opts
+                    )
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromString_InlineCode_WithEmitDebugInformation_WithoutFileEncoding_ResultInPdbEmitted()
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(true).WithFileEncoding(null);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts), line: 1, column: 1, filename: "");
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts),
+                line: 1,
+                column: 1,
+                filename: ""
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromString_InlineCode_WithEmitDebugInformation_WithFileEncoding_ResultInPdbEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(true).WithFileEncoding(Encoding.UTF8);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts), line: 1, column: 1, filename: "");
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(true)
+                .WithFileEncoding(Encoding.UTF8);
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts),
+                line: 1,
+                column: 1,
+                filename: ""
+            );
         }
 
         [Fact]
         public Task Pdb_CreateFromString_InlineCode_WithoutEmitDebugInformation_WithoutFileEncoding_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFileEncoding(null);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts));
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
         [Fact]
         public Task Pdb_CreateFromString_InlineCode_WithoutEmitDebugInformation_WithFileEncoding_ResultInPdbNotEmitted()
         {
-            var opts = ScriptOptions.Default.WithEmitDebugInformation(false).WithFileEncoding(Encoding.UTF8);
-            return VerifyStackTraceAsync(() => CSharpScript.Create("throw new System.Exception();", opts));
+            var opts = ScriptOptions
+                .Default.WithEmitDebugInformation(false)
+                .WithFileEncoding(Encoding.UTF8);
+            return VerifyStackTraceAsync(
+                () => CSharpScript.Create("throw new System.Exception();", opts)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30169")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30169"
+        )]
         [WorkItem("https://github.com/dotnet/roslyn/issues/19027")]
         public Task Pdb_CreateFromStream_InlineCode_WithEmitDebugInformation_ResultInPdbEmitted()
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(true);
-            return VerifyStackTraceAsync(() => CSharpScript.Create(new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")), opts), line: 1, column: 1, filename: "");
+            return VerifyStackTraceAsync(
+                () =>
+                    CSharpScript.Create(
+                        new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
+                        opts
+                    ),
+                line: 1,
+                column: 1,
+                filename: ""
+            );
         }
 
         [Fact]
         public Task Pdb_CreateFromStream_InlineCode_WithoutEmitDebugInformation_ResultInPdbNotEmitted()
         {
             var opts = ScriptOptions.Default.WithEmitDebugInformation(false);
-            return VerifyStackTraceAsync(() => CSharpScript.Create(new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")), opts));
+            return VerifyStackTraceAsync(
+                () =>
+                    CSharpScript.Create(
+                        new MemoryStream(Encoding.UTF8.GetBytes("throw new System.Exception();")),
+                        opts
+                    )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12348")]
@@ -948,21 +1207,27 @@ i", options);
         [Fact]
         public void CreateScriptWithFeatureThatIsNotSupportedInTheSelectedLanguageVersion()
         {
-            var script = CSharpScript.Create(@"string x = default;", ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7));
+            var script = CSharpScript.Create(
+                @"string x = default;",
+                ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7)
+            );
             var compilation = script.GetCompilation();
 
             compilation.VerifyDiagnostics(
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "default").
-                    WithArguments("default literal", "7.1").
-                    WithLocation(1, 12)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "default")
+                    .WithArguments("default literal", "7.1")
+                    .WithLocation(1, 12)
             );
         }
 
         [Fact]
         public void CreateScriptWithNullableContextWithCSharp8()
         {
-            var script = CSharpScript.Create(@"#nullable enable
-                string x = null;", ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+            var script = CSharpScript.Create(
+                @"#nullable enable
+                string x = null;",
+                ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+            );
             var compilation = script.GetCompilation();
 
             compilation.VerifyDiagnostics(
@@ -973,7 +1238,8 @@ i", options);
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/49529")]
         public async Task SwitchPatternWithVar_WhenValidCode_ShouldReturnValidResult()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 var data = ""data"";
 var reply = data switch {
@@ -984,7 +1250,10 @@ var reply = data switch {
 
 return reply;
 ";
-            var script = CSharpScript.Create(code, ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+            var script = CSharpScript.Create(
+                code,
+                ScriptOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+            );
             var compilation = script.GetCompilation();
             compilation.VerifyDiagnostics();
 
@@ -1000,16 +1269,22 @@ return reply;
 
             try
             {
-                await CSharpScript.RunAsync(@"var data = notExistentVariable switch { _ => null };", globals: new ScriptTests());
+                await CSharpScript.RunAsync(
+                    @"var data = notExistentVariable switch { _ => null };",
+                    globals: new ScriptTests()
+                );
             }
             catch (CompilationErrorException ex)
             {
                 exceptionThrown = true;
-                // Verify that it produces a single NameNotInContext error. 
+                // Verify that it produces a single NameNotInContext error.
                 ex.Diagnostics.Verify(
                     // (1,12): error CS0103: The name 'notExistentVariable' does not exist in the current context
                     // var data = notExistentVariable switch { _ => null };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "notExistentVariable").WithArguments("notExistentVariable").WithLocation(1, 12));
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "notExistentVariable")
+                        .WithArguments("notExistentVariable")
+                        .WithLocation(1, 12)
+                );
             }
 
             Assert.True(exceptionThrown);
@@ -1022,19 +1297,27 @@ return reply;
 
             try
             {
-                await CSharpScript.RunAsync(@"var data = ""data"" switch { < 5 => null };", globals: new ScriptTests());
+                await CSharpScript.RunAsync(
+                    @"var data = ""data"" switch { < 5 => null };",
+                    globals: new ScriptTests()
+                );
             }
             catch (CompilationErrorException ex)
             {
                 exceptionThrown = true;
-                // Verify that it produces a single NameNotInContext error. 
+                // Verify that it produces a single NameNotInContext error.
                 ex.Diagnostics.Verify(
                     // (1,28): error CS8781: Relational patterns may not be used for a value of type 'string'.
                     // var data = "data" switch { < 5 => null };
-                    Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "< 5").WithArguments("string").WithLocation(1, 28),
+                    Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "< 5")
+                        .WithArguments("string")
+                        .WithLocation(1, 28),
                     // (1,30): error CS0029: Cannot implicitly convert type 'int' to 'string'
                     // var data = "data" switch { < 5 => null };
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "5").WithArguments("int", "string").WithLocation(1, 30));
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "5")
+                        .WithArguments("int", "string")
+                        .WithLocation(1, 30)
+                );
             }
 
             Assert.True(exceptionThrown);
@@ -1047,17 +1330,22 @@ return reply;
 
             try
             {
-                await CSharpScript.RunAsync(@"var data = ""test"" switch { _ => armError };", globals: new ScriptTests());
+                await CSharpScript.RunAsync(
+                    @"var data = ""test"" switch { _ => armError };",
+                    globals: new ScriptTests()
+                );
             }
             catch (CompilationErrorException ex)
             {
                 exceptionThrown = true;
-                // Verify that it produces a single NameNotInContext error. 
+                // Verify that it produces a single NameNotInContext error.
                 ex.Diagnostics.Verify(
                     // (1,33): error CS0103: The name 'armError' does not exist in the current context
                     // var data = "test" switch { _ => armError };
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "armError").WithArguments("armError")
-                        .WithLocation(1, 33));
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "armError")
+                        .WithArguments("armError")
+                        .WithLocation(1, 33)
+                );
             }
 
             Assert.True(exceptionThrown);
@@ -1066,8 +1354,11 @@ return reply;
         private class StreamOffsetResolver : SourceReferenceResolver
         {
             public override bool Equals(object other) => ReferenceEquals(this, other);
+
             public override int GetHashCode() => 42;
+
             public override string ResolveReference(string path, string baseFilePath) => path;
+
             public override string NormalizePath(string path, string baseFilePath) => path;
 
             public override Stream OpenRead(string resolvedPath)
@@ -1084,15 +1375,19 @@ return reply;
                     padding,
                     text.Length,
                     writable: false,
-                    publiclyVisible: true);
+                    publiclyVisible: true
+                );
 
                 // sanity check that reading entire stream gives us back our text.
-                using (var streamReader = new StreamReader(
-                    stream,
-                    System.Text.Encoding.ASCII,
-                    detectEncodingFromByteOrderMarks: false,
-                    bufferSize: bytes.Length,
-                    leaveOpen: true))
+                using (
+                    var streamReader = new StreamReader(
+                        stream,
+                        System.Text.Encoding.ASCII,
+                        detectEncodingFromByteOrderMarks: false,
+                        bufferSize: bytes.Length,
+                        leaveOpen: true
+                    )
+                )
                 {
                     var textFromStream = streamReader.ReadToEnd();
                     Assert.Equal(textFromStream, text);
@@ -1103,7 +1398,12 @@ return reply;
             }
         }
 
-        private async Task VerifyStackTraceAsync(Func<Script<object>> scriptProvider, int line = 0, int column = 0, string filename = null)
+        private async Task VerifyStackTraceAsync(
+            Func<Script<object>> scriptProvider,
+            int line = 0,
+            int column = 0,
+            string filename = null
+        )
         {
             try
             {

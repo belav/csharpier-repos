@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.PeerResolvers
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     [MessageContract(IsWrapped = false)]
     public class RegisterInfo
@@ -24,6 +24,7 @@ namespace System.ServiceModel.PeerResolvers
 
             //            public TimeSpan RegistrationLifeTime;
             public RegisterInfoDC() { }
+
             public RegisterInfoDC(Guid client, string meshId, PeerNodeAddress address)
             {
                 this.ClientId = client;
@@ -36,7 +37,11 @@ namespace System.ServiceModel.PeerResolvers
         {
             body = new RegisterInfoDC(client, meshId, address);
         }
-        public RegisterInfo() { body = new RegisterInfoDC(); }
+
+        public RegisterInfo()
+        {
+            body = new RegisterInfoDC();
+        }
 
         [MessageBodyMember(Name = "Register", Namespace = PeerStrings.Namespace)]
         RegisterInfoDC body;
@@ -62,4 +67,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

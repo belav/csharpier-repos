@@ -10,7 +10,10 @@ class Program
     static int Main(string[] args)
     {
         MyClass myClass = new MyClass() { Name = "trimmed" };
-        MyClassWithVisualizerString myClassWithString = new MyClassWithVisualizerString() { Name = "trimmed" };
+        MyClassWithVisualizerString myClassWithString = new MyClassWithVisualizerString()
+        {
+            Name = "trimmed",
+        };
 
         Type[] allTypes = typeof(MyClass).Assembly.GetTypes();
         bool foundDebuggerVisualizer = false;
@@ -22,50 +25,68 @@ class Program
         for (int i = 0; i < allTypes.Length; i++)
         {
             Type currentType = allTypes[i];
-            if (currentType.FullName == "Program+MyClass+DebuggerVisualizer" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            if (
+                currentType.FullName == "Program+MyClass+DebuggerVisualizer"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundDebuggerVisualizer = true;
             }
-            else if (currentType.FullName == "Program+MyClass+DebuggerVisualizer2" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            else if (
+                currentType.FullName == "Program+MyClass+DebuggerVisualizer2"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundDebuggerVisualizer2 = true;
             }
-            else if (currentType.FullName == "Program+MyClass+DebuggerVisualizerObjectSource" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            else if (
+                currentType.FullName == "Program+MyClass+DebuggerVisualizerObjectSource"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundDebuggerVisualizerObjectSource = true;
             }
-            else if (currentType.FullName == "Program+MyClassWithVisualizerStringVisualizer" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            else if (
+                currentType.FullName == "Program+MyClassWithVisualizerStringVisualizer"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundStringDebuggerVisualizer = true;
             }
-            else if (currentType.FullName == "Program+MyClassWithVisualizerStringVisualizer2" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            else if (
+                currentType.FullName == "Program+MyClassWithVisualizerStringVisualizer2"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundStringDebuggerVisualizer2 = true;
             }
-            else if (currentType.FullName == "Program+MyClassWithVisualizerStringVisualizerObjectSource" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            else if (
+                currentType.FullName == "Program+MyClassWithVisualizerStringVisualizerObjectSource"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundStringDebuggerVisualizerObjectSource = true;
             }
         }
 
-        if (!foundDebuggerVisualizer) return -1;
-        if (!foundDebuggerVisualizer2) return -2;
-        if (!foundDebuggerVisualizerObjectSource) return -3;
-        if (!foundStringDebuggerVisualizer) return -4;
-        if (!foundStringDebuggerVisualizer2) return -5;
-        if (!foundStringDebuggerVisualizerObjectSource) return -6;
+        if (!foundDebuggerVisualizer)
+            return -1;
+        if (!foundDebuggerVisualizer2)
+            return -2;
+        if (!foundDebuggerVisualizerObjectSource)
+            return -3;
+        if (!foundStringDebuggerVisualizer)
+            return -4;
+        if (!foundStringDebuggerVisualizer2)
+            return -5;
+        if (!foundStringDebuggerVisualizerObjectSource)
+            return -6;
 
         return 100;
     }
@@ -114,7 +135,10 @@ class Program
     }
 
     [DebuggerVisualizer("Program+MyClassWithVisualizerStringVisualizer")]
-    [DebuggerVisualizer("Program+MyClassWithVisualizerStringVisualizer2", "Program+MyClassWithVisualizerStringVisualizerObjectSource")]
+    [DebuggerVisualizer(
+        "Program+MyClassWithVisualizerStringVisualizer2",
+        "Program+MyClassWithVisualizerStringVisualizerObjectSource"
+    )]
     public class MyClassWithVisualizerString
     {
         public string Name { get; set; }
@@ -148,7 +172,9 @@ class Program
     {
         private MyClassWithVisualizerString _instance;
 
-        public MyClassWithVisualizerStringVisualizerObjectSource(MyClassWithVisualizerString instance)
+        public MyClassWithVisualizerStringVisualizerObjectSource(
+            MyClassWithVisualizerString instance
+        )
         {
             _instance = instance;
         }

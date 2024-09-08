@@ -18,14 +18,8 @@ namespace System.Linq.Expressions.Interpreter
 
         object? IRuntimeVariables.this[int index]
         {
-            get
-            {
-                return _boxes[index].Value;
-            }
-            set
-            {
-                _boxes[index].Value = value;
-            }
+            get { return _boxes[index].Value; }
+            set { _boxes[index].Value = value; }
         }
 
         internal static IRuntimeVariables Create(IStrongBox[] boxes) => new RuntimeVariables(boxes);

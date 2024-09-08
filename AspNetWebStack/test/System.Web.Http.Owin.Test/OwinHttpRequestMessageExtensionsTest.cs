@@ -14,7 +14,13 @@ namespace System.Web.Http.Owin
         public void GetOwinContext_Throws_WhenRequestIsNull()
         {
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { OwinHttpRequestMessageExtensions.GetOwinContext(null); }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    OwinHttpRequestMessageExtensions.GetOwinContext(null);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -43,8 +49,13 @@ namespace System.Web.Http.Owin
             var context = new OwinContext();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { OwinHttpRequestMessageExtensions.SetOwinContext(null, context); },
-                "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    OwinHttpRequestMessageExtensions.SetOwinContext(null, context);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -91,15 +102,26 @@ namespace System.Web.Http.Owin
             var request = new HttpRequestMessage();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { OwinHttpRequestMessageExtensions.SetOwinContext(request, null); },
-                "context");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    OwinHttpRequestMessageExtensions.SetOwinContext(request, null);
+                },
+                "context"
+            );
         }
 
         [Fact]
         public void GetOwinEnvironment_Throws_WhenRequestIsNull()
         {
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { OwinHttpRequestMessageExtensions.GetOwinEnvironment(null); }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    OwinHttpRequestMessageExtensions.GetOwinEnvironment(null);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -158,7 +180,12 @@ namespace System.Web.Http.Owin
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => { OwinHttpRequestMessageExtensions.SetOwinEnvironment(null, environment); }, "request");
+                () =>
+                {
+                    OwinHttpRequestMessageExtensions.SetOwinEnvironment(null, environment);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -168,8 +195,13 @@ namespace System.Web.Http.Owin
             var request = new HttpRequestMessage();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { OwinHttpRequestMessageExtensions.SetOwinEnvironment(request, null); },
-                "environment");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    OwinHttpRequestMessageExtensions.SetOwinEnvironment(request, null);
+                },
+                "environment"
+            );
         }
     }
 }

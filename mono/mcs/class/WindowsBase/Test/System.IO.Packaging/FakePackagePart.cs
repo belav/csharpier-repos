@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,46 +24,51 @@
 //
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Packaging;
-using System.Collections.Generic;
 
-namespace MonoTests.System.IO.Packaging {
-    
-    class FakePackagePart : PackagePart {
-
+namespace MonoTests.System.IO.Packaging
+{
+    class FakePackagePart : PackagePart
+    {
         public List<FileAccess> Accesses { get; private set; }
         public List<FileMode> Modes { get; private set; }
 
-        public FakePackagePart (Package package, Uri partUri)
-            : base (package, partUri)
+        public FakePackagePart(Package package, Uri partUri)
+            : base(package, partUri)
         {
-            Init ();
+            Init();
         }
 
-        public FakePackagePart (Package package, Uri partUri, string contentType)
+        public FakePackagePart(Package package, Uri partUri, string contentType)
             : base(package, partUri, contentType)
         {
-            Init ();
+            Init();
         }
 
-        public FakePackagePart (Package package, Uri partUri, string contentType, CompressionOption compressionOption)
-            : base (package, partUri, contentType, compressionOption)
+        public FakePackagePart(
+            Package package,
+            Uri partUri,
+            string contentType,
+            CompressionOption compressionOption
+        )
+            : base(package, partUri, contentType, compressionOption)
         {
-            Init ();
+            Init();
         }
 
-        private void Init ()
+        private void Init()
         {
-            Accesses = new List<FileAccess> ();
-            Modes = new List<FileMode> ();
+            Accesses = new List<FileAccess>();
+            Modes = new List<FileMode>();
         }
 
-        protected override Stream GetStreamCore (FileMode mode, FileAccess access)
+        protected override Stream GetStreamCore(FileMode mode, FileAccess access)
         {
-            Accesses.Add (access);
-            Modes.Add (mode);
-            return new MemoryStream ();
+            Accesses.Add(access);
+            Modes.Add(mode);
+            return new MemoryStream();
         }
     }
 }

@@ -17,13 +17,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public List<CompletionData> CompletionDataList { get; set; } = new List<CompletionData>();
         public int ConnectionReceivedCount { get; set; }
 
-        public void ConnectionListening()
-        {
-        }
+        public void ConnectionListening() { }
 
         public void ConnectionReceived() => ConnectionReceivedCount++;
 
-        public void ConnectionCompleted(CompletionData completionData) => CompletionDataList.Add(completionData);
+        public void ConnectionCompleted(CompletionData completionData) =>
+            CompletionDataList.Add(completionData);
 
         public void UpdateKeepAlive(TimeSpan keepAlive) => KeepAlive = keepAlive;
 

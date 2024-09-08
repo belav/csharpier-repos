@@ -13,26 +13,33 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Security.AccessControl
 {
-	[TestFixture]
-	public class CryptoKeyAccessRuleTest
-	{
-		[Test]
-		public void StringOverloadIsNTAccount ()
-		{
-			CryptoKeyAccessRule rule;
-			rule = new CryptoKeyAccessRule (@"BUILTIN\Users", CryptoKeyRights.FullControl, AccessControlType.Allow);
-			Assert.AreNotEqual (new SecurityIdentifier ("BU"), rule.IdentityReference);
-			Assert.AreEqual (new NTAccount (@"BUILTIN\Users"), rule.IdentityReference);
-		}
+    [TestFixture]
+    public class CryptoKeyAccessRuleTest
+    {
+        [Test]
+        public void StringOverloadIsNTAccount()
+        {
+            CryptoKeyAccessRule rule;
+            rule = new CryptoKeyAccessRule(
+                @"BUILTIN\Users",
+                CryptoKeyRights.FullControl,
+                AccessControlType.Allow
+            );
+            Assert.AreNotEqual(new SecurityIdentifier("BU"), rule.IdentityReference);
+            Assert.AreEqual(new NTAccount(@"BUILTIN\Users"), rule.IdentityReference);
+        }
 
-		[Test]
-		public void StringOverloadIsNotSID ()
-		{
-			CryptoKeyAccessRule rule;
-			rule = new CryptoKeyAccessRule (@"S-1-5-32-545", CryptoKeyRights.FullControl, AccessControlType.Allow);
-			Assert.AreNotEqual (new SecurityIdentifier ("S-1-5-32-545"), rule.IdentityReference);
-			Assert.AreEqual (new NTAccount (@"S-1-5-32-545"), rule.IdentityReference);
-		}
-	}
+        [Test]
+        public void StringOverloadIsNotSID()
+        {
+            CryptoKeyAccessRule rule;
+            rule = new CryptoKeyAccessRule(
+                @"S-1-5-32-545",
+                CryptoKeyRights.FullControl,
+                AccessControlType.Allow
+            );
+            Assert.AreNotEqual(new SecurityIdentifier("S-1-5-32-545"), rule.IdentityReference);
+            Assert.AreEqual(new NTAccount(@"S-1-5-32-545"), rule.IdentityReference);
+        }
+    }
 }
-

@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,6 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Policy
 {
-
     /// <summary>
     ///     Factory class which can create evidence on demand for an assembly
     /// </summary>
@@ -30,7 +29,10 @@ namespace System.Security.Policy
         /// <summary>
         ///     Create a factory which can generate evidence for the specified assembly
         /// </summary>
-        private AssemblyEvidenceFactory(RuntimeAssembly targetAssembly, PEFileEvidenceFactory peFileFactory)
+        private AssemblyEvidenceFactory(
+            RuntimeAssembly targetAssembly,
+            PEFileEvidenceFactory peFileFactory
+        )
         {
             Contract.Assert(targetAssembly != null);
             Contract.Assert(peFileFactory != null);
@@ -134,16 +136,24 @@ namespace System.Security.Policy
             PermissionSet optionalPermissions = null;
             PermissionSet refusedPermissions = null;
 
-            GetAssemblyPermissionRequests(m_targetAssembly.GetNativeHandle(),
-                                          JitHelpers.GetObjectHandleOnStack(ref minimumPermissions),
-                                          JitHelpers.GetObjectHandleOnStack(ref optionalPermissions),
-                                          JitHelpers.GetObjectHandleOnStack(ref refusedPermissions));
+            GetAssemblyPermissionRequests(
+                m_targetAssembly.GetNativeHandle(),
+                JitHelpers.GetObjectHandleOnStack(ref minimumPermissions),
+                JitHelpers.GetObjectHandleOnStack(ref optionalPermissions),
+                JitHelpers.GetObjectHandleOnStack(ref refusedPermissions)
+            );
 
-            if (minimumPermissions != null || optionalPermissions != null || refusedPermissions != null)
+            if (
+                minimumPermissions != null
+                || optionalPermissions != null
+                || refusedPermissions != null
+            )
             {
-                return new PermissionRequestEvidence(minimumPermissions,
-                                                     optionalPermissions,
-                                                     refusedPermissions);
+                return new PermissionRequestEvidence(
+                    minimumPermissions,
+                    optionalPermissions,
+                    refusedPermissions
+                );
             }
 
             return null;
@@ -163,32 +173,38 @@ namespace System.Security.Policy
             ushort build = 0;
             ushort revision = 0;
 
-            GetStrongNameInformation(m_targetAssembly.GetNativeHandle(),
-                                     JitHelpers.GetObjectHandleOnStack(ref publicKeyBlob),
-                                     JitHelpers.GetStringHandleOnStack(ref simpleName),
-                                     out majorVersion,
-                                     out minorVersion,
-                                     out build,
-                                     out revision);
+            GetStrongNameInformation(
+                m_targetAssembly.GetNativeHandle(),
+                JitHelpers.GetObjectHandleOnStack(ref publicKeyBlob),
+                JitHelpers.GetStringHandleOnStack(ref simpleName),
+                out majorVersion,
+                out minorVersion,
+                out build,
+                out revision
+            );
 
             if (publicKeyBlob == null || publicKeyBlob.Length == 0)
             {
                 return null;
             }
 
-            return new StrongName(new StrongNamePublicKeyBlob(publicKeyBlob),
-                                  simpleName,
-                                  new Version(majorVersion, minorVersion, build, revision),
-                                  m_targetAssembly);
+            return new StrongName(
+                new StrongNamePublicKeyBlob(publicKeyBlob),
+                simpleName,
+                new Version(majorVersion, minorVersion, build, revision),
+                m_targetAssembly
+            );
         }
 
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetAssemblyPermissionRequests(RuntimeAssembly assembly,
-                                                                 ObjectHandleOnStack retMinimumPermissions,
-                                                                 ObjectHandleOnStack retOptionalPermissions,
-                                                                 ObjectHandleOnStack retRefusedPermissions);
+        private static extern void GetAssemblyPermissionRequests(
+            RuntimeAssembly assembly,
+            ObjectHandleOnStack retMinimumPermissions,
+            ObjectHandleOnStack retOptionalPermissions,
+            ObjectHandleOnStack retRefusedPermissions
+        );
 
         /// <summary>
         ///     Get any evidence that was serialized into the assembly
@@ -202,38 +218,60 @@ namespace System.Security.Policy
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetStrongNameInformation(RuntimeAssembly assembly,
-                                                            ObjectHandleOnStack retPublicKeyBlob,
-                                                            StringHandleOnStack retSimpleName,
-                                                            [Out] out ushort majorVersion,
-                                                            [Out] out ushort minorVersion,
-                                                            [Out] out ushort build,
-                                                            [Out] out ushort revision);
+        private static extern void GetStrongNameInformation(
+            RuntimeAssembly assembly,
+            ObjectHandleOnStack retPublicKeyBlob,
+            StringHandleOnStack retSimpleName,
+            [Out] out ushort majorVersion,
+            [Out] out ushort minorVersion,
+            [Out] out ushort build,
+            [Out] out ushort revision
+        );
 
         /// <summary>
         ///     Retarget an evidence object from generating evidence for a PEFile to generating evidence for
         ///     the file's assembly.
         /// </summary>
         [SecurityCritical]
-        private static Evidence UpgradeSecurityIdentity(Evidence peFileEvidence, RuntimeAssembly targetAssembly)
+        private static Evidence UpgradeSecurityIdentity(
+            Evidence peFileEvidence,
+            RuntimeAssembly targetAssembly
+        )
         {
             Contract.Assert(peFileEvidence != null);
             Contract.Assert(targetAssembly != null);
-            Contract.Assert(peFileEvidence.Target is PEFileEvidenceFactory, "Expected upgrade path is from PEFile to Assembly");
+            Contract.Assert(
+                peFileEvidence.Target is PEFileEvidenceFactory,
+                "Expected upgrade path is from PEFile to Assembly"
+            );
 
-            peFileEvidence.Target = new AssemblyEvidenceFactory(targetAssembly,
-                                                                peFileEvidence.Target as PEFileEvidenceFactory);
+            peFileEvidence.Target = new AssemblyEvidenceFactory(
+                targetAssembly,
+                peFileEvidence.Target as PEFileEvidenceFactory
+            );
 
             // Whidbey hosts would provide evidence for assemblies up front rather than on demand.  If there
             // is a HostSecurityManager which does want to provide evidence, then we should provide it the
             // opprotunity to do the same for compatibility.
             HostSecurityManager securityManager = AppDomain.CurrentDomain.HostSecurityManager;
-            if ((securityManager.Flags & HostSecurityManagerOptions.HostAssemblyEvidence) == HostSecurityManagerOptions.HostAssemblyEvidence)
+            if (
+                (securityManager.Flags & HostSecurityManagerOptions.HostAssemblyEvidence)
+                == HostSecurityManagerOptions.HostAssemblyEvidence
+            )
             {
-                peFileEvidence = securityManager.ProvideAssemblyEvidence(targetAssembly, peFileEvidence);
+                peFileEvidence = securityManager.ProvideAssemblyEvidence(
+                    targetAssembly,
+                    peFileEvidence
+                );
                 if (peFileEvidence == null)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("Policy_NullHostEvidence", securityManager.GetType().FullName, targetAssembly.FullName));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "Policy_NullHostEvidence",
+                            securityManager.GetType().FullName,
+                            targetAssembly.FullName
+                        )
+                    );
                 }
             }
 

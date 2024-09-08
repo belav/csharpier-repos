@@ -16,9 +16,7 @@ namespace System.Runtime.InteropServices.Marshalling
     public class IUnknownDerivedAttribute<T, TImpl> : Attribute, IIUnknownDerivedDetails
         where T : IIUnknownInterfaceType
     {
-        public IUnknownDerivedAttribute()
-        {
-        }
+        public IUnknownDerivedAttribute() { }
 
         /// <inheritdoc />
         public Guid Iid => T.Iid;

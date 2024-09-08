@@ -48,10 +48,7 @@ internal abstract partial class TransportConnection : ConnectionContext
             // Lazily allocate connection metadata
             return _items ?? (_items = new ConnectionItems());
         }
-        set
-        {
-            _items = value;
-        }
+        set { _items = value; }
     }
 
     internal void ResetItems()

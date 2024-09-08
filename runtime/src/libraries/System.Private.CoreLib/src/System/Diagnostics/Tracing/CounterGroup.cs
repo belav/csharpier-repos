@@ -37,7 +37,7 @@ namespace System.Diagnostics.Tracing
                 _counters.Remove(eventCounter);
         }
 
-#region EventSource Command Processing
+        #region EventSource Command Processing
 
         private void RegisterCommandCallback()
         {
@@ -49,14 +49,16 @@ namespace System.Diagnostics.Tracing
             // Should only be enable or disable
             Debug.Assert(e.Command == EventCommand.Enable || e.Command == EventCommand.Disable);
 
-            lock (s_counterGroupLock)      // Lock the CounterGroup
+            lock (s_counterGroupLock) // Lock the CounterGroup
             {
                 if (e.Command == EventCommand.Enable)
                 {
                     Debug.Assert(e.Arguments != null);
 
-                    if (!e.Arguments.TryGetValue("EventCounterIntervalSec", out string? valueStr)
-                        || !float.TryParse(valueStr, out float intervalValue))
+                    if (
+                        !e.Arguments.TryGetValue("EventCounterIntervalSec", out string? valueStr)
+                        || !float.TryParse(valueStr, out float intervalValue)
+                    )
                     {
                         // Command is Enable but no EventCounterIntervalSec arg so ignore
                         return;
@@ -92,16 +94,21 @@ namespace System.Diagnostics.Tracing
                     }
                 }
 
-                Debug.Assert((s_counterGroupEnabledList == null && !_eventSource.IsEnabled())
-                                || (_eventSource.IsEnabled() && s_counterGroupEnabledList!.Contains(this))
-                                || (_pollingIntervalInMilliseconds == 0 && !s_counterGroupEnabledList!.Contains(this))
-                                || (!_eventSource.IsEnabled() && !s_counterGroupEnabledList!.Contains(this)));
+                Debug.Assert(
+                    (s_counterGroupEnabledList == null && !_eventSource.IsEnabled())
+                        || (_eventSource.IsEnabled() && s_counterGroupEnabledList!.Contains(this))
+                        || (
+                            _pollingIntervalInMilliseconds == 0
+                            && !s_counterGroupEnabledList!.Contains(this)
+                        )
+                        || (!_eventSource.IsEnabled() && !s_counterGroupEnabledList!.Contains(this))
+                );
             }
         }
 
-#endregion // EventSource Command Processing
+        #endregion // EventSource Command Processing
 
-#region Global CounterGroup Array management
+        #region Global CounterGroup Array management
 
         // We need eventCounters to 'attach' themselves to a particular EventSource.
         // this table provides the mapping from EventSource -> CounterGroup
@@ -117,7 +124,9 @@ namespace System.Diagnostics.Tracing
             }
             else if (eventSourceIndex >= s_counterGroups.Length)
             {
-                WeakReference<CounterGroup>[] newCounterGroups = new WeakReference<CounterGroup>[eventSourceIndex + 1];
+                WeakReference<CounterGroup>[] newCounterGroups = new WeakReference<CounterGroup>[
+                    eventSourceIndex + 1
+                ];
                 Array.Copy(s_counterGroups, newCounterGroups, s_counterGroups.Length);
                 s_counterGroups = newCounterGroups;
             }
@@ -140,9 +149,9 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-#endregion // Global CounterGroup Array management
+        #endregion // Global CounterGroup Array management
 
-#region Timer Processing
+        #region Timer Processing
 
         private DateTime _timeStampSinceCollectionStarted;
         private int _pollingIntervalInMilliseconds;
@@ -152,13 +161,17 @@ namespace System.Diagnostics.Tracing
         {
             Debug.Assert(pollingIntervalInSeconds > 0);
             Debug.Assert(Monitor.IsEntered(s_counterGroupLock));
-            if (_pollingIntervalInMilliseconds == 0 || pollingIntervalInSeconds * 1000 < _pollingIntervalInMilliseconds)
+            if (
+                _pollingIntervalInMilliseconds == 0
+                || pollingIntervalInSeconds * 1000 < _pollingIntervalInMilliseconds
+            )
             {
                 _pollingIntervalInMilliseconds = (int)(pollingIntervalInSeconds * 1000);
                 ResetCounters(); // Reset statistics for counters before we start the thread.
 
                 _timeStampSinceCollectionStarted = DateTime.UtcNow;
-                _nextPollingTimeStamp = DateTime.UtcNow + new TimeSpan(0, 0, (int)pollingIntervalInSeconds);
+                _nextPollingTimeStamp =
+                    DateTime.UtcNow + new TimeSpan(0, 0, (int)pollingIntervalInSeconds);
 
                 // Create the polling thread and init all the shared state if needed
                 if (s_pollingThread == null)
@@ -168,7 +181,7 @@ namespace System.Diagnostics.Tracing
                     s_pollingThread = new Thread(PollForValues)
                     {
                         IsBackground = true,
-                        Name = ".NET Counter Poller"
+                        Name = ".NET Counter Poller",
                     };
                     s_pollingThread.InternalUnsafeStart();
                 }
@@ -245,21 +258,33 @@ namespace System.Diagnostics.Tracing
                     // written to the old session or the new session. The behavior change is not being treated as a
                     // significant problem to address for now, but we can come back and address it if it turns out to
                     // be an actual issue.
-                    counter.WritePayload((float)elapsed.TotalSeconds, pollingIntervalInMilliseconds);
+                    counter.WritePayload(
+                        (float)elapsed.TotalSeconds,
+                        pollingIntervalInMilliseconds
+                    );
                 }
 
                 lock (s_counterGroupLock)
                 {
                     _timeStampSinceCollectionStarted = now;
                     TimeSpan delta = now - _nextPollingTimeStamp;
-                    delta = _pollingIntervalInMilliseconds > delta.TotalMilliseconds ? TimeSpan.FromMilliseconds(_pollingIntervalInMilliseconds) : delta;
+                    delta =
+                        _pollingIntervalInMilliseconds > delta.TotalMilliseconds
+                            ? TimeSpan.FromMilliseconds(_pollingIntervalInMilliseconds)
+                            : delta;
                     if (_pollingIntervalInMilliseconds > 0)
-                        _nextPollingTimeStamp += TimeSpan.FromMilliseconds(_pollingIntervalInMilliseconds * Math.Ceiling(delta.TotalMilliseconds / _pollingIntervalInMilliseconds));
+                        _nextPollingTimeStamp += TimeSpan.FromMilliseconds(
+                            _pollingIntervalInMilliseconds
+                                * Math.Ceiling(
+                                    delta.TotalMilliseconds / _pollingIntervalInMilliseconds
+                                )
+                        );
                 }
             }
         }
 
         private static Thread? s_pollingThread;
+
         // Used for sleeping for a certain amount of time while allowing the thread to be woken up
         private static AutoResetEvent? s_pollingThreadSleepEvent;
 
@@ -288,9 +313,14 @@ namespace System.Diagnostics.Tracing
                             onTimers.Add(counterGroup);
                         }
 
-                        int millisecondsTillNextPoll = (int)((counterGroup._nextPollingTimeStamp - now).TotalMilliseconds);
+                        int millisecondsTillNextPoll = (int)(
+                            (counterGroup._nextPollingTimeStamp - now).TotalMilliseconds
+                        );
                         millisecondsTillNextPoll = Math.Max(1, millisecondsTillNextPoll);
-                        sleepDurationInMilliseconds = Math.Min(sleepDurationInMilliseconds, millisecondsTillNextPoll);
+                        sleepDurationInMilliseconds = Math.Min(
+                            sleepDurationInMilliseconds,
+                            millisecondsTillNextPoll
+                        );
                     }
                 }
                 foreach (CounterGroup onTimer in onTimers)
@@ -306,7 +336,6 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-#endregion // Timer Processing
-
+        #endregion // Timer Processing
     }
 }

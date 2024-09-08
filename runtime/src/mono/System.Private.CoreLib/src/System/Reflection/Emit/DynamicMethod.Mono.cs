@@ -10,7 +10,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     public sealed partial class DynamicMethod : MethodInfo
     {
-#region Sync with MonoReflectionDynamicMethod in object-internals.h
+        #region Sync with MonoReflectionDynamicMethod in object-internals.h
         private RuntimeMethodHandle _mhandle;
         private RuntimeType _returnType;
         private RuntimeType[] _parameterTypes;
@@ -23,7 +23,7 @@ namespace System.Reflection.Emit
         private object?[]? _refs;
         private IntPtr _referencedBy;
         private RuntimeType? _typeOwner;
-#endregion
+        #endregion
 
         private string _name;
         private MethodAttributes _attributes;
@@ -64,9 +64,19 @@ namespace System.Reflection.Emit
         internal RuntimeILGenerator GetRuntimeILGenerator() => GetILGeneratorInternal(64);
 
         private RuntimeILGenerator GetILGeneratorInternal(int streamSize) =>
-            _ilGenerator ??= new RuntimeILGenerator(Module, new DynamicMethodTokenGenerator(this), streamSize);
+            _ilGenerator ??= new RuntimeILGenerator(
+                Module,
+                new DynamicMethodTokenGenerator(this),
+                streamSize
+            );
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             if ((CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs)
                 throw new NotSupportedException(SR.NotSupported_CallToVarArg);
@@ -89,7 +99,12 @@ namespace System.Reflection.Emit
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void create_dynamic_method(DynamicMethod m, string name, MethodAttributes attributes, CallingConventions callingConvention);
+        private static extern void create_dynamic_method(
+            DynamicMethod m,
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention
+        );
 
         private void CreateDynMethod()
         {
@@ -99,7 +114,9 @@ namespace System.Reflection.Emit
                 if (_mhandle.Value == IntPtr.Zero)
                 {
                     if (_ilGenerator == null || _ilGenerator.ILOffset == 0)
-                        throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name)
+                        );
 
                     _ilGenerator.label_fixup(this);
 

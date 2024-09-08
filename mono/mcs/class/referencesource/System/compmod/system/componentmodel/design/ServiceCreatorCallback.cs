@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ServiceCreatorCallback.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
     using System.Security.Permissions;
 
@@ -16,5 +17,4 @@ namespace System.ComponentModel.Design {
     [HostProtection(SharedState = true)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public delegate object ServiceCreatorCallback(IServiceContainer container, Type serviceType);
-
 }

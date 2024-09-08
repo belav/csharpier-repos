@@ -19,7 +19,8 @@ namespace Microsoft.AspNet.Facebook.Test
         private const string AppSecret1 = "f8ad79c0081a80bb885e2b280c3f8442";
         private const string AppSignatureHeader2 = "sha1=3ee3a233ca0c872cae6b40d38a99dff26bf8eb27";
         private const string AppSecret2 = "134cfa3691d1f51c64e70700f397ed20";
-        private const string ContentString = "{\"object\":\"user\",\"entry\":[{\"uid\":\"17825901\",\"id\":\"17825901\",\"time\":1352251746,\"changed_fields\":[\"likes\"]}]}";
+        private const string ContentString =
+            "{\"object\":\"user\",\"entry\":[{\"uid\":\"17825901\",\"id\":\"17825901\",\"time\":1352251746,\"changed_fields\":[\"likes\"]}]}";
 
         [Fact]
         public void Overriding_VerificationToken()
@@ -45,9 +46,14 @@ namespace Microsoft.AspNet.Facebook.Test
             {
                 Challenge = challenge,
                 Mode = "subscribe",
-                Verify_Token = verifyToken
+                Verify_Token = verifyToken,
             };
-            Assert.Equal(challenge, await userRealTimeController.Get(subscriptionVerification).Content.ReadAsStringAsync());
+            Assert.Equal(
+                challenge,
+                await userRealTimeController
+                    .Get(subscriptionVerification)
+                    .Content.ReadAsStringAsync()
+            );
         }
 
         [Theory]
@@ -56,7 +62,11 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData("654321", "", HttpStatusCode.BadRequest)]
         [InlineData("", "bar", HttpStatusCode.BadRequest)]
         [InlineData("654321", "bar", HttpStatusCode.OK)]
-        public void Get_ReturnsExpectedStatusCode(string challenge, string verifyToken, HttpStatusCode expectedStatusCode)
+        public void Get_ReturnsExpectedStatusCode(
+            string challenge,
+            string verifyToken,
+            HttpStatusCode expectedStatusCode
+        )
         {
             var userRealTimeController = new UserRealtimeCallbackController(null, verifyToken);
             userRealTimeController.Request = new HttpRequestMessage();
@@ -64,20 +74,27 @@ namespace Microsoft.AspNet.Facebook.Test
             {
                 Challenge = challenge,
                 Mode = "subscribe",
-                Verify_Token = "bar"
+                Verify_Token = "bar",
             };
-            Assert.Equal(expectedStatusCode, userRealTimeController.Get(subscriptionVerification).StatusCode);
+            Assert.Equal(
+                expectedStatusCode,
+                userRealTimeController.Get(subscriptionVerification).StatusCode
+            );
         }
 
         [Theory]
         [InlineData(ContentString, AppSignatureHeader1, AppSecret1)]
         [InlineData(ContentString, AppSignatureHeader2, AppSecret2)]
-        public async Task Post_ReturnsOk_WithValidParameters(string contentString, string headerValue, string appSecret)
+        public async Task Post_ReturnsOk_WithValidParameters(
+            string contentString,
+            string headerValue,
+            string appSecret
+        )
         {
             var userRealTimeController = new UserRealtimeCallbackController(appSecret, null);
             userRealTimeController.Request = new HttpRequestMessage
             {
-                Content = new StringContent(contentString, Encoding.UTF8, "text/json")
+                Content = new StringContent(contentString, Encoding.UTF8, "text/json"),
             };
             var request = userRealTimeController.Request;
             request.Headers.Add("X-Hub-Signature", headerValue);
@@ -89,26 +106,34 @@ namespace Microsoft.AspNet.Facebook.Test
         [InlineData(ContentString, AppSignatureHeader2, AppSecret1)]
         [InlineData(ContentString, null, AppSecret2)]
         [InlineData(ContentString, AppSignatureHeader1, null)]
-        public async Task Post_ReturnsBadRequest_WithInValidParameters(string contentString, string headerValue, string AppSecret)
+        public async Task Post_ReturnsBadRequest_WithInValidParameters(
+            string contentString,
+            string headerValue,
+            string AppSecret
+        )
         {
             var userRealTimeController = new UserRealtimeCallbackController(AppSecret, null);
             userRealTimeController.Request = new HttpRequestMessage
             {
-                Content = new StringContent(contentString, Encoding.UTF8, "text/json")
+                Content = new StringContent(contentString, Encoding.UTF8, "text/json"),
             };
             var request = userRealTimeController.Request;
             if (headerValue != null)
             {
                 request.Headers.Add("X-Hub-Signature", headerValue);
             }
-            Assert.Equal(HttpStatusCode.BadRequest, (await userRealTimeController.Post()).StatusCode);
+            Assert.Equal(
+                HttpStatusCode.BadRequest,
+                (await userRealTimeController.Post()).StatusCode
+            );
         }
 
         private sealed class UserRealtimeCallbackController : FacebookRealtimeUpdateController
         {
             private string _verifyToken;
 
-            public UserRealtimeCallbackController() : this(null, null) { }
+            public UserRealtimeCallbackController()
+                : this(null, null) { }
 
             public UserRealtimeCallbackController(string appSecret, string verifyToken)
             {
@@ -124,10 +149,7 @@ namespace Microsoft.AspNet.Facebook.Test
 
             public override string VerifyToken
             {
-                get
-                {
-                    return _verifyToken;
-                }
+                get { return _verifyToken; }
             }
 
             public override Task HandleUpdateAsync(ChangeNotification notification)

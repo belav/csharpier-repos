@@ -8,8 +8,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static class DiagnosticsOptionsStorage
     {
-        public static readonly Option2<bool> Classification = new("dotnet_enable_classification", defaultValue: true);
+        public static readonly Option2<bool> Classification =
+            new("dotnet_enable_classification", defaultValue: true);
 
-        public static readonly Option2<bool> Squiggles = new("dotnet_enable_squiggles", defaultValue: true);
+        public static readonly Option2<bool> Squiggles =
+            new("dotnet_enable_squiggles", defaultValue: true);
     }
 }

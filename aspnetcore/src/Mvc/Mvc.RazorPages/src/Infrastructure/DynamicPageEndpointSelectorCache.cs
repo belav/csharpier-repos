@@ -13,7 +13,8 @@ internal class DynamicPageEndpointSelectorCache
 #pragma warning restore CA1852 // Seal internal types
 {
     private readonly ConcurrentDictionary<int, EndpointDataSource> _dataSourceCache = new();
-    private readonly ConcurrentDictionary<int, DynamicPageEndpointSelector> _endpointSelectorCache = new();
+    private readonly ConcurrentDictionary<int, DynamicPageEndpointSelector> _endpointSelectorCache =
+        new();
 
     public void AddDataSource(PageActionEndpointDataSource dataSource)
     {

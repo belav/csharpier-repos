@@ -18,11 +18,15 @@ public class CollectionCountTest
     private const int numTests = 3;
 
     private Int32[] _negValues = { -1, -10, -10000, Int32.MinValue };
-    private Int32[] _largeValues = { GC.MaxGeneration + 1, Int32.MaxValue / 2, Int32.MaxValue - 1, Int32.MaxValue };
-
-    private CollectionCountTest()
+    private Int32[] _largeValues =
     {
-    }
+        GC.MaxGeneration + 1,
+        Int32.MaxValue / 2,
+        Int32.MaxValue - 1,
+        Int32.MaxValue,
+    };
+
+    private CollectionCountTest() { }
 
     // Checks that CollectionCount correctly counts collections to higher generations
     public bool CollectionTest()
@@ -64,9 +68,7 @@ public class CollectionCountTest
                 GC.CollectionCount(i);
                 retVal = false;
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
@@ -83,7 +85,6 @@ public class CollectionCountTest
             Console.WriteLine("NegativeTest passed");
         return retVal;
     }
-
 
     // Checks that CollectionCount returns 0 when passed 0
     public bool LargeValuesTest()
@@ -112,7 +113,6 @@ public class CollectionCountTest
         return retVal;
     }
 
-
     public bool RunTest()
     {
         int passedCount = 0;
@@ -124,10 +124,8 @@ public class CollectionCountTest
         if (CollectionTest())
             passedCount++;
 
-
         return (passedCount == numTests);
     }
-
 
     public static int Main()
     {

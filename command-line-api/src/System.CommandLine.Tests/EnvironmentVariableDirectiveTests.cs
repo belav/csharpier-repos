@@ -1,9 +1,8 @@
 ﻿using System.CommandLine.Help;
 using System.CommandLine.Invocation;
-using FluentAssertions;
 using System.Linq;
 using System.Threading.Tasks;
-
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests
@@ -18,10 +17,7 @@ namespace System.CommandLine.Tests
         {
             bool asserted = false;
             const string value = "hello";
-            var rootCommand = new CliRootCommand
-            {
-                new EnvironmentVariablesDirective()
-            };
+            var rootCommand = new CliRootCommand { new EnvironmentVariablesDirective() };
             rootCommand.SetAction(_ =>
             {
                 asserted = true;
@@ -30,7 +26,7 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             await config.InvokeAsync($"[env:{_testVariableName}={value}]");
@@ -43,10 +39,7 @@ namespace System.CommandLine.Tests
         {
             bool asserted = false;
             const string value = "1=2";
-            var rootCommand = new CliRootCommand
-            {
-                new EnvironmentVariablesDirective()
-            };
+            var rootCommand = new CliRootCommand { new EnvironmentVariablesDirective() };
             rootCommand.SetAction(_ =>
             {
                 asserted = true;
@@ -55,10 +48,10 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
-            await config.InvokeAsync($"[env:{_testVariableName}={value}]" );
+            await config.InvokeAsync($"[env:{_testVariableName}={value}]");
 
             asserted.Should().BeTrue();
         }
@@ -68,10 +61,7 @@ namespace System.CommandLine.Tests
         {
             bool asserted = false;
             string variable = _testVariableName;
-            var rootCommand = new CliRootCommand
-            {
-                new EnvironmentVariablesDirective()
-            };
+            var rootCommand = new CliRootCommand { new EnvironmentVariablesDirective() };
             rootCommand.SetAction(_ =>
             {
                 asserted = true;
@@ -80,10 +70,10 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
-            await config.InvokeAsync( $"[env:{variable}]" );
+            await config.InvokeAsync($"[env:{variable}]");
 
             asserted.Should().BeTrue();
         }
@@ -93,10 +83,7 @@ namespace System.CommandLine.Tests
         {
             bool asserted = false;
             string value = "value";
-            var rootCommand = new CliRootCommand
-            {
-                new EnvironmentVariablesDirective()
-            };
+            var rootCommand = new CliRootCommand { new EnvironmentVariablesDirective() };
             rootCommand.SetAction(_ =>
             {
                 asserted = true;
@@ -106,7 +93,7 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             var result = config.Parse($"[env:={value}]");

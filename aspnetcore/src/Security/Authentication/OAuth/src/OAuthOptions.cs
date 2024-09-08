@@ -28,27 +28,62 @@ public class OAuthOptions : RemoteAuthenticationOptions
 
         if (string.IsNullOrEmpty(ClientId))
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ClientId)), nameof(ClientId));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(ClientId)
+                ),
+                nameof(ClientId)
+            );
         }
 
         if (string.IsNullOrEmpty(ClientSecret))
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(ClientSecret)), nameof(ClientSecret));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(ClientSecret)
+                ),
+                nameof(ClientSecret)
+            );
         }
 
         if (string.IsNullOrEmpty(AuthorizationEndpoint))
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(AuthorizationEndpoint)), nameof(AuthorizationEndpoint));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(AuthorizationEndpoint)
+                ),
+                nameof(AuthorizationEndpoint)
+            );
         }
 
         if (string.IsNullOrEmpty(TokenEndpoint))
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(TokenEndpoint)), nameof(TokenEndpoint));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(TokenEndpoint)
+                ),
+                nameof(TokenEndpoint)
+            );
         }
 
         if (!CallbackPath.HasValue)
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_OptionMustBeProvided, nameof(CallbackPath)), nameof(CallbackPath));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.Exception_OptionMustBeProvided,
+                    nameof(CallbackPath)
+                ),
+                nameof(CallbackPath)
+            );
         }
     }
 

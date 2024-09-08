@@ -12,16 +12,24 @@ namespace System
 {
     public static partial class RetryHelper
     {
-        private static readonly Func<int, int> s_defaultBackoffFunc = i => Math.Min(i * 100, 60_000);
+        private static readonly Func<int, int> s_defaultBackoffFunc = i =>
+            Math.Min(i * 100, 60_000);
         private static readonly Predicate<Exception> s_defaultRetryWhenFunc = _ => true;
-        private static readonly bool s_debug = Environment.GetEnvironmentVariable("DEBUG_RETRYHELPER") == "1";
+        private static readonly bool s_debug =
+            Environment.GetEnvironmentVariable("DEBUG_RETRYHELPER") == "1";
 
         /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref name="maxAttempts"/> times.</summary>
         /// <param name="maxAttempts">The maximum number of times to invoke <paramref name="test"/>.</param>
         /// <param name="test">The test to invoke.</param>
         /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait before the next attempt.  It's passed the number of iterations attempted.</param>
         /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception will trigger a retry.</param>
-        public static void Execute(Action test, int maxAttempts = 5, Func<int, int> backoffFunc = null, Predicate<Exception> retryWhen = null, [CallerMemberName] string? testName = null)
+        public static void Execute(
+            Action test,
+            int maxAttempts = 5,
+            Func<int, int> backoffFunc = null,
+            Predicate<Exception> retryWhen = null,
+            [CallerMemberName] string? testName = null
+        )
         {
             // Validate arguments
             if (maxAttempts < 1)
@@ -57,7 +65,8 @@ namespace System
 
                 if (s_debug)
                 {
-                    string diagnostic = $"RetryHelper: retrying {testName} {i}th time of {maxAttempts}: got {lastException.Message}";
+                    string diagnostic =
+                        $"RetryHelper: retrying {testName} {i}th time of {maxAttempts}: got {lastException.Message}";
                     Console.WriteLine(diagnostic);
                     Debug.WriteLine(diagnostic);
                 }
@@ -71,7 +80,13 @@ namespace System
         /// <param name="test">The test to invoke.</param>
         /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait before the next attempt.  It's passed the number of iterations attempted.</param>
         /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception will trigger a retry.</param>
-        public static async Task ExecuteAsync(Func<Task> test, int maxAttempts = 5, Func<int, int> backoffFunc = null, Predicate<Exception> retryWhen = null, [CallerMemberName] string? testName = null)
+        public static async Task ExecuteAsync(
+            Func<Task> test,
+            int maxAttempts = 5,
+            Func<int, int> backoffFunc = null,
+            Predicate<Exception> retryWhen = null,
+            [CallerMemberName] string? testName = null
+        )
         {
             // Validate arguments
             if (maxAttempts < 1)

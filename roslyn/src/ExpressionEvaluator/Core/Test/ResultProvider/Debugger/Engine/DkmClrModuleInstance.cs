@@ -9,9 +9,6 @@
 
 #endregion
 
-using Microsoft.CodeAnalysis.ExpressionEvaluator;
-using Microsoft.MetadataReader;
-using Microsoft.VisualStudio.Debugger.Symbols;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -20,6 +17,9 @@ using System.Reflection;
 using System.Reflection.Adds;
 using System.Text;
 using System.Threading;
+using Microsoft.CodeAnalysis.ExpressionEvaluator;
+using Microsoft.MetadataReader;
+using Microsoft.VisualStudio.Debugger.Symbols;
 
 namespace Microsoft.VisualStudio.Debugger.Clr
 {
@@ -29,8 +29,12 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private readonly DkmClrRuntimeInstance _runtimeInstance;
         private int _resolveTypeNameFailures;
 
-        public DkmClrModuleInstance(DkmClrRuntimeInstance runtimeInstance, Assembly assembly, DkmModule module) :
-            base(module)
+        public DkmClrModuleInstance(
+            DkmClrRuntimeInstance runtimeInstance,
+            Assembly assembly,
+            DkmModule module
+        )
+            : base(module)
         {
             _runtimeInstance = runtimeInstance;
             this.Assembly = assembly;
@@ -48,7 +52,10 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         public DkmProcess Process => _runtimeInstance.Process;
 
-        public DkmClrType ResolveTypeName(string typeName, ReadOnlyCollection<DkmClrType> typeArguments)
+        public DkmClrType ResolveTypeName(
+            string typeName,
+            ReadOnlyCollection<DkmClrType> typeArguments
+        )
         {
             var type = this.Assembly.GetType(typeName);
             if (type == null)
@@ -75,12 +82,25 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private class MetadataImportMock : IMetadataImport
         {
             private readonly Assembly _assembly;
+
             public MetadataImportMock(Assembly assembly)
             {
                 _assembly = assembly;
             }
 
-            int IMetadataImport.GetFieldProps(int mb, out int mdTypeDef, StringBuilder szField, int cchField, out int pchField, out FieldAttributes pdwAttr, out EmbeddedBlobPointer ppvSigBlob, out int pcbSigBlob, out int pdwCPlusTypeFlab, out IntPtr ppValue, out int pcchValue)
+            int IMetadataImport.GetFieldProps(
+                int mb,
+                out int mdTypeDef,
+                StringBuilder szField,
+                int cchField,
+                out int pchField,
+                out FieldAttributes pdwAttr,
+                out EmbeddedBlobPointer ppvSigBlob,
+                out int pcbSigBlob,
+                out int pdwCPlusTypeFlab,
+                out IntPtr ppValue,
+                out int pcchValue
+            )
             {
                 mdTypeDef = default;
                 pchField = default;
@@ -94,7 +114,15 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 // Iterate over all types in the assembly to find the field matching the token.
                 foreach (var type in _assembly.GetTypes())
                 {
-                    foreach (var field in type.GetFields(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+                    foreach (
+                        var field in type.GetFields(
+                            BindingFlags.DeclaredOnly
+                                | BindingFlags.Instance
+                                | BindingFlags.Static
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                        )
+                    )
                     {
                         // Found a match.
                         if (field.MetadataToken == mb)
@@ -136,27 +164,52 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumTypeDefs(ref HCORENUM phEnum, out int rTypeDefs, uint cMax, out uint pcTypeDefs)
+            int IMetadataImport.EnumTypeDefs(
+                ref HCORENUM phEnum,
+                out int rTypeDefs,
+                uint cMax,
+                out uint pcTypeDefs
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumInterfaceImpls(ref HCORENUM phEnum, int td, out int rImpls, int cMax, ref int pcImpls)
+            int IMetadataImport.EnumInterfaceImpls(
+                ref HCORENUM phEnum,
+                int td,
+                out int rImpls,
+                int cMax,
+                ref int pcImpls
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumTypeRefs(ref HCORENUM phEnum, int[] td, uint cMax, uint pcTypeRefs)
+            int IMetadataImport.EnumTypeRefs(
+                ref HCORENUM phEnum,
+                int[] td,
+                uint cMax,
+                uint pcTypeRefs
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.FindTypeDefByName(string szTypeDef, int tkEnclosingClass, out int token)
+            int IMetadataImport.FindTypeDefByName(
+                string szTypeDef,
+                int tkEnclosingClass,
+                out int token
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetScopeProps(StringBuilder szName, int cchName, out int pchName, out Guid mvid)
+            int IMetadataImport.GetScopeProps(
+                StringBuilder szName,
+                int cchName,
+                out int pchName,
+                out Guid mvid
+            )
             {
                 throw new NotImplementedException();
             }
@@ -166,7 +219,14 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetTypeDefProps(int td, StringBuilder szTypeDef, int cchTypeDef, out int pchTypeDef, out TypeAttributes pdwTypeDefFlags, out int ptkExtends)
+            int IMetadataImport.GetTypeDefProps(
+                int td,
+                StringBuilder szTypeDef,
+                int cchTypeDef,
+                out int pchTypeDef,
+                out TypeAttributes pdwTypeDefFlags,
+                out int ptkExtends
+            )
             {
                 throw new NotImplementedException();
             }
@@ -176,7 +236,13 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetTypeRefProps(int tr, out int ptkResolutionScope, StringBuilder szName, int cchName, out int pchName)
+            int IMetadataImport.GetTypeRefProps(
+                int tr,
+                out int ptkResolutionScope,
+                StringBuilder szName,
+                int cchName,
+                out int pchName
+            )
             {
                 throw new NotImplementedException();
             }
@@ -186,117 +252,271 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMembers(ref uint phEnum, uint cl, uint[] rMembers, uint cMax, out uint pcTokens)
+            int IMetadataImport.EnumMembers(
+                ref uint phEnum,
+                uint cl,
+                uint[] rMembers,
+                uint cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMembersWithName(ref uint phEnum, uint cl, string szName, uint[] rMembers, uint cMax, ref uint pcTokens)
+            int IMetadataImport.EnumMembersWithName(
+                ref uint phEnum,
+                uint cl,
+                string szName,
+                uint[] rMembers,
+                uint cMax,
+                ref uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMethods(ref HCORENUM phEnum, int cl, out int mdMethodDef, int cMax, out int pcTokens)
+            int IMetadataImport.EnumMethods(
+                ref HCORENUM phEnum,
+                int cl,
+                out int mdMethodDef,
+                int cMax,
+                out int pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMethodsWithName(ref HCORENUM phEnum, int cl, string szName, out int mdMethodDef, int cMax, out int pcTokens)
+            int IMetadataImport.EnumMethodsWithName(
+                ref HCORENUM phEnum,
+                int cl,
+                string szName,
+                out int mdMethodDef,
+                int cMax,
+                out int pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumFields(ref HCORENUM phEnum, int cl, out int mdFieldDef, int cMax, out uint pcTokens)
+            int IMetadataImport.EnumFields(
+                ref HCORENUM phEnum,
+                int cl,
+                out int mdFieldDef,
+                int cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumFieldsWithName(ref uint phEnum, uint cl, string szName, uint[] rFields, uint cMax, out uint pcTokens)
+            int IMetadataImport.EnumFieldsWithName(
+                ref uint phEnum,
+                uint cl,
+                string szName,
+                uint[] rFields,
+                uint cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumParams(ref HCORENUM phEnum, int mdMethodDef, int[] rParams, int cMax, out uint pcTokens)
+            int IMetadataImport.EnumParams(
+                ref HCORENUM phEnum,
+                int mdMethodDef,
+                int[] rParams,
+                int cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMemberRefs(ref uint phEnum, uint tkParent, uint[] rMemberRefs, uint cMax, out uint pcTokens)
+            int IMetadataImport.EnumMemberRefs(
+                ref uint phEnum,
+                uint tkParent,
+                uint[] rMemberRefs,
+                uint cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMethodImpls(ref HCORENUM hEnum, Token typeDef, out Token methodBody, out Token methodDecl, int cMax, out int cTokens)
+            int IMetadataImport.EnumMethodImpls(
+                ref HCORENUM hEnum,
+                Token typeDef,
+                out Token methodBody,
+                out Token methodDecl,
+                int cMax,
+                out int cTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumPermissionSets(ref HCORENUM hEnum, uint tk, uint dwActions, uint[] rPermission, ref uint cMax)
+            int IMetadataImport.EnumPermissionSets(
+                ref HCORENUM hEnum,
+                uint tk,
+                uint dwActions,
+                uint[] rPermission,
+                ref uint cMax
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.FindMember(int typeDefToken, string szName, byte[] pvSigBlob, int cbSigBlob, out int memberDefToken)
+            int IMetadataImport.FindMember(
+                int typeDefToken,
+                string szName,
+                byte[] pvSigBlob,
+                int cbSigBlob,
+                out int memberDefToken
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.FindMethod(int typeDef, string szName, EmbeddedBlobPointer pvSigBlob, int cbSigBlob, out int methodDef)
+            int IMetadataImport.FindMethod(
+                int typeDef,
+                string szName,
+                EmbeddedBlobPointer pvSigBlob,
+                int cbSigBlob,
+                out int methodDef
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.FindField(int typeDef, string szName, byte[] pvSigBlob, int cbSigBlob, out int fieldDef)
+            int IMetadataImport.FindField(
+                int typeDef,
+                string szName,
+                byte[] pvSigBlob,
+                int cbSigBlob,
+                out int fieldDef
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.FindMemberRef(int typeRef, string szName, byte[] pvSigBlob, int cbSigBlob, out int result)
+            int IMetadataImport.FindMemberRef(
+                int typeRef,
+                string szName,
+                byte[] pvSigBlob,
+                int cbSigBlob,
+                out int result
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetMethodProps(uint md, out int pClass, StringBuilder szMethod, int cchMethod, out uint pchMethod, out MethodAttributes pdwAttr, out EmbeddedBlobPointer ppvSigBlob, out uint pcbSigBlob, out uint pulCodeRVA, out uint pdwImplFlags)
+            int IMetadataImport.GetMethodProps(
+                uint md,
+                out int pClass,
+                StringBuilder szMethod,
+                int cchMethod,
+                out uint pchMethod,
+                out MethodAttributes pdwAttr,
+                out EmbeddedBlobPointer ppvSigBlob,
+                out uint pcbSigBlob,
+                out uint pulCodeRVA,
+                out uint pdwImplFlags
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetMemberRefProps(Token mr, out Token ptk, StringBuilder szMember, int cchMember, out uint pchMember, out EmbeddedBlobPointer ppvSigBlob, out uint pbSig)
+            int IMetadataImport.GetMemberRefProps(
+                Token mr,
+                out Token ptk,
+                StringBuilder szMember,
+                int cchMember,
+                out uint pchMember,
+                out EmbeddedBlobPointer ppvSigBlob,
+                out uint pbSig
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumProperties(ref HCORENUM phEnum, int td, out int mdFieldDef, int cMax, out uint pcTokens)
+            int IMetadataImport.EnumProperties(
+                ref HCORENUM phEnum,
+                int td,
+                out int mdFieldDef,
+                int cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumEvents(ref HCORENUM phEnum, int td, out int mdFieldDef, int cMax, out uint pcEvents)
+            int IMetadataImport.EnumEvents(
+                ref HCORENUM phEnum,
+                int td,
+                out int mdFieldDef,
+                int cMax,
+                out uint pcEvents
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetEventProps(int ev, out int pClass, StringBuilder szEvent, int cchEvent, out int pchEvent, out int pdwEventFlags, out int ptkEventType, out int pmdAddOn, out int pmdRemoveOn, out int pmdFire, out int rmdOtherMethod, uint cMax, out uint pcOtherMethod)
+            int IMetadataImport.GetEventProps(
+                int ev,
+                out int pClass,
+                StringBuilder szEvent,
+                int cchEvent,
+                out int pchEvent,
+                out int pdwEventFlags,
+                out int ptkEventType,
+                out int pmdAddOn,
+                out int pmdRemoveOn,
+                out int pmdFire,
+                out int rmdOtherMethod,
+                uint cMax,
+                out uint pcOtherMethod
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumMethodSemantics(ref uint phEnum, uint mb, uint[] rEventProp, uint cMax, out uint pcEventProp)
+            int IMetadataImport.EnumMethodSemantics(
+                ref uint phEnum,
+                uint mb,
+                uint[] rEventProp,
+                uint cMax,
+                out uint pcEventProp
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetMethodSemantics(uint mb, uint tkEventProp, out uint pdwSemanticsFlags)
+            int IMetadataImport.GetMethodSemantics(
+                uint mb,
+                uint tkEventProp,
+                out uint pdwSemanticsFlags
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetClassLayout(int typeDef, out uint dwPackSize, COR_FIELD_OFFSET[] rFieldOffset, uint cMax, out uint cFieldOffset, out uint ulClassSize)
+            int IMetadataImport.GetClassLayout(
+                int typeDef,
+                out uint dwPackSize,
+                COR_FIELD_OFFSET[] rFieldOffset,
+                uint cMax,
+                out uint cFieldOffset,
+                out uint ulClassSize
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetFieldMarshal(int tk, out IntPtr ppvNativeType, out int pcbNativeType)
+            int IMetadataImport.GetFieldMarshal(
+                int tk,
+                out IntPtr ppvNativeType,
+                out int pcbNativeType
+            )
             {
                 throw new NotImplementedException();
             }
@@ -306,27 +526,50 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetPermissionSetProps(uint pm, out uint pdwAction, out IntPtr ppvPermission, out int pcbPermission)
+            int IMetadataImport.GetPermissionSetProps(
+                uint pm,
+                out uint pdwAction,
+                out IntPtr ppvPermission,
+                out int pcbPermission
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetSigFromToken(int token, out EmbeddedBlobPointer pSig, out int cbSig)
+            int IMetadataImport.GetSigFromToken(
+                int token,
+                out EmbeddedBlobPointer pSig,
+                out int cbSig
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetModuleRefProps(int mur, StringBuilder szName, int cchName, out int pchName)
+            int IMetadataImport.GetModuleRefProps(
+                int mur,
+                StringBuilder szName,
+                int cchName,
+                out int pchName
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumModuleRefs(ref HCORENUM phEnum, out int mdModuleRef, int cMax, out uint pcModuleRefs)
+            int IMetadataImport.EnumModuleRefs(
+                ref HCORENUM phEnum,
+                out int mdModuleRef,
+                int cMax,
+                out uint pcModuleRefs
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetTypeSpecFromToken(Token typeSpec, out EmbeddedBlobPointer pSig, out int cbSig)
+            int IMetadataImport.GetTypeSpecFromToken(
+                Token typeSpec,
+                out EmbeddedBlobPointer pSig,
+                out int cbSig
+            )
             {
                 throw new NotImplementedException();
             }
@@ -336,47 +579,97 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumUnresolvedMethods(ref uint phEnum, uint[] rMethods, uint cMax, out uint pcTokens)
+            int IMetadataImport.EnumUnresolvedMethods(
+                ref uint phEnum,
+                uint[] rMethods,
+                uint cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetUserString(int stk, char[] szString, int cchString, out int pchString)
+            int IMetadataImport.GetUserString(
+                int stk,
+                char[] szString,
+                int cchString,
+                out int pchString
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetPinvokeMap(uint tk, out uint pdwMappingFlags, StringBuilder szImportName, uint cchImportName, out uint pchImportName, out int pmrImportDLL)
+            int IMetadataImport.GetPinvokeMap(
+                uint tk,
+                out uint pdwMappingFlags,
+                StringBuilder szImportName,
+                uint cchImportName,
+                out uint pchImportName,
+                out int pmrImportDLL
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumSignatures(ref uint phEnum, uint[] rSignatures, uint cmax, out uint pcSignatures)
+            int IMetadataImport.EnumSignatures(
+                ref uint phEnum,
+                uint[] rSignatures,
+                uint cmax,
+                out uint pcSignatures
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumTypeSpecs(ref uint phEnum, uint[] rTypeSpecs, uint cmax, out uint pcTypeSpecs)
+            int IMetadataImport.EnumTypeSpecs(
+                ref uint phEnum,
+                uint[] rTypeSpecs,
+                uint cmax,
+                out uint pcTypeSpecs
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumUserStrings(ref uint phEnum, uint[] rStrings, uint cmax, out uint pcStrings)
+            int IMetadataImport.EnumUserStrings(
+                ref uint phEnum,
+                uint[] rStrings,
+                uint cmax,
+                out uint pcStrings
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetParamForMethodIndex(uint md, uint ulParamSeq, out uint pParam, out int ppd)
+            int IMetadataImport.GetParamForMethodIndex(
+                uint md,
+                uint ulParamSeq,
+                out uint pParam,
+                out int ppd
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.EnumCustomAttributes(ref HCORENUM phEnum, int tk, int tkType, out Token mdCustomAttribute, uint cMax, out uint pcTokens)
+            int IMetadataImport.EnumCustomAttributes(
+                ref HCORENUM phEnum,
+                int tk,
+                int tkType,
+                out Token mdCustomAttribute,
+                uint cMax,
+                out uint pcTokens
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetCustomAttributeProps(Token cv, out Token tkObj, out Token tkType, out EmbeddedBlobPointer blob, out int cbSize)
+            int IMetadataImport.GetCustomAttributeProps(
+                Token cv,
+                out Token tkObj,
+                out Token tkType,
+                out EmbeddedBlobPointer blob,
+                out int cbSize
+            )
             {
                 throw new NotImplementedException();
             }
@@ -386,22 +679,69 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetMemberProps(uint mb, out uint pClass, StringBuilder szMember, uint cchMember, out uint pchMember, out uint pdwAttr, out IntPtr ppvSigBlob, out uint pcbSigBlob, out uint pulCodeRVA, out uint pdwImplFlags, out uint pdwCPlusTypeFlag, out IntPtr ppValue, out uint pcchValue)
+            int IMetadataImport.GetMemberProps(
+                uint mb,
+                out uint pClass,
+                StringBuilder szMember,
+                uint cchMember,
+                out uint pchMember,
+                out uint pdwAttr,
+                out IntPtr ppvSigBlob,
+                out uint pcbSigBlob,
+                out uint pulCodeRVA,
+                out uint pdwImplFlags,
+                out uint pdwCPlusTypeFlag,
+                out IntPtr ppValue,
+                out uint pcchValue
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetPropertyProps(Token prop, out Token pClass, StringBuilder szProperty, int cchProperty, out int pchProperty, out PropertyAttributes pdwPropFlags, out EmbeddedBlobPointer ppvSig, out int pbSig, out int pdwCPlusTypeFlag, out UnusedIntPtr ppDefaultValue, out int pcchDefaultValue, out Token pmdSetter, out Token pmdGetter, out Token rmdOtherMethod, uint cMax, out uint pcOtherMethod)
+            int IMetadataImport.GetPropertyProps(
+                Token prop,
+                out Token pClass,
+                StringBuilder szProperty,
+                int cchProperty,
+                out int pchProperty,
+                out PropertyAttributes pdwPropFlags,
+                out EmbeddedBlobPointer ppvSig,
+                out int pbSig,
+                out int pdwCPlusTypeFlag,
+                out UnusedIntPtr ppDefaultValue,
+                out int pcchDefaultValue,
+                out Token pmdSetter,
+                out Token pmdGetter,
+                out Token rmdOtherMethod,
+                uint cMax,
+                out uint pcOtherMethod
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetParamProps(int tk, out int pmd, out uint pulSequence, StringBuilder szName, uint cchName, out uint pchName, out uint pdwAttr, out uint pdwCPlusTypeFlag, out UnusedIntPtr ppValue, out uint pcchValue)
+            int IMetadataImport.GetParamProps(
+                int tk,
+                out int pmd,
+                out uint pulSequence,
+                StringBuilder szName,
+                uint cchName,
+                out uint pchName,
+                out uint pdwAttr,
+                out uint pdwCPlusTypeFlag,
+                out UnusedIntPtr ppValue,
+                out uint pcchValue
+            )
             {
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetCustomAttributeByName(int tkObj, string szName, out EmbeddedBlobPointer ppData, out uint pcbData)
+            int IMetadataImport.GetCustomAttributeByName(
+                int tkObj,
+                string szName,
+                out EmbeddedBlobPointer ppData,
+                out uint pcbData
+            )
             {
                 throw new NotImplementedException();
             }
@@ -416,7 +756,11 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 throw new NotImplementedException();
             }
 
-            int IMetadataImport.GetNativeCallConvFromSig(IntPtr pvSig, uint cbSig, out uint pCallConv)
+            int IMetadataImport.GetNativeCallConvFromSig(
+                IntPtr pvSig,
+                uint cbSig,
+                out uint pCallConv
+            )
             {
                 throw new NotImplementedException();
             }

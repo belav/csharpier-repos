@@ -38,7 +38,11 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static void AddRange<TKey, TValue>(this ICollection<TKey> collection, Dictionary<TKey, TValue>.KeyCollection? keyCollection) where TKey : notnull
+        public static void AddRange<TKey, TValue>(
+            this ICollection<TKey> collection,
+            Dictionary<TKey, TValue>.KeyCollection? keyCollection
+        )
+            where TKey : notnull
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));

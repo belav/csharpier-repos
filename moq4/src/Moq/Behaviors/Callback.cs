@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class Callback : Behavior
@@ -28,7 +27,6 @@ namespace Moq.Behaviors
         sealed class Callback : Behavior
     */
     sealed class Callback : Behavior
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Action<IInvocation> callback;

@@ -18,10 +18,15 @@ namespace Microsoft.Interop
 
         public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info)
         {
-            return info.IsByRef ? SignatureBehavior.PointerToNativeType : SignatureBehavior.NativeType;
+            return info.IsByRef
+                ? SignatureBehavior.PointerToNativeType
+                : SignatureBehavior.NativeType;
         }
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (!info.IsByRef)
             {
@@ -50,10 +55,14 @@ namespace Microsoft.Interop
                             PointerType(AsNativeType(info).Syntax),
                             SingletonSeparatedList(
                                 VariableDeclarator(Identifier(nativeIdentifier))
-                                    .WithInitializer(EqualsValueClause(
-                                        PrefixUnaryExpression(SyntaxKind.AddressOfExpression,
-                                            IdentifierName(managedIdentifier))
-                                    ))
+                                    .WithInitializer(
+                                        EqualsValueClause(
+                                            PrefixUnaryExpression(
+                                                SyntaxKind.AddressOfExpression,
+                                                IdentifierName(managedIdentifier)
+                                            )
+                                        )
+                                    )
                             )
                         ),
                         EmptyStatement()
@@ -62,31 +71,48 @@ namespace Microsoft.Interop
                 yield break;
             }
 
-            MarshalDirection elementMarshalling = MarshallerHelpers.GetMarshalDirection(info, context);
+            MarshalDirection elementMarshalling = MarshallerHelpers.GetMarshalDirection(
+                info,
+                context
+            );
 
             switch (context.CurrentStage)
             {
                 case StubCodeContext.Stage.Setup:
                     break;
                 case StubCodeContext.Stage.Marshal:
-                    if (elementMarshalling is MarshalDirection.ManagedToUnmanaged or MarshalDirection.Bidirectional && info.IsByRef)
+                    if (
+                        elementMarshalling
+                            is MarshalDirection.ManagedToUnmanaged
+                                or MarshalDirection.Bidirectional
+                        && info.IsByRef
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(nativeIdentifier),
-                                IdentifierName(managedIdentifier)));
+                                IdentifierName(managedIdentifier)
+                            )
+                        );
                     }
 
                     break;
                 case StubCodeContext.Stage.Unmarshal:
-                    if (elementMarshalling is MarshalDirection.UnmanagedToManaged or MarshalDirection.Bidirectional && info.IsByRef)
+                    if (
+                        elementMarshalling
+                            is MarshalDirection.UnmanagedToManaged
+                                or MarshalDirection.Bidirectional
+                        && info.IsByRef
+                    )
                     {
                         yield return ExpressionStatement(
                             AssignmentExpression(
                                 SyntaxKind.SimpleAssignmentExpression,
                                 IdentifierName(managedIdentifier),
-                                IdentifierName(nativeIdentifier)));
+                                IdentifierName(nativeIdentifier)
+                            )
+                        );
                     }
                     break;
                 default:
@@ -96,10 +122,22 @@ namespace Microsoft.Interop
 
         public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context)
         {
-            return info.IsByRef && !context.IsInStubReturnPosition(info) && !context.SingleFrameSpansNativeContext;
+            return info.IsByRef
+                && !context.IsInStubReturnPosition(info)
+                && !context.SingleFrameSpansNativeContext;
         }
 
-        public ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic)
-            => ByValueMarshalKindSupportDescriptor.Default.GetSupport(marshalKind, info, context, out diagnostic);
+        public ByValueMarshalKindSupport SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            TypePositionInfo info,
+            StubCodeContext context,
+            out GeneratorDiagnostic? diagnostic
+        ) =>
+            ByValueMarshalKindSupportDescriptor.Default.GetSupport(
+                marshalKind,
+                info,
+                context,
+                out diagnostic
+            );
     }
 }

@@ -39,16 +39,15 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <summary>
     ///     The internal builder being used to configure the element type.
     /// </summary>
-    IConventionElementTypeBuilder IInfrastructure<IConventionElementTypeBuilder>.Instance
-        => Builder;
+    IConventionElementTypeBuilder IInfrastructure<IConventionElementTypeBuilder>.Instance =>
+        Builder;
 
     private InternalElementTypeBuilder Builder { get; }
 
     /// <summary>
     ///     The element type being configured.
     /// </summary>
-    public virtual IMutableElementType Metadata
-        => Builder.Metadata;
+    public virtual IMutableElementType Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the element type. If an annotation with the key specified in
@@ -141,8 +140,8 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion>()
-        => HasConversion(typeof(TConversion));
+            TConversion
+    >() => HasConversion(typeof(TConversion));
 
     /// <summary>
     ///     Configures elements of the collection so that their values are converted before writing to the database and converted back
@@ -152,7 +151,8 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? conversionType)
+            Type? conversionType
+    )
     {
         if (typeof(ValueConverter).IsAssignableFrom(conversionType))
         {
@@ -172,8 +172,8 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// </summary>
     /// <param name="converter">The converter to use.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ElementTypeBuilder HasConversion(ValueConverter? converter)
-        => HasConversion(converter, null);
+    public virtual ElementTypeBuilder HasConversion(ValueConverter? converter) =>
+        HasConversion(converter, null);
 
     /// <summary>
     ///     Configures elements of the collection so that their values are converted before
@@ -184,9 +184,8 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion>(
-        ValueComparer? valueComparer)
-        => HasConversion(typeof(TConversion), valueComparer);
+            TConversion
+    >(ValueComparer? valueComparer) => HasConversion(typeof(TConversion), valueComparer);
 
     /// <summary>
     ///     Configures elements of the collection so that their values are converted before
@@ -197,8 +196,9 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type conversionType,
-        ValueComparer? valueComparer)
+            Type conversionType,
+        ValueComparer? valueComparer
+    )
     {
         Check.NotNull(conversionType, nameof(conversionType));
 
@@ -223,7 +223,10 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <param name="converter">The converter to use.</param>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ElementTypeBuilder HasConversion(ValueConverter? converter, ValueComparer? valueComparer)
+    public virtual ElementTypeBuilder HasConversion(
+        ValueConverter? converter,
+        ValueComparer? valueComparer
+    )
     {
         Builder.HasConversion(converter, ConfigurationSource.Explicit);
         Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
@@ -240,11 +243,11 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TConversion,
+            TConversion,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        TComparer>()
-        where TComparer : ValueComparer
-        => HasConversion(typeof(TConversion), typeof(TComparer));
+            TComparer
+    >()
+        where TComparer : ValueComparer => HasConversion(typeof(TConversion), typeof(TComparer));
 
     /// <summary>
     ///     Configures elements of the collection so that their values are converted before
@@ -255,9 +258,10 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type conversionType,
+            Type conversionType,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType)
+            Type? comparerType
+    )
     {
         Check.NotNull(conversionType, nameof(conversionType));
 
@@ -282,8 +286,7 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -292,8 +295,7 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -301,8 +303,7 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

@@ -21,10 +21,7 @@ public class SystemTextJsonHelperTest : JsonHelperTestBase
     {
         // Arrange
         var helper = GetJsonHelper();
-        var obj = new
-        {
-            HTML = $"Hello pingüino"
-        };
+        var obj = new { HTML = $"Hello pingüino" };
         var expectedOutput = "{\"html\":\"Hello ping\\u00FCino\"}";
 
         // Act
@@ -40,11 +37,9 @@ public class SystemTextJsonHelperTest : JsonHelperTestBase
     {
         // Arrange
         var helper = GetJsonHelper();
-        var obj = new
-        {
-            HTML = "<b>Hello \n pingüino</b>"
-        };
-        var expectedOutput = "{\"html\":\"\\u003Cb\\u003EHello \\n ping\\u00FCino\\u003C/b\\u003E\"}";
+        var obj = new { HTML = "<b>Hello \n pingüino</b>" };
+        var expectedOutput =
+            "{\"html\":\"\\u003Cb\\u003EHello \\n ping\\u00FCino\\u003C/b\\u003E\"}";
 
         // Act
         var result = helper.Serialize(obj);
@@ -62,19 +57,16 @@ public class SystemTextJsonHelperTest : JsonHelperTestBase
         var options = new JsonOptions
         {
             JsonSerializerOptions =
-                {
-                    Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                    PropertyNamingPolicy = null,
-                    WriteIndented = true,
-                }
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                PropertyNamingPolicy = null,
+                WriteIndented = true,
+            },
         };
         var helper = GetJsonHelper(options);
-        var obj = new
-        {
-            HTML = "<b>John</b>"
-        };
+        var obj = new { HTML = "<b>John</b>" };
         var expectedOutput =
-@"{
+            @"{
   ""HTML"": ""\u003Cb\u003EJohn\u003C/b\u003E""
 }";
 

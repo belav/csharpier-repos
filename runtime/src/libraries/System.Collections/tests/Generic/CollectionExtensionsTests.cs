@@ -12,7 +12,10 @@ namespace System.Collections.Tests
         [Fact]
         public void GetValueOrDefault_KeyExistsInIReadOnlyDictionary_ReturnsValue()
         {
-            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>() { { "key", "value" } };
+            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
+            {
+                { "key", "value" },
+            };
             Assert.Equal("value", dictionary.GetValueOrDefault("key"));
             Assert.Equal("value", dictionary.GetValueOrDefault("key", null));
         }
@@ -20,39 +23,66 @@ namespace System.Collections.Tests
         [Fact]
         public void GetValueOrDefault_KeyDoesntExistInIReadOnlyDictionary_ReturnsDefaultValue()
         {
-            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>() { { "key", "value" } };
+            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
+            {
+                { "key", "value" },
+            };
             Assert.Null(dictionary.GetValueOrDefault("anotherKey"));
-            Assert.Equal("anotherValue", dictionary.GetValueOrDefault("anotherKey", "anotherValue"));
+            Assert.Equal(
+                "anotherValue",
+                dictionary.GetValueOrDefault("anotherKey", "anotherValue")
+            );
         }
 
         [Fact]
         public void GetValueOrDefault_NullKeyIReadOnlyDictionary_ThrowsArgumentNullException()
         {
-            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>() { { "key", "value" } };
-            AssertExtensions.Throws<ArgumentNullException>("key", () => dictionary.GetValueOrDefault(null));
-            AssertExtensions.Throws<ArgumentNullException>("key", () => dictionary.GetValueOrDefault(null, "anotherValue"));
+            IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
+            {
+                { "key", "value" },
+            };
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => dictionary.GetValueOrDefault(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => dictionary.GetValueOrDefault(null, "anotherValue")
+            );
         }
 
         [Fact]
         public void GetValueOrDefault_NullIReadOnlyDictionary_ThrowsArgumentNullException()
         {
             IReadOnlyDictionary<string, string> dictionary = null;
-            AssertExtensions.Throws<ArgumentNullException>("dictionary", () => dictionary.GetValueOrDefault("key"));
-            AssertExtensions.Throws<ArgumentNullException>("dictionary", () => dictionary.GetValueOrDefault("key", "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dictionary",
+                () => dictionary.GetValueOrDefault("key")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dictionary",
+                () => dictionary.GetValueOrDefault("key", "value")
+            );
         }
 
         [Fact]
         public void TryAdd_NullIDictionary_ThrowsArgumentNullException()
         {
             IDictionary<string, string> dictionary = null;
-            AssertExtensions.Throws<ArgumentNullException>("dictionary", () => dictionary.TryAdd("key", "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dictionary",
+                () => dictionary.TryAdd("key", "value")
+            );
         }
 
         [Fact]
         public void TryAdd_NullKeyIDictionary_ThrowsArgumentNullException()
         {
             IDictionary<string, string> dictionary = new SortedDictionary<string, string>();
-            AssertExtensions.Throws<ArgumentNullException>("key", () => dictionary.TryAdd(null, "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => dictionary.TryAdd(null, "value")
+            );
         }
 
         [Fact]
@@ -66,7 +96,10 @@ namespace System.Collections.Tests
         [Fact]
         public void TryAdd_KeyExistsInIDictionary_ReturnsFalse()
         {
-            IDictionary<string, string> dictionary = new SortedDictionary<string, string>() { ["key"] = "value" };
+            IDictionary<string, string> dictionary = new SortedDictionary<string, string>()
+            {
+                ["key"] = "value",
+            };
             Assert.False(dictionary.TryAdd("key", "value2"));
             Assert.Equal("value", dictionary["key"]);
         }
@@ -76,7 +109,10 @@ namespace System.Collections.Tests
         {
             IDictionary<string, string> dictionary = null;
             string value = null;
-            AssertExtensions.Throws<ArgumentNullException>("dictionary", () => dictionary.Remove("key", out value));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dictionary",
+                () => dictionary.Remove("key", out value)
+            );
             Assert.Null(value);
         }
 
@@ -85,14 +121,20 @@ namespace System.Collections.Tests
         {
             IDictionary<string, string> dictionary = new SortedDictionary<string, string>();
             string value = null;
-            AssertExtensions.Throws<ArgumentNullException>("key", () => dictionary.Remove(null, out value));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => dictionary.Remove(null, out value)
+            );
             Assert.Null(value);
         }
 
         [Fact]
         public void Remove_KeyExistsInIDictionary_ReturnsTrue()
         {
-            IDictionary<string, string> dictionary = new SortedDictionary<string, string>() { ["key"] = "value" };
+            IDictionary<string, string> dictionary = new SortedDictionary<string, string>()
+            {
+                ["key"] = "value",
+            };
             Assert.True(dictionary.Remove("key", out var value));
             Assert.Equal("value", value);
             Assert.Throws<KeyNotFoundException>(() => dictionary["key"]);
@@ -118,7 +160,11 @@ namespace System.Collections.Tests
         [Fact]
         public void AsReadOnly_TurnsIDictionaryIntoReadOnlyDictionary()
         {
-            IDictionary<string, string> dictionary = new Dictionary<string, string> { ["key1"] = "value1", ["key2"] = "value2" };
+            IDictionary<string, string> dictionary = new Dictionary<string, string>
+            {
+                ["key1"] = "value1",
+                ["key2"] = "value2",
+            };
             ReadOnlyDictionary<string, string> readOnlyDictionary = dictionary.AsReadOnly();
             Assert.NotNull(readOnlyDictionary);
             Assert.Equal(dictionary["key1"], readOnlyDictionary["key1"]);

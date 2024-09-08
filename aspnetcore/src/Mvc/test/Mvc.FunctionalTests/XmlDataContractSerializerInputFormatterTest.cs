@@ -39,10 +39,14 @@ public class XmlDataContractSerializerInputFormatterTest : IClassFixture<MvcTest
     public async Task RequiredDataIsProvided_AndModelIsBound_NoValidationErrors()
     {
         // Arrange
-        var input = "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\" " +
-            "xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Address><State>WA</State><Zipcode>" +
-            "98052</Zipcode></Address><Id>10</Id></Store>";
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Validation/CreateStore");
+        var input =
+            "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\" "
+            + "xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Address><State>WA</State><Zipcode>"
+            + "98052</Zipcode></Address><Id>10</Id></Store>";
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/Validation/CreateStore"
+        );
         request.Content = new StringContent(input, Encoding.UTF8, "application/xml-dcs");
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml-dcs"));
 
@@ -67,10 +71,14 @@ public class XmlDataContractSerializerInputFormatterTest : IClassFixture<MvcTest
     public async Task DataMissingForReferenceTypeProperties_AndModelIsBound_AndHasMixedValidationErrors()
     {
         // Arrange
-        var input = "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\"" +
-            " xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-            "<Address i:nil=\"true\"/><Id>10</Id></Store>";
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Validation/CreateStore");
+        var input =
+            "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\""
+            + " xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+            + "<Address i:nil=\"true\"/><Id>10</Id></Store>";
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/Validation/CreateStore"
+        );
         request.Content = new StringContent(input, Encoding.UTF8, "application/xml-dcs");
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml-dcs"));
 
@@ -94,7 +102,8 @@ public class XmlDataContractSerializerInputFormatterTest : IClassFixture<MvcTest
         {
             Assert.Contains(
                 modelBindingInfo.ModelStateErrorMessages,
-                (actualErrorMessage) => actualErrorMessage.Equals(expectedErrorMessage));
+                (actualErrorMessage) => actualErrorMessage.Equals(expectedErrorMessage)
+            );
         }
     }
 }

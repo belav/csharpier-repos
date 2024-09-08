@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace QQ
 {
     using System;
@@ -9,6 +10,7 @@ namespace QQ
     public class AA
     {
         private static void Test(TypedReference arg, String result) { }
+
         [Fact]
         public static void TestEntryPoint()
         {

@@ -13,7 +13,9 @@ namespace System.Globalization
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(GlobalizationMode.Hybrid);
-            Debug.Assert((options & (CompareOptions.Ordinal | CompareOptions.OrdinalIgnoreCase)) == 0);
+            Debug.Assert(
+                (options & (CompareOptions.Ordinal | CompareOptions.OrdinalIgnoreCase)) == 0
+            );
         }
 
         private static void AssertComparisonSupported(CompareOptions options, string cultureName)
@@ -34,7 +36,11 @@ namespace System.Globalization
                 throw new PlatformNotSupportedException(GetPNSEForCulture(options, cultureName));
         }
 
-        private unsafe int JsCompareString(ReadOnlySpan<char> string1, ReadOnlySpan<char> string2, CompareOptions options)
+        private unsafe int JsCompareString(
+            ReadOnlySpan<char> string1,
+            ReadOnlySpan<char> string2,
+            CompareOptions options
+        )
         {
             AssertHybridOnWasm(options);
             string cultureName = m_name;
@@ -44,7 +50,16 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                cmpResult = Interop.JsGlobalization.CompareString(cultureName, pString1, string1.Length, pString2, string2.Length, options, out int exception, out object ex_result);
+                cmpResult = Interop.JsGlobalization.CompareString(
+                    cultureName,
+                    pString1,
+                    string1.Length,
+                    pString2,
+                    string2.Length,
+                    options,
+                    out int exception,
+                    out object ex_result
+                );
                 if (exception != 0)
                     throw new Exception((string)ex_result);
             }
@@ -52,7 +67,11 @@ namespace System.Globalization
             return cmpResult;
         }
 
-        private unsafe bool JsStartsWith(ReadOnlySpan<char> source, ReadOnlySpan<char> prefix, CompareOptions options)
+        private unsafe bool JsStartsWith(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> prefix,
+            CompareOptions options
+        )
         {
             AssertHybridOnWasm(options);
             Debug.Assert(!prefix.IsEmpty);
@@ -63,16 +82,28 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
             {
-                result = Interop.JsGlobalization.StartsWith(cultureName, pSource, source.Length, pPrefix, prefix.Length, options, out int exception, out object ex_result);
+                result = Interop.JsGlobalization.StartsWith(
+                    cultureName,
+                    pSource,
+                    source.Length,
+                    pPrefix,
+                    prefix.Length,
+                    options,
+                    out int exception,
+                    out object ex_result
+                );
                 if (exception != 0)
                     throw new Exception((string)ex_result);
             }
 
-
             return result;
         }
 
-        private unsafe bool JsEndsWith(ReadOnlySpan<char> source, ReadOnlySpan<char> prefix, CompareOptions options)
+        private unsafe bool JsEndsWith(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> prefix,
+            CompareOptions options
+        )
         {
             AssertHybridOnWasm(options);
             Debug.Assert(!prefix.IsEmpty);
@@ -83,7 +114,16 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
             {
-                result = Interop.JsGlobalization.EndsWith(cultureName, pSource, source.Length, pPrefix, prefix.Length, options, out int exception, out object ex_result);
+                result = Interop.JsGlobalization.EndsWith(
+                    cultureName,
+                    pSource,
+                    source.Length,
+                    pPrefix,
+                    prefix.Length,
+                    options,
+                    out int exception,
+                    out object ex_result
+                );
                 if (exception != 0)
                     throw new Exception((string)ex_result);
             }
@@ -91,7 +131,13 @@ namespace System.Globalization
             return result;
         }
 
-        private unsafe int JsIndexOfCore(ReadOnlySpan<char> source, ReadOnlySpan<char> target, CompareOptions options, int* matchLengthPtr, bool fromBeginning)
+        private unsafe int JsIndexOfCore(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> target,
+            CompareOptions options,
+            int* matchLengthPtr,
+            bool fromBeginning
+        )
         {
             AssertHybridOnWasm(options);
             Debug.Assert(!target.IsEmpty);
@@ -101,16 +147,39 @@ namespace System.Globalization
             int idx;
             if (_isAsciiEqualityOrdinal && CanUseAsciiOrdinalForOptions(options))
             {
-                idx = (options & CompareOptions.IgnoreCase) != 0 ?
-                    IndexOfOrdinalIgnoreCaseHelper(source, target, options, matchLengthPtr, fromBeginning) :
-                    IndexOfOrdinalHelper(source, target, options, matchLengthPtr, fromBeginning);
+                idx =
+                    (options & CompareOptions.IgnoreCase) != 0
+                        ? IndexOfOrdinalIgnoreCaseHelper(
+                            source,
+                            target,
+                            options,
+                            matchLengthPtr,
+                            fromBeginning
+                        )
+                        : IndexOfOrdinalHelper(
+                            source,
+                            target,
+                            options,
+                            matchLengthPtr,
+                            fromBeginning
+                        );
             }
             else
             {
                 fixed (char* pSource = &MemoryMarshal.GetReference(source))
                 fixed (char* pTarget = &MemoryMarshal.GetReference(target))
                 {
-                    idx = Interop.JsGlobalization.IndexOf(m_name, pTarget, target.Length, pSource, source.Length, options, fromBeginning, out int exception, out object ex_result);
+                    idx = Interop.JsGlobalization.IndexOf(
+                        m_name,
+                        pTarget,
+                        target.Length,
+                        pSource,
+                        source.Length,
+                        options,
+                        fromBeginning,
+                        out int exception,
+                        out object ex_result
+                    );
                     if (exception != 0)
                         throw new Exception((string)ex_result);
                 }
@@ -123,19 +192,29 @@ namespace System.Globalization
             (options & CompareOptions.IgnoreSymbols) == CompareOptions.IgnoreSymbols;
 
         private static bool CompareOptionsNotSupported(CompareOptions options) =>
-            (options & CompareOptions.IgnoreWidth) == CompareOptions.IgnoreWidth ||
-            ((options & CompareOptions.IgnoreNonSpace) == CompareOptions.IgnoreNonSpace && (options & CompareOptions.IgnoreKanaType) != CompareOptions.IgnoreKanaType);
+            (options & CompareOptions.IgnoreWidth) == CompareOptions.IgnoreWidth
+            || (
+                (options & CompareOptions.IgnoreNonSpace) == CompareOptions.IgnoreNonSpace
+                && (options & CompareOptions.IgnoreKanaType) != CompareOptions.IgnoreKanaType
+            );
 
         private static string GetPNSE(CompareOptions options) =>
             SR.Format(SR.PlatformNotSupported_HybridGlobalizationWithCompareOptions, options);
 
-        private static bool CompareOptionsNotSupportedForCulture(CompareOptions options, string cultureName) =>
-            (options == CompareOptions.IgnoreKanaType &&
-            (string.IsNullOrEmpty(cultureName) || cultureName.Split('-')[0] != "ja")) ||
-            (options == CompareOptions.None &&
-            (cultureName.Split('-')[0] == "ja"));
+        private static bool CompareOptionsNotSupportedForCulture(
+            CompareOptions options,
+            string cultureName
+        ) =>
+            (
+                options == CompareOptions.IgnoreKanaType
+                && (string.IsNullOrEmpty(cultureName) || cultureName.Split('-')[0] != "ja")
+            ) || (options == CompareOptions.None && (cultureName.Split('-')[0] == "ja"));
 
         private static string GetPNSEForCulture(CompareOptions options, string cultureName) =>
-            SR.Format(SR.PlatformNotSupported_HybridGlobalizationWithCompareOptions, options, cultureName);
+            SR.Format(
+                SR.PlatformNotSupported_HybridGlobalizationWithCompareOptions,
+                options,
+                cultureName
+            );
     }
 }

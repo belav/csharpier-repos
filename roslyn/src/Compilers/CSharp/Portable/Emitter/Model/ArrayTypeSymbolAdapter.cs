@@ -13,18 +13,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class
 #if DEBUG
-        ArrayTypeSymbolAdapter : SymbolAdapter,
+    ArrayTypeSymbolAdapter : SymbolAdapter,
 #else
-        ArrayTypeSymbol :
-#endif 
-        Cci.IArrayTypeReference
+    ArrayTypeSymbol :
+#endif
+            Cci.IArrayTypeReference
     {
         Cci.ITypeReference Cci.IArrayTypeReference.GetElementType(EmitContext context)
         {
             PEModuleBuilder moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
             TypeWithAnnotations elementType = AdaptedArrayTypeSymbol.ElementTypeWithAnnotations;
-            var type = moduleBeingBuilt.Translate(elementType.Type, syntaxNodeOpt: (CSharpSyntaxNode?)context.SyntaxNode, diagnostics: context.Diagnostics);
+            var type = moduleBeingBuilt.Translate(
+                elementType.Type,
+                syntaxNodeOpt: (CSharpSyntaxNode?)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
 
             if (elementType.CustomModifiers.Length == 0)
             {
@@ -32,19 +36,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                return new Cci.ModifiedTypeReference(type, ImmutableArray<Cci.ICustomModifier>.CastUp(elementType.CustomModifiers));
+                return new Cci.ModifiedTypeReference(
+                    type,
+                    ImmutableArray<Cci.ICustomModifier>.CastUp(elementType.CustomModifiers)
+                );
             }
         }
 
         bool Cci.IArrayTypeReference.IsSZArray
         {
-            get
-            {
-                return AdaptedArrayTypeSymbol.IsSZArray;
-            }
+            get { return AdaptedArrayTypeSymbol.IsSZArray; }
         }
 
-        ImmutableArray<int> Cci.IArrayTypeReference.LowerBounds => AdaptedArrayTypeSymbol.LowerBounds;
+        ImmutableArray<int> Cci.IArrayTypeReference.LowerBounds =>
+            AdaptedArrayTypeSymbol.LowerBounds;
         int Cci.IArrayTypeReference.Rank => AdaptedArrayTypeSymbol.Rank;
         ImmutableArray<int> Cci.IArrayTypeReference.Sizes => AdaptedArrayTypeSymbol.Sizes;
 
@@ -60,15 +65,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         Cci.PrimitiveTypeCode Cci.ITypeReference.TypeCode => Cci.PrimitiveTypeCode.NotPrimitive;
 
         Cci.ITypeDefinition? Cci.ITypeReference.GetResolvedType(EmitContext context) => null;
-        Cci.IGenericMethodParameterReference? Cci.ITypeReference.AsGenericMethodParameterReference => null;
-        Cci.IGenericTypeInstanceReference? Cci.ITypeReference.AsGenericTypeInstanceReference => null;
-        Cci.IGenericTypeParameterReference? Cci.ITypeReference.AsGenericTypeParameterReference => null;
-        Cci.INamespaceTypeDefinition? Cci.ITypeReference.AsNamespaceTypeDefinition(EmitContext context) => null;
+
+        Cci.IGenericMethodParameterReference? Cci.ITypeReference.AsGenericMethodParameterReference =>
+            null;
+        Cci.IGenericTypeInstanceReference? Cci.ITypeReference.AsGenericTypeInstanceReference =>
+            null;
+        Cci.IGenericTypeParameterReference? Cci.ITypeReference.AsGenericTypeParameterReference =>
+            null;
+
+        Cci.INamespaceTypeDefinition? Cci.ITypeReference.AsNamespaceTypeDefinition(
+            EmitContext context
+        ) => null;
+
         Cci.INamespaceTypeReference? Cci.ITypeReference.AsNamespaceTypeReference => null;
-        Cci.INestedTypeDefinition? Cci.ITypeReference.AsNestedTypeDefinition(EmitContext context) => null;
+
+        Cci.INestedTypeDefinition? Cci.ITypeReference.AsNestedTypeDefinition(EmitContext context) =>
+            null;
+
         Cci.INestedTypeReference? Cci.ITypeReference.AsNestedTypeReference => null;
-        Cci.ISpecializedNestedTypeReference? Cci.ITypeReference.AsSpecializedNestedTypeReference => null;
+        Cci.ISpecializedNestedTypeReference? Cci.ITypeReference.AsSpecializedNestedTypeReference =>
+            null;
+
         Cci.ITypeDefinition? Cci.ITypeReference.AsTypeDefinition(EmitContext context) => null;
+
         Cci.IDefinition? Cci.IReference.AsDefinition(EmitContext context) => null;
     }
 
@@ -83,7 +102,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new ArrayTypeSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new ArrayTypeSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;
@@ -109,5 +131,5 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal sealed override Symbol AdaptedSymbol => AdaptedArrayTypeSymbol;
         internal ArrayTypeSymbol AdaptedArrayTypeSymbol { get; }
     }
-#endif 
+#endif
 }

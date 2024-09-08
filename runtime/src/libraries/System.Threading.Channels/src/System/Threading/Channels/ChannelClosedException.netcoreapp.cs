@@ -14,12 +14,14 @@ namespace System.Threading.Channels
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected ChannelClosedException(SerializationInfo info, StreamingContext context) :
-            base(info, context)
-        {
-        }
+        protected ChannelClosedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -25,8 +25,11 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="pattern">The route pattern.</param>
     /// <param name="configure">A callback to configure the connection.</param>
     /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-    public static ConnectionEndpointRouteBuilder MapConnections(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern, Action<IConnectionBuilder> configure) =>
-        endpoints.MapConnections(pattern, new HttpConnectionDispatcherOptions(), configure);
+    public static ConnectionEndpointRouteBuilder MapConnections(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        Action<IConnectionBuilder> configure
+    ) => endpoints.MapConnections(pattern, new HttpConnectionDispatcherOptions(), configure);
 
     /// <summary>
     /// Maps incoming requests with the specified path to the provided connection pipeline.
@@ -35,7 +38,11 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The route pattern.</param>
     /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-    public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern) where TConnectionHandler : ConnectionHandler
+    public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern
+    )
+        where TConnectionHandler : ConnectionHandler
     {
         return endpoints.MapConnectionHandler<TConnectionHandler>(pattern, configureOptions: null);
     }
@@ -48,15 +55,24 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="pattern">The route pattern.</param>
     /// <param name="configureOptions">A callback to configure dispatcher options.</param>
     /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-    public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern, Action<HttpConnectionDispatcherOptions>? configureOptions) where TConnectionHandler : ConnectionHandler
+    public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        Action<HttpConnectionDispatcherOptions>? configureOptions
+    )
+        where TConnectionHandler : ConnectionHandler
     {
         var options = new HttpConnectionDispatcherOptions();
         configureOptions?.Invoke(options);
 
-        var conventionBuilder = endpoints.MapConnections(pattern, options, b =>
-        {
-            b.UseConnectionHandler<TConnectionHandler>();
-        });
+        var conventionBuilder = endpoints.MapConnections(
+            pattern,
+            options,
+            b =>
+            {
+                b.UseConnectionHandler<TConnectionHandler>();
+            }
+        );
 
         var attributes = typeof(TConnectionHandler).GetCustomAttributes(inherit: true);
         conventionBuilder.Add(e =>
@@ -80,7 +96,12 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="options">Options used to configure the connection.</param>
     /// <param name="configure">A callback to configure the connection.</param>
     /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
-    public static ConnectionEndpointRouteBuilder MapConnections(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern, HttpConnectionDispatcherOptions options, Action<IConnectionBuilder> configure)
+    public static ConnectionEndpointRouteBuilder MapConnections(
+        this IEndpointRouteBuilder endpoints,
+        [StringSyntax("Route")] string pattern,
+        HttpConnectionDispatcherOptions options,
+        Action<IConnectionBuilder> configure
+    )
     {
         var dispatcher = endpoints.ServiceProvider.GetRequiredService<HttpConnectionDispatcher>();
 
@@ -134,7 +155,9 @@ public static class ConnectionEndpointRouteBuilderExtensions
     {
         private readonly List<IEndpointConventionBuilder> _endpointConventionBuilders;
 
-        public CompositeEndpointConventionBuilder(List<IEndpointConventionBuilder> endpointConventionBuilders)
+        public CompositeEndpointConventionBuilder(
+            List<IEndpointConventionBuilder> endpointConventionBuilders
+        )
         {
             _endpointConventionBuilders = endpointConventionBuilders;
         }

@@ -35,52 +35,51 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Caching;
-
 using BenTools.Data;
 
 namespace Tester
 {
-	class PriorityQueueState
-	{
-		public readonly BinaryPriorityQueue Queue;
-		
-		public int EnqueueCount;
-		public int DequeueCount;
-		public int DisableCount;
-		public int PeekCount;
-		public int UpdateCount;
-		
-		public PriorityQueueState ()
-		{
-			Queue = new BinaryPriorityQueue (new CacheItemComparer ());
-			EnqueueCount = 0;
-			DequeueCount = 0;
-			DisableCount = 0;
-			PeekCount = 0;
-			UpdateCount = 0;
-		}
+    class PriorityQueueState
+    {
+        public readonly BinaryPriorityQueue Queue;
 
-		public void Enqueue (CacheItem item)
-		{
-			Queue.Push (item);
-		}
+        public int EnqueueCount;
+        public int DequeueCount;
+        public int DisableCount;
+        public int PeekCount;
+        public int UpdateCount;
 
-		public CacheItem Dequeue ()
-		{
-			return Queue.Pop () as CacheItem;
-		}
+        public PriorityQueueState()
+        {
+            Queue = new BinaryPriorityQueue(new CacheItemComparer());
+            EnqueueCount = 0;
+            DequeueCount = 0;
+            DisableCount = 0;
+            PeekCount = 0;
+            UpdateCount = 0;
+        }
 
-		public CacheItem Peek ()
-		{
-			return Queue.Peek () as CacheItem;
-		}
+        public void Enqueue(CacheItem item)
+        {
+            Queue.Push(item);
+        }
 
-		public void Update (int index)
-		{
-			if (index == -1)
-				return;
-			
-			Queue.Update (index);
-		}
-	}
+        public CacheItem Dequeue()
+        {
+            return Queue.Pop() as CacheItem;
+        }
+
+        public CacheItem Peek()
+        {
+            return Queue.Peek() as CacheItem;
+        }
+
+        public void Update(int index)
+        {
+            if (index == -1)
+                return;
+
+            Queue.Update(index);
+        }
+    }
 }

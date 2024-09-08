@@ -12,7 +12,12 @@ namespace Microsoft.AspNetCore.Authorization.Policy;
 public class AuthorizationMiddlewareResultHandler : IAuthorizationMiddlewareResultHandler
 {
     /// <inheritdoc />
-    public Task HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+    public Task HandleAsync(
+        RequestDelegate next,
+        HttpContext context,
+        AuthorizationPolicy policy,
+        PolicyAuthorizationResult authorizeResult
+    )
     {
         if (authorizeResult.Succeeded)
         {

@@ -32,7 +32,11 @@ namespace System.Text.RegularExpressions
         [ExcludeFromCodeCoverage(Justification = "Debug only")]
         internal static void GenerateUnicodeTables(string path)
         {
-            UnicodeCategoryRangesGenerator.Generate("System.Text.RegularExpressions.Symbolic", "UnicodeCategoryRanges", path);
+            UnicodeCategoryRangesGenerator.Generate(
+                "System.Text.RegularExpressions.Symbolic",
+                "UnicodeCategoryRanges",
+                path
+            );
         }
 
         /// <summary>
@@ -69,14 +73,26 @@ namespace System.Text.RegularExpressions
         /// <param name="exploreDfa">whether to explore DFA transitions</param>
         /// <param name="exploreNfa">whether to explore NFA transitions</param>
         [ExcludeFromCodeCoverage(Justification = "Debug only")]
-        internal void Explore(bool includeDotStarred, bool includeReverse, bool includeOriginal, bool exploreDfa, bool exploreNfa)
+        internal void Explore(
+            bool includeDotStarred,
+            bool includeReverse,
+            bool includeOriginal,
+            bool exploreDfa,
+            bool exploreNfa
+        )
         {
             if (factory is not SymbolicRegexRunnerFactory srmFactory)
             {
                 throw new NotSupportedException();
             }
 
-            srmFactory._matcher.Explore(includeDotStarred, includeReverse, includeOriginal, exploreDfa, exploreNfa);
+            srmFactory._matcher.Explore(
+                includeDotStarred,
+                includeReverse,
+                includeOriginal,
+                exploreDfa,
+                exploreNfa
+            );
         }
     }
 }

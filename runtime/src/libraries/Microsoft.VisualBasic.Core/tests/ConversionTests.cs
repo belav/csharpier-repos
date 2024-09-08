@@ -106,19 +106,44 @@ namespace Microsoft.VisualBasic.Tests
             Assert.Equal(expected, Conversion.CTypeDynamic<T>(expression));
         }
 
-        public static IEnumerable<object[]> CTypeDynamic_Byte_TestData() => ConversionsTests.ToByte_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_SByte_TestData() => ConversionsTests.ToSByte_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_UShort_TestData() => ConversionsTests.ToUShort_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Short_TestData() => ConversionsTests.ToShort_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_UInteger_TestData() => ConversionsTests.ToUInteger_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Integer_TestData() => ConversionsTests.ToInteger_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_ULong_TestData() => ConversionsTests.ToULong_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Long_TestData() => ConversionsTests.ToLong_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Single_TestData() => ConversionsTests.ToSingle_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Double_TestData() => ConversionsTests.ToDouble_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Decimal_TestData() => ConversionsTests.ToDecimal_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_Char_TestData() => ConversionsTests.ToChar_Object_TestData();
-        public static IEnumerable<object[]> CTypeDynamic_String_TestData() => ConversionsTests.ToString_Object_TestData();
+        public static IEnumerable<object[]> CTypeDynamic_Byte_TestData() =>
+            ConversionsTests.ToByte_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_SByte_TestData() =>
+            ConversionsTests.ToSByte_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_UShort_TestData() =>
+            ConversionsTests.ToUShort_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Short_TestData() =>
+            ConversionsTests.ToShort_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_UInteger_TestData() =>
+            ConversionsTests.ToUInteger_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Integer_TestData() =>
+            ConversionsTests.ToInteger_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_ULong_TestData() =>
+            ConversionsTests.ToULong_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Long_TestData() =>
+            ConversionsTests.ToLong_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Single_TestData() =>
+            ConversionsTests.ToSingle_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Double_TestData() =>
+            ConversionsTests.ToDouble_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Decimal_TestData() =>
+            ConversionsTests.ToDecimal_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_Char_TestData() =>
+            ConversionsTests.ToChar_Object_TestData();
+
+        public static IEnumerable<object[]> CTypeDynamic_String_TestData() =>
+            ConversionsTests.ToString_Object_TestData();
 
         [Theory]
         [InlineData(null, null)]
@@ -131,7 +156,9 @@ namespace Microsoft.VisualBasic.Tests
         [Fact]
         public void ErrorToString()
         {
-            Microsoft.VisualBasic.CompilerServices.ProjectData.SetProjectError(new System.IO.FileNotFoundException());
+            Microsoft.VisualBasic.CompilerServices.ProjectData.SetProjectError(
+                new System.IO.FileNotFoundException()
+            );
             Assert.NotNull(Conversion.ErrorToString());
         }
 

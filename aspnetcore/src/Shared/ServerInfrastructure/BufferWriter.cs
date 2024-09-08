@@ -9,7 +9,8 @@ namespace System.Buffers;
 /// A fast access struct that wraps <see cref="IBufferWriter{T}"/>.
 /// </summary>
 /// <typeparam name="T">The type of element to be written.</typeparam>
-internal ref struct BufferWriter<T> where T : IBufferWriter<byte>
+internal ref struct BufferWriter<T>
+    where T : IBufferWriter<byte>
 {
     /// <summary>
     /// The underlying <see cref="IBufferWriter{T}"/>.

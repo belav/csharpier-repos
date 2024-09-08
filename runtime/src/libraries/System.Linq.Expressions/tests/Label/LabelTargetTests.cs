@@ -17,9 +17,9 @@ namespace System.Linq.Expressions.Tests
         private class CustomException : Exception
         {
             public CustomException()
-                : base("This is a custom exception that exists just to distinguish throwing it in a test from any other cause of exceptions being thrown.")
-            {
-            }
+                : base(
+                    "This is a custom exception that exists just to distinguish throwing it in a test from any other cause of exceptions being thrown."
+                ) { }
         }
 
         [Fact]
@@ -28,7 +28,10 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(Expression.Label("name"), Expression.Label("name"));
             Assert.NotSame(Expression.Label(), Expression.Label());
             Assert.NotSame(Expression.Label(typeof(int)), Expression.Label(typeof(int)));
-            Assert.NotSame(Expression.Label(typeof(int), "name"), Expression.Label(typeof(int), "name"));
+            Assert.NotSame(
+                Expression.Label(typeof(int), "name"),
+                Expression.Label(typeof(int), "name")
+            );
         }
 
         [Fact]
@@ -61,15 +64,27 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullType()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Label(default(Type)));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Label(null, "name"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Expression.Label(default(Type))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Expression.Label(null, "name")
+            );
         }
 
         [Fact]
         public void GenericType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(typeof(List<>)));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(typeof(List<>), null));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Label(typeof(List<>))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Label(typeof(List<>), null)
+            );
         }
 
         [Fact]
@@ -77,8 +92,14 @@ namespace System.Linq.Expressions.Tests
         {
             Type listType = typeof(List<>);
             Type listListListType = listType.MakeGenericType(listType.MakeGenericType(listType));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(listListListType));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(listListListType, null));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Label(listListListType)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Label(listListListType, null)
+            );
         }
 
         [Fact]
@@ -86,7 +107,10 @@ namespace System.Linq.Expressions.Tests
         {
             Type pointerType = typeof(int).MakePointerType();
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(pointerType));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(pointerType, null));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Label(pointerType, null)
+            );
         }
 
         [Fact]
@@ -94,7 +118,10 @@ namespace System.Linq.Expressions.Tests
         {
             Type byRefType = typeof(int).MakeByRefType();
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(byRefType));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(byRefType, null));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Label(byRefType, null)
+            );
         }
 
         [Fact]
@@ -119,28 +146,37 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public void LableNameNeedNotBeValidCSharpLabel(bool useInterpreter)
         {
-            LabelTarget target = Expression.Label("1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff");
-            Expression.Lambda<Action>(
-                Expression.Block(
-                    Expression.Goto(target),
-                    Expression.Throw(Expression.Constant(new CustomException())),
-                    Expression.Label(target)
+            LabelTarget target = Expression.Label(
+                "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff"
+            );
+            Expression
+                .Lambda<Action>(
+                    Expression.Block(
+                        Expression.Goto(target),
+                        Expression.Throw(Expression.Constant(new CustomException())),
+                        Expression.Label(target)
                     )
-                ).Compile(useInterpreter)();
+                )
+                .Compile(useInterpreter)();
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         public void LableNameNeedNotBeValidCSharpLabelWithValue(bool useInterpreter)
         {
-            LabelTarget target = Expression.Label(typeof(int), "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff");
-            Func<int> func = Expression.Lambda<Func<int>>(
-                Expression.Block(
-                    Expression.Return(target, Expression.Constant(42)),
-                    Expression.Throw(Expression.Constant(new CustomException())),
-                    Expression.Label(target, Expression.Default(typeof(int)))
+            LabelTarget target = Expression.Label(
+                typeof(int),
+                "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff"
+            );
+            Func<int> func = Expression
+                .Lambda<Func<int>>(
+                    Expression.Block(
+                        Expression.Return(target, Expression.Constant(42)),
+                        Expression.Throw(Expression.Constant(new CustomException())),
+                        Expression.Label(target, Expression.Default(typeof(int)))
                     )
-                ).Compile(useInterpreter);
+                )
+                .Compile(useInterpreter);
             Assert.Equal(42, func());
         }
     }

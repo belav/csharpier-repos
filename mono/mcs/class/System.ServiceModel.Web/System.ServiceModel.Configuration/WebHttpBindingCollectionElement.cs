@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,39 +35,35 @@ using System.Configuration;
 using System.Net;
 using System.Net.Security;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Diagnostics;
 using System.ServiceModel.Dispatcher;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public partial class WebHttpBindingCollectionElement
-		 : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
+    public partial class WebHttpBindingCollectionElement
+        : StandardBindingCollectionElement<WebHttpBinding, WebHttpBindingElement>
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
 
-		static WebHttpBindingCollectionElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static WebHttpBindingCollectionElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-		public WebHttpBindingCollectionElement ()
-		{
-		}
+        public WebHttpBindingCollectionElement() { }
 
-		// Methods
+        // Methods
 
-		protected internal override Binding GetDefault ()
-		{
-			return new WebHttpBinding ();
-		}
-
-	}
-
+        protected internal override Binding GetDefault()
+        {
+            return new WebHttpBinding();
+        }
+    }
 }

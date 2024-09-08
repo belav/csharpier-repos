@@ -7,9 +7,9 @@ using System.Text;
 
 namespace MonoTests.Common
 {
-	public class BazValidationAttributes
-	{
-		[Range (-5, 5)]
-		public int Column1 { get; set; }
-	}
+    public class BazValidationAttributes
+    {
+        [Range(-5, 5)]
+        public int Column1 { get; set; }
+    }
 }

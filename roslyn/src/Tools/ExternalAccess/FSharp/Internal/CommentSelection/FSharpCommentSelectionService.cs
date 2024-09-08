@@ -22,16 +22,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.CommentSelection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FSharpCommentSelectionService()
-        {
-        }
+        public FSharpCommentSelectionService() { }
 
-        public CommentSelectionInfo GetInfo()
-            => new(
+        public CommentSelectionInfo GetInfo() =>
+            new(
                 supportsSingleLineComment: true,
                 supportsBlockComment: true,
                 singleLineCommentString: "//",
                 blockCommentStartString: "(*",
-                blockCommentEndString: "*)");
+                blockCommentEndString: "*)"
+            );
     }
 }

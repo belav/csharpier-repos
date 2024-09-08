@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -19,24 +19,28 @@ namespace System.Data.Services.Client
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Data.Services.Common;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
-    using System.Data.Services.Common;
-#if !ASTORIA_LIGHT
-    using System.Net;
-#else    
-    using System.Data.Services.Http;
-#endif
     using System.Text;
     using System.Xml;
     using System.Xml.Linq;
+#if !ASTORIA_LIGHT
+    using System.Net;
+#else
+    using System.Data.Services.Http;
+#endif
 
     #endregion Namespaces.
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506", Justification = "Central class of the API, likely to have many cross-references")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Maintainability",
+        "CA1506",
+        Justification = "Central class of the API, likely to have many cross-references"
+    )]
     public class DataServiceContext
     {
 #if !TESTUNIXNEWLINE
@@ -49,17 +53,17 @@ namespace System.Data.Services.Client
 
         private readonly System.Uri baseUriWithSlash;
 
-#if !ASTORIA_LIGHT        
+#if !ASTORIA_LIGHT
         private System.Net.ICredentials credentials;
 #endif
 
-          private string dataNamespace;
+        private string dataNamespace;
 
         private Func<Type, string> resolveName;
 
         private Func<string, Type> resolveType;
 
-#if !ASTORIA_LIGHT        
+#if !ASTORIA_LIGHT
         private int timeout;
 #endif
 
@@ -75,7 +79,7 @@ namespace System.Data.Services.Client
 
         private bool ignoreResourceNotFoundException;
 
-#if ASTORIA_LIGHT        
+#if ASTORIA_LIGHT
         private HttpStack httpStack;
 #endif
 
@@ -83,11 +87,17 @@ namespace System.Data.Services.Client
 
         private uint nextChange;
 
-        private Dictionary<object, EntityDescriptor> entityDescriptors = new Dictionary<object, EntityDescriptor>(EqualityComparer<object>.Default);
+        private Dictionary<object, EntityDescriptor> entityDescriptors = new Dictionary<
+            object,
+            EntityDescriptor
+        >(EqualityComparer<object>.Default);
 
         private Dictionary<String, EntityDescriptor> identityToDescriptor;
 
-        private Dictionary<LinkDescriptor, LinkDescriptor> bindings = new Dictionary<LinkDescriptor, LinkDescriptor>(LinkDescriptor.EquivalenceComparer);
+        private Dictionary<LinkDescriptor, LinkDescriptor> bindings = new Dictionary<
+            LinkDescriptor,
+            LinkDescriptor
+        >(LinkDescriptor.EquivalenceComparer);
 
         private bool applyingChanges;
 
@@ -104,7 +114,10 @@ namespace System.Data.Services.Client
             {
                 if (XHRHttpWebRequest.IsAvailable())
                 {
-                    serviceRoot = new Uri(System.Windows.Browser.HtmlPage.Document.DocumentUri, serviceRoot);
+                    serviceRoot = new Uri(
+                        System.Windows.Browser.HtmlPage.Document.DocumentUri,
+                        serviceRoot
+                    );
                 }
                 else
                 {
@@ -113,11 +126,13 @@ namespace System.Data.Services.Client
                 }
             }
 #endif
-            if (!serviceRoot.IsAbsoluteUri ||
-                !Uri.IsWellFormedUriString(serviceRoot.OriginalString, UriKind.Absolute) ||
-                !String.IsNullOrEmpty(serviceRoot.Query) ||
-                !string.IsNullOrEmpty(serviceRoot.Fragment) ||
-                ((serviceRoot.Scheme != "http") && (serviceRoot.Scheme != "https")))
+            if (
+                !serviceRoot.IsAbsoluteUri
+                || !Uri.IsWellFormedUriString(serviceRoot.OriginalString, UriKind.Absolute)
+                || !String.IsNullOrEmpty(serviceRoot.Query)
+                || !string.IsNullOrEmpty(serviceRoot.Fragment)
+                || ((serviceRoot.Scheme != "http") && (serviceRoot.Scheme != "https"))
+            )
             {
                 throw Error.Argument(Strings.Context_BaseUri, "serviceRoot");
             }
@@ -126,7 +141,10 @@ namespace System.Data.Services.Client
             this.baseUriWithSlash = serviceRoot;
             if (!serviceRoot.OriginalString.EndsWith("/", StringComparison.Ordinal))
             {
-                this.baseUriWithSlash = Util.CreateUri(serviceRoot.OriginalString + "/", UriKind.Absolute);
+                this.baseUriWithSlash = Util.CreateUri(
+                    serviceRoot.OriginalString + "/",
+                    UriKind.Absolute
+                );
             }
 
             this.mergeOption = MergeOption.AppendOnly;
@@ -158,7 +176,7 @@ namespace System.Data.Services.Client
             get { return this.baseUri; }
         }
 
-#if !ASTORIA_LIGHT        
+#if !ASTORIA_LIGHT
         public System.Net.ICredentials Credentials
         {
             get { return this.credentials; }
@@ -186,11 +204,7 @@ namespace System.Data.Services.Client
 
         public string DataNamespace
         {
-            get
-            {
-                return this.dataNamespace;
-            }
-
+            get { return this.dataNamespace; }
             set
             {
                 Util.CheckArgumentNull(value, "value");
@@ -210,14 +224,10 @@ namespace System.Data.Services.Client
             set { this.resolveType = value; }
         }
 
-#if !ASTORIA_LIGHT        
+#if !ASTORIA_LIGHT
         public int Timeout
         {
-            get
-            {
-                return this.timeout;
-            }
-
+            get { return this.timeout; }
             set
             {
                 if (value < 0)
@@ -232,11 +242,7 @@ namespace System.Data.Services.Client
 
         public Uri TypeScheme
         {
-            get
-            {
-                return this.typeScheme;
-            }
-
+            get { return this.typeScheme; }
             set
             {
                 Util.CheckArgumentNull(value, "value");
@@ -252,27 +258,23 @@ namespace System.Data.Services.Client
 
         public ReadOnlyCollection<LinkDescriptor> Links
         {
-            get
-            {
-                return this.bindings.Values.OrderBy(l => l.ChangeOrder).ToList().AsReadOnly();
-            }
+            get { return this.bindings.Values.OrderBy(l => l.ChangeOrder).ToList().AsReadOnly(); }
         }
 
         public ReadOnlyCollection<EntityDescriptor> Entities
         {
             get
             {
-                return this.entityDescriptors.Values.OrderBy(d => d.ChangeOrder).ToList().AsReadOnly();
+                return this
+                    .entityDescriptors.Values.OrderBy(d => d.ChangeOrder)
+                    .ToList()
+                    .AsReadOnly();
             }
         }
 
         public SaveChangesOptions SaveChangesDefaultOptions
         {
-            get
-            {
-                return this.saveChangesDefaultOptions;
-            }
-
+            get { return this.saveChangesDefaultOptions; }
             set
             {
                 ValidateSaveChangesOptions(value);
@@ -288,8 +290,8 @@ namespace System.Data.Services.Client
             set { this.ignoreResourceNotFoundException = value; }
         }
 
-#if ASTORIA_LIGHT        
-public HttpStack HttpStack
+#if ASTORIA_LIGHT
+        public HttpStack HttpStack
         {
             get { return this.httpStack; }
             set { this.httpStack = Util.CheckEnumerationValue(value, "HttpStack"); }
@@ -308,7 +310,7 @@ public HttpStack HttpStack
         }
 
         #region Entity and Link Tracking
-        
+
         public EntityDescriptor GetEntityDescriptor(object entity)
         {
             Util.CheckArgumentNull(entity, "entity");
@@ -323,16 +325,21 @@ public HttpStack HttpStack
                 return null;
             }
         }
-        
+
         public LinkDescriptor GetLinkDescriptor(object source, string sourceProperty, object target)
         {
             Util.CheckArgumentNull(source, "source");
             Util.CheckArgumentNotEmpty(sourceProperty, "sourceProperty");
             Util.CheckArgumentNull(target, "target");
-            
+
             LinkDescriptor link;
-            
-            if (this.bindings.TryGetValue(new LinkDescriptor(source, sourceProperty, target), out link))
+
+            if (
+                this.bindings.TryGetValue(
+                    new LinkDescriptor(source, sourceProperty, target),
+                    out link
+                )
+            )
             {
                 return link;
             }
@@ -341,7 +348,7 @@ public HttpStack HttpStack
                 return null;
             }
         }
-        
+
         #endregion
 
         #region CancelRequest
@@ -360,7 +367,8 @@ public HttpStack HttpStack
 
                     if (null != query)
                     {
-                        DataServiceQueryProvider provider = query.Provider as DataServiceQueryProvider;
+                        DataServiceQueryProvider provider =
+                            query.Provider as DataServiceQueryProvider;
                         if (null != provider)
                         {
                             context = provider.Context;
@@ -388,79 +396,178 @@ public HttpStack HttpStack
         #endregion
 
         #region CreateQuery
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "required for this feature")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads", Justification = "required for this feature")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "required for this feature"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1057:StringUriOverloadsCallSystemUriOverloads",
+            Justification = "required for this feature"
+        )]
         public DataServiceQuery<T> CreateQuery<T>(string entitySetName)
         {
             Util.CheckArgumentNotEmpty(entitySetName, "entitySetName");
             this.ValidateEntitySetName(ref entitySetName);
 
-            ResourceSetExpression rse = new ResourceSetExpression(typeof(IOrderedQueryable<T>), null, Expression.Constant(entitySetName), typeof(T), null, CountOption.None, null, null);
-            return new DataServiceQuery<T>.DataServiceOrderedQuery(rse, new DataServiceQueryProvider(this));
+            ResourceSetExpression rse = new ResourceSetExpression(
+                typeof(IOrderedQueryable<T>),
+                null,
+                Expression.Constant(entitySetName),
+                typeof(T),
+                null,
+                CountOption.None,
+                null,
+                null
+            );
+            return new DataServiceQuery<T>.DataServiceOrderedQuery(
+                rse,
+                new DataServiceQueryProvider(this)
+            );
         }
         #endregion
 
         #region GetMetadataUri
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "required for this feature")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "required for this feature"
+        )]
         public Uri GetMetadataUri()
         {
-            Uri metadataUri = Util.CreateUri(this.baseUriWithSlash.OriginalString + XmlConstants.UriMetadataSegment, UriKind.Absolute);
+            Uri metadataUri = Util.CreateUri(
+                this.baseUriWithSlash.OriginalString + XmlConstants.UriMetadataSegment,
+                UriKind.Absolute
+            );
             return metadataUri;
         }
         #endregion
 
         #region LoadProperty
 
-        public IAsyncResult BeginLoadProperty(object entity, string propertyName, AsyncCallback callback, object state)
+        public IAsyncResult BeginLoadProperty(
+            object entity,
+            string propertyName,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.BeginLoadProperty(entity, propertyName, (Uri)null, callback, state);
         }
 
-        public IAsyncResult BeginLoadProperty(object entity, string propertyName, Uri nextLinkUri, AsyncCallback callback, object state)
+        public IAsyncResult BeginLoadProperty(
+            object entity,
+            string propertyName,
+            Uri nextLinkUri,
+            AsyncCallback callback,
+            object state
+        )
         {
-            LoadPropertyResult result = this.CreateLoadPropertyRequest(entity, propertyName, callback, state, nextLinkUri, null);
+            LoadPropertyResult result = this.CreateLoadPropertyRequest(
+                entity,
+                propertyName,
+                callback,
+                state,
+                nextLinkUri,
+                null
+            );
             result.BeginExecute();
             return result;
         }
 
-        public IAsyncResult BeginLoadProperty(object entity, string propertyName, DataServiceQueryContinuation continuation, AsyncCallback callback, object state)
+        public IAsyncResult BeginLoadProperty(
+            object entity,
+            string propertyName,
+            DataServiceQueryContinuation continuation,
+            AsyncCallback callback,
+            object state
+        )
         {
             Util.CheckArgumentNull(continuation, "continuation");
-            LoadPropertyResult result = this.CreateLoadPropertyRequest(entity, propertyName, callback, state, null, continuation);
+            LoadPropertyResult result = this.CreateLoadPropertyRequest(
+                entity,
+                propertyName,
+                callback,
+                state,
+                null,
+                continuation
+            );
             result.BeginExecute();
             return result;
         }
 
         public QueryOperationResponse EndLoadProperty(IAsyncResult asyncResult)
         {
-            LoadPropertyResult response = QueryResult.EndExecute<LoadPropertyResult>(this, "LoadProperty", asyncResult);
+            LoadPropertyResult response = QueryResult.EndExecute<LoadPropertyResult>(
+                this,
+                "LoadProperty",
+                asyncResult
+            );
             return response.LoadProperty();
         }
 
-#if !ASTORIA_LIGHT        
+#if !ASTORIA_LIGHT
         public QueryOperationResponse LoadProperty(object entity, string propertyName)
         {
             return this.LoadProperty(entity, propertyName, (Uri)null);
         }
 
-        public QueryOperationResponse LoadProperty(object entity, string propertyName, Uri nextLinkUri)
+        public QueryOperationResponse LoadProperty(
+            object entity,
+            string propertyName,
+            Uri nextLinkUri
+        )
         {
-            LoadPropertyResult result = this.CreateLoadPropertyRequest(entity, propertyName, null, null, nextLinkUri, null);
+            LoadPropertyResult result = this.CreateLoadPropertyRequest(
+                entity,
+                propertyName,
+                null,
+                null,
+                nextLinkUri,
+                null
+            );
             result.Execute();
             return result.LoadProperty();
         }
 
-        public QueryOperationResponse LoadProperty(object entity, string propertyName, DataServiceQueryContinuation continuation)
+        public QueryOperationResponse LoadProperty(
+            object entity,
+            string propertyName,
+            DataServiceQueryContinuation continuation
+        )
         {
-            LoadPropertyResult result = this.CreateLoadPropertyRequest(entity, propertyName, null, null, null, continuation);
+            LoadPropertyResult result = this.CreateLoadPropertyRequest(
+                entity,
+                propertyName,
+                null,
+                null,
+                null,
+                continuation
+            );
             result.Execute();
             return result.LoadProperty();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011", Justification = "allows compiler to infer 'T'")]
-        public QueryOperationResponse<T> LoadProperty<T>(object entity, string propertyName, DataServiceQueryContinuation<T> continuation)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1011",
+            Justification = "allows compiler to infer 'T'"
+        )]
+        public QueryOperationResponse<T> LoadProperty<T>(
+            object entity,
+            string propertyName,
+            DataServiceQueryContinuation<T> continuation
+        )
         {
-            LoadPropertyResult result = this.CreateLoadPropertyRequest(entity, propertyName, null, null, null, continuation);
+            LoadPropertyResult result = this.CreateLoadPropertyRequest(
+                entity,
+                propertyName,
+                null,
+                null,
+                null,
+                continuation
+            );
             result.Execute();
             return (QueryOperationResponse<T>)result.LoadProperty();
         }
@@ -469,7 +576,7 @@ public HttpStack HttpStack
         #endregion
 
         #region GetReadStreamUri
-        public Uri GetReadStreamUri(object entity) 
+        public Uri GetReadStreamUri(object entity)
         {
             EntityDescriptor box = this.EnsureContained(entity, "entity");
             return box.GetMediaResourceUri(this.baseUriWithSlash);
@@ -478,7 +585,12 @@ public HttpStack HttpStack
 
         #region GetReadStream, BeginGetReadStream, EndGetReadStream
 
-        public IAsyncResult BeginGetReadStream(object entity, DataServiceRequestArgs args, AsyncCallback callback, object state)
+        public IAsyncResult BeginGetReadStream(
+            object entity,
+            DataServiceRequestArgs args,
+            AsyncCallback callback,
+            object state
+        )
         {
             GetReadStreamResult result;
             result = this.CreateGetReadStreamResult(entity, args, callback, state);
@@ -488,7 +600,11 @@ public HttpStack HttpStack
 
         public DataServiceStreamResponse EndGetReadStream(IAsyncResult asyncResult)
         {
-            GetReadStreamResult result = BaseAsyncResult.EndExecute<GetReadStreamResult>(this, "GetReadStream", asyncResult);
+            GetReadStreamResult result = BaseAsyncResult.EndExecute<GetReadStreamResult>(
+                this,
+                "GetReadStream",
+                asyncResult
+            );
             return result.End();
         }
 
@@ -518,7 +634,13 @@ public HttpStack HttpStack
 
         #region SetSaveStream
 
-        public void SetSaveStream(object entity, Stream stream, bool closeStream, string contentType, string slug)
+        public void SetSaveStream(
+            object entity,
+            Stream stream,
+            bool closeStream,
+            string contentType,
+            string slug
+        )
         {
             Util.CheckArgumentNull(contentType, "contentType");
             Util.CheckArgumentNull(slug, "slug");
@@ -529,7 +651,12 @@ public HttpStack HttpStack
             this.SetSaveStream(entity, stream, closeStream, args);
         }
 
-        public void SetSaveStream(object entity, Stream stream, bool closeStream, DataServiceRequestArgs args)
+        public void SetSaveStream(
+            object entity,
+            Stream stream,
+            bool closeStream,
+            DataServiceRequestArgs args
+        )
         {
             EntityDescriptor box = this.EnsureContained(entity, "entity");
             Util.CheckArgumentNull(stream, "stream");
@@ -537,15 +664,19 @@ public HttpStack HttpStack
 
             ClientType clientType = ClientType.Create(entity.GetType());
             if (clientType.MediaDataMember != null)
-            { 
+            {
                 throw new ArgumentException(
-                    Strings.Context_SetSaveStreamOnMediaEntryProperty(clientType.ElementTypeName), 
-                    "entity");
+                    Strings.Context_SetSaveStreamOnMediaEntryProperty(clientType.ElementTypeName),
+                    "entity"
+                );
             }
 
             box.SaveStream = new DataServiceSaveStream(stream, closeStream, args);
 
-            Debug.Assert(box.State != EntityStates.Detached, "We should never have a detached entity in the entityDescriptor dictionary.");
+            Debug.Assert(
+                box.State != EntityStates.Detached,
+                "We should never have a detached entity in the entityDescriptor dictionary."
+            );
             switch (box.State)
             {
                 case EntityStates.Added:
@@ -561,36 +692,58 @@ public HttpStack HttpStack
                 default:
                     throw new DataServiceClientException(Strings.DataServiceException_GeneralError);
             }
-
         }
 
         #endregion
 
         #region ExecuteBatch, BeginExecuteBatch, EndExecuteBatch
 
-        public IAsyncResult BeginExecuteBatch(AsyncCallback callback, object state, params DataServiceRequest[] queries)
+        public IAsyncResult BeginExecuteBatch(
+            AsyncCallback callback,
+            object state,
+            params DataServiceRequest[] queries
+        )
         {
             Util.CheckArgumentNotEmpty(queries, "queries");
 
-            SaveResult result = new SaveResult(this, "ExecuteBatch", queries, SaveChangesOptions.Batch, callback, state, true);
+            SaveResult result = new SaveResult(
+                this,
+                "ExecuteBatch",
+                queries,
+                SaveChangesOptions.Batch,
+                callback,
+                state,
+                true
+            );
             result.BatchBeginRequest(false);
             return result;
         }
 
-
         public DataServiceResponse EndExecuteBatch(IAsyncResult asyncResult)
         {
-            SaveResult result = BaseAsyncResult.EndExecute<SaveResult>(this, "ExecuteBatch", asyncResult);
+            SaveResult result = BaseAsyncResult.EndExecute<SaveResult>(
+                this,
+                "ExecuteBatch",
+                asyncResult
+            );
             return result.EndRequest();
         }
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
         public DataServiceResponse ExecuteBatch(params DataServiceRequest[] queries)
         {
             Util.CheckArgumentNotEmpty(queries, "queries");
 
-            SaveResult result = new SaveResult(this, "ExecuteBatch", queries, SaveChangesOptions.Batch, null, null, false);
-            result.BatchRequest(false );
+            SaveResult result = new SaveResult(
+                this,
+                "ExecuteBatch",
+                queries,
+                SaveChangesOptions.Batch,
+                null,
+                null,
+                false
+            );
+            result.BatchRequest(false);
             return result.EndRequest();
         }
 #endif
@@ -599,37 +752,81 @@ public HttpStack HttpStack
 
         #region Execute(Uri), BeginExecute(Uri), EndExecute(Uri)
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Type is used to infer result")]
-        public IAsyncResult BeginExecute<TElement>(Uri requestUri, AsyncCallback callback, object state)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Type is used to infer result"
+        )]
+        public IAsyncResult BeginExecute<TElement>(
+            Uri requestUri,
+            AsyncCallback callback,
+            object state
+        )
         {
             requestUri = Util.CreateUri(this.baseUriWithSlash, requestUri);
-            QueryComponents qc = new QueryComponents(requestUri, Util.DataServiceVersionEmpty, typeof(TElement), null, null);
-            return (new DataServiceRequest<TElement>(qc, null)).BeginExecute(this, this, callback, state);
+            QueryComponents qc = new QueryComponents(
+                requestUri,
+                Util.DataServiceVersionEmpty,
+                typeof(TElement),
+                null,
+                null
+            );
+            return (new DataServiceRequest<TElement>(qc, null)).BeginExecute(
+                this,
+                this,
+                callback,
+                state
+            );
         }
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Type is used to infer result")]
-        public IAsyncResult BeginExecute<T>(DataServiceQueryContinuation<T> continuation, AsyncCallback callback, object state)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Type is used to infer result"
+        )]
+        public IAsyncResult BeginExecute<T>(
+            DataServiceQueryContinuation<T> continuation,
+            AsyncCallback callback,
+            object state
+        )
         {
             Util.CheckArgumentNull(continuation, "continuation");
             QueryComponents qc = continuation.CreateQueryComponents();
-            return (new DataServiceRequest<T>(qc, continuation.Plan)).BeginExecute(this, this, callback, state);
+            return (new DataServiceRequest<T>(qc, continuation.Plan)).BeginExecute(
+                this,
+                this,
+                callback,
+                state
+            );
         }
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Type is used to infer result")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Type is used to infer result"
+        )]
         public IEnumerable<TElement> EndExecute<TElement>(IAsyncResult asyncResult)
         {
             Util.CheckArgumentNull(asyncResult, "asyncResult");
             return DataServiceRequest.EndExecute<TElement>(this, this, asyncResult);
         }
 
-#if !ASTORIA_LIGHT 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "Type is used to infer result")]
+#if !ASTORIA_LIGHT
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Type is used to infer result"
+        )]
         public IEnumerable<TElement> Execute<TElement>(Uri requestUri)
         {
             requestUri = Util.CreateUri(this.baseUriWithSlash, requestUri);
-            QueryComponents qc = new QueryComponents(requestUri, Util.DataServiceVersionEmpty, typeof(TElement), null, null);
+            QueryComponents qc = new QueryComponents(
+                requestUri,
+                Util.DataServiceVersionEmpty,
+                typeof(TElement),
+                null,
+                null
+            );
             DataServiceRequest request = new DataServiceRequest<TElement>(qc, null);
             return request.Execute<TElement>(this, qc);
         }
@@ -652,11 +849,22 @@ public HttpStack HttpStack
             return this.BeginSaveChanges(this.SaveChangesDefaultOptions, callback, state);
         }
 
-
-        public IAsyncResult BeginSaveChanges(SaveChangesOptions options, AsyncCallback callback, object state)
+        public IAsyncResult BeginSaveChanges(
+            SaveChangesOptions options,
+            AsyncCallback callback,
+            object state
+        )
         {
             ValidateSaveChangesOptions(options);
-            SaveResult result = new SaveResult(this, "SaveChanges", null, options, callback, state, true);
+            SaveResult result = new SaveResult(
+                this,
+                "SaveChanges",
+                null,
+                options,
+                callback,
+                state,
+                true
+            );
             bool replaceOnUpdate = IsFlagSet(options, SaveChangesOptions.ReplaceOnUpdate);
             if (IsFlagSet(options, SaveChangesOptions.Batch))
             {
@@ -664,7 +872,7 @@ public HttpStack HttpStack
             }
             else
             {
-                result.BeginNextChange(replaceOnUpdate); 
+                result.BeginNextChange(replaceOnUpdate);
             }
 
             return result;
@@ -672,8 +880,12 @@ public HttpStack HttpStack
 
         public DataServiceResponse EndSaveChanges(IAsyncResult asyncResult)
         {
-            SaveResult result = BaseAsyncResult.EndExecute<SaveResult>(this, "SaveChanges", asyncResult);
-            
+            SaveResult result = BaseAsyncResult.EndExecute<SaveResult>(
+                this,
+                "SaveChanges",
+                asyncResult
+            );
+
             DataServiceResponse errors = result.EndRequest();
 
             if (this.ChangesSaved != null)
@@ -690,13 +902,20 @@ public HttpStack HttpStack
             return this.SaveChanges(this.SaveChangesDefaultOptions);
         }
 
- 
         public DataServiceResponse SaveChanges(SaveChangesOptions options)
         {
             DataServiceResponse errors = null;
             ValidateSaveChangesOptions(options);
 
-            SaveResult result = new SaveResult(this, "SaveChanges", null, options, null, null, false);
+            SaveResult result = new SaveResult(
+                this,
+                "SaveChanges",
+                null,
+                options,
+                null,
+                null,
+                false
+            );
             bool replaceOnUpdate = IsFlagSet(options, SaveChangesOptions.ReplaceOnUpdate);
             if (IsFlagSet(options, SaveChangesOptions.Batch))
             {
@@ -739,12 +958,10 @@ public HttpStack HttpStack
             this.IncrementChange(relation);
         }
 
-
         public void AttachLink(object source, string sourceProperty, object target)
         {
             this.AttachLink(source, sourceProperty, target, MergeOption.NoTracking);
         }
-
 
         public bool DetachLink(object source, string sourceProperty, object target)
         {
@@ -762,26 +979,28 @@ public HttpStack HttpStack
             return true;
         }
 
-
         public void DeleteLink(object source, string sourceProperty, object target)
         {
             bool delay = this.EnsureRelatable(source, sourceProperty, target, EntityStates.Deleted);
 
             LinkDescriptor existing = null;
             LinkDescriptor relation = new LinkDescriptor(source, sourceProperty, target);
-            if (this.bindings.TryGetValue(relation, out existing) && (EntityStates.Added == existing.State))
-            {   
+            if (
+                this.bindings.TryGetValue(relation, out existing)
+                && (EntityStates.Added == existing.State)
+            )
+            {
                 this.DetachExistingLink(existing, false);
             }
             else
             {
                 if (delay)
-                {  
+                {
                     throw Error.InvalidOperation(Strings.Context_NoRelationWithInsertEnd);
                 }
 
                 if (null == existing)
-                {  
+                {
                     this.bindings.Add(relation, relation);
                     existing = relation;
                 }
@@ -790,18 +1009,21 @@ public HttpStack HttpStack
                 {
                     existing.State = EntityStates.Deleted;
 
-
                     this.IncrementChange(existing);
                 }
             }
         }
 
-
         public void SetLink(object source, string sourceProperty, object target)
         {
             this.EnsureRelatable(source, sourceProperty, target, EntityStates.Modified);
 
-            LinkDescriptor relation = this.DetachReferenceLink(source, sourceProperty, target, MergeOption.NoTracking);
+            LinkDescriptor relation = this.DetachReferenceLink(
+                source,
+                sourceProperty,
+                target,
+                MergeOption.NoTracking
+            );
             if (null == relation)
             {
                 relation = new LinkDescriptor(source, sourceProperty, target);
@@ -809,9 +1031,9 @@ public HttpStack HttpStack
             }
 
             Debug.Assert(
-                0 == relation.State ||
-                IncludeLinkState(relation.State),
-                "set link entity state");
+                0 == relation.State || IncludeLinkState(relation.State),
+                "set link entity state"
+            );
 
             if (EntityStates.Modified != relation.State)
             {
@@ -829,7 +1051,17 @@ public HttpStack HttpStack
             this.ValidateEntitySetName(ref entitySetName);
             ValidateEntityType(entity);
 
-            EntityDescriptor resource = new EntityDescriptor(null, null , null , entity, null, null, entitySetName, null, EntityStates.Added);
+            EntityDescriptor resource = new EntityDescriptor(
+                null,
+                null,
+                null,
+                entity,
+                null,
+                null,
+                entitySetName,
+                null,
+                EntityStates.Added
+            );
 
             try
             {
@@ -843,19 +1075,16 @@ public HttpStack HttpStack
             this.IncrementChange(resource);
         }
 
-
         public void AddRelatedObject(object source, string sourceProperty, object target)
         {
             Util.CheckArgumentNull(source, "source");
             Util.CheckArgumentNotEmpty(sourceProperty, "propertyName");
             Util.CheckArgumentNull(target, "target");
 
-
             ValidateEntityType(source);
 
             EntityDescriptor sourceResource = this.EnsureContained(source, "source");
 
-    
             if (sourceResource.State == EntityStates.Deleted)
             {
                 throw Error.InvalidOperation(Strings.Context_AddRelatedObjectSourceDeleted);
@@ -868,19 +1097,26 @@ public HttpStack HttpStack
                 throw Error.InvalidOperation(Strings.Context_AddRelatedObjectCollectionOnly);
             }
 
-
             ClientType childType = ClientType.Create(target.GetType());
             ValidateEntityType(target);
-
 
             ClientType propertyElementType = ClientType.Create(property.CollectionType);
             if (!propertyElementType.ElementType.IsAssignableFrom(childType.ElementType))
             {
-
                 throw Error.Argument(Strings.Context_RelationNotRefOrCollection, "target");
             }
 
-            EntityDescriptor targetResource = new EntityDescriptor(null, null, null, target, sourceResource, sourceProperty, null , null, EntityStates.Added);
+            EntityDescriptor targetResource = new EntityDescriptor(
+                null,
+                null,
+                null,
+                target,
+                sourceResource,
+                sourceProperty,
+                null,
+                null,
+                EntityStates.Added
+            );
 
             try
             {
@@ -891,7 +1127,6 @@ public HttpStack HttpStack
                 throw Error.InvalidOperation(Strings.Context_EntityAlreadyContained);
             }
 
-
             LinkDescriptor end = targetResource.GetRelatedEnd();
             end.State = EntityStates.Added;
             this.bindings.Add(end, end);
@@ -899,26 +1134,37 @@ public HttpStack HttpStack
             this.IncrementChange(targetResource);
         }
 
-
         public void AttachTo(string entitySetName, object entity)
         {
             this.AttachTo(entitySetName, entity, null);
         }
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704", MessageId = "etag", Justification = "represents ETag in request")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704",
+            MessageId = "etag",
+            Justification = "represents ETag in request"
+        )]
         public void AttachTo(string entitySetName, object entity, string etag)
         {
             this.ValidateEntitySetName(ref entitySetName);
             Uri editLink = GenerateEditLinkUri(this.baseUriWithSlash, entitySetName, entity);
 
-
             String identity = Util.ReferenceIdentity(editLink.ToString());
 
-            EntityDescriptor descriptor = new EntityDescriptor(identity, null , editLink, entity, null , null , null , etag, EntityStates.Unchanged);
+            EntityDescriptor descriptor = new EntityDescriptor(
+                identity,
+                null,
+                editLink,
+                entity,
+                null,
+                null,
+                null,
+                etag,
+                EntityStates.Unchanged
+            );
             this.InternalAttachEntityDescriptor(descriptor, true);
         }
-
 
         public void DeleteObject(object entity)
         {
@@ -926,21 +1172,18 @@ public HttpStack HttpStack
 
             EntityDescriptor resource = null;
             if (!this.entityDescriptors.TryGetValue(entity, out resource))
-            {   
+            {
                 throw Error.InvalidOperation(Strings.Context_EntityNotContained);
             }
 
             EntityStates state = resource.State;
             if (EntityStates.Added == state)
-            {  
+            {
                 this.DetachResource(resource);
             }
             else if (EntityStates.Deleted != state)
             {
-                Debug.Assert(
-                    IncludeLinkState(state),
-                    "bad state transition to deleted");
-
+                Debug.Assert(IncludeLinkState(state), "bad state transition to deleted");
 
                 resource.State = EntityStates.Deleted;
                 this.IncrementChange(resource);
@@ -960,7 +1203,6 @@ public HttpStack HttpStack
             return false;
         }
 
-
         public void UpdateObject(object entity)
         {
             Util.CheckArgumentNull(entity, "entity");
@@ -978,18 +1220,23 @@ public HttpStack HttpStack
             }
         }
 
-   public bool TryGetEntity<TEntity>(Uri identity, out TEntity entity) where TEntity : class
+        public bool TryGetEntity<TEntity>(Uri identity, out TEntity entity)
+            where TEntity : class
         {
             entity = null;
             Util.CheckArgumentNull(identity, "relativeUri");
 
             EntityStates state;
 
-
-            entity = (TEntity)this.TryGetEntity(Util.ReferenceIdentity(identity.ToString()), null, MergeOption.AppendOnly, out state);
+            entity = (TEntity)
+                this.TryGetEntity(
+                    Util.ReferenceIdentity(identity.ToString()),
+                    null,
+                    MergeOption.AppendOnly,
+                    out state
+                );
             return (null != entity);
         }
-
 
         public bool TryGetUri(object entity, out Uri identity)
         {
@@ -997,12 +1244,13 @@ public HttpStack HttpStack
             Util.CheckArgumentNull(entity, "entity");
 
             EntityDescriptor resource = null;
-            if ((null != this.identityToDescriptor) &&
-                this.entityDescriptors.TryGetValue(entity, out resource) &&
-                (null != resource.Identity) &&
-                Object.ReferenceEquals(resource, this.identityToDescriptor[resource.Identity]))
+            if (
+                (null != this.identityToDescriptor)
+                && this.entityDescriptors.TryGetValue(entity, out resource)
+                && (null != resource.Identity)
+                && Object.ReferenceEquals(resource, this.identityToDescriptor[resource.Identity])
+            )
             {
-
                 string identityUri = Util.DereferenceIdentity(resource.Identity);
                 identity = Util.CreateUri(identityUri, UriKind.Absolute);
             }
@@ -1014,14 +1262,16 @@ public HttpStack HttpStack
             HttpStatusCode statusCode,
             string responseVersion,
             Func<Stream> getResponseStream,
-            bool throwOnFailure)
+            bool throwOnFailure
+        )
         {
             InvalidOperationException failure = null;
             if (!CanHandleResponseVersion(responseVersion))
             {
                 string description = Strings.Context_VersionNotSupported(
                     responseVersion,
-                    SerializeSupportedVersions());
+                    SerializeSupportedVersions()
+                );
 
                 failure = Error.InvalidOperation(description);
             }
@@ -1039,8 +1289,15 @@ public HttpStack HttpStack
             return failure;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031", Justification = "Cache exception so user can examine it later")]
-        internal static DataServiceClientException GetResponseText(Func<Stream> getResponseStream, HttpStatusCode statusCode)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031",
+            Justification = "Cache exception so user can examine it later"
+        )]
+        internal static DataServiceClientException GetResponseText(
+            Func<Stream> getResponseStream,
+            HttpStatusCode statusCode
+        )
         {
             string message = null;
             using (System.IO.Stream stream = getResponseStream())
@@ -1059,18 +1316,22 @@ public HttpStack HttpStack
             return new DataServiceClientException(message, (int)statusCode);
         }
 
-        internal void AttachIdentity(String identity, Uri selfLink, Uri editLink, object entity, string etag)
-        { 
+        internal void AttachIdentity(
+            String identity,
+            Uri selfLink,
+            Uri editLink,
+            object entity,
+            string etag
+        )
+        {
             Debug.Assert(null != identity, "must have identity");
 
             this.EnsureIdentityToResource();
 
-          
             EntityDescriptor resource = this.entityDescriptors[entity];
 
             this.DetachResourceIdentity(resource);
 
-           
             if (resource.IsDeepInsert)
             {
                 LinkDescriptor end = this.bindings[resource.GetRelatedEnd()];
@@ -1078,16 +1339,14 @@ public HttpStack HttpStack
             }
 
             resource.ETag = etag;
-            resource.Identity = identity; 
+            resource.Identity = identity;
             resource.SelfLink = selfLink;
             resource.EditLink = editLink;
 
             resource.State = EntityStates.Unchanged;
 
-
             this.identityToDescriptor[identity] = resource;
         }
-
 
         internal void AttachLocation(object entity, string location)
         {
@@ -1100,21 +1359,24 @@ public HttpStack HttpStack
             EntityDescriptor resource = this.entityDescriptors[entity];
             this.DetachResourceIdentity(resource);
 
-
             if (resource.IsDeepInsert)
             {
                 LinkDescriptor end = this.bindings[resource.GetRelatedEnd()];
                 end.State = EntityStates.Unchanged;
             }
 
-            resource.Identity = identity; 
+            resource.Identity = identity;
             resource.EditLink = editLink;
 
-          this.identityToDescriptor[identity] = resource;
+            this.identityToDescriptor[identity] = resource;
         }
 
-
-        internal void AttachLink(object source, string sourceProperty, object target, MergeOption linkMerge)
+        internal void AttachLink(
+            object source,
+            string sourceProperty,
+            object target,
+            MergeOption linkMerge
+        )
         {
             this.EnsureRelatable(source, sourceProperty, target, EntityStates.Unchanged);
 
@@ -1132,31 +1394,58 @@ public HttpStack HttpStack
                         break;
 
                     case MergeOption.PreserveChanges:
-                        if ((EntityStates.Added == existing.State) ||
-                            (EntityStates.Unchanged == existing.State) ||
-                            (EntityStates.Modified == existing.State && null != existing.Target))
+                        if (
+                            (EntityStates.Added == existing.State)
+                            || (EntityStates.Unchanged == existing.State)
+                            || (EntityStates.Modified == existing.State && null != existing.Target)
+                        )
                         {
                             relation = existing;
                         }
 
                         break;
 
-                    case MergeOption.NoTracking: 
+                    case MergeOption.NoTracking:
                         throw Error.InvalidOperation(Strings.Context_RelationAlreadyContained);
                 }
             }
             else
             {
-                bool collectionProperty = (null != ClientType.Create(source.GetType()).GetProperty(sourceProperty, false).CollectionType);
-                if (collectionProperty || (null == (existing = this.DetachReferenceLink(source, sourceProperty, target, linkMerge))))
+                bool collectionProperty = (
+                    null
+                    != ClientType
+                        .Create(source.GetType())
+                        .GetProperty(sourceProperty, false)
+                        .CollectionType
+                );
+                if (
+                    collectionProperty
+                    || (
+                        null
+                        == (
+                            existing = this.DetachReferenceLink(
+                                source,
+                                sourceProperty,
+                                target,
+                                linkMerge
+                            )
+                        )
+                    )
+                )
                 {
                     this.bindings.Add(relation, relation);
                     this.IncrementChange(relation);
                 }
-                else if (!((MergeOption.AppendOnly == linkMerge) ||
-                           (MergeOption.PreserveChanges == linkMerge && EntityStates.Modified == existing.State)))
+                else if (
+                    !(
+                        (MergeOption.AppendOnly == linkMerge)
+                        || (
+                            MergeOption.PreserveChanges == linkMerge
+                            && EntityStates.Modified == existing.State
+                        )
+                    )
+                )
                 {
-         
                     relation = existing;
                 }
             }
@@ -1164,11 +1453,17 @@ public HttpStack HttpStack
             relation.State = EntityStates.Unchanged;
         }
 
-
-        internal EntityDescriptor InternalAttachEntityDescriptor(EntityDescriptor descriptor, bool failIfDuplicated)
+        internal EntityDescriptor InternalAttachEntityDescriptor(
+            EntityDescriptor descriptor,
+            bool failIfDuplicated
+        )
         {
             Debug.Assert((null != descriptor.Identity), "must have identity");
-            Debug.Assert(null != descriptor.Entity && ClientType.Create(descriptor.Entity.GetType()).IsEntityType, "must be entity type to attach");
+            Debug.Assert(
+                null != descriptor.Entity
+                    && ClientType.Create(descriptor.Entity.GetType()).IsEntityType,
+                "must be entity type to attach"
+            );
 
             this.EnsureIdentityToResource();
 
@@ -1189,13 +1484,11 @@ public HttpStack HttpStack
             else if (null == resource)
             {
                 resource = descriptor;
-                
-            
+
                 this.IncrementChange(descriptor);
                 this.entityDescriptors.Add(descriptor.Entity, descriptor);
                 this.identityToDescriptor.Add(descriptor.Identity, descriptor);
             }
-
 
             return resource;
         }
@@ -1204,36 +1497,73 @@ public HttpStack HttpStack
 
 #if ASTORIA_LIGHT
 
-        internal HttpWebRequest CreateRequest(Uri requestUri, string method, bool allowAnyType, string contentType, Version requestVersion, bool sendChunked)
+        internal HttpWebRequest CreateRequest(
+            Uri requestUri,
+            string method,
+            bool allowAnyType,
+            string contentType,
+            Version requestVersion,
+            bool sendChunked
+        )
         {
-            return CreateRequest(requestUri, method, allowAnyType, contentType, requestVersion, sendChunked, HttpStack.Auto);
+            return CreateRequest(
+                requestUri,
+                method,
+                allowAnyType,
+                contentType,
+                requestVersion,
+                sendChunked,
+                HttpStack.Auto
+            );
         }
 #endif
 
 #if !ASTORIA_LIGHT
-       
 
-        internal HttpWebRequest CreateRequest(Uri requestUri, string method, bool allowAnyType, string contentType, Version requestVersion, bool sendChunked)
+
+        internal HttpWebRequest CreateRequest(
+            Uri requestUri,
+            string method,
+            bool allowAnyType,
+            string contentType,
+            Version requestVersion,
+            bool sendChunked
+        )
 #else
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "sendChunked", Justification = "common parameter not used in silverlight")]
-        internal HttpWebRequest CreateRequest(Uri requestUri, string method, bool allowAnyType, string contentType, Version requestVersion, bool sendChunked, HttpStack httpStackArg)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "sendChunked",
+            Justification = "common parameter not used in silverlight"
+        )]
+        internal HttpWebRequest CreateRequest(
+            Uri requestUri,
+            string method,
+            bool allowAnyType,
+            string contentType,
+            Version requestVersion,
+            bool sendChunked,
+            HttpStack httpStackArg
+        )
 #endif
         {
             Debug.Assert(null != requestUri, "request uri is null");
             Debug.Assert(requestUri.IsAbsoluteUri, "request uri is not absolute uri");
             Debug.Assert(
-                requestUri.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase) ||
-                    requestUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase), 
-                "request uri is not for HTTP");
+                requestUri.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase)
+                    || requestUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase),
+                "request uri is not for HTTP"
+            );
 
             Debug.Assert(
-                Object.ReferenceEquals(XmlConstants.HttpMethodDelete, method) ||
-                Object.ReferenceEquals(XmlConstants.HttpMethodGet, method) ||
-                Object.ReferenceEquals(XmlConstants.HttpMethodPost, method) ||
-                Object.ReferenceEquals(XmlConstants.HttpMethodPut, method) ||
-                Object.ReferenceEquals(XmlConstants.HttpMethodMerge, method),
-                "unexpected http method string reference");
+                Object.ReferenceEquals(XmlConstants.HttpMethodDelete, method)
+                    || Object.ReferenceEquals(XmlConstants.HttpMethodGet, method)
+                    || Object.ReferenceEquals(XmlConstants.HttpMethodPost, method)
+                    || Object.ReferenceEquals(XmlConstants.HttpMethodPut, method)
+                    || Object.ReferenceEquals(XmlConstants.HttpMethodMerge, method),
+                "unexpected http method string reference"
+            );
 
 #if !ASTORIA_LIGHT
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri);
@@ -1245,31 +1575,34 @@ public HttpStack HttpStack
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri, httpStackArg);
 #endif
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             if (null != this.Credentials)
             {
                 request.Credentials = this.Credentials;
             }
 #endif
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             if (0 != this.timeout)
             {
-                request.Timeout = (int)Math.Min(Int32.MaxValue, new TimeSpan(0, 0, this.timeout).TotalMilliseconds);
+                request.Timeout = (int)
+                    Math.Min(Int32.MaxValue, new TimeSpan(0, 0, this.timeout).TotalMilliseconds);
             }
 #endif
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             request.KeepAlive = true;
 #endif
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             request.UserAgent = "Microsoft ADO.NET Data Services";
 #endif
 
-            if (this.UsePostTunneling &&
-                (!Object.ReferenceEquals(XmlConstants.HttpMethodPost, method)) &&
-                (!Object.ReferenceEquals(XmlConstants.HttpMethodGet, method)))
+            if (
+                this.UsePostTunneling
+                && (!Object.ReferenceEquals(XmlConstants.HttpMethodPost, method))
+                && (!Object.ReferenceEquals(XmlConstants.HttpMethodGet, method))
+            )
             {
                 request.Headers[XmlConstants.HttpXMethod] = method;
                 request.Method = XmlConstants.HttpMethodPost;
@@ -1281,13 +1614,14 @@ public HttpStack HttpStack
 
             if (requestVersion != null && requestVersion.Major > 0)
             {
-         
-                request.Headers[XmlConstants.HttpDataServiceVersion] = requestVersion.ToString() + Util.VersionSuffix;
+                request.Headers[XmlConstants.HttpDataServiceVersion] =
+                    requestVersion.ToString() + Util.VersionSuffix;
             }
 
-            request.Headers[XmlConstants.HttpMaxDataServiceVersion] = Util.MaxResponseVersion.ToString() + Util.VersionSuffix;
+            request.Headers[XmlConstants.HttpMaxDataServiceVersion] =
+                Util.MaxResponseVersion.ToString() + Util.VersionSuffix;
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             if (sendChunked)
             {
                 request.SendChunked = true;
@@ -1312,7 +1646,7 @@ public HttpStack HttpStack
                     request = (System.Net.HttpWebRequest)args.Request;
                 }
 #else
-              
+
                 foreach (string key in requestHeaders.AllKeys)
                 {
                     request.Headers[key] = requestHeaders[key];
@@ -1320,33 +1654,39 @@ public HttpStack HttpStack
 #endif
             }
 
-            request.Accept = allowAnyType ?
-                    XmlConstants.MimeAny :
-                    (XmlConstants.MimeApplicationAtom + "," + XmlConstants.MimeApplicationXml);
+            request.Accept = allowAnyType
+                ? XmlConstants.MimeAny
+                : (XmlConstants.MimeApplicationAtom + "," + XmlConstants.MimeApplicationXml);
 
             request.Headers[HttpRequestHeader.AcceptCharset] = XmlConstants.Utf8Encoding;
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             bool allowStreamBuffering = false;
             bool removeXMethod = true;
 #endif
 
             if (!Object.ReferenceEquals(XmlConstants.HttpMethodGet, method))
             {
-                Debug.Assert(!String.IsNullOrEmpty(contentType), "Content-Type must be specified for non get operation");
+                Debug.Assert(
+                    !String.IsNullOrEmpty(contentType),
+                    "Content-Type must be specified for non get operation"
+                );
                 request.ContentType = contentType;
                 if (Object.ReferenceEquals(XmlConstants.HttpMethodDelete, method))
                 {
                     request.ContentLength = 0;
                 }
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
                 // else
-                {   
+                {
                     allowStreamBuffering = true;
                 }
 #endif
 
-                if (this.UsePostTunneling && (!Object.ReferenceEquals(XmlConstants.HttpMethodPost, method)))
+                if (
+                    this.UsePostTunneling
+                    && (!Object.ReferenceEquals(XmlConstants.HttpMethodPost, method))
+                )
                 {
                     request.Headers[XmlConstants.HttpXMethod] = method;
                     method = XmlConstants.HttpMethodPost;
@@ -1360,21 +1700,21 @@ public HttpStack HttpStack
                 Debug.Assert(contentType == null, "Content-Type for get methods should be null");
             }
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             request.AllowWriteStreamBuffering = allowStreamBuffering;
 #endif
 
             ICollection<string> headers;
             headers = request.Headers.AllKeys;
 
-#if !ASTORIA_LIGHT  
+#if !ASTORIA_LIGHT
             if (headers.Contains(XmlConstants.HttpRequestIfMatch))
             {
                 request.Headers.Remove(HttpRequestHeader.IfMatch);
             }
 #endif
 
-#if !ASTORIA_LIGHT  
+#if !ASTORIA_LIGHT
             if (removeXMethod && headers.Contains(XmlConstants.HttpXMethod))
             {
                 request.Headers.Remove(XmlConstants.HttpXMethod);
@@ -1385,19 +1725,25 @@ public HttpStack HttpStack
             return request;
         }
 
-
-        internal object TryGetEntity(String resourceUri, string etag, MergeOption merger, out EntityStates state)
+        internal object TryGetEntity(
+            String resourceUri,
+            string etag,
+            MergeOption merger,
+            out EntityStates state
+        )
         {
             Debug.Assert(null != resourceUri, "null uri");
             state = EntityStates.Detached;
 
             EntityDescriptor resource = null;
-            if ((null != this.identityToDescriptor) &&
-                 this.identityToDescriptor.TryGetValue(resourceUri, out resource))
+            if (
+                (null != this.identityToDescriptor)
+                && this.identityToDescriptor.TryGetValue(resourceUri, out resource)
+            )
             {
                 state = resource.State;
                 if ((null != etag) && (MergeOption.AppendOnly != merger))
-                {  
+                {
                     resource.ETag = etag;
                 }
 
@@ -1408,12 +1754,12 @@ public HttpStack HttpStack
             return null;
         }
 
-
         internal IEnumerable<LinkDescriptor> GetLinks(object source, string sourceProperty)
         {
-            return this.bindings.Values.Where(o => (o.Source == source) && (o.SourceProperty == sourceProperty));
+            return this.bindings.Values.Where(o =>
+                (o.Source == source) && (o.SourceProperty == sourceProperty)
+            );
         }
-
 
         internal Type ResolveTypeFromName(string wireName, Type userType, bool checkAssignable)
         {
@@ -1432,13 +1778,11 @@ public HttpStack HttpStack
                 Func<string, Type> resolve = this.ResolveType;
                 if (null != resolve)
                 {
-             
                     payloadType = resolve(wireName);
                 }
 
                 if (null == payloadType)
                 {
-                 
 #if !ASTORIA_LIGHT
                     payloadType = ClientType.ResolveFromName(wireName, userType);
 #else
@@ -1446,16 +1790,20 @@ public HttpStack HttpStack
 #endif
                 }
 
-                if (checkAssignable && (null != payloadType) && (!userType.IsAssignableFrom(payloadType)))
+                if (
+                    checkAssignable
+                    && (null != payloadType)
+                    && (!userType.IsAssignableFrom(payloadType))
+                )
                 {
-          
-                    throw Error.InvalidOperation(Strings.Deserialize_Current(userType, payloadType));
+                    throw Error.InvalidOperation(
+                        Strings.Deserialize_Current(userType, payloadType)
+                    );
                 }
             }
 
             return payloadType ?? userType;
         }
-
 
         internal string ResolveNameFromType(Type type)
         {
@@ -1464,19 +1812,22 @@ public HttpStack HttpStack
             return ((null != resolve) ? resolve(type) : (String)null);
         }
 
-
         internal string GetServerTypeName(EntityDescriptor descriptor)
         {
-            Debug.Assert(descriptor != null && descriptor.Entity != null, "Null descriptor or no entity in descriptor");
+            Debug.Assert(
+                descriptor != null && descriptor.Entity != null,
+                "Null descriptor or no entity in descriptor"
+            );
 
             if (this.resolveName != null)
             {
-               
                 Type entityType = descriptor.Entity.GetType();
-                var codegenAttr = this.resolveName.Method.GetCustomAttributes(false).OfType<System.CodeDom.Compiler.GeneratedCodeAttribute>().FirstOrDefault();
+                var codegenAttr = this
+                    .resolveName.Method.GetCustomAttributes(false)
+                    .OfType<System.CodeDom.Compiler.GeneratedCodeAttribute>()
+                    .FirstOrDefault();
                 if (codegenAttr == null || codegenAttr.Tool != Util.CodeGeneratorToolName)
                 {
-                   
                     return this.resolveName(entityType) ?? descriptor.ServerTypeName;
                 }
                 else
@@ -1490,7 +1841,6 @@ public HttpStack HttpStack
             }
         }
 
-
         internal void FireReadingEntityEvent(object entity, XElement data)
         {
             Debug.Assert(entity != null, "entity != null");
@@ -1502,7 +1852,7 @@ public HttpStack HttpStack
 
         #region Ensure
 
-  
+
         private static bool IncludeLinkState(EntityStates x)
         {
             return ((EntityStates.Modified == x) || (EntityStates.Unchanged == x));
@@ -1529,13 +1879,21 @@ public HttpStack HttpStack
             return true;
         }
 
-
         private static string SerializeSupportedVersions()
         {
-            Debug.Assert(Util.SupportedResponseVersions.Length > 0, "At least one supported version must exist.");
+            Debug.Assert(
+                Util.SupportedResponseVersions.Length > 0,
+                "At least one supported version must exist."
+            );
 
-            StringBuilder supportedVersions = new StringBuilder("'").Append(Util.SupportedResponseVersions[0].ToString());
-            for (int versionIdx = 1; versionIdx < Util.SupportedResponseVersions.Length; versionIdx++)
+            StringBuilder supportedVersions = new StringBuilder("'").Append(
+                Util.SupportedResponseVersions[0].ToString()
+            );
+            for (
+                int versionIdx = 1;
+                versionIdx < Util.SupportedResponseVersions.Length;
+                versionIdx++
+            )
             {
                 supportedVersions.Append("', '");
                 supportedVersions.Append(Util.SupportedResponseVersions[versionIdx].ToString());
@@ -1546,11 +1904,24 @@ public HttpStack HttpStack
             return supportedVersions.ToString();
         }
 
-        private static Uri GenerateEditLinkUri(Uri baseUriWithSlash, string entitySetName, object entity)
+        private static Uri GenerateEditLinkUri(
+            Uri baseUriWithSlash,
+            string entitySetName,
+            object entity
+        )
         {
-            Debug.Assert(null != baseUriWithSlash && baseUriWithSlash.IsAbsoluteUri && baseUriWithSlash.OriginalString.EndsWith("/", StringComparison.Ordinal), "baseUriWithSlash");
-            Debug.Assert(!String.IsNullOrEmpty(entitySetName) && !entitySetName.StartsWith("/", StringComparison.Ordinal), "entitySetName");
-     
+            Debug.Assert(
+                null != baseUriWithSlash
+                    && baseUriWithSlash.IsAbsoluteUri
+                    && baseUriWithSlash.OriginalString.EndsWith("/", StringComparison.Ordinal),
+                "baseUriWithSlash"
+            );
+            Debug.Assert(
+                !String.IsNullOrEmpty(entitySetName)
+                    && !entitySetName.StartsWith("/", StringComparison.Ordinal),
+                "entitySetName"
+            );
+
             ValidateEntityTypeHasKeys(entity);
 
             StringBuilder builder = new StringBuilder();
@@ -1561,11 +1932,18 @@ public HttpStack HttpStack
             string prefix = String.Empty;
             ClientType clientType = ClientType.Create(entity.GetType());
 
-            ClientType.ClientProperty[] keys = clientType.Properties.Where<ClientType.ClientProperty>(ClientType.ClientProperty.GetKeyProperty).ToArray();
+            ClientType.ClientProperty[] keys = clientType
+                .Properties.Where<ClientType.ClientProperty>(
+                    ClientType.ClientProperty.GetKeyProperty
+                )
+                .ToArray();
             foreach (ClientType.ClientProperty property in keys)
             {
 #if ASTORIA_OPEN_OBJECT
-                Debug.Assert(!property.OpenObjectProperty, "key property values can't be OpenProperties");
+                Debug.Assert(
+                    !property.OpenObjectProperty,
+                    "key property values can't be OpenProperties"
+                );
 #endif
 
                 builder.Append(prefix);
@@ -1577,7 +1955,9 @@ public HttpStack HttpStack
                 object value = property.GetValue(entity);
                 if (null == value)
                 {
-                    throw Error.InvalidOperation(Strings.Serializer_NullKeysAreNotSupported(property.PropertyName));
+                    throw Error.InvalidOperation(
+                        Strings.Serializer_NullKeysAreNotSupported(property.PropertyName)
+                    );
                 }
 
                 string converted;
@@ -1595,7 +1975,6 @@ public HttpStack HttpStack
             return Util.CreateUri(builder.ToString(), UriKind.Absolute);
         }
 
- 
         private static string GetEntityHttpMethod(EntityStates state, bool replaceOnUpdate)
         {
             switch (state)
@@ -1619,37 +1998,46 @@ public HttpStack HttpStack
             }
         }
 
-    
         private static string GetLinkHttpMethod(LinkDescriptor link)
         {
-            bool collection = (null != ClientType.Create(link.Source.GetType()).GetProperty(link.SourceProperty, false).CollectionType);
+            bool collection = (
+                null
+                != ClientType
+                    .Create(link.Source.GetType())
+                    .GetProperty(link.SourceProperty, false)
+                    .CollectionType
+            );
             if (!collection)
             {
                 Debug.Assert(EntityStates.Modified == link.State, "not Modified state");
                 if (null == link.Target)
-                {   
+                {
                     return XmlConstants.HttpMethodDelete;
                 }
                 else
-                {   
+                {
                     return XmlConstants.HttpMethodPut;
                 }
             }
             else if (EntityStates.Deleted == link.State)
-            {   
+            {
                 return XmlConstants.HttpMethodDelete;
             }
             else
-            {   
+            {
                 Debug.Assert(EntityStates.Added == link.State, "not Added state");
                 return XmlConstants.HttpMethodPost;
             }
         }
 
-
         private static void HandleResponsePost(LinkDescriptor entry)
         {
-            if (!((EntityStates.Added == entry.State) || (EntityStates.Modified == entry.State && null != entry.Target)))
+            if (
+                !(
+                    (EntityStates.Added == entry.State)
+                    || (EntityStates.Modified == entry.State && null != entry.Target)
+                )
+            )
             {
                 Error.ThrowBatchUnexpectedContent(InternalError.LinkNotAddedState);
             }
@@ -1657,13 +2045,15 @@ public HttpStack HttpStack
             entry.State = EntityStates.Unchanged;
         }
 
-
         private static void HandleResponsePut(Descriptor entry, string etag)
         {
             if (entry.IsResource)
             {
                 EntityDescriptor descriptor = (EntityDescriptor)entry;
-                if (EntityStates.Modified != descriptor.State && StreamStates.Modified != descriptor.StreamState)
+                if (
+                    EntityStates.Modified != descriptor.State
+                    && StreamStates.Modified != descriptor.StreamState
+                )
                 {
                     Error.ThrowBatchUnexpectedContent(InternalError.EntryNotModified);
                 }
@@ -1675,7 +2065,10 @@ public HttpStack HttpStack
                 }
                 else
                 {
-                    Debug.Assert(descriptor.State == EntityStates.Modified, "descriptor.State == EntityStates.Modified");
+                    Debug.Assert(
+                        descriptor.State == EntityStates.Modified,
+                        "descriptor.State == EntityStates.Modified"
+                    );
                     descriptor.ETag = etag;
                     descriptor.State = EntityStates.Unchanged;
                 }
@@ -1688,44 +2081,69 @@ public HttpStack HttpStack
                     link.State = EntityStates.Unchanged;
                 }
                 else if (EntityStates.Detached != entry.State)
-                {   
+                {
                     Error.ThrowBatchUnexpectedContent(InternalError.LinkBadState);
                 }
             }
         }
 
-        private static void WriteContentProperty(XmlWriter writer, string namespaceName, ClientType.ClientProperty property, object propertyValue)
+        private static void WriteContentProperty(
+            XmlWriter writer,
+            string namespaceName,
+            ClientType.ClientProperty property,
+            object propertyValue
+        )
         {
             writer.WriteStartElement(property.PropertyName, namespaceName);
 
             string typename = ClientConvert.GetEdmType(property.PropertyType);
             if (null != typename)
             {
-                writer.WriteAttributeString(XmlConstants.AtomTypeAttributeName, XmlConstants.DataWebMetadataNamespace, typename);
+                writer.WriteAttributeString(
+                    XmlConstants.AtomTypeAttributeName,
+                    XmlConstants.DataWebMetadataNamespace,
+                    typename
+                );
             }
 
             if (null == propertyValue)
-            {   
-                writer.WriteAttributeString(XmlConstants.AtomNullAttributeName, XmlConstants.DataWebMetadataNamespace, XmlConstants.XmlTrueLiteral);
+            {
+                writer.WriteAttributeString(
+                    XmlConstants.AtomNullAttributeName,
+                    XmlConstants.DataWebMetadataNamespace,
+                    XmlConstants.XmlTrueLiteral
+                );
 
                 if (property.KeyProperty)
                 {
-                    throw Error.InvalidOperation(Strings.Serializer_NullKeysAreNotSupported(property.PropertyName));
+                    throw Error.InvalidOperation(
+                        Strings.Serializer_NullKeysAreNotSupported(property.PropertyName)
+                    );
                 }
             }
             else
             {
-                string convertedValue = ClientConvert.ToString(propertyValue, false );
+                string convertedValue = ClientConvert.ToString(propertyValue, false);
                 if (0 == convertedValue.Length)
-                {  
-                    writer.WriteAttributeString(XmlConstants.AtomNullAttributeName, XmlConstants.DataWebMetadataNamespace, XmlConstants.XmlFalseLiteral);
+                {
+                    writer.WriteAttributeString(
+                        XmlConstants.AtomNullAttributeName,
+                        XmlConstants.DataWebMetadataNamespace,
+                        XmlConstants.XmlFalseLiteral
+                    );
                 }
                 else
-                {   
-                    if (Char.IsWhiteSpace(convertedValue[0]) ||
-                        Char.IsWhiteSpace(convertedValue[convertedValue.Length - 1]))
-                    {  
-                        writer.WriteAttributeString(XmlConstants.XmlSpaceAttributeName, XmlConstants.XmlNamespacesNamespace, XmlConstants.XmlSpacePreserveValue);
+                {
+                    if (
+                        Char.IsWhiteSpace(convertedValue[0])
+                        || Char.IsWhiteSpace(convertedValue[convertedValue.Length - 1])
+                    )
+                    {
+                        writer.WriteAttributeString(
+                            XmlConstants.XmlSpaceAttributeName,
+                            XmlConstants.XmlNamespacesNamespace,
+                            XmlConstants.XmlSpacePreserveValue
+                        );
                     }
 
                     writer.WriteValue(convertedValue);
@@ -1734,7 +2152,6 @@ public HttpStack HttpStack
 
             writer.WriteEndElement();
         }
-
 
         private static void ValidateEntityType(object entity)
         {
@@ -1746,7 +2163,6 @@ public HttpStack HttpStack
             }
         }
 
-
         private static void ValidateEntityTypeHasKeys(object entity)
         {
             Util.CheckArgumentNull(entity, "entity");
@@ -1757,64 +2173,95 @@ public HttpStack HttpStack
             }
         }
 
- 
         private static void ValidateSaveChangesOptions(SaveChangesOptions options)
         {
             const SaveChangesOptions All =
-                SaveChangesOptions.ContinueOnError |
-                SaveChangesOptions.Batch |
-                SaveChangesOptions.ReplaceOnUpdate;
+                SaveChangesOptions.ContinueOnError
+                | SaveChangesOptions.Batch
+                | SaveChangesOptions.ReplaceOnUpdate;
 
-            
             if ((options | All) != All)
             {
                 throw Error.ArgumentOutOfRange("options");
             }
 
-    
             if (IsFlagSet(options, SaveChangesOptions.Batch | SaveChangesOptions.ContinueOnError))
             {
                 throw Error.ArgumentOutOfRange("options");
             }
         }
 
- 
         private static bool IsFlagSet(SaveChangesOptions options, SaveChangesOptions flag)
         {
             return ((options & flag) == flag);
         }
 
-        private static void WriteOperationRequestHeaders(StreamWriter writer, string methodName, string uri, Version requestVersion)
+        private static void WriteOperationRequestHeaders(
+            StreamWriter writer,
+            string methodName,
+            string uri,
+            Version requestVersion
+        )
         {
-            writer.WriteLine("{0}: {1}", XmlConstants.HttpContentType, XmlConstants.MimeApplicationHttp);
-            writer.WriteLine("{0}: {1}", XmlConstants.HttpContentTransferEncoding, XmlConstants.BatchRequestContentTransferEncoding);
+            writer.WriteLine(
+                "{0}: {1}",
+                XmlConstants.HttpContentType,
+                XmlConstants.MimeApplicationHttp
+            );
+            writer.WriteLine(
+                "{0}: {1}",
+                XmlConstants.HttpContentTransferEncoding,
+                XmlConstants.BatchRequestContentTransferEncoding
+            );
             writer.WriteLine();
 
             writer.WriteLine("{0} {1} {2}", methodName, uri, XmlConstants.HttpVersionInBatching);
-            if (requestVersion != Util.DataServiceVersion1 && requestVersion != Util.DataServiceVersionEmpty)
+            if (
+                requestVersion != Util.DataServiceVersion1
+                && requestVersion != Util.DataServiceVersionEmpty
+            )
             {
-                writer.WriteLine("{0}: {1}{2}", XmlConstants.HttpDataServiceVersion, requestVersion, Util.VersionSuffix);
+                writer.WriteLine(
+                    "{0}: {1}{2}",
+                    XmlConstants.HttpDataServiceVersion,
+                    requestVersion,
+                    Util.VersionSuffix
+                );
             }
         }
 
         private static void WriteOperationResponseHeaders(StreamWriter writer, int statusCode)
         {
-            writer.WriteLine("{0}: {1}", XmlConstants.HttpContentType, XmlConstants.MimeApplicationHttp);
-            writer.WriteLine("{0}: {1}", XmlConstants.HttpContentTransferEncoding, XmlConstants.BatchRequestContentTransferEncoding);
+            writer.WriteLine(
+                "{0}: {1}",
+                XmlConstants.HttpContentType,
+                XmlConstants.MimeApplicationHttp
+            );
+            writer.WriteLine(
+                "{0}: {1}",
+                XmlConstants.HttpContentTransferEncoding,
+                XmlConstants.BatchRequestContentTransferEncoding
+            );
             writer.WriteLine();
 
-            writer.WriteLine("{0} {1} {2}", XmlConstants.HttpVersionInBatching, statusCode, (HttpStatusCode)statusCode);
+            writer.WriteLine(
+                "{0} {1} {2}",
+                XmlConstants.HttpVersionInBatching,
+                statusCode,
+                (HttpStatusCode)statusCode
+            );
         }
-
 
         private bool DetachResource(EntityDescriptor resource)
         {
-          
-            foreach (LinkDescriptor end in this.bindings.Values.Where(resource.IsRelatedEntity).ToList())
+            foreach (
+                LinkDescriptor end in this.bindings.Values.Where(resource.IsRelatedEntity).ToList()
+            )
             {
                 this.DetachExistingLink(
-                        end, 
-                        end.Target == resource.Entity && resource.State == EntityStates.Added);
+                    end,
+                    end.Target == resource.Entity && resource.State == EntityStates.Added
+                );
             }
 
             resource.ChangeOrder = UInt32.MaxValue;
@@ -1826,19 +2273,19 @@ public HttpStack HttpStack
             return true;
         }
 
-
         private void DetachResourceIdentity(EntityDescriptor resource)
         {
             EntityDescriptor existing = null;
-            if ((null != resource.Identity) &&
-                this.identityToDescriptor.TryGetValue(resource.Identity, out existing) &&
-                Object.ReferenceEquals(existing, resource))
+            if (
+                (null != resource.Identity)
+                && this.identityToDescriptor.TryGetValue(resource.Identity, out existing)
+                && Object.ReferenceEquals(existing, resource)
+            )
             {
                 bool removed = this.identityToDescriptor.Remove(resource.Identity);
                 Debug.Assert(removed, "should have removed existing identity");
             }
         }
-
 
         private HttpWebRequest CreateRequest(LinkDescriptor binding)
         {
@@ -1849,57 +2296,89 @@ public HttpStack HttpStack
             }
 
             EntityDescriptor sourceResource = this.entityDescriptors[binding.Source];
-            EntityDescriptor targetResource = (null != binding.Target) ? this.entityDescriptors[binding.Target] : null;
+            EntityDescriptor targetResource =
+                (null != binding.Target) ? this.entityDescriptors[binding.Target] : null;
 
-      
             if (null == sourceResource.Identity)
             {
                 Debug.Assert(!binding.ContentGeneratedForSave, "already saved link");
                 binding.ContentGeneratedForSave = true;
                 Debug.Assert(EntityStates.Added == sourceResource.State, "expected added state");
-                throw Error.InvalidOperation(Strings.Context_LinkResourceInsertFailure, sourceResource.SaveError);
+                throw Error.InvalidOperation(
+                    Strings.Context_LinkResourceInsertFailure,
+                    sourceResource.SaveError
+                );
             }
             else if ((null != targetResource) && (null == targetResource.Identity))
             {
                 Debug.Assert(!binding.ContentGeneratedForSave, "already saved link");
                 binding.ContentGeneratedForSave = true;
                 Debug.Assert(EntityStates.Added == targetResource.State, "expected added state");
-                throw Error.InvalidOperation(Strings.Context_LinkResourceInsertFailure, targetResource.SaveError);
+                throw Error.InvalidOperation(
+                    Strings.Context_LinkResourceInsertFailure,
+                    targetResource.SaveError
+                );
             }
 
             Debug.Assert(null != sourceResource.Identity, "missing sourceResource.Identity");
-            return this.CreateRequest(this.CreateRequestUri(sourceResource, binding), GetLinkHttpMethod(binding), false, XmlConstants.MimeApplicationXml, Util.DataServiceVersion1, false);
+            return this.CreateRequest(
+                this.CreateRequestUri(sourceResource, binding),
+                GetLinkHttpMethod(binding),
+                false,
+                XmlConstants.MimeApplicationXml,
+                Util.DataServiceVersion1,
+                false
+            );
         }
 
         private Uri CreateRequestUri(EntityDescriptor sourceResource, LinkDescriptor binding)
         {
-            Uri requestUri = Util.CreateUri(sourceResource.GetResourceUri(this.baseUriWithSlash, false ), this.CreateRequestRelativeUri(binding));
+            Uri requestUri = Util.CreateUri(
+                sourceResource.GetResourceUri(this.baseUriWithSlash, false),
+                this.CreateRequestRelativeUri(binding)
+            );
             return requestUri;
         }
 
         private Uri CreateRequestRelativeUri(LinkDescriptor binding)
         {
             Uri relative;
-            bool collection = (null != ClientType.Create(binding.Source.GetType()).GetProperty(binding.SourceProperty, false).CollectionType);
+            bool collection = (
+                null
+                != ClientType
+                    .Create(binding.Source.GetType())
+                    .GetProperty(binding.SourceProperty, false)
+                    .CollectionType
+            );
             if (collection && (EntityStates.Added != binding.State))
-            {  
+            {
                 Debug.Assert(null != binding.Target, "null target in collection");
                 EntityDescriptor targetResource = this.entityDescriptors[binding.Target];
 
-               Uri navigationPropertyUri = this.BaseUriWithSlash.MakeRelativeUri(DataServiceContext.GenerateEditLinkUri(this.BaseUriWithSlash, binding.SourceProperty, targetResource.Entity));
+                Uri navigationPropertyUri = this.BaseUriWithSlash.MakeRelativeUri(
+                    DataServiceContext.GenerateEditLinkUri(
+                        this.BaseUriWithSlash,
+                        binding.SourceProperty,
+                        targetResource.Entity
+                    )
+                );
 
-                
-                relative = Util.CreateUri(XmlConstants.UriLinkSegment + "/" + navigationPropertyUri.OriginalString, UriKind.Relative);
+                relative = Util.CreateUri(
+                    XmlConstants.UriLinkSegment + "/" + navigationPropertyUri.OriginalString,
+                    UriKind.Relative
+                );
             }
             else
-            {   
-                relative = Util.CreateUri(XmlConstants.UriLinkSegment + "/" + binding.SourceProperty, UriKind.Relative);
+            {
+                relative = Util.CreateUri(
+                    XmlConstants.UriLinkSegment + "/" + binding.SourceProperty,
+                    UriKind.Relative
+                );
             }
 
             Debug.Assert(!relative.IsAbsoluteUri, "should be relative uri");
             return relative;
         }
-
 
         private void CreateRequestBatch(LinkDescriptor binding, StreamWriter text)
         {
@@ -1912,38 +2391,58 @@ public HttpStack HttpStack
             else
             {
                 Uri relative = this.CreateRequestRelativeUri(binding);
-                requestString = "$" + sourceResource.ChangeOrder.ToString(CultureInfo.InvariantCulture) + "/" + relative.OriginalString;
+                requestString =
+                    "$"
+                    + sourceResource.ChangeOrder.ToString(CultureInfo.InvariantCulture)
+                    + "/"
+                    + relative.OriginalString;
             }
 
-            WriteOperationRequestHeaders(text, GetLinkHttpMethod(binding), requestString, Util.DataServiceVersion1);
+            WriteOperationRequestHeaders(
+                text,
+                GetLinkHttpMethod(binding),
+                requestString,
+                Util.DataServiceVersion1
+            );
             text.WriteLine("{0}: {1}", XmlConstants.HttpContentID, binding.ChangeOrder);
 
-       
-            if ((EntityStates.Added == binding.State) || (EntityStates.Modified == binding.State && (null != binding.Target)))
+            if (
+                (EntityStates.Added == binding.State)
+                || (EntityStates.Modified == binding.State && (null != binding.Target))
+            )
             {
-                text.WriteLine("{0}: {1}", XmlConstants.HttpContentType, XmlConstants.MimeApplicationXml);
+                text.WriteLine(
+                    "{0}: {1}",
+                    XmlConstants.HttpContentType,
+                    XmlConstants.MimeApplicationXml
+                );
             }
         }
-
 
         private MemoryStream CreateRequestData(LinkDescriptor binding, bool newline)
         {
             Debug.Assert(
-                (binding.State == EntityStates.Added) ||
-                (binding.State == EntityStates.Modified && null != binding.Target),
-                "This method must be called only when a binding is added or put");
+                (binding.State == EntityStates.Added)
+                    || (binding.State == EntityStates.Modified && null != binding.Target),
+                "This method must be called only when a binding is added or put"
+            );
             MemoryStream stream = new MemoryStream();
-            XmlWriter writer = XmlUtil.CreateXmlWriterAndWriteProcessingInstruction(stream, HttpProcessUtility.EncodingUtf8NoPreamble);
+            XmlWriter writer = XmlUtil.CreateXmlWriterAndWriteProcessingInstruction(
+                stream,
+                HttpProcessUtility.EncodingUtf8NoPreamble
+            );
             EntityDescriptor targetResource = this.entityDescriptors[binding.Target];
 
             #region <uri xmlns="metadata">
-            writer.WriteStartElement(XmlConstants.UriElementName, XmlConstants.DataWebMetadataNamespace);
+            writer.WriteStartElement(
+                XmlConstants.UriElementName,
+                XmlConstants.DataWebMetadataNamespace
+            );
 
             string id;
             if (null != targetResource.Identity)
             {
- 
-                id = targetResource.GetResourceUri(this.baseUriWithSlash, false ).OriginalString;
+                id = targetResource.GetResourceUri(this.baseUriWithSlash, false).OriginalString;
             }
             else
             {
@@ -1958,29 +2457,50 @@ public HttpStack HttpStack
 
             if (newline)
             {
-             
                 for (int kk = 0; kk < NewLine.Length; ++kk)
                 {
                     stream.WriteByte((byte)NewLine[kk]);
                 }
             }
 
-
             stream.Position = 0;
             return stream;
         }
 
-
-        private HttpWebRequest CreateRequest(EntityDescriptor box, EntityStates state, bool replaceOnUpdate)
+        private HttpWebRequest CreateRequest(
+            EntityDescriptor box,
+            EntityStates state,
+            bool replaceOnUpdate
+        )
         {
-            Debug.Assert(null != box && ((EntityStates.Added == state) || (EntityStates.Modified == state) || (EntityStates.Deleted == state)), "unexpected entity ResourceState");
+            Debug.Assert(
+                null != box
+                    && (
+                        (EntityStates.Added == state)
+                        || (EntityStates.Modified == state)
+                        || (EntityStates.Deleted == state)
+                    ),
+                "unexpected entity ResourceState"
+            );
 
             string httpMethod = GetEntityHttpMethod(state, replaceOnUpdate);
-            Uri requestUri = box.GetResourceUri(this.baseUriWithSlash, false );
+            Uri requestUri = box.GetResourceUri(this.baseUriWithSlash, false);
 
-            Version requestVersion = ClientType.Create(box.Entity.GetType()).EpmIsV1Compatible ? Util.DataServiceVersion1 : Util.DataServiceVersion2;
-            HttpWebRequest request = this.CreateRequest(requestUri, httpMethod, false, XmlConstants.MimeApplicationAtom, requestVersion, false);
-            if ((null != box.ETag) && ((EntityStates.Deleted == state) || (EntityStates.Modified == state)))
+            Version requestVersion = ClientType.Create(box.Entity.GetType()).EpmIsV1Compatible
+                ? Util.DataServiceVersion1
+                : Util.DataServiceVersion2;
+            HttpWebRequest request = this.CreateRequest(
+                requestUri,
+                httpMethod,
+                false,
+                XmlConstants.MimeApplicationAtom,
+                requestVersion,
+                false
+            );
+            if (
+                (null != box.ETag)
+                && ((EntityStates.Deleted == state) || (EntityStates.Modified == state))
+            )
             {
                 request.Headers.Set(HttpRequestHeader.IfMatch, box.ETag);
             }
@@ -1988,31 +2508,53 @@ public HttpStack HttpStack
             return request;
         }
 
-        private void CreateRequestBatch(EntityDescriptor box, StreamWriter text, bool replaceOnUpdate)
+        private void CreateRequestBatch(
+            EntityDescriptor box,
+            StreamWriter text,
+            bool replaceOnUpdate
+        )
         {
             Debug.Assert(null != box, "null box");
             Debug.Assert(null != text, "null text");
-            Debug.Assert(box.State == EntityStates.Added || box.State == EntityStates.Deleted || box.State == EntityStates.Modified, "the entity must be in one of the 3 possible states");
+            Debug.Assert(
+                box.State == EntityStates.Added
+                    || box.State == EntityStates.Deleted
+                    || box.State == EntityStates.Modified,
+                "the entity must be in one of the 3 possible states"
+            );
 
             Uri requestUri = box.GetResourceUri(this.baseUriWithSlash, false);
 
             Debug.Assert(null != requestUri, "request uri is null");
             Debug.Assert(requestUri.IsAbsoluteUri, "request uri is not absolute uri");
 
-            Version requestVersion = ClientType.Create(box.Entity.GetType()).EpmIsV1Compatible ? Util.DataServiceVersion1 : Util.DataServiceVersion2;
-            WriteOperationRequestHeaders(text, GetEntityHttpMethod(box.State, replaceOnUpdate), requestUri.AbsoluteUri, requestVersion);
+            Version requestVersion = ClientType.Create(box.Entity.GetType()).EpmIsV1Compatible
+                ? Util.DataServiceVersion1
+                : Util.DataServiceVersion2;
+            WriteOperationRequestHeaders(
+                text,
+                GetEntityHttpMethod(box.State, replaceOnUpdate),
+                requestUri.AbsoluteUri,
+                requestVersion
+            );
             text.WriteLine("{0}: {1}", XmlConstants.HttpContentID, box.ChangeOrder);
             if (EntityStates.Deleted != box.State)
             {
-                text.WriteLine("{0}: {1}", XmlConstants.HttpContentType, XmlConstants.LinkMimeTypeEntry);
+                text.WriteLine(
+                    "{0}: {1}",
+                    XmlConstants.HttpContentType,
+                    XmlConstants.LinkMimeTypeEntry
+                );
             }
 
-            if ((null != box.ETag) && (EntityStates.Deleted == box.State || EntityStates.Modified == box.State))
+            if (
+                (null != box.ETag)
+                && (EntityStates.Deleted == box.State || EntityStates.Modified == box.State)
+            )
             {
                 text.WriteLine("{0}: {1}", XmlConstants.HttpRequestIfMatch, box.ETag);
             }
         }
-
 
         private Stream CreateRequestData(EntityDescriptor box, bool newline)
         {
@@ -2037,13 +2579,15 @@ public HttpStack HttpStack
                 XDocument node = null;
                 if (this.WritingEntity != null)
                 {
-                
                     node = new XDocument();
                     writer = node.CreateWriter();
                 }
                 else
                 {
-                    writer = XmlUtil.CreateXmlWriterAndWriteProcessingInstruction(stream, HttpProcessUtility.EncodingUtf8NoPreamble);
+                    writer = XmlUtil.CreateXmlWriterAndWriteProcessingInstruction(
+                        stream,
+                        HttpProcessUtility.EncodingUtf8NoPreamble
+                    );
                 }
 
                 ClientType type = ClientType.Create(box.Entity.GetType());
@@ -2051,47 +2595,96 @@ public HttpStack HttpStack
                 string typeName = this.GetServerTypeName(box);
 
                 #region <entry xmlns="Atom" xmlns:d="DataWeb", xmlns:m="DataWebMetadata">
-                writer.WriteStartElement(XmlConstants.AtomEntryElementName, XmlConstants.AtomNamespace);
-                writer.WriteAttributeString(XmlConstants.DataWebNamespacePrefix, XmlConstants.XmlNamespacesNamespace, this.DataNamespace);
-                writer.WriteAttributeString(XmlConstants.DataWebMetadataNamespacePrefix, XmlConstants.XmlNamespacesNamespace, XmlConstants.DataWebMetadataNamespace);
+                writer.WriteStartElement(
+                    XmlConstants.AtomEntryElementName,
+                    XmlConstants.AtomNamespace
+                );
+                writer.WriteAttributeString(
+                    XmlConstants.DataWebNamespacePrefix,
+                    XmlConstants.XmlNamespacesNamespace,
+                    this.DataNamespace
+                );
+                writer.WriteAttributeString(
+                    XmlConstants.DataWebMetadataNamespacePrefix,
+                    XmlConstants.XmlNamespacesNamespace,
+                    XmlConstants.DataWebMetadataNamespace
+                );
 
- 
                 if (!String.IsNullOrEmpty(typeName))
                 {
-                    writer.WriteStartElement(XmlConstants.AtomCategoryElementName, XmlConstants.AtomNamespace);
-                    writer.WriteAttributeString(XmlConstants.AtomCategorySchemeAttributeName, this.typeScheme.OriginalString);
-                    writer.WriteAttributeString(XmlConstants.AtomCategoryTermAttributeName, typeName);
+                    writer.WriteStartElement(
+                        XmlConstants.AtomCategoryElementName,
+                        XmlConstants.AtomNamespace
+                    );
+                    writer.WriteAttributeString(
+                        XmlConstants.AtomCategorySchemeAttributeName,
+                        this.typeScheme.OriginalString
+                    );
+                    writer.WriteAttributeString(
+                        XmlConstants.AtomCategoryTermAttributeName,
+                        typeName
+                    );
                     writer.WriteEndElement();
                 }
 
                 if (type.HasEntityPropertyMappings)
                 {
-                    using (EpmSyndicationContentSerializer s = new EpmSyndicationContentSerializer(type.EpmTargetTree, box.Entity, writer))
+                    using (
+                        EpmSyndicationContentSerializer s = new EpmSyndicationContentSerializer(
+                            type.EpmTargetTree,
+                            box.Entity,
+                            writer
+                        )
+                    )
                     {
                         s.Serialize();
                     }
                 }
                 else
                 {
-                    writer.WriteElementString(XmlConstants.AtomTitleElementName, XmlConstants.AtomNamespace, String.Empty);
-                    writer.WriteStartElement(XmlConstants.AtomAuthorElementName, XmlConstants.AtomNamespace);
-                    writer.WriteElementString(XmlConstants.AtomNameElementName, XmlConstants.AtomNamespace, String.Empty);
+                    writer.WriteElementString(
+                        XmlConstants.AtomTitleElementName,
+                        XmlConstants.AtomNamespace,
+                        String.Empty
+                    );
+                    writer.WriteStartElement(
+                        XmlConstants.AtomAuthorElementName,
+                        XmlConstants.AtomNamespace
+                    );
+                    writer.WriteElementString(
+                        XmlConstants.AtomNameElementName,
+                        XmlConstants.AtomNamespace,
+                        String.Empty
+                    );
                     writer.WriteEndElement();
 
-                    writer.WriteElementString(XmlConstants.AtomUpdatedElementName, XmlConstants.AtomNamespace, XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.RoundtripKind));
+                    writer.WriteElementString(
+                        XmlConstants.AtomUpdatedElementName,
+                        XmlConstants.AtomNamespace,
+                        XmlConvert.ToString(
+                            DateTime.UtcNow,
+                            XmlDateTimeSerializationMode.RoundtripKind
+                        )
+                    );
                 }
 
                 if (EntityStates.Modified == box.State)
                 {
-    
-                    writer.WriteElementString(XmlConstants.AtomIdElementName, Util.DereferenceIdentity(box.Identity));
+                    writer.WriteElementString(
+                        XmlConstants.AtomIdElementName,
+                        Util.DereferenceIdentity(box.Identity)
+                    );
                 }
                 else
                 {
-                    writer.WriteElementString(XmlConstants.AtomIdElementName, XmlConstants.AtomNamespace, String.Empty);
+                    writer.WriteElementString(
+                        XmlConstants.AtomIdElementName,
+                        XmlConstants.AtomNamespace,
+                        String.Empty
+                    );
                 }
 
-                #region <link href=”%EditLink%” rel=”%DataWebRelatedNamespace%%AssociationName%” type=”application/atom+xml;feed” />
+                #region <link href=ï¿½%EditLink%ï¿½ rel=ï¿½%DataWebRelatedNamespace%%AssociationName%ï¿½ type=ï¿½application/atom+xml;feedï¿½ />
                 if (EntityStates.Added == box.State)
                 {
                     this.CreateRequestDataLinks(box, writer);
@@ -2099,27 +2692,48 @@ public HttpStack HttpStack
                 #endregion
 
                 #region <content type="application/xml"><m:Properites> or <m:Properties>
-    
+
                 if (!type.IsMediaLinkEntry && !box.IsMediaLinkEntry)
                 {
-                    writer.WriteStartElement(XmlConstants.AtomContentElementName, XmlConstants.AtomNamespace); 
-                    writer.WriteAttributeString(XmlConstants.AtomTypeAttributeName, XmlConstants.MimeApplicationXml); 
+                    writer.WriteStartElement(
+                        XmlConstants.AtomContentElementName,
+                        XmlConstants.AtomNamespace
+                    );
+                    writer.WriteAttributeString(
+                        XmlConstants.AtomTypeAttributeName,
+                        XmlConstants.MimeApplicationXml
+                    );
                 }
 
-                writer.WriteStartElement(XmlConstants.AtomPropertiesElementName, XmlConstants.DataWebMetadataNamespace); 
+                writer.WriteStartElement(
+                    XmlConstants.AtomPropertiesElementName,
+                    XmlConstants.DataWebMetadataNamespace
+                );
                 bool propertiesWritten;
-                this.WriteContentProperties(writer, type, box.Entity, type.HasEntityPropertyMappings ? type.EpmSourceTree.Root : null, out propertiesWritten);
+                this.WriteContentProperties(
+                    writer,
+                    type,
+                    box.Entity,
+                    type.HasEntityPropertyMappings ? type.EpmSourceTree.Root : null,
+                    out propertiesWritten
+                );
 
-                writer.WriteEndElement(); 
+                writer.WriteEndElement();
 
                 if (!type.IsMediaLinkEntry && !box.IsMediaLinkEntry)
                 {
-                    writer.WriteEndElement(); 
+                    writer.WriteEndElement();
                 }
 
                 if (type.HasEntityPropertyMappings)
                 {
-                    using (EpmCustomContentSerializer s = new EpmCustomContentSerializer(type.EpmTargetTree, box.Entity, writer))
+                    using (
+                        EpmCustomContentSerializer s = new EpmCustomContentSerializer(
+                            type.EpmTargetTree,
+                            box.Entity,
+                            writer
+                        )
+                    )
                     {
                         s.Serialize();
                     }
@@ -2133,12 +2747,15 @@ public HttpStack HttpStack
 
                 if (this.WritingEntity != null)
                 {
-                    ReadingWritingEntityEventArgs args = new ReadingWritingEntityEventArgs(box.Entity, node.Root);
+                    ReadingWritingEntityEventArgs args = new ReadingWritingEntityEventArgs(
+                        box.Entity,
+                        node.Root
+                    );
                     this.WritingEntity(this, args);
 
-                   
-                  
-                    XmlWriterSettings settings = XmlUtil.CreateXmlWriterSettings(HttpProcessUtility.EncodingUtf8NoPreamble);
+                    XmlWriterSettings settings = XmlUtil.CreateXmlWriterSettings(
+                        HttpProcessUtility.EncodingUtf8NoPreamble
+                    );
                     settings.ConformanceLevel = ConformanceLevel.Auto;
                     using (XmlWriter streamWriter = XmlWriter.Create(stream, settings))
                     {
@@ -2148,7 +2765,6 @@ public HttpStack HttpStack
 
                 if (newline)
                 {
-
                     for (int kk = 0; kk < NewLine.Length; ++kk)
                     {
                         stream.WriteByte((byte)NewLine[kk]);
@@ -2160,7 +2776,6 @@ public HttpStack HttpStack
 
             return stream;
         }
-
 
         private void CreateRequestDataLinks(EntityDescriptor box, XmlWriter writer)
         {
@@ -2190,14 +2805,19 @@ public HttpStack HttpStack
                 Debug.Assert(null != end.Target, "null is DELETE");
                 String targetEditLink = this.entityDescriptors[end.Target].EditLink.ToString();
 
-                writer.WriteStartElement(XmlConstants.AtomLinkElementName, XmlConstants.AtomNamespace);
+                writer.WriteStartElement(
+                    XmlConstants.AtomLinkElementName,
+                    XmlConstants.AtomNamespace
+                );
                 writer.WriteAttributeString(XmlConstants.AtomHRefAttributeName, targetEditLink);
-                writer.WriteAttributeString(XmlConstants.AtomLinkRelationAttributeName, XmlConstants.DataWebRelatedNamespace + end.SourceProperty);
+                writer.WriteAttributeString(
+                    XmlConstants.AtomLinkRelationAttributeName,
+                    XmlConstants.DataWebRelatedNamespace + end.SourceProperty
+                );
                 writer.WriteAttributeString(XmlConstants.AtomTypeAttributeName, typeAttributeValue);
                 writer.WriteEndElement();
             }
         }
-
 
         private void HandleResponseDelete(Descriptor entry)
         {
@@ -2217,7 +2837,12 @@ public HttpStack HttpStack
             }
         }
 
-        private void HandleResponsePost(EntityDescriptor entry, MaterializeAtom materializer, Uri editLink, string etag)
+        private void HandleResponsePost(
+            EntityDescriptor entry,
+            MaterializeAtom materializer,
+            Uri editLink,
+            string etag
+        )
         {
             Debug.Assert(editLink != null, "location header must be specified in POST responses.");
 
@@ -2228,9 +2853,8 @@ public HttpStack HttpStack
 
             if (materializer == null)
             {
-               
                 String identity = Util.ReferenceIdentity(editLink.ToString());
-                this.AttachIdentity(identity, null , editLink, entry.Entity, etag);
+                this.AttachIdentity(identity, null, editLink, entry.Entity, etag);
             }
             else
             {
@@ -2238,12 +2862,24 @@ public HttpStack HttpStack
 
                 foreach (object x in materializer)
                 {
-                    Debug.Assert(null != entry.Identity, "updated inserted should always gain an identity");
-                    Debug.Assert(x == entry.Entity, "x == box.Entity, should have same object generated by response");
-                    Debug.Assert(EntityStates.Unchanged == entry.State, "should have moved out of insert");
-                    Debug.Assert((null != this.identityToDescriptor) && this.identityToDescriptor.ContainsKey(entry.Identity), "should have identity tracked");
+                    Debug.Assert(
+                        null != entry.Identity,
+                        "updated inserted should always gain an identity"
+                    );
+                    Debug.Assert(
+                        x == entry.Entity,
+                        "x == box.Entity, should have same object generated by response"
+                    );
+                    Debug.Assert(
+                        EntityStates.Unchanged == entry.State,
+                        "should have moved out of insert"
+                    );
+                    Debug.Assert(
+                        (null != this.identityToDescriptor)
+                            && this.identityToDescriptor.ContainsKey(entry.Identity),
+                        "should have identity tracked"
+                    );
 
-              
                     if (entry.EditLink == null)
                     {
                         entry.EditLink = editLink;
@@ -2258,20 +2894,23 @@ public HttpStack HttpStack
 
             foreach (LinkDescriptor end in this.RelatedLinks(entry))
             {
-                Debug.Assert(0 != end.SaveResultWasProcessed, "link should have been saved with the enty");
+                Debug.Assert(
+                    0 != end.SaveResultWasProcessed,
+                    "link should have been saved with the enty"
+                );
 
-        
-                if (IncludeLinkState(end.SaveResultWasProcessed) || end.SaveResultWasProcessed == EntityStates.Added)
+                if (
+                    IncludeLinkState(end.SaveResultWasProcessed)
+                    || end.SaveResultWasProcessed == EntityStates.Added
+                )
                 {
                     HandleResponsePost(end);
                 }
             }
         }
 
-
         private int SaveResultProcessed(Descriptor entry)
         {
-      
             entry.SaveResultWasProcessed = entry.State;
 
             int count = 0;
@@ -2279,10 +2918,16 @@ public HttpStack HttpStack
             {
                 foreach (LinkDescriptor end in this.RelatedLinks((EntityDescriptor)entry))
                 {
-                    Debug.Assert(end.ContentGeneratedForSave, "link should have been saved with the enty");
+                    Debug.Assert(
+                        end.ContentGeneratedForSave,
+                        "link should have been saved with the enty"
+                    );
                     if (end.ContentGeneratedForSave)
                     {
-                        Debug.Assert(0 == end.SaveResultWasProcessed, "this link already had a result");
+                        Debug.Assert(
+                            0 == end.SaveResultWasProcessed,
+                            "this link already had a result"
+                        );
                         end.SaveResultWasProcessed = end.State;
                         count++;
                     }
@@ -2292,7 +2937,6 @@ public HttpStack HttpStack
             return count;
         }
 
-
         private IEnumerable<LinkDescriptor> RelatedLinks(EntityDescriptor box)
         {
             foreach (LinkDescriptor end in this.bindings.Values)
@@ -2300,16 +2944,31 @@ public HttpStack HttpStack
                 if (end.Source == box.Entity)
                 {
                     if (null != end.Target)
-                    {   
+                    {
                         EntityDescriptor target = this.entityDescriptors[end.Target];
 
-
-                        if (IncludeLinkState(target.SaveResultWasProcessed) || ((0 == target.SaveResultWasProcessed) && IncludeLinkState(target.State)) ||
-                            ((null != target.Identity) && (target.ChangeOrder < box.ChangeOrder) &&
-                             ((0 == target.SaveResultWasProcessed && EntityStates.Added == target.State) ||
-                              (EntityStates.Added == target.SaveResultWasProcessed))))
+                        if (
+                            IncludeLinkState(target.SaveResultWasProcessed)
+                            || (
+                                (0 == target.SaveResultWasProcessed)
+                                && IncludeLinkState(target.State)
+                            )
+                            || (
+                                (null != target.Identity)
+                                && (target.ChangeOrder < box.ChangeOrder)
+                                && (
+                                    (
+                                        0 == target.SaveResultWasProcessed
+                                        && EntityStates.Added == target.State
+                                    ) || (EntityStates.Added == target.SaveResultWasProcessed)
+                                )
+                            )
+                        )
                         {
-                            Debug.Assert(box.ChangeOrder < end.ChangeOrder, "saving is out of order");
+                            Debug.Assert(
+                                box.ChangeOrder < end.ChangeOrder,
+                                "saving is out of order"
+                            );
                             yield return end;
                         }
                     }
@@ -2317,9 +2976,19 @@ public HttpStack HttpStack
             }
         }
 
-        private LoadPropertyResult CreateLoadPropertyRequest(object entity, string propertyName, AsyncCallback callback, object state, Uri requestUri, DataServiceQueryContinuation continuation)
+        private LoadPropertyResult CreateLoadPropertyRequest(
+            object entity,
+            string propertyName,
+            AsyncCallback callback,
+            object state,
+            Uri requestUri,
+            DataServiceQueryContinuation continuation
+        )
         {
-            Debug.Assert(continuation == null || requestUri == null, "continuation == null || requestUri == null -- only one or the either (or neither) may be passed in");
+            Debug.Assert(
+                continuation == null || requestUri == null,
+                "continuation == null || requestUri == null -- only one or the either (or neither) may be passed in"
+            );
             EntityDescriptor box = this.EnsureContained(entity, "entity");
             Util.CheckArgumentNotEmpty(propertyName, "propertyName");
 
@@ -2345,56 +3014,99 @@ public HttpStack HttpStack
                 requestUri = continuation.NextLinkUri;
             }
 
-            bool mediaLink = (type.MediaDataMember != null && propertyName == type.MediaDataMember.PropertyName);
+            bool mediaLink = (
+                type.MediaDataMember != null && propertyName == type.MediaDataMember.PropertyName
+            );
             Version requestVersion;
             if (requestUri == null)
             {
                 Uri relativeUri;
                 if (mediaLink)
                 {
-                   
                     relativeUri = Util.CreateUri(XmlConstants.UriValueSegment, UriKind.Relative);
                 }
                 else
                 {
-                    relativeUri = Util.CreateUri(propertyName + (null != property.CollectionType ? "()" : String.Empty), UriKind.Relative);
+                    relativeUri = Util.CreateUri(
+                        propertyName + (null != property.CollectionType ? "()" : String.Empty),
+                        UriKind.Relative
+                    );
                 }
 
-                requestUri = Util.CreateUri(box.GetResourceUri(this.baseUriWithSlash, true ), relativeUri);
+                requestUri = Util.CreateUri(
+                    box.GetResourceUri(this.baseUriWithSlash, true),
+                    relativeUri
+                );
                 requestVersion = Util.DataServiceVersion1;
             }
             else
             {
-  
                 requestVersion = Util.DataServiceVersionEmpty;
             }
 
-            HttpWebRequest request = this.CreateRequest(requestUri, XmlConstants.HttpMethodGet, mediaLink, null, requestVersion, false);
-            DataServiceRequest dataServiceRequest = DataServiceRequest.GetInstance(property.PropertyType, requestUri);
-            return new LoadPropertyResult(entity, propertyName, this, request, callback, state, dataServiceRequest, plan);
+            HttpWebRequest request = this.CreateRequest(
+                requestUri,
+                XmlConstants.HttpMethodGet,
+                mediaLink,
+                null,
+                requestVersion,
+                false
+            );
+            DataServiceRequest dataServiceRequest = DataServiceRequest.GetInstance(
+                property.PropertyType,
+                requestUri
+            );
+            return new LoadPropertyResult(
+                entity,
+                propertyName,
+                this,
+                request,
+                callback,
+                state,
+                dataServiceRequest,
+                plan
+            );
         }
 
-
-        private void WriteContentProperties(XmlWriter writer, ClientType type, object resource, EpmSourcePathSegment currentSegment, out bool propertiesWritten)
+        private void WriteContentProperties(
+            XmlWriter writer,
+            ClientType type,
+            object resource,
+            EpmSourcePathSegment currentSegment,
+            out bool propertiesWritten
+        )
         {
             #region <d:property>value</property>
             propertiesWritten = false;
             foreach (ClientType.ClientProperty property in type.Properties)
             {
-                if (property == type.MediaDataMember ||
-                    (type.MediaDataMember != null &&
-                     type.MediaDataMember.MimeTypeProperty == property))
+                if (
+                    property == type.MediaDataMember
+                    || (
+                        type.MediaDataMember != null
+                        && type.MediaDataMember.MimeTypeProperty == property
+                    )
+                )
                 {
                     continue;
                 }
 
                 object propertyValue = property.GetValue(resource);
 
-                EpmSourcePathSegment matchedSegment = currentSegment != null ? currentSegment.SubProperties.SingleOrDefault(s => s.PropertyName == property.PropertyName) : null;
+                EpmSourcePathSegment matchedSegment =
+                    currentSegment != null
+                        ? currentSegment.SubProperties.SingleOrDefault(s =>
+                            s.PropertyName == property.PropertyName
+                        )
+                        : null;
 
                 if (property.IsKnownType)
                 {
-                    if (propertyValue == null || matchedSegment == null || matchedSegment.EpmInfo.Attribute.KeepInContent)
+                    if (
+                        propertyValue == null
+                        || matchedSegment == null
+                        || matchedSegment.EpmInfo.Attribute.KeepInContent
+                    )
                     {
                         WriteContentProperty(writer, this.DataNamespace, property, propertyValue);
                         propertiesWritten = true;
@@ -2403,13 +3115,27 @@ public HttpStack HttpStack
 #if ASTORIA_OPEN_OBJECT
                 else if (property.OpenObjectProperty)
                 {
-                    foreach (KeyValuePair<string, object> pair in (IDictionary<string, object>)propertyValue)
+                    foreach (
+                        KeyValuePair<string, object> pair in (IDictionary<string, object>)
+                            propertyValue
+                    )
                     {
                         if ((null == pair.Value) || ClientConvert.IsKnownType(pair.Value.GetType()))
                         {
-                            Type valueType = pair.Value != null ? pair.Value.GetType() : typeof(string);
-                            ClientType.ClientProperty openProperty = new ClientType.ClientProperty(null, valueType, false, true);
-                            WriteContentProperty(writer, this.DataNamespace, openProperty, pair.Value);
+                            Type valueType =
+                                pair.Value != null ? pair.Value.GetType() : typeof(string);
+                            ClientType.ClientProperty openProperty = new ClientType.ClientProperty(
+                                null,
+                                valueType,
+                                false,
+                                true
+                            );
+                            WriteContentProperty(
+                                writer,
+                                this.DataNamespace,
+                                openProperty,
+                                pair.Value
+                            );
                             propertiesWritten = true;
                         }
                     }
@@ -2421,25 +3147,44 @@ public HttpStack HttpStack
                     if (!nested.IsEntityType)
                     {
                         #region complex type
-                        XElement complexProperty = new XElement(((XNamespace)this.DataNamespace) + property.PropertyName);
+                        XElement complexProperty = new XElement(
+                            ((XNamespace)this.DataNamespace) + property.PropertyName
+                        );
                         bool shouldWriteComplexProperty = false;
                         string typeName = this.ResolveNameFromType(nested.ElementType);
                         if (!String.IsNullOrEmpty(typeName))
                         {
-                            complexProperty.Add(new XAttribute(((XNamespace)XmlConstants.DataWebMetadataNamespace) + XmlConstants.AtomTypeAttributeName, typeName));
+                            complexProperty.Add(
+                                new XAttribute(
+                                    ((XNamespace)XmlConstants.DataWebMetadataNamespace)
+                                        + XmlConstants.AtomTypeAttributeName,
+                                    typeName
+                                )
+                            );
                         }
-                        
-           
+
                         if (null == propertyValue)
                         {
-                            complexProperty.Add(new XAttribute(((XNamespace)XmlConstants.DataWebMetadataNamespace) + XmlConstants.AtomNullAttributeName, XmlConstants.XmlTrueLiteral));
+                            complexProperty.Add(
+                                new XAttribute(
+                                    ((XNamespace)XmlConstants.DataWebMetadataNamespace)
+                                        + XmlConstants.AtomNullAttributeName,
+                                    XmlConstants.XmlTrueLiteral
+                                )
+                            );
                             shouldWriteComplexProperty = true;
                         }
                         else
                         {
                             using (XmlWriter complexPropertyWriter = complexProperty.CreateWriter())
                             {
-                                this.WriteContentProperties(complexPropertyWriter, nested, propertyValue, matchedSegment, out shouldWriteComplexProperty);
+                                this.WriteContentProperties(
+                                    complexPropertyWriter,
+                                    nested,
+                                    propertyValue,
+                                    matchedSegment,
+                                    out shouldWriteComplexProperty
+                                );
                             }
                         }
 
@@ -2455,54 +3200,67 @@ public HttpStack HttpStack
             #endregion
         }
 
-
         private void DetachExistingLink(LinkDescriptor existingLink, bool targetDelete)
         {
-     
             if (existingLink.Target != null)
             {
-              
                 EntityDescriptor targetResource = this.entityDescriptors[existingLink.Target];
-                
-    
+
                 if (targetResource.IsDeepInsert && !targetDelete)
                 {
                     EntityDescriptor parentOfTarget = targetResource.ParentForInsert;
-                    if (Object.ReferenceEquals(targetResource.ParentEntity, existingLink.Source) && 
-                       (parentOfTarget.State != EntityStates.Deleted || 
-                        parentOfTarget.State != EntityStates.Detached))
+                    if (
+                        Object.ReferenceEquals(targetResource.ParentEntity, existingLink.Source)
+                        && (
+                            parentOfTarget.State != EntityStates.Deleted
+                            || parentOfTarget.State != EntityStates.Detached
+                        )
+                    )
                     {
                         throw new InvalidOperationException(Strings.Context_ChildResourceExists);
                     }
                 }
             }
-        
+
             if (this.bindings.Remove(existingLink))
-            {   
+            {
                 existingLink.State = EntityStates.Detached;
             }
         }
 
-
-        private LinkDescriptor DetachReferenceLink(object source, string sourceProperty, object target, MergeOption linkMerge)
+        private LinkDescriptor DetachReferenceLink(
+            object source,
+            string sourceProperty,
+            object target,
+            MergeOption linkMerge
+        )
         {
             LinkDescriptor existing = this.GetLinks(source, sourceProperty).FirstOrDefault();
             if (null != existing)
             {
-                if ((target == existing.Target) ||
-                    (MergeOption.AppendOnly == linkMerge) ||
-                    (MergeOption.PreserveChanges == linkMerge && EntityStates.Modified == existing.State))
+                if (
+                    (target == existing.Target)
+                    || (MergeOption.AppendOnly == linkMerge)
+                    || (
+                        MergeOption.PreserveChanges == linkMerge
+                        && EntityStates.Modified == existing.State
+                    )
+                )
                 {
                     return existing;
                 }
 
                 this.DetachExistingLink(existing, false);
-                Debug.Assert(!this.bindings.Values.Any(o => (o.Source == source) && (o.SourceProperty == sourceProperty)), "only expecting one");
+                Debug.Assert(
+                    !this.bindings.Values.Any(o =>
+                        (o.Source == source) && (o.SourceProperty == sourceProperty)
+                    ),
+                    "only expecting one"
+                );
             }
 
             return null;
         }
-
 
         private EntityDescriptor EnsureContained(object resource, string parameterName)
         {
@@ -2517,11 +3275,19 @@ public HttpStack HttpStack
             return box;
         }
 
-         private bool EnsureRelatable(object source, string sourceProperty, object target, EntityStates state)
+        private bool EnsureRelatable(
+            object source,
+            string sourceProperty,
+            object target,
+            EntityStates state
+        )
         {
             EntityDescriptor sourceResource = this.EnsureContained(source, "source");
             EntityDescriptor targetResource = null;
-            if ((null != target) || ((EntityStates.Modified != state) && (EntityStates.Unchanged != state)))
+            if (
+                (null != target)
+                || ((EntityStates.Modified != state) && (EntityStates.Unchanged != state))
+            )
             {
                 targetResource = this.EnsureContained(target, "target");
             }
@@ -2531,7 +3297,6 @@ public HttpStack HttpStack
             ClientType type = ClientType.Create(source.GetType());
             Debug.Assert(type.IsEntityType, "should be enforced by just adding an object");
 
-     
             ClientType.ClientProperty property = type.GetProperty(sourceProperty, false);
 
             if (property.IsKnownType)
@@ -2539,12 +3304,19 @@ public HttpStack HttpStack
                 throw Error.InvalidOperation(Strings.Context_RelationNotRefOrCollection);
             }
 
-            if ((EntityStates.Unchanged == state) && (null == target) && (null != property.CollectionType))
+            if (
+                (EntityStates.Unchanged == state)
+                && (null == target)
+                && (null != property.CollectionType)
+            )
             {
                 targetResource = this.EnsureContained(target, "target");
             }
 
-            if (((EntityStates.Added == state) || (EntityStates.Deleted == state)) && (null == property.CollectionType))
+            if (
+                ((EntityStates.Added == state) || (EntityStates.Deleted == state))
+                && (null == property.CollectionType)
+            )
             {
                 throw Error.InvalidOperation(Strings.Context_AddLinkCollectionOnly);
             }
@@ -2553,7 +3325,7 @@ public HttpStack HttpStack
                 throw Error.InvalidOperation(Strings.Context_SetLinkReferenceOnly);
             }
 
-             type = ClientType.Create(property.CollectionType ?? property.PropertyType);
+            type = ClientType.Create(property.CollectionType ?? property.PropertyType);
             Debug.Assert(type.IsEntityType, "should be enforced by just adding an object");
 
             if ((null != target) && !type.ElementType.IsInstanceOfType(target))
@@ -2563,8 +3335,10 @@ public HttpStack HttpStack
 
             if ((EntityStates.Added == state) || (EntityStates.Unchanged == state))
             {
-                if ((sourceResource.State == EntityStates.Deleted) ||
-                    ((targetResource != null) && (targetResource.State == EntityStates.Deleted)))
+                if (
+                    (sourceResource.State == EntityStates.Deleted)
+                    || ((targetResource != null) && (targetResource.State == EntityStates.Deleted))
+                )
                 {
                     throw Error.InvalidOperation(Strings.Context_NoRelationWithDeleteEnd);
                 }
@@ -2572,8 +3346,10 @@ public HttpStack HttpStack
 
             if ((EntityStates.Deleted == state) || (EntityStates.Unchanged == state))
             {
-                if ((sourceResource.State == EntityStates.Added) ||
-                    ((targetResource != null) && (targetResource.State == EntityStates.Added)))
+                if (
+                    (sourceResource.State == EntityStates.Added)
+                    || ((targetResource != null) && (targetResource.State == EntityStates.Added))
+                )
                 {
                     if (EntityStates.Deleted == state)
                     {
@@ -2595,9 +3371,16 @@ public HttpStack HttpStack
             Util.CheckArgumentNotEmpty(entitySetName, "entitySetName");
 
             Uri tmp = Util.CreateUri(entitySetName, UriKind.RelativeOrAbsolute);
-            if (tmp.IsAbsoluteUri ||
-                !String.IsNullOrEmpty(Util.CreateUri(this.baseUriWithSlash, tmp)
-                                     .GetComponents(UriComponents.Query | UriComponents.Fragment, UriFormat.SafeUnescaped)))
+            if (
+                tmp.IsAbsoluteUri
+                || !String.IsNullOrEmpty(
+                    Util.CreateUri(this.baseUriWithSlash, tmp)
+                        .GetComponents(
+                            UriComponents.Query | UriComponents.Fragment,
+                            UriFormat.SafeUnescaped
+                        )
+                )
+            )
             {
                 throw Error.Argument(Strings.Context_EntitySetName, "entitySetName");
             }
@@ -2607,7 +3390,11 @@ public HttpStack HttpStack
         {
             if (null == this.identityToDescriptor)
             {
-                System.Threading.Interlocked.CompareExchange(ref this.identityToDescriptor, new Dictionary<String, EntityDescriptor>(EqualityComparer<String>.Default), null);
+                System.Threading.Interlocked.CompareExchange(
+                    ref this.identityToDescriptor,
+                    new Dictionary<String, EntityDescriptor>(EqualityComparer<String>.Default),
+                    null
+                );
             }
         }
 
@@ -2617,10 +3404,11 @@ public HttpStack HttpStack
         }
 
         private GetReadStreamResult CreateGetReadStreamResult(
-            object entity, 
+            object entity,
             DataServiceRequestArgs args,
-            AsyncCallback callback, 
-            object state)
+            AsyncCallback callback,
+            object state
+        )
         {
             EntityDescriptor box = this.EnsureContained(entity, "entity");
             Util.CheckArgumentNull(args, "args");
@@ -2632,9 +3420,24 @@ public HttpStack HttpStack
             }
 
 #if ASTORIA_LIGHT
-           HttpWebRequest request = this.CreateRequest(requestUri, XmlConstants.HttpMethodGet, true, null, null, false, HttpStack.ClientHttp);
+            HttpWebRequest request = this.CreateRequest(
+                requestUri,
+                XmlConstants.HttpMethodGet,
+                true,
+                null,
+                null,
+                false,
+                HttpStack.ClientHttp
+            );
 #else
-            HttpWebRequest request = this.CreateRequest(requestUri, XmlConstants.HttpMethodGet, true, null, null, false);
+            HttpWebRequest request = this.CreateRequest(
+                requestUri,
+                XmlConstants.HttpMethodGet,
+                true,
+                null,
+                null,
+                false
+            );
 #endif
 
             WebUtil.ApplyHeadersToRequest(args.Headers, request, false);
@@ -2646,11 +3449,11 @@ public HttpStack HttpStack
         {
             private readonly Stream stream;
 
-             private readonly bool close;
+            private readonly bool close;
 
             private readonly DataServiceRequestArgs args;
 
-             internal DataServiceSaveStream(Stream stream, bool close, DataServiceRequestArgs args)
+            internal DataServiceSaveStream(Stream stream, bool close, DataServiceRequestArgs args)
             {
                 Debug.Assert(stream != null, "stream must not be null.");
 
@@ -2661,10 +3464,7 @@ public HttpStack HttpStack
 
             internal Stream Stream
             {
-                get 
-                {
-                    return this.stream;
-                }
+                get { return this.stream; }
             }
 
             internal DataServiceRequestArgs Args
@@ -2693,7 +3493,16 @@ public HttpStack HttpStack
 
             #endregion Private fields.
 
-            internal LoadPropertyResult(object entity, string propertyName, DataServiceContext context, HttpWebRequest request, AsyncCallback callback, object state, DataServiceRequest dataServiceRequest, ProjectionPlan plan)
+            internal LoadPropertyResult(
+                object entity,
+                string propertyName,
+                DataServiceContext context,
+                HttpWebRequest request,
+                AsyncCallback callback,
+                object state,
+                DataServiceRequest dataServiceRequest,
+                ProjectionPlan plan
+            )
                 : base(context, "LoadProperty", dataServiceRequest, request, callback, state)
             {
                 this.entity = entity;
@@ -2729,23 +3538,33 @@ public HttpStack HttpStack
                     {
                         results = this.ReadPropertyFromAtom(box, property);
                     }
-                    
+
                     return this.GetResponseWithType(results, elementType);
                 }
                 catch (InvalidOperationException ex)
                 {
-                    QueryOperationResponse response = this.GetResponseWithType(results, elementType);
+                    QueryOperationResponse response = this.GetResponseWithType(
+                        results,
+                        elementType
+                    );
                     if (response != null)
                     {
                         response.Error = ex;
-                        throw new DataServiceQueryException(Strings.DataServiceException_GeneralError, ex, response);
+                        throw new DataServiceQueryException(
+                            Strings.DataServiceException_GeneralError,
+                            ex,
+                            response
+                        );
                     }
 
                     throw;
                 }
             }
 
-            private static byte[] ReadByteArrayWithContentLength(Stream responseStream, int totalLength)
+            private static byte[] ReadByteArrayWithContentLength(
+                Stream responseStream,
+                int totalLength
+            )
             {
                 byte[] buffer = new byte[totalLength];
                 int read = 0;
@@ -2791,7 +3610,10 @@ public HttpStack HttpStack
                 return completeBuffer;
             }
 
-            private MaterializeAtom ReadPropertyFromAtom(EntityDescriptor box, ClientType.ClientProperty property)
+            private MaterializeAtom ReadPropertyFromAtom(
+                EntityDescriptor box,
+                ClientType.ClientProperty property
+            )
             {
                 DataServiceContext context = (DataServiceContext)this.Source;
 
@@ -2805,11 +3627,11 @@ public HttpStack HttpStack
 
                     Type nestedType;
 #if ASTORIA_OPEN_OBJECT
-                if (property.OpenObjectProperty)
-                {
-                    nestedType = typeof(OpenObject);
-                }
-                else
+                    if (property.OpenObjectProperty)
+                    {
+                        nestedType = typeof(OpenObject);
+                    }
+                    else
 #endif
                     {
                         nestedType = property.CollectionType ?? property.NullablePropertyType;
@@ -2820,34 +3642,45 @@ public HttpStack HttpStack
                     bool setNestedValue = false;
                     object collection = this.entity;
                     if (null != property.CollectionType)
-                    {   collection = property.GetValue(this.entity);
+                    {
+                        collection = property.GetValue(this.entity);
                         if (null == collection)
                         {
                             setNestedValue = true;
                             if (BindingEntityInfo.IsDataServiceCollection(property.PropertyType))
                             {
-                                Debug.Assert(WebUtil.GetDataServiceCollectionOfT(nestedType) != null, "DataServiceCollection<> must be available here.");
+                                Debug.Assert(
+                                    WebUtil.GetDataServiceCollectionOfT(nestedType) != null,
+                                    "DataServiceCollection<> must be available here."
+                                );
 
                                 collection = Activator.CreateInstance(
-                                    WebUtil.GetDataServiceCollectionOfT(nestedType), 
+                                    WebUtil.GetDataServiceCollectionOfT(nestedType),
                                     null,
-                                    TrackingMode.None);
+                                    TrackingMode.None
+                                );
                             }
                             else
                             {
-                                collection = Activator.CreateInstance(typeof(List<>).MakeGenericType(nestedType));
+                                collection = Activator.CreateInstance(
+                                    typeof(List<>).MakeGenericType(nestedType)
+                                );
                             }
                         }
                     }
 
                     Type elementType = property.CollectionType ?? property.NullablePropertyType;
-                    IList results = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
+                    IList results = (IList)
+                        Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
 
                     DataServiceQueryContinuation continuation = null;
 
                     using (MaterializeAtom materializer = this.GetMaterializer(context, this.plan))
                     {
-                        Debug.Assert(materializer != null, "materializer != null -- otherwise GetMaterializer() returned null rather than empty");
+                        Debug.Assert(
+                            materializer != null,
+                            "materializer != null -- otherwise GetMaterializer() returned null rather than empty"
+                        );
                         int count = 0;
 #if ASTORIA_OPEN_OBJECT
                         object openProperties = null;
@@ -2857,33 +3690,54 @@ public HttpStack HttpStack
                             results.Add(child);
                             count++;
 #if ASTORIA_OPEN_OBJECT
-                            property.SetValue(collection, child, this.propertyName, ref openProperties, true);
+                            property.SetValue(
+                                collection,
+                                child,
+                                this.propertyName,
+                                ref openProperties,
+                                true
+                            );
 #else
                             property.SetValue(collection, child, this.propertyName, true);
 #endif
 
-                            if ((null != child) && (MergeOption.NoTracking != materializer.MergeOptionValue) && clientType.IsEntityType)
+                            if (
+                                (null != child)
+                                && (MergeOption.NoTracking != materializer.MergeOptionValue)
+                                && clientType.IsEntityType
+                            )
                             {
                                 if (deletedState)
                                 {
                                     context.DeleteLink(this.entity, this.propertyName, child);
                                 }
                                 else
-                                {   context.AttachLink(this.entity, this.propertyName, child, materializer.MergeOptionValue);
+                                {
+                                    context.AttachLink(
+                                        this.entity,
+                                        this.propertyName,
+                                        child,
+                                        materializer.MergeOptionValue
+                                    );
                                 }
                             }
                         }
 
                         continuation = materializer.GetContinuation(null);
                         Util.SetNextLinkForCollection(collection, continuation);
-
                     }
 
                     if (setNestedValue)
                     {
 #if ASTORIA_OPEN_OBJECT
-                    object openProperties = null;
-                    property.SetValue(this.entity, collection, this.propertyName, ref openProperties, false);
+                        object openProperties = null;
+                        property.SetValue(
+                            this.entity,
+                            collection,
+                            this.propertyName,
+                            ref openProperties,
+                            false
+                        );
 #else
                         property.SetValue(this.entity, collection, this.propertyName, false);
 #endif
@@ -2897,7 +3751,7 @@ public HttpStack HttpStack
                 }
             }
 
-           private MaterializeAtom ReadPropertyFromRawData(ClientType.ClientProperty property)
+            private MaterializeAtom ReadPropertyFromRawData(ClientType.ClientProperty property)
             {
                 DataServiceContext context = (DataServiceContext)this.Source;
 
@@ -2908,13 +3762,18 @@ public HttpStack HttpStack
                     context.ApplyingChanges = true;
 
 #if ASTORIA_OPEN_OBJECT
-                object openProps = null;
+                    object openProps = null;
 #endif
                     string mimeType = null;
                     Encoding encoding = null;
                     Type elementType = property.CollectionType ?? property.NullablePropertyType;
-                    IList results = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
-                    HttpProcessUtility.ReadContentType(this.ContentType, out mimeType, out encoding);
+                    IList results = (IList)
+                        Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
+                    HttpProcessUtility.ReadContentType(
+                        this.ContentType,
+                        out mimeType,
+                        out encoding
+                    );
 
                     using (Stream responseStream = this.GetResponseStream())
                     {
@@ -2924,7 +3783,10 @@ public HttpStack HttpStack
                             byte[] buffer = null;
                             if (total >= 0)
                             {
-                                buffer = LoadPropertyResult.ReadByteArrayWithContentLength(responseStream, total);
+                                buffer = LoadPropertyResult.ReadByteArrayWithContentLength(
+                                    responseStream,
+                                    total
+                                );
                             }
                             else
                             {
@@ -2933,7 +3795,13 @@ public HttpStack HttpStack
 
                             results.Add(buffer);
 #if ASTORIA_OPEN_OBJECT
-                            property.SetValue(this.entity, buffer, this.propertyName, ref openProps, false);
+                            property.SetValue(
+                                this.entity,
+                                buffer,
+                                this.propertyName,
+                                ref openProps,
+                                false
+                            );
 #else
                             property.SetValue(this.entity, buffer, this.propertyName, false);
 #endif
@@ -2941,27 +3809,47 @@ public HttpStack HttpStack
                         else
                         {
                             StreamReader reader = new StreamReader(responseStream, encoding);
-                            object convertedValue = property.PropertyType == typeof(string) ?
-                                                        reader.ReadToEnd() :
-                                                        ClientConvert.ChangeType(reader.ReadToEnd(), property.PropertyType);
+                            object convertedValue =
+                                property.PropertyType == typeof(string)
+                                    ? reader.ReadToEnd()
+                                    : ClientConvert.ChangeType(
+                                        reader.ReadToEnd(),
+                                        property.PropertyType
+                                    );
                             results.Add(convertedValue);
 #if ASTORIA_OPEN_OBJECT
-                            property.SetValue(this.entity, convertedValue, this.propertyName, ref openProps, false);
+                            property.SetValue(
+                                this.entity,
+                                convertedValue,
+                                this.propertyName,
+                                ref openProps,
+                                false
+                            );
 #else
-                            property.SetValue(this.entity, convertedValue, this.propertyName, false);
+                            property.SetValue(
+                                this.entity,
+                                convertedValue,
+                                this.propertyName,
+                                false
+                            );
 #endif
                         }
                     }
 
 #if ASTORIA_OPEN_OBJECT
-                Debug.Assert(openProps == null, "These should not be set in this path");
+                    Debug.Assert(openProps == null, "These should not be set in this path");
 #endif
                     if (property.MimeTypeProperty != null)
                     {
-                       
 #if ASTORIA_OPEN_OBJECT
-                    property.MimeTypeProperty.SetValue(this.entity, mimeType, null, ref openProps, false);
-                    Debug.Assert(openProps == null, "These should not be set in this path");
+                        property.MimeTypeProperty.SetValue(
+                            this.entity,
+                            mimeType,
+                            null,
+                            ref openProps,
+                            false
+                        );
+                        Debug.Assert(openProps == null, "These should not be set in this path");
 #else
                         property.MimeTypeProperty.SetValue(this.entity, mimeType, null, false);
 #endif
@@ -2976,24 +3864,28 @@ public HttpStack HttpStack
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable", Justification = "Pending")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
+            Justification = "Pending"
+        )]
         private class SaveResult : BaseAsyncResult
         {
             private readonly DataServiceContext Context;
 
-           private readonly List<Descriptor> ChangedEntries;
+            private readonly List<Descriptor> ChangedEntries;
 
             private readonly DataServiceRequest[] Queries;
 
             private readonly List<OperationResponse> Responses;
 
-             private readonly string batchBoundary;
+            private readonly string batchBoundary;
 
             private readonly SaveChangesOptions options;
 
             private readonly bool executeAsync;
 
-             private int changesCompleted;
+            private int changesCompleted;
 
             private PerRequest request;
 
@@ -3005,7 +3897,7 @@ public HttpStack HttpStack
 
             private int entryIndex = -1;
 
-           private bool processingMediaLinkEntry;
+            private bool processingMediaLinkEntry;
 
             private bool processingMediaLinkEntryPut;
 
@@ -3024,7 +3916,15 @@ public HttpStack HttpStack
             private bool changesetStarted;
 
             #region constructors
-            internal SaveResult(DataServiceContext context, string method, DataServiceRequest[] queries, SaveChangesOptions options, AsyncCallback callback, object state, bool async)
+            internal SaveResult(
+                DataServiceContext context,
+                string method,
+                DataServiceRequest[] queries,
+                SaveChangesOptions options,
+                AsyncCallback callback,
+                object state,
+                bool async
+            )
                 : base(context, method, callback, state)
             {
                 this.executeAsync = async;
@@ -3037,11 +3937,12 @@ public HttpStack HttpStack
                 if (null == queries)
                 {
                     #region changed entries
-                    this.ChangedEntries = context.entityDescriptors.Values.Cast<Descriptor>()
-                                          .Union(context.bindings.Values.Cast<Descriptor>())
-                                          .Where(o => o.IsModified && o.ChangeOrder != UInt32.MaxValue)
-                                          .OrderBy(o => o.ChangeOrder)
-                                          .ToList();
+                    this.ChangedEntries = context
+                        .entityDescriptors.Values.Cast<Descriptor>()
+                        .Union(context.bindings.Values.Cast<Descriptor>())
+                        .Where(o => o.IsModified && o.ChangeOrder != UInt32.MaxValue)
+                        .OrderBy(o => o.ChangeOrder)
+                        .ToList();
 
                     foreach (Descriptor e in this.ChangedEntries)
                     {
@@ -3073,12 +3974,21 @@ public HttpStack HttpStack
 
                 if (IsFlagSet(options, SaveChangesOptions.Batch))
                 {
-                    this.batchBoundary = XmlConstants.HttpMultipartBoundaryBatch + "_" + Guid.NewGuid().ToString();
+                    this.batchBoundary =
+                        XmlConstants.HttpMultipartBoundaryBatch + "_" + Guid.NewGuid().ToString();
                 }
                 else
                 {
-                    this.batchBoundary = XmlConstants.HttpMultipartBoundaryBatchResponse + "_" + Guid.NewGuid().ToString();
-                    this.DataServiceResponse = new DataServiceResponse(null, -1, this.Responses, false );
+                    this.batchBoundary =
+                        XmlConstants.HttpMultipartBoundaryBatchResponse
+                        + "_"
+                        + Guid.NewGuid().ToString();
+                    this.DataServiceResponse = new DataServiceResponse(
+                        null,
+                        -1,
+                        this.Responses,
+                        false
+                    );
                 }
             }
             #endregion constructor
@@ -3087,20 +3997,17 @@ public HttpStack HttpStack
 
             internal DataServiceResponse DataServiceResponse
             {
-                get
-                {
-                    return this.service;
-                }
-
-                set
-                {
-                    this.service = value;
-                }
+                get { return this.service; }
+                set { this.service = value; }
             }
 
             internal DataServiceResponse EndRequest()
             {
-                foreach (EntityDescriptor box in this.ChangedEntries.Where(e => e.IsResource).Cast<EntityDescriptor>())
+                foreach (
+                    EntityDescriptor box in this
+                        .ChangedEntries.Where(e => e.IsResource)
+                        .Cast<EntityDescriptor>()
+                )
                 {
                     box.CloseSaveStream();
                 }
@@ -3134,7 +4041,11 @@ public HttpStack HttpStack
 
                         this.httpWebResponseStream = new MemoryStream();
 
-                        IAsyncResult asyncResult = BaseAsyncResult.InvokeAsync(httpWebRequest.BeginGetRequestStream, this.AsyncEndGetRequestStream, pereq);
+                        IAsyncResult asyncResult = BaseAsyncResult.InvokeAsync(
+                            httpWebRequest.BeginGetRequestStream,
+                            this.AsyncEndGetRequestStream,
+                            pereq
+                        );
                         pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
                     }
                     else
@@ -3146,17 +4057,21 @@ public HttpStack HttpStack
                 catch (Exception e)
                 {
                     this.HandleFailure(pereq, e);
-                    throw; 
+                    throw;
                 }
                 finally
                 {
-                    this.HandleCompleted(pereq); 
+                    this.HandleCompleted(pereq);
                 }
 
-                Debug.Assert((this.CompletedSynchronously && this.IsCompleted) || !this.CompletedSynchronously, "sync without complete");
+                Debug.Assert(
+                    (this.CompletedSynchronously && this.IsCompleted)
+                        || !this.CompletedSynchronously,
+                    "sync without complete"
+                );
             }
 
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
             internal void BatchRequest(bool replaceOnUpdate)
             {
                 MemoryStream memory = this.GenerateBatchRequest(replaceOnUpdate);
@@ -3169,7 +4084,7 @@ public HttpStack HttpStack
                         int bufferOffset = checked((int)memory.Position);
                         int bufferLength = checked((int)memory.Length) - bufferOffset;
 
-                       requestStream.Write(buffer, bufferOffset, bufferLength);
+                        requestStream.Write(buffer, bufferOffset, bufferLength);
                     }
 
                     HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
@@ -3204,19 +4119,30 @@ public HttpStack HttpStack
                         }
 
                         this.Abortable = httpWebRequest = this.CreateNextRequest(replaceOnUpdate);
-                        if ((null != httpWebRequest) || (this.entryIndex < this.ChangedEntries.Count))
+                        if (
+                            (null != httpWebRequest)
+                            || (this.entryIndex < this.ChangedEntries.Count)
+                        )
                         {
                             if (this.ChangedEntries[this.entryIndex].ContentGeneratedForSave)
                             {
-                                Debug.Assert(this.ChangedEntries[this.entryIndex] is LinkDescriptor, "only expected RelatedEnd to presave");
                                 Debug.Assert(
-                                    this.ChangedEntries[this.entryIndex].State == EntityStates.Added ||
-                                    this.ChangedEntries[this.entryIndex].State == EntityStates.Modified,
-                                    "only expected added to presave");
+                                    this.ChangedEntries[this.entryIndex] is LinkDescriptor,
+                                    "only expected RelatedEnd to presave"
+                                );
+                                Debug.Assert(
+                                    this.ChangedEntries[this.entryIndex].State == EntityStates.Added
+                                        || this.ChangedEntries[this.entryIndex].State
+                                            == EntityStates.Modified,
+                                    "only expected added to presave"
+                                );
                                 continue;
                             }
 
-                            PerRequest.ContentStream contentStream = this.CreateChangeData(this.entryIndex, false);
+                            PerRequest.ContentStream contentStream = this.CreateChangeData(
+                                this.entryIndex,
+                                false
+                            );
                             if (this.executeAsync)
                             {
                                 #region async
@@ -3225,24 +4151,35 @@ public HttpStack HttpStack
 
                                 if (null == contentStream || null == contentStream.Stream)
                                 {
-                                    asyncResult = BaseAsyncResult.InvokeAsync(httpWebRequest.BeginGetResponse, this.AsyncEndGetResponse, pereq);
+                                    asyncResult = BaseAsyncResult.InvokeAsync(
+                                        httpWebRequest.BeginGetResponse,
+                                        this.AsyncEndGetResponse,
+                                        pereq
+                                    );
                                 }
                                 else
                                 {
                                     if (contentStream.IsKnownMemoryStream)
                                     {
-                                        httpWebRequest.ContentLength = contentStream.Stream.Length - contentStream.Stream.Position;
+                                        httpWebRequest.ContentLength =
+                                            contentStream.Stream.Length
+                                            - contentStream.Stream.Position;
                                     }
 
                                     pereq.RequestContentStream = contentStream;
-                                    asyncResult = BaseAsyncResult.InvokeAsync(httpWebRequest.BeginGetRequestStream, this.AsyncEndGetRequestStream, pereq);
+                                    asyncResult = BaseAsyncResult.InvokeAsync(
+                                        httpWebRequest.BeginGetRequestStream,
+                                        this.AsyncEndGetRequestStream,
+                                        pereq
+                                    );
                                 }
 
-                                pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
+                                pereq.RequestCompletedSynchronously &=
+                                    asyncResult.CompletedSynchronously;
                                 this.CompletedSynchronously &= asyncResult.CompletedSynchronously;
                                 #endregion
                             }
-#if !ASTORIA_LIGHT 
+#if !ASTORIA_LIGHT
                             else
                             {
                                 #region sync
@@ -3250,7 +4187,9 @@ public HttpStack HttpStack
                                 {
                                     if (contentStream.IsKnownMemoryStream)
                                     {
-                                        httpWebRequest.ContentLength = contentStream.Stream.Length - contentStream.Stream.Position;
+                                        httpWebRequest.ContentLength =
+                                            contentStream.Stream.Length
+                                            - contentStream.Stream.Position;
                                     }
 
                                     using (Stream stream = httpWebRequest.GetRequestStream())
@@ -3259,13 +4198,16 @@ public HttpStack HttpStack
                                         int read;
                                         do
                                         {
-                                            read = contentStream.Stream.Read(buffer, 0, buffer.Length);
+                                            read = contentStream.Stream.Read(
+                                                buffer,
+                                                0,
+                                                buffer.Length
+                                            );
                                             if (read > 0)
                                             {
                                                 stream.Write(buffer, 0, read);
                                             }
-                                        }
-                                        while (read > 0);
+                                        } while (read > 0);
                                     }
                                 }
 
@@ -3306,32 +4248,63 @@ public HttpStack HttpStack
                             response.Close();
                         }
                     }
+                } while (
+                    (
+                        (null == pereq)
+                        || (
+                            pereq.RequestCompleted
+                            && asyncResult != null
+                            && asyncResult.CompletedSynchronously
+                        )
+                    ) && !this.IsCompletedInternally
+                );
 
-                   
-                }
-                while (((null == pereq) || (pereq.RequestCompleted && asyncResult != null && asyncResult.CompletedSynchronously)) && !this.IsCompletedInternally);
-
-                Debug.Assert(this.executeAsync || this.CompletedSynchronously, "sync !CompletedSynchronously");
-                Debug.Assert((this.CompletedSynchronously && this.IsCompleted) || !this.CompletedSynchronously, "sync without complete");
-                Debug.Assert(this.entryIndex < this.ChangedEntries.Count || this.ChangedEntries.All(o => o.ContentGeneratedForSave), "didn't generate content for all entities/links");
+                Debug.Assert(
+                    this.executeAsync || this.CompletedSynchronously,
+                    "sync !CompletedSynchronously"
+                );
+                Debug.Assert(
+                    (this.CompletedSynchronously && this.IsCompleted)
+                        || !this.CompletedSynchronously,
+                    "sync without complete"
+                );
+                Debug.Assert(
+                    this.entryIndex < this.ChangedEntries.Count
+                        || this.ChangedEntries.All(o => o.ContentGeneratedForSave),
+                    "didn't generate content for all entities/links"
+                );
             }
 
-             protected override void CompletedRequest()
+            protected override void CompletedRequest()
             {
                 this.buildBatchBuffer = null;
                 if (null != this.buildBatchWriter)
                 {
-                    Debug.Assert(!IsFlagSet(this.options, SaveChangesOptions.Batch), "should be non-batch");
+                    Debug.Assert(
+                        !IsFlagSet(this.options, SaveChangesOptions.Batch),
+                        "should be non-batch"
+                    );
                     this.HandleOperationEnd();
                     this.buildBatchWriter.WriteLine("--{0}--", this.batchBoundary);
 
                     this.buildBatchWriter.Flush();
-                    Debug.Assert(Object.ReferenceEquals(this.httpWebResponseStream, this.buildBatchWriter.BaseStream), "expected different stream");
+                    Debug.Assert(
+                        Object.ReferenceEquals(
+                            this.httpWebResponseStream,
+                            this.buildBatchWriter.BaseStream
+                        ),
+                        "expected different stream"
+                    );
                     this.httpWebResponseStream.Position = 0;
 
                     this.buildBatchWriter = null;
 
-                   this.responseBatchStream = new BatchStream(this.httpWebResponseStream, this.batchBoundary, HttpProcessUtility.EncodingUtf8NoPreamble, false);
+                    this.responseBatchStream = new BatchStream(
+                        this.httpWebResponseStream,
+                        this.batchBoundary,
+                        HttpProcessUtility.EncodingUtf8NoPreamble,
+                        false
+                    );
                 }
             }
 
@@ -3339,11 +4312,15 @@ public HttpStack HttpStack
             {
                 if ((null == value) || value.RequestCompleted)
                 {
-                   Error.ThrowInternalError(errorcode);
+                    Error.ThrowInternalError(errorcode);
                 }
             }
 
-            private static void EqualRefCheck(PerRequest actual, PerRequest expected, InternalError errorcode)
+            private static void EqualRefCheck(
+                PerRequest actual,
+                PerRequest expected,
+                InternalError errorcode
+            )
             {
                 if (!Object.ReferenceEquals(actual, expected))
                 {
@@ -3361,8 +4338,12 @@ public HttpStack HttpStack
                     {
                         System.Threading.Interlocked.CompareExchange(ref this.request, null, pereq);
                         if (IsFlagSet(this.options, SaveChangesOptions.Batch))
-                        {   
-                            System.Threading.Interlocked.CompareExchange(ref this.batchResponse, pereq.HttpWebResponse, null);
+                        {
+                            System.Threading.Interlocked.CompareExchange(
+                                ref this.batchResponse,
+                                pereq.HttpWebResponse,
+                                null
+                            );
                             pereq.HttpWebResponse = null;
                         }
 
@@ -3398,7 +4379,10 @@ public HttpStack HttpStack
                 }
                 else
                 {
-                    Debug.Assert(this.ChangedEntries[this.entryIndex].IsResource, "Only resources can have MR's.");
+                    Debug.Assert(
+                        this.ChangedEntries[this.entryIndex].IsResource,
+                        "Only resources can have MR's."
+                    );
                     EntityDescriptor box = (EntityDescriptor)this.ChangedEntries[this.entryIndex];
                     if (this.processingMediaLinkEntryPut && EntityStates.Unchanged == box.State)
                     {
@@ -3420,20 +4404,31 @@ public HttpStack HttpStack
                         EntityDescriptor box = (EntityDescriptor)entry;
 
                         HttpWebRequest req;
-                        if (((EntityStates.Unchanged == entry.State) || (EntityStates.Modified == entry.State)) &&
-                            (null != (req = this.CheckAndProcessMediaEntryPut(box))))
+                        if (
+                            (
+                                (EntityStates.Unchanged == entry.State)
+                                || (EntityStates.Modified == entry.State)
+                            ) && (null != (req = this.CheckAndProcessMediaEntryPut(box)))
+                        )
                         {
                             this.processingMediaLinkEntry = true;
                             this.processingMediaLinkEntryPut = true;
                         }
-                        else if ((EntityStates.Added == entry.State) && (null != (req = this.CheckAndProcessMediaEntryPost(box))))
+                        else if (
+                            (EntityStates.Added == entry.State)
+                            && (null != (req = this.CheckAndProcessMediaEntryPost(box)))
+                        )
                         {
                             this.processingMediaLinkEntry = true;
                             this.processingMediaLinkEntryPut = false;
                         }
                         else
                         {
-                            Debug.Assert(!this.processingMediaLinkEntry || entry.State == EntityStates.Modified, "!this.processingMediaLinkEntry || entry.State == EntityStates.Modified");
+                            Debug.Assert(
+                                !this.processingMediaLinkEntry
+                                    || entry.State == EntityStates.Modified,
+                                "!this.processingMediaLinkEntry || entry.State == EntityStates.Modified"
+                            );
                             req = this.Context.CreateRequest(box, entry.State, replaceOnUpdate);
                         }
 
@@ -3457,18 +4452,22 @@ public HttpStack HttpStack
 
                 if (type.MediaDataMember == null && entityDescriptor.SaveStream == null)
                 {
-                    throw Error.InvalidOperation(Strings.Context_MLEWithoutSaveStream(type.ElementTypeName));
+                    throw Error.InvalidOperation(
+                        Strings.Context_MLEWithoutSaveStream(type.ElementTypeName)
+                    );
                 }
 
                 Debug.Assert(
-                    (type.MediaDataMember != null && entityDescriptor.SaveStream == null) ||
-                    (type.MediaDataMember == null && entityDescriptor.SaveStream != null),
-                    "Only one way of specifying the MR content is allowed.");
+                    (type.MediaDataMember != null && entityDescriptor.SaveStream == null)
+                        || (type.MediaDataMember == null && entityDescriptor.SaveStream != null),
+                    "Only one way of specifying the MR content is allowed."
+                );
 
                 HttpWebRequest mediaRequest = this.CreateMediaResourceRequest(
                     entityDescriptor.GetResourceUri(this.Context.baseUriWithSlash, false),
                     XmlConstants.HttpMethodPost,
-                    type.MediaDataMember == null);
+                    type.MediaDataMember == null
+                );
 
                 if (type.MediaDataMember != null)
                 {
@@ -3478,7 +4477,9 @@ public HttpStack HttpStack
                     }
                     else
                     {
-                        object mimeTypeValue = type.MediaDataMember.MimeTypeProperty.GetValue(entityDescriptor.Entity);
+                        object mimeTypeValue = type.MediaDataMember.MimeTypeProperty.GetValue(
+                            entityDescriptor.Entity
+                        );
                         String mimeType = mimeTypeValue != null ? mimeTypeValue.ToString() : null;
 
                         if (String.IsNullOrEmpty(mimeType))
@@ -3486,7 +4487,9 @@ public HttpStack HttpStack
                             throw Error.InvalidOperation(
                                 Strings.Context_NoContentTypeForMediaLink(
                                     type.ElementTypeName,
-                                    type.MediaDataMember.MimeTypeProperty.PropertyName));
+                                    type.MediaDataMember.MimeTypeProperty.PropertyName
+                                )
+                            );
                         }
 
                         mediaRequest.ContentType = mimeType;
@@ -3505,7 +4508,11 @@ public HttpStack HttpStack
                         {
                             string mime;
                             Encoding encoding;
-                            HttpProcessUtility.ReadContentType(mediaRequest.ContentType, out mime, out encoding);
+                            HttpProcessUtility.ReadContentType(
+                                mediaRequest.ContentType,
+                                out mime,
+                                out encoding
+                            );
 
                             if (encoding == null)
                             {
@@ -3518,7 +4525,13 @@ public HttpStack HttpStack
 
                         mediaRequest.ContentLength = buffer.Length;
 
-                        this.mediaResourceRequestStream = new MemoryStream(buffer, 0, buffer.Length, false, true);
+                        this.mediaResourceRequestStream = new MemoryStream(
+                            buffer,
+                            0,
+                            buffer.Length,
+                            false,
+                            true
+                        );
                     }
                 }
                 else
@@ -3541,11 +4554,14 @@ public HttpStack HttpStack
                 Uri requestUri = box.GetEditMediaResourceUri(this.Context.baseUriWithSlash);
                 if (requestUri == null)
                 {
-                    throw Error.InvalidOperation(
-                        Strings.Context_SetSaveStreamWithoutEditMediaLink);
+                    throw Error.InvalidOperation(Strings.Context_SetSaveStreamWithoutEditMediaLink);
                 }
 
-                HttpWebRequest mediaResourceRequest = this.CreateMediaResourceRequest(requestUri, XmlConstants.HttpMethodPut, true);
+                HttpWebRequest mediaResourceRequest = this.CreateMediaResourceRequest(
+                    requestUri,
+                    XmlConstants.HttpMethodPut,
+                    true
+                );
                 this.SetupMediaResourceRequest(mediaResourceRequest, box);
 
                 if (box.StreamETag != null)
@@ -3556,7 +4572,11 @@ public HttpStack HttpStack
                 return mediaResourceRequest;
             }
 
-            private HttpWebRequest CreateMediaResourceRequest(Uri requestUri, string method, bool sendChunked)
+            private HttpWebRequest CreateMediaResourceRequest(
+                Uri requestUri,
+                string method,
+                bool sendChunked
+            )
             {
 #if ASTORIA_LIGHT
                 HttpWebRequest mediaResourceRequest = this.Context.CreateRequest(
@@ -3566,7 +4586,8 @@ public HttpStack HttpStack
                     XmlConstants.MimeAny,
                     Util.DataServiceVersion1,
                     sendChunked,
-                    HttpStack.ClientHttp);
+                    HttpStack.ClientHttp
+                );
 #else
                 HttpWebRequest mediaResourceRequest = this.Context.CreateRequest(
                     requestUri,
@@ -3574,20 +4595,27 @@ public HttpStack HttpStack
                     false,
                     XmlConstants.MimeAny,
                     Util.DataServiceVersion1,
-                    sendChunked);
+                    sendChunked
+                );
 #endif
                 return mediaResourceRequest;
             }
 
-           private void SetupMediaResourceRequest(HttpWebRequest mediaResourceRequest, EntityDescriptor box)
+            private void SetupMediaResourceRequest(
+                HttpWebRequest mediaResourceRequest,
+                EntityDescriptor box
+            )
             {
                 this.mediaResourceRequestStream = box.SaveStream.Stream;
 
-                WebUtil.ApplyHeadersToRequest(box.SaveStream.Args.Headers, mediaResourceRequest, true);
+                WebUtil.ApplyHeadersToRequest(
+                    box.SaveStream.Args.Headers,
+                    mediaResourceRequest,
+                    true
+                );
+            }
 
-           }
-
-           private PerRequest.ContentStream CreateChangeData(int index, bool newline)
+            private PerRequest.ContentStream CreateChangeData(int index, bool newline)
             {
                 Descriptor entry = this.ChangedEntries[index];
                 Debug.Assert(!entry.ContentGeneratedForSave, "already saved entity/link");
@@ -3598,29 +4626,47 @@ public HttpStack HttpStack
                     if (this.processingMediaLinkEntry)
                     {
                         Debug.Assert(
-                            this.processingMediaLinkEntryPut || entry.State == EntityStates.Modified, 
-                            "We should have modified the MLE state to Modified when we've created the MR POST request.");
+                            this.processingMediaLinkEntryPut
+                                || entry.State == EntityStates.Modified,
+                            "We should have modified the MLE state to Modified when we've created the MR POST request."
+                        );
                         Debug.Assert(
-                            !this.processingMediaLinkEntryPut || (entry.State == EntityStates.Unchanged || entry.State == EntityStates.Modified),
-                            "If we're processing MR PUT the entity must be either in Unchanged or Modified state.");
+                            !this.processingMediaLinkEntryPut
+                                || (
+                                    entry.State == EntityStates.Unchanged
+                                    || entry.State == EntityStates.Modified
+                                ),
+                            "If we're processing MR PUT the entity must be either in Unchanged or Modified state."
+                        );
 
-                        Debug.Assert(this.mediaResourceRequestStream != null, "We should have precreated the MR stream already.");
+                        Debug.Assert(
+                            this.mediaResourceRequestStream != null,
+                            "We should have precreated the MR stream already."
+                        );
                         return new PerRequest.ContentStream(this.mediaResourceRequestStream, false);
                     }
                     else
                     {
                         entry.ContentGeneratedForSave = true;
-                        return new PerRequest.ContentStream(this.Context.CreateRequestData(box, newline), true);
+                        return new PerRequest.ContentStream(
+                            this.Context.CreateRequestData(box, newline),
+                            true
+                        );
                     }
                 }
                 else
                 {
                     entry.ContentGeneratedForSave = true;
                     LinkDescriptor link = (LinkDescriptor)entry;
-                    if ((EntityStates.Added == link.State) ||
-                        ((EntityStates.Modified == link.State) && (null != link.Target)))
+                    if (
+                        (EntityStates.Added == link.State)
+                        || ((EntityStates.Modified == link.State) && (null != link.Target))
+                    )
                     {
-                        return new PerRequest.ContentStream(this.Context.CreateRequestData(link, newline), true);
+                        return new PerRequest.ContentStream(
+                            this.Context.CreateRequestData(link, newline),
+                            true
+                        );
                     }
                 }
 
@@ -3641,7 +4687,7 @@ public HttpStack HttpStack
 
                 if (null == this.buildBatchWriter)
                 {
-                    this.buildBatchWriter = new StreamWriter(this.httpWebResponseStream);    
+                    this.buildBatchWriter = new StreamWriter(this.httpWebResponseStream);
 #if TESTUNIXNEWLINE
                     this.buildBatchWriter.NewLine = NewLine;
 #endif
@@ -3649,17 +4695,25 @@ public HttpStack HttpStack
 
                 if (null == this.changesetBoundary)
                 {
-                    this.changesetBoundary = XmlConstants.HttpMultipartBoundaryChangesetResponse + "_" + Guid.NewGuid().ToString();
+                    this.changesetBoundary =
+                        XmlConstants.HttpMultipartBoundaryChangesetResponse
+                        + "_"
+                        + Guid.NewGuid().ToString();
                 }
 
                 this.changesetStarted = true;
                 this.buildBatchWriter.WriteLine("--{0}", this.batchBoundary);
-                this.buildBatchWriter.WriteLine("{0}: {1}; boundary={2}", XmlConstants.HttpContentType, XmlConstants.MimeMultiPartMixed, this.changesetBoundary);
+                this.buildBatchWriter.WriteLine(
+                    "{0}: {1}; boundary={2}",
+                    XmlConstants.HttpContentType,
+                    XmlConstants.MimeMultiPartMixed,
+                    this.changesetBoundary
+                );
                 this.buildBatchWriter.WriteLine();
                 this.buildBatchWriter.WriteLine("--{0}", this.changesetBoundary);
             }
 
-             private void HandleOperationEnd()
+            private void HandleOperationEnd()
             {
                 if (this.changesetStarted)
                 {
@@ -3683,8 +4737,16 @@ public HttpStack HttpStack
                 {
                     this.HandleOperationStart();
                     WriteOperationResponseHeaders(this.buildBatchWriter, 500);
-                    this.buildBatchWriter.WriteLine("{0}: {1}", XmlConstants.HttpContentType, XmlConstants.MimeTextPlain);
-                    this.buildBatchWriter.WriteLine("{0}: {1}", XmlConstants.HttpContentID, this.ChangedEntries[this.entryIndex].ChangeOrder);
+                    this.buildBatchWriter.WriteLine(
+                        "{0}: {1}",
+                        XmlConstants.HttpContentType,
+                        XmlConstants.MimeTextPlain
+                    );
+                    this.buildBatchWriter.WriteLine(
+                        "{0}: {1}",
+                        XmlConstants.HttpContentID,
+                        this.ChangedEntries[this.entryIndex].ChangeOrder
+                    );
                     this.buildBatchWriter.WriteLine();
                     this.buildBatchWriter.WriteLine(e.ToString());
                     this.HandleOperationEnd();
@@ -3711,9 +4773,14 @@ public HttpStack HttpStack
                 {
                     EntityDescriptor entityDescriptor = (EntityDescriptor)entry;
 
-                    if (entry.State == EntityStates.Added ||
-                         (entry.State == EntityStates.Modified &&
-                          this.processingMediaLinkEntry && !this.processingMediaLinkEntryPut))
+                    if (
+                        entry.State == EntityStates.Added
+                        || (
+                            entry.State == EntityStates.Modified
+                            && this.processingMediaLinkEntry
+                            && !this.processingMediaLinkEntryPut
+                        )
+                    )
                     {
                         string location = response.Headers[XmlConstants.HttpResponseLocation];
 
@@ -3734,21 +4801,23 @@ public HttpStack HttpStack
                     {
                         if (!WebUtil.SuccessStatusCode(response.StatusCode))
                         {
-                           this.processingMediaLinkEntry = false;
+                            this.processingMediaLinkEntry = false;
 
                             if (!this.processingMediaLinkEntryPut)
                             {
-                                Debug.Assert(entry.State == EntityStates.Modified, "Entity state should be set to Modified once we've sent the POST MR");
+                                Debug.Assert(
+                                    entry.State == EntityStates.Modified,
+                                    "Entity state should be set to Modified once we've sent the POST MR"
+                                );
                                 entry.State = EntityStates.Added;
                                 this.processingMediaLinkEntryPut = false;
                             }
 
-                           entry.ContentGeneratedForSave = true;
+                            entry.ContentGeneratedForSave = true;
                         }
                         else if (response.StatusCode == HttpStatusCode.Created)
                         {
                             entityDescriptor.ETag = response.Headers[XmlConstants.HttpResponseETag];
-
                         }
                     }
                 }
@@ -3762,18 +4831,29 @@ public HttpStack HttpStack
                     }
                 }
 
-                this.buildBatchWriter.WriteLine("{0}: {1}", XmlConstants.HttpContentID, entry.ChangeOrder);
+                this.buildBatchWriter.WriteLine(
+                    "{0}: {1}",
+                    XmlConstants.HttpContentID,
+                    entry.ChangeOrder
+                );
                 this.buildBatchWriter.WriteLine();
             }
 
-           private void HandleOperationResponseData(HttpWebResponse response)
+            private void HandleOperationResponseData(HttpWebResponse response)
             {
                 using (Stream stream = response.GetResponseStream())
                 {
                     if (null != stream)
                     {
                         this.buildBatchWriter.Flush();
-                        if (0 == WebUtil.CopyStream(stream, this.buildBatchWriter.BaseStream, ref this.buildBatchBuffer))
+                        if (
+                            0
+                            == WebUtil.CopyStream(
+                                stream,
+                                this.buildBatchWriter.BaseStream,
+                                ref this.buildBatchBuffer
+                            )
+                        )
                         {
                             this.HandleOperationResponseNoData();
                         }
@@ -3791,7 +4871,11 @@ public HttpStack HttpStack
                 Debug.Assert(this.buildBatchWriter.NewLine == NewLine, "mismatch NewLine");
                 for (int kk = 0; kk < NewLine.Length; ++kk)
                 {
-                    Debug.Assert((char)memory.GetBuffer()[memory.Length - (NewLine.Length - kk)] == NewLine[kk], "didn't end with newline");
+                    Debug.Assert(
+                        (char)memory.GetBuffer()[memory.Length - (NewLine.Length - kk)]
+                            == NewLine[kk],
+                        "didn't end with newline"
+                    );
                 }
 #endif
                 this.buildBatchWriter.BaseStream.Position -= NewLine.Length;
@@ -3801,11 +4885,26 @@ public HttpStack HttpStack
 
             #endregion
 
-             private HttpWebRequest CreateBatchRequest(MemoryStream memory)
+            private HttpWebRequest CreateBatchRequest(MemoryStream memory)
             {
-                Uri requestUri = Util.CreateUri(this.Context.baseUriWithSlash, Util.CreateUri("$batch", UriKind.Relative));
-                string contentType = XmlConstants.MimeMultiPartMixed + "; " + XmlConstants.HttpMultipartBoundary + "=" + this.batchBoundary;
-                HttpWebRequest httpWebRequest = this.Context.CreateRequest(requestUri, XmlConstants.HttpMethodPost, false, contentType, Util.DataServiceVersion1, false);
+                Uri requestUri = Util.CreateUri(
+                    this.Context.baseUriWithSlash,
+                    Util.CreateUri("$batch", UriKind.Relative)
+                );
+                string contentType =
+                    XmlConstants.MimeMultiPartMixed
+                    + "; "
+                    + XmlConstants.HttpMultipartBoundary
+                    + "="
+                    + this.batchBoundary;
+                HttpWebRequest httpWebRequest = this.Context.CreateRequest(
+                    requestUri,
+                    XmlConstants.HttpMethodPost,
+                    false,
+                    contentType,
+                    Util.DataServiceVersion1,
+                    false
+                );
                 httpWebRequest.ContentLength = memory.Length - memory.Position;
                 return httpWebRequest;
             }
@@ -3813,22 +4912,28 @@ public HttpStack HttpStack
             private MemoryStream GenerateBatchRequest(bool replaceOnUpdate)
             {
                 this.changesetBoundary = null;
-                if (null != this.Queries)
-                {
-                }
+                if (null != this.Queries) { }
                 else if (0 == this.ChangedEntries.Count)
                 {
-                    this.DataServiceResponse = new DataServiceResponse(null, (int)WebExceptionStatus.Success, this.Responses, true );
+                    this.DataServiceResponse = new DataServiceResponse(
+                        null,
+                        (int)WebExceptionStatus.Success,
+                        this.Responses,
+                        true
+                    );
                     this.SetCompleted();
                     return null;
                 }
                 else
                 {
-                    this.changesetBoundary = XmlConstants.HttpMultipartBoundaryChangeSet + "_" + Guid.NewGuid().ToString();
+                    this.changesetBoundary =
+                        XmlConstants.HttpMultipartBoundaryChangeSet
+                        + "_"
+                        + Guid.NewGuid().ToString();
                 }
 
                 MemoryStream memory = new MemoryStream();
-                StreamWriter text = new StreamWriter(memory);     
+                StreamWriter text = new StreamWriter(memory);
 
 #if TESTUNIXNEWLINE
                 text.NewLine = NewLine;
@@ -3838,20 +4943,33 @@ public HttpStack HttpStack
                 {
                     for (int i = 0; i < this.Queries.Length; ++i)
                     {
-                        Uri requestUri = Util.CreateUri(this.Context.baseUriWithSlash, this.Queries[i].QueryComponents.Uri);
+                        Uri requestUri = Util.CreateUri(
+                            this.Context.baseUriWithSlash,
+                            this.Queries[i].QueryComponents.Uri
+                        );
 
                         Debug.Assert(null != requestUri, "request uri is null");
                         Debug.Assert(requestUri.IsAbsoluteUri, "request uri is not absolute uri");
 
                         text.WriteLine("--{0}", this.batchBoundary);
-                        WriteOperationRequestHeaders(text, XmlConstants.HttpMethodGet, requestUri.AbsoluteUri, this.Queries[i].QueryComponents.Version);
+                        WriteOperationRequestHeaders(
+                            text,
+                            XmlConstants.HttpMethodGet,
+                            requestUri.AbsoluteUri,
+                            this.Queries[i].QueryComponents.Version
+                        );
                         text.WriteLine();
                     }
                 }
                 else if (0 < this.ChangedEntries.Count)
                 {
                     text.WriteLine("--{0}", this.batchBoundary);
-                    text.WriteLine("{0}: {1}; boundary={2}", XmlConstants.HttpContentType, XmlConstants.MimeMultiPartMixed, this.changesetBoundary);
+                    text.WriteLine(
+                        "{0}: {1}; boundary={2}",
+                        XmlConstants.HttpContentType,
+                        XmlConstants.MimeMultiPartMixed,
+                        this.changesetBoundary
+                    );
                     text.WriteLine();
 
                     for (int i = 0; i < this.ChangedEntries.Count; ++i)
@@ -3862,7 +4980,11 @@ public HttpStack HttpStack
                             text.Flush();
                             for (int kk = 0; kk < NewLine.Length; ++kk)
                             {
-                                Debug.Assert((char)memory.GetBuffer()[memory.Length - (NewLine.Length - kk)] == NewLine[kk], "boundary didn't start with newline");
+                                Debug.Assert(
+                                    (char)memory.GetBuffer()[memory.Length - (NewLine.Length - kk)]
+                                        == NewLine[kk],
+                                    "boundary didn't start with newline"
+                                );
                             }
                         }
 #endif
@@ -3881,17 +5003,26 @@ public HttpStack HttpStack
                         {
                             if (entityDescriptor.State == EntityStates.Added)
                             {
-                                ClientType type = ClientType.Create(entityDescriptor.Entity.GetType());
+                                ClientType type = ClientType.Create(
+                                    entityDescriptor.Entity.GetType()
+                                );
                                 if (type.IsMediaLinkEntry || entityDescriptor.IsMediaLinkEntry)
                                 {
-                                    throw Error.NotSupported(Strings.Context_BatchNotSupportedForMediaLink);
+                                    throw Error.NotSupported(
+                                        Strings.Context_BatchNotSupportedForMediaLink
+                                    );
                                 }
                             }
-                            else if (entityDescriptor.State == EntityStates.Unchanged || entityDescriptor.State == EntityStates.Modified)
+                            else if (
+                                entityDescriptor.State == EntityStates.Unchanged
+                                || entityDescriptor.State == EntityStates.Modified
+                            )
                             {
                                 if (entityDescriptor.SaveStream != null)
                                 {
-                                    throw Error.NotSupported(Strings.Context_BatchNotSupportedForMediaLink);
+                                    throw Error.NotSupported(
+                                        Strings.Context_BatchNotSupportedForMediaLink
+                                    );
                                 }
                             }
                         }
@@ -3900,13 +5031,20 @@ public HttpStack HttpStack
                         MemoryStream stream = null;
                         if (null != contentStream)
                         {
-                            Debug.Assert(contentStream.IsKnownMemoryStream, "Batch requests don't support MRs yet");
+                            Debug.Assert(
+                                contentStream.IsKnownMemoryStream,
+                                "Batch requests don't support MRs yet"
+                            );
                             stream = contentStream.Stream as MemoryStream;
                         }
 
                         if (entry.IsResource)
                         {
-                            this.Context.CreateRequestBatch(entityDescriptor, text, replaceOnUpdate);
+                            this.Context.CreateRequestBatch(
+                                entityDescriptor,
+                                text,
+                                replaceOnUpdate
+                            );
                         }
                         else
                         {
@@ -3914,7 +5052,8 @@ public HttpStack HttpStack
                         }
 
                         byte[] buffer = null;
-                        int bufferOffset = 0, bufferLength = 0;
+                        int bufferOffset = 0,
+                            bufferLength = 0;
                         if (null != stream)
                         {
                             buffer = stream.GetBuffer();
@@ -3924,7 +5063,11 @@ public HttpStack HttpStack
 
                         if (0 < bufferLength)
                         {
-                            text.WriteLine("{0}: {1}", XmlConstants.HttpContentLength, bufferLength);
+                            text.WriteLine(
+                                "{0}: {1}",
+                                XmlConstants.HttpContentLength,
+                                bufferLength
+                            );
                         }
 
                         text.WriteLine();
@@ -3943,20 +5086,27 @@ public HttpStack HttpStack
 
                         for (int kk = 0; kk < NewLine.Length; ++kk)
                         {
-                            Debug.Assert((char)memory.GetBuffer()[memory.Length - (NewLine.Length - kk)] == NewLine[kk], "post CreateRequest boundary didn't start with newline");
+                            Debug.Assert(
+                                (char)memory.GetBuffer()[memory.Length - (NewLine.Length - kk)]
+                                    == NewLine[kk],
+                                "post CreateRequest boundary didn't start with newline"
+                            );
                         }
                     }
 #endif
                     #endregion
 
-                   text.WriteLine("--{0}--", this.changesetBoundary);
+                    text.WriteLine("--{0}--", this.changesetBoundary);
                 }
 
                 text.WriteLine("--{0}--", this.batchBoundary);
 
                 text.Flush();
                 Debug.Assert(Object.ReferenceEquals(text.BaseStream, memory), "should be same");
-                Debug.Assert(this.ChangedEntries.All(o => o.ContentGeneratedForSave), "didn't generated content for all entities/links");
+                Debug.Assert(
+                    this.ChangedEntries.All(o => o.ContentGeneratedForSave),
+                    "didn't generated content for all entities/links"
+                );
 
                 #region Validate batch format
 #if DEBUG
@@ -3965,7 +5115,12 @@ public HttpStack HttpStack
                 int testBeginSetCount = 0;
                 int testEndSetCount = 0;
                 memory.Position = 0;
-                BatchStream testBatch = new BatchStream(memory, this.batchBoundary, HttpProcessUtility.EncodingUtf8NoPreamble, true);
+                BatchStream testBatch = new BatchStream(
+                    memory,
+                    this.batchBoundary,
+                    HttpProcessUtility.EncodingUtf8NoPreamble,
+                    true
+                );
                 while (testBatch.MoveNext())
                 {
                     switch (testBatch.State)
@@ -3995,10 +5150,20 @@ public HttpStack HttpStack
                     }
                 }
 
-                Debug.Assert((null == this.Queries && 1 == testBeginSetCount) || (0 == testBeginSetCount), "more than one BeginChangeSet");
+                Debug.Assert(
+                    (null == this.Queries && 1 == testBeginSetCount) || (0 == testBeginSetCount),
+                    "more than one BeginChangeSet"
+                );
                 Debug.Assert(testBeginSetCount == testEndSetCount, "more than one EndChangeSet");
-                Debug.Assert((null == this.Queries && testGetCount == 0) || this.Queries.Length == testGetCount, "too many get count");
-                Debug.Assert(BatchStreamState.EndBatch == testBatch.State, "should have ended propertly");
+                Debug.Assert(
+                    (null == this.Queries && testGetCount == 0)
+                        || this.Queries.Length == testGetCount,
+                    "too many get count"
+                );
+                Debug.Assert(
+                    BatchStreamState.EndBatch == testBatch.State,
+                    "should have ended propertly"
+                );
 #endif
                 #endregion
 
@@ -4021,29 +5186,52 @@ public HttpStack HttpStack
                 {
                     if (IsFlagSet(this.options, SaveChangesOptions.Batch))
                     {
-                        if ((null == this.batchResponse) || (HttpStatusCode.NoContent == this.batchResponse.StatusCode))
-                        {   
+                        if (
+                            (null == this.batchResponse)
+                            || (HttpStatusCode.NoContent == this.batchResponse.StatusCode)
+                        )
+                        {
                             throw Error.InvalidOperation(Strings.Batch_ExpectedResponse(1));
                         }
 
                         headers = WebUtil.WrapResponseHeaders(this.batchResponse);
                         HandleResponse(
-                            this.batchResponse.StatusCode,                                    
-                            this.batchResponse.Headers[XmlConstants.HttpDataServiceVersion],   
-                            delegate() { return this.httpWebResponseStream; },                 
-                            true);                                                              
+                            this.batchResponse.StatusCode,
+                            this.batchResponse.Headers[XmlConstants.HttpDataServiceVersion],
+                            delegate()
+                            {
+                                return this.httpWebResponseStream;
+                            },
+                            true
+                        );
 
-                        if (!BatchStream.GetBoundaryAndEncodingFromMultipartMixedContentType(this.batchResponse.ContentType, out boundary, out encoding))
+                        if (
+                            !BatchStream.GetBoundaryAndEncodingFromMultipartMixedContentType(
+                                this.batchResponse.ContentType,
+                                out boundary,
+                                out encoding
+                            )
+                        )
                         {
                             string mime;
                             Exception inner = null;
-                            HttpProcessUtility.ReadContentType(this.batchResponse.ContentType, out mime, out encoding);
+                            HttpProcessUtility.ReadContentType(
+                                this.batchResponse.ContentType,
+                                out mime,
+                                out encoding
+                            );
                             if (String.Equals(XmlConstants.MimeTextPlain, mime))
                             {
-                                inner = GetResponseText(this.batchResponse.GetResponseStream, this.batchResponse.StatusCode);
+                                inner = GetResponseText(
+                                    this.batchResponse.GetResponseStream,
+                                    this.batchResponse.StatusCode
+                                );
                             }
 
-                            throw Error.InvalidOperation(Strings.Batch_ExpectedContentType(this.batchResponse.ContentType), inner);
+                            throw Error.InvalidOperation(
+                                Strings.Batch_ExpectedContentType(this.batchResponse.ContentType),
+                                inner
+                            );
                         }
 
                         if (null == this.httpWebResponseStream)
@@ -4051,19 +5239,36 @@ public HttpStack HttpStack
                             Error.ThrowBatchExpectedResponse(InternalError.NullResponseStream);
                         }
 
-                        this.DataServiceResponse = new DataServiceResponse(headers, (int)this.batchResponse.StatusCode, this.Responses, true);
+                        this.DataServiceResponse = new DataServiceResponse(
+                            headers,
+                            (int)this.batchResponse.StatusCode,
+                            this.Responses,
+                            true
+                        );
                     }
 
                     bool close = true;
                     BatchStream batchStream = null;
                     try
                     {
-                        batchStream = this.responseBatchStream ?? new BatchStream(this.httpWebResponseStream, boundary, encoding, false);
+                        batchStream =
+                            this.responseBatchStream
+                            ?? new BatchStream(
+                                this.httpWebResponseStream,
+                                boundary,
+                                encoding,
+                                false
+                            );
                         this.httpWebResponseStream = null;
                         this.responseBatchStream = null;
 
-                        IEnumerable<OperationResponse> responses = this.HandleBatchResponse(batchStream);
-                        if (IsFlagSet(this.options, SaveChangesOptions.Batch) && (null != this.Queries))
+                        IEnumerable<OperationResponse> responses = this.HandleBatchResponse(
+                            batchStream
+                        );
+                        if (
+                            IsFlagSet(this.options, SaveChangesOptions.Batch)
+                            && (null != this.Queries)
+                        )
                         {
                             close = false;
                             this.responseBatchStream = batchStream;
@@ -4072,10 +5277,11 @@ public HttpStack HttpStack
                                 (Dictionary<string, string>)this.DataServiceResponse.BatchHeaders,
                                 this.DataServiceResponse.BatchStatusCode,
                                 responses,
-                                true );
+                                true
+                            );
                         }
                         else
-                        {   
+                        {
                             foreach (ChangeOperationResponse response in responses)
                             {
                                 if (exception == null && response.Error != null)
@@ -4102,16 +5308,36 @@ public HttpStack HttpStack
                 {
                     if (this.DataServiceResponse == null)
                     {
-                        int statusCode = this.batchResponse == null ? (int)HttpStatusCode.InternalServerError : (int)this.batchResponse.StatusCode;
-                        this.DataServiceResponse = new DataServiceResponse(headers, statusCode, null, IsFlagSet(this.options, SaveChangesOptions.Batch));
+                        int statusCode =
+                            this.batchResponse == null
+                                ? (int)HttpStatusCode.InternalServerError
+                                : (int)this.batchResponse.StatusCode;
+                        this.DataServiceResponse = new DataServiceResponse(
+                            headers,
+                            statusCode,
+                            null,
+                            IsFlagSet(this.options, SaveChangesOptions.Batch)
+                        );
                     }
 
-                    throw new DataServiceRequestException(Strings.DataServiceException_GeneralError, exception, this.DataServiceResponse);
+                    throw new DataServiceRequestException(
+                        Strings.DataServiceException_GeneralError,
+                        exception,
+                        this.DataServiceResponse
+                    );
                 }
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506", Justification = "Central method of the API, likely to have many cross-references")]
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031", Justification = "Cache exception so user can examine it later")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1506",
+                Justification = "Central method of the API, likely to have many cross-references"
+            )]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Design",
+                "CA1031",
+                Justification = "Cache exception so user can examine it later"
+            )]
             private IEnumerable<OperationResponse> HandleBatchResponse(BatchStream batch)
             {
                 if (!batch.CanRead)
@@ -4132,17 +5358,23 @@ public HttpStack HttpStack
                 this.entryIndex = 0;
                 while (batch.MoveNext())
                 {
-                    var contentHeaders = batch.ContentHeaders; 
+                    var contentHeaders = batch.ContentHeaders;
 
                     Descriptor entry;
                     switch (batch.State)
                     {
                         #region BeginChangeSet
                         case BatchStreamState.BeginChangeSet:
-                            if ((IsFlagSet(this.options, SaveChangesOptions.Batch) && (0 != changesetIndex)) ||
-                                (0 != operationCount))
-                            {   
-                                Error.ThrowBatchUnexpectedContent(InternalError.UnexpectedBeginChangeSet);
+                            if (
+                                (
+                                    IsFlagSet(this.options, SaveChangesOptions.Batch)
+                                    && (0 != changesetIndex)
+                                ) || (0 != operationCount)
+                            )
+                            {
+                                Error.ThrowBatchUnexpectedContent(
+                                    InternalError.UnexpectedBeginChangeSet
+                                );
                             }
 
                             break;
@@ -4159,7 +5391,10 @@ public HttpStack HttpStack
                         case BatchStreamState.GetResponse:
                             Debug.Assert(0 == operationCount, "missing an EndChangeSet 2");
 
-                            contentHeaders.TryGetValue(XmlConstants.HttpContentType, out contentType);
+                            contentHeaders.TryGetValue(
+                                XmlConstants.HttpContentType,
+                                out contentType
+                            );
                             status = (HttpStatusCode)(-1);
 
                             Exception ex = null;
@@ -4168,12 +5403,28 @@ public HttpStack HttpStack
                             {
                                 status = batch.GetStatusCode();
 
-                                ex = HandleResponse(status, batch.GetResponseVersion(), batch.GetContentStream, false);
+                                ex = HandleResponse(
+                                    status,
+                                    batch.GetResponseVersion(),
+                                    batch.GetContentStream,
+                                    false
+                                );
                                 if (null == ex)
                                 {
                                     DataServiceRequest query = this.Queries[queryCount];
-                                    MaterializeAtom materializer = DataServiceRequest.Materialize(this.Context, query.QueryComponents, null, contentType, batch.GetContentStream());
-                                    qresponse = QueryOperationResponse.GetInstance(query.ElementType, contentHeaders, query, materializer);
+                                    MaterializeAtom materializer = DataServiceRequest.Materialize(
+                                        this.Context,
+                                        query.QueryComponents,
+                                        null,
+                                        contentType,
+                                        batch.GetContentStream()
+                                    );
+                                    qresponse = QueryOperationResponse.GetInstance(
+                                        query.ElementType,
+                                        contentHeaders,
+                                        query,
+                                        materializer
+                                    );
                                 }
                             }
                             catch (ArgumentException e)
@@ -4193,21 +5444,34 @@ public HttpStack HttpStack
                             {
                                 if (null != this.Queries)
                                 {
-                                     DataServiceRequest query = this.Queries[queryCount];
+                                    DataServiceRequest query = this.Queries[queryCount];
 
-                                    if (this.Context.ignoreResourceNotFoundException && status == HttpStatusCode.NotFound)
+                                    if (
+                                        this.Context.ignoreResourceNotFoundException
+                                        && status == HttpStatusCode.NotFound
+                                    )
                                     {
-                                        qresponse = QueryOperationResponse.GetInstance(query.ElementType, contentHeaders, query, MaterializeAtom.EmptyResults);
+                                        qresponse = QueryOperationResponse.GetInstance(
+                                            query.ElementType,
+                                            contentHeaders,
+                                            query,
+                                            MaterializeAtom.EmptyResults
+                                        );
                                     }
                                     else
                                     {
-                                        qresponse = QueryOperationResponse.GetInstance(query.ElementType, contentHeaders, query, MaterializeAtom.EmptyResults);
+                                        qresponse = QueryOperationResponse.GetInstance(
+                                            query.ElementType,
+                                            contentHeaders,
+                                            query,
+                                            MaterializeAtom.EmptyResults
+                                        );
                                         qresponse.Error = ex;
                                     }
                                 }
                                 else
                                 {
-                                   throw ex;
+                                    throw ex;
                                 }
                             }
 
@@ -4221,7 +5485,12 @@ public HttpStack HttpStack
                         case BatchStreamState.ChangeResponse:
 
                             HttpStatusCode statusCode = batch.GetStatusCode();
-                            Exception error = HandleResponse(statusCode, batch.GetResponseVersion(), batch.GetContentStream, false);
+                            Exception error = HandleResponse(
+                                statusCode,
+                                batch.GetResponseVersion(),
+                                batch.GetContentStream,
+                                false
+                            );
                             int index = this.ValidateContentID(contentHeaders);
 
                             try
@@ -4243,28 +5512,45 @@ public HttpStack HttpStack
                                     if (descriptor.StreamState == StreamStates.Added)
                                     {
                                         Debug.Assert(
-                                            statusCode == HttpStatusCode.Created && entry.State == EntityStates.Modified && descriptor.IsMediaLinkEntry,
-                                            "statusCode == HttpStatusCode.Created && entry.State == EntityStates.Modified && descriptor.IsMediaLinkEntry -- Processing Post MR");
+                                            statusCode == HttpStatusCode.Created
+                                                && entry.State == EntityStates.Modified
+                                                && descriptor.IsMediaLinkEntry,
+                                            "statusCode == HttpStatusCode.Created && entry.State == EntityStates.Modified && descriptor.IsMediaLinkEntry -- Processing Post MR"
+                                        );
                                     }
                                     else if (descriptor.StreamState == StreamStates.Modified)
                                     {
                                         Debug.Assert(
-                                            statusCode == HttpStatusCode.NoContent && descriptor.IsMediaLinkEntry,
-                                            "statusCode == HttpStatusCode.NoContent && descriptor.IsMediaLinkEntry -- Processing Put MR");
+                                            statusCode == HttpStatusCode.NoContent
+                                                && descriptor.IsMediaLinkEntry,
+                                            "statusCode == HttpStatusCode.NoContent && descriptor.IsMediaLinkEntry -- Processing Put MR"
+                                        );
                                     }
 #endif
                                 }
 
-                                if (streamState == StreamStates.Added || entry.State == EntityStates.Added)
+                                if (
+                                    streamState == StreamStates.Added
+                                    || entry.State == EntityStates.Added
+                                )
                                 {
                                     #region Post
                                     if (entry.IsResource)
                                     {
                                         string mime = null;
                                         Encoding postEncoding = null;
-                                        contentHeaders.TryGetValue(XmlConstants.HttpContentType, out contentType);
-                                        contentHeaders.TryGetValue(XmlConstants.HttpResponseLocation, out location);
-                                        contentHeaders.TryGetValue(XmlConstants.HttpResponseETag, out etag);
+                                        contentHeaders.TryGetValue(
+                                            XmlConstants.HttpContentType,
+                                            out contentType
+                                        );
+                                        contentHeaders.TryGetValue(
+                                            XmlConstants.HttpResponseLocation,
+                                            out location
+                                        );
+                                        contentHeaders.TryGetValue(
+                                            XmlConstants.HttpResponseETag,
+                                            out etag
+                                        );
                                         EntityDescriptor entityDescriptor = (EntityDescriptor)entry;
 
                                         if (location != null)
@@ -4273,41 +5559,85 @@ public HttpStack HttpStack
                                         }
                                         else
                                         {
-                                            throw Error.NotSupported(Strings.Deserialize_NoLocationHeader);
+                                            throw Error.NotSupported(
+                                                Strings.Deserialize_NoLocationHeader
+                                            );
                                         }
 
                                         Stream stream = batch.GetContentStream();
                                         if (null != stream)
                                         {
-                                            HttpProcessUtility.ReadContentType(contentType, out mime, out postEncoding);
-                                            if (!String.Equals(XmlConstants.MimeApplicationAtom, mime, StringComparison.OrdinalIgnoreCase))
+                                            HttpProcessUtility.ReadContentType(
+                                                contentType,
+                                                out mime,
+                                                out postEncoding
+                                            );
+                                            if (
+                                                !String.Equals(
+                                                    XmlConstants.MimeApplicationAtom,
+                                                    mime,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
+                                            )
                                             {
-                                                throw Error.InvalidOperation(Strings.Deserialize_UnknownMimeTypeSpecified(mime));
+                                                throw Error.InvalidOperation(
+                                                    Strings.Deserialize_UnknownMimeTypeSpecified(
+                                                        mime
+                                                    )
+                                                );
                                             }
 
-                                            XmlReader reader = XmlUtil.CreateXmlReader(stream, postEncoding);
-                                            QueryComponents qc = new QueryComponents(null, Util.DataServiceVersionEmpty, entityDescriptor.Entity.GetType(), null, null);
+                                            XmlReader reader = XmlUtil.CreateXmlReader(
+                                                stream,
+                                                postEncoding
+                                            );
+                                            QueryComponents qc = new QueryComponents(
+                                                null,
+                                                Util.DataServiceVersionEmpty,
+                                                entityDescriptor.Entity.GetType(),
+                                                null,
+                                                null
+                                            );
                                             EntityDescriptor descriptor = (EntityDescriptor)entry;
                                             MergeOption mergeOption = MergeOption.OverwriteChanges;
 
                                             if (descriptor.StreamState == StreamStates.Added)
                                             {
                                                 mergeOption = MergeOption.PreserveChanges;
-                                                Debug.Assert(descriptor.State == EntityStates.Modified, "The MLE state must be Modified.");
+                                                Debug.Assert(
+                                                    descriptor.State == EntityStates.Modified,
+                                                    "The MLE state must be Modified."
+                                                );
                                             }
 
                                             try
                                             {
-                                                using (MaterializeAtom atom = new MaterializeAtom(this.Context, reader, qc, null, mergeOption))
+                                                using (
+                                                    MaterializeAtom atom = new MaterializeAtom(
+                                                        this.Context,
+                                                        reader,
+                                                        qc,
+                                                        null,
+                                                        mergeOption
+                                                    )
+                                                )
                                                 {
-                                                    this.Context.HandleResponsePost(entityDescriptor, atom, editLink, etag);
+                                                    this.Context.HandleResponsePost(
+                                                        entityDescriptor,
+                                                        atom,
+                                                        editLink,
+                                                        etag
+                                                    );
                                                 }
                                             }
                                             finally
                                             {
                                                 if (descriptor.StreamState == StreamStates.Added)
                                                 {
-                                                   Debug.Assert(descriptor.State == EntityStates.Unchanged, "The materializer should always set the entity state to Unchanged.");
+                                                    Debug.Assert(
+                                                        descriptor.State == EntityStates.Unchanged,
+                                                        "The materializer should always set the entity state to Unchanged."
+                                                    );
                                                     descriptor.State = EntityStates.Modified;
 
                                                     descriptor.StreamState = StreamStates.NoStream;
@@ -4316,7 +5646,12 @@ public HttpStack HttpStack
                                         }
                                         else
                                         {
-                                            this.Context.HandleResponsePost(entityDescriptor, null, editLink, etag);
+                                            this.Context.HandleResponsePost(
+                                                entityDescriptor,
+                                                null,
+                                                editLink,
+                                                etag
+                                            );
                                         }
                                     }
                                     else
@@ -4325,10 +5660,16 @@ public HttpStack HttpStack
                                     }
                                     #endregion
                                 }
-                                else if (streamState == StreamStates.Modified || entry.State == EntityStates.Modified)
+                                else if (
+                                    streamState == StreamStates.Modified
+                                    || entry.State == EntityStates.Modified
+                                )
                                 {
                                     #region Put, Merge
-                                    contentHeaders.TryGetValue(XmlConstants.HttpResponseETag, out etag);
+                                    contentHeaders.TryGetValue(
+                                        XmlConstants.HttpResponseETag,
+                                        out etag
+                                    );
                                     HandleResponsePut(entry, etag);
                                     #endregion
                                 }
@@ -4338,16 +5679,18 @@ public HttpStack HttpStack
                                     this.Context.HandleResponseDelete(entry);
                                     #endregion
                                 }
-
-                           }
+                            }
                             catch (Exception e)
                             {
                                 this.ChangedEntries[index].SaveError = e;
                                 error = e;
                             }
 
-                            ChangeOperationResponse changeOperationResponse = 
-                                new ChangeOperationResponse(contentHeaders, this.ChangedEntries[index]);
+                            ChangeOperationResponse changeOperationResponse =
+                                new ChangeOperationResponse(
+                                    contentHeaders,
+                                    this.ChangedEntries[index]
+                                );
                             changeOperationResponse.StatusCode = (int)statusCode;
                             if (error != null)
                             {
@@ -4369,12 +5712,25 @@ public HttpStack HttpStack
 
                 Debug.Assert(batch.State == BatchStreamState.EndBatch, "unexpected batch state");
 
-               if ((null == this.Queries && 
-                    (0 == changesetIndex || 
-                     0 < queryCount || 
-                     this.ChangedEntries.Any(o => o.ContentGeneratedForSave && 0 == o.SaveResultWasProcessed) &&
-                     (!IsFlagSet(this.options, SaveChangesOptions.Batch) || null == this.ChangedEntries.FirstOrDefault(o => null != o.SaveError)))) ||
-                    (null != this.Queries && queryCount != this.Queries.Length))
+                if (
+                    (
+                        null == this.Queries
+                        && (
+                            0 == changesetIndex
+                            || 0 < queryCount
+                            || this.ChangedEntries.Any(o =>
+                                o.ContentGeneratedForSave && 0 == o.SaveResultWasProcessed
+                            )
+                                && (
+                                    !IsFlagSet(this.options, SaveChangesOptions.Batch)
+                                    || null
+                                        == this.ChangedEntries.FirstOrDefault(o =>
+                                            null != o.SaveError
+                                        )
+                                )
+                        )
+                    ) || (null != this.Queries && queryCount != this.Queries.Length)
+                )
                 {
                     throw Error.InvalidOperation(Strings.Batch_IncompleteResponseCount);
                 }
@@ -4382,13 +5738,20 @@ public HttpStack HttpStack
                 batch.Dispose();
             }
 
-           private int ValidateContentID(Dictionary<string, string> contentHeaders)
+            private int ValidateContentID(Dictionary<string, string> contentHeaders)
             {
                 int contentID = 0;
                 string contentValueID;
 
-                if (!contentHeaders.TryGetValue(XmlConstants.HttpContentID, out contentValueID) ||
-                    !Int32.TryParse(contentValueID, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out contentID))
+                if (
+                    !contentHeaders.TryGetValue(XmlConstants.HttpContentID, out contentValueID)
+                    || !Int32.TryParse(
+                        contentValueID,
+                        NumberStyles.Integer,
+                        NumberFormatInfo.InvariantInfo,
+                        out contentID
+                    )
+                )
                 {
                     Error.ThrowBatchUnexpectedContent(InternalError.ChangeResponseMissingContentID);
                 }
@@ -4409,25 +5772,42 @@ public HttpStack HttpStack
 
             #region callback handlers
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "required for this feature")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "required for this feature"
+            )]
             private void AsyncEndGetRequestStream(IAsyncResult asyncResult)
             {
-                Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
-                PerRequest pereq = asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
+                Debug.Assert(
+                    asyncResult != null && asyncResult.IsCompleted,
+                    "asyncResult.IsCompleted"
+                );
+                PerRequest pereq =
+                    asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
                 try
                 {
                     CompleteCheck(pereq, InternalError.InvalidEndGetRequestCompleted);
-                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
+                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
 
                     EqualRefCheck(this.request, pereq, InternalError.InvalidEndGetRequestStream);
-                    HttpWebRequest httpWebRequest = Util.NullCheck(pereq.Request, InternalError.InvalidEndGetRequestStreamRequest);
+                    HttpWebRequest httpWebRequest = Util.NullCheck(
+                        pereq.Request,
+                        InternalError.InvalidEndGetRequestStreamRequest
+                    );
 
-                    Stream stream = Util.NullCheck(httpWebRequest.EndGetRequestStream(asyncResult), InternalError.InvalidEndGetRequestStreamStream);
+                    Stream stream = Util.NullCheck(
+                        httpWebRequest.EndGetRequestStream(asyncResult),
+                        InternalError.InvalidEndGetRequestStreamStream
+                    );
                     pereq.RequestStream = stream;
 
                     PerRequest.ContentStream contentStream = pereq.RequestContentStream;
                     Util.NullCheck(contentStream, InternalError.InvalidEndGetRequestStreamContent);
-                    Util.NullCheck(contentStream.Stream, InternalError.InvalidEndGetRequestStreamContent);
+                    Util.NullCheck(
+                        contentStream.Stream,
+                        InternalError.InvalidEndGetRequestStreamContent
+                    );
                     if (contentStream.IsKnownMemoryStream)
                     {
                         MemoryStream memoryStream = contentStream.Stream as MemoryStream;
@@ -4436,14 +5816,25 @@ public HttpStack HttpStack
                         int bufferLength = checked((int)memoryStream.Length) - bufferOffset;
                         if ((null == buffer) || (0 == bufferLength))
                         {
-                            Error.ThrowInternalError(InternalError.InvalidEndGetRequestStreamContentLength);
+                            Error.ThrowInternalError(
+                                InternalError.InvalidEndGetRequestStreamContentLength
+                            );
                         }
                     }
 
                     pereq.RequestContentBufferValidLength = -1;
 
-                    Util.DebugInjectFault("SaveAsyncResult::AsyncEndGetRequestStream_BeforeBeginRead");
-                    asyncResult = BaseAsyncResult.InvokeAsync(contentStream.Stream.BeginRead, pereq.RequestContentBuffer, 0, pereq.RequestContentBuffer.Length, this.AsyncRequestContentEndRead, pereq);
+                    Util.DebugInjectFault(
+                        "SaveAsyncResult::AsyncEndGetRequestStream_BeforeBeginRead"
+                    );
+                    asyncResult = BaseAsyncResult.InvokeAsync(
+                        contentStream.Stream.BeginRead,
+                        pereq.RequestContentBuffer,
+                        0,
+                        pereq.RequestContentBuffer.Length,
+                        this.AsyncRequestContentEndRead,
+                        pereq
+                    );
                     pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
                 }
                 catch (Exception e)
@@ -4461,20 +5852,29 @@ public HttpStack HttpStack
 
             private void AsyncRequestContentEndRead(IAsyncResult asyncResult)
             {
-                Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
-                PerRequest pereq = asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
+                Debug.Assert(
+                    asyncResult != null && asyncResult.IsCompleted,
+                    "asyncResult.IsCompleted"
+                );
+                PerRequest pereq =
+                    asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
                 try
                 {
                     CompleteCheck(pereq, InternalError.InvalidEndReadCompleted);
-                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
+                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
 
                     EqualRefCheck(this.request, pereq, InternalError.InvalidEndRead);
                     PerRequest.ContentStream contentStream = pereq.RequestContentStream;
                     Util.NullCheck(contentStream, InternalError.InvalidEndReadStream);
                     Util.NullCheck(contentStream.Stream, InternalError.InvalidEndReadStream);
-                    Stream stream = Util.NullCheck(pereq.RequestStream, InternalError.InvalidEndReadStream);
+                    Stream stream = Util.NullCheck(
+                        pereq.RequestStream,
+                        InternalError.InvalidEndReadStream
+                    );
 
-                    Util.DebugInjectFault("SaveAsyncResult::AsyncRequestContentEndRead_BeforeEndRead");
+                    Util.DebugInjectFault(
+                        "SaveAsyncResult::AsyncRequestContentEndRead_BeforeEndRead"
+                    );
                     int count = contentStream.Stream.EndRead(asyncResult);
                     if (0 < count)
                     {
@@ -4485,21 +5885,46 @@ public HttpStack HttpStack
                         {
                             do
                             {
-                                Util.DebugInjectFault("SaveAsyncResult::AsyncRequestContentEndRead_BeforeBeginWrite");
-                                asyncResult = BaseAsyncResult.InvokeAsync(stream.BeginWrite, pereq.RequestContentBuffer, 0, pereq.RequestContentBufferValidLength, this.AsyncEndWrite, pereq);
-                                pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
+                                Util.DebugInjectFault(
+                                    "SaveAsyncResult::AsyncRequestContentEndRead_BeforeBeginWrite"
+                                );
+                                asyncResult = BaseAsyncResult.InvokeAsync(
+                                    stream.BeginWrite,
+                                    pereq.RequestContentBuffer,
+                                    0,
+                                    pereq.RequestContentBufferValidLength,
+                                    this.AsyncEndWrite,
+                                    pereq
+                                );
+                                pereq.RequestCompletedSynchronously &=
+                                    asyncResult.CompletedSynchronously;
 
-                                if (asyncResult.CompletedSynchronously && !pereq.RequestCompleted && !this.IsCompletedInternally)
+                                if (
+                                    asyncResult.CompletedSynchronously
+                                    && !pereq.RequestCompleted
+                                    && !this.IsCompletedInternally
+                                )
                                 {
-                                    Util.DebugInjectFault("SaveAsyncResult::AsyncRequestContentEndRead_BeforeBeginRead");
-                                    asyncResult = BaseAsyncResult.InvokeAsync(contentStream.Stream.BeginRead, pereq.RequestContentBuffer, 0, pereq.RequestContentBuffer.Length, this.AsyncRequestContentEndRead, pereq);
-                                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
+                                    Util.DebugInjectFault(
+                                        "SaveAsyncResult::AsyncRequestContentEndRead_BeforeBeginRead"
+                                    );
+                                    asyncResult = BaseAsyncResult.InvokeAsync(
+                                        contentStream.Stream.BeginRead,
+                                        pereq.RequestContentBuffer,
+                                        0,
+                                        pereq.RequestContentBuffer.Length,
+                                        this.AsyncRequestContentEndRead,
+                                        pereq
+                                    );
+                                    pereq.RequestCompletedSynchronously &=
+                                        asyncResult.CompletedSynchronously;
                                 }
-
-
-                            }
-                            while (asyncResult.CompletedSynchronously && !pereq.RequestCompleted && !this.IsCompletedInternally &&
-                                pereq.RequestContentBufferValidLength > 0);
+                            } while (
+                                asyncResult.CompletedSynchronously
+                                && !pereq.RequestCompleted
+                                && !this.IsCompletedInternally
+                                && pereq.RequestContentBufferValidLength > 0
+                            );
                         }
                     }
                     else
@@ -4508,47 +5933,15 @@ public HttpStack HttpStack
                         pereq.RequestStream = null;
                         stream.Close();
 
-                        HttpWebRequest httpWebRequest = Util.NullCheck(pereq.Request, InternalError.InvalidEndWriteRequest);
-                        asyncResult = BaseAsyncResult.InvokeAsync(httpWebRequest.BeginGetResponse, this.AsyncEndGetResponse, pereq);
-                        pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
-                    }
-                }
-                catch (Exception e)
-                {
-                    if (this.HandleFailure(pereq, e))
-                    {
-                        throw;
-                    }
-                }
-                finally
-                {
-                    this.HandleCompleted(pereq);
-                }
-            }
-                        
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "required for this feature")]
-            private void AsyncEndWrite(IAsyncResult asyncResult)
-            {
-                Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
-                PerRequest pereq = asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
-                try
-                {
-                    CompleteCheck(pereq, InternalError.InvalidEndWriteCompleted);
-                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
-
-                    EqualRefCheck(this.request, pereq, InternalError.InvalidEndWrite);
-
-                    PerRequest.ContentStream contentStream = pereq.RequestContentStream;
-                    Util.NullCheck(contentStream, InternalError.InvalidEndWriteStream);
-                    Util.NullCheck(contentStream.Stream, InternalError.InvalidEndWriteStream);
-                    Stream stream = Util.NullCheck(pereq.RequestStream, InternalError.InvalidEndWriteStream);
-                    Util.DebugInjectFault("SaveAsyncResult::AsyncEndWrite_BeforeEndWrite");
-                    stream.EndWrite(asyncResult);
-
-                   if (!asyncResult.CompletedSynchronously)
-                    {
-                        Util.DebugInjectFault("SaveAsyncResult::AsyncEndWrite_BeforeBeginRead");
-                        asyncResult = BaseAsyncResult.InvokeAsync(contentStream.Stream.BeginRead, pereq.RequestContentBuffer, 0, pereq.RequestContentBuffer.Length, this.AsyncRequestContentEndRead, pereq);
+                        HttpWebRequest httpWebRequest = Util.NullCheck(
+                            pereq.Request,
+                            InternalError.InvalidEndWriteRequest
+                        );
+                        asyncResult = BaseAsyncResult.InvokeAsync(
+                            httpWebRequest.BeginGetResponse,
+                            this.AsyncEndGetResponse,
+                            pereq
+                        );
                         pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
                     }
                 }
@@ -4565,23 +5958,93 @@ public HttpStack HttpStack
                 }
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "required for this feature")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "required for this feature"
+            )]
+            private void AsyncEndWrite(IAsyncResult asyncResult)
+            {
+                Debug.Assert(
+                    asyncResult != null && asyncResult.IsCompleted,
+                    "asyncResult.IsCompleted"
+                );
+                PerRequest pereq =
+                    asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
+                try
+                {
+                    CompleteCheck(pereq, InternalError.InvalidEndWriteCompleted);
+                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
+
+                    EqualRefCheck(this.request, pereq, InternalError.InvalidEndWrite);
+
+                    PerRequest.ContentStream contentStream = pereq.RequestContentStream;
+                    Util.NullCheck(contentStream, InternalError.InvalidEndWriteStream);
+                    Util.NullCheck(contentStream.Stream, InternalError.InvalidEndWriteStream);
+                    Stream stream = Util.NullCheck(
+                        pereq.RequestStream,
+                        InternalError.InvalidEndWriteStream
+                    );
+                    Util.DebugInjectFault("SaveAsyncResult::AsyncEndWrite_BeforeEndWrite");
+                    stream.EndWrite(asyncResult);
+
+                    if (!asyncResult.CompletedSynchronously)
+                    {
+                        Util.DebugInjectFault("SaveAsyncResult::AsyncEndWrite_BeforeBeginRead");
+                        asyncResult = BaseAsyncResult.InvokeAsync(
+                            contentStream.Stream.BeginRead,
+                            pereq.RequestContentBuffer,
+                            0,
+                            pereq.RequestContentBuffer.Length,
+                            this.AsyncRequestContentEndRead,
+                            pereq
+                        );
+                        pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
+                    }
+                }
+                catch (Exception e)
+                {
+                    if (this.HandleFailure(pereq, e))
+                    {
+                        throw;
+                    }
+                }
+                finally
+                {
+                    this.HandleCompleted(pereq);
+                }
+            }
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "required for this feature"
+            )]
             private void AsyncEndGetResponse(IAsyncResult asyncResult)
             {
-                Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
-                PerRequest pereq = asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
+                Debug.Assert(
+                    asyncResult != null && asyncResult.IsCompleted,
+                    "asyncResult.IsCompleted"
+                );
+                PerRequest pereq =
+                    asyncResult == null ? null : asyncResult.AsyncState as PerRequest;
                 try
                 {
                     CompleteCheck(pereq, InternalError.InvalidEndGetResponseCompleted);
-                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
+                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
 
                     EqualRefCheck(this.request, pereq, InternalError.InvalidEndGetResponse);
-                    HttpWebRequest httpWebRequest = Util.NullCheck(pereq.Request, InternalError.InvalidEndGetResponseRequest);
+                    HttpWebRequest httpWebRequest = Util.NullCheck(
+                        pereq.Request,
+                        InternalError.InvalidEndGetResponseRequest
+                    );
 
                     HttpWebResponse response = null;
                     try
                     {
-                        Util.DebugInjectFault("SaveAsyncResult::AsyncEndGetResponse::BeforeEndGetResponse");
+                        Util.DebugInjectFault(
+                            "SaveAsyncResult::AsyncEndGetResponse::BeforeEndGetResponse"
+                        );
                         response = (HttpWebResponse)httpWebRequest.EndGetResponse(asyncResult);
                     }
                     catch (WebException e)
@@ -4593,7 +6056,10 @@ public HttpStack HttpStack
                         }
                     }
 
-                    pereq.HttpWebResponse = Util.NullCheck(response, InternalError.InvalidEndGetResponseResponse);
+                    pereq.HttpWebResponse = Util.NullCheck(
+                        response,
+                        InternalError.InvalidEndGetResponseResponse
+                    );
 
                     if (!IsFlagSet(this.options, SaveChangesOptions.Batch))
                     {
@@ -4618,11 +6084,25 @@ public HttpStack HttpStack
 
                         do
                         {
-                            Util.DebugInjectFault("SaveAsyncResult::AsyncEndGetResponse_BeforeBeginRead");
-                            asyncResult = BaseAsyncResult.InvokeAsync(stream.BeginRead, this.buildBatchBuffer, 0, this.buildBatchBuffer.Length, this.AsyncEndRead, pereq);
-                            pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
-                        }
-                        while (asyncResult.CompletedSynchronously && !pereq.RequestCompleted && !this.IsCompletedInternally && stream.CanRead);
+                            Util.DebugInjectFault(
+                                "SaveAsyncResult::AsyncEndGetResponse_BeforeBeginRead"
+                            );
+                            asyncResult = BaseAsyncResult.InvokeAsync(
+                                stream.BeginRead,
+                                this.buildBatchBuffer,
+                                0,
+                                this.buildBatchBuffer.Length,
+                                this.AsyncEndRead,
+                                pereq
+                            );
+                            pereq.RequestCompletedSynchronously &=
+                                asyncResult.CompletedSynchronously;
+                        } while (
+                            asyncResult.CompletedSynchronously
+                            && !pereq.RequestCompleted
+                            && !this.IsCompletedInternally
+                            && stream.CanRead
+                        );
                     }
                     else
                     {
@@ -4647,36 +6127,61 @@ public HttpStack HttpStack
                 }
             }
 
-           [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "required for this feature")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "required for this feature"
+            )]
             private void AsyncEndRead(IAsyncResult asyncResult)
             {
-                Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult.IsCompleted");
+                Debug.Assert(
+                    asyncResult != null && asyncResult.IsCompleted,
+                    "asyncResult.IsCompleted"
+                );
                 PerRequest pereq = asyncResult.AsyncState as PerRequest;
                 int count = 0;
                 try
                 {
                     CompleteCheck(pereq, InternalError.InvalidEndReadCompleted);
-                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
+                    pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously;
 
                     EqualRefCheck(this.request, pereq, InternalError.InvalidEndRead);
-                    Stream stream = Util.NullCheck(pereq.ResponseStream, InternalError.InvalidEndReadStream);
+                    Stream stream = Util.NullCheck(
+                        pereq.ResponseStream,
+                        InternalError.InvalidEndReadStream
+                    );
 
                     Util.DebugInjectFault("SaveAsyncResult::AsyncEndRead_BeforeEndRead");
                     count = stream.EndRead(asyncResult);
                     if (0 < count)
                     {
-                        Stream outputResponse = Util.NullCheck(this.httpWebResponseStream, InternalError.InvalidEndReadCopy);
+                        Stream outputResponse = Util.NullCheck(
+                            this.httpWebResponseStream,
+                            InternalError.InvalidEndReadCopy
+                        );
                         outputResponse.Write(this.buildBatchBuffer, 0, count);
                         this.copiedContentLength += count;
 
                         if (!asyncResult.CompletedSynchronously && stream.CanRead)
-                        {   
-                             do
+                        {
+                            do
                             {
-                                asyncResult = BaseAsyncResult.InvokeAsync(stream.BeginRead, this.buildBatchBuffer, 0, this.buildBatchBuffer.Length, this.AsyncEndRead, pereq);
-                                pereq.RequestCompletedSynchronously &= asyncResult.CompletedSynchronously; 
-                            }
-                            while (asyncResult.CompletedSynchronously && !pereq.RequestCompleted && !this.IsCompletedInternally && stream.CanRead);
+                                asyncResult = BaseAsyncResult.InvokeAsync(
+                                    stream.BeginRead,
+                                    this.buildBatchBuffer,
+                                    0,
+                                    this.buildBatchBuffer.Length,
+                                    this.AsyncEndRead,
+                                    pereq
+                                );
+                                pereq.RequestCompletedSynchronously &=
+                                    asyncResult.CompletedSynchronously;
+                            } while (
+                                asyncResult.CompletedSynchronously
+                                && !pereq.RequestCompleted
+                                && !this.IsCompletedInternally
+                                && stream.CanRead
+                            );
                         }
                     }
                     else
@@ -4735,10 +6240,12 @@ public HttpStack HttpStack
                     pereq.Dispose();
                     this.request = null;
                     if (!pereq.RequestCompletedSynchronously)
-                    {   
+                    {
                         if (!this.IsCompletedInternally)
                         {
-                            this.BeginNextChange(IsFlagSet(this.options, SaveChangesOptions.ReplaceOnUpdate));
+                            this.BeginNextChange(
+                                IsFlagSet(this.options, SaveChangesOptions.ReplaceOnUpdate)
+                            );
                         }
                     }
                 }
@@ -4756,41 +6263,17 @@ public HttpStack HttpStack
                     this.RequestCompletedSynchronously = true;
                 }
 
-                internal HttpWebRequest Request
-                {
-                    get;
-                    set;
-                }
+                internal HttpWebRequest Request { get; set; }
 
-                internal Stream RequestStream
-                {
-                    get;
-                    set;
-                }
+                internal Stream RequestStream { get; set; }
 
-                internal ContentStream RequestContentStream
-                {
-                    get;
-                    set;
-                }
+                internal ContentStream RequestContentStream { get; set; }
 
-                internal HttpWebResponse HttpWebResponse
-                {
-                    get;
-                    set;
-                }
+                internal HttpWebResponse HttpWebResponse { get; set; }
 
-                internal Stream ResponseStream
-                {
-                    get;
-                    set;
-                }
+                internal Stream ResponseStream { get; set; }
 
-                internal bool RequestCompletedSynchronously
-                {
-                    get;
-                    set;
-                }
+                internal bool RequestCompletedSynchronously { get; set; }
 
                 internal bool RequestCompleted
                 {
@@ -4815,11 +6298,7 @@ public HttpStack HttpStack
                     }
                 }
 
-                internal int RequestContentBufferValidLength
-                {
-                    get;
-                    set;
-                }
+                internal int RequestContentBufferValidLength { get; set; }
 
                 internal void SetComplete()
                 {
@@ -4830,7 +6309,7 @@ public HttpStack HttpStack
                 {
                     System.Threading.Interlocked.Exchange(ref this.requestStatus, 2);
                 }
-                
+
                 internal void Dispose()
                 {
                     Stream stream = null;
@@ -4843,20 +6322,25 @@ public HttpStack HttpStack
 
                     if (null != this.RequestContentStream)
                     {
-                        if (this.RequestContentStream.Stream != null && this.RequestContentStream.IsKnownMemoryStream)
+                        if (
+                            this.RequestContentStream.Stream != null
+                            && this.RequestContentStream.IsKnownMemoryStream
+                        )
                         {
                             this.RequestContentStream.Stream.Dispose();
                         }
 
                         this.RequestContentStream = null;
                     }
-                    
+
                     if (null != (stream = this.RequestStream))
                     {
                         this.RequestStream = null;
                         try
                         {
-                            Util.DebugInjectFault("PerRequest::Dispose_BeforeRequestStreamDisposed");
+                            Util.DebugInjectFault(
+                                "PerRequest::Dispose_BeforeRequestStreamDisposed"
+                            );
                             stream.Dispose();
                         }
                         catch (WebException)
@@ -4866,7 +6350,7 @@ public HttpStack HttpStack
                                 throw;
                             }
 
-                             Util.DebugInjectFault("PerRequest::Dispose_WebExceptionThrown");
+                            Util.DebugInjectFault("PerRequest::Dispose_WebExceptionThrown");
                         }
                     }
 
@@ -4882,22 +6366,22 @@ public HttpStack HttpStack
 
                 internal class ContentStream
                 {
-                     private readonly Stream stream;
+                    private readonly Stream stream;
 
                     private readonly bool isKnownMemoryStream;
 
-                   public ContentStream(Stream stream, bool isKnownMemoryStream)
+                    public ContentStream(Stream stream, bool isKnownMemoryStream)
                     {
                         this.stream = stream;
                         this.isKnownMemoryStream = isKnownMemoryStream;
                     }
 
-                   public Stream Stream
+                    public Stream Stream
                     {
                         get { return this.stream; }
                     }
 
-                   public bool IsKnownMemoryStream
+                    public bool IsKnownMemoryStream
                     {
                         get { return this.isKnownMemoryStream; }
                     }

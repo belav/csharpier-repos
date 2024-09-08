@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
+    where TStartup : class
 {
     protected CorsTestsBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -29,7 +32,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     {
         // Arrange
         var origin = "http://example.com";
-        var request = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Cors/GetBlogComments");
+        var request = new HttpRequestMessage(
+            new HttpMethod(method),
+            "http://localhost/Cors/GetBlogComments"
+        );
         request.Headers.Add(CorsConstants.Origin, origin);
 
         // Act
@@ -49,7 +55,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     public async Task OptionsRequest_NonPreflight_ExecutesOptionsAction()
     {
         // Arrange
-        var request = new HttpRequestMessage(new HttpMethod("OPTIONS"), "http://localhost/NonCors/GetOptions");
+        var request = new HttpRequestMessage(
+            new HttpMethod("OPTIONS"),
+            "http://localhost/NonCors/GetOptions"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -65,7 +74,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     public async Task PreflightRequestOnNonCorsEnabledController_ExecutesOptionsAction()
     {
         // Arrange
-        var request = new HttpRequestMessage(new HttpMethod("OPTIONS"), "http://localhost/NonCors/GetOptions");
+        var request = new HttpRequestMessage(
+            new HttpMethod("OPTIONS"),
+            "http://localhost/NonCors/GetOptions"
+        );
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
         request.Headers.Add(CorsConstants.AccessControlRequestMethod, "POST");
 
@@ -83,7 +95,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     public virtual async Task PreflightRequestOnNonCorsEnabledController_DoesNotMatchTheAction()
     {
         // Arrange
-        var request = new HttpRequestMessage(new HttpMethod("OPTIONS"), "http://localhost/NonCors/Post");
+        var request = new HttpRequestMessage(
+            new HttpMethod("OPTIONS"),
+            "http://localhost/NonCors/Post"
+        );
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
         request.Headers.Add(CorsConstants.AccessControlRequestMethod, "POST");
 
@@ -104,7 +119,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod(CorsConstants.PreflightHttpMethod),
-            "http://localhost/Cors/GetBlogComments");
+            "http://localhost/Cors/GetBlogComments"
+        );
 
         // Adding a custom header makes it a non-simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -128,7 +144,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
             {
                 Assert.Equal(CorsConstants.AccessControlAllowOrigin, h.Key);
                 Assert.Equal(new[] { "*" }, h.Value);
-            });
+            }
+        );
 
         // It should short circuit and hence no result.
         var content = await response.Content.ReadAsStringAsync();
@@ -141,7 +158,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Put,
-            "http://localhost/Cors/EditUserComment?userComment=abcd");
+            "http://localhost/Cors/EditUserComment?userComment=abcd"
+        );
 
         // Adding a custom header makes it a non-simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -155,13 +173,16 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         var responseHeaders = response.Headers;
         Assert.Equal(
             new[] { "http://example.com" },
-            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray());
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray()
+        );
         Assert.Equal(
-           new[] { "true" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowCredentials).ToArray());
+            new[] { "true" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowCredentials).ToArray()
+        );
         Assert.Equal(
-           new[] { "exposed1,exposed2" },
-           responseHeaders.GetValues(CorsConstants.AccessControlExposeHeaders).ToArray());
+            new[] { "exposed1,exposed2" },
+            responseHeaders.GetValues(CorsConstants.AccessControlExposeHeaders).ToArray()
+        );
 
         var content = await response.Content.ReadAsStringAsync();
         Assert.Equal("abcd", content);
@@ -173,7 +194,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod(CorsConstants.PreflightHttpMethod),
-            "http://localhost/Cors/EditUserComment?userComment=abcd");
+            "http://localhost/Cors/EditUserComment?userComment=abcd"
+        );
 
         // Adding a custom header makes it a non-simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -188,16 +210,20 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         var responseHeaders = response.Headers;
         Assert.Equal(
             new[] { "http://example.com" },
-            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray());
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray()
+        );
         Assert.Equal(
-           new[] { "true" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowCredentials).ToArray());
+            new[] { "true" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowCredentials).ToArray()
+        );
         Assert.Equal(
-           new[] { "header1,header2" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowHeaders).ToArray());
+            new[] { "header1,header2" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowHeaders).ToArray()
+        );
         Assert.Equal(
-           new[] { "PUT,POST" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowMethods).ToArray());
+            new[] { "PUT,POST" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowMethods).ToArray()
+        );
 
         var content = await response.Content.ReadAsStringAsync();
         Assert.Empty(content);
@@ -207,7 +233,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     public async Task PolicyFailed_Allows_ActualRequest_WithMissingResponseHeaders()
     {
         // Arrange
-        var request = new HttpRequestMessage(HttpMethod.Put, "http://localhost/Cors/GetUserComments");
+        var request = new HttpRequestMessage(
+            HttpMethod.Put,
+            "http://localhost/Cors/GetUserComments"
+        );
 
         // Adding a custom header makes it a non simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example2.com");
@@ -232,7 +261,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     public async Task DisableCors_ActionsCanOverride_ControllerLevel(string method)
     {
         // Arrange
-        var request = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Cors/GetExclusiveContent");
+        var request = new HttpRequestMessage(
+            new HttpMethod(method),
+            "http://localhost/Cors/GetExclusiveContent"
+        );
 
         // Exclusive content is not available on other sites.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -258,7 +290,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod(CorsConstants.PreflightHttpMethod),
-            "http://localhost/Cors/GetExclusiveContent");
+            "http://localhost/Cors/GetExclusiveContent"
+        );
 
         // Exclusive content is not available on other sites.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -283,7 +316,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     {
         // Arrange
         var url = "http://localhost/api/store/actionusingcontrollercorssettings";
-        var request = new HttpRequestMessage(new HttpMethod(CorsConstants.PreflightHttpMethod), url);
+        var request = new HttpRequestMessage(
+            new HttpMethod(CorsConstants.PreflightHttpMethod),
+            url
+        );
 
         // Adding a custom header makes it a non-simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -298,13 +334,16 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         var responseHeaders = response.Headers;
         Assert.Equal(
             new[] { "*" },
-            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray());
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray()
+        );
         Assert.Equal(
-           new[] { "Custom" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowHeaders).ToArray());
+            new[] { "Custom" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowHeaders).ToArray()
+        );
         Assert.Equal(
-           new[] { "GET" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowMethods).ToArray());
+            new[] { "GET" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowMethods).ToArray()
+        );
 
         var content = await response.Content.ReadAsStringAsync();
         Assert.Empty(content);
@@ -315,7 +354,10 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
     {
         // Arrange
         var url = "http://localhost/api/store/actionwithcorssettings";
-        var request = new HttpRequestMessage(new HttpMethod(CorsConstants.PreflightHttpMethod), url);
+        var request = new HttpRequestMessage(
+            new HttpMethod(CorsConstants.PreflightHttpMethod),
+            url
+        );
 
         // Adding a custom header makes it a non-simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -330,16 +372,20 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         var responseHeaders = response.Headers;
         Assert.Equal(
             new[] { "http://example.com" },
-            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray());
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowOrigin).ToArray()
+        );
         Assert.Equal(
-           new[] { "true" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowCredentials).ToArray());
+            new[] { "true" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowCredentials).ToArray()
+        );
         Assert.Equal(
-           new[] { "Custom" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowHeaders).ToArray());
+            new[] { "Custom" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowHeaders).ToArray()
+        );
         Assert.Equal(
-           new[] { "GET" },
-           responseHeaders.GetValues(CorsConstants.AccessControlAllowMethods).ToArray());
+            new[] { "GET" },
+            responseHeaders.GetValues(CorsConstants.AccessControlAllowMethods).ToArray()
+        );
 
         var content = await response.Content.ReadAsStringAsync();
         Assert.Empty(content);
@@ -354,7 +400,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod(CorsConstants.PreflightHttpMethod),
-            "http://localhost/api/store/actionwithcorsdisabled");
+            "http://localhost/api/store/actionwithcorsdisabled"
+        );
 
         // Adding a custom header makes it a non-simple request.
         request.Headers.Add(CorsConstants.Origin, "http://example.com");
@@ -379,7 +426,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod(CorsConstants.PreflightHttpMethod),
-            "http://localhost/api/store/actionwithdifferentcorspolicy");
+            "http://localhost/api/store/actionwithdifferentcorspolicy"
+        );
         request.Headers.Add(CorsConstants.Origin, "http://notexpecteddomain.com");
         request.Headers.Add(CorsConstants.AccessControlRequestMethod, "GET");
         request.Headers.Add(CorsConstants.AccessControlRequestHeaders, "Custom");
@@ -402,7 +450,8 @@ public abstract class CorsTestsBase<TStartup> : IClassFixture<MvcTestFixture<TSt
         // Arrange
         var request = new HttpRequestMessage(
             HttpMethod.Put,
-            "http://localhost/Cors/EditUserComment?userComment=abcd");
+            "http://localhost/Cors/EditUserComment?userComment=abcd"
+        );
 
         // Act
         var response = await Client.SendAsync(request);

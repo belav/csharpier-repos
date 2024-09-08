@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
-public class X<K> 
+public class X<K>
 {
     public X(K k1)
     {
@@ -29,7 +29,7 @@ public class B
     {
         X<Vector3> a = null;
         bool result = false;
-        try 
+        try
         {
             X<Vector3>.Test(a);
         }

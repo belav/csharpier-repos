@@ -10,32 +10,29 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-    using System.ComponentModel;
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlInputCheckBox'/> class defines the methods,
-///       properties, and events for the HtmlInputCheckBox control. This class allows
-///       programmatic access to the HTML &lt;input type=
-///       checkbox&gt;
-///       element on the server.
-///    </para>
-/// </devdoc>
-    [
-    DefaultEvent("ServerChange"),
-    SupportsEventValidation,
-    ]
-    public class HtmlInputCheckBox : HtmlInputControl, IPostBackDataHandler {
-
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlInputCheckBox'/> class defines the methods,
+    ///       properties, and events for the HtmlInputCheckBox control. This class allows
+    ///       programmatic access to the HTML &lt;input type=
+    ///       checkbox&gt;
+    ///       element on the server.
+    ///    </para>
+    /// </devdoc>
+    [DefaultEvent("ServerChange"), SupportsEventValidation]
+    public class HtmlInputCheckBox : HtmlInputControl, IPostBackDataHandler
+    {
         private static readonly object EventServerChange = new object();
 
         /*
@@ -45,8 +42,8 @@ namespace System.Web.UI.HtmlControls {
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputCheckBox'/> class.</para>
         /// </devdoc>
-        public HtmlInputCheckBox() : base("checkbox") {
-        }
+        public HtmlInputCheckBox()
+            : base("checkbox") { }
 
         /*
          * Checked property.
@@ -57,17 +54,20 @@ namespace System.Web.UI.HtmlControls {
         ///       currently selected.</para>
         /// </devdoc>
         [
-        WebCategory("Default"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        TypeConverter(typeof(MinimizableAttributeTypeConverter))
+            WebCategory("Default"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            TypeConverter(typeof(MinimizableAttributeTypeConverter))
         ]
-        public bool Checked {
-            get {
+        public bool Checked
+        {
+            get
+            {
                 string s = Attributes["checked"];
-                return((s != null) ? (s.Equals("checked")) : false);
+                return ((s != null) ? (s.Equals("checked")) : false);
             }
-            set {
+            set
+            {
                 if (value)
                     Attributes["checked"] = "checked";
                 else
@@ -83,17 +83,11 @@ namespace System.Web.UI.HtmlControls {
         /// <devdoc>
         ///    <para>Occurs when </para>
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.Control_OnServerCheckChanged)
-        ]
-        public event EventHandler ServerChange {
-            add {
-                Events.AddHandler(EventServerChange, value);
-            }
-            remove {
-                Events.RemoveHandler(EventServerChange, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.Control_OnServerCheckChanged)]
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(EventServerChange, value); }
+            remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
         /*
@@ -103,10 +97,12 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
-            if (Page != null && !Disabled) {
+            if (Page != null && !Disabled)
+            {
                 Page.RegisterRequiresPostBack(this);
 
                 Page.RegisterEnabledControl(this);
@@ -114,8 +110,9 @@ namespace System.Web.UI.HtmlControls {
 
             // if no change handler, no need to save posted property unless
             // we are disabled
-            if (Events[EventServerChange] == null && !Disabled) {
-                ViewState.SetItemDirty("checked",false);
+            if (Events[EventServerChange] == null && !Disabled)
+            {
+                ViewState.SetItemDirty("checked", false);
             }
         }
 
@@ -126,10 +123,12 @@ namespace System.Web.UI.HtmlControls {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected virtual void OnServerChange(EventArgs e) {
+        protected virtual void OnServerChange(EventArgs e)
+        {
             // invoke delegates AFTER binding
             EventHandler handler = (EventHandler)Events[EventServerChange];
-            if (handler != null) handler(this, e);
+            if (handler != null)
+                handler(this, e);
         }
 
         /*
@@ -138,29 +137,36 @@ namespace System.Web.UI.HtmlControls {
          */
 
         /// <internalonly/>
-        bool IPostBackDataHandler.LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
             return LoadPostData(postDataKey, postCollection);
         }
 
-
         /// <internalonly/>
-        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
             string post = postCollection[postDataKey];
             bool newValue = !String.IsNullOrEmpty(post);
             bool valueChanged = (newValue != Checked);
             Checked = newValue;
 
-            if (newValue) {
+            if (newValue)
+            {
                 ValidateEvent(postDataKey);
             }
 
             return valueChanged;
         }
 
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             base.RenderAttributes(writer);
 
-            if (Page != null) {
+            if (Page != null)
+            {
                 Page.ClientScript.RegisterForEventValidation(RenderedNameAttribute);
             }
         }
@@ -172,13 +178,14 @@ namespace System.Web.UI.HtmlControls {
          */
 
         /// <internalonly/>
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
 
-
         /// <internalonly/>
-        protected virtual void RaisePostDataChangedEvent() {
+        protected virtual void RaisePostDataChangedEvent()
+        {
             OnServerChange(EventArgs.Empty);
         }
     }

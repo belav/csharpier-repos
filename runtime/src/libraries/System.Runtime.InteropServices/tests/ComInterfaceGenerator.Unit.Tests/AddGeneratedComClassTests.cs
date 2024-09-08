@@ -4,8 +4,9 @@
 using System.Threading.Tasks;
 using Xunit;
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
-       Microsoft.Interop.Analyzers.AddGeneratedComClassAnalyzer,
-       Microsoft.Interop.Analyzers.AddGeneratedComClassFixer>;
+    Microsoft.Interop.Analyzers.AddGeneratedComClassAnalyzer,
+    Microsoft.Interop.Analyzers.AddGeneratedComClassFixer
+>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
@@ -15,24 +16,24 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task TypeThatImplementsGeneratedComInterfaceType_ReportsDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
-               public partial interface I
-               {
-               }
+                [GeneratedComInterface]
+                [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
+                public partial interface I
+                {
+                }
 
-               class [|C|] : I
-               {
-               }
-               """;
+                class [|C|] : I
+                {
+                }
+                """;
 
             string fixedSource = """
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
                 public partial interface I
@@ -101,13 +102,13 @@ namespace ComInterfaceGenerator.Unit.Tests
             string fixedSource = """
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-    
+
                 [GeneratedComInterface]
                 [Guid("0B7171CD-04A3-41B6-AD10-FE86D52197DD")]
                 public partial interface I
                 {
                 }
-                
+
                 public interface J : I
                 {
                 }

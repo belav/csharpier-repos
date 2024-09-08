@@ -11,11 +11,14 @@ using Microsoft.Internal;
 namespace System.ComponentModel.Composition.Hosting
 {
     [DebuggerTypeProxy(typeof(CompositionScopeDefinitionDebuggerProxy))]
-    public class CompositionScopeDefinition : ComposablePartCatalog, INotifyComposablePartCatalogChanged
+    public class CompositionScopeDefinition
+        : ComposablePartCatalog,
+            INotifyComposablePartCatalogChanged
     {
         private ComposablePartCatalog? _catalog;
         private IEnumerable<ExportDefinition>? _publicSurface;
-        private IEnumerable<CompositionScopeDefinition> _children = Enumerable.Empty<CompositionScopeDefinition>();
+        private IEnumerable<CompositionScopeDefinition> _children =
+            Enumerable.Empty<CompositionScopeDefinition>();
         private volatile int _isDisposed;
 
         /// <summary>
@@ -28,7 +31,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         /// <param name="catalog">The catalog.</param>
         /// <param name="children">The children.</param>
-        public CompositionScopeDefinition(ComposablePartCatalog catalog, IEnumerable<CompositionScopeDefinition> children)
+        public CompositionScopeDefinition(
+            ComposablePartCatalog catalog,
+            IEnumerable<CompositionScopeDefinition> children
+        )
         {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NullOrNotNullElements(children, nameof(children));
@@ -42,7 +48,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <param name="catalog">The catalog.</param>
         /// <param name="children">The children.</param>
         /// <param name="publicSurface">The exports that can be used to create new scopes.</param>
-        public CompositionScopeDefinition(ComposablePartCatalog catalog, IEnumerable<CompositionScopeDefinition> children, IEnumerable<ExportDefinition> publicSurface)
+        public CompositionScopeDefinition(
+            ComposablePartCatalog catalog,
+            IEnumerable<CompositionScopeDefinition> children,
+            IEnumerable<ExportDefinition> publicSurface
+        )
         {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NullOrNotNullElements(children, nameof(children));
@@ -57,7 +67,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <param name="catalog">The catalog.</param>
         /// <param name="children">The children.</param>
         /// <param name="publicSurface">The exports that can be used to create new scopes.</param>
-        private void InitializeCompositionScopeDefinition(ComposablePartCatalog catalog, IEnumerable<CompositionScopeDefinition>? children, IEnumerable<ExportDefinition>? publicSurface)
+        private void InitializeCompositionScopeDefinition(
+            ComposablePartCatalog catalog,
+            IEnumerable<CompositionScopeDefinition>? children,
+            IEnumerable<ExportDefinition>? publicSurface
+        )
         {
             _catalog = catalog;
             if (children != null)
@@ -176,7 +190,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         /// </note>
         /// </remarks>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             ThrowIfDisposed();
 
@@ -184,7 +200,9 @@ namespace System.ComponentModel.Composition.Hosting
             return _catalog.GetExports(definition);
         }
 
-        internal IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExportsFromPublicSurface(ImportDefinition definition)
+        internal IEnumerable<
+            Tuple<ComposablePartDefinition, ExportDefinition>
+        > GetExportsFromPublicSurface(ImportDefinition definition)
         {
             ArgumentNullException.ThrowIfNull(definition);
 

@@ -15,7 +15,7 @@ public class AcceptsMatcherPolicyTest
     public void INodeBuilderPolicy_AppliesToEndpoints_EndpointWithoutMetadata_ReturnsFalse()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", null), };
+        var endpoints = new[] { CreateEndpoint("/", null) };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -30,10 +30,7 @@ public class AcceptsMatcherPolicyTest
     public void INodeBuilderPolicy_AppliesToEndpoints_EndpointWithoutContentTypes_ReturnsFalse()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
-            };
+        var endpoints = new[] { CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())) };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -50,9 +47,9 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json", })),
-            };
+            CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json" })),
+        };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -69,9 +66,13 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json", })),
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(Array.Empty<string>()),
+                new DynamicEndpointMetadata()
+            ),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json" })),
+        };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -86,7 +87,7 @@ public class AcceptsMatcherPolicyTest
     public void IEndpointSelectorPolicy_AppliesToEndpoints_EndpointWithoutMetadata_ReturnsTrue()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", null, new DynamicEndpointMetadata()), };
+        var endpoints = new[] { CreateEndpoint("/", null, new DynamicEndpointMetadata()) };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
@@ -103,8 +104,12 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(Array.Empty<string>()),
+                new DynamicEndpointMetadata()
+            ),
+        };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
@@ -121,9 +126,13 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>()), new DynamicEndpointMetadata()),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json", })),
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(Array.Empty<string>()),
+                new DynamicEndpointMetadata()
+            ),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json" })),
+        };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
@@ -140,9 +149,9 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json", })),
-            };
+            CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json" })),
+        };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
@@ -159,14 +168,20 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                // These are arrange in an order that we won't actually see in a product scenario. It's done
-                // this way so we can verify that ordering is preserved by GetEdges.
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json", "application/*+json", })),
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/xml", "application/*+xml", })),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/*", })),
-                CreateEndpoint("/", new AcceptsMetadata(new[]{ "*/*", })),
-            };
+            // These are arrange in an order that we won't actually see in a product scenario. It's done
+            // this way so we can verify that ordering is preserved by GetEdges.
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new[] { "application/json", "application/*+json" })
+            ),
+            CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new[] { "application/xml", "application/*+xml" })
+            ),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "application/*" })),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "*/*" })),
+        };
 
         var policy = CreatePolicy();
 
@@ -179,38 +194,54 @@ public class AcceptsMatcherPolicyTest
             e =>
             {
                 Assert.Equal(string.Empty, e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal("*/*", e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal("application/*", e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(
+                    new[] { endpoints[1], endpoints[3], endpoints[4] },
+                    e.Endpoints.ToArray()
+                );
             },
             e =>
             {
                 Assert.Equal("application/*+json", e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(
+                    new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4] },
+                    e.Endpoints.ToArray()
+                );
             },
             e =>
             {
                 Assert.Equal("application/*+xml", e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
+                    e.Endpoints.ToArray()
+                );
             },
             e =>
             {
                 Assert.Equal("application/json", e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(
+                    new[] { endpoints[0], endpoints[1], endpoints[3], endpoints[4] },
+                    e.Endpoints.ToArray()
+                );
             },
             e =>
             {
                 Assert.Equal("application/xml", e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], }, e.Endpoints.ToArray());
-            });
+                Assert.Equal(
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
+                    e.Endpoints.ToArray()
+                );
+            }
+        );
     }
 
     [Fact] // See explanation in GetEdges for how this case is different
@@ -219,12 +250,18 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                // These are arrange in an order that we won't actually see in a product scenario. It's done
-                // this way so we can verify that ordering is preserved by GetEdges.
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/json", "application/*+json", })),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/xml", "application/*+xml", })),
-                CreateEndpoint("/", new AcceptsMetadata(new[] { "application/*", })),
-            };
+            // These are arrange in an order that we won't actually see in a product scenario. It's done
+            // this way so we can verify that ordering is preserved by GetEdges.
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new[] { "application/json", "application/*+json" })
+            ),
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new[] { "application/xml", "application/*+xml" })
+            ),
+            CreateEndpoint("/", new AcceptsMetadata(new[] { "application/*" })),
+        };
 
         var policy = CreatePolicy();
 
@@ -237,39 +274,45 @@ public class AcceptsMatcherPolicyTest
             e =>
             {
                 Assert.Equal(string.Empty, e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(
+                    new[] { endpoints[0], endpoints[1], endpoints[2] },
+                    e.Endpoints.ToArray()
+                );
             },
             e =>
             {
                 Assert.Equal("*/*", e.State);
-                Assert.Equal(AcceptsMatcherPolicy.Http415EndpointDisplayName, Assert.Single(e.Endpoints).DisplayName);
+                Assert.Equal(
+                    AcceptsMatcherPolicy.Http415EndpointDisplayName,
+                    Assert.Single(e.Endpoints).DisplayName
+                );
             },
             e =>
             {
                 Assert.Equal("application/*", e.State);
-                Assert.Equal(new[] { endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal("application/*+json", e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[0], endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal("application/*+xml", e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal("application/json", e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[0], endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal("application/xml", e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
-            });
-
+                Assert.Equal(new[] { endpoints[1], endpoints[2] }, e.Endpoints.ToArray());
+            }
+        );
     }
 
     [Theory]
@@ -285,15 +328,15 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var edges = new PolicyJumpTableEdge[]
         {
-                // In reverse order of how they should be processed
-                new PolicyJumpTableEdge(string.Empty, 0),
-                new PolicyJumpTableEdge("*/*", 1),
-                new PolicyJumpTableEdge("application/*", 2),
-                new PolicyJumpTableEdge("text/*", 3),
-                new PolicyJumpTableEdge("application/*+xml", 4),
-                new PolicyJumpTableEdge("application/*+json", 5),
-                new PolicyJumpTableEdge("application/json", 6),
-                new PolicyJumpTableEdge("application/xml", 7),
+            // In reverse order of how they should be processed
+            new PolicyJumpTableEdge(string.Empty, 0),
+            new PolicyJumpTableEdge("*/*", 1),
+            new PolicyJumpTableEdge("application/*", 2),
+            new PolicyJumpTableEdge("text/*", 3),
+            new PolicyJumpTableEdge("application/*+xml", 4),
+            new PolicyJumpTableEdge("application/*+json", 5),
+            new PolicyJumpTableEdge("application/json", 6),
+            new PolicyJumpTableEdge("application/xml", 7),
         };
 
         var policy = CreatePolicy();
@@ -314,10 +357,7 @@ public class AcceptsMatcherPolicyTest
     public async Task ApplyAsync_EndpointWithoutMetadata_MatchWithoutContentType()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", null),
-            };
+        var endpoints = new[] { CreateEndpoint("/", null) };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext();
@@ -335,10 +375,7 @@ public class AcceptsMatcherPolicyTest
     public async Task ApplyAsync_EndpointAllowsAnyContentType_MatchWithoutContentType()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
-            };
+        var endpoints = new[] { CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())) };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext();
@@ -356,10 +393,7 @@ public class AcceptsMatcherPolicyTest
     public async Task ApplyAsync_EndpointHasWildcardContentType_MatchWithoutContentType()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "*/*" })),
-            };
+        var endpoints = new[] { CreateEndpoint("/", new AcceptsMetadata(new string[] { "*/*" })) };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext();
@@ -377,19 +411,10 @@ public class AcceptsMatcherPolicyTest
     public async Task ApplyAsync_EndpointWithoutMetadata_MatchWithAnyContentType()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", null),
-            };
+        var endpoints = new[] { CreateEndpoint("/", null) };
 
         var candidates = CreateCandidateSet(endpoints);
-        var httpContext = new DefaultHttpContext()
-        {
-            Request =
-                {
-                    ContentType = "text/plain",
-                },
-        };
+        var httpContext = new DefaultHttpContext() { Request = { ContentType = "text/plain" } };
 
         var policy = CreatePolicy();
 
@@ -404,19 +429,10 @@ public class AcceptsMatcherPolicyTest
     public async Task ApplyAsync_EndpointAllowsAnyContentType_MatchWithAnyContentType()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())),
-            };
+        var endpoints = new[] { CreateEndpoint("/", new AcceptsMetadata(Array.Empty<string>())) };
 
         var candidates = CreateCandidateSet(endpoints);
-        var httpContext = new DefaultHttpContext()
-        {
-            Request =
-                {
-                    ContentType = "text/plain",
-                },
-        };
+        var httpContext = new DefaultHttpContext() { Request = { ContentType = "text/plain" } };
 
         var policy = CreatePolicy();
 
@@ -431,19 +447,10 @@ public class AcceptsMatcherPolicyTest
     public async Task ApplyAsync_EndpointHasWildcardContentType_MatchWithAnyContentType()
     {
         // Arrange
-        var endpoints = new[]
-        {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "*/*" })),
-            };
+        var endpoints = new[] { CreateEndpoint("/", new AcceptsMetadata(new string[] { "*/*" })) };
 
         var candidates = CreateCandidateSet(endpoints);
-        var httpContext = new DefaultHttpContext()
-        {
-            Request =
-                {
-                    ContentType = "text/plain",
-                },
-        };
+        var httpContext = new DefaultHttpContext() { Request = { ContentType = "text/plain" } };
 
         var policy = CreatePolicy();
 
@@ -460,16 +467,13 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "application/*+json", })),
-            };
+            CreateEndpoint("/", new AcceptsMetadata(new string[] { "application/*+json" })),
+        };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext()
         {
-            Request =
-                {
-                    ContentType = "application/project+json",
-                },
+            Request = { ContentType = "application/project+json" },
         };
 
         var policy = CreatePolicy();
@@ -487,16 +491,16 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "text/xml", "application/xml", })),
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new string[] { "text/xml", "application/xml" })
+            ),
+        };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext()
         {
-            Request =
-                {
-                    ContentType = "application/xml",
-                },
+            Request = { ContentType = "application/xml" },
         };
 
         var policy = CreatePolicy();
@@ -514,16 +518,16 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "text/xml", "application/xml", })),
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new string[] { "text/xml", "application/xml" })
+            ),
+        };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext()
         {
-            Request =
-                {
-                    ContentType = "application/json",
-                },
+            Request = { ContentType = "application/json" },
         };
 
         var policy = CreatePolicy();
@@ -542,17 +546,17 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "text/xml", "application/xml", })),
-                CreateEndpoint("/", null)
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new string[] { "text/xml", "application/xml" })
+            ),
+            CreateEndpoint("/", null),
+        };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext()
         {
-            Request =
-                {
-                    ContentType = "application/json",
-                },
+            Request = { ContentType = "application/json" },
         };
 
         var policy = CreatePolicy();
@@ -571,17 +575,17 @@ public class AcceptsMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "text/xml", "application/xml", })),
-                CreateEndpoint("/", new AcceptsMetadata(new string[] { "*/*", }))
-            };
+            CreateEndpoint(
+                "/",
+                new AcceptsMetadata(new string[] { "text/xml", "application/xml" })
+            ),
+            CreateEndpoint("/", new AcceptsMetadata(new string[] { "*/*" })),
+        };
 
         var candidates = CreateCandidateSet(endpoints);
         var httpContext = new DefaultHttpContext()
         {
-            Request =
-                {
-                    ContentType = "application/json",
-                },
+            Request = { ContentType = "application/json" },
         };
 
         var policy = CreatePolicy();
@@ -595,7 +599,11 @@ public class AcceptsMatcherPolicyTest
         Assert.Null(httpContext.GetEndpoint());
     }
 
-    private static RouteEndpoint CreateEndpoint(string template, AcceptsMetadata consumesMetadata, params object[] more)
+    private static RouteEndpoint CreateEndpoint(
+        string template,
+        AcceptsMetadata consumesMetadata,
+        params object[] more
+    )
     {
         var metadata = new List<object>();
         if (consumesMetadata != null)
@@ -613,12 +621,17 @@ public class AcceptsMatcherPolicyTest
             RoutePatternFactory.Parse(template),
             0,
             new EndpointMetadataCollection(metadata),
-            $"test: {template} - {string.Join(", ", consumesMetadata?.ContentTypes ?? Array.Empty<string>())}");
+            $"test: {template} - {string.Join(", ", consumesMetadata?.ContentTypes ?? Array.Empty<string>())}"
+        );
     }
 
     private static CandidateSet CreateCandidateSet(Endpoint[] endpoints)
     {
-        return new CandidateSet(endpoints, new RouteValueDictionary[endpoints.Length], new int[endpoints.Length]);
+        return new CandidateSet(
+            endpoints,
+            new RouteValueDictionary[endpoints.Length],
+            new int[endpoints.Length]
+        );
     }
 
     private static AcceptsMatcherPolicy CreatePolicy()

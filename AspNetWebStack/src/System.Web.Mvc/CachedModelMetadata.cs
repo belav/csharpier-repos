@@ -52,15 +52,37 @@ namespace System.Web.Mvc
         private bool _watermarkComputed;
 
         // Constructor for creating real instances of the metadata class based on a prototype
-        protected CachedModelMetadata(CachedModelMetadata<TPrototypeCache> prototype, Func<object> modelAccessor)
-            : base(prototype.Provider, prototype.ContainerType, modelAccessor, prototype.ModelType, prototype.PropertyName)
+        protected CachedModelMetadata(
+            CachedModelMetadata<TPrototypeCache> prototype,
+            Func<object> modelAccessor
+        )
+            : base(
+                prototype.Provider,
+                prototype.ContainerType,
+                modelAccessor,
+                prototype.ModelType,
+                prototype.PropertyName
+            )
         {
             PrototypeCache = prototype.PrototypeCache;
         }
 
         // Constructor for creating the prototype instances of the metadata class
-        protected CachedModelMetadata(CachedDataAnnotationsModelMetadataProvider provider, Type containerType, Type modelType, string propertyName, TPrototypeCache prototypeCache)
-            : base(provider, containerType, null /* modelAccessor */, modelType, propertyName)
+        protected CachedModelMetadata(
+            CachedDataAnnotationsModelMetadataProvider provider,
+            Type containerType,
+            Type modelType,
+            string propertyName,
+            TPrototypeCache prototypeCache
+        )
+            : base(
+                provider,
+                containerType,
+                null /* modelAccessor */
+                ,
+                modelType,
+                propertyName
+            )
         {
             PrototypeCache = prototypeCache;
         }

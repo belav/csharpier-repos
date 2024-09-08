@@ -17,7 +17,7 @@ public class EndpointRoutingSampleTest : IDisposable
 
     public EndpointRoutingSampleTest()
     {
-        var hostBuilder = Program.GetHostBuilder(new[] { Program.EndpointRoutingScenario, });
+        var hostBuilder = Program.GetHostBuilder(new[] { Program.EndpointRoutingScenario });
         _host = hostBuilder.Build();
 
         _testServer = _host.GetTestServer();
@@ -167,10 +167,14 @@ public class EndpointRoutingSampleTest : IDisposable
 
     [Theory]
     [InlineData("/WithSingleAsteriskCatchAll/a/b/c", "Link: /WithSingleAsteriskCatchAll/a%2Fb%2Fc")]
-    [InlineData("/WithSingleAsteriskCatchAll/a/b b1/c c1", "Link: /WithSingleAsteriskCatchAll/a%2Fb%20b1%2Fc%20c1")]
+    [InlineData(
+        "/WithSingleAsteriskCatchAll/a/b b1/c c1",
+        "Link: /WithSingleAsteriskCatchAll/a%2Fb%20b1%2Fc%20c1"
+    )]
     public async Task GeneratesLink_ToEndpointWithSingleAsteriskCatchAllParameter_EncodesValue(
         string url,
-        string expected)
+        string expected
+    )
     {
         // Arrange & Act
         var response = await _client.GetAsync(url);
@@ -188,7 +192,8 @@ public class EndpointRoutingSampleTest : IDisposable
     [InlineData("/WithDoubleAsteriskCatchAll/a//b/c", "Link: /WithDoubleAsteriskCatchAll/a//b/c")]
     public async Task GeneratesLink_ToEndpointWithDoubleAsteriskCatchAllParameter_DoesNotEncodeSlashes(
         string url,
-        string expected)
+        string expected
+    )
     {
         // Arrange & Act
         var response = await _client.GetAsync(url);

@@ -4,13 +4,15 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Runtime;
     using System.Configuration;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(StateElement),
+    [ConfigurationCollection(
+        typeof(StateElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.State)]
+        AddItemName = TrackingConfigurationStrings.State
+    )]
     public sealed class StateElementCollection : TrackingConfigurationCollection<StateElement>
     {
         protected override string ElementName

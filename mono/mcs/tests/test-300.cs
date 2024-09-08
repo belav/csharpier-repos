@@ -3,75 +3,80 @@ using System.Collections;
 
 class A
 {
-	class C { }
+    class C { }
 
-	public class B
-	{
-		class C { }
+    public class B
+    {
+        class C { }
 
-		public B() {
-			string error = "";
+        public B()
+        {
+            string error = "";
 
-			if (typeof (C) != typeof (A.B.C))
-				error += " 'typeof' keyword,";
+            if (typeof(C) != typeof(A.B.C))
+                error += " 'typeof' keyword,";
 
-			object o0 = new C ();
-			if (o0.GetType() != typeof (A.B.C))
-				error += " 'new' keyword,";
+            object o0 = new C();
+            if (o0.GetType() != typeof(A.B.C))
+                error += " 'new' keyword,";
 
-			C o1 = new C ();
-			if (o1.GetType () != typeof (A.B.C))
-				error += " local declaration,";
+            C o1 = new C();
+            if (o1.GetType() != typeof(A.B.C))
+                error += " local declaration,";
 
-			object o2 = new A.B.C ();
-			if (!(o2 is C))
-				error += " 'is' keyword,";
+            object o2 = new A.B.C();
+            if (!(o2 is C))
+                error += " 'is' keyword,";
 
-			object o3 = o2 as C;
-			if (o3 == null)
-				error += " 'as' keyword,";
+            object o3 = o2 as C;
+            if (o3 == null)
+                error += " 'as' keyword,";
 
-			try {
-				object o4 = (C) o2;
-			}
-			catch {
-				error += " type cast,";
-			}
+            try
+            {
+                object o4 = (C)o2;
+            }
+            catch
+            {
+                error += " type cast,";
+            }
 
-			try {
-				object o5 = (C) (o2);
-			}
-			catch {
-				error += " invocation-or-cast,";
-			}
+            try
+            {
+                object o5 = (C)(o2);
+            }
+            catch
+            {
+                error += " invocation-or-cast,";
+            }
 
-			object o6 = new C [1];
+            object o6 = new C[1];
 
-			if (o6.GetType ().GetElementType () != typeof (A.B.C))
-				error += " array creation,";
+            if (o6.GetType().GetElementType() != typeof(A.B.C))
+                error += " array creation,";
 
-			if (typeof (C []).GetElementType () != typeof (A.B.C))
-				error += " composed cast (array),";
+            if (typeof(C[]).GetElementType() != typeof(A.B.C))
+                error += " composed cast (array),";
 
-			ArrayList a = new ArrayList ();
-			a.Add (new A.B.C ());
+            ArrayList a = new ArrayList();
+            a.Add(new A.B.C());
 
-			try {
-				foreach (C c in a)
-				{ 
-				}
-			}
-			catch {
-				error += " 'foreach' statement,";
-			}
+            try
+            {
+                foreach (C c in a) { }
+            }
+            catch
+            {
+                error += " 'foreach' statement,";
+            }
 
-			if (error.Length != 0)
-				throw new Exception ("The following couldn't resolve C as A+B+C:" + error);
-		}
-	}
+            if (error.Length != 0)
+                throw new Exception("The following couldn't resolve C as A+B+C:" + error);
+        }
+    }
 
-	public static void Main()
-	{
-		object o = new A.B();
-	}
+    public static void Main()
+    {
+        object o = new A.B();
+    }
 }

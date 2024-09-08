@@ -15,9 +15,12 @@ namespace System.Net.NetworkInformation
     {
         private const int MaxUdpPacket = 0xFFFF + 256; // Marshal.SizeOf(typeof(ICMPV6_ECHO_REPLY)) * 2 + ip header info;
 
-        private static readonly SafeWaitHandle s_nullSafeWaitHandle = new SafeWaitHandle(IntPtr.Zero, true);
+        private static readonly SafeWaitHandle s_nullSafeWaitHandle = new SafeWaitHandle(
+            IntPtr.Zero,
+            true
+        );
 
-        private int _sendSize;  // Needed to determine what the reply size is for ipv6 in callback.
+        private int _sendSize; // Needed to determine what the reply size is for ipv6 in callback.
         private bool _ipv6;
         private ManualResetEvent? _pingEvent;
         private RegisteredWaitHandle? _registeredWait;
@@ -27,14 +30,26 @@ namespace System.Net.NetworkInformation
         private Interop.IpHlpApi.SafeCloseIcmpHandle? _handlePingV6;
         private TaskCompletionSource<PingReply>? _taskCompletionSource;
 
-        private PingReply SendPingCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private PingReply SendPingCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             // Since isAsync == false, DoSendPingCore will execute synchronously and return a completed
             // Task - so no blocking here
-            return DoSendPingCore(address, buffer, timeout, options, isAsync: false).GetAwaiter().GetResult();
+            return DoSendPingCore(address, buffer, timeout, options, isAsync: false)
+                .GetAwaiter()
+                .GetResult();
         }
 
-        private Task<PingReply> SendPingAsyncCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private Task<PingReply> SendPingAsyncCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             // Since isAsync == true, DoSendPingCore will execute asynchronously and return an active Task
             return DoSendPingCore(address, buffer, timeout, options, isAsync: true);
@@ -42,7 +57,13 @@ namespace System.Net.NetworkInformation
 
         // Any exceptions that escape synchronously will be caught by the caller and wrapped in a PingException.
         // We do not need to or want to capture such exceptions into the returned task.
-        private Task<PingReply> DoSendPingCore(IPAddress address, byte[] buffer, int timeout, PingOptions? options, bool isAsync)
+        private Task<PingReply> DoSendPingCore(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options,
+            bool isAsync
+        )
         {
             TaskCompletionSource<PingReply>? tcs = null;
             if (isAsync)
@@ -86,7 +107,9 @@ namespace System.Net.NetworkInformation
                     Cleanup(isAsync);
 
                     IPStatus status = GetStatusFromCode(error);
-                    return Task.FromResult(new PingReply(address, default, status, default, Array.Empty<byte>()));
+                    return Task.FromResult(
+                        new PingReply(address, default, status, default, Array.Empty<byte>())
+                    );
                 }
             }
 
@@ -110,7 +133,13 @@ namespace System.Net.NetworkInformation
                 _pingEvent.Reset();
             }
 
-            _registeredWait = ThreadPool.RegisterWaitForSingleObject(_pingEvent, (state, _) => ((Ping)state!).PingCallback(), this, -1, true);
+            _registeredWait = ThreadPool.RegisterWaitForSingleObject(
+                _pingEvent,
+                (state, _) => ((Ping)state!).PingCallback(),
+                this,
+                -1,
+                true
+            );
         }
 
         private void UnregisterWaitHandle()
@@ -161,25 +190,34 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private unsafe int SendEcho(IPAddress address, byte[] buffer, int timeout, PingOptions? options, bool isAsync)
+        private unsafe int SendEcho(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options,
+            bool isAsync
+        )
         {
-            Interop.IpHlpApi.IP_OPTION_INFORMATION ipOptions = new Interop.IpHlpApi.IP_OPTION_INFORMATION(options);
+            Interop.IpHlpApi.IP_OPTION_INFORMATION ipOptions =
+                new Interop.IpHlpApi.IP_OPTION_INFORMATION(options);
             if (!_ipv6)
             {
-                return (int)Interop.IpHlpApi.IcmpSendEcho2(
-                    _handlePingV4!,
-                    GetWaitHandle(isAsync),
-                    IntPtr.Zero,
-                    IntPtr.Zero,
+                return (int)
+                    Interop.IpHlpApi.IcmpSendEcho2(
+                        _handlePingV4!,
+                        GetWaitHandle(isAsync),
+                        IntPtr.Zero,
+                        IntPtr.Zero,
 #pragma warning disable CS0618 // Address is marked obsolete
-                    (uint)address.Address,
+                        (uint)address.Address,
 #pragma warning restore CS0618
-                    _requestBuffer!,
-                    (ushort)buffer.Length,
-                    ref ipOptions,
-                    _replyBuffer!,
-                    MaxUdpPacket,
-                    (uint)timeout);
+                        _requestBuffer!,
+                        (ushort)buffer.Length,
+                        ref ipOptions,
+                        _replyBuffer!,
+                        MaxUdpPacket,
+                        (uint)timeout
+                    );
             }
 
             Span<byte> remoteAddr = stackalloc byte[SocketAddressPal.IPv6AddressSize];
@@ -188,19 +226,21 @@ namespace System.Net.NetworkInformation
             Span<byte> sourceAddr = stackalloc byte[SocketAddressPal.IPv6AddressSize];
             sourceAddr.Clear();
 
-            return (int)Interop.IpHlpApi.Icmp6SendEcho2(
-                _handlePingV6!,
-                GetWaitHandle(isAsync),
-                IntPtr.Zero,
-                IntPtr.Zero,
-                sourceAddr,
-                remoteAddr,
-                _requestBuffer!,
-                (ushort)buffer.Length,
-                ref ipOptions,
-                _replyBuffer!,
-                MaxUdpPacket,
-                (uint)timeout);
+            return (int)
+                Interop.IpHlpApi.Icmp6SendEcho2(
+                    _handlePingV6!,
+                    GetWaitHandle(isAsync),
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    sourceAddr,
+                    remoteAddr,
+                    _requestBuffer!,
+                    (ushort)buffer.Length,
+                    ref ipOptions,
+                    _replyBuffer!,
+                    MaxUdpPacket,
+                    (uint)timeout
+                );
         }
 
         private unsafe PingReply CreatePingReply()
@@ -210,11 +250,17 @@ namespace System.Net.NetworkInformation
             // Marshals and constructs new reply.
             if (_ipv6)
             {
-                ref Interop.IpHlpApi.ICMPV6_ECHO_REPLY icmp6Reply = ref *(Interop.IpHlpApi.ICMPV6_ECHO_REPLY*)buffer.DangerousGetHandle();
-                return CreatePingReplyFromIcmp6EchoReply(in icmp6Reply, buffer.DangerousGetHandle(), _sendSize);
+                ref Interop.IpHlpApi.ICMPV6_ECHO_REPLY icmp6Reply =
+                    ref *(Interop.IpHlpApi.ICMPV6_ECHO_REPLY*)buffer.DangerousGetHandle();
+                return CreatePingReplyFromIcmp6EchoReply(
+                    in icmp6Reply,
+                    buffer.DangerousGetHandle(),
+                    _sendSize
+                );
             }
 
-            ref Interop.IpHlpApi.ICMP_ECHO_REPLY icmpReply = ref *(Interop.IpHlpApi.ICMP_ECHO_REPLY*)buffer.DangerousGetHandle();
+            ref Interop.IpHlpApi.ICMP_ECHO_REPLY icmpReply =
+                ref *(Interop.IpHlpApi.ICMP_ECHO_REPLY*)buffer.DangerousGetHandle();
             return CreatePingReplyFromIcmpEchoReply(in icmpReply);
         }
 
@@ -337,7 +383,9 @@ namespace System.Net.NetworkInformation
             return (IPStatus)statusCode;
         }
 
-        private static PingReply CreatePingReplyFromIcmpEchoReply(in Interop.IpHlpApi.ICMP_ECHO_REPLY reply)
+        private static PingReply CreatePingReplyFromIcmpEchoReply(
+            in Interop.IpHlpApi.ICMP_ECHO_REPLY reply
+        )
         {
             const int DontFragmentFlag = 2;
 
@@ -352,7 +400,10 @@ namespace System.Net.NetworkInformation
             {
                 // Only copy the data if we succeed w/ the ping operation.
                 rtt = reply.roundTripTime;
-                options = new PingOptions(reply.options.ttl, (reply.options.flags & DontFragmentFlag) > 0);
+                options = new PingOptions(
+                    reply.options.ttl,
+                    (reply.options.flags & DontFragmentFlag) > 0
+                );
                 buffer = new byte[reply.dataSize];
                 Marshal.Copy(reply.data, buffer, 0, reply.dataSize);
             }
@@ -366,7 +417,11 @@ namespace System.Net.NetworkInformation
             return new PingReply(address, options, ipStatus, rtt, buffer);
         }
 
-        private static PingReply CreatePingReplyFromIcmp6EchoReply(in Interop.IpHlpApi.ICMPV6_ECHO_REPLY reply, IntPtr dataPtr, int sendSize)
+        private static PingReply CreatePingReplyFromIcmp6EchoReply(
+            in Interop.IpHlpApi.ICMPV6_ECHO_REPLY reply,
+            IntPtr dataPtr,
+            int sendSize
+        )
         {
             IPAddress address = new IPAddress(reply.Address.Address, reply.Address.ScopeID);
             IPStatus ipStatus = GetStatusFromCode((int)reply.Status);

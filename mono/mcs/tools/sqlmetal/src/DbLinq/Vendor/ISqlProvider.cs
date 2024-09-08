@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,12 +21,11 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System.Collections.Generic;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
 
@@ -179,7 +178,12 @@ namespace DbLinq.Vendor
         /// <param name="offset">first row to be returned (starting from 0)</param>
         /// <param name="offsetAndLimit">limit+offset</param>
         /// <returns></returns>
-        SqlStatement GetLiteralLimit(SqlStatement select, SqlStatement limit, SqlStatement offset, SqlStatement offsetAndLimit);
+        SqlStatement GetLiteralLimit(
+            SqlStatement select,
+            SqlStatement limit,
+            SqlStatement offset,
+            SqlStatement offsetAndLimit
+        );
 
         /// <summary>
         /// Returns an ORDER criterium
@@ -217,7 +221,11 @@ namespace DbLinq.Vendor
         /// <param name="selectA"></param>
         /// <param name="selectB"></param>
         /// <returns></returns>
-        SqlStatement GetLiteral(SelectOperatorType selectOperator, SqlStatement selectA, SqlStatement selectB);
+        SqlStatement GetLiteral(
+            SelectOperatorType selectOperator,
+            SqlStatement selectA,
+            SqlStatement selectB
+        );
 
         /// <summary>
         /// Builds an insert clause
@@ -226,7 +234,11 @@ namespace DbLinq.Vendor
         /// <param name="inputColumns">Columns to be inserted</param>
         /// <param name="inputValues">Values to be inserted into columns</param>
         /// <returns></returns>
-        SqlStatement GetInsert(SqlStatement table, IList<SqlStatement> inputColumns, IList<SqlStatement> inputValues);
+        SqlStatement GetInsert(
+            SqlStatement table,
+            IList<SqlStatement> inputColumns,
+            IList<SqlStatement> inputValues
+        );
 
         /// <summary>
         /// Builds the statements that gets back the IDs for the inserted statement
@@ -234,7 +246,15 @@ namespace DbLinq.Vendor
         /// <param name="outputParameters">Expected output parameters</param>
         /// <param name="outputExpressions">Expressions (to help generate output parameters)</param>
         /// <returns></returns>
-        SqlStatement GetInsertIds(SqlStatement table, IList<SqlStatement> autoPKColumn, IList<SqlStatement> inputPKColumns, IList<SqlStatement> inputPKValues, IList<SqlStatement> outputColumns, IList<SqlStatement> outputParameters, IList<SqlStatement> outputExpressions);
+        SqlStatement GetInsertIds(
+            SqlStatement table,
+            IList<SqlStatement> autoPKColumn,
+            IList<SqlStatement> inputPKColumns,
+            IList<SqlStatement> inputPKValues,
+            IList<SqlStatement> outputColumns,
+            IList<SqlStatement> outputParameters,
+            IList<SqlStatement> outputExpressions
+        );
 
         /// <summary>
         /// Builds an update clause
@@ -247,9 +267,15 @@ namespace DbLinq.Vendor
         /// <param name="inputPKColumns">PK columns for reference</param>
         /// <param name="inputPKValues">PK values for reference</param>
         /// <returns></returns>
-        SqlStatement GetUpdate(SqlStatement table, IList<SqlStatement> inputColumns, IList<SqlStatement> inputValues,
-                                         IList<SqlStatement> outputParameters, IList<SqlStatement> outputExpressions,
-                                         IList<SqlStatement> inputPKColumns, IList<SqlStatement> inputPKValues);
+        SqlStatement GetUpdate(
+            SqlStatement table,
+            IList<SqlStatement> inputColumns,
+            IList<SqlStatement> inputValues,
+            IList<SqlStatement> outputParameters,
+            IList<SqlStatement> outputExpressions,
+            IList<SqlStatement> inputPKColumns,
+            IList<SqlStatement> inputPKValues
+        );
 
         /// <summary>
         /// Builds a delete clause
@@ -258,7 +284,11 @@ namespace DbLinq.Vendor
         /// <param name="inputPKColumns">PK columns for reference</param>
         /// <param name="inputPKValues">PK values for reference</param>
         /// <returns></returns>
-        SqlStatement GetDelete(SqlStatement table, IList<SqlStatement> inputPKColumns, IList<SqlStatement> inputPKValues);
+        SqlStatement GetDelete(
+            SqlStatement table,
+            IList<SqlStatement> inputPKColumns,
+            IList<SqlStatement> inputPKValues
+        );
 
         /// <summary>
         /// given 'User', return '[User]' to prevent a SQL keyword conflict
@@ -277,10 +307,10 @@ namespace DbLinq.Vendor
         ///Returns a SqlStatement with a conversion of an expression(value) to a type(newType)
         ///</summary>
         /// <example>
-        /// In sqlServer: 
+        /// In sqlServer:
         /// value= OrderDetail.Quantity
         /// newType= boolean
-        /// 
+        ///
         /// it should return CONVERT(bit,OrderDetail.Quantity)
         /// </example>
         /// <returns></returns>

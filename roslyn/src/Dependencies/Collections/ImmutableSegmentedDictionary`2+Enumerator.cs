@@ -42,7 +42,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             public readonly KeyValuePair<TKey, TValue> Current => _enumerator.Current;
 
-            readonly object IEnumerator.Current => _returnType == ReturnType.DictionaryEntry ? ((IDictionaryEnumerator)this).Entry : Current;
+            readonly object IEnumerator.Current =>
+                _returnType == ReturnType.DictionaryEntry
+                    ? ((IDictionaryEnumerator)this).Entry
+                    : Current;
 
             readonly DictionaryEntry IDictionaryEnumerator.Entry => new(Current.Key, Current.Value);
 
@@ -50,11 +53,9 @@ namespace Microsoft.CodeAnalysis.Collections
 
             readonly object? IDictionaryEnumerator.Value => Current.Value;
 
-            public readonly void Dispose()
-                => _enumerator.Dispose();
+            public readonly void Dispose() => _enumerator.Dispose();
 
-            public bool MoveNext()
-                => _enumerator.MoveNext();
+            public bool MoveNext() => _enumerator.MoveNext();
 
             public void Reset()
             {

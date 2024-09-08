@@ -6,37 +6,40 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
-
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(PublishedSitesCollection.Name)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class BasicAuthTests : IISFunctionalTestBase
 {
-    public BasicAuthTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public BasicAuthTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels();
@@ -59,7 +62,10 @@ public class BasicAuthTests : IISFunctionalTestBase
         var deploymentResult = await DeployAsync(deploymentParameters);
         var request = new HttpRequestMessage(HttpMethod.Get, "/Auth");
         var byteArray = new UTF8Encoding().GetBytes(username + ":" + password);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+        request.Headers.Authorization = new AuthenticationHeaderValue(
+            "Basic",
+            Convert.ToBase64String(byteArray)
+        );
 
         var response = await deploymentResult.HttpClient.SendAsync(request);
 

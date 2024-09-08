@@ -13,7 +13,10 @@ public class Program
 {
     private static void Eval(int testCase, bool b1, bool b2)
     {
-        if (b1 != b2) throw new Exception(string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2));
+        if (b1 != b2)
+            throw new Exception(
+                string.Format("case {0:000} failed: v1 {1} v2 {2}", testCase, b1, b2)
+            );
     }
 
     private static void TestCase0001()
@@ -973,7 +976,8 @@ public class Program
             Eval(0979, v is SealedClass, false);
             Eval(0980, v is SealedClass[], false);
         }
-    }  // end of test case 0001
+    } // end of test case 0001
+
     private static void TestCase0002()
     {
         {
@@ -1931,7 +1935,8 @@ public class Program
             Eval(1959, v is SealedClass, false);
             Eval(1960, v is SealedClass[], false);
         }
-    }  // end of test case 0002
+    } // end of test case 0002
+
     private static void TestCase0003()
     {
         {
@@ -2889,7 +2894,8 @@ public class Program
             Eval(2939, v is SealedClass, false);
             Eval(2940, v is SealedClass[], false);
         }
-    }  // end of test case 0003
+    } // end of test case 0003
+
     private static void TestCase0004()
     {
         {
@@ -3657,7 +3663,10 @@ public class Program
             Eval(3724, v is SealedClass[], false);
         }
         {
-            NotEmptyStructGen<Guid>?[] v = new NotEmptyStructGen<Guid>?[] { default(NotEmptyStructGen<Guid>) };
+            NotEmptyStructGen<Guid>?[] v = new NotEmptyStructGen<Guid>?[]
+            {
+                default(NotEmptyStructGen<Guid>),
+            };
             Eval(3725, v is EmptyStruct, false);
             Eval(3726, v is EmptyStruct[], false);
             Eval(3727, v is EmptyStruct?, false);
@@ -3847,7 +3856,8 @@ public class Program
             Eval(3919, v is SealedClass, false);
             Eval(3920, v is SealedClass[], false);
         }
-    }  // end of test case 0004
+    } // end of test case 0004
+
     private static void TestCase0005()
     {
         {
@@ -4233,7 +4243,8 @@ public class Program
             Eval(4312, v is SealedClass[], false);
         }
         {
-            NotEmptyStructConstrainedGen<IntPtr>? v = default(NotEmptyStructConstrainedGen<IntPtr>?);
+            NotEmptyStructConstrainedGen<IntPtr>? v =
+                default(NotEmptyStructConstrainedGen<IntPtr>?);
             Eval(4313, v is EmptyStruct, false);
             Eval(4314, v is EmptyStruct[], false);
             Eval(4315, v is EmptyStruct?, false);
@@ -4424,7 +4435,8 @@ public class Program
             Eval(4508, v is SealedClass[], false);
         }
         {
-            NotEmptyStructConstrainedGen<IntPtr>?[] v = default(NotEmptyStructConstrainedGen<IntPtr>?[]);
+            NotEmptyStructConstrainedGen<IntPtr>?[] v =
+                default(NotEmptyStructConstrainedGen<IntPtr>?[]);
             Eval(4509, v is EmptyStruct, false);
             Eval(4510, v is EmptyStruct[], false);
             Eval(4511, v is EmptyStruct?, false);
@@ -4615,7 +4627,10 @@ public class Program
             Eval(4704, v is SealedClass[], false);
         }
         {
-            NotEmptyStructConstrainedGen<IntPtr>?[] v = new NotEmptyStructConstrainedGen<IntPtr>?[] { default(NotEmptyStructConstrainedGen<IntPtr>) };
+            NotEmptyStructConstrainedGen<IntPtr>?[] v = new NotEmptyStructConstrainedGen<IntPtr>?[]
+            {
+                default(NotEmptyStructConstrainedGen<IntPtr>),
+            };
             Eval(4705, v is EmptyStruct, false);
             Eval(4706, v is EmptyStruct[], false);
             Eval(4707, v is EmptyStruct?, false);
@@ -4805,7 +4820,8 @@ public class Program
             Eval(4899, v is SealedClass, false);
             Eval(4900, v is SealedClass[], false);
         }
-    }  // end of test case 0005
+    } // end of test case 0005
+
     private static void TestCase0006()
     {
         {
@@ -5763,7 +5779,8 @@ public class Program
             Eval(5879, v is SealedClass, false);
             Eval(5880, v is SealedClass[], false);
         }
-    }  // end of test case 0006
+    } // end of test case 0006
+
     private static void TestCase0007()
     {
         {
@@ -6531,7 +6548,10 @@ public class Program
             Eval(6664, v is SealedClass[], false);
         }
         {
-            NestedStructGen<Decimal>?[] v = new NestedStructGen<Decimal>?[] { default(NestedStructGen<Decimal>) };
+            NestedStructGen<Decimal>?[] v = new NestedStructGen<Decimal>?[]
+            {
+                default(NestedStructGen<Decimal>),
+            };
             Eval(6665, v is EmptyStruct, false);
             Eval(6666, v is EmptyStruct[], false);
             Eval(6667, v is EmptyStruct?, false);
@@ -6721,7 +6741,8 @@ public class Program
             Eval(6859, v is SealedClass, false);
             Eval(6860, v is SealedClass[], false);
         }
-    }  // end of test case 0007
+    } // end of test case 0007
+
     private static void TestCase0008()
     {
         {
@@ -7489,7 +7510,10 @@ public class Program
             Eval(7644, v is SealedClass[], false);
         }
         {
-            ExplicitFieldOffsetStruct?[] v = new ExplicitFieldOffsetStruct?[] { default(ExplicitFieldOffsetStruct) };
+            ExplicitFieldOffsetStruct?[] v = new ExplicitFieldOffsetStruct?[]
+            {
+                default(ExplicitFieldOffsetStruct),
+            };
             Eval(7645, v is EmptyStruct, false);
             Eval(7646, v is EmptyStruct[], false);
             Eval(7647, v is EmptyStruct?, false);
@@ -7679,7 +7703,8 @@ public class Program
             Eval(7839, v is SealedClass, false);
             Eval(7840, v is SealedClass[], false);
         }
-    }  // end of test case 0008
+    } // end of test case 0008
+
     private static void TestCase0011()
     {
         {
@@ -8637,7 +8662,8 @@ public class Program
             Eval(10779, v is SealedClass, false);
             Eval(10780, v is SealedClass[], false);
         }
-    }  // end of test case 0011
+    } // end of test case 0011
+
     private static void TestCase0012()
     {
         {
@@ -9405,7 +9431,10 @@ public class Program
             Eval(11564, v is SealedClass[], false);
         }
         {
-            ImplementOneInterface?[] v = new ImplementOneInterface?[] { default(ImplementOneInterface) };
+            ImplementOneInterface?[] v = new ImplementOneInterface?[]
+            {
+                default(ImplementOneInterface),
+            };
             Eval(11565, v is EmptyStruct, false);
             Eval(11566, v is EmptyStruct[], false);
             Eval(11567, v is EmptyStruct?, false);
@@ -9595,7 +9624,8 @@ public class Program
             Eval(11759, v is SealedClass, false);
             Eval(11760, v is SealedClass[], false);
         }
-    }  // end of test case 0012
+    } // end of test case 0012
+
     private static void TestCase0013()
     {
         {
@@ -10363,7 +10393,10 @@ public class Program
             Eval(12544, v is SealedClass[], false);
         }
         {
-            ImplementTwoInterface?[] v = new ImplementTwoInterface?[] { default(ImplementTwoInterface) };
+            ImplementTwoInterface?[] v = new ImplementTwoInterface?[]
+            {
+                default(ImplementTwoInterface),
+            };
             Eval(12545, v is EmptyStruct, false);
             Eval(12546, v is EmptyStruct[], false);
             Eval(12547, v is EmptyStruct?, false);
@@ -10553,11 +10586,14 @@ public class Program
             Eval(12739, v is SealedClass, false);
             Eval(12740, v is SealedClass[], false);
         }
-    }  // end of test case 0013
+    } // end of test case 0013
+
     private static void TestCase0014()
     {
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>> v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>);
+            ImplementOneInterfaceGen<EmptyStructGen<int>> v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >);
             Eval(12741, v is EmptyStruct, false);
             Eval(12742, v is EmptyStruct[], false);
             Eval(12743, v is EmptyStruct?, false);
@@ -10748,7 +10784,9 @@ public class Program
             Eval(12936, v is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >);
             Eval(12937, v is EmptyStruct, false);
             Eval(12938, v is EmptyStruct[], false);
             Eval(12939, v is EmptyStruct?, false);
@@ -10939,7 +10977,9 @@ public class Program
             Eval(13132, v is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>?);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>? v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >?);
             Eval(13133, v is EmptyStruct, false);
             Eval(13134, v is EmptyStruct[], false);
             Eval(13135, v is EmptyStruct?, false);
@@ -11130,7 +11170,9 @@ public class Program
             Eval(13328, v is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>?[] v = default(ImplementOneInterfaceGen<EmptyStructGen<int>>?[]);
+            ImplementOneInterfaceGen<EmptyStructGen<int>>?[] v = default(ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >?[]);
             Eval(13329, v is EmptyStruct, false);
             Eval(13330, v is EmptyStruct[], false);
             Eval(13331, v is EmptyStruct?, false);
@@ -11321,7 +11363,12 @@ public class Program
             Eval(13524, v is SealedClass[], false);
         }
         {
-            ImplementOneInterfaceGen<EmptyStructGen<int>>?[] v = new ImplementOneInterfaceGen<EmptyStructGen<int>>?[] { default(ImplementOneInterfaceGen<EmptyStructGen<int>>) };
+            ImplementOneInterfaceGen<EmptyStructGen<int>>?[] v = new ImplementOneInterfaceGen<
+                EmptyStructGen<int>
+            >?[]
+            {
+                default(ImplementOneInterfaceGen<EmptyStructGen<int>>),
+            };
             Eval(13525, v is EmptyStruct, false);
             Eval(13526, v is EmptyStruct[], false);
             Eval(13527, v is EmptyStruct?, false);
@@ -11511,7 +11558,8 @@ public class Program
             Eval(13719, v is SealedClass, false);
             Eval(13720, v is SealedClass[], false);
         }
-    }  // end of test case 0014
+    } // end of test case 0014
+
     private static void TestCase0015()
     {
         {
@@ -12279,7 +12327,10 @@ public class Program
             Eval(14504, v is SealedClass[], false);
         }
         {
-            ImplementTwoInterfaceGen<int>?[] v = new ImplementTwoInterfaceGen<int>?[] { default(ImplementTwoInterfaceGen<int>) };
+            ImplementTwoInterfaceGen<int>?[] v = new ImplementTwoInterfaceGen<int>?[]
+            {
+                default(ImplementTwoInterfaceGen<int>),
+            };
             Eval(14505, v is EmptyStruct, false);
             Eval(14506, v is EmptyStruct[], false);
             Eval(14507, v is EmptyStruct?, false);
@@ -12469,7 +12520,8 @@ public class Program
             Eval(14699, v is SealedClass, false);
             Eval(14700, v is SealedClass[], false);
         }
-    }  // end of test case 0015
+    } // end of test case 0015
+
     private static void TestCase0016()
     {
         {
@@ -13237,7 +13289,10 @@ public class Program
             Eval(15484, v is SealedClass[], false);
         }
         {
-            ImplementAllInterface<int>?[] v = new ImplementAllInterface<int>?[] { default(ImplementAllInterface<int>) };
+            ImplementAllInterface<int>?[] v = new ImplementAllInterface<int>?[]
+            {
+                default(ImplementAllInterface<int>),
+            };
             Eval(15485, v is EmptyStruct, false);
             Eval(15486, v is EmptyStruct[], false);
             Eval(15487, v is EmptyStruct?, false);
@@ -13427,7 +13482,8 @@ public class Program
             Eval(15679, v is SealedClass, false);
             Eval(15680, v is SealedClass[], false);
         }
-    }  // end of test case 0016
+    } // end of test case 0016
+
     private static void TestCase0017()
     {
         {
@@ -14385,7 +14441,8 @@ public class Program
             Eval(16659, v is SealedClass, false);
             Eval(16660, v is SealedClass[], false);
         }
-    }  // end of test case 0017
+    } // end of test case 0017
+
     private static void TestCase0018()
     {
         {
@@ -15343,7 +15400,7 @@ public class Program
             Eval(17639, v is SealedClass, false);
             Eval(17640, v is SealedClass[], false);
         }
-    }  // end of test case 0018
+    } // end of test case 0018
 
     [Fact]
     public static int TestEntryPoint()

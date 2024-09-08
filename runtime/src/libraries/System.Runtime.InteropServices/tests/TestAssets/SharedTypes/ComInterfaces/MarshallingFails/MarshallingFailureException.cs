@@ -7,7 +7,10 @@ namespace SharedTypes.ComInterfaces.MarshallingFails
 {
     internal class MarshallingFailureException : Exception
     {
-        public MarshallingFailureException() : base() { }
-        public MarshallingFailureException(string message) : base(message) { }
+        public MarshallingFailureException()
+            : base() { }
+
+        public MarshallingFailureException(string message)
+            : base(message) { }
     }
 }

@@ -51,9 +51,7 @@ namespace Newtonsoft.Json.Tests.Issues
     {
         public class Color
         {
-            public Color()
-            {
-            }
+            public Color() { }
 
             public Color(uint colorCode)
             {
@@ -98,8 +96,8 @@ namespace Newtonsoft.Json.Tests.Issues
                         A = 1,
                         G = 1,
                         B = 1,
-                        R = 1
-                    }
+                        R = 1,
+                    },
                 },
                 new TestClass
                 {
@@ -108,26 +106,31 @@ namespace Newtonsoft.Json.Tests.Issues
                         A = 2,
                         G = 2,
                         B = 2,
-                        R = 2
-                    }
-                }
+                        R = 2,
+                    },
+                },
             };
             var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             var json = JsonConvert.SerializeObject(t, settings);
 
-            var exception = ExceptionAssert.Throws<JsonSerializationException>(() =>
+            var exception = ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
                 {
                     JsonConvert.DeserializeObject<List<TestClass>>(json, settings);
                 },
-                "Error reading object reference '4'. Path '[1].Color.A', line 16, position 10.");
+                "Error reading object reference '4'. Path '[1].Color.A', line 16, position 10."
+            );
 
-            Assert.AreEqual("A different Id has already been assigned for value 'Newtonsoft.Json.Tests.Issues.Issue1351+Color'. This error may be caused by an object being reused multiple times during deserialization and can be fixed with the setting ObjectCreationHandling.Replace.", exception.InnerException.Message);
+            Assert.AreEqual(
+                "A different Id has already been assigned for value 'Newtonsoft.Json.Tests.Issues.Issue1351+Color'. This error may be caused by an object being reused multiple times during deserialization and can be fixed with the setting ObjectCreationHandling.Replace.",
+                exception.InnerException.Message
+            );
         }
 
         [Test]
@@ -142,8 +145,8 @@ namespace Newtonsoft.Json.Tests.Issues
                         A = 1,
                         G = 1,
                         B = 1,
-                        R = 1
-                    }
+                        R = 1,
+                    },
                 },
                 new TestClass
                 {
@@ -152,16 +155,16 @@ namespace Newtonsoft.Json.Tests.Issues
                         A = 2,
                         G = 2,
                         B = 2,
-                        R = 2
-                    }
-                }
+                        R = 2,
+                    },
+                },
             };
             var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto,
                 PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 Formatting = Formatting.Indented,
-                ObjectCreationHandling = ObjectCreationHandling.Replace
+                ObjectCreationHandling = ObjectCreationHandling.Replace,
             };
             var json = JsonConvert.SerializeObject(t, settings);
 

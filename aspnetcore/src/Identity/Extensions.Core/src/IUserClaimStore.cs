@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store of claims for a user.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserClaimStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserClaimStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="user"/> as an asynchronous operation.
@@ -41,7 +42,12 @@ public interface IUserClaimStore<TUser> : IUserStore<TUser> where TUser : class
     /// <param name="newClaim">The new claim to replace the existing <paramref name="claim"/> with.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken);
+    Task ReplaceClaimAsync(
+        TUser user,
+        Claim claim,
+        Claim newClaim,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Removes the specified <paramref name="claims"/> from the given <paramref name="user"/>.
@@ -50,7 +56,11 @@ public interface IUserClaimStore<TUser> : IUserStore<TUser> where TUser : class
     /// <param name="claims">A collection of <see cref="Claim"/>s to remove.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken);
+    Task RemoveClaimsAsync(
+        TUser user,
+        IEnumerable<Claim> claims,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Returns a list of users who contain the specified <see cref="Claim"/>.

@@ -15,7 +15,13 @@ namespace Microsoft.AspNetCore.Components.RenderTree;
 /// <param name="frameIndex">The index of the <see cref="RenderTreeFrameType.NamedEvent"/> frame within the component's current render output.</param>
 /// <param name="eventType">The event type.</param>
 /// <param name="assignedName">The application-assigned name.</param>
-public readonly struct NamedEventChange(NamedEventChangeType changeType, int componentId, int frameIndex, string eventType, string assignedName)
+public readonly struct NamedEventChange(
+    NamedEventChangeType changeType,
+    int componentId,
+    int frameIndex,
+    string eventType,
+    string assignedName
+)
 {
     /// <summary>
     /// Describes the type of the change.

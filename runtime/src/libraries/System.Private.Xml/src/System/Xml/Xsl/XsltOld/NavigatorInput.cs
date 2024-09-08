@@ -21,30 +21,18 @@ namespace System.Xml.Xsl.XsltOld
 
         internal NavigatorInput? Next
         {
-            get
-            {
-                return _Next;
-            }
-            set
-            {
-                _Next = value;
-            }
+            get { return _Next; }
+            set { _Next = value; }
         }
 
         internal string Href
         {
-            get
-            {
-                return _Href;
-            }
+            get { return _Href; }
         }
 
         internal KeywordsTable Atoms
         {
-            get
-            {
-                return _Atoms;
-            }
+            get { return _Atoms; }
         }
 
         internal XPathNavigator Navigator
@@ -172,10 +160,7 @@ namespace System.Xml.Xsl.XsltOld
 
         internal string BaseURI
         {
-            get
-            {
-                return _Navigator!.BaseURI;
-            }
+            get { return _Navigator!.BaseURI; }
         }
 
         internal bool MoveToFirstAttribute()
@@ -189,6 +174,7 @@ namespace System.Xml.Xsl.XsltOld
             AssertInput();
             return _Navigator.MoveToNextAttribute();
         }
+
         internal bool MoveToFirstNamespace()
         {
             AssertInput();
@@ -225,7 +211,8 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        internal NavigatorInput(XPathNavigator navigator) : this(navigator, navigator.BaseURI, null) { }
+        internal NavigatorInput(XPathNavigator navigator)
+            : this(navigator, navigator.BaseURI, null) { }
 
         //
         // Debugging support

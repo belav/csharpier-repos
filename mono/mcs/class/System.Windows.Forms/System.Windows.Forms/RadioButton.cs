@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,360 +28,414 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms {
-	[DefaultProperty("Checked")]
-	[DefaultEvent("CheckedChanged")]
-	[ClassInterface (ClassInterfaceType.AutoDispatch)]
-	[ComVisible (true)]
-	[DefaultBindingProperty ("Checked")]
-	[ToolboxItem ("System.Windows.Forms.Design.AutoSizeToolboxItem," + Consts.AssemblySystem_Design)]
-	[Designer ("System.Windows.Forms.Design.RadioButtonDesigner, " + Consts.AssemblySystem_Design)]
-	public class RadioButton : ButtonBase {
-		#region Local Variables
-		internal Appearance		appearance;
-		internal bool			auto_check;
-		internal ContentAlignment	radiobutton_alignment;
-		internal CheckState		check_state;
-		#endregion	// Local Variables
+namespace System.Windows.Forms
+{
+    [DefaultProperty("Checked")]
+    [DefaultEvent("CheckedChanged")]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [ComVisible(true)]
+    [DefaultBindingProperty("Checked")]
+    [ToolboxItem("System.Windows.Forms.Design.AutoSizeToolboxItem," + Consts.AssemblySystem_Design)]
+    [Designer("System.Windows.Forms.Design.RadioButtonDesigner, " + Consts.AssemblySystem_Design)]
+    public class RadioButton : ButtonBase
+    {
+        #region Local Variables
+        internal Appearance appearance;
+        internal bool auto_check;
+        internal ContentAlignment radiobutton_alignment;
+        internal CheckState check_state;
+        #endregion	// Local Variables
 
-		#region RadioButtonAccessibleObject Subclass
-		[ComVisible(true)]
-		public class RadioButtonAccessibleObject : ButtonBaseAccessibleObject {
-			#region RadioButtonAccessibleObject Local Variables
-			private new RadioButton	owner;
-			#endregion	// RadioButtonAccessibleObject Local Variables
+        #region RadioButtonAccessibleObject Subclass
+        [ComVisible(true)]
+        public class RadioButtonAccessibleObject : ButtonBaseAccessibleObject
+        {
+            #region RadioButtonAccessibleObject Local Variables
+            private new RadioButton owner;
+            #endregion	// RadioButtonAccessibleObject Local Variables
 
-			#region RadioButtonAccessibleObject Constructors
-			public RadioButtonAccessibleObject(RadioButton owner) : base(owner) {
-				this.owner = owner;
-			}
-			#endregion	// RadioButtonAccessibleObject Constructors
+            #region RadioButtonAccessibleObject Constructors
+            public RadioButtonAccessibleObject(RadioButton owner)
+                : base(owner)
+            {
+                this.owner = owner;
+            }
+            #endregion	// RadioButtonAccessibleObject Constructors
 
-			#region RadioButtonAccessibleObject Properties
-			public override string DefaultAction {
-				get {
-					return "Select";
-				}
-			}
+            #region RadioButtonAccessibleObject Properties
+            public override string DefaultAction
+            {
+                get { return "Select"; }
+            }
 
-			public override AccessibleRole Role {
-				get {
-					return AccessibleRole.RadioButton;
-				}
-			}
+            public override AccessibleRole Role
+            {
+                get { return AccessibleRole.RadioButton; }
+            }
 
-			public override AccessibleStates State {
-				get {
-					AccessibleStates	retval;
+            public override AccessibleStates State
+            {
+                get
+                {
+                    AccessibleStates retval;
 
-					retval = AccessibleStates.Default;
+                    retval = AccessibleStates.Default;
 
-					if (owner.check_state == CheckState.Checked) {
-						retval |= AccessibleStates.Checked;
-					}
+                    if (owner.check_state == CheckState.Checked)
+                    {
+                        retval |= AccessibleStates.Checked;
+                    }
 
-					if (owner.Focused) {
-						retval |= AccessibleStates.Focused;
-					}
+                    if (owner.Focused)
+                    {
+                        retval |= AccessibleStates.Focused;
+                    }
 
-					if (owner.CanFocus) {
-						retval |= AccessibleStates.Focusable;
-					}
+                    if (owner.CanFocus)
+                    {
+                        retval |= AccessibleStates.Focusable;
+                    }
 
-					return retval;
-				}
-			}
-			#endregion	// RadioButtonAccessibleObject Properties
+                    return retval;
+                }
+            }
+            #endregion	// RadioButtonAccessibleObject Properties
 
-			#region RadioButtonAccessibleObject Methods
-			public override void DoDefaultAction() {
-				owner.PerformClick();
-			}
-			#endregion	// RadioButtonAccessibleObject Methods
-		}
-		#endregion	// RadioButtonAccessibleObject Sub-class
+            #region RadioButtonAccessibleObject Methods
+            public override void DoDefaultAction()
+            {
+                owner.PerformClick();
+            }
+            #endregion	// RadioButtonAccessibleObject Methods
+        }
+        #endregion	// RadioButtonAccessibleObject Sub-class
 
-		#region Public Constructors
-		public RadioButton() {
-			appearance = Appearance.Normal;
-			auto_check = true;
-			radiobutton_alignment = ContentAlignment.MiddleLeft;
-			TextAlign = ContentAlignment.MiddleLeft;
-			TabStop = false;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public RadioButton()
+        {
+            appearance = Appearance.Normal;
+            auto_check = true;
+            radiobutton_alignment = ContentAlignment.MiddleLeft;
+            TextAlign = ContentAlignment.MiddleLeft;
+            TabStop = false;
+        }
+        #endregion	// Public Constructors
 
-		#region Private Methods
+        #region Private Methods
 
-		// When getting OnEnter we need to set Checked as true in case none of the sibling radio
-		// buttons is checked.
-		private void PerformDefaultCheck ()
-		{
-			// if we are already checked, no need to check the other controls
-			if (!auto_check || Checked)
-				return;
+        // When getting OnEnter we need to set Checked as true in case none of the sibling radio
+        // buttons is checked.
+        private void PerformDefaultCheck()
+        {
+            // if we are already checked, no need to check the other controls
+            if (!auto_check || Checked)
+                return;
 
-			bool is_any_selected = false;
-			Control c = Parent;
-			if (c != null) {
-				for (int i = 0; i < c.Controls.Count; i++) {
-					RadioButton rb = c.Controls [i] as RadioButton;
-					if (rb == null || !rb.auto_check)
-						continue;
+            bool is_any_selected = false;
+            Control c = Parent;
+            if (c != null)
+            {
+                for (int i = 0; i < c.Controls.Count; i++)
+                {
+                    RadioButton rb = c.Controls[i] as RadioButton;
+                    if (rb == null || !rb.auto_check)
+                        continue;
 
-					if (rb.check_state == CheckState.Checked) {
-						is_any_selected = true;
-						break;
-					}
-				}
-			}
+                    if (rb.check_state == CheckState.Checked)
+                    {
+                        is_any_selected = true;
+                        break;
+                    }
+                }
+            }
 
-			if (!is_any_selected)
-				Checked = true;
-		}
+            if (!is_any_selected)
+                Checked = true;
+        }
 
-		private void UpdateSiblings() {
-			Control	c;
+        private void UpdateSiblings()
+        {
+            Control c;
 
-			if (auto_check == false) {
-				return;
-			}
+            if (auto_check == false)
+            {
+                return;
+            }
 
-			// Remove tabstop property from and uncheck our radio-button siblings
-			c = this.Parent;
-			if (c != null) {
-				for (int i = 0; i < c.Controls.Count; i++) {
-					if ((this != c.Controls[i]) && (c.Controls[i] is RadioButton)) {
-						if (((RadioButton)(c.Controls[i])).auto_check) {
-							c.Controls[i].TabStop = false;
-							((RadioButton)(c.Controls[i])).Checked = false;
-						}
-					}
-				}
-			}
+            // Remove tabstop property from and uncheck our radio-button siblings
+            c = this.Parent;
+            if (c != null)
+            {
+                for (int i = 0; i < c.Controls.Count; i++)
+                {
+                    if ((this != c.Controls[i]) && (c.Controls[i] is RadioButton))
+                    {
+                        if (((RadioButton)(c.Controls[i])).auto_check)
+                        {
+                            c.Controls[i].TabStop = false;
+                            ((RadioButton)(c.Controls[i])).Checked = false;
+                        }
+                    }
+                }
+            }
 
-			this.TabStop = true;
-		}
+            this.TabStop = true;
+        }
 
-		internal override void Draw (PaintEventArgs pe) {
-			// FIXME: This should be called every time something that can affect it
-			// is changed, not every paint.  Can only change so many things at a time.
+        internal override void Draw(PaintEventArgs pe)
+        {
+            // FIXME: This should be called every time something that can affect it
+            // is changed, not every paint.  Can only change so many things at a time.
 
-			// Figure out where our text and image should go
-			Rectangle glyph_rectangle;
-			Rectangle text_rectangle;
-			Rectangle image_rectangle;
+            // Figure out where our text and image should go
+            Rectangle glyph_rectangle;
+            Rectangle text_rectangle;
+            Rectangle image_rectangle;
 
-			ThemeEngine.Current.CalculateRadioButtonTextAndImageLayout (this, Point.Empty, out glyph_rectangle, out text_rectangle, out image_rectangle);
+            ThemeEngine.Current.CalculateRadioButtonTextAndImageLayout(
+                this,
+                Point.Empty,
+                out glyph_rectangle,
+                out text_rectangle,
+                out image_rectangle
+            );
 
-			// Draw our button
-			if (FlatStyle != FlatStyle.System && Appearance != Appearance.Button)
-				ThemeEngine.Current.DrawRadioButton (pe.Graphics, this, glyph_rectangle, text_rectangle, image_rectangle, pe.ClipRectangle);
-			else
-				ThemeEngine.Current.DrawRadioButton (pe.Graphics, this.ClientRectangle, this);
-		}
+            // Draw our button
+            if (FlatStyle != FlatStyle.System && Appearance != Appearance.Button)
+                ThemeEngine.Current.DrawRadioButton(
+                    pe.Graphics,
+                    this,
+                    glyph_rectangle,
+                    text_rectangle,
+                    image_rectangle,
+                    pe.ClipRectangle
+                );
+            else
+                ThemeEngine.Current.DrawRadioButton(pe.Graphics, this.ClientRectangle, this);
+        }
 
-		internal override Size GetPreferredSizeCore (Size proposedSize)
-		{
-			if (this.AutoSize)
-				return ThemeEngine.Current.CalculateRadioButtonAutoSize (this);
+        internal override Size GetPreferredSizeCore(Size proposedSize)
+        {
+            if (this.AutoSize)
+                return ThemeEngine.Current.CalculateRadioButtonAutoSize(this);
 
-			return base.GetPreferredSizeCore (proposedSize);
-		}
-		#endregion	// Private Methods
+            return base.GetPreferredSizeCore(proposedSize);
+        }
+        #endregion	// Private Methods
 
-		#region Public Instance Properties
-		[DefaultValue(Appearance.Normal)]
-		[Localizable(true)]
-		public Appearance Appearance {
-			get {
-				return appearance;
-			}
+        #region Public Instance Properties
+        [DefaultValue(Appearance.Normal)]
+        [Localizable(true)]
+        public Appearance Appearance
+        {
+            get { return appearance; }
+            set
+            {
+                if (value != appearance)
+                {
+                    appearance = value;
+                    EventHandler eh = (EventHandler)(Events[AppearanceChangedEvent]);
+                    if (eh != null)
+                        eh(this, EventArgs.Empty);
+                    if (Parent != null)
+                        Parent.PerformLayout(this, "Appearance");
+                    Invalidate();
+                }
+            }
+        }
 
-			set {
-				if (value != appearance) {
-					appearance = value;
-					EventHandler eh = (EventHandler)(Events [AppearanceChangedEvent]);
-					if (eh != null)
-						eh (this, EventArgs.Empty);
-					if (Parent != null)
-						Parent.PerformLayout (this, "Appearance");
-					Invalidate();
-				}
-			}
-		}
+        [DefaultValue(true)]
+        public bool AutoCheck
+        {
+            get { return auto_check; }
+            set { auto_check = value; }
+        }
 
-		[DefaultValue(true)]
-		public bool AutoCheck {
-			get {
-				return auto_check;
-			}
+        [Localizable(true)]
+        [DefaultValue(ContentAlignment.MiddleLeft)]
+        public ContentAlignment CheckAlign
+        {
+            get { return radiobutton_alignment; }
+            set
+            {
+                if (value != radiobutton_alignment)
+                {
+                    radiobutton_alignment = value;
 
-			set {
-				auto_check = value;
-			}
-		}
+                    Invalidate();
+                }
+            }
+        }
 
-		[Localizable(true)]
-		[DefaultValue(ContentAlignment.MiddleLeft)]
-		public ContentAlignment CheckAlign {
-			get {
-				return radiobutton_alignment;
-			}
+        [DefaultValue(false)]
+        [SettingsBindable(true)]
+        [Bindable(true, BindingDirection.OneWay)]
+        public bool Checked
+        {
+            get
+            {
+                if (check_state != CheckState.Unchecked)
+                {
+                    return true;
+                }
+                return false;
+            }
+            set
+            {
+                if (value && (check_state != CheckState.Checked))
+                {
+                    check_state = CheckState.Checked;
+                    Invalidate();
+                    UpdateSiblings();
+                    OnCheckedChanged(EventArgs.Empty);
+                }
+                else if (!value && (check_state != CheckState.Unchecked))
+                {
+                    TabStop = false;
+                    check_state = CheckState.Unchecked;
+                    Invalidate();
+                    OnCheckedChanged(EventArgs.Empty);
+                }
+            }
+        }
 
-			set {
-				if (value != radiobutton_alignment) {
-					radiobutton_alignment = value;
+        [DefaultValue(false)]
+        public new bool TabStop
+        {
+            get { return base.TabStop; }
+            set { base.TabStop = value; }
+        }
 
-					Invalidate();
-				}
-			}
-		}
+        [DefaultValue(ContentAlignment.MiddleLeft)]
+        [Localizable(true)]
+        public override ContentAlignment TextAlign
+        {
+            get { return base.TextAlign; }
+            set { base.TextAlign = value; }
+        }
+        #endregion	// Public Instance Properties
 
-		[DefaultValue(false)]
-		[SettingsBindable (true)]
-		[Bindable (true, BindingDirection.OneWay)]
-		public bool Checked {
-			get {
-				if (check_state != CheckState.Unchecked) {
-					return true;
-				}
-				return false;
-			}
+        #region Protected Instance Properties
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+                SetStyle(ControlStyles.UserPaint, true);
 
-			set {
-				if (value && (check_state != CheckState.Checked)) {
-					check_state = CheckState.Checked;
-					Invalidate();
-					UpdateSiblings();
-					OnCheckedChanged(EventArgs.Empty);
-				} else if (!value && (check_state != CheckState.Unchecked)) {
-					TabStop = false;
-					check_state = CheckState.Unchecked;
-					Invalidate();
-					OnCheckedChanged(EventArgs.Empty);
-				}
-			}
-		}
+                return base.CreateParams;
+            }
+        }
 
-		[DefaultValue(false)]
-		public new bool TabStop {
-			get { return base.TabStop; }
-			set { base.TabStop = value; }
-		}
+        protected override Size DefaultSize
+        {
+            get { return ThemeEngine.Current.RadioButtonDefaultSize; }
+        }
+        #endregion	// Protected Instance Properties
 
-		[DefaultValue(ContentAlignment.MiddleLeft)]
-		[Localizable(true)]
-		public override ContentAlignment TextAlign {
-			get { return base.TextAlign; }
-			set { base.TextAlign = value; }
-		}
-		#endregion	// Public Instance Properties
+        #region Public Instance Methods
+        public void PerformClick()
+        {
+            OnClick(EventArgs.Empty);
+        }
 
-		#region Protected Instance Properties
-		protected override CreateParams CreateParams {
-			get {
-				SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-				SetStyle(ControlStyles.UserPaint, true);
+        public override string ToString()
+        {
+            return base.ToString() + ", Checked: " + this.Checked;
+        }
+        #endregion	// Public Instance Methods
 
-				return base.CreateParams;
-			}
-		}
+        #region Protected Instance Methods
+        protected override AccessibleObject CreateAccessibilityInstance()
+        {
+            AccessibleObject ao;
 
-		protected override Size DefaultSize {
-			get {
-				return ThemeEngine.Current.RadioButtonDefaultSize;
-			}
-		}
-		#endregion	// Protected Instance Properties
+            ao = base.CreateAccessibilityInstance();
+            ao.role = AccessibleRole.RadioButton;
 
-		#region Public Instance Methods
-		public void PerformClick() {
-			OnClick(EventArgs.Empty);
-		}
+            return ao;
+        }
 
-		public override string ToString() {
-			return base.ToString() + ", Checked: " + this.Checked;
-		}
-		#endregion	// Public Instance Methods
+        protected virtual void OnCheckedChanged(EventArgs e)
+        {
+            EventHandler eh = (EventHandler)(Events[CheckedChangedEvent]);
+            if (eh != null)
+                eh(this, e);
+        }
 
-		#region Protected Instance Methods
-		protected override AccessibleObject CreateAccessibilityInstance() {
-			AccessibleObject	ao;
+        protected override void OnClick(EventArgs e)
+        {
+            if (auto_check)
+            {
+                if (!Checked)
+                {
+                    Checked = true;
+                }
+            }
 
-			ao = base.CreateAccessibilityInstance ();
-			ao.role = AccessibleRole.RadioButton;
+            base.OnClick(e);
+        }
 
-			return ao;
-		}
+        protected override void OnEnter(EventArgs e)
+        {
+            PerformDefaultCheck();
+            base.OnEnter(e);
+        }
 
-		protected virtual void OnCheckedChanged(EventArgs e) {
-			EventHandler eh = (EventHandler)(Events [CheckedChangedEvent]);
-			if (eh != null)
-				eh (this, e);
-		}
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+        }
 
-		protected override void OnClick(EventArgs e) {
-			if (auto_check) {
-				if (!Checked) {
-					Checked = true;
-				}
-			}
-			
-			base.OnClick (e);
-		}
+        protected override void OnMouseUp(MouseEventArgs mevent)
+        {
+            base.OnMouseUp(mevent);
+        }
 
-		protected override void OnEnter(EventArgs e) {
-			PerformDefaultCheck ();
-			base.OnEnter(e);
-		}
+        protected override bool ProcessMnemonic(char charCode)
+        {
+            if (IsMnemonic(charCode, Text) == true)
+            {
+                Select();
+                PerformClick();
+                return true;
+            }
 
-		protected override void OnHandleCreated(EventArgs e) {
-			base.OnHandleCreated(e);
-		}
+            return base.ProcessMnemonic(charCode);
+        }
+        #endregion	// Protected Instance Methods
 
-		protected override void OnMouseUp(MouseEventArgs mevent) {
-			base.OnMouseUp(mevent);
-		}
+        #region Events
+        static object AppearanceChangedEvent = new object();
+        static object CheckedChangedEvent = new object();
 
-		protected override bool ProcessMnemonic(char charCode) {
-			if (IsMnemonic(charCode, Text) == true) {
-				Select();
-				PerformClick();
-				return true;
-			}
-			
-			return base.ProcessMnemonic(charCode);
-		}
-		#endregion	// Protected Instance Methods
+        public event EventHandler AppearanceChanged
+        {
+            add { Events.AddHandler(AppearanceChangedEvent, value); }
+            remove { Events.RemoveHandler(AppearanceChangedEvent, value); }
+        }
 
-		#region Events
-		static object AppearanceChangedEvent = new object ();
-		static object CheckedChangedEvent = new object ();
+        public event EventHandler CheckedChanged
+        {
+            add { Events.AddHandler(CheckedChangedEvent, value); }
+            remove { Events.RemoveHandler(CheckedChangedEvent, value); }
+        }
 
-		public event EventHandler AppearanceChanged {
-			add { Events.AddHandler (AppearanceChangedEvent, value); }
-			remove { Events.RemoveHandler (AppearanceChangedEvent, value); }
-		}
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event EventHandler DoubleClick
+        {
+            add { base.DoubleClick += value; }
+            remove { base.DoubleClick -= value; }
+        }
 
-		public event EventHandler CheckedChanged {
-			add { Events.AddHandler (CheckedChangedEvent, value); }
-			remove { Events.RemoveHandler (CheckedChangedEvent, value); }
-		}
-
-		[Browsable(false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new event EventHandler DoubleClick {
-			add { base.DoubleClick += value; }
-			remove { base.DoubleClick -= value; }
-		}
-		
-		[Browsable (false)]
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		public new event MouseEventHandler MouseDoubleClick { 
-			add { base.MouseDoubleClick += value; }
-			remove { base.MouseDoubleClick -= value; }
-		}
-		#endregion	// Events
-	}
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public new event MouseEventHandler MouseDoubleClick
+        {
+            add { base.MouseDoubleClick += value; }
+            remove { base.MouseDoubleClick -= value; }
+        }
+        #endregion	// Events
+    }
 }

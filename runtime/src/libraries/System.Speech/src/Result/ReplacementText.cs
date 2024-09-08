@@ -7,12 +7,16 @@ namespace System.Speech.Recognition
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-
     public class ReplacementText
     {
         #region Constructors
 
-        internal ReplacementText(DisplayAttributes displayAttributes, string text, int wordIndex, int countOfWords)
+        internal ReplacementText(
+            DisplayAttributes displayAttributes,
+            string text,
+            int wordIndex,
+            int countOfWords
+        )
         {
             _displayAttributes = displayAttributes;
             _text = text;
@@ -25,31 +29,19 @@ namespace System.Speech.Recognition
         #region Public Properties
         public DisplayAttributes DisplayAttributes
         {
-            get
-            {
-                return _displayAttributes;
-            }
+            get { return _displayAttributes; }
         }
         public string Text
         {
-            get
-            {
-                return _text;
-            }
+            get { return _text; }
         }
         public int FirstWordIndex
         {
-            get
-            {
-                return _wordIndex;
-            }
+            get { return _wordIndex; }
         }
         public int CountOfWords
         {
-            get
-            {
-                return _countOfWords;
-            }
+            get { return _countOfWords; }
         }
 
         #endregion

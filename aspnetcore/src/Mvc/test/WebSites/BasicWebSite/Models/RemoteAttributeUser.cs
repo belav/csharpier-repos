@@ -17,7 +17,12 @@ public class RemoteAttributeUser
 
     // Controller in root area.
     [Required(ErrorMessage = "UserId2 is required")]
-    [Remote(action: "IsIdAvailable", controller: "RemoteAttribute_Verify", areaName: null, HttpMethod = "Post")]
+    [Remote(
+        action: "IsIdAvailable",
+        controller: "RemoteAttribute_Verify",
+        areaName: null,
+        HttpMethod = "Post"
+    )]
     public string UserId2 { get; set; }
 
     [Required(ErrorMessage = "UserId3 is required")]
@@ -25,7 +30,8 @@ public class RemoteAttributeUser
         action: "IsIdAvailable",
         controller: "RemoteAttribute_Verify",
         areaName: "Area1",
-        ErrorMessage = "/Area1/RemoteAttribute_Verify/IsIdAvailable rejects you.")]
+        ErrorMessage = "/Area1/RemoteAttribute_Verify/IsIdAvailable rejects you."
+    )]
     public string UserId3 { get; set; }
 
     [Required(ErrorMessage = "UserId4 is required")]
@@ -33,7 +39,8 @@ public class RemoteAttributeUser
         action: "IsIdAvailable",
         controller: "RemoteAttribute_Verify",
         areaName: "Area2",
-        AdditionalFields = "UserId1, UserId2, UserId3")]
+        AdditionalFields = "UserId1, UserId2, UserId3"
+    )]
     public string UserId4 { get; set; }
 
     [Required(ErrorMessage = "UserId5 is required")]

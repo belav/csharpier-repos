@@ -7,31 +7,52 @@ namespace System.Net.Mime.Tests
 {
     public class SmtpDateTimeTest
     {
-        private static readonly DateTime s_validDateStringDateTimeEquivalent = new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Utc);
+        private static readonly DateTime s_validDateStringDateTimeEquivalent = new DateTime(
+            2009,
+            5,
+            17,
+            15,
+            34,
+            07,
+            DateTimeKind.Utc
+        );
 
         private const string UnspecifiedTimeZone = "-0000";
-        private const string ValidDateStringDateTimeEquivalentString = "Sun, 17 May 2009 15:34:07 +0000";
+        private const string ValidDateStringDateTimeEquivalentString =
+            "Sun, 17 May 2009 15:34:07 +0000";
         private const string ValidCompleteDateString = "Sun, 17 May 2009 15:34:07 +0000";
         private const string ValidDateStringWithNoDayOfWeek = "17 May 2009 15:34:07 +0000";
-        private const string ValidDateStringWithKnownShortHandTimeZone = "Sun, 17 May 2009 15:34:07 GMT";
-        private const string ValidDateStringWithUnknownButValidShortHandTimeZone = "Sun, 17 May 2009 15:34:07 BST";
-        private const string ValidDateStringWithOnlyTabsAsWhitespace = "Sun,\t17 May\t2009\t15:34:07\tGMT";
-        private const string ValidDateStringWithMixedTabsAndSpacesAsWhitespace = "Sun,\t17 May\t 2009 \t15:34:07 \t GMT  \t ";
-        private const string ValidDateStringWithTrailingWhitespaceAndCommentAfterTimeZone = "Sun,\t17 May\t2009 15:34:07\tGMT\t \"comment\"";
-        private const string InvalidDateStringWithBadDayOfWeek = "Thursday, 17 May 2009 15:34:07 +0000";
+        private const string ValidDateStringWithKnownShortHandTimeZone =
+            "Sun, 17 May 2009 15:34:07 GMT";
+        private const string ValidDateStringWithUnknownButValidShortHandTimeZone =
+            "Sun, 17 May 2009 15:34:07 BST";
+        private const string ValidDateStringWithOnlyTabsAsWhitespace =
+            "Sun,\t17 May\t2009\t15:34:07\tGMT";
+        private const string ValidDateStringWithMixedTabsAndSpacesAsWhitespace =
+            "Sun,\t17 May\t 2009 \t15:34:07 \t GMT  \t ";
+        private const string ValidDateStringWithTrailingWhitespaceAndCommentAfterTimeZone =
+            "Sun,\t17 May\t2009 15:34:07\tGMT\t \"comment\"";
+        private const string InvalidDateStringWithBadDayOfWeek =
+            "Thursday, 17 May 2009 15:34:07 +0000";
         private const string InvalidDateStringWithBadDay = "Sun, 37 May 2009 15:34:07 +0000";
         private const string InvalidDateStringWithBadMonth = "Sun, 17 Smarch 2009 15:34:07 +0000";
         private const string InvalidDateStringWithBadYear = "Sun, 17 May 20099 15:34:07 +0000";
         private const string InvalidDateStringWithBadTimeHours = "Sun, 17 May 2009 27:34:07 +0000";
-        private const string InvalidDateStringWithBadTimeMinutes = "Sun, 17 May 2009 15:88:07 +0000";
-        private const string InvalidDateStringWithBadTimeSeconds = "Sun, 17 May 2009 15:34:87 +0000";
-        private const string InvalidDateStringWithInvalidTimeZone = "Sun, 17 May 2009 15:34:07 7M-Gte";
+        private const string InvalidDateStringWithBadTimeMinutes =
+            "Sun, 17 May 2009 15:88:07 +0000";
+        private const string InvalidDateStringWithBadTimeSeconds =
+            "Sun, 17 May 2009 15:34:87 +0000";
+        private const string InvalidDateStringWithInvalidTimeZone =
+            "Sun, 17 May 2009 15:34:07 7M-Gte";
 
         [Fact]
         public void SmtpDateTime_WithInvalidTimeZone_ShouldParseDateCorrectly()
         {
             string timeZoneOffset;
-            DateTime result = SmtpDateTime.ParseValue(InvalidDateStringWithInvalidTimeZone, out timeZoneOffset);
+            DateTime result = SmtpDateTime.ParseValue(
+                InvalidDateStringWithInvalidTimeZone,
+                out timeZoneOffset
+            );
 
             Assert.Equal("7M-Gte", timeZoneOffset);
             Assert.Equal(new DateTime(2009, 5, 17, 15, 34, 07), result);
@@ -73,18 +94,83 @@ namespace System.Net.Mime.Tests
         }
 
         [Theory]
-        [InlineData(ValidCompleteDateString, 2009, 5, 17, 15, 34, 7, "+0000", DateTimeKind.Unspecified)]
-        [InlineData(ValidDateStringWithKnownShortHandTimeZone, 2009, 5, 17, 15, 34, 7, "GMT", DateTimeKind.Unspecified)]
-        [InlineData(ValidDateStringWithNoDayOfWeek, 2009, 5, 17, 15, 34, 7, "+0000", DateTimeKind.Unspecified)]
-        [InlineData(ValidDateStringWithOnlyTabsAsWhitespace, 2009, 5, 17, 15, 34, 7, "GMT", DateTimeKind.Unspecified)]
-        [InlineData(ValidDateStringWithTrailingWhitespaceAndCommentAfterTimeZone, 2009, 5, 17, 15, 34, 7, "GMT", DateTimeKind.Unspecified)]
-        [InlineData(ValidDateStringWithMixedTabsAndSpacesAsWhitespace, 2009, 5, 17, 15, 34, 7, "GMT", DateTimeKind.Unspecified)]
+        [InlineData(
+            ValidCompleteDateString,
+            2009,
+            5,
+            17,
+            15,
+            34,
+            7,
+            "+0000",
+            DateTimeKind.Unspecified
+        )]
+        [InlineData(
+            ValidDateStringWithKnownShortHandTimeZone,
+            2009,
+            5,
+            17,
+            15,
+            34,
+            7,
+            "GMT",
+            DateTimeKind.Unspecified
+        )]
+        [InlineData(
+            ValidDateStringWithNoDayOfWeek,
+            2009,
+            5,
+            17,
+            15,
+            34,
+            7,
+            "+0000",
+            DateTimeKind.Unspecified
+        )]
+        [InlineData(
+            ValidDateStringWithOnlyTabsAsWhitespace,
+            2009,
+            5,
+            17,
+            15,
+            34,
+            7,
+            "GMT",
+            DateTimeKind.Unspecified
+        )]
+        [InlineData(
+            ValidDateStringWithTrailingWhitespaceAndCommentAfterTimeZone,
+            2009,
+            5,
+            17,
+            15,
+            34,
+            7,
+            "GMT",
+            DateTimeKind.Unspecified
+        )]
+        [InlineData(
+            ValidDateStringWithMixedTabsAndSpacesAsWhitespace,
+            2009,
+            5,
+            17,
+            15,
+            34,
+            7,
+            "GMT",
+            DateTimeKind.Unspecified
+        )]
         public void SmtpDateTime_CreatedFromDateTimeString_ShouldParseCorrectly(
             string input,
-            int expectedYear, int expectedMonth, int expectedDay,
-            int expectedHour, int expectedMinut, int expectedSecond,
+            int expectedYear,
+            int expectedMonth,
+            int expectedDay,
+            int expectedHour,
+            int expectedMinut,
+            int expectedSecond,
             string expectedTimeZoneOffset,
-            DateTimeKind expectedKind)
+            DateTimeKind expectedKind
+        )
         {
             DateTime result = SmtpDateTime.ParseValue(input, out string timeZoneOffset);
 
@@ -114,7 +200,9 @@ namespace System.Net.Mime.Tests
         [Fact]
         public void SmtpDate_ValidateTimeZoneShortHandValue_WithInvalidShortHand_ShouldReturnFalse()
         {
-            Assert.Throws<FormatException>(() => SmtpDateTime.ValidateTimeZoneShortHandValue("7M-GTE"));
+            Assert.Throws<FormatException>(
+                () => SmtpDateTime.ValidateTimeZoneShortHandValue("7M-GTE")
+            );
         }
 
         [Fact]
@@ -124,15 +212,67 @@ namespace System.Net.Mime.Tests
             int hours;
             int minutes;
 
-            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("+0000", out positive, out hours, out minutes);
-            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("+9959", out positive, out hours, out minutes);
-            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("-9959", out positive, out hours, out minutes);
-            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("+0900", out positive, out hours, out minutes);
+            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                "+0000",
+                out positive,
+                out hours,
+                out minutes
+            );
+            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                "+9959",
+                out positive,
+                out hours,
+                out minutes
+            );
+            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                "-9959",
+                out positive,
+                out hours,
+                out minutes
+            );
+            SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                "+0900",
+                out positive,
+                out hours,
+                out minutes
+            );
 
-            Assert.Throws<FormatException>(() => SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("+0080", out positive, out hours, out minutes));
-            Assert.Throws<FormatException>(() => SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("+-0045", out positive, out hours, out minutes));
-            Assert.Throws<FormatException>(() => SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("+10000", out positive, out hours, out minutes));
-            Assert.Throws<FormatException>(() => SmtpDateTime.ValidateAndGetTimeZoneOffsetValues("-A000", out positive, out hours, out minutes));
+            Assert.Throws<FormatException>(
+                () =>
+                    SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                        "+0080",
+                        out positive,
+                        out hours,
+                        out minutes
+                    )
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                        "+-0045",
+                        out positive,
+                        out hours,
+                        out minutes
+                    )
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                        "+10000",
+                        out positive,
+                        out hours,
+                        out minutes
+                    )
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                    SmtpDateTime.ValidateAndGetTimeZoneOffsetValues(
+                        "-A000",
+                        out positive,
+                        out hours,
+                        out minutes
+                    )
+            );
         }
 
         [Fact]
@@ -160,7 +300,9 @@ namespace System.Net.Mime.Tests
         public void SmtpDate_TryParseTimeZoneString_WithInvalidShortHand_ShouldThrowException()
         {
             TimeSpan span;
-            Assert.Throws<FormatException>(() => SmtpDateTime.TryParseTimeZoneString("7mGTE", out span));
+            Assert.Throws<FormatException>(
+                () => SmtpDateTime.TryParseTimeZoneString("7mGTE", out span)
+            );
         }
     }
 }

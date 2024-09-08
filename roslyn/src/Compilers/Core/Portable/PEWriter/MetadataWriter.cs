@@ -85,11 +85,11 @@ namespace Microsoft.Cci
 
         private const byte TinyFormat = 2;
         private const int ThrowNullCodeSize = 2;
-        private static readonly ImmutableArray<byte> ThrowNullEncodedBody =
-            ImmutableArray.Create(
-                (byte)((ThrowNullCodeSize << 2) | TinyFormat),
-                (byte)ILOpCode.Ldnull,
-                (byte)ILOpCode.Throw);
+        private static readonly ImmutableArray<byte> ThrowNullEncodedBody = ImmutableArray.Create(
+            (byte)((ThrowNullCodeSize << 2) | TinyFormat),
+            (byte)ILOpCode.Ldnull,
+            (byte)ILOpCode.Throw
+        );
 
         protected MetadataWriter(
             MetadataBuilder metadata,
@@ -100,7 +100,8 @@ namespace Microsoft.Cci
             bool metadataOnly,
             bool deterministic,
             bool emitTestCoverageData,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(metadata != debugMetadataOpt);
 
@@ -111,7 +112,10 @@ namespace Microsoft.Cci
 
             // EDMAURER provide some reasonable size estimates for these that will avoid
             // much of the reallocation that would occur when growing these from empty.
-            _signatureIndex = new Dictionary<ISignature, KeyValuePair<BlobHandle, ImmutableArray<byte>>>(module.HintNumberOfMethodDefinitions, ReferenceEqualityComparer.Instance); //ignores field signatures
+            _signatureIndex = new Dictionary<
+                ISignature,
+                KeyValuePair<BlobHandle, ImmutableArray<byte>>
+            >(module.HintNumberOfMethodDefinitions, ReferenceEqualityComparer.Instance); //ignores field signatures
 
             this.Context = context;
             this.messageProvider = messageProvider;
@@ -120,8 +124,12 @@ namespace Microsoft.Cci
             this.metadata = metadata;
             _debugMetadataOpt = debugMetadataOpt;
             _dynamicAnalysisDataWriterOpt = dynamicAnalysisDataWriterOpt;
-            _smallMethodBodies = new Dictionary<(ImmutableArray<byte>, bool), int>(ByteSequenceBoolTupleComparer.Instance);
-            _scopeIndex = new Dictionary<IImportScope, ImportScopeHandle>(new ImportScopeEqualityComparer(context));
+            _smallMethodBodies = new Dictionary<(ImmutableArray<byte>, bool), int>(
+                ByteSequenceBoolTupleComparer.Instance
+            );
+            _scopeIndex = new Dictionary<IImportScope, ImportScopeHandle>(
+                new ImportScopeEqualityComparer(context)
+            );
         }
 
         /// <summary>
@@ -144,7 +152,8 @@ namespace Microsoft.Cci
         /// NetModules and EnC deltas don't have AssemblyDef record.
         /// We don't emit it for EnC deltas since assembly identity has to be preserved across generations (CLR/debugger get confused otherwise).
         /// </summary>
-        private bool EmitAssemblyDefinition => module.OutputKind != OutputKind.NetModule && !IsMinimalDelta;
+        private bool EmitAssemblyDefinition =>
+            module.OutputKind != OutputKind.NetModule && !IsMinimalDelta;
 
         /// <summary>
         /// Returns metadata generation ordinal. Zero for
@@ -168,7 +177,10 @@ namespace Microsoft.Cci
         /// Returns true and full metadata handle of the type definition
         /// if the type definition is recognized. Otherwise returns false.
         /// </summary>
-        protected abstract bool TryGetTypeDefinitionHandle(ITypeDefinition def, out TypeDefinitionHandle handle);
+        protected abstract bool TryGetTypeDefinitionHandle(
+            ITypeDefinition def,
+            out TypeDefinitionHandle handle
+        );
 
         /// <summary>
         /// Get full metadata handle of the type definition.
@@ -214,7 +226,10 @@ namespace Microsoft.Cci
         /// if the method definition is recognized. Otherwise returns false.
         /// The index is into the full metadata.
         /// </summary>
-        protected abstract bool TryGetMethodDefinitionHandle(IMethodDefinition def, out MethodDefinitionHandle handle);
+        protected abstract bool TryGetMethodDefinitionHandle(
+            IMethodDefinition def,
+            out MethodDefinitionHandle handle
+        );
 
         /// <summary>
         /// Get full metadata handle of the method definition.
@@ -264,12 +279,16 @@ namespace Microsoft.Cci
         /// <summary>
         /// The handle of the first field of the type.
         /// </summary>
-        protected abstract FieldDefinitionHandle GetFirstFieldDefinitionHandle(INamedTypeDefinition typeDef);
+        protected abstract FieldDefinitionHandle GetFirstFieldDefinitionHandle(
+            INamedTypeDefinition typeDef
+        );
 
         /// <summary>
         /// The handle of the first method of the type.
         /// </summary>
-        protected abstract MethodDefinitionHandle GetFirstMethodDefinitionHandle(INamedTypeDefinition typeDef);
+        protected abstract MethodDefinitionHandle GetFirstMethodDefinitionHandle(
+            INamedTypeDefinition typeDef
+        );
 
         /// <summary>
         /// The handle of the first parameter of the method.
@@ -281,7 +300,9 @@ namespace Microsoft.Cci
         /// the reference to the index for this generation if missing.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract AssemblyReferenceHandle GetOrAddAssemblyReferenceHandle(IAssemblyReference reference);
+        protected abstract AssemblyReferenceHandle GetOrAddAssemblyReferenceHandle(
+            IAssemblyReference reference
+        );
 
         /// <summary>
         /// The assembly references to be emitted, in row order. These
@@ -317,7 +338,9 @@ namespace Microsoft.Cci
         /// the reference to the index for this generation if missing.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract MemberReferenceHandle GetOrAddMemberReferenceHandle(ITypeMemberReference reference);
+        protected abstract MemberReferenceHandle GetOrAddMemberReferenceHandle(
+            ITypeMemberReference reference
+        );
 
         /// <summary>
         /// The member references to be emitted, in row order. These
@@ -330,7 +353,9 @@ namespace Microsoft.Cci
         /// the spec to the index for this generation if missing.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract MethodSpecificationHandle GetOrAddMethodSpecificationHandle(IGenericMethodInstanceReference reference);
+        protected abstract MethodSpecificationHandle GetOrAddMethodSpecificationHandle(
+            IGenericMethodInstanceReference reference
+        );
 
         /// <summary>
         /// The method specs to be emitted, in row order. These
@@ -348,14 +373,19 @@ namespace Microsoft.Cci
         /// if the reference is available in the current generation.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract bool TryGetTypeReferenceHandle(ITypeReference reference, out TypeReferenceHandle handle);
+        protected abstract bool TryGetTypeReferenceHandle(
+            ITypeReference reference,
+            out TypeReferenceHandle handle
+        );
 
         /// <summary>
         /// Return full metadata handle of the type reference, adding
         /// the reference to the index for this generation if missing.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract TypeReferenceHandle GetOrAddTypeReferenceHandle(ITypeReference reference);
+        protected abstract TypeReferenceHandle GetOrAddTypeReferenceHandle(
+            ITypeReference reference
+        );
 
         /// <summary>
         /// The type references to be emitted, in row order. These
@@ -368,7 +398,9 @@ namespace Microsoft.Cci
         /// the spec to the index for this generation if missing.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract TypeSpecificationHandle GetOrAddTypeSpecificationHandle(ITypeReference reference);
+        protected abstract TypeSpecificationHandle GetOrAddTypeSpecificationHandle(
+            ITypeReference reference
+        );
 
         /// <summary>
         /// The type specs to be emitted, in row order. These
@@ -381,7 +413,9 @@ namespace Microsoft.Cci
         /// the signature to the index for this generation if missing.
         /// Deltas are not required to return rows from previous generations.
         /// </summary>
-        protected abstract StandaloneSignatureHandle GetOrAddStandaloneSignatureHandle(BlobHandle handle);
+        protected abstract StandaloneSignatureHandle GetOrAddStandaloneSignatureHandle(
+            BlobHandle handle
+        );
 
         /// <summary>
         /// The signature blob handles to be emitted, in row order. These
@@ -436,25 +470,50 @@ namespace Microsoft.Cci
 
         private readonly DynamicAnalysisDataWriter _dynamicAnalysisDataWriterOpt;
 
-        private readonly Dictionary<ICustomAttribute, BlobHandle> _customAttributeSignatureIndex = new Dictionary<ICustomAttribute, BlobHandle>();
-        private readonly Dictionary<ITypeReference, BlobHandle> _typeSpecSignatureIndex = new Dictionary<ITypeReference, BlobHandle>(ReferenceEqualityComparer.Instance);
-        private readonly Dictionary<string, int> _fileRefIndex = new Dictionary<string, int>(32);  // more than enough in most cases, value is a RowId
+        private readonly Dictionary<ICustomAttribute, BlobHandle> _customAttributeSignatureIndex =
+            new Dictionary<ICustomAttribute, BlobHandle>();
+        private readonly Dictionary<ITypeReference, BlobHandle> _typeSpecSignatureIndex =
+            new Dictionary<ITypeReference, BlobHandle>(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<string, int> _fileRefIndex = new Dictionary<string, int>(32); // more than enough in most cases, value is a RowId
         private readonly List<IFileReference> _fileRefList = new List<IFileReference>(32);
-        private readonly Dictionary<IFieldReference, BlobHandle> _fieldSignatureIndex = new Dictionary<IFieldReference, BlobHandle>(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<IFieldReference, BlobHandle> _fieldSignatureIndex =
+            new Dictionary<IFieldReference, BlobHandle>(ReferenceEqualityComparer.Instance);
 
         // We need to keep track of both the index of the signature and the actual blob to support VB static local naming scheme.
-        private readonly Dictionary<ISignature, KeyValuePair<BlobHandle, ImmutableArray<byte>>> _signatureIndex;
+        private readonly Dictionary<
+            ISignature,
+            KeyValuePair<BlobHandle, ImmutableArray<byte>>
+        > _signatureIndex;
 
-        private readonly Dictionary<IMarshallingInformation, BlobHandle> _marshallingDescriptorIndex = new Dictionary<IMarshallingInformation, BlobHandle>();
-        protected readonly List<MethodImplementation> methodImplList = new List<MethodImplementation>();
-        private readonly Dictionary<IGenericMethodInstanceReference, BlobHandle> _methodInstanceSignatureIndex = new Dictionary<IGenericMethodInstanceReference, BlobHandle>(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<
+            IMarshallingInformation,
+            BlobHandle
+        > _marshallingDescriptorIndex = new Dictionary<IMarshallingInformation, BlobHandle>();
+        protected readonly List<MethodImplementation> methodImplList =
+            new List<MethodImplementation>();
+        private readonly Dictionary<
+            IGenericMethodInstanceReference,
+            BlobHandle
+        > _methodInstanceSignatureIndex = new Dictionary<
+            IGenericMethodInstanceReference,
+            BlobHandle
+        >(ReferenceEqualityComparer.Instance);
 
         // Well known dummy cor library types whose refs are used for attaching assembly attributes off within net modules
         // There is no guarantee the types actually exist in a cor library
-        internal const string dummyAssemblyAttributeParentNamespace = "System.Runtime.CompilerServices";
+        internal const string dummyAssemblyAttributeParentNamespace =
+            "System.Runtime.CompilerServices";
         internal const string dummyAssemblyAttributeParentName = "AssemblyAttributesGoHere";
-        internal static readonly string[,] dummyAssemblyAttributeParentQualifier = { { "", "M" }, { "S", "SM" } };
-        private readonly TypeReferenceHandle[,] _dummyAssemblyAttributeParent = { { default(TypeReferenceHandle), default(TypeReferenceHandle) }, { default(TypeReferenceHandle), default(TypeReferenceHandle) } };
+        internal static readonly string[,] dummyAssemblyAttributeParentQualifier =
+        {
+            { "", "M" },
+            { "S", "SM" },
+        };
+        private readonly TypeReferenceHandle[,] _dummyAssemblyAttributeParent =
+        {
+            { default(TypeReferenceHandle), default(TypeReferenceHandle) },
+            { default(TypeReferenceHandle), default(TypeReferenceHandle) },
+        };
 
         internal CommonPEModuleBuilder Module => module;
 
@@ -493,7 +552,9 @@ namespace Microsoft.Cci
                 _pseudoStringTokenToStringMap.Add(str);
             }
 
-            _pseudoStringTokenToTokenMap = new UserStringHandle[_pseudoStringTokenToStringMap.Count];
+            _pseudoStringTokenToTokenMap = new UserStringHandle[
+                _pseudoStringTokenToStringMap.Count
+            ];
         }
 
         private void CreateIndicesForModule()
@@ -512,11 +573,12 @@ namespace Microsoft.Cci
             }
         }
 
-        protected virtual void OnIndicesCreated()
-        {
-        }
+        protected virtual void OnIndicesCreated() { }
 
-        private void CreateIndicesFor(ITypeDefinition typeDef, Queue<INestedTypeDefinition> nestedTypes)
+        private void CreateIndicesFor(
+            ITypeDefinition typeDef,
+            Queue<INestedTypeDefinition> nestedTypes
+        )
         {
             _cancellationToken.ThrowIfCancellationRequested();
 
@@ -531,7 +593,9 @@ namespace Microsoft.Cci
             }
         }
 
-        protected IEnumerable<IGenericTypeParameter> GetConsolidatedTypeParameters(ITypeDefinition typeDef)
+        protected IEnumerable<IGenericTypeParameter> GetConsolidatedTypeParameters(
+            ITypeDefinition typeDef
+        )
         {
             INestedTypeDefinition nestedTypeDef = typeDef.AsNestedTypeDefinition(Context);
             if (nestedTypeDef == null)
@@ -547,13 +611,19 @@ namespace Microsoft.Cci
             return this.GetConsolidatedTypeParameters(typeDef, typeDef);
         }
 
-        private List<IGenericTypeParameter> GetConsolidatedTypeParameters(ITypeDefinition typeDef, ITypeDefinition owner)
+        private List<IGenericTypeParameter> GetConsolidatedTypeParameters(
+            ITypeDefinition typeDef,
+            ITypeDefinition owner
+        )
         {
             List<IGenericTypeParameter> result = null;
             INestedTypeDefinition nestedTypeDef = typeDef.AsNestedTypeDefinition(Context);
             if (nestedTypeDef != null)
             {
-                result = this.GetConsolidatedTypeParameters(nestedTypeDef.ContainingTypeDefinition, owner);
+                result = this.GetConsolidatedTypeParameters(
+                    nestedTypeDef.ContainingTypeDefinition,
+                    owner
+                );
             }
 
             if (typeDef.GenericParameterCount > 0)
@@ -584,9 +654,19 @@ namespace Microsoft.Cci
             return result;
         }
 
-        protected ImmutableArray<IParameterDefinition> GetParametersToEmit(IMethodDefinition methodDef)
+        protected ImmutableArray<IParameterDefinition> GetParametersToEmit(
+            IMethodDefinition methodDef
+        )
         {
-            if (methodDef.ParameterCount == 0 && !(methodDef.ReturnValueIsMarshalledExplicitly || IteratorHelper.EnumerableIsNotEmpty(methodDef.GetReturnValueAttributes(Context))))
+            if (
+                methodDef.ParameterCount == 0
+                && !(
+                    methodDef.ReturnValueIsMarshalledExplicitly
+                    || IteratorHelper.EnumerableIsNotEmpty(
+                        methodDef.GetReturnValueAttributes(Context)
+                    )
+                )
+            )
             {
                 return ImmutableArray<IParameterDefinition>.Empty;
             }
@@ -594,12 +674,17 @@ namespace Microsoft.Cci
             return GetParametersToEmitCore(methodDef);
         }
 
-        private ImmutableArray<IParameterDefinition> GetParametersToEmitCore(IMethodDefinition methodDef)
+        private ImmutableArray<IParameterDefinition> GetParametersToEmitCore(
+            IMethodDefinition methodDef
+        )
         {
             ArrayBuilder<IParameterDefinition> builder = null;
             var parameters = methodDef.Parameters;
 
-            if (methodDef.ReturnValueIsMarshalledExplicitly || IteratorHelper.EnumerableIsNotEmpty(methodDef.GetReturnValueAttributes(Context)))
+            if (
+                methodDef.ReturnValueIsMarshalledExplicitly
+                || IteratorHelper.EnumerableIsNotEmpty(methodDef.GetReturnValueAttributes(Context))
+            )
             {
                 builder = ArrayBuilder<IParameterDefinition>.GetInstance(parameters.Length + 1);
                 builder.Add(new ReturnValueParameter(methodDef));
@@ -611,9 +696,14 @@ namespace Microsoft.Cci
 
                 // No explicit param row is needed if param has no flags (other than optionally IN),
                 // no name and no references to the param row, such as CustomAttribute, Constant, or FieldMarshal
-                if (parDef.Name != String.Empty ||
-                    parDef.HasDefaultValue || parDef.IsOptional || parDef.IsOut || parDef.IsMarshalledExplicitly ||
-                    IteratorHelper.EnumerableIsNotEmpty(parDef.GetAttributes(Context)))
+                if (
+                    parDef.Name != String.Empty
+                    || parDef.HasDefaultValue
+                    || parDef.IsOptional
+                    || parDef.IsOut
+                    || parDef.IsMarshalledExplicitly
+                    || IteratorHelper.EnumerableIsNotEmpty(parDef.GetAttributes(Context))
+                )
                 {
                     if (builder != null)
                     {
@@ -638,7 +728,10 @@ namespace Microsoft.Cci
         /// Returns a reference to the unit that defines the given referenced type. If the referenced type is a structural type, such as a pointer or a generic type instance,
         /// then the result is null.
         /// </summary>
-        public static IUnitReference GetDefiningUnitReference(ITypeReference typeReference, EmitContext context)
+        public static IUnitReference GetDefiningUnitReference(
+            ITypeReference typeReference,
+            EmitContext context
+        )
         {
             INestedTypeReference nestedTypeReference = typeReference.AsNestedTypeReference;
             while (nestedTypeReference != null)
@@ -687,11 +780,16 @@ namespace Microsoft.Cci
             }
         }
 
-        internal AssemblyReferenceHandle GetAssemblyReferenceHandle(IAssemblyReference assemblyReference)
+        internal AssemblyReferenceHandle GetAssemblyReferenceHandle(
+            IAssemblyReference assemblyReference
+        )
         {
             var containingAssembly = this.module.GetContainingAssembly(Context);
 
-            if (containingAssembly != null && ReferenceEquals(assemblyReference, containingAssembly))
+            if (
+                containingAssembly != null
+                && ReferenceEquals(assemblyReference, containingAssembly)
+            )
             {
                 return default(AssemblyReferenceHandle);
             }
@@ -723,7 +821,10 @@ namespace Microsoft.Cci
         private EntityHandle GetCustomAttributeTypeCodedIndex(IMethodReference methodReference)
         {
             IMethodDefinition methodDef = null;
-            IUnitReference definingUnit = GetDefiningUnitReference(methodReference.GetContainingType(Context), Context);
+            IUnitReference definingUnit = GetDefiningUnitReference(
+                methodReference.GetContainingType(Context),
+                Context
+            );
             if (definingUnit != null && ReferenceEquals(definingUnit, this.module))
             {
                 methodDef = methodReference.GetResolvedMethod(Context);
@@ -804,7 +905,8 @@ namespace Microsoft.Cci
         internal BlobHandle GetFieldSignatureIndex(IFieldReference fieldReference)
         {
             BlobHandle result;
-            ISpecializedFieldReference specializedFieldReference = fieldReference.AsSpecializedFieldReference;
+            ISpecializedFieldReference specializedFieldReference =
+                fieldReference.AsSpecializedFieldReference;
             if (specializedFieldReference != null)
             {
                 fieldReference = specializedFieldReference.UnspecializedVersion;
@@ -826,7 +928,10 @@ namespace Microsoft.Cci
         internal EntityHandle GetFieldHandle(IFieldReference fieldReference)
         {
             IFieldDefinition fieldDef = null;
-            IUnitReference definingUnit = GetDefiningUnitReference(fieldReference.GetContainingType(Context), Context);
+            IUnitReference definingUnit = GetDefiningUnitReference(
+                fieldReference.GetContainingType(Context),
+                Context
+            );
             if (definingUnit != null && ReferenceEquals(definingUnit, this.module))
             {
                 fieldDef = fieldReference.GetResolvedField(Context);
@@ -856,7 +961,9 @@ namespace Microsoft.Cci
             return MetadataTokens.AssemblyFileHandle(_fileRefIndex[mref.Name]);
         }
 
-        private static GenericParameterAttributes GetGenericParameterAttributes(IGenericParameter genPar)
+        private static GenericParameterAttributes GetGenericParameterAttributes(
+            IGenericParameter genPar
+        )
         {
             GenericParameterAttributes result = 0;
             switch (genPar.Variance)
@@ -902,7 +1009,10 @@ namespace Microsoft.Cci
                 : GetAssemblyReferenceHandle(aref);
         }
 
-        private static uint GetManagedResourceOffset(ManagedResource resource, BlobBuilder resourceWriter)
+        private static uint GetManagedResourceOffset(
+            ManagedResource resource,
+            BlobBuilder resourceWriter
+        )
         {
             if (resource.ExternalFile != null)
             {
@@ -914,7 +1024,10 @@ namespace Microsoft.Cci
             return (uint)result;
         }
 
-        private static uint GetManagedResourceOffset(BlobBuilder resource, BlobBuilder resourceWriter)
+        private static uint GetManagedResourceOffset(
+            BlobBuilder resource,
+            BlobBuilder resourceWriter
+        )
         {
             int result = resourceWriter.Count;
             resourceWriter.WriteInt32(resource.Count);
@@ -925,10 +1038,15 @@ namespace Microsoft.Cci
 
         public static string GetMetadataName(INamedTypeReference namedType, int generation)
         {
-            string nameWithGeneration = (generation == 0) ? namedType.Name : namedType.Name + "#" + generation;
+            string nameWithGeneration =
+                (generation == 0) ? namedType.Name : namedType.Name + "#" + generation;
             string fileIdentifier = namedType.AssociatedFileIdentifier;
             return namedType.MangleName || fileIdentifier != null
-                ? MetadataHelpers.ComposeAritySuffixedMetadataName(nameWithGeneration, namedType.GenericParameterCount, fileIdentifier)
+                ? MetadataHelpers.ComposeAritySuffixedMetadataName(
+                    nameWithGeneration,
+                    namedType.GenericParameterCount,
+                    fileIdentifier
+                )
                 : nameWithGeneration;
         }
 
@@ -939,7 +1057,9 @@ namespace Microsoft.Cci
 
         internal EntityHandle GetMemberReferenceParent(ITypeMemberReference memberRef)
         {
-            ITypeDefinition parentTypeDef = memberRef.GetContainingType(Context).AsTypeDefinition(Context);
+            ITypeDefinition parentTypeDef = memberRef
+                .GetContainingType(Context)
+                .AsTypeDefinition(Context);
             if (parentTypeDef != null)
             {
                 TypeDefinitionHandle parentTypeDefHandle;
@@ -957,7 +1077,12 @@ namespace Microsoft.Cci
                         if (methodRef.AcceptsExtraArguments)
                         {
                             MethodDefinitionHandle methodHandle;
-                            if (this.TryGetMethodDefinitionHandle(methodRef.GetResolvedMethod(Context), out methodHandle))
+                            if (
+                                this.TryGetMethodDefinitionHandle(
+                                    methodRef.GetResolvedMethod(Context),
+                                    out methodHandle
+                                )
+                            )
                             {
                                 return methodHandle;
                             }
@@ -979,7 +1104,10 @@ namespace Microsoft.Cci
         internal EntityHandle GetMethodDefinitionOrReferenceHandle(IMethodReference methodReference)
         {
             IMethodDefinition methodDef = null;
-            IUnitReference definingUnit = GetDefiningUnitReference(methodReference.GetContainingType(Context), Context);
+            IUnitReference definingUnit = GetDefiningUnitReference(
+                methodReference.GetContainingType(Context),
+                Context
+            );
             if (definingUnit != null && ReferenceEquals(definingUnit, this.module))
             {
                 methodDef = methodReference.GetResolvedMethod(Context);
@@ -1056,7 +1184,9 @@ namespace Microsoft.Cci
             return result;
         }
 
-        internal BlobHandle GetMethodSpecificationSignatureHandle(IGenericMethodInstanceReference methodInstanceReference)
+        internal BlobHandle GetMethodSpecificationSignatureHandle(
+            IGenericMethodInstanceReference methodInstanceReference
+        )
         {
             BlobHandle result;
             if (_methodInstanceSignatureIndex.TryGetValue(methodInstanceReference, out result))
@@ -1065,9 +1195,13 @@ namespace Microsoft.Cci
             }
 
             var builder = PooledBlobBuilder.GetInstance();
-            var encoder = new BlobEncoder(builder).MethodSpecificationSignature(methodInstanceReference.GetGenericMethod(Context).GenericParameterCount);
+            var encoder = new BlobEncoder(builder).MethodSpecificationSignature(
+                methodInstanceReference.GetGenericMethod(Context).GenericParameterCount
+            );
 
-            foreach (ITypeReference typeReference in methodInstanceReference.GetGenericArguments(Context))
+            foreach (
+                ITypeReference typeReference in methodInstanceReference.GetGenericArguments(Context)
+            )
             {
                 var typeRef = typeReference;
                 SerializeTypeReference(encoder.AddArgument(), typeRef);
@@ -1079,7 +1213,9 @@ namespace Microsoft.Cci
             return result;
         }
 
-        private BlobHandle GetMarshallingDescriptorHandle(IMarshallingInformation marshallingInformation)
+        private BlobHandle GetMarshallingDescriptorHandle(
+            IMarshallingInformation marshallingInformation
+        )
         {
             BlobHandle result;
             if (_marshallingDescriptorIndex.TryGetValue(marshallingInformation, out result))
@@ -1106,13 +1242,18 @@ namespace Microsoft.Cci
             {
                 IFieldReference fieldReference => this.GetFieldSignatureIndex(fieldReference),
                 IMethodReference methodReference => this.GetMethodSignatureHandle(methodReference),
-                _ => throw ExceptionUtilities.Unreachable()
+                _ => throw ExceptionUtilities.Unreachable(),
             };
         }
 
         internal BlobHandle GetMethodSignatureHandle(IMethodReference methodReference)
         {
-            if (methodReference is DeletedPEMethodDefinition { MetadataSignatureHandle: { IsNil: false } handle })
+            if (
+                methodReference is DeletedPEMethodDefinition
+                {
+                    MetadataSignatureHandle: { IsNil: false } handle
+                }
+            )
             {
                 return handle;
             }
@@ -1127,10 +1268,14 @@ namespace Microsoft.Cci
             return signatureBlob.ToArray();
         }
 
-        private BlobHandle GetMethodSignatureHandleAndBlob(IMethodReference methodReference, out ImmutableArray<byte> signatureBlob)
+        private BlobHandle GetMethodSignatureHandleAndBlob(
+            IMethodReference methodReference,
+            out ImmutableArray<byte> signatureBlob
+        )
         {
             BlobHandle result;
-            ISpecializedMethodReference specializedMethodReference = methodReference.AsSpecializedMethodReference;
+            ISpecializedMethodReference specializedMethodReference =
+                methodReference.AsSpecializedMethodReference;
             if (specializedMethodReference != null)
             {
                 methodReference = specializedMethodReference.UnspecializedVersion;
@@ -1143,16 +1288,25 @@ namespace Microsoft.Cci
                 return existing.Key;
             }
 
-            Debug.Assert((methodReference.CallingConvention & CallingConvention.Generic) != 0 == (methodReference.GenericParameterCount > 0));
+            Debug.Assert(
+                (methodReference.CallingConvention & CallingConvention.Generic) != 0
+                    == (methodReference.GenericParameterCount > 0)
+            );
 
             var builder = PooledBlobBuilder.GetInstance();
 
             var encoder = new BlobEncoder(builder).MethodSignature(
                 new SignatureHeader((byte)methodReference.CallingConvention).CallingConvention,
                 methodReference.GenericParameterCount,
-                isInstanceMethod: (methodReference.CallingConvention & CallingConvention.HasThis) != 0);
+                isInstanceMethod: (methodReference.CallingConvention & CallingConvention.HasThis)
+                    != 0
+            );
 
-            SerializeReturnValueAndParameters(encoder, methodReference, methodReference.ExtraParameters);
+            SerializeReturnValueAndParameters(
+                encoder,
+                methodReference,
+                methodReference.ExtraParameters
+            );
 
             signatureBlob = builder.ToImmutableArray();
             result = metadata.GetOrAddBlob(signatureBlob);
@@ -1161,7 +1315,9 @@ namespace Microsoft.Cci
             return result;
         }
 
-        private BlobHandle GetMethodSpecificationBlobHandle(IGenericMethodInstanceReference genericMethodInstanceReference)
+        private BlobHandle GetMethodSpecificationBlobHandle(
+            IGenericMethodInstanceReference genericMethodInstanceReference
+        )
         {
             var writer = PooledBlobBuilder.GetInstance();
             SerializeMethodSpecificationSignature(writer, genericMethodInstanceReference);
@@ -1170,32 +1326,47 @@ namespace Microsoft.Cci
             return result;
         }
 
-        private MethodSpecificationHandle GetMethodSpecificationHandle(IGenericMethodInstanceReference methodSpec)
+        private MethodSpecificationHandle GetMethodSpecificationHandle(
+            IGenericMethodInstanceReference methodSpec
+        )
         {
             return this.GetOrAddMethodSpecificationHandle(methodSpec);
         }
 
         internal EntityHandle GetMethodHandle(IMethodReference methodReference)
         {
-            if (methodReference is IDeletedMethodDefinition { MetadataHandle: var deletedMethodHandle })
+            if (
+                methodReference is IDeletedMethodDefinition
+                {
+                    MetadataHandle: var deletedMethodHandle
+                }
+            )
             {
                 return deletedMethodHandle;
             }
 
             MethodDefinitionHandle methodDefHandle;
             IMethodDefinition methodDef = null;
-            IUnitReference definingUnit = GetDefiningUnitReference(methodReference.GetContainingType(Context), Context);
+            IUnitReference definingUnit = GetDefiningUnitReference(
+                methodReference.GetContainingType(Context),
+                Context
+            );
             if (definingUnit != null && ReferenceEquals(definingUnit, this.module))
             {
                 methodDef = methodReference.GetResolvedMethod(Context);
             }
 
-            if (methodDef != null && (methodReference == methodDef || !methodReference.AcceptsExtraArguments) && this.TryGetMethodDefinitionHandle(methodDef, out methodDefHandle))
+            if (
+                methodDef != null
+                && (methodReference == methodDef || !methodReference.AcceptsExtraArguments)
+                && this.TryGetMethodDefinitionHandle(methodDef, out methodDefHandle)
+            )
             {
                 return methodDefHandle;
             }
 
-            IGenericMethodInstanceReference methodSpec = methodReference.AsGenericMethodInstanceReference;
+            IGenericMethodInstanceReference methodSpec =
+                methodReference.AsGenericMethodInstanceReference;
             return methodSpec != null
                 ? (EntityHandle)GetMethodSpecificationHandle(methodSpec)
                 : GetMemberReferenceHandle(methodReference);
@@ -1205,8 +1376,16 @@ namespace Microsoft.Cci
         {
             Debug.Assert(!(signature is IMethodReference));
             var builder = PooledBlobBuilder.GetInstance();
-            var signatureEncoder = new BlobEncoder(builder).MethodSignature(convention: signature.CallingConvention.ToSignatureConvention(), genericParameterCount: 0, isInstanceMethod: false);
-            SerializeReturnValueAndParameters(signatureEncoder, signature, varargParameters: ImmutableArray<IParameterTypeInformation>.Empty);
+            var signatureEncoder = new BlobEncoder(builder).MethodSignature(
+                convention: signature.CallingConvention.ToSignatureConvention(),
+                genericParameterCount: 0,
+                isInstanceMethod: false
+            );
+            SerializeReturnValueAndParameters(
+                signatureEncoder,
+                signature,
+                varargParameters: ImmutableArray<IParameterTypeInformation>.Empty
+            );
 
             BlobHandle blobIndex = metadata.GetOrAddBlob(builder);
             StandaloneSignatureHandle handle = GetOrAddStandaloneSignatureHandle(blobIndex);
@@ -1244,7 +1423,9 @@ namespace Microsoft.Cci
             return result;
         }
 
-        private BlobHandle GetPermissionSetBlobHandle(ImmutableArray<ICustomAttribute> permissionSet)
+        private BlobHandle GetPermissionSetBlobHandle(
+            ImmutableArray<ICustomAttribute> permissionSet
+        )
         {
             var writer = PooledBlobBuilder.GetInstance();
             BlobHandle result;
@@ -1295,9 +1476,14 @@ namespace Microsoft.Cci
             var builder = PooledBlobBuilder.GetInstance();
 
             var encoder = new BlobEncoder(builder).PropertySignature(
-                isInstanceProperty: (propertyDef.CallingConvention & CallingConvention.HasThis) != 0);
+                isInstanceProperty: (propertyDef.CallingConvention & CallingConvention.HasThis) != 0
+            );
 
-            SerializeReturnValueAndParameters(encoder, propertyDef, ImmutableArray<IParameterTypeInformation>.Empty);
+            SerializeReturnValueAndParameters(
+                encoder,
+                propertyDef,
+                ImmutableArray<IParameterTypeInformation>.Empty
+            );
 
             var blob = builder.ToImmutableArray();
             var result = metadata.GetOrAddBlob(blob);
@@ -1327,13 +1513,19 @@ namespace Microsoft.Cci
             return GetModuleReferenceHandle(mref.Name);
         }
 
-        private StringHandle GetStringHandleForPathAndCheckLength(string path, INamedEntity errorEntity = null)
+        private StringHandle GetStringHandleForPathAndCheckLength(
+            string path,
+            INamedEntity errorEntity = null
+        )
         {
             CheckPathLength(path, errorEntity);
             return metadata.GetOrAddString(path);
         }
 
-        private StringHandle GetStringHandleForNameAndCheckLength(string name, INamedEntity errorEntity = null)
+        private StringHandle GetStringHandleForNameAndCheckLength(
+            string name,
+            INamedEntity errorEntity = null
+        )
         {
             CheckNameLength(name, errorEntity);
             return metadata.GetOrAddString(name);
@@ -1348,7 +1540,10 @@ namespace Microsoft.Cci
         /// <param name="namespaceType">We're trying to add the containing namespace of this type to the string heap.</param>
         /// <param name="mangledTypeName">Namespace names are never used on their own - this is the type that is adding the namespace name.
         /// Used only for length checking.</param>
-        private StringHandle GetStringHandleForNamespaceAndCheckLength(INamespaceTypeReference namespaceType, string mangledTypeName)
+        private StringHandle GetStringHandleForNamespaceAndCheckLength(
+            INamespaceTypeReference namespaceType,
+            string mangledTypeName
+        )
         {
             string namespaceName = namespaceType.NamespaceName;
             if (namespaceName.Length == 0) // Optimization: CheckNamespaceLength is relatively expensive.
@@ -1369,7 +1564,13 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(name, NameLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.ERR_MetadataNameTooLong, location, name));
+                this.Context.Diagnostics.Add(
+                    this.messageProvider.CreateDiagnostic(
+                        this.messageProvider.ERR_MetadataNameTooLong,
+                        location,
+                        name
+                    )
+                );
             }
         }
 
@@ -1378,11 +1579,21 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(path, PathLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.ERR_MetadataNameTooLong, location, path));
+                this.Context.Diagnostics.Add(
+                    this.messageProvider.CreateDiagnostic(
+                        this.messageProvider.ERR_MetadataNameTooLong,
+                        location,
+                        path
+                    )
+                );
             }
         }
 
-        private void CheckNamespaceLength(string namespaceName, string mangledTypeName, INamespaceTypeReference errorEntity)
+        private void CheckNamespaceLength(
+            string namespaceName,
+            string mangledTypeName,
+            INamespaceTypeReference errorEntity
+        )
         {
             // It's never useful to report that the namespace name is too long.
             // If it's too long, then the full name is too long and that string is
@@ -1395,14 +1606,21 @@ namespace Microsoft.Cci
             if (namespaceName.Length + 1 + mangledTypeName.Length > NameLengthLimit / 3)
             {
                 int utf8Length =
-                    s_utf8Encoding.GetByteCount(namespaceName) +
-                    1 + // dot
+                    s_utf8Encoding.GetByteCount(namespaceName)
+                    + 1
+                    + // dot
                     s_utf8Encoding.GetByteCount(mangledTypeName);
 
                 if (utf8Length > NameLengthLimit)
                 {
                     Location location = GetNamedEntityLocation(errorEntity);
-                    this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.ERR_MetadataNameTooLong, location, namespaceName + "." + mangledTypeName));
+                    this.Context.Diagnostics.Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.ERR_MetadataNameTooLong,
+                            location,
+                            namespaceName + "." + mangledTypeName
+                        )
+                    );
                 }
             }
         }
@@ -1412,7 +1630,13 @@ namespace Microsoft.Cci
             if (IsTooLongInternal(usingString, PdbLengthLimit))
             {
                 Location location = GetNamedEntityLocation(errorEntity);
-                this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.WRN_PdbUsingNameTooLong, location, usingString));
+                this.Context.Diagnostics.Add(
+                    this.messageProvider.CreateDiagnostic(
+                        this.messageProvider.WRN_PdbUsingNameTooLong,
+                        location,
+                        usingString
+                    )
+                );
                 return true;
             }
 
@@ -1424,7 +1648,13 @@ namespace Microsoft.Cci
             string name = localDefinition.Name;
             if (IsTooLongInternal(name, PdbLengthLimit))
             {
-                this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.WRN_PdbLocalNameTooLong, localDefinition.Location, name));
+                this.Context.Diagnostics.Add(
+                    this.messageProvider.CreateDiagnostic(
+                        this.messageProvider.WRN_PdbLocalNameTooLong,
+                        localDefinition.Location,
+                        name
+                    )
+                );
                 return true;
             }
 
@@ -1469,7 +1699,9 @@ namespace Microsoft.Cci
 
         protected static Location GetSymbolLocation(ISymbolInternal symbolOpt)
         {
-            return symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty ? symbolOpt.Locations[0] : Location.None;
+            return symbolOpt != null && !symbolOpt.Locations.IsDefaultOrEmpty
+                ? symbolOpt.Locations[0]
+                : Location.None;
         }
 
         internal TypeAttributes GetTypeAttributes(ITypeDefinition typeDef)
@@ -1664,7 +1896,10 @@ namespace Microsoft.Cci
             }
 
             var builder = PooledBlobBuilder.GetInstance();
-            this.SerializeTypeReference(new BlobEncoder(builder).TypeSpecificationSignature(), typeReference);
+            this.SerializeTypeReference(
+                new BlobEncoder(builder).TypeSpecificationSignature(),
+                typeReference
+            );
             result = metadata.GetOrAddBlob(builder);
 
             _typeSpecSignatureIndex.Add(typeReference, result);
@@ -1672,11 +1907,17 @@ namespace Microsoft.Cci
             return result;
         }
 
-        internal EntityHandle GetTypeHandle(ITypeReference typeReference, bool treatRefAsPotentialTypeSpec = true)
+        internal EntityHandle GetTypeHandle(
+            ITypeReference typeReference,
+            bool treatRefAsPotentialTypeSpec = true
+        )
         {
             TypeDefinitionHandle handle;
             var typeDefinition = typeReference.AsTypeDefinition(this.Context);
-            if (typeDefinition != null && this.TryGetTypeDefinitionHandle(typeDefinition, out handle))
+            if (
+                typeDefinition != null
+                && this.TryGetTypeDefinitionHandle(typeDefinition, out handle)
+            )
             {
                 return handle;
             }
@@ -1695,11 +1936,17 @@ namespace Microsoft.Cci
                 IFieldDefinition fieldDef => GetFieldDefinitionHandle(fieldDef),
                 IEventDefinition eventDef => GetEventDefinitionHandle(eventDef),
                 IPropertyDefinition propertyDef => GetPropertyDefIndex(propertyDef),
-                _ => throw ExceptionUtilities.Unreachable()
+                _ => throw ExceptionUtilities.Unreachable(),
             };
         }
 
-        public void WriteMetadataAndIL(PdbWriter nativePdbWriterOpt, Stream metadataStream, Stream ilStream, Stream portablePdbStreamOpt, out MetadataSizes metadataSizes)
+        public void WriteMetadataAndIL(
+            PdbWriter nativePdbWriterOpt,
+            Stream metadataStream,
+            Stream ilStream,
+            Stream portablePdbStreamOpt,
+            out MetadataSizes metadataSizes
+        )
         {
             Debug.Assert(nativePdbWriterOpt == null ^ portablePdbStreamOpt == null);
 
@@ -1727,7 +1974,8 @@ namespace Microsoft.Cci
                 mappedFieldDataBuilder,
                 managedResourceDataBuilder,
                 out Blob mvidFixup,
-                out Blob mvidStringFixup);
+                out Blob mvidStringFixup
+            );
 
             var typeSystemRowCounts = metadata.GetRowCounts();
             Debug.Assert(typeSystemRowCounts[(int)TableIndex.EncLog] == 0);
@@ -1743,15 +1991,29 @@ namespace Microsoft.Cci
             // https://github.com/dotnet/roslyn/issues/70389
             if (!IsFullMetadata)
             {
-                metadata.GetType().GetField("_customAttributeTableNeedsSorting", BindingFlags.Instance | BindingFlags.NonPublic).SetValue(metadata, false);
+                metadata
+                    .GetType()
+                    .GetField(
+                        "_customAttributeTableNeedsSorting",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    )
+                    .SetValue(metadata, false);
             }
 
             // TODO (https://github.com/dotnet/roslyn/issues/3905):
             // InterfaceImpl table emitted by Roslyn is not compliant with ECMA spec.
             // Once fixed enable validation in DEBUG builds.
-            var rootBuilder = new MetadataRootBuilder(metadata, module.SerializationProperties.TargetRuntimeVersion, suppressValidation: true);
+            var rootBuilder = new MetadataRootBuilder(
+                metadata,
+                module.SerializationProperties.TargetRuntimeVersion,
+                suppressValidation: true
+            );
 
-            rootBuilder.Serialize(metadataBuilder, methodBodyStreamRva: 0, mappedFieldDataStreamRva: 0);
+            rootBuilder.Serialize(
+                metadataBuilder,
+                methodBodyStreamRva: 0,
+                mappedFieldDataStreamRva: 0
+            );
             metadataSizes = rootBuilder.Sizes;
 
             try
@@ -1769,7 +2031,8 @@ namespace Microsoft.Cci
                 var portablePdbBuilder = GetPortablePdbBuilder(
                     typeSystemRowCounts,
                     debugEntryPoint: default(MethodDefinitionHandle),
-                    deterministicIdProviderOpt: null);
+                    deterministicIdProviderOpt: null
+                );
 
                 var portablePdbBlob = new BlobBuilder();
                 portablePdbBuilder.Serialize(portablePdbBlob);
@@ -1791,7 +2054,8 @@ namespace Microsoft.Cci
             BlobBuilder mappedFieldDataBuilder,
             BlobBuilder managedResourceDataBuilder,
             out Blob mvidFixup,
-            out Blob mvidStringFixup)
+            out Blob mvidStringFixup
+        )
         {
             // Extract information from object model into tables, indices and streams
             CreateIndices();
@@ -1803,7 +2067,11 @@ namespace Microsoft.Cci
                 var documentsBuilder = Module.DebugDocumentsBuilder;
                 foreach (var tree in Module.CommonCompilation.SyntaxTrees)
                 {
-                    if (documentsBuilder.TryGetDebugDocument(tree.FilePath, basePath: null) is { } doc && !_documentIndex.ContainsKey(doc))
+                    if (
+                        documentsBuilder.TryGetDebugDocument(tree.FilePath, basePath: null)
+                            is { } doc
+                        && !_documentIndex.ContainsKey(doc)
+                    )
                     {
                         AddDocument(doc, _documentIndex);
                     }
@@ -1812,7 +2080,8 @@ namespace Microsoft.Cci
                 if (Context.RebuildData is { } rebuildData)
                 {
                     _usingNonSourceDocumentNameEnumerator = true;
-                    _nonSourceDocumentNameEnumerator = rebuildData.NonSourceFileDocumentNames.GetEnumerator();
+                    _nonSourceDocumentNameEnumerator =
+                        rebuildData.NonSourceFileDocumentNames.GetEnumerator();
                 }
 
                 DefineModuleImportScope();
@@ -1842,7 +2111,11 @@ namespace Microsoft.Cci
             }
             else
             {
-                methodBodyOffsets = SerializeMethodBodies(ilBuilder, nativePdbWriterOpt, out mvidStringFixup);
+                methodBodyOffsets = SerializeMethodBodies(
+                    ilBuilder,
+                    nativePdbWriterOpt,
+                    out mvidStringFixup
+                );
             }
 
             _cancellationToken.ThrowIfCancellationRequested();
@@ -1859,39 +2132,66 @@ namespace Microsoft.Cci
                 _dynamicAnalysisDataWriterOpt.SerializeMetadataTables(dynamicAnalysisDataOpt);
             }
 
-            PopulateTypeSystemTables(methodBodyOffsets, mappedFieldDataBuilder, managedResourceDataBuilder, dynamicAnalysisDataOpt, out mvidFixup);
+            PopulateTypeSystemTables(
+                methodBodyOffsets,
+                mappedFieldDataBuilder,
+                managedResourceDataBuilder,
+                dynamicAnalysisDataOpt,
+                out mvidFixup
+            );
         }
 
-        public virtual void PopulateEncTables(ImmutableArray<int> typeSystemRowCounts)
-        {
-        }
+        public virtual void PopulateEncTables(ImmutableArray<int> typeSystemRowCounts) { }
 
         public MetadataRootBuilder GetRootBuilder()
         {
             // TODO (https://github.com/dotnet/roslyn/issues/3905):
             // InterfaceImpl table emitted by Roslyn is not compliant with ECMA spec.
             // Once fixed enable validation in DEBUG builds.
-            return new MetadataRootBuilder(metadata, module.SerializationProperties.TargetRuntimeVersion, suppressValidation: true);
+            return new MetadataRootBuilder(
+                metadata,
+                module.SerializationProperties.TargetRuntimeVersion,
+                suppressValidation: true
+            );
         }
 
-        public PortablePdbBuilder GetPortablePdbBuilder(ImmutableArray<int> typeSystemRowCounts, MethodDefinitionHandle debugEntryPoint, Func<IEnumerable<Blob>, BlobContentId> deterministicIdProviderOpt)
+        public PortablePdbBuilder GetPortablePdbBuilder(
+            ImmutableArray<int> typeSystemRowCounts,
+            MethodDefinitionHandle debugEntryPoint,
+            Func<IEnumerable<Blob>, BlobContentId> deterministicIdProviderOpt
+        )
         {
-            return new PortablePdbBuilder(_debugMetadataOpt, typeSystemRowCounts, debugEntryPoint, deterministicIdProviderOpt);
+            return new PortablePdbBuilder(
+                _debugMetadataOpt,
+                typeSystemRowCounts,
+                debugEntryPoint,
+                deterministicIdProviderOpt
+            );
         }
 
-        internal void GetEntryPoints(out MethodDefinitionHandle entryPointHandle, out MethodDefinitionHandle debugEntryPointHandle)
+        internal void GetEntryPoints(
+            out MethodDefinitionHandle entryPointHandle,
+            out MethodDefinitionHandle debugEntryPointHandle
+        )
         {
             if (IsFullMetadata && !MetadataOnly)
             {
                 // PE entry point is set for executable programs
                 IMethodReference entryPoint = module.PEEntryPoint;
-                entryPointHandle = entryPoint != null ? (MethodDefinitionHandle)GetMethodHandle((IMethodDefinition)entryPoint.AsDefinition(Context)) : default(MethodDefinitionHandle);
+                entryPointHandle =
+                    entryPoint != null
+                        ? (MethodDefinitionHandle)GetMethodHandle(
+                            (IMethodDefinition)entryPoint.AsDefinition(Context)
+                        )
+                        : default(MethodDefinitionHandle);
 
                 // debug entry point may be different from PE entry point, it may also be set for libraries
                 IMethodReference debugEntryPoint = module.DebugEntryPoint;
                 if (debugEntryPoint != null && debugEntryPoint != entryPoint)
                 {
-                    debugEntryPointHandle = (MethodDefinitionHandle)GetMethodHandle((IMethodDefinition)debugEntryPoint.AsDefinition(Context));
+                    debugEntryPointHandle = (MethodDefinitionHandle)GetMethodHandle(
+                        (IMethodDefinition)debugEntryPoint.AsDefinition(Context)
+                    );
                 }
                 else
                 {
@@ -1906,20 +2206,32 @@ namespace Microsoft.Cci
 
         private ImmutableArray<IGenericParameter> GetSortedGenericParameters()
         {
-            return GetGenericParameters().OrderBy((x, y) =>
-            {
-                // Spec: GenericParam table is sorted by Owner and then by Number.
-                int result = CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(x)) - CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(y));
-                if (result != 0)
-                {
-                    return result;
-                }
+            return GetGenericParameters()
+                .OrderBy(
+                    (x, y) =>
+                    {
+                        // Spec: GenericParam table is sorted by Owner and then by Number.
+                        int result =
+                            CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(x))
+                            - CodedIndex.TypeOrMethodDef(GetDeclaringTypeOrMethodHandle(y));
+                        if (result != 0)
+                        {
+                            return result;
+                        }
 
-                return x.Index - y.Index;
-            }).ToImmutableArray();
+                        return x.Index - y.Index;
+                    }
+                )
+                .ToImmutableArray();
         }
 
-        private void PopulateTypeSystemTables(int[] methodBodyOffsets, BlobBuilder mappedFieldDataWriter, BlobBuilder resourceWriter, BlobBuilder dynamicAnalysisDataOpt, out Blob mvidFixup)
+        private void PopulateTypeSystemTables(
+            int[] methodBodyOffsets,
+            BlobBuilder mappedFieldDataWriter,
+            BlobBuilder resourceWriter,
+            BlobBuilder dynamicAnalysisDataOpt,
+            out Blob mvidFixup
+        )
         {
             var sortedGenericParameters = GetSortedGenericParameters();
 
@@ -1973,8 +2285,10 @@ namespace Microsoft.Cci
                     version: identity.Version,
                     culture: metadata.GetOrAddString(identity.CultureName),
                     publicKeyOrToken: metadata.GetOrAddBlob(identity.PublicKeyToken),
-                    flags: (AssemblyFlags)((int)identity.ContentType << 9) | (identity.IsRetargetable ? AssemblyFlags.Retargetable : 0),
-                    hashValue: default(BlobHandle));
+                    flags: (AssemblyFlags)((int)identity.ContentType << 9)
+                        | (identity.IsRetargetable ? AssemblyFlags.Retargetable : 0),
+                    hashValue: default(BlobHandle)
+                );
             }
         }
 
@@ -2001,10 +2315,13 @@ namespace Microsoft.Cci
                 version: sourceAssembly.Identity.Version,
                 publicKey: metadata.GetOrAddBlob(sourceAssembly.Identity.PublicKey),
                 name: GetStringHandleForPathAndCheckLength(module.Name, module),
-                culture: metadata.GetOrAddString(sourceAssembly.Identity.CultureName));
+                culture: metadata.GetOrAddString(sourceAssembly.Identity.CultureName)
+            );
         }
 
-        private void PopulateCustomAttributeTableRows(ImmutableArray<IGenericParameter> sortedGenericParameters)
+        private void PopulateCustomAttributeTableRows(
+            ImmutableArray<IGenericParameter> sortedGenericParameters
+        )
         {
             if (IsFullMetadata)
             {
@@ -2030,9 +2347,7 @@ namespace Microsoft.Cci
             FinalizeCustomAttributeTableRows();
         }
 
-        protected virtual void FinalizeCustomAttributeTableRows()
-        {
-        }
+        protected virtual void FinalizeCustomAttributeTableRows() { }
 
         private void AddAssemblyAttributesToTable()
         {
@@ -2047,16 +2362,22 @@ namespace Microsoft.Cci
                 AddAssemblyAttributesToTable(
                     this.module.GetSourceAssemblySecurityAttributes().Select(sa => sa.Attribute),
                     needsDummyParent: true,
-                    isSecurity: true);
+                    isSecurity: true
+                );
             }
 
             AddAssemblyAttributesToTable(
                 this.module.GetSourceAssemblyAttributes(Context.IsRefAssembly),
                 needsDummyParent: writingNetModule,
-                isSecurity: false);
+                isSecurity: false
+            );
         }
 
-        private void AddAssemblyAttributesToTable(IEnumerable<ICustomAttribute> assemblyAttributes, bool needsDummyParent, bool isSecurity)
+        private void AddAssemblyAttributesToTable(
+            IEnumerable<ICustomAttribute> assemblyAttributes,
+            bool needsDummyParent,
+            bool isSecurity
+        )
         {
             Debug.Assert(this.IsFullMetadata); // parentToken is not relative
             EntityHandle parentHandle = Handle.AssemblyDefinition;
@@ -2068,14 +2389,20 @@ namespace Microsoft.Cci
                     // System.Runtime.CompilerServices.AssemblyAttributesGoHere* type refs.  This is the contract for publishing
                     // assembly attributes in netmodules so they may be migrated to containing/referencing multi-module assemblies,
                     // at multi-module assembly build time.
-                    parentHandle = GetDummyAssemblyAttributeParent(isSecurity, customAttribute.AllowMultiple);
+                    parentHandle = GetDummyAssemblyAttributeParent(
+                        isSecurity,
+                        customAttribute.AllowMultiple
+                    );
                 }
 
                 AddCustomAttributeToTable(parentHandle, customAttribute);
             }
         }
 
-        private TypeReferenceHandle GetDummyAssemblyAttributeParent(bool isSecurity, bool allowMultiple)
+        private TypeReferenceHandle GetDummyAssemblyAttributeParent(
+            bool isSecurity,
+            bool allowMultiple
+        )
         {
             // Lazily get or create placeholder assembly attribute parent type ref for the given combination of
             // whether isSecurity and allowMultiple.  Convert type ref row id to corresponding attribute parent tag.
@@ -2088,7 +2415,11 @@ namespace Microsoft.Cci
                 _dummyAssemblyAttributeParent[iS, iM] = metadata.AddTypeReference(
                     resolutionScope: GetResolutionScopeHandle(module.GetCorLibrary(Context)),
                     @namespace: metadata.GetOrAddString(dummyAssemblyAttributeParentNamespace),
-                    name: metadata.GetOrAddString(dummyAssemblyAttributeParentName + dummyAssemblyAttributeParentQualifier[iS, iM]));
+                    name: metadata.GetOrAddString(
+                        dummyAssemblyAttributeParentName
+                            + dummyAssemblyAttributeParentQualifier[iS, iM]
+                    )
+                );
             }
 
             return _dummyAssemblyAttributeParent[iS, iM];
@@ -2097,7 +2428,10 @@ namespace Microsoft.Cci
         private void AddModuleAttributesToTable(CommonPEModuleBuilder module)
         {
             Debug.Assert(this.IsFullMetadata);
-            AddCustomAttributesToTable(EntityHandle.ModuleDefinition, module.GetSourceModuleAttributes());
+            AddCustomAttributesToTable(
+                EntityHandle.ModuleDefinition,
+                module.GetSourceModuleAttributes()
+            );
         }
 
         private void AddCustomAttributesToTable<T>(IEnumerable<T> parentList, TableIndex tableIndex)
@@ -2117,7 +2451,10 @@ namespace Microsoft.Cci
             }
         }
 
-        private void AddCustomAttributesToTable<T>(IEnumerable<T> parentList, Func<T, EntityHandle> getDefinitionHandle)
+        private void AddCustomAttributesToTable<T>(
+            IEnumerable<T> parentList,
+            Func<T, EntityHandle> getDefinitionHandle
+        )
             where T : IDefinition
         {
             foreach (var parent in parentList)
@@ -2133,7 +2470,10 @@ namespace Microsoft.Cci
             }
         }
 
-        protected virtual void AddCustomAttributesToTable(EntityHandle parentHandle, IEnumerable<ICustomAttribute> attributes)
+        protected virtual void AddCustomAttributesToTable(
+            EntityHandle parentHandle,
+            IEnumerable<ICustomAttribute> attributes
+        )
         {
             foreach (var attr in attributes)
             {
@@ -2141,15 +2481,22 @@ namespace Microsoft.Cci
             }
         }
 
-        protected bool AddCustomAttributeToTable(EntityHandle parentHandle, ICustomAttribute customAttribute)
+        protected bool AddCustomAttributeToTable(
+            EntityHandle parentHandle,
+            ICustomAttribute customAttribute
+        )
         {
-            IMethodReference constructor = customAttribute.Constructor(Context, reportDiagnostics: true);
+            IMethodReference constructor = customAttribute.Constructor(
+                Context,
+                reportDiagnostics: true
+            );
             if (constructor != null)
             {
                 metadata.AddCustomAttribute(
                     parent: parentHandle,
                     constructor: GetCustomAttributeTypeCodedIndex(constructor),
-                    value: GetCustomAttributeSignatureIndex(customAttribute));
+                    value: GetCustomAttributeSignatureIndex(customAttribute)
+                );
 
                 return true;
             }
@@ -2161,7 +2508,10 @@ namespace Microsoft.Cci
         {
             if (module.OutputKind != OutputKind.NetModule)
             {
-                this.PopulateDeclSecurityTableRowsFor(EntityHandle.AssemblyDefinition, module.GetSourceAssemblySecurityAttributes());
+                this.PopulateDeclSecurityTableRowsFor(
+                    EntityHandle.AssemblyDefinition,
+                    module.GetSourceAssemblySecurityAttributes()
+                );
             }
 
             foreach (ITypeDefinition typeDef in this.GetTypeDefs())
@@ -2171,7 +2521,10 @@ namespace Microsoft.Cci
                     continue;
                 }
 
-                this.PopulateDeclSecurityTableRowsFor(GetTypeDefinitionHandle(typeDef), typeDef.SecurityAttributes);
+                this.PopulateDeclSecurityTableRowsFor(
+                    GetTypeDefinitionHandle(typeDef),
+                    typeDef.SecurityAttributes
+                );
             }
 
             foreach (IMethodDefinition methodDef in this.GetMethodDefs())
@@ -2181,18 +2534,35 @@ namespace Microsoft.Cci
                     continue;
                 }
 
-                this.PopulateDeclSecurityTableRowsFor(GetMethodDefinitionHandle(methodDef), methodDef.SecurityAttributes);
+                this.PopulateDeclSecurityTableRowsFor(
+                    GetMethodDefinitionHandle(methodDef),
+                    methodDef.SecurityAttributes
+                );
             }
         }
 
-        private void PopulateDeclSecurityTableRowsFor(EntityHandle parentHandle, IEnumerable<SecurityAttribute> attributes)
+        private void PopulateDeclSecurityTableRowsFor(
+            EntityHandle parentHandle,
+            IEnumerable<SecurityAttribute> attributes
+        )
         {
-            OrderPreservingMultiDictionary<DeclarativeSecurityAction, ICustomAttribute> groupedSecurityAttributes = null;
+            OrderPreservingMultiDictionary<
+                DeclarativeSecurityAction,
+                ICustomAttribute
+            > groupedSecurityAttributes = null;
 
             foreach (SecurityAttribute securityAttribute in attributes)
             {
-                groupedSecurityAttributes = groupedSecurityAttributes ?? OrderPreservingMultiDictionary<DeclarativeSecurityAction, ICustomAttribute>.GetInstance();
-                groupedSecurityAttributes.Add(securityAttribute.Action, securityAttribute.Attribute);
+                groupedSecurityAttributes =
+                    groupedSecurityAttributes
+                    ?? OrderPreservingMultiDictionary<
+                        DeclarativeSecurityAction,
+                        ICustomAttribute
+                    >.GetInstance();
+                groupedSecurityAttributes.Add(
+                    securityAttribute.Action,
+                    securityAttribute.Attribute
+                );
             }
 
             if (groupedSecurityAttributes == null)
@@ -2205,7 +2575,10 @@ namespace Microsoft.Cci
                 metadata.AddDeclarativeSecurityAttribute(
                     parent: parentHandle,
                     action: securityAction,
-                    permissionSet: GetPermissionSetBlobHandle(groupedSecurityAttributes[securityAction]));
+                    permissionSet: GetPermissionSetBlobHandle(
+                        groupedSecurityAttributes[securityAction]
+                    )
+                );
             }
 
             groupedSecurityAttributes.Free();
@@ -2221,7 +2594,8 @@ namespace Microsoft.Cci
                 metadata.AddEvent(
                     attributes: GetEventAttributes(eventDef),
                     name: GetStringHandleForNameAndCheckLength(eventDef.Name, eventDef),
-                    type: GetTypeHandle(eventDef.GetType(Context)));
+                    type: GetTypeHandle(eventDef.GetType(Context))
+                );
             }
         }
 
@@ -2254,10 +2628,18 @@ namespace Microsoft.Cci
                     // exported types are not emitted in EnC deltas (hence generation 0):
                     string metadataTypeName = GetMetadataName(namespaceTypeRef, generation: 0);
 
-                    typeName = GetStringHandleForNameAndCheckLength(metadataTypeName, namespaceTypeRef);
-                    typeNamespace = GetStringHandleForNamespaceAndCheckLength(namespaceTypeRef, metadataTypeName);
+                    typeName = GetStringHandleForNameAndCheckLength(
+                        metadataTypeName,
+                        namespaceTypeRef
+                    );
+                    typeNamespace = GetStringHandleForNamespaceAndCheckLength(
+                        namespaceTypeRef,
+                        metadataTypeName
+                    );
                     implementation = GetExportedTypeImplementation(namespaceTypeRef);
-                    attributes = exportedType.IsForwarder ? TypeAttributes.NotPublic | Constants.TypeAttributes_TypeForwarder : TypeAttributes.Public;
+                    attributes = exportedType.IsForwarder
+                        ? TypeAttributes.NotPublic | Constants.TypeAttributes_TypeForwarder
+                        : TypeAttributes.Public;
                 }
                 else if ((nestedRef = exportedType.Type.AsNestedTypeReference) != null)
                 {
@@ -2268,8 +2650,12 @@ namespace Microsoft.Cci
 
                     typeName = GetStringHandleForNameAndCheckLength(metadataTypeName, nestedRef);
                     typeNamespace = default(StringHandle);
-                    implementation = MetadataTokens.ExportedTypeHandle(exportedType.ParentIndex + 1);
-                    attributes = exportedType.IsForwarder ? TypeAttributes.NotPublic : TypeAttributes.NestedPublic;
+                    implementation = MetadataTokens.ExportedTypeHandle(
+                        exportedType.ParentIndex + 1
+                    );
+                    attributes = exportedType.IsForwarder
+                        ? TypeAttributes.NotPublic
+                        : TypeAttributes.NestedPublic;
                 }
                 else
                 {
@@ -2281,7 +2667,10 @@ namespace Microsoft.Cci
                     @namespace: typeNamespace,
                     name: typeName,
                     implementation: implementation,
-                    typeDefinitionId: exportedType.IsForwarder ? 0 : MetadataTokens.GetToken(exportedType.Type.TypeDef));
+                    typeDefinitionId: exportedType.IsForwarder
+                        ? 0
+                        : MetadataTokens.GetToken(exportedType.Type.TypeDef)
+                );
             }
         }
 
@@ -2289,14 +2678,18 @@ namespace Microsoft.Cci
         {
             foreach (IFieldDefinition fieldDef in this.GetFieldDefs())
             {
-                if (fieldDef.ContainingTypeDefinition.Layout != LayoutKind.Explicit || fieldDef.IsStatic)
+                if (
+                    fieldDef.ContainingTypeDefinition.Layout != LayoutKind.Explicit
+                    || fieldDef.IsStatic
+                )
                 {
                     continue;
                 }
 
                 metadata.AddFieldLayout(
                     field: GetFieldDefinitionHandle(fieldDef),
-                    offset: fieldDef.Offset);
+                    offset: fieldDef.Offset
+                );
             }
         }
 
@@ -2311,13 +2704,15 @@ namespace Microsoft.Cci
 
                 var marshallingInformation = fieldDef.MarshallingInformation;
 
-                BlobHandle descriptor = (marshallingInformation != null)
-                    ? GetMarshallingDescriptorHandle(marshallingInformation)
-                    : GetMarshallingDescriptorHandle(fieldDef.MarshallingDescriptor);
+                BlobHandle descriptor =
+                    (marshallingInformation != null)
+                        ? GetMarshallingDescriptorHandle(marshallingInformation)
+                        : GetMarshallingDescriptorHandle(fieldDef.MarshallingDescriptor);
 
                 metadata.AddMarshallingDescriptor(
                     parent: GetFieldDefinitionHandle(fieldDef),
-                    descriptor: descriptor);
+                    descriptor: descriptor
+                );
             }
 
             foreach (IParameterDefinition parDef in this.GetParameterDefs())
@@ -2329,13 +2724,15 @@ namespace Microsoft.Cci
 
                 var marshallingInformation = parDef.MarshallingInformation;
 
-                BlobHandle descriptor = (marshallingInformation != null)
-                     ? GetMarshallingDescriptorHandle(marshallingInformation)
-                     : GetMarshallingDescriptorHandle(parDef.MarshallingDescriptor);
+                BlobHandle descriptor =
+                    (marshallingInformation != null)
+                        ? GetMarshallingDescriptorHandle(marshallingInformation)
+                        : GetMarshallingDescriptorHandle(parDef.MarshallingDescriptor);
 
                 metadata.AddMarshallingDescriptor(
                     parent: GetParameterHandle(parDef),
-                    descriptor: descriptor);
+                    descriptor: descriptor
+                );
             }
         }
 
@@ -2354,15 +2751,22 @@ namespace Microsoft.Cci
                 // potentially could be tightened to align each field only as much as is actually required by that
                 // field, saving a few bytes per field.
                 int offset = mappedFieldDataWriter.Count;
-                Debug.Assert(offset % ManagedPEBuilder.MappedFieldDataAlignment == 0, "Expected last write to end at alignment boundary");
-                Debug.Assert(ManagedPEBuilder.MappedFieldDataAlignment == 8, "Expected alignment to be 8");
+                Debug.Assert(
+                    offset % ManagedPEBuilder.MappedFieldDataAlignment == 0,
+                    "Expected last write to end at alignment boundary"
+                );
+                Debug.Assert(
+                    ManagedPEBuilder.MappedFieldDataAlignment == 8,
+                    "Expected alignment to be 8"
+                );
 
                 mappedFieldDataWriter.WriteBytes(fieldDef.MappedData);
                 mappedFieldDataWriter.Align(ManagedPEBuilder.MappedFieldDataAlignment);
 
                 metadata.AddFieldRelativeVirtualAddress(
                     field: GetFieldDefinitionHandle(fieldDef),
-                    offset: offset);
+                    offset: offset
+                );
             }
         }
 
@@ -2381,7 +2785,8 @@ namespace Microsoft.Cci
                 metadata.AddFieldDefinition(
                     attributes: GetFieldAttributes(fieldDef),
                     name: GetStringHandleForNameAndCheckLength(fieldDef.Name, fieldDef),
-                    signature: GetFieldSignatureIndex(fieldDef));
+                    signature: GetFieldSignatureIndex(fieldDef)
+                );
             }
         }
 
@@ -2397,7 +2802,8 @@ namespace Microsoft.Cci
 
                 metadata.AddConstant(
                     parent: GetFieldDefinitionHandle(fieldDef),
-                    value: constant.Value);
+                    value: constant.Value
+                );
             }
 
             foreach (IParameterDefinition parDef in this.GetParameterDefs())
@@ -2408,9 +2814,7 @@ namespace Microsoft.Cci
                     continue;
                 }
 
-                metadata.AddConstant(
-                    parent: GetParameterHandle(parDef),
-                    value: defaultValue.Value);
+                metadata.AddConstant(parent: GetParameterHandle(parDef), value: defaultValue.Value);
             }
 
             foreach (IPropertyDefinition propDef in this.GetPropertyDefs())
@@ -2422,7 +2826,8 @@ namespace Microsoft.Cci
 
                 metadata.AddConstant(
                     parent: GetPropertyDefIndex(propDef),
-                    value: propDef.DefaultValue.Value);
+                    value: propDef.DefaultValue.Value
+                );
             }
         }
 
@@ -2442,12 +2847,14 @@ namespace Microsoft.Cci
                 metadata.AddAssemblyFile(
                     name: GetStringHandleForPathAndCheckLength(fileReference.FileName),
                     hashValue: metadata.GetOrAddBlob(fileReference.GetHashValue(hashAlgorithm)),
-                    containsMetadata: fileReference.HasMetadata);
+                    containsMetadata: fileReference.HasMetadata
+                );
             }
         }
 
         private void PopulateGenericParameters(
-            ImmutableArray<IGenericParameter> sortedGenericParameters)
+            ImmutableArray<IGenericParameter> sortedGenericParameters
+        )
         {
             foreach (IGenericParameter genericParameter in sortedGenericParameters)
             {
@@ -2457,15 +2864,23 @@ namespace Microsoft.Cci
                 var genericParameterHandle = metadata.AddGenericParameter(
                     parent: GetDeclaringTypeOrMethodHandle(genericParameter),
                     attributes: GetGenericParameterAttributes(genericParameter),
-                    name: GetStringHandleForNameAndCheckLength(genericParameter.Name, genericParameter),
-                    index: genericParameter.Index);
+                    name: GetStringHandleForNameAndCheckLength(
+                        genericParameter.Name,
+                        genericParameter
+                    ),
+                    index: genericParameter.Index
+                );
 
                 foreach (var refWithAttributes in genericParameter.GetConstraints(Context))
                 {
                     var genericConstraintHandle = metadata.AddGenericParameterConstraint(
                         genericParameter: genericParameterHandle,
-                        constraint: GetTypeHandle(refWithAttributes.TypeRef));
-                    AddCustomAttributesToTable(genericConstraintHandle, refWithAttributes.Attributes);
+                        constraint: GetTypeHandle(refWithAttributes.TypeRef)
+                    );
+                    AddCustomAttributesToTable(
+                        genericConstraintHandle,
+                        refWithAttributes.Attributes
+                    );
                 }
             }
         }
@@ -2482,15 +2897,17 @@ namespace Microsoft.Cci
                 var data = methodDef.PlatformInvokeData;
                 string entryPointName = data.EntryPointName;
 
-                StringHandle importName = entryPointName != null && entryPointName != methodDef.Name
-                    ? GetStringHandleForNameAndCheckLength(entryPointName, methodDef)
-                    : metadata.GetOrAddString(methodDef.Name); // Length checked while populating the method def table.
+                StringHandle importName =
+                    entryPointName != null && entryPointName != methodDef.Name
+                        ? GetStringHandleForNameAndCheckLength(entryPointName, methodDef)
+                        : metadata.GetOrAddString(methodDef.Name); // Length checked while populating the method def table.
 
                 metadata.AddMethodImport(
                     method: GetMethodDefinitionHandle(methodDef),
                     attributes: data.Flags,
                     name: importName,
-                    module: GetModuleReferenceHandle(data.ModuleName));
+                    module: GetModuleReferenceHandle(data.ModuleName)
+                );
             }
         }
 
@@ -2503,13 +2920,17 @@ namespace Microsoft.Cci
                 {
                     var handle = metadata.AddInterfaceImplementation(
                         type: typeDefHandle,
-                        implementedInterface: GetTypeHandle(interfaceImpl.TypeRef));
+                        implementedInterface: GetTypeHandle(interfaceImpl.TypeRef)
+                    );
                     AddCustomAttributesToTable(handle, interfaceImpl.Attributes);
                 }
             }
         }
 
-        private void PopulateManifestResourceTableRows(BlobBuilder resourceDataWriter, BlobBuilder dynamicAnalysisDataOpt)
+        private void PopulateManifestResourceTableRows(
+            BlobBuilder resourceDataWriter,
+            BlobBuilder dynamicAnalysisDataOpt
+        )
         {
             if (dynamicAnalysisDataOpt != null)
             {
@@ -2536,14 +2957,19 @@ namespace Microsoft.Cci
                 }
 
                 metadata.AddManifestResource(
-                    attributes: resource.IsPublic ? ManifestResourceAttributes.Public : ManifestResourceAttributes.Private,
+                    attributes: resource.IsPublic
+                        ? ManifestResourceAttributes.Public
+                        : ManifestResourceAttributes.Private,
                     name: GetStringHandleForNameAndCheckLength(resource.Name),
                     implementation: implementation,
-                    offset: GetManagedResourceOffset(resource, resourceDataWriter));
+                    offset: GetManagedResourceOffset(resource, resourceDataWriter)
+                );
             }
 
             // the stream should be aligned:
-            Debug.Assert((resourceDataWriter.Count % ManagedPEBuilder.ManagedResourcesDataAlignment) == 0);
+            Debug.Assert(
+                (resourceDataWriter.Count % ManagedPEBuilder.ManagedResourcesDataAlignment) == 0
+            );
         }
 
         private void PopulateMemberRefTableRows()
@@ -2556,7 +2982,8 @@ namespace Microsoft.Cci
                 metadata.AddMemberReference(
                     parent: GetMemberReferenceParent(memberRef),
                     name: GetStringHandleForNameAndCheckLength(memberRef.Name, memberRef),
-                    signature: GetMemberReferenceSignatureHandle(memberRef));
+                    signature: GetMemberReferenceSignatureHandle(memberRef)
+                );
             }
         }
 
@@ -2568,8 +2995,13 @@ namespace Microsoft.Cci
             {
                 metadata.AddMethodImplementation(
                     type: GetTypeDefinitionHandle(methodImplementation.ContainingType),
-                    methodBody: GetMethodDefinitionOrReferenceHandle(methodImplementation.ImplementingMethod),
-                    methodDeclaration: GetMethodDefinitionOrReferenceHandle(methodImplementation.ImplementedMethod));
+                    methodBody: GetMethodDefinitionOrReferenceHandle(
+                        methodImplementation.ImplementingMethod
+                    ),
+                    methodDeclaration: GetMethodDefinitionOrReferenceHandle(
+                        methodImplementation.ImplementedMethod
+                    )
+                );
             }
         }
 
@@ -2581,8 +3013,11 @@ namespace Microsoft.Cci
             foreach (IGenericMethodInstanceReference genericMethodInstanceReference in methodSpecs)
             {
                 metadata.AddMethodSpecification(
-                    method: GetMethodDefinitionOrReferenceHandle(genericMethodInstanceReference.GetGenericMethod(Context)),
-                    instantiation: GetMethodSpecificationBlobHandle(genericMethodInstanceReference));
+                    method: GetMethodDefinitionOrReferenceHandle(
+                        genericMethodInstanceReference.GetGenericMethod(Context)
+                    ),
+                    instantiation: GetMethodSpecificationBlobHandle(genericMethodInstanceReference)
+                );
             }
         }
 
@@ -2600,7 +3035,8 @@ namespace Microsoft.Cci
                     name: GetStringHandleForNameAndCheckLength(methodDef.Name, methodDef),
                     signature: GetMethodSignatureHandle(methodDef),
                     bodyOffset: methodBodyOffsets[i],
-                    parameterList: GetFirstParameterHandle(methodDef));
+                    parameterList: GetFirstParameterHandle(methodDef)
+                );
 
                 i++;
             }
@@ -2612,7 +3048,10 @@ namespace Microsoft.Cci
             var eventDefs = this.GetEventDefs();
 
             // an estimate, not necessarily accurate.
-            metadata.SetCapacity(TableIndex.MethodSemantics, propertyDefs.Count * 2 + eventDefs.Count * 2);
+            metadata.SetCapacity(
+                TableIndex.MethodSemantics,
+                propertyDefs.Count * 2 + eventDefs.Count * 2
+            );
 
             foreach (IPropertyDefinition propertyDef in this.GetPropertyDefs())
             {
@@ -2636,7 +3075,10 @@ namespace Microsoft.Cci
                     metadata.AddMethodSemantics(
                         association: association,
                         semantics: semantics,
-                        methodDefinition: GetMethodDefinitionHandle(accessorMethod.GetResolvedMethod(Context)));
+                        methodDefinition: GetMethodDefinitionHandle(
+                            accessorMethod.GetResolvedMethod(Context)
+                        )
+                    );
                 }
             }
 
@@ -2666,7 +3108,10 @@ namespace Microsoft.Cci
                     metadata.AddMethodSemantics(
                         association: association,
                         semantics: semantics,
-                        methodDefinition: GetMethodDefinitionHandle(accessorMethod.GetResolvedMethod(Context)));
+                        methodDefinition: GetMethodDefinitionHandle(
+                            accessorMethod.GetResolvedMethod(Context)
+                        )
+                    );
                 }
             }
         }
@@ -2708,7 +3153,8 @@ namespace Microsoft.Cci
                 moduleName: metadata.GetOrAddString(this.module.ModuleName),
                 mvid: mvidHandle,
                 encId: metadata.GetOrAddGuid(EncId),
-                encBaseId: metadata.GetOrAddGuid(EncBaseId));
+                encBaseId: metadata.GetOrAddGuid(EncBaseId)
+            );
         }
 
         private void PopulateParamTableRows()
@@ -2721,7 +3167,8 @@ namespace Microsoft.Cci
                 metadata.AddParameter(
                     attributes: GetParameterAttributes(parDef),
                     sequenceNumber: (parDef is ReturnValueParameter) ? 0 : parDef.Index + 1,
-                    name: GetStringHandleForNameAndCheckLength(parDef.Name, parDef));
+                    name: GetStringHandleForNameAndCheckLength(parDef.Name, parDef)
+                );
             }
         }
 
@@ -2735,7 +3182,8 @@ namespace Microsoft.Cci
                 metadata.AddProperty(
                     attributes: GetPropertyAttributes(propertyDef),
                     name: GetStringHandleForNameAndCheckLength(propertyDef.Name, propertyDef),
-                    signature: GetPropertySignatureHandle(propertyDef));
+                    signature: GetPropertySignatureHandle(propertyDef)
+                );
             }
         }
 
@@ -2756,11 +3204,14 @@ namespace Microsoft.Cci
 
                 metadata.AddTypeDefinition(
                     attributes: GetTypeAttributes(typeDef),
-                    @namespace: (namespaceType != null) ? GetStringHandleForNamespaceAndCheckLength(namespaceType, metadataTypeName) : default(StringHandle),
+                    @namespace: (namespaceType != null)
+                        ? GetStringHandleForNamespaceAndCheckLength(namespaceType, metadataTypeName)
+                        : default(StringHandle),
                     name: GetStringHandleForNameAndCheckLength(metadataTypeName, typeDef),
                     baseType: (baseType != null) ? GetTypeHandle(baseType) : default(EntityHandle),
                     fieldList: GetFirstFieldDefinitionHandle(typeDef),
-                    methodList: GetFirstMethodDefinitionHandle(typeDef));
+                    methodList: GetFirstMethodDefinitionHandle(typeDef)
+                );
             }
         }
 
@@ -2776,7 +3227,8 @@ namespace Microsoft.Cci
 
                 metadata.AddNestedType(
                     type: GetTypeDefinitionHandle(typeDef),
-                    enclosingType: GetTypeDefinitionHandle(nestedTypeDef.ContainingTypeDefinition));
+                    enclosingType: GetTypeDefinitionHandle(nestedTypeDef.ContainingTypeDefinition)
+                );
             }
         }
 
@@ -2792,7 +3244,8 @@ namespace Microsoft.Cci
                 metadata.AddTypeLayout(
                     type: GetTypeDefinitionHandle(typeDef),
                     packingSize: typeDef.Alignment,
-                    size: typeDef.SizeOf);
+                    size: typeDef.SizeOf
+                );
             }
         }
 
@@ -2812,10 +3265,13 @@ namespace Microsoft.Cci
                 {
                     ITypeReference scopeTypeRef;
 
-                    ISpecializedNestedTypeReference sneTypeRef = nestedTypeRef.AsSpecializedNestedTypeReference;
+                    ISpecializedNestedTypeReference sneTypeRef =
+                        nestedTypeRef.AsSpecializedNestedTypeReference;
                     if (sneTypeRef != null)
                     {
-                        scopeTypeRef = sneTypeRef.GetUnspecializedVersion(Context).GetContainingType(Context);
+                        scopeTypeRef = sneTypeRef
+                            .GetUnspecializedVersion(Context)
+                            .GetContainingType(Context);
                     }
                     else
                     {
@@ -2828,7 +3284,10 @@ namespace Microsoft.Cci
                     // TODO: https://github.com/dotnet/roslyn/issues/54981
                     string metadataTypeName = GetMetadataName(nestedTypeRef, generation: 0);
 
-                    name = this.GetStringHandleForNameAndCheckLength(metadataTypeName, nestedTypeRef);
+                    name = this.GetStringHandleForNameAndCheckLength(
+                        metadataTypeName,
+                        nestedTypeRef
+                    );
                     @namespace = default(StringHandle);
                 }
                 else
@@ -2839,20 +3298,29 @@ namespace Microsoft.Cci
                         throw ExceptionUtilities.UnexpectedValue(typeRef);
                     }
 
-                    resolutionScope = this.GetResolutionScopeHandle(namespaceTypeRef.GetUnit(Context));
+                    resolutionScope = this.GetResolutionScopeHandle(
+                        namespaceTypeRef.GetUnit(Context)
+                    );
 
                     // It's not possible to reference newer versions of reloadable types from another assembly, hence generation 0:
                     // TODO: https://github.com/dotnet/roslyn/issues/54981
                     string metadataTypeName = GetMetadataName(namespaceTypeRef, generation: 0);
 
-                    name = this.GetStringHandleForNameAndCheckLength(metadataTypeName, namespaceTypeRef);
-                    @namespace = this.GetStringHandleForNamespaceAndCheckLength(namespaceTypeRef, metadataTypeName);
+                    name = this.GetStringHandleForNameAndCheckLength(
+                        metadataTypeName,
+                        namespaceTypeRef
+                    );
+                    @namespace = this.GetStringHandleForNamespaceAndCheckLength(
+                        namespaceTypeRef,
+                        metadataTypeName
+                    );
                 }
 
                 metadata.AddTypeReference(
                     resolutionScope: resolutionScope,
                     @namespace: @namespace,
-                    name: name);
+                    name: name
+                );
             }
         }
 
@@ -2906,11 +3374,16 @@ namespace Microsoft.Cci
             return bodyOffsets;
         }
 
-        private int[] SerializeMethodBodies(BlobBuilder ilBuilder, PdbWriter nativePdbWriterOpt, out Blob mvidStringFixup)
+        private int[] SerializeMethodBodies(
+            BlobBuilder ilBuilder,
+            PdbWriter nativePdbWriterOpt,
+            out Blob mvidStringFixup
+        )
         {
             Debug.Assert(!MetadataOnly);
 
-            CustomDebugInfoWriter customDebugInfoWriter = (nativePdbWriterOpt != null) ? new CustomDebugInfoWriter(nativePdbWriterOpt) : null;
+            CustomDebugInfoWriter customDebugInfoWriter =
+                (nativePdbWriterOpt != null) ? new CustomDebugInfoWriter(nativePdbWriterOpt) : null;
 
             var methods = this.GetMethodDefs();
             int[] bodyOffsets = new int[methods.Count];
@@ -2939,9 +3412,19 @@ namespace Microsoft.Cci
                     localSignatureHandleOpt = this.SerializeLocalVariablesSignature(body);
 
                     // TODO: consider parallelizing these (local signature tokens can be piped into IL serialization & debug info generation)
-                    bodyOffset = SerializeMethodBody(encoder, body, localSignatureHandleOpt, ref mvidStringHandle, ref mvidStringFixup);
+                    bodyOffset = SerializeMethodBody(
+                        encoder,
+                        body,
+                        localSignatureHandleOpt,
+                        ref mvidStringHandle,
+                        ref mvidStringFixup
+                    );
 
-                    nativePdbWriterOpt?.SerializeDebugInfo(body, localSignatureHandleOpt, customDebugInfoWriter);
+                    nativePdbWriterOpt?.SerializeDebugInfo(
+                        body,
+                        localSignatureHandleOpt,
+                        customDebugInfoWriter
+                    );
                 }
                 else
                 {
@@ -2955,8 +3438,17 @@ namespace Microsoft.Cci
                 {
                     // methodRid is based on this delta but for async state machine debug info we need the "real" row number
                     // of the method aggregated across generations
-                    var aggregateMethodRid = MetadataTokens.GetRowNumber(GetMethodDefinitionHandle(method));
-                    SerializeMethodDebugInfo(body, methodRid, aggregateMethodRid, localSignatureHandleOpt, ref lastLocalVariableHandle, ref lastLocalConstantHandle);
+                    var aggregateMethodRid = MetadataTokens.GetRowNumber(
+                        GetMethodDefinitionHandle(method)
+                    );
+                    SerializeMethodDebugInfo(
+                        body,
+                        methodRid,
+                        aggregateMethodRid,
+                        localSignatureHandleOpt,
+                        ref lastLocalVariableHandle,
+                        ref lastLocalConstantHandle
+                    );
                 }
 
                 _dynamicAnalysisDataWriterOpt?.SerializeMethodCodeCoverageData(body);
@@ -2969,11 +3461,21 @@ namespace Microsoft.Cci
             return bodyOffsets;
         }
 
-        private int SerializeMethodBody(MethodBodyStreamEncoder encoder, IMethodBody methodBody, StandaloneSignatureHandle localSignatureHandleOpt, ref UserStringHandle mvidStringHandle, ref Blob mvidStringFixup)
+        private int SerializeMethodBody(
+            MethodBodyStreamEncoder encoder,
+            IMethodBody methodBody,
+            StandaloneSignatureHandle localSignatureHandleOpt,
+            ref UserStringHandle mvidStringHandle,
+            ref Blob mvidStringFixup
+        )
         {
             int ilLength = methodBody.IL.Length;
             var exceptionRegions = methodBody.ExceptionRegions;
-            bool isSmallBody = ilLength < 64 && methodBody.MaxStack <= 8 && localSignatureHandleOpt.IsNil && exceptionRegions.Length == 0;
+            bool isSmallBody =
+                ilLength < 64
+                && methodBody.MaxStack <= 8
+                && localSignatureHandleOpt.IsNil
+                && exceptionRegions.Length == 0;
             var smallBodyKey = (methodBody.IL, methodBody.AreLocalsZeroed);
 
             // Check if an identical method body has already been serialized.
@@ -2983,7 +3485,11 @@ namespace Microsoft.Cci
             // Don't do small body method caching during deterministic builds until this issue is fixed
             // https://github.com/dotnet/roslyn/issues/7595
             int bodyOffset;
-            if (!_deterministic && isSmallBody && _smallMethodBodies.TryGetValue(smallBodyKey, out bodyOffset))
+            if (
+                !_deterministic
+                && isSmallBody
+                && _smallMethodBodies.TryGetValue(smallBodyKey, out bodyOffset)
+            )
             {
                 return bodyOffset;
             }
@@ -2995,7 +3501,8 @@ namespace Microsoft.Cci
                 hasSmallExceptionRegions: MayUseSmallExceptionHeaders(exceptionRegions),
                 localVariablesSignature: localSignatureHandleOpt,
                 attributes: (methodBody.AreLocalsZeroed ? MethodBodyAttributes.InitLocals : 0),
-                hasDynamicStackAllocation: methodBody.HasStackalloc);
+                hasDynamicStackAllocation: methodBody.HasStackalloc
+            );
 
             // Don't do small body method caching during deterministic builds until this issue is fixed
             // https://github.com/dotnet/roslyn/issues/7595
@@ -3004,8 +3511,16 @@ namespace Microsoft.Cci
                 _smallMethodBodies.Add(smallBodyKey, encodedBody.Offset);
             }
 
-            WriteInstructions(encodedBody.Instructions, methodBody.IL, ref mvidStringHandle, ref mvidStringFixup);
-            SerializeMethodBodyExceptionHandlerTable(encodedBody.ExceptionRegions, exceptionRegions);
+            WriteInstructions(
+                encodedBody.Instructions,
+                methodBody.IL,
+                ref mvidStringHandle,
+                ref mvidStringFixup
+            );
+            SerializeMethodBodyExceptionHandlerTable(
+                encodedBody.ExceptionRegions,
+                exceptionRegions
+            );
 
             return encodedBody.Offset;
         }
@@ -3014,7 +3529,9 @@ namespace Microsoft.Cci
         /// Serialize the method local signature to the blob.
         /// </summary>
         /// <returns>Standalone signature token</returns>
-        protected virtual StandaloneSignatureHandle SerializeLocalVariablesSignature(IMethodBody body)
+        protected virtual StandaloneSignatureHandle SerializeLocalVariablesSignature(
+            IMethodBody body
+        )
         {
             Debug.Assert(!_tableIndicesAreComplete);
 
@@ -3040,7 +3557,10 @@ namespace Microsoft.Cci
             return handle;
         }
 
-        protected void SerializeLocalVariableType(LocalVariableTypeEncoder encoder, ILocalDefinition local)
+        protected void SerializeLocalVariableType(
+            LocalVariableTypeEncoder encoder,
+            ILocalDefinition local
+        )
         {
             if (local.CustomModifiers.Length > 0)
             {
@@ -3050,14 +3570,19 @@ namespace Microsoft.Cci
             SerializeTypeReference(encoder.Type(local.IsReference, local.IsPinned), local.Type);
         }
 
-        internal StandaloneSignatureHandle SerializeLocalConstantStandAloneSignature(ILocalDefinition localConstant)
+        internal StandaloneSignatureHandle SerializeLocalConstantStandAloneSignature(
+            ILocalDefinition localConstant
+        )
         {
             var builder = PooledBlobBuilder.GetInstance();
             var typeEncoder = new BlobEncoder(builder).FieldSignature();
 
             if (localConstant.CustomModifiers.Length > 0)
             {
-                SerializeCustomModifiers(typeEncoder.CustomModifiers(), localConstant.CustomModifiers);
+                SerializeCustomModifiers(
+                    typeEncoder.CustomModifiers(),
+                    localConstant.CustomModifiers
+                );
             }
 
             SerializeTypeReference(typeEncoder, localConstant.Type);
@@ -3076,7 +3601,10 @@ namespace Microsoft.Cci
 
         private static int ReadInt32(ImmutableArray<byte> buffer, int pos)
         {
-            return buffer[pos] | buffer[pos + 1] << 8 | buffer[pos + 2] << 16 | buffer[pos + 3] << 24;
+            return buffer[pos]
+                | buffer[pos + 1] << 8
+                | buffer[pos + 2] << 16
+                | buffer[pos + 3] << 24;
         }
 
         private EntityHandle GetHandle(object reference)
@@ -3087,7 +3615,7 @@ namespace Microsoft.Cci
                 IFieldReference fieldReference => GetFieldHandle(fieldReference),
                 IMethodReference methodReference => GetMethodHandle(methodReference),
                 ISignature signature => GetStandaloneSignatureHandle(signature),
-                _ => throw ExceptionUtilities.UnexpectedValue(reference)
+                _ => throw ExceptionUtilities.UnexpectedValue(reference),
             };
         }
 
@@ -3142,7 +3670,12 @@ namespace Microsoft.Cci
                 }
                 catch (ImageFormatLimitationException)
                 {
-                    this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.ERR_TooManyUserStrings, NoLocation.Singleton));
+                    this.Context.Diagnostics.Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.ERR_TooManyUserStrings,
+                            NoLocation.Singleton
+                        )
+                    );
                     _userStringTokenOverflow = true;
                 }
             }
@@ -3160,7 +3693,12 @@ namespace Microsoft.Cci
                 }
                 catch (ImageFormatLimitationException)
                 {
-                    this.Context.Diagnostics.Add(this.messageProvider.CreateDiagnostic(this.messageProvider.ERR_TooManyUserStrings, NoLocation.Singleton));
+                    this.Context.Diagnostics.Add(
+                        this.messageProvider.CreateDiagnostic(
+                            this.messageProvider.ERR_TooManyUserStrings,
+                            NoLocation.Singleton
+                        )
+                    );
                     _userStringTokenOverflow = true;
                 }
             }
@@ -3188,7 +3726,7 @@ namespace Microsoft.Cci
             DocumentRowId,
 
             /// <summary>
-            /// Emit ldc.i4 of row id of the hoisted local variable or parameter field that the pseudo-token represents, 
+            /// Emit ldc.i4 of row id of the hoisted local variable or parameter field that the pseudo-token represents,
             /// increased by <see cref="LiftedVariableBaseIndex"/>.
             /// </summary>
             LiftedVariableId,
@@ -3207,7 +3745,12 @@ namespace Microsoft.Cci
         /// </summary>
         internal const int LiftedVariableBaseIndex = 0x10000;
 
-        private void WriteInstructions(Blob finalIL, ImmutableArray<byte> generatedIL, ref UserStringHandle mvidStringHandle, ref Blob mvidStringFixup)
+        private void WriteInstructions(
+            Blob finalIL,
+            ImmutableArray<byte> generatedIL,
+            ref UserStringHandle mvidStringHandle,
+            ref Blob mvidStringFixup
+        )
         {
             // write the raw body first and then patch tokens:
             var writer = new BlobWriter(finalIL);
@@ -3226,90 +3769,113 @@ namespace Microsoft.Cci
                     case OperandType.InlineTok:
                     case OperandType.InlineType:
                     case OperandType.InlineSig:
+                    {
+                        int pseudoToken = ReadInt32(generatedIL, offset);
+                        int token = 0;
+                        // If any bits in the high-order byte of the pseudotoken are nonzero, replace the opcode with Ldc_i4
+                        // and either clear the high-order byte in the pseudotoken or ignore the pseudotoken.
+                        // This is a trick to enable loading raw metadata token indices as integers.
+                        if (operandType == OperandType.InlineTok)
                         {
-                            int pseudoToken = ReadInt32(generatedIL, offset);
-                            int token = 0;
-                            // If any bits in the high-order byte of the pseudotoken are nonzero, replace the opcode with Ldc_i4
-                            // and either clear the high-order byte in the pseudotoken or ignore the pseudotoken.
-                            // This is a trick to enable loading raw metadata token indices as integers.
-                            if (operandType == OperandType.InlineTok)
+                            var rawTokenEncoding = (RawTokenEncoding)(pseudoToken >> 24);
+                            if (
+                                rawTokenEncoding != RawTokenEncoding.None
+                                && (uint)pseudoToken != 0xffffffff
+                            )
                             {
-                                var rawTokenEncoding = (RawTokenEncoding)(pseudoToken >> 24);
-                                if (rawTokenEncoding != RawTokenEncoding.None && (uint)pseudoToken != 0xffffffff)
+                                Debug.Assert(
+                                    ReadByte(generatedIL, offset - 1) == (byte)ILOpCode.Ldtoken
+                                );
+                                writer.Offset = offset - 1;
+                                writer.WriteByte((byte)ILOpCode.Ldc_i4);
+                                switch (rawTokenEncoding)
                                 {
-                                    Debug.Assert(ReadByte(generatedIL, offset - 1) == (byte)ILOpCode.Ldtoken);
-                                    writer.Offset = offset - 1;
-                                    writer.WriteByte((byte)ILOpCode.Ldc_i4);
-                                    switch (rawTokenEncoding)
-                                    {
-                                        case RawTokenEncoding.RowId:
-                                            {
-                                                var handle = ResolveEntityHandleFromPseudoToken(pseudoToken & 0x00ffffff);
-                                                Debug.Assert(handle.Kind is HandleKind.MethodDefinition);
-                                                token = MetadataTokens.GetRowNumber(handle);
-                                            }
-                                            break;
+                                    case RawTokenEncoding.RowId:
+                                        {
+                                            var handle = ResolveEntityHandleFromPseudoToken(
+                                                pseudoToken & 0x00ffffff
+                                            );
+                                            Debug.Assert(
+                                                handle.Kind is HandleKind.MethodDefinition
+                                            );
+                                            token = MetadataTokens.GetRowNumber(handle);
+                                        }
+                                        break;
 
-                                        case RawTokenEncoding.LiftedVariableId:
-                                            {
-                                                var handle = ResolveEntityHandleFromPseudoToken(pseudoToken & 0x00ffffff);
-                                                Debug.Assert(handle.Kind is HandleKind.FieldDefinition);
-                                                token = MetadataTokens.GetRowNumber(handle) + LiftedVariableBaseIndex;
-                                            }
-                                            break;
+                                    case RawTokenEncoding.LiftedVariableId:
+                                        {
+                                            var handle = ResolveEntityHandleFromPseudoToken(
+                                                pseudoToken & 0x00ffffff
+                                            );
+                                            Debug.Assert(handle.Kind is HandleKind.FieldDefinition);
+                                            token =
+                                                MetadataTokens.GetRowNumber(handle)
+                                                + LiftedVariableBaseIndex;
+                                        }
+                                        break;
 
-                                        case RawTokenEncoding.GreatestMethodDefinitionRowId:
-                                            token = GreatestMethodDefIndex;
-                                            break;
+                                    case RawTokenEncoding.GreatestMethodDefinitionRowId:
+                                        token = GreatestMethodDefIndex;
+                                        break;
 
-                                        case RawTokenEncoding.DocumentRowId:
-                                            token = _dynamicAnalysisDataWriterOpt.GetOrAddDocument(module.GetSourceDocumentFromIndex((uint)(pseudoToken & 0x00ffffff)));
-                                            break;
+                                    case RawTokenEncoding.DocumentRowId:
+                                        token = _dynamicAnalysisDataWriterOpt.GetOrAddDocument(
+                                            module.GetSourceDocumentFromIndex(
+                                                (uint)(pseudoToken & 0x00ffffff)
+                                            )
+                                        );
+                                        break;
 
-                                        default:
-                                            throw ExceptionUtilities.UnexpectedValue(rawTokenEncoding);
-                                    }
+                                    default:
+                                        throw ExceptionUtilities.UnexpectedValue(rawTokenEncoding);
                                 }
                             }
-                            writer.Offset = offset;
-                            writer.WriteInt32(token == 0 ? MetadataTokens.GetToken(ResolveEntityHandleFromPseudoToken(pseudoToken)) : token);
-                            offset += 4;
-                            break;
                         }
+                        writer.Offset = offset;
+                        writer.WriteInt32(
+                            token == 0
+                                ? MetadataTokens.GetToken(
+                                    ResolveEntityHandleFromPseudoToken(pseudoToken)
+                                )
+                                : token
+                        );
+                        offset += 4;
+                        break;
+                    }
 
                     case OperandType.InlineString:
+                    {
+                        writer.Offset = offset;
+
+                        int pseudoToken = ReadInt32(generatedIL, offset);
+                        UserStringHandle handle;
+
+                        if ((uint)pseudoToken == ModuleVersionIdStringToken)
                         {
-                            writer.Offset = offset;
-
-                            int pseudoToken = ReadInt32(generatedIL, offset);
-                            UserStringHandle handle;
-
-                            if ((uint)pseudoToken == ModuleVersionIdStringToken)
+                            // The pseudotoken encoding indicates that the string should refer to a textual encoding of the
+                            // current module's module version ID (such that the MVID can be realized using Guid.Parse).
+                            // The value cannot be determined until very late in the compilation, so reserve a slot for it now and fill in the value later.
+                            if (mvidStringHandle.IsNil)
                             {
-                                // The pseudotoken encoding indicates that the string should refer to a textual encoding of the
-                                // current module's module version ID (such that the MVID can be realized using Guid.Parse).
-                                // The value cannot be determined until very late in the compilation, so reserve a slot for it now and fill in the value later.
-                                if (mvidStringHandle.IsNil)
-                                {
-                                    const int guidStringLength = 36;
-                                    Debug.Assert(guidStringLength == default(Guid).ToString().Length);
-                                    var reserved = ReserveUserString(guidStringLength);
-                                    mvidStringHandle = reserved.Handle;
-                                    mvidStringFixup = reserved.Content;
-                                }
-
-                                handle = mvidStringHandle;
-                            }
-                            else
-                            {
-                                handle = ResolveUserStringHandleFromPseudoToken(pseudoToken);
+                                const int guidStringLength = 36;
+                                Debug.Assert(guidStringLength == default(Guid).ToString().Length);
+                                var reserved = ReserveUserString(guidStringLength);
+                                mvidStringHandle = reserved.Handle;
+                                mvidStringFixup = reserved.Content;
                             }
 
-                            writer.WriteInt32(MetadataTokens.GetToken(handle));
-
-                            offset += 4;
-                            break;
+                            handle = mvidStringHandle;
                         }
+                        else
+                        {
+                            handle = ResolveUserStringHandleFromPseudoToken(pseudoToken);
+                        }
+
+                        writer.WriteInt32(MetadataTokens.GetToken(handle));
+
+                        offset += 4;
+                        break;
+                    }
 
                     case OperandType.InlineBrTarget:
                     case OperandType.InlineI:
@@ -3347,7 +3913,10 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeMethodBodyExceptionHandlerTable(ExceptionRegionEncoder encoder, ImmutableArray<ExceptionHandlerRegion> regions)
+        private void SerializeMethodBodyExceptionHandlerTable(
+            ExceptionRegionEncoder encoder,
+            ImmutableArray<ExceptionHandlerRegion> regions
+        )
         {
             foreach (var region in regions)
             {
@@ -3360,11 +3929,14 @@ namespace Microsoft.Cci
                     region.HandlerStartOffset,
                     region.HandlerLength,
                     (exceptionType != null) ? GetTypeHandle(exceptionType) : default(EntityHandle),
-                    region.FilterDecisionStartOffset);
+                    region.FilterDecisionStartOffset
+                );
             }
         }
 
-        private static bool MayUseSmallExceptionHeaders(ImmutableArray<ExceptionHandlerRegion> exceptionRegions)
+        private static bool MayUseSmallExceptionHeaders(
+            ImmutableArray<ExceptionHandlerRegion> exceptionRegions
+        )
         {
             if (!ExceptionRegionEncoder.IsSmallRegionCount(exceptionRegions.Length))
             {
@@ -3373,8 +3945,16 @@ namespace Microsoft.Cci
 
             foreach (var region in exceptionRegions)
             {
-                if (!ExceptionRegionEncoder.IsSmallExceptionRegion(region.TryStartOffset, region.TryLength) ||
-                    !ExceptionRegionEncoder.IsSmallExceptionRegion(region.HandlerStartOffset, region.HandlerLength))
+                if (
+                    !ExceptionRegionEncoder.IsSmallExceptionRegion(
+                        region.TryStartOffset,
+                        region.TryLength
+                    )
+                    || !ExceptionRegionEncoder.IsSmallExceptionRegion(
+                        region.HandlerStartOffset,
+                        region.HandlerLength
+                    )
+                )
                 {
                     return false;
                 }
@@ -3383,27 +3963,44 @@ namespace Microsoft.Cci
             return true;
         }
 
-        private void SerializeParameterInformation(ParameterTypeEncoder encoder, IParameterTypeInformation parameterTypeInformation)
+        private void SerializeParameterInformation(
+            ParameterTypeEncoder encoder,
+            IParameterTypeInformation parameterTypeInformation
+        )
         {
             var type = parameterTypeInformation.GetType(Context);
 
-            Debug.Assert(parameterTypeInformation.RefCustomModifiers.Length == 0 || parameterTypeInformation.IsByReference);
-            SerializeCustomModifiers(encoder.CustomModifiers(), parameterTypeInformation.RefCustomModifiers);
+            Debug.Assert(
+                parameterTypeInformation.RefCustomModifiers.Length == 0
+                    || parameterTypeInformation.IsByReference
+            );
+            SerializeCustomModifiers(
+                encoder.CustomModifiers(),
+                parameterTypeInformation.RefCustomModifiers
+            );
 
             var typeEncoder = encoder.Type(parameterTypeInformation.IsByReference);
 
-            SerializeCustomModifiers(typeEncoder.CustomModifiers(), parameterTypeInformation.CustomModifiers);
+            SerializeCustomModifiers(
+                typeEncoder.CustomModifiers(),
+                parameterTypeInformation.CustomModifiers
+            );
             SerializeTypeReference(typeEncoder, type);
         }
 
         private void SerializeFieldSignature(IFieldReference fieldReference, BlobBuilder builder)
         {
-            Debug.Assert(fieldReference.RefCustomModifiers.Length == 0 || fieldReference.IsByReference);
+            Debug.Assert(
+                fieldReference.RefCustomModifiers.Length == 0 || fieldReference.IsByReference
+            );
 
             // https://github.com/dotnet/roslyn/issues/61385: Use System.Reflection.Metadata.Ecma335.FieldTypeEncoder
             // instead, since that type supports ref fields directly.
             var typeEncoder = new BlobEncoder(builder).FieldSignature();
-            SerializeCustomModifiers(new CustomModifiersEncoder(builder), fieldReference.RefCustomModifiers);
+            SerializeCustomModifiers(
+                new CustomModifiersEncoder(builder),
+                fieldReference.RefCustomModifiers
+            );
             if (fieldReference.IsByReference)
             {
                 typeEncoder.Builder.WriteByte((byte)SignatureTypeCode.ByReference);
@@ -3411,10 +4008,19 @@ namespace Microsoft.Cci
             SerializeTypeReference(typeEncoder, fieldReference.GetType(Context));
         }
 
-        private void SerializeMethodSpecificationSignature(BlobBuilder builder, IGenericMethodInstanceReference genericMethodInstanceReference)
+        private void SerializeMethodSpecificationSignature(
+            BlobBuilder builder,
+            IGenericMethodInstanceReference genericMethodInstanceReference
+        )
         {
-            var argsEncoder = new BlobEncoder(builder).MethodSpecificationSignature(genericMethodInstanceReference.GetGenericMethod(Context).GenericParameterCount);
-            foreach (ITypeReference genericArgument in genericMethodInstanceReference.GetGenericArguments(Context))
+            var argsEncoder = new BlobEncoder(builder).MethodSpecificationSignature(
+                genericMethodInstanceReference.GetGenericMethod(Context).GenericParameterCount
+            );
+            foreach (
+                ITypeReference genericArgument in genericMethodInstanceReference.GetGenericArguments(
+                    Context
+                )
+            )
             {
                 ITypeReference typeRef = genericArgument;
                 SerializeTypeReference(argsEncoder.AddArgument(), typeRef);
@@ -3423,7 +4029,9 @@ namespace Microsoft.Cci
 
         private EmitContext GetEmitContextForAttribute(ICustomAttribute customAttribute)
         {
-            if (customAttribute is AttributeData { ApplicationSyntaxReference: { } syntaxReference })
+            if (
+                customAttribute is AttributeData { ApplicationSyntaxReference: { } syntaxReference }
+            )
             {
                 return new EmitContext(
                     Context.Module,
@@ -3431,47 +4039,85 @@ namespace Microsoft.Cci
                     metadataOnly: Context.MetadataOnly,
                     includePrivateMembers: Context.IncludePrivateMembers,
                     rebuildData: Context.RebuildData,
-                    syntaxReference: syntaxReference);
+                    syntaxReference: syntaxReference
+                );
             }
             return Context;
         }
 
-        private void SerializeCustomAttributeSignature(ICustomAttribute customAttribute, BlobBuilder builder)
+        private void SerializeCustomAttributeSignature(
+            ICustomAttribute customAttribute,
+            BlobBuilder builder
+        )
         {
-            var parameters = customAttribute.Constructor(Context, reportDiagnostics: false).GetParameters(Context);
+            var parameters = customAttribute
+                .Constructor(Context, reportDiagnostics: false)
+                .GetParameters(Context);
             var arguments = customAttribute.GetArguments(Context);
             Debug.Assert(parameters.Length == arguments.Length);
 
             FixedArgumentsEncoder fixedArgsEncoder;
             CustomAttributeNamedArgumentsEncoder namedArgsEncoder;
-            new BlobEncoder(builder).CustomAttributeSignature(out fixedArgsEncoder, out namedArgsEncoder);
+            new BlobEncoder(builder).CustomAttributeSignature(
+                out fixedArgsEncoder,
+                out namedArgsEncoder
+            );
 
             var attributeContext = GetEmitContextForAttribute(customAttribute);
 
             for (int i = 0; i < parameters.Length; i++)
             {
-                SerializeMetadataExpression(in attributeContext, fixedArgsEncoder.AddArgument(), arguments[i], parameters[i].GetType(Context));
+                SerializeMetadataExpression(
+                    in attributeContext,
+                    fixedArgsEncoder.AddArgument(),
+                    arguments[i],
+                    parameters[i].GetType(Context)
+                );
             }
 
-            SerializeCustomAttributeNamedArguments(in attributeContext, namedArgsEncoder.Count(customAttribute.NamedArgumentCount), customAttribute);
+            SerializeCustomAttributeNamedArguments(
+                in attributeContext,
+                namedArgsEncoder.Count(customAttribute.NamedArgumentCount),
+                customAttribute
+            );
         }
 
-        private void SerializeCustomAttributeNamedArguments(in EmitContext context, NamedArgumentsEncoder encoder, ICustomAttribute customAttribute)
+        private void SerializeCustomAttributeNamedArguments(
+            in EmitContext context,
+            NamedArgumentsEncoder encoder,
+            ICustomAttribute customAttribute
+        )
         {
-            foreach (IMetadataNamedArgument namedArgument in customAttribute.GetNamedArguments(Context))
+            foreach (
+                IMetadataNamedArgument namedArgument in customAttribute.GetNamedArguments(Context)
+            )
             {
                 NamedArgumentTypeEncoder typeEncoder;
                 NameEncoder nameEncoder;
                 LiteralEncoder literalEncoder;
-                encoder.AddArgument(namedArgument.IsField, out typeEncoder, out nameEncoder, out literalEncoder);
+                encoder.AddArgument(
+                    namedArgument.IsField,
+                    out typeEncoder,
+                    out nameEncoder,
+                    out literalEncoder
+                );
 
                 SerializeNamedArgumentType(in context, typeEncoder, namedArgument.Type);
                 nameEncoder.Name(namedArgument.ArgumentName);
-                SerializeMetadataExpression(in context, literalEncoder, namedArgument.ArgumentValue, namedArgument.Type);
+                SerializeMetadataExpression(
+                    in context,
+                    literalEncoder,
+                    namedArgument.ArgumentValue,
+                    namedArgument.Type
+                );
             }
         }
 
-        private void SerializeNamedArgumentType(in EmitContext context, NamedArgumentTypeEncoder encoder, ITypeReference type)
+        private void SerializeNamedArgumentType(
+            in EmitContext context,
+            NamedArgumentTypeEncoder encoder,
+            ITypeReference type
+        )
         {
             if (type is IArrayTypeReference arrayType)
             {
@@ -3487,7 +4133,12 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeMetadataExpression(in EmitContext context, LiteralEncoder encoder, IMetadataExpression expression, ITypeReference targetType)
+        private void SerializeMetadataExpression(
+            in EmitContext context,
+            LiteralEncoder encoder,
+            IMetadataExpression expression,
+            ITypeReference targetType
+        )
         {
             if (expression is MetadataCreateArray a)
             {
@@ -3518,7 +4169,12 @@ namespace Microsoft.Cci
 
                 foreach (IMetadataExpression elemValue in a.Elements)
                 {
-                    SerializeMetadataExpression(in context, literalsEncoder.AddLiteral(), elemValue, targetElementType);
+                    SerializeMetadataExpression(
+                        in context,
+                        literalsEncoder.AddLiteral(),
+                        elemValue,
+                        targetElementType
+                    );
                 }
             }
             else
@@ -3532,15 +4188,21 @@ namespace Microsoft.Cci
                     encoder.TaggedScalar(out typeEncoder, out scalarEncoder);
 
                     // special case null argument assigned to Object parameter - treat as null string
-                    if (c != null &&
-                        c.Value == null &&
-                        this.module.IsPlatformType(c.Type, PlatformType.SystemObject))
+                    if (
+                        c != null
+                        && c.Value == null
+                        && this.module.IsPlatformType(c.Type, PlatformType.SystemObject)
+                    )
                     {
                         typeEncoder.String();
                     }
                     else
                     {
-                        SerializeCustomAttributeElementType(in context, typeEncoder, expression.Type);
+                        SerializeCustomAttributeElementType(
+                            in context,
+                            typeEncoder,
+                            expression.Type
+                        );
                     }
                 }
                 else
@@ -3556,17 +4218,24 @@ namespace Microsoft.Cci
                         return;
                     }
 
-                    Debug.Assert(!module.IsPlatformType(c.Type, PlatformType.SystemType) || c.Value == null);
+                    Debug.Assert(
+                        !module.IsPlatformType(c.Type, PlatformType.SystemType) || c.Value == null
+                    );
                     scalarEncoder.Constant(c.Value);
                 }
                 else
                 {
-                    scalarEncoder.SystemType(((MetadataTypeOf)expression).TypeToGet.GetSerializedTypeName(context));
+                    scalarEncoder.SystemType(
+                        ((MetadataTypeOf)expression).TypeToGet.GetSerializedTypeName(context)
+                    );
                 }
             }
         }
 
-        private void SerializeMarshallingDescriptor(IMarshallingInformation marshallingInformation, BlobBuilder writer)
+        private void SerializeMarshallingDescriptor(
+            IMarshallingInformation marshallingInformation,
+            BlobBuilder writer
+        )
         {
             writer.WriteCompressedInteger((int)marshallingInformation.UnmanagedType);
             switch (marshallingInformation.UnmanagedType)
@@ -3634,8 +4303,11 @@ namespace Microsoft.Cci
                 case Constants.UnmanagedType_SafeArray:
                     if (marshallingInformation.SafeArrayElementSubtype >= 0)
                     {
-                        writer.WriteCompressedInteger((int)marshallingInformation.SafeArrayElementSubtype);
-                        var elementType = marshallingInformation.GetSafeArrayElementUserDefinedSubtype(Context);
+                        writer.WriteCompressedInteger(
+                            (int)marshallingInformation.SafeArrayElementSubtype
+                        );
+                        var elementType =
+                            marshallingInformation.GetSafeArrayElementUserDefinedSubtype(Context);
                         if (elementType != null)
                         {
                             this.SerializeTypeName(elementType, writer);
@@ -3675,10 +4347,21 @@ namespace Microsoft.Cci
             var pooled = PooledStringBuilder.GetInstance();
             StringBuilder sb = pooled.Builder;
             sb.Append(identity.Name);
-            sb.AppendFormat(CultureInfo.InvariantCulture, ", Version={0}.{1}.{2}.{3}", identity.Version.Major, identity.Version.Minor, identity.Version.Build, identity.Version.Revision);
+            sb.AppendFormat(
+                CultureInfo.InvariantCulture,
+                ", Version={0}.{1}.{2}.{3}",
+                identity.Version.Major,
+                identity.Version.Minor,
+                identity.Version.Build,
+                identity.Version.Revision
+            );
             if (!string.IsNullOrEmpty(identity.CultureName))
             {
-                sb.AppendFormat(CultureInfo.InvariantCulture, ", Culture={0}", identity.CultureName);
+                sb.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    ", Culture={0}",
+                    identity.CultureName
+                );
             }
             else
             {
@@ -3715,16 +4398,23 @@ namespace Microsoft.Cci
             return pooled.ToStringAndFree();
         }
 
-        private void SerializePermissionSet(ImmutableArray<ICustomAttribute> permissionSet, BlobBuilder writer)
+        private void SerializePermissionSet(
+            ImmutableArray<ICustomAttribute> permissionSet,
+            BlobBuilder writer
+        )
         {
             EmitContext context = this.Context;
             foreach (ICustomAttribute customAttribute in permissionSet)
             {
                 bool isAssemblyQualified = true;
-                string typeName = customAttribute.GetType(context).GetSerializedTypeName(context, ref isAssemblyQualified);
+                string typeName = customAttribute
+                    .GetType(context)
+                    .GetSerializedTypeName(context, ref isAssemblyQualified);
                 if (!isAssemblyQualified)
                 {
-                    INamespaceTypeReference namespaceType = customAttribute.GetType(context).AsNamespaceTypeReference;
+                    INamespaceTypeReference namespaceType = customAttribute
+                        .GetType(context)
+                        .AsNamespaceTypeReference;
                     if (namespaceType?.GetUnit(context) is IAssemblyReference referencedAssembly)
                     {
                         typeName = typeName + ", " + StrongName(referencedAssembly);
@@ -3734,8 +4424,14 @@ namespace Microsoft.Cci
                 writer.WriteSerializedString(typeName);
 
                 var customAttributeArgsBuilder = PooledBlobBuilder.GetInstance();
-                var namedArgsEncoder = new BlobEncoder(customAttributeArgsBuilder).PermissionSetArguments(customAttribute.NamedArgumentCount);
-                SerializeCustomAttributeNamedArguments(GetEmitContextForAttribute(customAttribute), namedArgsEncoder, customAttribute);
+                var namedArgsEncoder = new BlobEncoder(
+                    customAttributeArgsBuilder
+                ).PermissionSetArguments(customAttribute.NamedArgumentCount);
+                SerializeCustomAttributeNamedArguments(
+                    GetEmitContextForAttribute(customAttribute),
+                    namedArgsEncoder,
+                    customAttribute
+                );
                 writer.WriteCompressedInteger(customAttributeArgsBuilder.Count);
 
                 customAttributeArgsBuilder.WriteContentTo(writer);
@@ -3744,7 +4440,11 @@ namespace Microsoft.Cci
             // TODO: xml for older platforms
         }
 
-        private void SerializeReturnValueAndParameters(MethodSignatureEncoder encoder, ISignature signature, ImmutableArray<IParameterTypeInformation> varargParameters)
+        private void SerializeReturnValueAndParameters(
+            MethodSignatureEncoder encoder,
+            ISignature signature,
+            ImmutableArray<IParameterTypeInformation> varargParameters
+        )
         {
             var declaredParameters = signature.GetParameters(Context);
             var returnType = signature.GetType(Context);
@@ -3752,24 +4452,37 @@ namespace Microsoft.Cci
             ReturnTypeEncoder returnTypeEncoder;
             ParametersEncoder parametersEncoder;
 
-            encoder.Parameters(declaredParameters.Length + varargParameters.Length, out returnTypeEncoder, out parametersEncoder);
+            encoder.Parameters(
+                declaredParameters.Length + varargParameters.Length,
+                out returnTypeEncoder,
+                out parametersEncoder
+            );
 
             if (module.IsPlatformType(returnType, PlatformType.SystemVoid))
             {
                 Debug.Assert(!signature.ReturnValueIsByRef);
                 Debug.Assert(signature.RefCustomModifiers.IsEmpty);
-                SerializeCustomModifiers(returnTypeEncoder.CustomModifiers(), signature.ReturnValueCustomModifiers);
+                SerializeCustomModifiers(
+                    returnTypeEncoder.CustomModifiers(),
+                    signature.ReturnValueCustomModifiers
+                );
 
                 returnTypeEncoder.Void();
             }
             else
             {
                 Debug.Assert(signature.RefCustomModifiers.IsEmpty || signature.ReturnValueIsByRef);
-                SerializeCustomModifiers(returnTypeEncoder.CustomModifiers(), signature.RefCustomModifiers);
+                SerializeCustomModifiers(
+                    returnTypeEncoder.CustomModifiers(),
+                    signature.RefCustomModifiers
+                );
 
                 var typeEncoder = returnTypeEncoder.Type(signature.ReturnValueIsByRef);
 
-                SerializeCustomModifiers(typeEncoder.CustomModifiers(), signature.ReturnValueCustomModifiers);
+                SerializeCustomModifiers(
+                    typeEncoder.CustomModifiers(),
+                    signature.ReturnValueCustomModifiers
+                );
                 SerializeTypeReference(typeEncoder, returnType);
             }
 
@@ -3788,7 +4501,10 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeTypeReference(SignatureTypeEncoder encoder, ITypeReference typeReference)
+        private void SerializeTypeReference(
+            SignatureTypeEncoder encoder,
+            ITypeReference typeReference
+        )
         {
             while (true)
             {
@@ -3802,7 +4518,10 @@ namespace Microsoft.Cci
 
                 if (typeReference is IModifiedTypeReference modifiedTypeReference)
                 {
-                    SerializeCustomModifiers(encoder.CustomModifiers(), modifiedTypeReference.CustomModifiers);
+                    SerializeCustomModifiers(
+                        encoder.CustomModifiers(),
+                        modifiedTypeReference.CustomModifiers
+                    );
                     typeReference = modifiedTypeReference.UnmodifiedType;
                     continue;
                 }
@@ -3830,17 +4549,26 @@ namespace Microsoft.Cci
                 if (typeReference is IFunctionPointerTypeReference functionPointerTypeReference)
                 {
                     var signature = functionPointerTypeReference.Signature;
-                    var signatureEncoder = encoder.FunctionPointer(convention: signature.CallingConvention.ToSignatureConvention());
-                    SerializeReturnValueAndParameters(signatureEncoder, signature, varargParameters: ImmutableArray<IParameterTypeInformation>.Empty);
+                    var signatureEncoder = encoder.FunctionPointer(
+                        convention: signature.CallingConvention.ToSignatureConvention()
+                    );
+                    SerializeReturnValueAndParameters(
+                        signatureEncoder,
+                        signature,
+                        varargParameters: ImmutableArray<IParameterTypeInformation>.Empty
+                    );
                     return;
                 }
 
-                IGenericTypeParameterReference genericTypeParameterReference = typeReference.AsGenericTypeParameterReference;
+                IGenericTypeParameterReference genericTypeParameterReference =
+                    typeReference.AsGenericTypeParameterReference;
                 if (genericTypeParameterReference != null)
                 {
                     encoder.GenericTypeParameter(
-                        GetNumberOfInheritedTypeParameters(genericTypeParameterReference.DefiningType) +
-                        genericTypeParameterReference.Index);
+                        GetNumberOfInheritedTypeParameters(
+                            genericTypeParameterReference.DefiningType
+                        ) + genericTypeParameterReference.Index
+                    );
                     return;
                 }
 
@@ -3859,7 +4587,11 @@ namespace Microsoft.Cci
                         ArrayShapeEncoder arrayShape;
                         encoder.Array(out elementType, out arrayShape);
                         SerializeTypeReference(elementType, typeReference);
-                        arrayShape.Shape(arrayTypeReference.Rank, arrayTypeReference.Sizes, arrayTypeReference.LowerBounds);
+                        arrayShape.Shape(
+                            arrayTypeReference.Rank,
+                            arrayTypeReference.Sizes,
+                            arrayTypeReference.LowerBounds
+                        );
                         return;
                     }
                 }
@@ -3870,7 +4602,8 @@ namespace Microsoft.Cci
                     return;
                 }
 
-                IGenericMethodParameterReference genericMethodParameterReference = typeReference.AsGenericMethodParameterReference;
+                IGenericMethodParameterReference genericMethodParameterReference =
+                    typeReference.AsGenericMethodParameterReference;
                 if (genericMethodParameterReference != null)
                 {
                     encoder.GenericMethodTypeParameter(genericMethodParameterReference.Index);
@@ -3879,18 +4612,26 @@ namespace Microsoft.Cci
 
                 if (typeReference.IsTypeSpecification())
                 {
-                    ITypeReference uninstantiatedTypeReference = typeReference.GetUninstantiatedGenericType(Context);
+                    ITypeReference uninstantiatedTypeReference =
+                        typeReference.GetUninstantiatedGenericType(Context);
 
                     // Roslyn's uninstantiated type is the same object as the instantiated type for
                     // types closed over their type parameters, so to speak.
 
                     var consolidatedTypeArguments = ArrayBuilder<ITypeReference>.GetInstance();
-                    typeReference.GetConsolidatedTypeArguments(consolidatedTypeArguments, this.Context);
+                    typeReference.GetConsolidatedTypeArguments(
+                        consolidatedTypeArguments,
+                        this.Context
+                    );
 
                     var genericArgsEncoder = encoder.GenericInstantiation(
-                        GetTypeHandle(uninstantiatedTypeReference, treatRefAsPotentialTypeSpec: false),
+                        GetTypeHandle(
+                            uninstantiatedTypeReference,
+                            treatRefAsPotentialTypeSpec: false
+                        ),
                         consolidatedTypeArguments.Count,
-                        typeReference.IsValueType);
+                        typeReference.IsValueType
+                    );
 
                     foreach (ITypeReference typeArgument in consolidatedTypeArguments)
                     {
@@ -3906,7 +4647,10 @@ namespace Microsoft.Cci
             }
         }
 
-        private static void SerializePrimitiveType(SignatureTypeEncoder encoder, PrimitiveTypeCode primitiveType)
+        private static void SerializePrimitiveType(
+            SignatureTypeEncoder encoder,
+            PrimitiveTypeCode primitiveType
+        )
         {
             switch (primitiveType)
             {
@@ -3974,7 +4718,9 @@ namespace Microsoft.Cci
                     // "void" is handled specifically for "void*" with custom modifiers.
                     // If SignatureTypeEncoder supports such cases directly, this can
                     // be removed. See https://github.com/dotnet/corefx/issues/14571.
-                    encoder.Builder.WriteByte((byte)System.Reflection.Metadata.PrimitiveTypeCode.Void);
+                    encoder.Builder.WriteByte(
+                        (byte)System.Reflection.Metadata.PrimitiveTypeCode.Void
+                    );
                     break;
 
                 default:
@@ -3982,7 +4728,11 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeCustomAttributeArrayType(in EmitContext context, CustomAttributeArrayTypeEncoder encoder, IArrayTypeReference arrayTypeReference)
+        private void SerializeCustomAttributeArrayType(
+            in EmitContext context,
+            CustomAttributeArrayTypeEncoder encoder,
+            IArrayTypeReference arrayTypeReference
+        )
         {
             // A single-dimensional, zero-based array is specified as a single byte 0x1D followed by the FieldOrPropType of the element type.
 
@@ -4003,7 +4753,11 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeCustomAttributeElementType(in EmitContext context, CustomAttributeElementTypeEncoder encoder, ITypeReference typeReference)
+        private void SerializeCustomAttributeElementType(
+            in EmitContext context,
+            CustomAttributeElementTypeEncoder encoder,
+            ITypeReference typeReference
+        )
         {
             // Spec:
             // The FieldOrPropType shall be exactly one of:
@@ -4027,7 +4781,10 @@ namespace Microsoft.Cci
             }
         }
 
-        private static void SerializePrimitiveType(CustomAttributeElementTypeEncoder encoder, PrimitiveTypeCode primitiveType)
+        private static void SerializePrimitiveType(
+            CustomAttributeElementTypeEncoder encoder,
+            PrimitiveTypeCode primitiveType
+        )
         {
             switch (primitiveType)
             {
@@ -4088,11 +4845,17 @@ namespace Microsoft.Cci
             }
         }
 
-        private void SerializeCustomModifiers(CustomModifiersEncoder encoder, ImmutableArray<ICustomModifier> modifiers)
+        private void SerializeCustomModifiers(
+            CustomModifiersEncoder encoder,
+            ImmutableArray<ICustomModifier> modifiers
+        )
         {
             foreach (var modifier in modifiers)
             {
-                encoder = encoder.AddModifier(GetTypeHandle(modifier.GetModifier(Context)), modifier.IsOptional);
+                encoder = encoder.AddModifier(
+                    GetTypeHandle(modifier.GetModifier(Context)),
+                    modifier.IsOptional
+                );
             }
         }
 
@@ -4104,7 +4867,8 @@ namespace Microsoft.Cci
                 return 0;
             }
 
-            ISpecializedNestedTypeReference specializedNestedType = nestedType.AsSpecializedNestedTypeReference;
+            ISpecializedNestedTypeReference specializedNestedType =
+                nestedType.AsSpecializedNestedTypeReference;
             if (specializedNestedType != null)
             {
                 nestedType = specializedNestedType.GetUnspecializedVersion(Context);
@@ -4124,7 +4888,9 @@ namespace Microsoft.Cci
             return result;
         }
 
-        internal static EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(IMethodBody methodBody)
+        internal static EditAndContinueMethodDebugInformation GetEncMethodDebugInfo(
+            IMethodBody methodBody
+        )
         {
             ImmutableArray<LocalSlotDebugInfo> encLocalSlots;
 
@@ -4145,10 +4911,13 @@ namespace Microsoft.Cci
                 encLocalSlots,
                 methodBody.ClosureDebugInfo,
                 methodBody.LambdaDebugInfo,
-                methodBody.StateMachineStatesDebugInfo.States);
+                methodBody.StateMachineStatesDebugInfo.States
+            );
         }
 
-        internal static ImmutableArray<LocalSlotDebugInfo> GetLocalSlotDebugInfos(ImmutableArray<ILocalDefinition> locals)
+        internal static ImmutableArray<LocalSlotDebugInfo> GetLocalSlotDebugInfos(
+            ImmutableArray<ILocalDefinition> locals
+        )
         {
             if (!locals.Any(static variable => !variable.SlotInfo.Id.IsNone))
             {
@@ -4158,7 +4927,9 @@ namespace Microsoft.Cci
             return locals.SelectAsArray(variable => variable.SlotInfo);
         }
 
-        internal static ImmutableArray<LocalSlotDebugInfo> GetLocalSlotDebugInfos(ImmutableArray<EncHoistedLocalInfo> locals)
+        internal static ImmutableArray<LocalSlotDebugInfo> GetLocalSlotDebugInfos(
+            ImmutableArray<EncHoistedLocalInfo> locals
+        )
         {
             if (!locals.Any(static variable => !variable.SlotInfo.Id.IsNone))
             {
@@ -4220,11 +4991,13 @@ namespace Microsoft.Cci
             private readonly Dictionary<T, int> _index;
 
             public HeapOrReferenceIndex(MetadataWriter writer, int lastRowId = 0)
-                : this(writer, new Dictionary<T, int>(), lastRowId)
-            {
-            }
+                : this(writer, new Dictionary<T, int>(), lastRowId) { }
 
-            private HeapOrReferenceIndex(MetadataWriter writer, Dictionary<T, int> index, int lastRowId)
+            private HeapOrReferenceIndex(
+                MetadataWriter writer,
+                Dictionary<T, int> index,
+                int lastRowId
+            )
                 : base(writer, lastRowId)
             {
                 Debug.Assert(index.Count == 0);
@@ -4247,11 +5020,17 @@ namespace Microsoft.Cci
             private readonly Dictionary<ITypeReference, int> _index;
 
             public TypeReferenceIndex(MetadataWriter writer, int lastRowId = 0)
-                : this(writer, new Dictionary<ITypeReference, int>(ReferenceEqualityComparer.Instance), lastRowId)
-            {
-            }
+                : this(
+                    writer,
+                    new Dictionary<ITypeReference, int>(ReferenceEqualityComparer.Instance),
+                    lastRowId
+                ) { }
 
-            private TypeReferenceIndex(MetadataWriter writer, Dictionary<ITypeReference, int> index, int lastRowId)
+            private TypeReferenceIndex(
+                MetadataWriter writer,
+                Dictionary<ITypeReference, int> index,
+                int lastRowId
+            )
                 : base(writer, lastRowId)
             {
                 Debug.Assert(index.Count == 0);
@@ -4269,12 +5048,17 @@ namespace Microsoft.Cci
             }
         }
 
-        protected sealed class InstanceAndStructuralReferenceIndex<T> : HeapOrReferenceIndexBase<T> where T : class, IReference
+        protected sealed class InstanceAndStructuralReferenceIndex<T> : HeapOrReferenceIndexBase<T>
+            where T : class, IReference
         {
             private readonly Dictionary<T, int> _instanceIndex;
             private readonly Dictionary<T, int> _structuralIndex;
 
-            public InstanceAndStructuralReferenceIndex(MetadataWriter writer, IEqualityComparer<T> structuralComparer, int lastRowId = 0)
+            public InstanceAndStructuralReferenceIndex(
+                MetadataWriter writer,
+                IEqualityComparer<T> structuralComparer,
+                int lastRowId = 0
+            )
                 : base(writer, lastRowId)
             {
                 _instanceIndex = new Dictionary<T, int>(ReferenceEqualityComparer.Instance);
@@ -4302,22 +5086,30 @@ namespace Microsoft.Cci
             }
         }
 
-        private class ByteSequenceBoolTupleComparer : IEqualityComparer<(ImmutableArray<byte>, bool)>
+        private class ByteSequenceBoolTupleComparer
+            : IEqualityComparer<(ImmutableArray<byte>, bool)>
         {
-            internal static readonly ByteSequenceBoolTupleComparer Instance = new ByteSequenceBoolTupleComparer();
+            internal static readonly ByteSequenceBoolTupleComparer Instance =
+                new ByteSequenceBoolTupleComparer();
 
-            private ByteSequenceBoolTupleComparer()
-            {
-            }
+            private ByteSequenceBoolTupleComparer() { }
 
-            bool IEqualityComparer<(ImmutableArray<byte>, bool)>.Equals((ImmutableArray<byte>, bool) x, (ImmutableArray<byte>, bool) y)
+            bool IEqualityComparer<(ImmutableArray<byte>, bool)>.Equals(
+                (ImmutableArray<byte>, bool) x,
+                (ImmutableArray<byte>, bool) y
+            )
             {
                 return x.Item2 == y.Item2 && ByteSequenceComparer.Equals(x.Item1, y.Item1);
             }
 
-            int IEqualityComparer<(ImmutableArray<byte>, bool)>.GetHashCode((ImmutableArray<byte>, bool) x)
+            int IEqualityComparer<(ImmutableArray<byte>, bool)>.GetHashCode(
+                (ImmutableArray<byte>, bool) x
+            )
             {
-                return Hash.Combine(ByteSequenceComparer.GetHashCode(x.Item1), x.Item2.GetHashCode());
+                return Hash.Combine(
+                    ByteSequenceComparer.GetHashCode(x.Item1),
+                    x.Item2.GetHashCode()
+                );
             }
         }
     }

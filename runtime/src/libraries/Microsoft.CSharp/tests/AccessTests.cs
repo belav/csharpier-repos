@@ -16,73 +16,67 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             public abstract int IntValueProperty { get; }
         }
 
-        public interface ITestIFace
-        {
-        }
+        public interface ITestIFace { }
 
-        public interface ITestIFaceCons<out T> where T : ITestIFace
-        {
-        }
+        public interface ITestIFaceCons<out T>
+            where T : ITestIFace { }
 
         private class Container
         {
-            private abstract class ReferenceTypeIntermediary : PublicReferenceType
-            {
-            }
+            private abstract class ReferenceTypeIntermediary : PublicReferenceType { }
 
             private class ReferenceType : ReferenceTypeIntermediary, ITestIFace
             {
                 public override int IntValueProperty => 23;
             }
 
-            private struct PrivateValueType
-            {
-            }
+            private struct PrivateValueType { }
 
-            private protected struct PrivateProtectedValueType
-            {
-            }
+            private protected struct PrivateProtectedValueType { }
 
-            internal struct InternalValueType
-            {
-            }
+            internal struct InternalValueType { }
 
-            protected internal struct ProtectedInternalValueType
-            {
-            }
+            protected internal struct ProtectedInternalValueType { }
 
-            private interface IPrivateInterface
-            {
-            }
+            private interface IPrivateInterface { }
 
             public static dynamic GetReferenceType() => new ReferenceType();
 
             public static dynamic TenReferenceTypesArray() => new ReferenceType[10];
 
-            public static dynamic TenReferenceTypesRepeat() => Enumerable.Repeat(new ReferenceType(), 10);
+            public static dynamic TenReferenceTypesRepeat() =>
+                Enumerable.Repeat(new ReferenceType(), 10);
 
             public static dynamic ReferenceTypeDelegate() =>
-                (Func<int, IEnumerable<ReferenceType>>)(i => Enumerable.Repeat(new ReferenceType(), i));
+                (Func<int, IEnumerable<ReferenceType>>)(
+                    i => Enumerable.Repeat(new ReferenceType(), i)
+                );
 
             public static dynamic ValueTypeArray() => new PrivateValueType[2];
 
-            public static dynamic PrivateProtectedValueTypeArray() => new PrivateProtectedValueType[2];
+            public static dynamic PrivateProtectedValueTypeArray() =>
+                new PrivateProtectedValueType[2];
 
             public static dynamic InternalValueTypeArray() => new InternalValueType[2];
 
-            public static dynamic ProtectedInternalValueTypeArray() => new ProtectedInternalValueType[2];
+            public static dynamic ProtectedInternalValueTypeArray() =>
+                new ProtectedInternalValueType[2];
 
             private delegate int PrivateFunc<T>(T arg);
 
-            public static dynamic PrivateDelegateType() => (PrivateFunc<ReferenceType>)(r => r.IntValueProperty);
+            public static dynamic PrivateDelegateType() =>
+                (PrivateFunc<ReferenceType>)(r => r.IntValueProperty);
 
-            public static dynamic ValueTypeDelegate() => (Func<PrivateValueType>)(() => new PrivateValueType());
+            public static dynamic ValueTypeDelegate() =>
+                (Func<PrivateValueType>)(() => new PrivateValueType());
 
             public static unsafe dynamic PointerArray() => new PrivateValueType*[4];
 
-            public static dynamic PrivateInterfaceDelegate() => (Func<IPrivateInterface>)(() => null);
+            public static dynamic PrivateInterfaceDelegate() =>
+                (Func<IPrivateInterface>)(() => null);
 
-            public static dynamic PrivateConstraintInterfaceDelegate() => (Func<ITestIFaceCons<ReferenceType>>)(() => null);
+            public static dynamic PrivateConstraintInterfaceDelegate() =>
+                (Func<ITestIFaceCons<ReferenceType>>)(() => null);
 
             public static dynamic PrivateProtectedInstance() => PrivateProtectedValueTypeArray()[1];
         }
@@ -129,13 +123,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        public void CanGetAccessibleBaseOfInaccessibleType() => Assert.Equal(23, Container.GetReferenceType().IntValueProperty);
+        public void CanGetAccessibleBaseOfInaccessibleType() =>
+            Assert.Equal(23, Container.GetReferenceType().IntValueProperty);
 
         [Fact]
-        public void AccessibleArray() => Assert.Equal(10, Enumerable.Count(Container.TenReferenceTypesArray()));
+        public void AccessibleArray() =>
+            Assert.Equal(10, Enumerable.Count(Container.TenReferenceTypesArray()));
 
         [Fact]
-        public void AccessibleInterface() => Assert.Equal(10, Enumerable.Count(Container.TenReferenceTypesRepeat()));
+        public void AccessibleInterface() =>
+            Assert.Equal(10, Enumerable.Count(Container.TenReferenceTypesRepeat()));
 
         [Fact]
         public void AccessCovariantDelegate()
@@ -149,7 +146,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        public void NonCovariantArrayToArrayType() => Assert.Equal(2, Container.ValueTypeArray().Length);
+        public void NonCovariantArrayToArrayType() =>
+            Assert.Equal(2, Container.ValueTypeArray().Length);
 
         [Fact]
         public void NonCovariantArrayNotCastToIndexableType()
@@ -211,36 +209,43 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public void NullableOfInaccessible()
         {
             // ValueType members work without access to the type.
-            CallSite<Func<CallSite, SomeValueType?, object>> site =
-                CallSite<Func<CallSite, SomeValueType?, object>>.Create(
-                    Binder.InvokeMember(
-                        CSharpBinderFlags.None, "ToString", null, null,
-                        new[]
-                        {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        }));
+            CallSite<Func<CallSite, SomeValueType?, object>> site = CallSite<
+                Func<CallSite, SomeValueType?, object>
+            >.Create(
+                Binder.InvokeMember(
+                    CSharpBinderFlags.None,
+                    "ToString",
+                    null,
+                    null,
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                )
+            );
             Func<CallSite, SomeValueType?, object> target = site.Target;
             Assert.Equal("test", target(site, new SomeValueType()));
 
             // Nullable<T> members work with access to the type.
             site = CallSite<Func<CallSite, SomeValueType?, object>>.Create(
                 Binder.InvokeMember(
-                    CSharpBinderFlags.None, "GetValueOrDefault", null, GetType(),
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    }));
+                    CSharpBinderFlags.None,
+                    "GetValueOrDefault",
+                    null,
+                    GetType(),
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                )
+            );
             target = site.Target;
             Assert.Equal(new SomeValueType(), target(site, new SomeValueType()));
 
             // Nullable<T> members don't work without access to the type.
             site = CallSite<Func<CallSite, SomeValueType?, object>>.Create(
                 Binder.InvokeMember(
-                    CSharpBinderFlags.None, "GetValueOrDefault", null, null,
-                    new[]
-                    {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    }));
+                    CSharpBinderFlags.None,
+                    "GetValueOrDefault",
+                    null,
+                    null,
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                )
+            );
             target = site.Target;
             Assert.Throws<RuntimeBinderException>(() => target(site, new SomeValueType()));
         }
@@ -253,7 +258,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void AccessNestedPrivateProtectedAssembly()
         {
             dynamic d = Container.PrivateProtectedValueTypeArray();
@@ -271,7 +279,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void InaccessibleFields()
         {
             dynamic d = new TypeWithFields();

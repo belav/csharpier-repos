@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
     internal static class PythiaObjectPool
     {
         [Obsolete("Use specific GetInstance overloads")]
-        public static IDisposable GetInstance<T>(out T instance) where T : class, new()
+        public static IDisposable GetInstance<T>(out T instance)
+            where T : class, new()
         {
             var disposer = Default<T>().GetPooledObject<T>();
             instance = disposer.Object;
@@ -34,10 +35,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             return disposer;
         }
 
-        private static ObjectPool<T> Default<T>() where T : class, new()
-            => DefaultNormalPool<T>.Instance;
+        private static ObjectPool<T> Default<T>()
+            where T : class, new() => DefaultNormalPool<T>.Instance;
 
-        private static class DefaultNormalPool<T> where T : class, new()
+        private static class DefaultNormalPool<T>
+            where T : class, new()
         {
             public static readonly ObjectPool<T> Instance = new(() => new T(), 20);
         }

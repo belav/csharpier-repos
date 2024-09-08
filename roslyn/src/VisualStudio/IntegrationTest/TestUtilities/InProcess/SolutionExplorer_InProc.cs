@@ -33,16 +33,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private Solution2? _solution;
         private string? _fileName;
 
-        private static readonly Lazy<IDictionary<string, string>> _csharpProjectTemplates = new Lazy<IDictionary<string, string>>(InitializeCSharpProjectTemplates);
-        private static readonly Lazy<IDictionary<string, string>> _visualBasicProjectTemplates = new Lazy<IDictionary<string, string>>(InitializeVisualBasicProjectTemplates);
+        private static readonly Lazy<IDictionary<string, string>> _csharpProjectTemplates =
+            new Lazy<IDictionary<string, string>>(InitializeCSharpProjectTemplates);
+        private static readonly Lazy<IDictionary<string, string>> _visualBasicProjectTemplates =
+            new Lazy<IDictionary<string, string>>(InitializeVisualBasicProjectTemplates);
 
         private SolutionExplorer_InProc()
         {
             _sendKeys = new SendKeys_InProc(VisualStudio_InProc.Create());
         }
 
-        public static SolutionExplorer_InProc Create()
-            => new SolutionExplorer_InProc();
+        public static SolutionExplorer_InProc Create() => new SolutionExplorer_InProc();
 
         private static IDictionary<string, string> InitializeCSharpProjectTemplates()
         {
@@ -51,11 +52,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return new Dictionary<string, string>
             {
                 [WellKnownProjectTemplates.ClassLibrary] = $@"Windows\{localeID}\ClassLibrary.zip",
-                [WellKnownProjectTemplates.ConsoleApplication] = "Microsoft.CSharp.ConsoleApplication",
+                [WellKnownProjectTemplates.ConsoleApplication] =
+                    "Microsoft.CSharp.ConsoleApplication",
                 [WellKnownProjectTemplates.Website] = "EmptyWeb.zip",
                 [WellKnownProjectTemplates.WinFormsApplication] = "WindowsApplication.zip",
                 [WellKnownProjectTemplates.WpfApplication] = "WpfApplication.zip",
-                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40"
+                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40",
             };
         }
 
@@ -66,11 +68,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             return new Dictionary<string, string>
             {
                 [WellKnownProjectTemplates.ClassLibrary] = $@"Windows\{localeID}\ClassLibrary.zip",
-                [WellKnownProjectTemplates.ConsoleApplication] = "Microsoft.VisualBasic.Windows.ConsoleApplication",
+                [WellKnownProjectTemplates.ConsoleApplication] =
+                    "Microsoft.VisualBasic.Windows.ConsoleApplication",
                 [WellKnownProjectTemplates.Website] = "EmptyWeb.zip",
                 [WellKnownProjectTemplates.WinFormsApplication] = "WindowsApplication.zip",
                 [WellKnownProjectTemplates.WpfApplication] = "WpfApplication.zip",
-                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40"
+                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40",
             };
         }
 
@@ -92,14 +95,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 var solutionFullName = _solution.FullName;
 
-                return string.IsNullOrEmpty(solutionFullName)
-                    ? _fileName
-                    : solutionFullName;
+                return string.IsNullOrEmpty(solutionFullName) ? _fileName : solutionFullName;
             }
         }
 
-        public void CloseSolution(bool saveFirst = false)
-            => GetDTE().Solution.Close(saveFirst);
+        public void CloseSolution(bool saveFirst = false) => GetDTE().Solution.Close(saveFirst);
 
         /// <summary>
         /// Creates and loads a new solution in the host process, optionally saving the existing solution if one exists.
@@ -121,8 +121,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             var solution = GetGlobalService<SVsSolution, IVsSolution>();
             InvokeOnUIThread(cancellationToken =>
             {
-                ErrorHandler.ThrowOnFailure(solution.CreateSolution(solutionPath, solutionFileName, (uint)__VSCREATESOLUTIONFLAGS.CSF_SILENT));
-                ErrorHandler.ThrowOnFailure(solution.SaveSolutionElement((uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_ForceSave, null, 0));
+                ErrorHandler.ThrowOnFailure(
+                    solution.CreateSolution(
+                        solutionPath,
+                        solutionFileName,
+                        (uint)__VSCREATESOLUTIONFLAGS.CSF_SILENT
+                    )
+                );
+                ErrorHandler.ThrowOnFailure(
+                    solution.SaveSolutionElement(
+                        (uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_ForceSave,
+                        null,
+                        0
+                    )
+                );
             });
 
             _solution = (Solution2)dte.Solution;
@@ -163,18 +175,35 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             const string language = "Language";
             const string name = "ProjectName";
             const string template = "ProjectTemplate";
-            var languageName = projectElement.Attribute(language)?.Value
-                ?? throw new ArgumentException($"You must specify an attribute called '{language}' on a project element.");
-            var projectName = projectElement.Attribute(name)?.Value
-                ?? throw new ArgumentException($"You must specify an attribute called '{name}' on a project element.");
-            var projectTemplate = projectElement.Attribute(template)?.Value
-                ?? throw new ArgumentException($"You must specify an attribute called '{template}' on a project element.");
+            var languageName =
+                projectElement.Attribute(language)?.Value
+                ?? throw new ArgumentException(
+                    $"You must specify an attribute called '{language}' on a project element."
+                );
+            var projectName =
+                projectElement.Attribute(name)?.Value
+                ?? throw new ArgumentException(
+                    $"You must specify an attribute called '{name}' on a project element."
+                );
+            var projectTemplate =
+                projectElement.Attribute(template)?.Value
+                ?? throw new ArgumentException(
+                    $"You must specify an attribute called '{template}' on a project element."
+                );
 
             var projectPath = Path.Combine(DirectoryName, projectName);
-            var projectTemplatePath = GetProjectTemplatePath(projectTemplate, ConvertLanguageName(languageName));
+            var projectTemplatePath = GetProjectTemplatePath(
+                projectTemplate,
+                ConvertLanguageName(languageName)
+            );
 
             Contract.ThrowIfNull(_solution);
-            _solution.AddFromTemplate(projectTemplatePath, projectPath, projectName, Exclusive: false);
+            _solution.AddFromTemplate(
+                projectTemplatePath,
+                projectPath,
+                projectName,
+                Exclusive: false
+            );
             foreach (var documentElement in projectElement.Elements("Document"))
             {
                 var fileName = documentElement.Attribute("FileName").Value;
@@ -195,17 +224,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (project is IVsBrowseObjectContext browseObjectContext)
             {
-                var threadingService = browseObjectContext.UnconfiguredProject.ProjectService.Services.ThreadingPolicy;
+                var threadingService = browseObjectContext
+                    .UnconfiguredProject
+                    .ProjectService
+                    .Services
+                    .ThreadingPolicy;
 
                 var result = threadingService.ExecuteSynchronously(async () =>
                 {
-                    var configuredProject = await browseObjectContext.UnconfiguredProject.GetSuggestedConfiguredProjectAsync().ConfigureAwait(false);
-                    return await configuredProject!.Services.PackageReferences!.AddAsync(packageName, version).ConfigureAwait(false);
+                    var configuredProject = await browseObjectContext
+                        .UnconfiguredProject.GetSuggestedConfiguredProjectAsync()
+                        .ConfigureAwait(false);
+                    return await configuredProject!
+                        .Services.PackageReferences!.AddAsync(packageName, version)
+                        .ConfigureAwait(false);
                 });
             }
             else
             {
-                throw new InvalidOperationException($"'{nameof(AddPackageReference)}' is not supported in project '{projectName}'.");
+                throw new InvalidOperationException(
+                    $"'{nameof(AddPackageReference)}' is not supported in project '{projectName}'."
+                );
             }
         }
 
@@ -215,17 +254,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (project is IVsBrowseObjectContext browseObjectContext)
             {
-                var threadingService = browseObjectContext.UnconfiguredProject.ProjectService.Services.ThreadingPolicy;
+                var threadingService = browseObjectContext
+                    .UnconfiguredProject
+                    .ProjectService
+                    .Services
+                    .ThreadingPolicy;
 
                 threadingService.ExecuteSynchronously(async () =>
                 {
-                    var configuredProject = await browseObjectContext.UnconfiguredProject.GetSuggestedConfiguredProjectAsync().ConfigureAwait(false);
-                    await configuredProject!.Services.PackageReferences!.RemoveAsync(packageName).ConfigureAwait(false);
+                    var configuredProject = await browseObjectContext
+                        .UnconfiguredProject.GetSuggestedConfiguredProjectAsync()
+                        .ConfigureAwait(false);
+                    await configuredProject!
+                        .Services.PackageReferences!.RemoveAsync(packageName)
+                        .ConfigureAwait(false);
                 });
             }
             else
             {
-                throw new InvalidOperationException($"'{nameof(RemovePackageReference)}' is not supported in project '{projectName}'.");
+                throw new InvalidOperationException(
+                    $"'{nameof(RemovePackageReference)}' is not supported in project '{projectName}'."
+                );
             }
         }
 
@@ -241,7 +290,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 case LanguageNames.VisualBasic:
                     return VisualBasic;
                 default:
-                    throw new ArgumentException($"{languageName} is not supported.", nameof(languageName));
+                    throw new ArgumentException(
+                        $"{languageName} is not supported.",
+                        nameof(languageName)
+                    );
             }
         }
 
@@ -249,10 +301,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             var projectPath = Path.Combine(DirectoryName, projectName);
 
-            var projectTemplatePath = GetProjectTemplatePath(projectTemplate, ConvertLanguageName(languageName));
+            var projectTemplatePath = GetProjectTemplatePath(
+                projectTemplate,
+                ConvertLanguageName(languageName)
+            );
 
             Contract.ThrowIfNull(_solution);
-            _solution.AddFromTemplate(projectTemplatePath, projectPath, projectName, Exclusive: false);
+            _solution.AddFromTemplate(
+                projectTemplatePath,
+                projectPath,
+                projectName,
+                Exclusive: false
+            );
         }
 
         // TODO: Adjust language name based on whether we are using a web template
@@ -260,14 +320,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             Contract.ThrowIfNull(_solution);
 
-            if (languageName.Equals("csharp", StringComparison.OrdinalIgnoreCase) &&
-               _csharpProjectTemplates.Value.TryGetValue(projectTemplate, out var csharpProjectTemplate))
+            if (
+                languageName.Equals("csharp", StringComparison.OrdinalIgnoreCase)
+                && _csharpProjectTemplates.Value.TryGetValue(
+                    projectTemplate,
+                    out var csharpProjectTemplate
+                )
+            )
             {
                 return _solution.GetProjectTemplate(csharpProjectTemplate, languageName);
             }
 
-            if (languageName.Equals("visualbasic", StringComparison.OrdinalIgnoreCase) &&
-               _visualBasicProjectTemplates.Value.TryGetValue(projectTemplate, out var visualBasicProjectTemplate))
+            if (
+                languageName.Equals("visualbasic", StringComparison.OrdinalIgnoreCase)
+                && _visualBasicProjectTemplates.Value.TryGetValue(
+                    projectTemplate,
+                    out var visualBasicProjectTemplate
+                )
+            )
             {
                 return _solution.GetProjectTemplate(visualBasicProjectTemplate, languageName);
             }
@@ -339,7 +409,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             // state believing a debugger session was active.
             //
             // This delay should be replaced with a proper wait condition once the correct one is determined.
-            var debugService = GetComponentModelService<VisualStudioWorkspace>().Services.GetRequiredService<IDebuggingWorkspaceService>();
+            var debugService = GetComponentModelService<VisualStudioWorkspace>()
+                .Services.GetRequiredService<IDebuggingWorkspaceService>();
             using (var debugSessionEndedEvent = new ManualResetEventSlim(initialState: false))
             {
                 debugService.BeforeDebuggingStateChanged += (_, e) =>
@@ -366,7 +437,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private void CloseSolution()
         {
             var solution = GetGlobalService<SVsSolution, IVsSolution>();
-            ErrorHandler.ThrowOnFailure(solution.GetProperty((int)__VSPROPID.VSPROPID_IsSolutionOpen, out var isOpen));
+            ErrorHandler.ThrowOnFailure(
+                solution.GetProperty((int)__VSPROPID.VSPROPID_IsSolutionOpen, out var isOpen)
+            );
             if (!(bool)isOpen)
             {
                 return;
@@ -382,7 +455,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 {
                     InvokeOnUIThread(cancellationToken =>
                     {
-                        ErrorHandler.ThrowOnFailure(solution.CloseSolutionElement((uint)__VSSLNCLOSEOPTIONS.SLNCLOSEOPT_DeleteProject | (uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_NoSave, null, 0));
+                        ErrorHandler.ThrowOnFailure(
+                            solution.CloseSolutionElement(
+                                (uint)__VSSLNCLOSEOPTIONS.SLNCLOSEOPT_DeleteProject
+                                    | (uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_NoSave,
+                                null,
+                                0
+                            )
+                        );
                     });
 
                     semaphore.Wait();
@@ -393,8 +473,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 }
             }
 
-            var waitingService = new TestWaitingService(GetComponentModel().DefaultExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>());
-            waitingService.WaitForAsyncOperations(FeatureAttribute.Workspace, waitForWorkspaceFirst: true);
+            var waitingService = new TestWaitingService(
+                GetComponentModel()
+                    .DefaultExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>()
+            );
+            waitingService.WaitForAsyncOperations(
+                FeatureAttribute.Workspace,
+                waitForWorkspaceFirst: true
+            );
         }
 
         private sealed class SolutionEvents : IVsSolutionEvents, IDisposable
@@ -443,7 +529,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return VSConstants.S_OK;
             }
 
-            public int OnBeforeUnloadProject(IVsHierarchy pRealHierarchy, IVsHierarchy pStubHierarchy)
+            public int OnBeforeUnloadProject(
+                IVsHierarchy pRealHierarchy,
+                IVsHierarchy pStubHierarchy
+            )
             {
                 return VSConstants.S_OK;
             }
@@ -473,9 +562,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private EnvDTE.Project GetProject(string nameOrFileName)
         {
             Contract.ThrowIfNull(_solution);
-            return _solution.Projects.OfType<EnvDTE.Project>().First(
-                p => string.Compare(p.FileName, nameOrFileName, StringComparison.OrdinalIgnoreCase) == 0
-                    || string.Compare(p.Name, nameOrFileName, StringComparison.OrdinalIgnoreCase) == 0);
+            return _solution
+                .Projects.OfType<EnvDTE.Project>()
+                .First(p =>
+                    string.Compare(p.FileName, nameOrFileName, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    || string.Compare(p.Name, nameOrFileName, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                );
         }
 
         /// <summary>
@@ -485,7 +579,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// <param name="fileName">The name of the file to update or add.</param>
         /// <param name="contents">The contents of the file to overwrite if the file already exists or set if the file it created. Empty string is used if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated/created.</param>
-        public void UpdateOrAddFile(string projectName, string fileName, string? contents = null, bool open = false)
+        public void UpdateOrAddFile(
+            string projectName,
+            string fileName,
+            string? contents = null,
+            bool open = false
+        )
         {
             var project = GetProject(projectName);
             if (project.ProjectItems.Cast<EnvDTE.ProjectItem>().Any(x => x.Name == fileName))
@@ -505,7 +604,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// <param name="fileName">The name of the file to update or add.</param>
         /// <param name="contents">The contents of the file to overwrite. Empty string is used if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated.</param>
-        public void UpdateFile(string projectName, string fileName, string? contents = null, bool open = false)
+        public void UpdateFile(
+            string projectName,
+            string fileName,
+            string? contents = null,
+            bool open = false
+        )
         {
             void SetText(string text)
             {
@@ -516,16 +620,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     WaitForApplicationIdle(Helper.HangMitigatingTimeout);
 
                     var vsTextManager = GetGlobalService<SVsTextManager, IVsTextManager>();
-                    var hresult = vsTextManager.GetActiveView(fMustHaveFocus: 1, pBuffer: null, ppView: out var vsTextView);
+                    var hresult = vsTextManager.GetActiveView(
+                        fMustHaveFocus: 1,
+                        pBuffer: null,
+                        ppView: out var vsTextView
+                    );
                     Marshal.ThrowExceptionForHR(hresult);
                     var activeVsTextView = (IVsUserData)vsTextView;
 
-                    hresult = activeVsTextView.GetData(Editor_InProc.IWpfTextViewId, out var wpfTextViewHost);
+                    hresult = activeVsTextView.GetData(
+                        Editor_InProc.IWpfTextViewId,
+                        out var wpfTextViewHost
+                    );
                     Marshal.ThrowExceptionForHR(hresult);
 
                     var view = ((IWpfTextViewHost)wpfTextViewHost).TextView;
                     var textSnapshot = view.TextSnapshot;
-                    var replacementSpan = new Text.SnapshotSpan(textSnapshot, 0, textSnapshot.Length);
+                    var replacementSpan = new Text.SnapshotSpan(
+                        textSnapshot,
+                        0,
+                        textSnapshot.Length
+                    );
                     view.TextBuffer.Replace(replacementSpan, text);
                 });
             }
@@ -546,7 +661,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// <param name="fileName">The name of the file to add.</param>
         /// <param name="contents">The contents of the file to overwrite. An empty file is create if null is passed.</param>
         /// <param name="open">Whether to open the file after it has been updated.</param>
-        public void AddFile(string projectName, string fileName, string? contents = null, bool open = false)
+        public void AddFile(
+            string projectName,
+            string fileName,
+            string? contents = null,
+            bool open = false
+        )
         {
             var project = GetProject(projectName);
             var projectDirectory = Path.GetDirectoryName(project.FullName);
@@ -597,7 +717,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void WaitForBuildToFinish()
         {
-            var buildManager = GetGlobalService<SVsSolutionBuildManager, IVsSolutionBuildManager2>();
+            var buildManager = GetGlobalService<
+                SVsSolutionBuildManager,
+                IVsSolutionBuildManager2
+            >();
             using (var semaphore = new SemaphoreSlim(1))
             using (var solutionEvents = new UpdateSolutionEvents(buildManager))
             {
@@ -615,16 +738,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        internal sealed class UpdateSolutionEvents : IVsUpdateSolutionEvents, IVsUpdateSolutionEvents2, IDisposable
+        internal sealed class UpdateSolutionEvents
+            : IVsUpdateSolutionEvents,
+                IVsUpdateSolutionEvents2,
+                IDisposable
         {
             private uint cookie;
             private readonly IVsSolutionBuildManager2 solutionBuildManager;
 
-            internal delegate void UpdateSolutionDoneEvent(bool succeeded, bool modified, bool canceled);
+            internal delegate void UpdateSolutionDoneEvent(
+                bool succeeded,
+                bool modified,
+                bool canceled
+            );
             internal delegate void UpdateSolutionBeginEvent(ref bool cancel);
             internal delegate void UpdateSolutionStartUpdateEvent(ref bool cancel);
-            internal delegate void UpdateProjectConfigDoneEvent(IVsHierarchy projectHierarchy, IVsCfg projectConfig, int success);
-            internal delegate void UpdateProjectConfigBeginEvent(IVsHierarchy projectHierarchy, IVsCfg projectConfig);
+            internal delegate void UpdateProjectConfigDoneEvent(
+                IVsHierarchy projectHierarchy,
+                IVsCfg projectConfig,
+                int success
+            );
+            internal delegate void UpdateProjectConfigBeginEvent(
+                IVsHierarchy projectHierarchy,
+                IVsCfg projectConfig
+            );
 
             public event UpdateSolutionDoneEvent? OnUpdateSolutionDone;
             public event UpdateSolutionBeginEvent? OnUpdateSolutionBegin;
@@ -656,7 +793,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return 0;
             }
 
-            int IVsUpdateSolutionEvents.UpdateSolution_Done(int fSucceeded, int fModified, int fCancelCommand)
+            int IVsUpdateSolutionEvents.UpdateSolution_Done(
+                int fSucceeded,
+                int fModified,
+                int fCancelCommand
+            )
             {
                 OnUpdateSolutionDone?.Invoke(fSucceeded != 0, fModified != 0, fCancelCommand != 0);
                 return 0;
@@ -690,7 +831,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return 0;
             }
 
-            int IVsUpdateSolutionEvents2.UpdateSolution_Done(int fSucceeded, int fModified, int fCancelCommand)
+            int IVsUpdateSolutionEvents2.UpdateSolution_Done(
+                int fSucceeded,
+                int fModified,
+                int fCancelCommand
+            )
             {
                 OnUpdateSolutionDone?.Invoke(fSucceeded != 0, fModified != 0, fCancelCommand != 0);
                 return 0;
@@ -712,13 +857,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 return OnActiveProjectCfgChange();
             }
 
-            int IVsUpdateSolutionEvents2.UpdateProjectCfg_Begin(IVsHierarchy pHierProj, IVsCfg pCfgProj, IVsCfg pCfgSln, uint dwAction, ref int pfCancel)
+            int IVsUpdateSolutionEvents2.UpdateProjectCfg_Begin(
+                IVsHierarchy pHierProj,
+                IVsCfg pCfgProj,
+                IVsCfg pCfgSln,
+                uint dwAction,
+                ref int pfCancel
+            )
             {
                 OnUpdateProjectConfigBegin?.Invoke(pHierProj, pCfgProj);
                 return 0;
             }
 
-            int IVsUpdateSolutionEvents2.UpdateProjectCfg_Done(IVsHierarchy pHierProj, IVsCfg pCfgProj, IVsCfg pCfgSln, uint dwAction, int fSuccess, int fCancel)
+            int IVsUpdateSolutionEvents2.UpdateProjectCfg_Done(
+                IVsHierarchy pHierProj,
+                IVsCfg pCfgProj,
+                IVsCfg pCfgSln,
+                uint dwAction,
+                int fSuccess,
+                int fCancel
+            )
             {
                 OnUpdateProjectConfigDone?.Invoke(pHierProj, pCfgProj, fSuccess);
                 return 0;
@@ -769,8 +927,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             InvokeOnUIThread(cancellationToken =>
             {
-                var filePath = GetAbsolutePathForProjectRelativeFilePath(projectName, relativeFilePath);
-                VsShellUtilities.OpenDocument(ServiceProvider.GlobalProvider, filePath, VSConstants.LOGVIEWID.Designer_guid, out _, out _, out var windowFrame, out _);
+                var filePath = GetAbsolutePathForProjectRelativeFilePath(
+                    projectName,
+                    relativeFilePath
+                );
+                VsShellUtilities.OpenDocument(
+                    ServiceProvider.GlobalProvider,
+                    filePath,
+                    VSConstants.LOGVIEWID.Designer_guid,
+                    out _,
+                    out _,
+                    out var windowFrame,
+                    out _
+                );
                 ErrorHandler.ThrowOnFailure(windowFrame.Show());
             });
         }
@@ -778,13 +947,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public void OpenFile(string projectName, string relativeFilePath)
         {
             var filePath = GetAbsolutePathForProjectRelativeFilePath(projectName, relativeFilePath);
-            VsShellUtilities.OpenDocument(ServiceProvider.GlobalProvider, filePath, VSConstants.LOGVIEWID.Code_guid, out _, out _, out _, out var view);
+            VsShellUtilities.OpenDocument(
+                ServiceProvider.GlobalProvider,
+                filePath,
+                VSConstants.LOGVIEWID.Code_guid,
+                out _,
+                out _,
+                out _,
+                out var view
+            );
 
             // Reliably set focus using NavigateToLineAndColumn
             var textManager = GetGlobalService<SVsTextManager, IVsTextManager>();
             ErrorHandler.ThrowOnFailure(view.GetBuffer(out var textLines));
             ErrorHandler.ThrowOnFailure(view.GetCaretPos(out var line, out var column));
-            ErrorHandler.ThrowOnFailure(textManager.NavigateToLineAndColumn(textLines, VSConstants.LOGVIEWID.Code_guid, line, column, line, column));
+            ErrorHandler.ThrowOnFailure(
+                textManager.NavigateToLineAndColumn(
+                    textLines,
+                    VSConstants.LOGVIEWID.Code_guid,
+                    line,
+                    column,
+                    line,
+                    column
+                )
+            );
         }
 
         public void CloseDesignerFile(string projectName, string relativeFilePath, bool saveFile)
@@ -797,17 +983,38 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             CloseFile(projectName, relativeFilePath, VSConstants.LOGVIEWID.Code_guid, saveFile);
         }
 
-        private void CloseFile(string projectName, string relativeFilePath, Guid logicalView, bool saveFile)
+        private void CloseFile(
+            string projectName,
+            string relativeFilePath,
+            Guid logicalView,
+            bool saveFile
+        )
         {
             InvokeOnUIThread(cancellationToken =>
             {
-                var filePath = GetAbsolutePathForProjectRelativeFilePath(projectName, relativeFilePath);
-                if (!VsShellUtilities.IsDocumentOpen(ServiceProvider.GlobalProvider, filePath, logicalView, out _, out _, out var windowFrame))
+                var filePath = GetAbsolutePathForProjectRelativeFilePath(
+                    projectName,
+                    relativeFilePath
+                );
+                if (
+                    !VsShellUtilities.IsDocumentOpen(
+                        ServiceProvider.GlobalProvider,
+                        filePath,
+                        logicalView,
+                        out _,
+                        out _,
+                        out var windowFrame
+                    )
+                )
                 {
-                    throw new InvalidOperationException($"File '{filePath}' is not open in logical view '{logicalView}'");
+                    throw new InvalidOperationException(
+                        $"File '{filePath}' is not open in logical view '{logicalView}'"
+                    );
                 }
 
-                var frameClose = saveFile ? __FRAMECLOSE.FRAMECLOSE_SaveIfDirty : __FRAMECLOSE.FRAMECLOSE_NoSave;
+                var frameClose = saveFile
+                    ? __FRAMECLOSE.FRAMECLOSE_SaveIfDirty
+                    : __FRAMECLOSE.FRAMECLOSE_NoSave;
                 ErrorHandler.ThrowOnFailure(windowFrame.CloseFrame((uint)frameClose));
             });
         }
@@ -820,7 +1027,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (document == null)
             {
-                throw new InvalidOperationException($"Open document '{filePath} could not be found. Available documents: {string.Join(", ", documents.Select(x => x.FullName))}.");
+                throw new InvalidOperationException(
+                    $"Open document '{filePath} could not be found. Available documents: {string.Join(", ", documents.Select(x => x.FullName))}."
+                );
             }
 
             return document;
@@ -834,18 +1043,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             if (project == null)
             {
-                throw new InvalidOperationException($"Project '{projectName} could not be found. Available projects: {string.Join(", ", projects.Select(x => x.Name))}.");
+                throw new InvalidOperationException(
+                    $"Project '{projectName} could not be found. Available projects: {string.Join(", ", projects.Select(x => x.Name))}."
+                );
             }
 
             var projectPath = Path.GetDirectoryName(project.FullName);
             var fullFilePath = Path.Combine(projectPath, relativeFilePath);
 
             var projectItems = project.ProjectItems.Cast<EnvDTE.ProjectItem>();
-            var document = projectItems.FirstOrDefault(d => d.get_FileNames(1).Equals(fullFilePath));
+            var document = projectItems.FirstOrDefault(d =>
+                d.get_FileNames(1).Equals(fullFilePath)
+            );
 
             if (document == null)
             {
-                throw new InvalidOperationException($"File '{fullFilePath}' could not be found.  Available files: {string.Join(", ", projectItems.Select(x => x.get_FileNames(1)))}.");
+                throw new InvalidOperationException(
+                    $"File '{fullFilePath}' could not be found.  Available files: {string.Join(", ", projectItems.Select(x => x.get_FileNames(1)))}."
+                );
             }
 
             return document;
@@ -859,35 +1074,50 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static void SaveFileWithExtraValidation(EnvDTE.Document document)
         {
             var textDocument = (EnvDTE.TextDocument)document.Object(nameof(EnvDTE.TextDocument));
-            var currentTextInDocument = textDocument.StartPoint.CreateEditPoint().GetText(textDocument.EndPoint);
+            var currentTextInDocument = textDocument
+                .StartPoint.CreateEditPoint()
+                .GetText(textDocument.EndPoint);
             var fullPath = document.FullName;
             document.Save();
             if (File.ReadAllText(fullPath) != currentTextInDocument)
             {
-                throw new InvalidOperationException("The text that we thought we were saving isn't what we saved!");
+                throw new InvalidOperationException(
+                    "The text that we thought we were saving isn't what we saved!"
+                );
             }
         }
 
-        private string GetAbsolutePathForProjectRelativeFilePath(string projectName, string relativeFilePath)
+        private string GetAbsolutePathForProjectRelativeFilePath(
+            string projectName,
+            string relativeFilePath
+        )
         {
             Contract.ThrowIfNull(_solution);
-            var project = _solution.Projects.Cast<EnvDTE.Project>().First(x => x.Name == projectName);
+            var project = _solution
+                .Projects.Cast<EnvDTE.Project>()
+                .First(x => x.Name == projectName);
             var projectPath = Path.GetDirectoryName(project.FullName);
             return Path.Combine(projectPath, relativeFilePath);
         }
 
         public bool RestoreNuGetPackages(string projectName)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
 
-            var solutionRestoreService = InvokeOnUIThread(cancellationToken => GetComponentModel().GetExtensions<IVsSolutionRestoreService2>().Single());
-            var nominateProjectTask = solutionRestoreService.NominateProjectAsync(GetProject(projectName).FullName, cancellationTokenSource.Token);
+            var solutionRestoreService = InvokeOnUIThread(cancellationToken =>
+                GetComponentModel().GetExtensions<IVsSolutionRestoreService2>().Single()
+            );
+            var nominateProjectTask = solutionRestoreService.NominateProjectAsync(
+                GetProject(projectName).FullName,
+                cancellationTokenSource.Token
+            );
             nominateProjectTask.Wait(cancellationTokenSource.Token);
             return nominateProjectTask.Result;
         }
 
-        public void SaveAll()
-            => ExecuteCommand(WellKnownCommandNames.File_SaveAll);
+        public void SaveAll() => ExecuteCommand(WellKnownCommandNames.File_SaveAll);
 
         public void SelectItem(string itemName)
         {
@@ -915,12 +1145,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private static EnvDTE.UIHierarchyItem? FindItemAtPath(
             EnvDTE.UIHierarchyItems currentItems,
-            string[] path)
+            string[] path
+        )
         {
             EnvDTE.UIHierarchyItem? item = null;
             foreach (var name in path)
             {
-                item = currentItems.Cast<EnvDTE.UIHierarchyItem>().FirstOrDefault(i => i.Name == name);
+                item = currentItems
+                    .Cast<EnvDTE.UIHierarchyItem>()
+                    .FirstOrDefault(i => i.Name == name);
 
                 if (item == null)
                 {
@@ -935,7 +1168,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private static EnvDTE.UIHierarchyItem? FindFirstItemRecursively(
             EnvDTE.UIHierarchyItems currentItems,
-            string itemName)
+            string itemName
+        )
         {
             if (currentItems == null)
             {

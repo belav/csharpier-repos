@@ -26,18 +26,23 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     [InlineData("[FromBody] System.IO.Stream")]
     public async Task MapAction_SingleSpecialTypeParam_StringReturn(string parameterType)
     {
-        var (results, compilation) = await RunGeneratorAsync($"""
+        var (results, compilation) = await RunGeneratorAsync(
+            $"""
 app.MapGet("/hello", ({parameterType} p) => p == null ? "null!" : "Hello world!");
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(results, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-            var p = Assert.Single(endpointModel.Parameters);
-            Assert.Equal(EndpointParameterSource.SpecialType, p.Source);
-            Assert.Equal("p", p.SymbolName);
-        });
+        VerifyStaticEndpointModel(
+            results,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+                var p = Assert.Single(endpointModel.Parameters);
+                Assert.Equal(EndpointParameterSource.SpecialType, p.Source);
+                Assert.Equal("p", p.SymbolName);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -47,27 +52,34 @@ app.MapGet("/hello", ({parameterType} p) => p == null ? "null!" : "Hello world!"
     [Fact]
     public async Task MapAction_MultipleSpecialTypeParam_StringReturn()
     {
-        var (results, compilation) = await RunGeneratorAsync("""
+        var (results, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/hello", (HttpRequest req, HttpResponse res) => req is null || res is null ? "null!" : "Hello world!");
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(results, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        VerifyStaticEndpointModel(
+            results,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
 
-            Assert.Collection(endpointModel.Parameters,
-                reqParam =>
-                {
-                    Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                    Assert.Equal("req", reqParam.SymbolName);
-                },
-                reqParam =>
-                {
-                    Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                    Assert.Equal("res", reqParam.SymbolName);
-                });
-        });
+                Assert.Collection(
+                    endpointModel.Parameters,
+                    reqParam =>
+                    {
+                        Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                        Assert.Equal("req", reqParam.SymbolName);
+                    },
+                    reqParam =>
+                    {
+                        Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                        Assert.Equal("res", reqParam.SymbolName);
+                    }
+                );
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -87,10 +99,13 @@ app.MapGet("/hello", () =>
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(result, endpointModel =>
-        {
-            Assert.Equal("MapGet", endpointModel.HttpMethod);
-        });
+        VerifyStaticEndpointModel(
+            result,
+            endpointModel =>
+            {
+                Assert.Equal("MapGet", endpointModel.HttpMethod);
+            }
+        );
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -123,36 +138,44 @@ app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
         var endpoints = GetEndpointsFromCompilation(compilation);
 
         await VerifyAgainstBaselineUsingFile(compilation);
-        VerifyStaticEndpointModels(results, endpointModels => Assert.Collection(endpointModels,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                var reqParam = Assert.Single(endpointModel.Parameters);
-                Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                Assert.Equal("req", reqParam.SymbolName);
-            },
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                var reqParam = Assert.Single(endpointModel.Parameters);
-                Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                Assert.Equal("res", reqParam.SymbolName);
-            },
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.Collection(endpointModel.Parameters,
-                    reqParam =>
+        VerifyStaticEndpointModels(
+            results,
+            endpointModels =>
+                Assert.Collection(
+                    endpointModels,
+                    endpointModel =>
                     {
+                        Assert.Equal("MapGet", endpointModel.HttpMethod);
+                        var reqParam = Assert.Single(endpointModel.Parameters);
                         Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
                         Assert.Equal("req", reqParam.SymbolName);
                     },
-                    reqParam =>
+                    endpointModel =>
                     {
+                        Assert.Equal("MapGet", endpointModel.HttpMethod);
+                        var reqParam = Assert.Single(endpointModel.Parameters);
                         Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
                         Assert.Equal("res", reqParam.SymbolName);
-                    });
-            }));
+                    },
+                    endpointModel =>
+                    {
+                        Assert.Equal("MapGet", endpointModel.HttpMethod);
+                        Assert.Collection(
+                            endpointModel.Parameters,
+                            reqParam =>
+                            {
+                                Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                                Assert.Equal("req", reqParam.SymbolName);
+                            },
+                            reqParam =>
+                            {
+                                Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                                Assert.Equal("res", reqParam.SymbolName);
+                            }
+                        );
+                    }
+                )
+        );
 
         Assert.Equal(3, endpoints.Length);
         var httpContext = CreateHttpContext();
@@ -173,10 +196,14 @@ app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
         get
         {
             var expectedBody = "Test header value";
-            var fromHeaderRequiredSource = """app.MapGet("/", ([FromHeader] string headerValue) => headerValue);""";
-            var fromHeaderWithNameRequiredSource = """app.MapGet("/", ([FromHeader(Name = "headerValue")] string parameterName) => parameterName);""";
-            var fromHeaderWithNullNameRequiredSource = """app.MapGet("/", ([FromHeader(Name = null)] string headerValue) => headerValue);""";
-            var fromHeaderNullableSource = """app.MapGet("/", ([FromHeader] string? headerValue) => headerValue ?? string.Empty);""";
+            var fromHeaderRequiredSource =
+                """app.MapGet("/", ([FromHeader] string headerValue) => headerValue);""";
+            var fromHeaderWithNameRequiredSource =
+                """app.MapGet("/", ([FromHeader(Name = "headerValue")] string parameterName) => parameterName);""";
+            var fromHeaderWithNullNameRequiredSource =
+                """app.MapGet("/", ([FromHeader(Name = null)] string headerValue) => headerValue);""";
+            var fromHeaderNullableSource =
+                """app.MapGet("/", ([FromHeader] string? headerValue) => headerValue ?? string.Empty);""";
             var fromHeaderDefaultValueSource = """
 #nullable disable
 string getHeaderWithDefault([FromHeader] string headerValue = null) => headerValue ?? string.Empty;
@@ -190,7 +217,13 @@ app.MapGet("/", getHeaderWithDefault);
                 new object[] { fromHeaderRequiredSource, null, 400, string.Empty },
                 new object[] { fromHeaderWithNameRequiredSource, expectedBody, 200, expectedBody },
                 new object[] { fromHeaderWithNameRequiredSource, null, 400, string.Empty },
-                new object[] { fromHeaderWithNullNameRequiredSource, expectedBody, 200, expectedBody },
+                new object[]
+                {
+                    fromHeaderWithNullNameRequiredSource,
+                    expectedBody,
+                    200,
+                    expectedBody,
+                },
                 new object[] { fromHeaderWithNullNameRequiredSource, null, 400, string.Empty },
                 new object[] { fromHeaderNullableSource, expectedBody, 200, expectedBody },
                 new object[] { fromHeaderNullableSource, null, 200, string.Empty },
@@ -202,7 +235,12 @@ app.MapGet("/", getHeaderWithDefault);
 
     [Theory]
     [MemberData(nameof(MapAction_ExplicitHeaderParam_SimpleReturn_Data))]
-    public async Task MapAction_ExplicitHeaderParam_SimpleReturn(string source, string requestData, int expectedStatusCode, string expectedBody)
+    public async Task MapAction_ExplicitHeaderParam_SimpleReturn(
+        string source,
+        string requestData,
+        int expectedStatusCode,
+        string expectedBody
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -221,8 +259,10 @@ app.MapGet("/", getHeaderWithDefault);
     {
         get
         {
-            var fromServiceRequiredSource = """app.MapPost("/", ([FromServices]TestService svc) => svc.TestServiceMethod());""";
-            var fromServiceNullableSource = """app.MapPost("/", ([FromServices]TestService? svc) => svc?.TestServiceMethod() ?? string.Empty);""";
+            var fromServiceRequiredSource =
+                """app.MapPost("/", ([FromServices]TestService svc) => svc.TestServiceMethod());""";
+            var fromServiceNullableSource =
+                """app.MapPost("/", ([FromServices]TestService? svc) => svc?.TestServiceMethod() ?? string.Empty);""";
             var fromServiceDefaultValueSource = """
 #nullable disable
 string postServiceWithDefault([FromServices]TestService svc = null) => svc?.TestServiceMethod() ?? string.Empty;
@@ -230,8 +270,10 @@ app.MapPost("/", postServiceWithDefault);
 #nullable restore
 """;
 
-            var fromServiceEnumerableRequiredSource = """app.MapPost("/", ([FromServices]IEnumerable<TestService>  svc) => svc.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);""";
-            var fromServiceEnumerableNullableSource = """app.MapPost("/", ([FromServices]IEnumerable<TestService>? svc) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);""";
+            var fromServiceEnumerableRequiredSource =
+                """app.MapPost("/", ([FromServices]IEnumerable<TestService>  svc) => svc.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);""";
+            var fromServiceEnumerableNullableSource =
+                """app.MapPost("/", ([FromServices]IEnumerable<TestService>? svc) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty);""";
             var fromServiceEnumerableDefaultValueSource = """
 #nullable disable
 string postServiceWithDefault([FromServices]IEnumerable<TestService> svc = null) => svc?.FirstOrDefault()?.TestServiceMethod() ?? string.Empty;
@@ -252,14 +294,18 @@ app.MapPost("/", postServiceWithDefault);
                 new object[] { fromServiceEnumerableNullableSource, true, true },
                 new object[] { fromServiceEnumerableNullableSource, false, true },
                 new object[] { fromServiceEnumerableDefaultValueSource, true, true },
-                new object[] { fromServiceEnumerableDefaultValueSource, false, true }
+                new object[] { fromServiceEnumerableDefaultValueSource, false, true },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(MapAction_ExplicitServiceParam_SimpleReturn_Data))]
-    public async Task MapAction_ExplicitServiceParam_SimpleReturn(string source, bool hasService, bool isValid)
+    public async Task MapAction_ExplicitServiceParam_SimpleReturn(
+        string source,
+        bool hasService,
+        bool isValid
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -276,11 +322,16 @@ app.MapPost("/", postServiceWithDefault);
         if (isValid)
         {
             await endpoint.RequestDelegate(httpContext);
-            await VerifyResponseBodyAsync(httpContext, hasService ? "Produced from service!" : string.Empty);
+            await VerifyResponseBodyAsync(
+                httpContext,
+                hasService ? "Produced from service!" : string.Empty
+            );
         }
         else
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(() => endpoint.RequestDelegate(httpContext));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => endpoint.RequestDelegate(httpContext)
+            );
             Assert.False(httpContext.RequestAborted.IsCancellationRequested);
         }
     }
@@ -311,7 +362,9 @@ app.MapGet("/multipleFromService", ([FromServices]TestService? svc, [FromService
 
         // fromServiceRequired throws on null input
         httpContext.RequestServices = emptyServices;
-        await Assert.ThrowsAsync<InvalidOperationException>(() => endpoints[0].RequestDelegate(httpContext));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => endpoints[0].RequestDelegate(httpContext)
+        );
         Assert.False(httpContext.RequestAborted.IsCancellationRequested);
 
         // fromServiceRequired accepts a provided input
@@ -368,16 +421,19 @@ string HelloName([FromQuery] int? one, [FromQuery] string? two, [FromQuery] int?
 """;
             return new object[][]
             {
-                new [] { tooManyArguments, "True, 11, Too many arguments" },
-                new [] { noArguments, "True, 0, No arguments" },
-                new [] { justRightArguments, "False, 7, Just right arguments" },
+                new[] { tooManyArguments, "True, 11, Too many arguments" },
+                new[] { noArguments, "True, 0, No arguments" },
+                new[] { justRightArguments, "False, 7, Just right arguments" },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(CanApplyFiltersOnHandlerWithVariousArguments_Data))]
-    public async Task CanApplyFiltersOnHandlerWithVariousArguments(string handlerMethod, string expectedBody)
+    public async Task CanApplyFiltersOnHandlerWithVariousArguments(
+        string handlerMethod,
+        string expectedBody
+    )
     {
         var source = $$"""
 {{handlerMethod}}
@@ -428,10 +484,9 @@ app.MapGet("/", (HttpContext httpContext, int id) =>
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "42",
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "42" }
+        );
 
         httpContext.Request.Headers.Referer = "https://example.org";
         await endpoint.RequestDelegate(httpContext);
@@ -454,10 +509,9 @@ app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "42",
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "42" }
+        );
 
         httpContext.Request.Headers.Referer = "https://example.org";
         await endpoint.RequestDelegate(httpContext);
@@ -501,10 +555,9 @@ app.Map("/", (HttpContext httpContext, int id) =>
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "42",
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "42" }
+        );
 
         httpContext.Request.Headers.Referer = "https://example.org";
         await endpoint.RequestDelegate(httpContext);
@@ -526,10 +579,9 @@ app.MapFallback("/", (HttpContext httpContext, int id) =>
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "42",
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "42" }
+        );
 
         httpContext.Request.Headers.Referer = "https://example.org";
         await endpoint.RequestDelegate(httpContext);
@@ -551,10 +603,9 @@ app.MapFallback((HttpContext httpContext, int id) =>
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["id"] = "42",
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["id"] = "42" }
+        );
 
         httpContext.Request.Headers.Referer = "https://example.org";
         await endpoint.RequestDelegate(httpContext);
@@ -581,17 +632,15 @@ app.MapPost("/", (HttpContext context,
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["a"] = new(new[] { "1", "2", "3" })
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["a"] = new(new[] { "1", "2", "3" }) }
+        );
 
         httpContext.Request.Headers["Custom"] = new(new[] { "4", "5", "6" });
 
-        httpContext.Request.Form = new FormCollection(new Dictionary<string, StringValues>
-        {
-            ["form"] = new(new[] { "7", "8", "9" })
-        });
+        httpContext.Request.Form = new FormCollection(
+            new Dictionary<string, StringValues> { ["form"] = new(new[] { "7", "8", "9" }) }
+        );
 
         await endpoint.RequestDelegate(httpContext);
 

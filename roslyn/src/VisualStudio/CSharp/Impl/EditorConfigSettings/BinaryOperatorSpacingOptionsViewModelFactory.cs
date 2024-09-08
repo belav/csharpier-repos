@@ -17,16 +17,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BinaryOperatorSpacingOptionsViewModelFactory()
-        {
-        }
+        public BinaryOperatorSpacingOptionsViewModelFactory() { }
 
         public IEnumSettingViewModel CreateViewModel(Setting setting)
         {
             return new BinaryOperatorSpacingOptionsViewModel(setting);
         }
 
-        public bool IsSupported(OptionKey2 key)
-            => key.Option.Type == typeof(BinaryOperatorSpacingOptions);
+        public bool IsSupported(OptionKey2 key) =>
+            key.Option.Type == typeof(BinaryOperatorSpacingOptions);
     }
 }

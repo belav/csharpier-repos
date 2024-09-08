@@ -12,24 +12,26 @@
 
 using System;
 
-public class Test_TrackResurrection {
-    public static int Main() {
+public class Test_TrackResurrection
+{
+    public static int Main()
+    {
         int[] array = new int[50];
         Object obj = new Object();
 
-        WeakReference weak1 = new WeakReference(array,true);
-        WeakReference weak2 = new WeakReference(obj,false);
+        WeakReference weak1 = new WeakReference(array, true);
+        WeakReference weak2 = new WeakReference(obj, false);
 
-        
-        bool ans1 = weak1.TrackResurrection;        
-        bool ans2 = weak2.TrackResurrection;    
+        bool ans1 = weak1.TrackResurrection;
+        bool ans2 = weak2.TrackResurrection;
 
-
-        if((ans1 == true) && (ans2 == false)) {
+        if ((ans1 == true) && (ans2 == false))
+        {
             Console.WriteLine("Test for WeakReference.TrackResurrection passed!");
             return 100;
         }
-        else {
+        else
+        {
             Console.WriteLine("Test for WeakReference.TrackResurrection failed!");
             return 1;
         }

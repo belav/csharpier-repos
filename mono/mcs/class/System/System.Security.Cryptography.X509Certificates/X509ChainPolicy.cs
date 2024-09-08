@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,124 +29,139 @@
 
 #if SECURITY_DEP
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public sealed class X509ChainPolicy
+    {
+        private OidCollection apps;
+        private OidCollection cert;
+        private X509CertificateCollection store;
+        private X509Certificate2Collection store2;
+        private X509RevocationFlag rflag;
+        private X509RevocationMode mode;
+        private TimeSpan timeout;
+        private X509VerificationFlags vflags;
+        private DateTime vtime;
 
-	public sealed class X509ChainPolicy {
+        // constructors
 
-		private OidCollection apps;
-		private OidCollection cert;
-		private X509CertificateCollection store;
-		private X509Certificate2Collection store2;
-		private X509RevocationFlag rflag;
-		private X509RevocationMode mode;
-		private TimeSpan timeout;
-		private X509VerificationFlags vflags;
-		private DateTime vtime;
+        public X509ChainPolicy()
+        {
+            Reset();
+        }
 
-		// constructors
+        /*
+         * Lazy-init ExtraStore from X509CertificateCollection.
+         * This is called from Mono.Net.Security.SystemCertificateValidator.CreateX509Chain.
+         *
+         * AppleTLS supports a lazily-initialized X509Certificate, but not X509Certificate2 so
+         * we need to fall-back to using Mono.Security.X509 whenever we need an X509Certificate2.
+         * To avoid unnecessary fallbacks, the private Mono.Net.Security APIs use X509Certificate
+         * instead of X509Certificate2.
+         *
+         * Since 'ExtraStore' returns X509Certificate2Collection, we need to convert these to
+         * X509Certificate2.
+         */
+        internal X509ChainPolicy(X509CertificateCollection store)
+        {
+            this.store = store;
+            Reset();
+        }
 
-		public X509ChainPolicy () 
-		{
-			Reset ();
-		}
+        // properties
 
-		/*
-		 * Lazy-init ExtraStore from X509CertificateCollection.
-		 * This is called from Mono.Net.Security.SystemCertificateValidator.CreateX509Chain.
-		 *
-		 * AppleTLS supports a lazily-initialized X509Certificate, but not X509Certificate2 so
-		 * we need to fall-back to using Mono.Security.X509 whenever we need an X509Certificate2.
-		 * To avoid unnecessary fallbacks, the private Mono.Net.Security APIs use X509Certificate
-		 * instead of X509Certificate2.
-		 *
-		 * Since 'ExtraStore' returns X509Certificate2Collection, we need to convert these to
-		 * X509Certificate2.
-		 */
-		internal X509ChainPolicy (X509CertificateCollection store)
-		{
-			this.store = store;
-			Reset ();
-		}
+        public OidCollection ApplicationPolicy
+        {
+            get { return apps; }
+        }
 
-		// properties
+        public OidCollection CertificatePolicy
+        {
+            get { return cert; }
+        }
 
-		public OidCollection ApplicationPolicy {
-			get { return apps; }
-		}
+        public X509Certificate2Collection ExtraStore
+        {
+            get
+            {
+                if (store2 != null)
+                    return store2;
 
-		public OidCollection CertificatePolicy {
-			get { return cert; }
-		}
+                store2 = new X509Certificate2Collection();
+                if (store != null)
+                {
+                    foreach (var cert in store)
+                    {
+                        store2.Add(new X509Certificate2(cert));
+                    }
+                }
+                return store2;
+            }
+            internal set { store2 = value; }
+        }
 
-		public X509Certificate2Collection ExtraStore {
-			get {
-				if (store2 != null)
-					return store2;
+        public X509RevocationFlag RevocationFlag
+        {
+            get { return rflag; }
+            set
+            {
+                if (
+                    (value < X509RevocationFlag.EndCertificateOnly)
+                    || (value > X509RevocationFlag.ExcludeRoot)
+                )
+                    throw new ArgumentException("RevocationFlag");
+                rflag = value;
+            }
+        }
 
-				store2 = new X509Certificate2Collection ();
-				if (store != null) {
-					foreach (var cert in store) {
-						store2.Add (new X509Certificate2 (cert));
-					}
-				}
-				return store2;
-			}
-			internal set {
-				store2 = value;
-			}
-		}
+        public X509RevocationMode RevocationMode
+        {
+            get { return mode; }
+            set
+            {
+                if ((value < X509RevocationMode.NoCheck) || (value > X509RevocationMode.Offline))
+                    throw new ArgumentException("RevocationMode");
+                mode = value;
+            }
+        }
 
-		public X509RevocationFlag RevocationFlag {
-			get { return rflag; }
-			set {
-				if ((value < X509RevocationFlag.EndCertificateOnly) || (value > X509RevocationFlag.ExcludeRoot))
-					throw new ArgumentException ("RevocationFlag");
-				rflag = value;
-			}
-		}
+        public TimeSpan UrlRetrievalTimeout
+        {
+            get { return timeout; }
+            set { timeout = value; }
+        }
 
-		public X509RevocationMode RevocationMode {
-			get { return mode; }
-			set {
-				if ((value < X509RevocationMode.NoCheck) || (value > X509RevocationMode.Offline))
-					throw new ArgumentException ("RevocationMode");
-				mode = value;
-			}
-		}
+        public X509VerificationFlags VerificationFlags
+        {
+            get { return vflags; }
+            set
+            {
+                if ((value | X509VerificationFlags.AllFlags) != X509VerificationFlags.AllFlags)
+                    throw new ArgumentException("VerificationFlags");
+                vflags = value;
+            }
+        }
 
-		public TimeSpan UrlRetrievalTimeout {
-			get { return timeout; }
-			set { timeout = value; }
-		}
+        public DateTime VerificationTime
+        {
+            get { return vtime; }
+            set { vtime = value; }
+        }
 
-		public X509VerificationFlags VerificationFlags {
-			get { return vflags; }
-			set {
-				if ((value | X509VerificationFlags.AllFlags) != X509VerificationFlags.AllFlags)
-					throw new ArgumentException ("VerificationFlags");
-				vflags = value;
-			}
-		}
+        // methods
 
-		public DateTime VerificationTime {
-			get { return vtime; }
-			set { vtime = value; }
-		}
-
-		// methods
-
-		public void Reset ()
-		{
-			apps = new OidCollection ();
-			cert = new OidCollection ();
-			store2 = null;
-			rflag = X509RevocationFlag.ExcludeRoot;
-			mode = X509RevocationMode.Online;
-			timeout = TimeSpan.Zero;
-			vflags = X509VerificationFlags.NoFlag;
-			vtime = DateTime.Now;
-		}
-	}
+        public void Reset()
+        {
+            apps = new OidCollection();
+            cert = new OidCollection();
+            store2 = null;
+            rflag = X509RevocationFlag.ExcludeRoot;
+            mode = X509RevocationMode.Online;
+            timeout = TimeSpan.Zero;
+            vflags = X509VerificationFlags.NoFlag;
+            vtime = DateTime.Now;
+        }
+    }
 }
 
 #endif

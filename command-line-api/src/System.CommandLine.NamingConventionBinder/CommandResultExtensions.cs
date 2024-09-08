@@ -10,7 +10,8 @@ internal static class CommandResultExtensions
     internal static bool TryGetValueForArgument(
         this CommandResult commandResult,
         IValueDescriptor valueDescriptor,
-        out object? value)
+        out object? value
+    )
     {
         var arguments = commandResult.Command.Arguments;
 
@@ -40,7 +41,8 @@ internal static class CommandResultExtensions
     internal static bool TryGetValueForOption(
         this CommandResult commandResult,
         IValueDescriptor valueDescriptor,
-        out object? value)
+        out object? value
+    )
     {
         var options = commandResult.Command.Options;
 
@@ -48,8 +50,7 @@ internal static class CommandResultExtensions
         {
             if (options[i] is CliOption option)
             {
-                var hasMatchingAlias =
-                    HasMatchingAlias(valueDescriptor, option);
+                var hasMatchingAlias = HasMatchingAlias(valueDescriptor, option);
 
                 if (hasMatchingAlias)
                 {
@@ -68,12 +69,15 @@ internal static class CommandResultExtensions
         value = null;
         return false;
 
-        static bool HasMatchingAlias(
-            IValueDescriptor valueDescriptor,
-            CliOption option)
+        static bool HasMatchingAlias(IValueDescriptor valueDescriptor, CliOption option)
         {
             string nameWithoutPrefix = RemovePrefix(option.Name);
-            if (valueDescriptor.ValueName.Equals(nameWithoutPrefix, StringComparison.OrdinalIgnoreCase) || valueDescriptor.ValueName.IsMatch(nameWithoutPrefix))
+            if (
+                valueDescriptor.ValueName.Equals(
+                    nameWithoutPrefix,
+                    StringComparison.OrdinalIgnoreCase
+                ) || valueDescriptor.ValueName.IsMatch(nameWithoutPrefix)
+            )
             {
                 return true;
             }
@@ -97,9 +101,11 @@ internal static class CommandResultExtensions
         var indexAfterPrefix = IndexAfterPrefix(alias);
         var parameterCandidateLength = alias.Length - indexAfterPrefix;
 
-        for (var aliasIndex = indexAfterPrefix;
-             aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
-             aliasIndex++)
+        for (
+            var aliasIndex = indexAfterPrefix;
+            aliasIndex < alias.Length && parameterNameIndex < parameterName.Length;
+            aliasIndex++
+        )
         {
             var aliasChar = alias[aliasIndex];
 
@@ -155,17 +161,13 @@ internal static class CommandResultExtensions
     private static string RemovePrefix(string name)
     {
         int prefixLength = GetPrefixLength(name);
-        return prefixLength > 0
-                   ? name.Substring(prefixLength)
-                   : name;
+        return prefixLength > 0 ? name.Substring(prefixLength) : name;
 
         static int GetPrefixLength(string name)
         {
             if (name[0] == '-')
             {
-                return name.Length > 1 && name[1] == '-'
-                           ? 2
-                           : 1;
+                return name.Length > 1 && name[1] == '-' ? 2 : 1;
             }
 
             if (name[0] == '/')

@@ -18,13 +18,20 @@ namespace Microsoft.AspNetCore.InternalTesting
             Assert.Equal(GetType().FullName, Context.FileOutput.TestClassName);
         }
 
-        Task ITestMethodLifecycle.OnTestStartAsync(TestContext context, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestStartAsync(
+            TestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Context = context;
             return Task.CompletedTask;
         }
 
-        Task ITestMethodLifecycle.OnTestEndAsync(TestContext context, Exception exception, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestEndAsync(
+            TestContext context,
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             return Task.CompletedTask;
         }
@@ -43,13 +50,20 @@ namespace Microsoft.AspNetCore.InternalTesting.Tests
             Assert.Equal(GetType().Name, Context.FileOutput.TestClassName);
         }
 
-        Task ITestMethodLifecycle.OnTestStartAsync(TestContext context, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestStartAsync(
+            TestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Context = context;
             return Task.CompletedTask;
         }
 
-        Task ITestMethodLifecycle.OnTestEndAsync(TestContext context, Exception exception, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestEndAsync(
+            TestContext context,
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             return Task.CompletedTask;
         }
@@ -69,13 +83,20 @@ namespace Microsoft.AspNetCore.InternalTesting
             Assert.Equal(GetType().Name, Context.FileOutput.TestClassName);
         }
 
-        Task ITestMethodLifecycle.OnTestStartAsync(TestContext context, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestStartAsync(
+            TestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Context = context;
             return Task.CompletedTask;
         }
 
-        Task ITestMethodLifecycle.OnTestEndAsync(TestContext context, Exception exception, CancellationToken cancellationToken)
+        Task ITestMethodLifecycle.OnTestEndAsync(
+            TestContext context,
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             return Task.CompletedTask;
         }

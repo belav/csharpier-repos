@@ -19,7 +19,11 @@ namespace System.Reflection.Tests
         /// <summary>
         /// Invoke constructor on an existing instance. Should return null.
         /// </summary>
-        public abstract object? Invoke(ConstructorInfo constructorInfo, object obj, object?[]? parameters);
+        public abstract object? Invoke(
+            ConstructorInfo constructorInfo,
+            object obj,
+            object?[]? parameters
+        );
 
         public static ConstructorInfo[] GetConstructors(Type type)
         {
@@ -70,12 +74,16 @@ namespace System.Reflection.Tests
                 // Create big Array with elements
                 if (IsExceptionWrapped)
                 {
-                    Exception ex = Assert.Throws<TargetInvocationException>(() => Invoke(constructors[0], new object[] { length }));
+                    Exception ex = Assert.Throws<TargetInvocationException>(
+                        () => Invoke(constructors[0], new object[] { length })
+                    );
                     Assert.IsType<OverflowException>(ex.InnerException);
                 }
                 else
                 {
-                    Assert.Throws<OverflowException>(() => Invoke(constructors[0], new object[] { length }));
+                    Assert.Throws<OverflowException>(
+                        () => Invoke(constructors[0], new object[] { length })
+                    );
                 }
             }
         }
@@ -84,7 +92,10 @@ namespace System.Reflection.Tests
         public void Invoke_OneParameter()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            ClassWith3Constructors obj = (ClassWith3Constructors)Invoke(constructors[1], new object[] { 100 });
+            ClassWith3Constructors obj = (ClassWith3Constructors)Invoke(
+                constructors[1],
+                new object[] { 100 }
+            );
             Assert.Equal(100, obj.intValue);
         }
 
@@ -92,7 +103,10 @@ namespace System.Reflection.Tests
         public void Invoke_TwoParameters()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            ClassWith3Constructors obj = (ClassWith3Constructors)Invoke(constructors[2], new object[] { 101, "hello" });
+            ClassWith3Constructors obj = (ClassWith3Constructors)Invoke(
+                constructors[2],
+                new object[] { 101, "hello" }
+            );
             Assert.Equal(101, obj.intValue);
             Assert.Equal("hello", obj.stringValue);
         }
@@ -101,21 +115,28 @@ namespace System.Reflection.Tests
         public void Invoke_NoParameters_ThowsTargetParameterCountException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            Assert.Throws<TargetParameterCountException>(() => Invoke(constructors[2], new object[0]));
+            Assert.Throws<TargetParameterCountException>(
+                () => Invoke(constructors[2], new object[0])
+            );
         }
 
         [Fact]
         public void Invoke_ParameterMismatch_ThrowsTargetParameterCountException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            Assert.Throws<TargetParameterCountException>(() => (ClassWith3Constructors)Invoke(constructors[2], new object[] { 121 }));
+            Assert.Throws<TargetParameterCountException>(
+                () => (ClassWith3Constructors)Invoke(constructors[2], new object[] { 121 })
+            );
         }
 
         [Fact]
         public void Invoke_ParameterWrongType_ThrowsArgumentException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            AssertExtensions.Throws<ArgumentException>(null, () => (ClassWith3Constructors)Invoke(constructors[1], new object[] { "hello" }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => (ClassWith3Constructors)Invoke(constructors[1], new object[] { "hello" })
+            );
         }
 
         [Fact]
@@ -124,7 +145,11 @@ namespace System.Reflection.Tests
             // Should not produce a second object.
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
             ClassWith3Constructors obj1 = new ClassWith3Constructors(100, "hello");
-            ClassWith3Constructors obj2 = (ClassWith3Constructors)Invoke(constructors[2], obj1, new object[] { 999, "initialized" });
+            ClassWith3Constructors obj2 = (ClassWith3Constructors)Invoke(
+                constructors[2],
+                obj1,
+                new object[] { 999, "initialized" }
+            );
             Assert.Null(obj2);
             Assert.Equal(999, obj1.intValue);
             Assert.Equal("initialized", obj1.stringValue);
@@ -134,7 +159,9 @@ namespace System.Reflection.Tests
         public void Invoke_NullForObj()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWith3Constructors));
-            Assert.Throws<TargetException>(() => Invoke(constructors[2], obj: null, new object[] { 999, "initialized" }));
+            Assert.Throws<TargetException>(
+                () => Invoke(constructors[2], obj: null, new object[] { 999, "initialized" })
+            );
         }
 
         [Fact]
@@ -142,7 +169,9 @@ namespace System.Reflection.Tests
         public void Invoke_AbstractClass_ThrowsMemberAccessException()
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ConstructorInfoAbstractBase));
-            Assert.Throws<MemberAccessException>(() => (ConstructorInfoAbstractBase)Invoke(constructors[0], new object[0]));
+            Assert.Throws<MemberAccessException>(
+                () => (ConstructorInfoAbstractBase)Invoke(constructors[0], new object[0])
+            );
         }
 
         [Fact]

@@ -22,7 +22,8 @@ public class RazorReferenceManagerTest
         var applicationPartManager = GetApplicationPartManager();
         var referenceManager = new RazorReferenceManager(
             applicationPartManager,
-            Options.Create(options));
+            Options.Create(options)
+        );
 
         var expected = new[] { ApplicationPartReferencePath, additionalReferencePath };
 

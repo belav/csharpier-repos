@@ -18,13 +18,17 @@ public static class WebAssemblyRazorComponentsEndpointConventionBuilderExtension
     /// <returns>The <see cref="RazorComponentsEndpointConventionBuilder"/>.</returns>
     public static RazorComponentsEndpointConventionBuilder AddInteractiveWebAssemblyRenderMode(
         this RazorComponentsEndpointConventionBuilder builder,
-        Action<WebAssemblyComponentsEndpointOptions>? callback = null)
+        Action<WebAssemblyComponentsEndpointOptions>? callback = null
+    )
     {
         var options = new WebAssemblyComponentsEndpointOptions();
 
         callback?.Invoke(options);
 
-        ComponentEndpointConventionBuilderHelper.AddRenderMode(builder, new WebAssemblyRenderModeWithOptions(options));
+        ComponentEndpointConventionBuilderHelper.AddRenderMode(
+            builder,
+            new WebAssemblyRenderModeWithOptions(options)
+        );
         return builder;
     }
 }

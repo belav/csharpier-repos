@@ -5,13 +5,13 @@
 // There's a generic and a non-generic `List' type in two
 // different namespaces: make sure we pick the correct one.
 
-using Foo;
 using Bar;
+using Foo;
 
 class X
 {
-	public static void Main ()
-	{
-		List<int> list = new List<int> ();
-	}
+    public static void Main()
+    {
+        List<int> list = new List<int>();
+    }
 }

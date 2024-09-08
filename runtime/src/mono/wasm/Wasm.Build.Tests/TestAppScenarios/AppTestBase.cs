@@ -8,17 +8,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Xunit.Abstractions;
 using Wasm.Build.Tests.Blazor;
+using Xunit.Abstractions;
 
 namespace Wasm.Build.Tests.TestAppScenarios;
 
 public abstract class AppTestBase : BlazorWasmTestBase
 {
     protected AppTestBase(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+        : base(output, buildContext) { }
 
     protected string Id { get; set; }
     protected string LogPath { get; set; }
@@ -29,7 +27,10 @@ public abstract class AppTestBase : BlazorWasmTestBase
         InitBlazorWasmProjectDir(Id);
 
         LogPath = Path.Combine(s_buildEnv.LogRootPath, Id);
-        Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, assetName), Path.Combine(_projectDir!));
+        Utils.DirectoryCopy(
+            Path.Combine(BuildEnvironment.TestAssetsPath, assetName),
+            Path.Combine(_projectDir!)
+        );
     }
 
     protected void BuildProject(string configuration)
@@ -44,26 +45,34 @@ public abstract class AppTestBase : BlazorWasmTestBase
         result.EnsureSuccessful();
     }
 
-    protected ToolCommand CreateDotNetCommand() => new DotNetCommand(s_buildEnv, _testOutput)
-        .WithWorkingDirectory(_projectDir!)
-        .WithEnvironmentVariable("NUGET_PACKAGES", _nugetPackagesDir);
+    protected ToolCommand CreateDotNetCommand() =>
+        new DotNetCommand(s_buildEnv, _testOutput)
+            .WithWorkingDirectory(_projectDir!)
+            .WithEnvironmentVariable("NUGET_PACKAGES", _nugetPackagesDir);
 
     protected async Task<RunResult> RunSdkStyleApp(RunOptions options)
     {
         string queryString = "?test=" + options.TestScenario;
         if (options.BrowserQueryString != null)
-            queryString += "&" + string.Join("&", options.BrowserQueryString.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+            queryString +=
+                "&"
+                + string.Join(
+                    "&",
+                    options.BrowserQueryString.Select(kvp => $"{kvp.Key}={kvp.Value}")
+                );
 
         var tcs = new TaskCompletionSource<int>();
         List<string> testOutput = new();
         List<string> consoleOutput = new();
         Regex exitRegex = new Regex("WASM EXIT (?<exitCode>[0-9]+)$");
 
-        BlazorRunOptions blazorRunOptions = new(
+        BlazorRunOptions blazorRunOptions =
+            new(
                 CheckCounter: false,
                 Config: options.Configuration,
                 OnConsoleMessage: OnConsoleMessage,
-                QueryString: queryString);
+                QueryString: queryString
+            );
 
         await BlazorRunForBuildWithDotnetRun(blazorRunOptions);
 
@@ -89,11 +98,13 @@ public abstract class AppTestBase : BlazorWasmTestBase
         //TimeSpan timeout = TimeSpan.FromMinutes(2);
         //await Task.WhenAny(tcs.Task, Task.Delay(timeout));
         //if (!tcs.Task.IsCompleted)
-            //throw new Exception($"Timed out after {timeout.TotalSeconds}s waiting for process to exit");
+        //throw new Exception($"Timed out after {timeout.TotalSeconds}s waiting for process to exit");
 
         int wasmExitCode = tcs.Task.Result;
         if (options.ExpectedExitCode != null && wasmExitCode != options.ExpectedExitCode)
-            throw new Exception($"Expected exit code {options.ExpectedExitCode} but got {wasmExitCode}");
+            throw new Exception(
+                $"Expected exit code {options.ExpectedExitCode} but got {wasmExitCode}"
+            );
 
         return new(wasmExitCode, testOutput, consoleOutput);
     }

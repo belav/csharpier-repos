@@ -15,9 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             public static TestAnalyzerConfigOptions Instance = new();
             private readonly Func<string, string?>? _lookup = null;
 
-            public TestAnalyzerConfigOptions()
-            {
-            }
+            public TestAnalyzerConfigOptions() { }
 
             public TestAnalyzerConfigOptions(Func<string, string?> lookup)
             {

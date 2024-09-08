@@ -1,6 +1,6 @@
 ﻿// <copyright>
 // Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
+// </copyright>
 
 namespace System.ServiceModel.Channels
 {
@@ -12,30 +12,46 @@ namespace System.ServiceModel.Channels
 
     internal static class EncoderHelpers
     {
-        internal static XmlDictionaryReaderQuotas GetBufferedReadQuotas(XmlDictionaryReaderQuotas encoderQuotas)
+        internal static XmlDictionaryReaderQuotas GetBufferedReadQuotas(
+            XmlDictionaryReaderQuotas encoderQuotas
+        )
         {
             XmlDictionaryReaderQuotas bufferedReadQuotas = new XmlDictionaryReaderQuotas();
             encoderQuotas.CopyTo(bufferedReadQuotas);
 
-            // now we have the quotas from the encoder, we need to update the values with the new quotas from the default read quotas. 
-            if (IsDefaultQuota(bufferedReadQuotas, XmlDictionaryReaderQuotaTypes.MaxStringContentLength))
+            // now we have the quotas from the encoder, we need to update the values with the new quotas from the default read quotas.
+            if (
+                IsDefaultQuota(
+                    bufferedReadQuotas,
+                    XmlDictionaryReaderQuotaTypes.MaxStringContentLength
+                )
+            )
             {
-                bufferedReadQuotas.MaxStringContentLength = EncoderDefaults.BufferedReadDefaultMaxStringContentLength;
+                bufferedReadQuotas.MaxStringContentLength =
+                    EncoderDefaults.BufferedReadDefaultMaxStringContentLength;
             }
 
             if (IsDefaultQuota(bufferedReadQuotas, XmlDictionaryReaderQuotaTypes.MaxArrayLength))
             {
-                bufferedReadQuotas.MaxArrayLength = EncoderDefaults.BufferedReadDefaultMaxArrayLength;
+                bufferedReadQuotas.MaxArrayLength =
+                    EncoderDefaults.BufferedReadDefaultMaxArrayLength;
             }
 
             if (IsDefaultQuota(bufferedReadQuotas, XmlDictionaryReaderQuotaTypes.MaxBytesPerRead))
             {
-                bufferedReadQuotas.MaxBytesPerRead = EncoderDefaults.BufferedReadDefaultMaxBytesPerRead;
+                bufferedReadQuotas.MaxBytesPerRead =
+                    EncoderDefaults.BufferedReadDefaultMaxBytesPerRead;
             }
 
-            if (IsDefaultQuota(bufferedReadQuotas, XmlDictionaryReaderQuotaTypes.MaxNameTableCharCount))
+            if (
+                IsDefaultQuota(
+                    bufferedReadQuotas,
+                    XmlDictionaryReaderQuotaTypes.MaxNameTableCharCount
+                )
+            )
             {
-                bufferedReadQuotas.MaxNameTableCharCount = EncoderDefaults.BufferedReadDefaultMaxNameTableCharCount;
+                bufferedReadQuotas.MaxNameTableCharCount =
+                    EncoderDefaults.BufferedReadDefaultMaxNameTableCharCount;
             }
 
             if (IsDefaultQuota(bufferedReadQuotas, XmlDictionaryReaderQuotaTypes.MaxDepth))
@@ -46,7 +62,10 @@ namespace System.ServiceModel.Channels
             return bufferedReadQuotas;
         }
 
-        private static bool IsDefaultQuota(XmlDictionaryReaderQuotas quotas, XmlDictionaryReaderQuotaTypes quotaType)
+        private static bool IsDefaultQuota(
+            XmlDictionaryReaderQuotas quotas,
+            XmlDictionaryReaderQuotaTypes quotaType
+        )
         {
             switch (quotaType)
             {

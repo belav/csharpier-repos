@@ -14,12 +14,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         {
             get
             {
-                return this is GenericNameSyntax ? ((GenericNameSyntax)this).TypeArgumentList.Arguments.Count : 0;
+                return this is GenericNameSyntax
+                    ? ((GenericNameSyntax)this).TypeArgumentList.Arguments.Count
+                    : 0;
             }
         }
 
         /// <summary>
-        /// Returns the unqualified (right-most) part of a qualified or alias-qualified name, or the name itself if already unqualified. 
+        /// Returns the unqualified (right-most) part of a qualified or alias-qualified name, or the name itself if already unqualified.
         /// </summary>
         /// <returns>The unqualified (right-most) part of a qualified or alias-qualified name, or the name itself if already unqualified.
         /// If called on an instance of <see cref="AliasQualifiedNameSyntax"/> returns the value of the <see cref="AliasQualifiedNameSyntax.Name"/> property.

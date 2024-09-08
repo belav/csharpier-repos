@@ -9,14 +9,21 @@ namespace System.IO.Tests.Enumeration
 {
     public class GetTimesTests : FileSystemTest
     {
-        private class AllEntries : FileSystemEnumerator<(DateTimeOffset CreationTimeUtc, DateTimeOffset LastAccessTimeUtc, DateTimeOffset LastWriteTimeUtc)>
+        private class AllEntries
+            : FileSystemEnumerator<(
+                DateTimeOffset CreationTimeUtc,
+                DateTimeOffset LastAccessTimeUtc,
+                DateTimeOffset LastWriteTimeUtc
+            )>
         {
             public AllEntries(string directory, EnumerationOptions options)
-                : base(directory, options)
-            {
-            }
+                : base(directory, options) { }
 
-            protected override (DateTimeOffset CreationTimeUtc, DateTimeOffset LastAccessTimeUtc, DateTimeOffset LastWriteTimeUtc) TransformEntry(ref FileSystemEntry entry)
+            protected override (
+                DateTimeOffset CreationTimeUtc,
+                DateTimeOffset LastAccessTimeUtc,
+                DateTimeOffset LastWriteTimeUtc
+            ) TransformEntry(ref FileSystemEntry entry)
             {
                 return (entry.CreationTimeUtc, entry.LastAccessTimeUtc, entry.LastWriteTimeUtc);
             }
@@ -26,11 +33,15 @@ namespace System.IO.Tests.Enumeration
         public void FileTimesShouldBeUtc()
         {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
-            FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
+            FileInfo fileOne = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
 
             fileOne.Create().Dispose();
 
-            using (var enumerator = new AllEntries(testDirectory.FullName, new EnumerationOptions()))
+            using (
+                var enumerator = new AllEntries(testDirectory.FullName, new EnumerationOptions())
+            )
             {
                 Assert.True(enumerator.MoveNext());
                 Assert.Equal(TimeSpan.Zero, enumerator.Current.CreationTimeUtc.Offset);

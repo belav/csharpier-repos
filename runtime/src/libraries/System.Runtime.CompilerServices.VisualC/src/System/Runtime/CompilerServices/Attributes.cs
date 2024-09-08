@@ -4,40 +4,45 @@
 // We need to add an InternalsVisibleToAttribute here to mscorlib since we need to expose some of these types via type forwards in mscorlib
 // since tooling expects some types to live there and not in System.Runtime.CompilerServices.VisualC, but we don't want to expose
 // these types publicly.
-[assembly:System.Runtime.CompilerServices.InternalsVisibleTo("mscorlib, PublicKey=00000000000000000400000000000000")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(
+    "mscorlib, PublicKey=00000000000000000400000000000000"
+)]
 
 #pragma warning disable IDE0060
 
 namespace System.Runtime.CompilerServices
 {
     // Types used by the C++/CLI compiler during linking.
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     internal sealed class AssemblyAttributesGoHere
     {
-        internal AssemblyAttributesGoHere()
-        {
-        }
+        internal AssemblyAttributesGoHere() { }
     }
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     internal sealed class AssemblyAttributesGoHereS
     {
-        internal AssemblyAttributesGoHereS()
-        {
-        }
+        internal AssemblyAttributesGoHereS() { }
     }
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     internal sealed class AssemblyAttributesGoHereM
     {
-        internal AssemblyAttributesGoHereM()
-        {
-        }
+        internal AssemblyAttributesGoHereM() { }
     }
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     internal sealed class AssemblyAttributesGoHereSM
     {
-        internal AssemblyAttributesGoHereSM()
-        {
-        }
+        internal AssemblyAttributesGoHereSM() { }
     }
 
     [AttributeUsage(AttributeTargets.All)]
@@ -47,45 +52,25 @@ namespace System.Runtime.CompilerServices
     }
 
     // Indicates that the modified instance is pinned in memory.
-    public static class IsPinned
-    {
-    }
+    public static class IsPinned { }
 
-    public static partial class IsBoxed
-    {
-    }
+    public static partial class IsBoxed { }
 
-    public static partial class IsByValue
-    {
-    }
+    public static partial class IsByValue { }
 
-    public static partial class IsCopyConstructed
-    {
-    }
+    public static partial class IsCopyConstructed { }
 
-    public static partial class IsExplicitlyDereferenced
-    {
-    }
+    public static partial class IsExplicitlyDereferenced { }
 
-    public static partial class IsImplicitlyDereferenced
-    {
-    }
+    public static partial class IsImplicitlyDereferenced { }
 
-    public static partial class IsJitIntrinsic
-    {
-    }
+    public static partial class IsJitIntrinsic { }
 
-    public static partial class IsLong
-    {
-    }
+    public static partial class IsLong { }
 
-    public static partial class IsSignUnspecifiedByte
-    {
-    }
+    public static partial class IsSignUnspecifiedByte { }
 
-    public static partial class IsUdtReturn
-    {
-    }
+    public static partial class IsUdtReturn { }
 
     [AttributeUsage(AttributeTargets.Struct)]
     public sealed class HasCopySemanticsAttribute : Attribute
@@ -105,31 +90,42 @@ namespace System.Runtime.CompilerServices
         public NativeCppClassAttribute() { }
     }
 
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=true)]
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class CppInlineNamespaceAttribute : Attribute
     {
-        public CppInlineNamespaceAttribute(string dottedName) {}
+        public CppInlineNamespaceAttribute(string dottedName) { }
     }
 
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum | AttributeTargets.Interface, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class RequiredAttributeAttribute : Attribute
     {
-        public RequiredAttributeAttribute(Type requiredContract) => RequiredContract = requiredContract;
+        public RequiredAttributeAttribute(Type requiredContract) =>
+            RequiredContract = requiredContract;
 
         public Type RequiredContract { get; }
     }
 
-    [AttributeUsage(AttributeTargets.Class |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Method |
-                    AttributeTargets.Field |
-                    AttributeTargets.Event |
-                    AttributeTargets.Property)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Event
+            | AttributeTargets.Property
+    )]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     internal sealed class SuppressMergeCheckAttribute : Attribute
     {
-        public SuppressMergeCheckAttribute()
-        {}
+        public SuppressMergeCheckAttribute() { }
     }
 
     // The CLR data marshaler has some behaviors that are incompatible with
@@ -145,7 +141,5 @@ namespace System.Runtime.CompilerServices
     //
     // Indicates that the modified instance differs from its true type for
     // correct marshalling.
-    public static class CompilerMarshalOverride
-    {
-    }
+    public static class CompilerMarshalOverride { }
 }

@@ -53,7 +53,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData(10, 10)]
         [InlineData(11, 11)]
         [InlineData(12, 11)]
-        public void EncodeUtf8_WellFormedInput_DoesNotRequireEncoding_CopiedToDestinationCorrectly(int destinationSize, int expectedBytesCopied)
+        public void EncodeUtf8_WellFormedInput_DoesNotRequireEncoding_CopiedToDestinationCorrectly(
+            int destinationSize,
+            int expectedBytesCopied
+        )
         {
             // This test considers input which is well-formed and doesn't need to be encoded.
             // If the destination buffer is large enough, the data should be copied in its entirety.
@@ -63,30 +66,67 @@ namespace System.Text.Encodings.Web.Tests
 
             // Arrange
 
-            byte[] fullUtf8Input = new byte[] {
-                0xC2, 0x82,
+            byte[] fullUtf8Input = new byte[]
+            {
+                0xC2,
+                0x82,
                 0x40,
-                0xE2, 0x90, 0x91,
-                0xF3, 0xA0, 0xA1, 0xA2,
-                0x50 }; // UTF-8 subsequences of varying length
+                0xE2,
+                0x90,
+                0x91,
+                0xF3,
+                0xA0,
+                0xA1,
+                0xA2,
+                0x50,
+            }; // UTF-8 subsequences of varying length
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => true /* allow everything */);
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                true /* allow everything */
+            );
 
             // Act & assert
 
-            OperationStatus expectedOpStatus = (expectedBytesCopied == fullUtf8Input.Length) ? OperationStatus.Done : OperationStatus.DestinationTooSmall;
+            OperationStatus expectedOpStatus =
+                (expectedBytesCopied == fullUtf8Input.Length)
+                    ? OperationStatus.Done
+                    : OperationStatus.DestinationTooSmall;
 
             byte[] destination = new byte[destinationSize];
-            Assert.Equal(expectedOpStatus, encoder.EncodeUtf8(fullUtf8Input, destination, out int bytesConsumed, out int bytesWritten, isFinalBlock: true));
+            Assert.Equal(
+                expectedOpStatus,
+                encoder.EncodeUtf8(
+                    fullUtf8Input,
+                    destination,
+                    out int bytesConsumed,
+                    out int bytesWritten,
+                    isFinalBlock: true
+                )
+            );
             Assert.Equal(expectedBytesCopied, bytesConsumed);
             Assert.Equal(expectedBytesCopied, bytesWritten); // bytes written should match bytes consumed if no encoding needs to take place
-            Assert.Equal(fullUtf8Input.AsSpan(0, bytesConsumed).ToArray(), destination.AsSpan(0, bytesWritten).ToArray()); // ensure byte-for-byte copy
+            Assert.Equal(
+                fullUtf8Input.AsSpan(0, bytesConsumed).ToArray(),
+                destination.AsSpan(0, bytesWritten).ToArray()
+            ); // ensure byte-for-byte copy
 
             destination = new byte[destinationSize];
-            Assert.Equal(expectedOpStatus, encoder.EncodeUtf8(fullUtf8Input, destination, out bytesConsumed, out bytesWritten, isFinalBlock: false));
+            Assert.Equal(
+                expectedOpStatus,
+                encoder.EncodeUtf8(
+                    fullUtf8Input,
+                    destination,
+                    out bytesConsumed,
+                    out bytesWritten,
+                    isFinalBlock: false
+                )
+            );
             Assert.Equal(expectedBytesCopied, bytesConsumed);
             Assert.Equal(expectedBytesCopied, bytesWritten); // bytes written should match bytes consumed if no encoding needs to take place
-            Assert.Equal(fullUtf8Input.AsSpan(0, bytesConsumed).ToArray(), destination.AsSpan(0, bytesWritten).ToArray()); // ensure byte-for-byte copy
+            Assert.Equal(
+                fullUtf8Input.AsSpan(0, bytesConsumed).ToArray(),
+                destination.AsSpan(0, bytesWritten).ToArray()
+            ); // ensure byte-for-byte copy
         }
 
         [Fact]
@@ -105,7 +145,9 @@ namespace System.Text.Encodings.Web.Tests
                 new { utf8Bytes = new byte[] { 0xF0, 0x90, 0x82, 0x83 }, output = "[10083]" }, // U+10083 LINEAR B IDEOGRAM B105 EQUID (encoded since not on allow list)
             };
 
-            var encoder = new ConfigurableScalarTextEncoder(scalarValue => (scalarValue % 2) == 0 /* allow only even-valued scalars to be represented unescaped */);
+            var encoder = new ConfigurableScalarTextEncoder(scalarValue =>
+                (scalarValue % 2) == 0 /* allow only even-valued scalars to be represented unescaped */
+            );
 
             // Act & assert
 
@@ -117,7 +159,8 @@ namespace System.Text.Encodings.Web.Tests
                 int aggregateInputByteCountAtStartOfLoop = aggregateInputBytesSoFar.Count;
 
                 byte[] destination;
-                int bytesConsumed, bytesWritten;
+                int bytesConsumed,
+                    bytesWritten;
 
                 for (int i = 0; i < entry.utf8Bytes.Length - 1; i++)
                 {
@@ -126,31 +169,77 @@ namespace System.Text.Encodings.Web.Tests
                     // If not final block, partial encoding should say "needs more data".
                     // We'll try with various destination lengths just to make sure it doesn't affect result.
 
-                    foreach (int destinationLength in new[] { expectedOutputBytesSoFar.Count, expectedOutputBytesSoFar.Count + 1024 })
+                    foreach (
+                        int destinationLength in new[]
+                        {
+                            expectedOutputBytesSoFar.Count,
+                            expectedOutputBytesSoFar.Count + 1024,
+                        }
+                    )
                     {
                         destination = new byte[destinationLength];
 
-                        Assert.Equal(OperationStatus.NeedMoreData, encoder.EncodeUtf8(aggregateInputBytesSoFar.ToArray(), destination, out bytesConsumed, out bytesWritten, isFinalBlock: false));
+                        Assert.Equal(
+                            OperationStatus.NeedMoreData,
+                            encoder.EncodeUtf8(
+                                aggregateInputBytesSoFar.ToArray(),
+                                destination,
+                                out bytesConsumed,
+                                out bytesWritten,
+                                isFinalBlock: false
+                            )
+                        );
                         Assert.Equal(aggregateInputByteCountAtStartOfLoop, bytesConsumed);
                         Assert.Equal(expectedOutputBytesSoFar.Count, bytesWritten);
-                        Assert.Equal(expectedOutputBytesSoFar.ToArray(), new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray());
+                        Assert.Equal(
+                            expectedOutputBytesSoFar.ToArray(),
+                            new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray()
+                        );
                     }
 
                     // Now try it with "isFinalBlock = true" to force the U+FFFD conversion
 
                     destination = new byte[expectedOutputBytesSoFar.Count]; // first with not enough output space to write "[FFFD]"
 
-                    Assert.Equal(OperationStatus.DestinationTooSmall, encoder.EncodeUtf8(aggregateInputBytesSoFar.ToArray(), destination, out bytesConsumed, out bytesWritten, isFinalBlock: true));
+                    Assert.Equal(
+                        OperationStatus.DestinationTooSmall,
+                        encoder.EncodeUtf8(
+                            aggregateInputBytesSoFar.ToArray(),
+                            destination,
+                            out bytesConsumed,
+                            out bytesWritten,
+                            isFinalBlock: true
+                        )
+                    );
                     Assert.Equal(aggregateInputByteCountAtStartOfLoop, bytesConsumed);
                     Assert.Equal(expectedOutputBytesSoFar.Count, bytesWritten);
-                    Assert.Equal(expectedOutputBytesSoFar.ToArray(), new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray());
+                    Assert.Equal(
+                        expectedOutputBytesSoFar.ToArray(),
+                        new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray()
+                    );
 
                     destination = new byte[expectedOutputBytesSoFar.Count + 1024]; // then with enough output space to write "[FFFD]"
 
-                    Assert.Equal(OperationStatus.Done, encoder.EncodeUtf8(aggregateInputBytesSoFar.ToArray(), destination, out bytesConsumed, out bytesWritten, isFinalBlock: true));
+                    Assert.Equal(
+                        OperationStatus.Done,
+                        encoder.EncodeUtf8(
+                            aggregateInputBytesSoFar.ToArray(),
+                            destination,
+                            out bytesConsumed,
+                            out bytesWritten,
+                            isFinalBlock: true
+                        )
+                    );
                     Assert.Equal(aggregateInputBytesSoFar.Count, bytesConsumed);
                     Assert.Equal(expectedOutputBytesSoFar.Count + "[FFFD]".Length, bytesWritten);
-                    Assert.Equal(expectedOutputBytesSoFar.Concat("[FFFD]"u8.ToArray()), new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count + "[FFFD]".Length).ToArray());
+                    Assert.Equal(
+                        expectedOutputBytesSoFar.Concat("[FFFD]"u8.ToArray()),
+                        new Span<byte>(
+                            destination,
+                            0,
+                            expectedOutputBytesSoFar.Count + "[FFFD]".Length
+                        ).ToArray()
+                    );
                 }
 
                 // Consume the remainder of this entry and make sure it escaped properly (if needed).
@@ -159,26 +248,58 @@ namespace System.Text.Encodings.Web.Tests
 
                 // First with not enough space in the destination buffer.
 
-                destination = new byte[expectedOutputBytesSoFar.Count + Encoding.UTF8.GetByteCount(entry.output) - 1];
+                destination = new byte[
+                    expectedOutputBytesSoFar.Count + Encoding.UTF8.GetByteCount(entry.output) - 1
+                ];
 
-                Assert.Equal(OperationStatus.DestinationTooSmall, encoder.EncodeUtf8(aggregateInputBytesSoFar.ToArray(), destination, out bytesConsumed, out bytesWritten, isFinalBlock: true));
+                Assert.Equal(
+                    OperationStatus.DestinationTooSmall,
+                    encoder.EncodeUtf8(
+                        aggregateInputBytesSoFar.ToArray(),
+                        destination,
+                        out bytesConsumed,
+                        out bytesWritten,
+                        isFinalBlock: true
+                    )
+                );
                 Assert.Equal(aggregateInputByteCountAtStartOfLoop, bytesConsumed);
                 Assert.Equal(expectedOutputBytesSoFar.Count, bytesWritten);
-                Assert.Equal(expectedOutputBytesSoFar.ToArray(), new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray());
+                Assert.Equal(
+                    expectedOutputBytesSoFar.ToArray(),
+                    new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray()
+                );
 
                 // Then with exactly enough space in the destination buffer,
                 // and again with more than enough space in the destination buffer.
 
                 expectedOutputBytesSoFar.AddRange(Encoding.UTF8.GetBytes(entry.output));
 
-                foreach (int destinationLength in new[] { expectedOutputBytesSoFar.Count, expectedOutputBytesSoFar.Count + 1024 })
+                foreach (
+                    int destinationLength in new[]
+                    {
+                        expectedOutputBytesSoFar.Count,
+                        expectedOutputBytesSoFar.Count + 1024,
+                    }
+                )
                 {
                     destination = new byte[destinationLength];
 
-                    Assert.Equal(OperationStatus.Done, encoder.EncodeUtf8(aggregateInputBytesSoFar.ToArray(), destination, out bytesConsumed, out bytesWritten, isFinalBlock: false));
+                    Assert.Equal(
+                        OperationStatus.Done,
+                        encoder.EncodeUtf8(
+                            aggregateInputBytesSoFar.ToArray(),
+                            destination,
+                            out bytesConsumed,
+                            out bytesWritten,
+                            isFinalBlock: false
+                        )
+                    );
                     Assert.Equal(aggregateInputBytesSoFar.Count, bytesConsumed);
                     Assert.Equal(expectedOutputBytesSoFar.Count, bytesWritten);
-                    Assert.Equal(expectedOutputBytesSoFar.ToArray(), new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray());
+                    Assert.Equal(
+                        expectedOutputBytesSoFar.ToArray(),
+                        new Span<byte>(destination, 0, expectedOutputBytesSoFar.Count).ToArray()
+                    );
                 }
             }
         }
@@ -188,15 +309,35 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => false /* disallow everything */);
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                false /* disallow everything */
+            );
 
             // Act & assert
 
-            Assert.Equal(OperationStatus.Done, encoder.EncodeUtf8(ReadOnlySpan<byte>.Empty, Span<byte>.Empty, out int bytesConsumed, out int bytesWritten, isFinalBlock: true));
+            Assert.Equal(
+                OperationStatus.Done,
+                encoder.EncodeUtf8(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    out int bytesConsumed,
+                    out int bytesWritten,
+                    isFinalBlock: true
+                )
+            );
             Assert.Equal(0, bytesConsumed);
             Assert.Equal(0, bytesWritten);
 
-            Assert.Equal(OperationStatus.Done, encoder.EncodeUtf8(ReadOnlySpan<byte>.Empty, Span<byte>.Empty, out bytesConsumed, out bytesWritten, isFinalBlock: false));
+            Assert.Equal(
+                OperationStatus.Done,
+                encoder.EncodeUtf8(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    out bytesConsumed,
+                    out bytesWritten,
+                    isFinalBlock: false
+                )
+            );
             Assert.Equal(0, bytesConsumed);
             Assert.Equal(0, bytesWritten);
         }
@@ -206,11 +347,15 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => false /* disallow everything */);
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                false /* disallow everything */
+            );
 
             // Act
 
-            int idxOfFirstByteToEncode = encoder.FindFirstCharacterToEncodeUtf8(ReadOnlySpan<byte>.Empty);
+            int idxOfFirstByteToEncode = encoder.FindFirstCharacterToEncodeUtf8(
+                ReadOnlySpan<byte>.Empty
+            );
 
             // Assert
 
@@ -223,7 +368,9 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
 
             byte[] inputBytes = "\U00000040\U00000400\U00004000\U00040000"u8.ToArray(); // code units of different lengths
-            var encoder = new ConfigurableScalarTextEncoder(_ => true /* allow everything */);
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                true /* allow everything */
+            );
 
             // Act
 
@@ -240,7 +387,9 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
 
             byte[] inputBytes = "\U00000040\U00000400\U00004000\U00040000"u8.ToArray(); // code units of different lengths
-            var encoder = new ConfigurableScalarTextEncoder(codePoint => codePoint != 0x4000 /* disallow U+4000, allow all else */);
+            var encoder = new ConfigurableScalarTextEncoder(codePoint =>
+                codePoint != 0x4000 /* disallow U+4000, allow all else */
+            );
 
             // Act
 
@@ -257,11 +406,16 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData(new byte[] { 0xF1, 0x80, 0x80 }, 0)]
         [InlineData(new byte[] { 0xF1, 0x80, 0x80, 0x80, 0xFF }, 4)]
         [InlineData(new byte[] { 0xFF, 0x80, 0x80, 0x80, 0xFF }, 0)]
-        public void FindFirstCharToEncodeUtf8_IllFormedData_ReturnsIndexOfIllFormedSubsequence(byte[] utf8Data, int expectedIndex)
+        public void FindFirstCharToEncodeUtf8_IllFormedData_ReturnsIndexOfIllFormedSubsequence(
+            byte[] utf8Data,
+            int expectedIndex
+        )
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(_ => true /* allow everything */);
+            var encoder = new ConfigurableScalarTextEncoder(_ =>
+                true /* allow everything */
+            );
 
             // Act
 
@@ -283,59 +437,142 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData("ABC+DEF", 8, "ABC", 3, OperationStatus.DestinationTooSmall)]
         [InlineData("ABC+DEF", 9, "ABC[002B]", 4, OperationStatus.DestinationTooSmall)]
         [InlineData("ABC+DEF", 12, "ABC[002B]DEF", 7, OperationStatus.Done)]
-        public void EncodeUtf16_OperationStatus_AlphaNumericOnly(string input, int destBufferSize, string expectedOutput, int expectedCharsConsumed, OperationStatus expectedResult)
+        public void EncodeUtf16_OperationStatus_AlphaNumericOnly(
+            string input,
+            int destBufferSize,
+            string expectedOutput,
+            int expectedCharsConsumed,
+            OperationStatus expectedResult
+        )
         {
             // Arrange
 
-            var encoder = new ConfigurableScalarTextEncoder(scalar => UnicodeUtility.IsInRangeInclusive((uint)scalar | 0x20, 'a', 'z')); // allow only [A-Za-z] unescaped
-            using BoundedMemory<char> boundedInput = BoundedMemory.AllocateFromExistingData<char>(input.AsSpan());
+            var encoder = new ConfigurableScalarTextEncoder(scalar =>
+                UnicodeUtility.IsInRangeInclusive((uint)scalar | 0x20, 'a', 'z')
+            ); // allow only [A-Za-z] unescaped
+            using BoundedMemory<char> boundedInput = BoundedMemory.AllocateFromExistingData<char>(
+                input.AsSpan()
+            );
             using BoundedMemory<char> boundedOutput = BoundedMemory.Allocate<char>(destBufferSize);
 
             // Act
 
-            OperationStatus actualResult = encoder.Encode(boundedInput.Span, boundedOutput.Span, out int actualCharsConsumed, out int actualCharsWritten);
+            OperationStatus actualResult = encoder.Encode(
+                boundedInput.Span,
+                boundedOutput.Span,
+                out int actualCharsConsumed,
+                out int actualCharsWritten
+            );
 
             // Assert
 
             Assert.Equal(expectedResult, actualResult);
             Assert.Equal(expectedCharsConsumed, actualCharsConsumed);
-            Assert.Equal(expectedOutput, boundedOutput.Span.Slice(0, actualCharsWritten).ToString());
+            Assert.Equal(
+                expectedOutput,
+                boundedOutput.Span.Slice(0, actualCharsWritten).ToString()
+            );
         }
 
         [Theory]
         [InlineData("ABC\U0001F600", 4, "ABC", 3, OperationStatus.DestinationTooSmall)] // don't allow breaking across a surrogate
         [InlineData("ABC\U0001F600", 5, "ABC\U0001F600", 5, OperationStatus.Done)]
-        public void EncodeUtf16_OperationStatus_AllowEverything(string input, int destBufferSize, string expectedOutput, int expectedCharsConsumed, OperationStatus expectedResult)
+        public void EncodeUtf16_OperationStatus_AllowEverything(
+            string input,
+            int destBufferSize,
+            string expectedOutput,
+            int expectedCharsConsumed,
+            OperationStatus expectedResult
+        )
         {
             // Arrange
 
             var encoder = new ConfigurableScalarTextEncoder(_ => true); // allow all well-formed scalars
-            using BoundedMemory<char> boundedInput = BoundedMemory.AllocateFromExistingData<char>(input.AsSpan());
+            using BoundedMemory<char> boundedInput = BoundedMemory.AllocateFromExistingData<char>(
+                input.AsSpan()
+            );
             using BoundedMemory<char> boundedOutput = BoundedMemory.Allocate<char>(destBufferSize);
 
             // Act
 
-            OperationStatus actualResult = encoder.Encode(boundedInput.Span, boundedOutput.Span, out int actualCharsConsumed, out int actualCharsWritten);
+            OperationStatus actualResult = encoder.Encode(
+                boundedInput.Span,
+                boundedOutput.Span,
+                out int actualCharsConsumed,
+                out int actualCharsWritten
+            );
 
             // Assert
 
             Assert.Equal(expectedResult, actualResult);
             Assert.Equal(expectedCharsConsumed, actualCharsConsumed);
-            Assert.Equal(expectedOutput, boundedOutput.Span.Slice(0, actualCharsWritten).ToString());
+            Assert.Equal(
+                expectedOutput,
+                boundedOutput.Span.Slice(0, actualCharsWritten).ToString()
+            );
         }
 
         [Theory]
-        [InlineData(new[] { 'A', 'B', '\ud83d' }, 2, true, "AB", 2, OperationStatus.DestinationTooSmall)]
+        [InlineData(
+            new[] { 'A', 'B', '\ud83d' },
+            2,
+            true,
+            "AB",
+            2,
+            OperationStatus.DestinationTooSmall
+        )]
         [InlineData(new[] { 'A', 'B', '\ud83d' }, 2, false, "AB", 2, OperationStatus.NeedMoreData)]
-        [InlineData(new[] { 'A', 'B', '\ud83d' }, 3, true, "AB", 2, OperationStatus.DestinationTooSmall)]
+        [InlineData(
+            new[] { 'A', 'B', '\ud83d' },
+            3,
+            true,
+            "AB",
+            2,
+            OperationStatus.DestinationTooSmall
+        )]
         [InlineData(new[] { 'A', 'B', '\ud83d' }, 3, false, "AB", 2, OperationStatus.NeedMoreData)]
         [InlineData(new[] { 'A', 'B', '\ud83d' }, 10, true, "AB[FFFD]", 3, OperationStatus.Done)]
         [InlineData(new[] { 'A', 'B', '\ud83d' }, 10, false, "AB", 2, OperationStatus.NeedMoreData)]
-        [InlineData(new[] { 'A', 'B', '\ud83d', '\ude00' }, 2, true, "AB", 2, OperationStatus.DestinationTooSmall)]
-        [InlineData(new[] { 'A', 'B', '\ud83d', '\ude00' }, 2, false, "AB", 2, OperationStatus.DestinationTooSmall)]
-        [InlineData(new[] { 'A', 'B', '\ud83d', '\ude00' }, 4, true, "AB\U0001F600", 4, OperationStatus.Done)]
-        [InlineData(new[] { 'A', 'B', '\ud83d', '\ude00' }, 4, false, "AB\U0001F600", 4, OperationStatus.Done)]
-        public void EncodeUtf16_OperationStatus_SurrogateHandlingEdgeCases(char[] input, int destBufferSize, bool isFinalBlock, string expectedOutput, int expectedCharsConsumed, OperationStatus expectedResult)
+        [InlineData(
+            new[] { 'A', 'B', '\ud83d', '\ude00' },
+            2,
+            true,
+            "AB",
+            2,
+            OperationStatus.DestinationTooSmall
+        )]
+        [InlineData(
+            new[] { 'A', 'B', '\ud83d', '\ude00' },
+            2,
+            false,
+            "AB",
+            2,
+            OperationStatus.DestinationTooSmall
+        )]
+        [InlineData(
+            new[] { 'A', 'B', '\ud83d', '\ude00' },
+            4,
+            true,
+            "AB\U0001F600",
+            4,
+            OperationStatus.Done
+        )]
+        [InlineData(
+            new[] { 'A', 'B', '\ud83d', '\ude00' },
+            4,
+            false,
+            "AB\U0001F600",
+            4,
+            OperationStatus.Done
+        )]
+        public void EncodeUtf16_OperationStatus_SurrogateHandlingEdgeCases(
+            char[] input,
+            int destBufferSize,
+            bool isFinalBlock,
+            string expectedOutput,
+            int expectedCharsConsumed,
+            OperationStatus expectedResult
+        )
         {
             // Arrange
 
@@ -345,13 +582,22 @@ namespace System.Text.Encodings.Web.Tests
 
             // Act
 
-            OperationStatus actualResult = encoder.Encode(boundedInput.Span, boundedOutput.Span, out int actualCharsConsumed, out int actualCharsWritten, isFinalBlock);
+            OperationStatus actualResult = encoder.Encode(
+                boundedInput.Span,
+                boundedOutput.Span,
+                out int actualCharsConsumed,
+                out int actualCharsWritten,
+                isFinalBlock
+            );
 
             // Assert
 
             Assert.Equal(expectedResult, actualResult);
             Assert.Equal(expectedCharsConsumed, actualCharsConsumed);
-            Assert.Equal(expectedOutput, boundedOutput.Span.Slice(0, actualCharsWritten).ToString());
+            Assert.Equal(
+                expectedOutput,
+                boundedOutput.Span.Slice(0, actualCharsWritten).ToString()
+            );
         }
     }
 }

@@ -3,7 +3,6 @@
 
 using System.Diagnostics;
 using System.Runtime.Versioning;
-
 using SafeX509ChainHandle = Microsoft.Win32.SafeHandles.SafeX509ChainHandle;
 
 namespace System.Security.Cryptography.X509Certificates
@@ -37,7 +36,8 @@ namespace System.Security.Cryptography.X509Certificates
             return new X509Chain();
         }
 
-        public X509ChainElementCollection ChainElements => _chainElements ??= new X509ChainElementCollection();
+        public X509ChainElementCollection ChainElements =>
+            _chainElements ??= new X509ChainElementCollection();
 
         public X509ChainPolicy ChainPolicy
         {
@@ -54,7 +54,9 @@ namespace System.Security.Cryptography.X509Certificates
             get
             {
                 // We give the user a reference to the array since we'll never access it.
-                return _lazyChainStatus ??= (_pal == null ? Array.Empty<X509ChainStatus>() : _pal.ChainStatus!);
+                return _lazyChainStatus ??= (
+                    _pal == null ? Array.Empty<X509ChainStatus>() : _pal.ChainStatus!
+                );
             }
         }
 
@@ -96,25 +98,43 @@ namespace System.Security.Cryptography.X509Certificates
             lock (_syncRoot)
             {
                 if (certificate == null || certificate.Pal == null)
-                    throw new ArgumentException(SR.Cryptography_InvalidContextHandle, nameof(certificate));
+                    throw new ArgumentException(
+                        SR.Cryptography_InvalidContextHandle,
+                        nameof(certificate)
+                    );
 
                 if (_chainPolicy != null)
                 {
                     if (_chainPolicy._customTrustStore != null)
                     {
-                        if (_chainPolicy.TrustMode == X509ChainTrustMode.System && _chainPolicy.CustomTrustStore.Count > 0)
-                            throw new CryptographicException(SR.Cryptography_CustomTrustCertsInSystemMode);
+                        if (
+                            _chainPolicy.TrustMode == X509ChainTrustMode.System
+                            && _chainPolicy.CustomTrustStore.Count > 0
+                        )
+                            throw new CryptographicException(
+                                SR.Cryptography_CustomTrustCertsInSystemMode
+                            );
 
-                        foreach (X509Certificate2 customCertificate in _chainPolicy.CustomTrustStore)
+                        foreach (
+                            X509Certificate2 customCertificate in _chainPolicy.CustomTrustStore
+                        )
                         {
-                            if (customCertificate == null || customCertificate.Handle == IntPtr.Zero)
+                            if (
+                                customCertificate == null
+                                || customCertificate.Handle == IntPtr.Zero
+                            )
                             {
-                                throw new CryptographicException(SR.Cryptography_InvalidTrustCertificate);
+                                throw new CryptographicException(
+                                    SR.Cryptography_InvalidTrustCertificate
+                                );
                             }
                         }
                     }
 
-                    if (_chainPolicy.TrustMode == X509ChainTrustMode.CustomRootTrust && _chainPolicy._customTrustStore == null)
+                    if (
+                        _chainPolicy.TrustMode == X509ChainTrustMode.CustomRootTrust
+                        && _chainPolicy._customTrustStore == null
+                    )
                     {
                         _chainPolicy._customTrustStore = new X509Certificate2Collection();
                     }
@@ -133,9 +153,12 @@ namespace System.Security.Cryptography.X509Certificates
                     chainPolicy.RevocationFlag,
                     chainPolicy._customTrustStore,
                     chainPolicy.TrustMode,
-                    chainPolicy.VerificationTimeIgnored ? DateTime.Now : chainPolicy.VerificationTime,
+                    chainPolicy.VerificationTimeIgnored
+                        ? DateTime.Now
+                        : chainPolicy.VerificationTime,
                     chainPolicy.UrlRetrievalTimeout,
-                    chainPolicy.DisableCertificateDownloads);
+                    chainPolicy.DisableCertificateDownloads
+                );
 
                 if (_pal == null)
                     return false;
@@ -143,7 +166,10 @@ namespace System.Security.Cryptography.X509Certificates
                 _chainElements = new X509ChainElementCollection(_pal.ChainElements!);
 
                 Exception? verificationException;
-                bool? verified = _pal.Verify(chainPolicy.VerificationFlags, out verificationException);
+                bool? verified = _pal.Verify(
+                    chainPolicy.VerificationFlags,
+                    out verificationException
+                );
                 if (!verified.HasValue)
                 {
                     if (throwOnException)

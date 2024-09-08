@@ -17,7 +17,10 @@ namespace System.Diagnostics.Tests
             return CreateSleepProcess(RemotelyInvokable.WaitInMS, callerName);
         }
 
-        protected Process CreateSleepProcess(int durationMs, [CallerMemberName] string callerName = null)
+        protected Process CreateSleepProcess(
+            int durationMs,
+            [CallerMemberName] string callerName = null
+        )
         {
             return CreateProcess(RemotelyInvokable.Sleep, durationMs.ToString(), callerName);
         }

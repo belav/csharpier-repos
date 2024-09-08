@@ -14,7 +14,12 @@ namespace System.IO.Compression.Tests
     {
         private static readonly int s_bufferSize = 10240;
         private static readonly string s_tamperedFileName = "binary.wmv";
-        private static void ConstructorThrows<TException>(Func<ZipArchive> constructor, string Message) where TException : Exception
+
+        private static void ConstructorThrows<TException>(
+            Func<ZipArchive> constructor,
+            string Message
+        )
+            where TException : Exception
         {
             try
             {
@@ -44,7 +49,10 @@ namespace System.IO.Compression.Tests
                 ZipArchiveEntry entry = archive.GetEntry("first.txt");
 
                 //null/empty string
-                AssertExtensions.Throws<ArgumentException>("entryName", () => archive.CreateEntry("")); //"Should throw on empty entry name"
+                AssertExtensions.Throws<ArgumentException>(
+                    "entryName",
+                    () => archive.CreateEntry("")
+                ); //"Should throw on empty entry name"
                 Assert.Throws<ArgumentNullException>(() => archive.CreateEntry(null)); //"should throw on null entry name"
             }
         }
@@ -53,47 +61,82 @@ namespace System.IO.Compression.Tests
         public static void InvalidConstructors()
         {
             //out of range enum values
-            ConstructorThrows<ArgumentOutOfRangeException>(() =>
-                new ZipArchive(new MemoryStream(), (ZipArchiveMode)(-1)), "Out of range enum");
-            ConstructorThrows<ArgumentOutOfRangeException>(() =>
-                new ZipArchive(new MemoryStream(), (ZipArchiveMode)(4)), "out of range enum");
-            ConstructorThrows<ArgumentOutOfRangeException>(() =>
-                new ZipArchive(new MemoryStream(), (ZipArchiveMode)(10)), "Out of range enum");
+            ConstructorThrows<ArgumentOutOfRangeException>(
+                () => new ZipArchive(new MemoryStream(), (ZipArchiveMode)(-1)),
+                "Out of range enum"
+            );
+            ConstructorThrows<ArgumentOutOfRangeException>(
+                () => new ZipArchive(new MemoryStream(), (ZipArchiveMode)(4)),
+                "out of range enum"
+            );
+            ConstructorThrows<ArgumentOutOfRangeException>(
+                () => new ZipArchive(new MemoryStream(), (ZipArchiveMode)(10)),
+                "Out of range enum"
+            );
 
             //null/closed stream
-            ConstructorThrows<ArgumentNullException>(() =>
-                new ZipArchive((Stream)null, ZipArchiveMode.Read), "Null/closed stream");
-            ConstructorThrows<ArgumentNullException>(() =>
-                new ZipArchive((Stream)null, ZipArchiveMode.Create), "Null/closed stream");
-            ConstructorThrows<ArgumentNullException>(() =>
-                new ZipArchive((Stream)null, ZipArchiveMode.Update), "Null/closed stream");
+            ConstructorThrows<ArgumentNullException>(
+                () => new ZipArchive((Stream)null, ZipArchiveMode.Read),
+                "Null/closed stream"
+            );
+            ConstructorThrows<ArgumentNullException>(
+                () => new ZipArchive((Stream)null, ZipArchiveMode.Create),
+                "Null/closed stream"
+            );
+            ConstructorThrows<ArgumentNullException>(
+                () => new ZipArchive((Stream)null, ZipArchiveMode.Update),
+                "Null/closed stream"
+            );
 
             MemoryStream ms = new MemoryStream();
             ms.Dispose();
 
-            ConstructorThrows<ArgumentException>(() =>
-                new ZipArchive(ms, ZipArchiveMode.Read), "Disposed Base Stream");
-            ConstructorThrows<ArgumentException>(() =>
-                new ZipArchive(ms, ZipArchiveMode.Create), "Disposed Base Stream");
-            ConstructorThrows<ArgumentException>(() =>
-                new ZipArchive(ms, ZipArchiveMode.Update), "Disposed Base Stream");
+            ConstructorThrows<ArgumentException>(
+                () => new ZipArchive(ms, ZipArchiveMode.Read),
+                "Disposed Base Stream"
+            );
+            ConstructorThrows<ArgumentException>(
+                () => new ZipArchive(ms, ZipArchiveMode.Create),
+                "Disposed Base Stream"
+            );
+            ConstructorThrows<ArgumentException>(
+                () => new ZipArchive(ms, ZipArchiveMode.Update),
+                "Disposed Base Stream"
+            );
 
             //non-seekable to update
-            using (LocalMemoryStream nonReadable = new LocalMemoryStream(),
-                nonWriteable = new LocalMemoryStream(),
-                nonSeekable = new LocalMemoryStream())
+            using (
+                LocalMemoryStream nonReadable = new LocalMemoryStream(),
+                    nonWriteable = new LocalMemoryStream(),
+                    nonSeekable = new LocalMemoryStream()
+            )
             {
                 nonReadable.SetCanRead(false);
                 nonWriteable.SetCanWrite(false);
                 nonSeekable.SetCanSeek(false);
 
-                ConstructorThrows<ArgumentException>(() => new ZipArchive(nonReadable, ZipArchiveMode.Read), "Non readable stream");
+                ConstructorThrows<ArgumentException>(
+                    () => new ZipArchive(nonReadable, ZipArchiveMode.Read),
+                    "Non readable stream"
+                );
 
-                ConstructorThrows<ArgumentException>(() => new ZipArchive(nonWriteable, ZipArchiveMode.Create), "Non-writable stream");
+                ConstructorThrows<ArgumentException>(
+                    () => new ZipArchive(nonWriteable, ZipArchiveMode.Create),
+                    "Non-writable stream"
+                );
 
-                ConstructorThrows<ArgumentException>(() => new ZipArchive(nonReadable, ZipArchiveMode.Update), "Non-readable stream");
-                ConstructorThrows<ArgumentException>(() => new ZipArchive(nonWriteable, ZipArchiveMode.Update), "Non-writable stream");
-                ConstructorThrows<ArgumentException>(() => new ZipArchive(nonSeekable, ZipArchiveMode.Update), "Non-seekable stream");
+                ConstructorThrows<ArgumentException>(
+                    () => new ZipArchive(nonReadable, ZipArchiveMode.Update),
+                    "Non-readable stream"
+                );
+                ConstructorThrows<ArgumentException>(
+                    () => new ZipArchive(nonWriteable, ZipArchiveMode.Update),
+                    "Non-writable stream"
+                );
+                ConstructorThrows<ArgumentException>(
+                    () => new ZipArchive(nonSeekable, ZipArchiveMode.Update),
+                    "Non-seekable stream"
+                );
             }
         }
 
@@ -105,7 +148,8 @@ namespace System.IO.Compression.Tests
             string filename = bad(zipname);
             Stream updatedCopy = await StreamHelpers.CreateTempCopyStream(filename);
             string name;
-            long length, compressedLength;
+            long length,
+                compressedLength;
             DateTimeOffset lastWriteTime;
             using (ZipArchive archive = new ZipArchive(updatedCopy, ZipArchiveMode.Update, true))
             {
@@ -132,7 +176,9 @@ namespace System.IO.Compression.Tests
         [Fact]
         public static async Task LargeArchive_DataDescriptor_Read_NonZip64_FileLengthGreaterThanIntMax()
         {
-            MemoryStream stream = await LocalMemoryStream.readAppFileAsync(strange("fileLengthGreaterIntLessUInt.zip"));
+            MemoryStream stream = await LocalMemoryStream.readAppFileAsync(
+                strange("fileLengthGreaterIntLessUInt.zip")
+            );
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -144,8 +190,8 @@ namespace System.IO.Compression.Tests
                 using (Stream source = e.Open())
                 {
                     byte[] buffer = new byte[s_bufferSize];
-                    int read = source.Read(buffer, 0, buffer.Length);   // We don't want to inflate this large archive entirely 
-                                                                        // just making sure it read successfully 
+                    int read = source.Read(buffer, 0, buffer.Length); // We don't want to inflate this large archive entirely
+                    // just making sure it read successfully
                     Assert.Equal(s_bufferSize, read);
                     foreach (byte b in buffer)
                     {
@@ -163,8 +209,17 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream stream = await LocalMemoryStream.readAppFileAsync(zfile("normal.zip"));
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -173,7 +228,7 @@ namespace System.IO.Compression.Tests
                 using (Stream source = e.Open())
                 {
                     source.CopyTo(ms);
-                    Assert.Equal(e.Length, ms.Length);     // Only allow to decompress up to uncompressed size
+                    Assert.Equal(e.Length, ms.Length); // Only allow to decompress up to uncompressed size
                     byte[] buffer = new byte[s_bufferSize];
                     Assert.Equal(0, source.Read(buffer, 0, buffer.Length)); // shouldn't be able read more
                     ms.Seek(0, SeekOrigin.Begin);
@@ -191,8 +246,17 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream stream = await LocalMemoryStream.readAppFileAsync(zfile("normal.zip"));
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -206,7 +270,7 @@ namespace System.IO.Compression.Tests
                     {
                         ms.Write(buffer, 0, read);
                     }
-                    Assert.Equal(e.Length, ms.Length);     // Only allow to decompress up to uncompressed size
+                    Assert.Equal(e.Length, ms.Length); // Only allow to decompress up to uncompressed size
                     Assert.Equal(0, source.Read(buffer, 0, s_bufferSize)); // shouldn't be able read more
                     ms.Seek(0, SeekOrigin.Begin);
                     while ((read = ms.Read(buffer, 0, buffer.Length)) != 0)
@@ -222,8 +286,17 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream stream = populateStream().Result;
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -259,8 +332,17 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream stream = await LocalMemoryStream.readAppFileAsync(compat("deflate64.zip"));
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -269,7 +351,7 @@ namespace System.IO.Compression.Tests
                 using (Stream source = e.Open())
                 {
                     source.CopyTo(ms);
-                    Assert.Equal(e.Length, ms.Length);     // Only allow to decompress up to uncompressed size
+                    Assert.Equal(e.Length, ms.Length); // Only allow to decompress up to uncompressed size
                     ms.Seek(0, SeekOrigin.Begin);
                     int read;
                     byte[] buffer = new byte[s_bufferSize];
@@ -286,8 +368,17 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream stream = await LocalMemoryStream.readAppFileAsync(zfile("normal.zip"));
 
-            int nameOffset = PatchDataRelativeToFileNameFillBytes(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileNameFillBytes(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileNameFillBytes(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileNameFillBytes(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -296,7 +387,7 @@ namespace System.IO.Compression.Tests
                 using (Stream source = e.Open())
                 {
                     source.CopyTo(ms);
-                    Assert.True(e.Length > ms.Length);           // Even uncompressed size is bigger than decompressed size there should be no error
+                    Assert.True(e.Length > ms.Length); // Even uncompressed size is bigger than decompressed size there should be no error
                     Assert.True(e.CompressedLength < ms.Length);
                 }
             }
@@ -307,8 +398,17 @@ namespace System.IO.Compression.Tests
         {
             MemoryStream stream = await LocalMemoryStream.readAppFileAsync(compat("deflate64.zip"));
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -322,17 +422,18 @@ namespace System.IO.Compression.Tests
                     {
                         ms.Write(buffer, 0, read);
                     }
-                    Assert.Equal(e.Length, ms.Length);     // Only allow to decompress up to uncompressed size
+                    Assert.Equal(e.Length, ms.Length); // Only allow to decompress up to uncompressed size
                     Assert.Equal(0, source.Read(buffer, 0, buffer.Length)); // Shouldn't be readable more
                 }
             }
         }
 
-
         [Fact]
         public static async Task UnseekableVeryLargeArchive_DataDescriptor_Read_Zip64()
         {
-            MemoryStream stream = await LocalMemoryStream.readAppFileAsync(strange("veryLarge.zip"));
+            MemoryStream stream = await LocalMemoryStream.readAppFileAsync(
+                strange("veryLarge.zip")
+            );
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Read))
             {
@@ -344,8 +445,8 @@ namespace System.IO.Compression.Tests
                 using (Stream source = e.Open())
                 {
                     byte[] buffer = new byte[s_bufferSize];
-                    int read = source.Read(buffer, 0, buffer.Length);   // We don't want to inflate this large archive entirely
-                                                                        // just making sure it read successfully
+                    int read = source.Read(buffer, 0, buffer.Length); // We don't want to inflate this large archive entirely
+                    // just making sure it read successfully
                     Assert.Equal(s_bufferSize, read);
                 }
             }
@@ -360,8 +461,17 @@ namespace System.IO.Compression.Tests
             byte[] data = Encoding.ASCII.GetBytes(append);
             long oldCompressedSize = 0;
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Update, true))
             {
@@ -401,8 +511,17 @@ namespace System.IO.Compression.Tests
             string overwrite = "\r\n\r\nThe answer my friend, is blowin' in the wind.";
             byte[] data = Encoding.ASCII.GetBytes(overwrite);
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Update, true))
             {
@@ -428,7 +547,10 @@ namespace System.IO.Compression.Tests
                 {
                     await s.CopyToAsync(ms, s_bufferSize);
                     Assert.Equal(data.Length, ms.Length);
-                    Assert.Equal(overwrite, Encoding.ASCII.GetString(ms.GetBuffer(), 0, data.Length));
+                    Assert.Equal(
+                        overwrite,
+                        Encoding.ASCII.GetString(ms.GetBuffer(), 0, data.Length)
+                    );
                 }
             }
         }
@@ -438,10 +560,21 @@ namespace System.IO.Compression.Tests
         {
             string addingFile = "added.txt";
             MemoryStream stream = await StreamHelpers.CreateTempCopyStream(zfile("normal.zip"));
-            MemoryStream file = await StreamHelpers.CreateTempCopyStream(zmodified(Path.Combine("addFile", addingFile)));
+            MemoryStream file = await StreamHelpers.CreateTempCopyStream(
+                zmodified(Path.Combine("addFile", addingFile))
+            );
 
-            int nameOffset = PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 8);  // patch uncompressed size in file header
-            PatchDataRelativeToFileName(Encoding.ASCII.GetBytes(s_tamperedFileName), stream, 22, nameOffset + s_tamperedFileName.Length); // patch in central directory too
+            int nameOffset = PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                8
+            ); // patch uncompressed size in file header
+            PatchDataRelativeToFileName(
+                Encoding.ASCII.GetBytes(s_tamperedFileName),
+                stream,
+                22,
+                nameOffset + s_tamperedFileName.Length
+            ); // patch in central directory too
 
             using (ZipArchive archive = new ZipArchive(stream, ZipArchiveMode.Update, true))
             {
@@ -459,7 +592,7 @@ namespace System.IO.Compression.Tests
                 using (var ms = new MemoryStream())
                 {
                     await s.CopyToAsync(ms, s_bufferSize);
-                    Assert.Equal(e.Length, ms.Length);  // tampered file should read up to uncompressed size
+                    Assert.Equal(e.Length, ms.Length); // tampered file should read up to uncompressed size
                 }
 
                 ZipArchiveEntry addedEntry = modifiedArchive.GetEntry(addingFile);
@@ -473,7 +606,7 @@ namespace System.IO.Compression.Tests
                     byte[] buffer2 = new byte[1024];
                     file.Seek(0, SeekOrigin.Begin);
 
-                    while ((read = s.Read(buffer1, 0, buffer1.Length)) != 0 )
+                    while ((read = s.Read(buffer1, 0, buffer1.Length)) != 0)
                     {
                         file.Read(buffer2, 0, buffer2.Length);
                         Assert.Equal(buffer1, buffer2);
@@ -482,7 +615,12 @@ namespace System.IO.Compression.Tests
             }
         }
 
-        private static int PatchDataRelativeToFileName(byte[] fileNameInBytes, MemoryStream packageStream, int distance, int start = 0)
+        private static int PatchDataRelativeToFileName(
+            byte[] fileNameInBytes,
+            MemoryStream packageStream,
+            int distance,
+            int start = 0
+        )
         {
             var buffer = packageStream.GetBuffer();
             var startOfName = FindSequenceIndex(fileNameInBytes, buffer, start);
@@ -497,7 +635,12 @@ namespace System.IO.Compression.Tests
             return startOfName;
         }
 
-        private static int PatchDataRelativeToFileNameFillBytes(byte[] fileNameInBytes, MemoryStream packageStream, int distance, int start = 0)
+        private static int PatchDataRelativeToFileNameFillBytes(
+            byte[] fileNameInBytes,
+            MemoryStream packageStream,
+            int distance,
+            int start = 0
+        )
         {
             var buffer = packageStream.GetBuffer();
             var startOfName = FindSequenceIndex(fileNameInBytes, buffer, start);
@@ -512,12 +655,19 @@ namespace System.IO.Compression.Tests
             return startOfName;
         }
 
-        private static int FindSequenceIndex(byte[] searchItem, byte[] whereToSearch, int startIndex = 0)
+        private static int FindSequenceIndex(
+            byte[] searchItem,
+            byte[] whereToSearch,
+            int startIndex = 0
+        )
         {
             for (int start = startIndex; start < whereToSearch.Length - searchItem.Length; ++start)
             {
                 int searchIndex = 0;
-                while (searchIndex < searchItem.Length && searchItem[searchIndex] == whereToSearch[start + searchIndex])
+                while (
+                    searchIndex < searchItem.Length
+                    && searchItem[searchIndex] == whereToSearch[start + searchIndex]
+                )
                 {
                     ++searchIndex;
                 }
@@ -536,7 +686,9 @@ namespace System.IO.Compression.Tests
         {
             string filename = bad(zipname);
             using (var stream = await StreamHelpers.CreateTempCopyStream(filename))
-                Assert.Throws<InvalidDataException>(() => new ZipArchive(stream, ZipArchiveMode.Read));
+                Assert.Throws<InvalidDataException>(
+                    () => new ZipArchive(stream, ZipArchiveMode.Read)
+                );
         }
 
         [Theory]
@@ -545,7 +697,12 @@ namespace System.IO.Compression.Tests
         public static async Task ZipArchive_InvalidEntryTable(string zipname)
         {
             string filename = bad(zipname);
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(filename), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(filename),
+                    ZipArchiveMode.Read
+                )
+            )
                 Assert.Throws<InvalidDataException>(() => archive.Entries[0]);
         }
 
@@ -558,7 +715,12 @@ namespace System.IO.Compression.Tests
         public static async Task ZipArchive_InvalidEntry(string zipname, bool throwsOnOpen)
         {
             string filename = bad(zipname);
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(filename), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(filename),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 ZipArchiveEntry e = archive.Entries[0];
                 if (throwsOnOpen)
@@ -578,10 +740,17 @@ namespace System.IO.Compression.Tests
         [Fact]
         public static async Task ZipArchiveEntry_InvalidLastWriteTime_Read()
         {
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(
-                 bad("invaliddate.zip")), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(bad("invaliddate.zip")),
+                    ZipArchiveMode.Read
+                )
+            )
             {
-                Assert.Equal(new DateTime(1980, 1, 1, 0, 0, 0), archive.Entries[0].LastWriteTime.DateTime); //"Date isn't correct on invalid date"
+                Assert.Equal(
+                    new DateTime(1980, 1, 1, 0, 0, 0),
+                    archive.Entries[0].LastWriteTime.DateTime
+                ); //"Date isn't correct on invalid date"
             }
         }
 
@@ -610,9 +779,19 @@ namespace System.IO.Compression.Tests
         [InlineData("extradata/zip64ThenExtraData.zip", "verysmall", true)]
         [InlineData("dataDescriptor.zip", "normalWithoutBinary", false)]
         [InlineData("filenameTimeAndSizesDifferentInLH.zip", "verysmall", false)]
-        public static async Task StrangeFiles(string zipFile, string zipFolder, bool requireExplicit)
+        public static async Task StrangeFiles(
+            string zipFile,
+            string zipFolder,
+            bool requireExplicit
+        )
         {
-            IsZipSameAsDir(await StreamHelpers.CreateTempCopyStream(strange(zipFile)), zfolder(zipFolder), ZipArchiveMode.Update, requireExplicit, checkTimes: true);
+            IsZipSameAsDir(
+                await StreamHelpers.CreateTempCopyStream(strange(zipFile)),
+                zfolder(zipFolder),
+                ZipArchiveMode.Update,
+                requireExplicit,
+                checkTimes: true
+            );
         }
 
         /// <summary>
@@ -635,7 +814,8 @@ namespace System.IO.Compression.Tests
                     using (Stream entryStream = entry.Open())
                     {
                         byte[] b = new byte[bufferSize];
-                        int read = 0, count = 0;
+                        int read = 0,
+                            count = 0;
                         while ((read = entryStream.Read(b, 0, bufferSize)) > 0)
                         {
                             count += read;
@@ -648,33 +828,304 @@ namespace System.IO.Compression.Tests
 
         private static readonly byte[] s_emptyFileCompressedWithEtx =
         {
-            0x50, 0x4B, 0x03, 0x04, 0x14, 0x00, 0x06, 0x00, 0x08, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00, 0x78, 0x6C,
-            0x2F, 0x63, 0x75, 0x73, 0x74, 0x6F, 0x6D, 0x50, 0x72, 0x6F, 0x70, 0x65, 0x72, 0x74, 0x79, 0x32,
-            0x2E, 0x62, 0x69, 0x6E, 0x03, 0x00, 0x50, 0x4B, 0x01, 0x02, 0x14, 0x00, 0x14, 0x00, 0x06, 0x00,
-            0x08, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x78, 0x6C, 0x2F, 0x63, 0x75, 0x73, 0x74, 0x6F, 0x6D, 0x50, 0x72, 0x6F,
-            0x70, 0x65, 0x72, 0x74, 0x79, 0x32, 0x2E, 0x62, 0x69, 0x6E, 0x50, 0x4B, 0x05, 0x06, 0x00, 0x00,
-            0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x44, 0x00, 0x00, 0x00, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00
+            0x50,
+            0x4B,
+            0x03,
+            0x04,
+            0x14,
+            0x00,
+            0x06,
+            0x00,
+            0x08,
+            0x00,
+            0x00,
+            0x00,
+            0x21,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x02,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x16,
+            0x00,
+            0x00,
+            0x00,
+            0x78,
+            0x6C,
+            0x2F,
+            0x63,
+            0x75,
+            0x73,
+            0x74,
+            0x6F,
+            0x6D,
+            0x50,
+            0x72,
+            0x6F,
+            0x70,
+            0x65,
+            0x72,
+            0x74,
+            0x79,
+            0x32,
+            0x2E,
+            0x62,
+            0x69,
+            0x6E,
+            0x03,
+            0x00,
+            0x50,
+            0x4B,
+            0x01,
+            0x02,
+            0x14,
+            0x00,
+            0x14,
+            0x00,
+            0x06,
+            0x00,
+            0x08,
+            0x00,
+            0x00,
+            0x00,
+            0x21,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x02,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x16,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x78,
+            0x6C,
+            0x2F,
+            0x63,
+            0x75,
+            0x73,
+            0x74,
+            0x6F,
+            0x6D,
+            0x50,
+            0x72,
+            0x6F,
+            0x70,
+            0x65,
+            0x72,
+            0x74,
+            0x79,
+            0x32,
+            0x2E,
+            0x62,
+            0x69,
+            0x6E,
+            0x50,
+            0x4B,
+            0x05,
+            0x06,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x01,
+            0x00,
+            0x01,
+            0x00,
+            0x44,
+            0x00,
+            0x00,
+            0x00,
+            0x36,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
         };
         private static readonly byte[] s_emptyFileCompressedWrongSize =
         {
-            0x50, 0x4B, 0x03, 0x04, 0x14, 0x00, 0x06, 0x00, 0x08, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00, 0x78, 0x6C,
-            0x2F, 0x63, 0x75, 0x73, 0x74, 0x6F, 0x6D, 0x50, 0x72, 0x6F, 0x70, 0x65, 0x72, 0x74, 0x79, 0x32,
-            0x2E, 0x62, 0x69, 0x6E, 0xBA, 0xAD, 0x03, 0x00, 0x50, 0x4B, 0x01, 0x02, 0x14, 0x00, 0x14, 0x00,
-            0x06, 0x00, 0x08, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x16, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x78, 0x6C, 0x2F, 0x63, 0x75, 0x73, 0x74, 0x6F, 0x6D, 0x50,
-            0x72, 0x6F, 0x70, 0x65, 0x72, 0x74, 0x79, 0x32, 0x2E, 0x62, 0x69, 0x6E, 0x50, 0x4B, 0x05, 0x06,
-            0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x44, 0x00, 0x00, 0x00, 0x38, 0x00, 0x00, 0x00,
-            0x00, 0x00
+            0x50,
+            0x4B,
+            0x03,
+            0x04,
+            0x14,
+            0x00,
+            0x06,
+            0x00,
+            0x08,
+            0x00,
+            0x00,
+            0x00,
+            0x21,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x04,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x16,
+            0x00,
+            0x00,
+            0x00,
+            0x78,
+            0x6C,
+            0x2F,
+            0x63,
+            0x75,
+            0x73,
+            0x74,
+            0x6F,
+            0x6D,
+            0x50,
+            0x72,
+            0x6F,
+            0x70,
+            0x65,
+            0x72,
+            0x74,
+            0x79,
+            0x32,
+            0x2E,
+            0x62,
+            0x69,
+            0x6E,
+            0xBA,
+            0xAD,
+            0x03,
+            0x00,
+            0x50,
+            0x4B,
+            0x01,
+            0x02,
+            0x14,
+            0x00,
+            0x14,
+            0x00,
+            0x06,
+            0x00,
+            0x08,
+            0x00,
+            0x00,
+            0x00,
+            0x21,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x04,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x16,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x78,
+            0x6C,
+            0x2F,
+            0x63,
+            0x75,
+            0x73,
+            0x74,
+            0x6F,
+            0x6D,
+            0x50,
+            0x72,
+            0x6F,
+            0x70,
+            0x65,
+            0x72,
+            0x74,
+            0x79,
+            0x32,
+            0x2E,
+            0x62,
+            0x69,
+            0x6E,
+            0x50,
+            0x4B,
+            0x05,
+            0x06,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x01,
+            0x00,
+            0x01,
+            0x00,
+            0x44,
+            0x00,
+            0x00,
+            0x00,
+            0x38,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
         };
         public static IEnumerable<object[]> EmptyFiles = new List<object[]>()
         {
             new object[] { s_emptyFileCompressedWithEtx },
-            new object[] { s_emptyFileCompressedWrongSize }
+            new object[] { s_emptyFileCompressedWrongSize },
         };
 
         /// <summary>
@@ -766,7 +1217,13 @@ namespace System.IO.Compression.Tests
             using (MemoryStream archiveStream = StreamHelpers.CreateTempCopyStream(path).Result)
             {
                 // Insert 2 64KB txt entries
-                using (ZipArchive archive = new ZipArchive(archiveStream, ZipArchiveMode.Update, leaveOpen: true))
+                using (
+                    ZipArchive archive = new ZipArchive(
+                        archiveStream,
+                        ZipArchiveMode.Update,
+                        leaveOpen: true
+                    )
+                )
                 {
                     InsertEntry(archive, name0, str64KB);
                     InsertEntry(archive, name1, str64KB);
@@ -774,7 +1231,13 @@ namespace System.IO.Compression.Tests
 
                 // Open and verify items
                 archiveStream.Seek(0, SeekOrigin.Begin);
-                using (ZipArchive archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true))
+                using (
+                    ZipArchive archive = new ZipArchive(
+                        archiveStream,
+                        ZipArchiveMode.Read,
+                        leaveOpen: true
+                    )
+                )
                 {
                     Assert.Equal(2, archive.Entries.Count);
                     VerifyValidEntry(archive.Entries[0], name0, ushort.MaxValue);
@@ -788,7 +1251,11 @@ namespace System.IO.Compression.Tests
                 // Open should not be possible because we can't find the EOCD in the max search length from the end
                 Assert.Throws<InvalidDataException>(() =>
                 {
-                    ZipArchive archive = new ZipArchive(archiveStream, ZipArchiveMode.Read, leaveOpen: true);
+                    ZipArchive archive = new ZipArchive(
+                        archiveStream,
+                        ZipArchiveMode.Read,
+                        leaveOpen: true
+                    );
                 });
 
                 // Create stream with 64KB of prepended garbage, then the above stream appended
@@ -815,12 +1282,12 @@ namespace System.IO.Compression.Tests
         [Fact]
         public void ReadArchive_WithUnexpectedZip64ExtraFieldSize()
         {
-            using ZipArchive archive = new (new MemoryStream(s_slightlyIncorrectZip64));
+            using ZipArchive archive = new(new MemoryStream(s_slightlyIncorrectZip64));
             ZipArchiveEntry entry = archive.GetEntry("file.txt");
             Assert.Equal(4, entry.Length);
             Assert.Equal(6, entry.CompressedLength);
             using var stream = entry.Open();
-            using StreamReader reader = new (stream);
+            using StreamReader reader = new(stream);
             string text = reader.ReadToEnd();
             Assert.Equal("test", text);
         }
@@ -874,291 +1341,788 @@ namespace System.IO.Compression.Tests
         private static readonly byte[] s_slightlyIncorrectZip64 =
         {
             // ===== Local file header signature 0x04034b50
-            0x50, 0x4b, 0x03, 0x04,
+            0x50,
+            0x4b,
+            0x03,
+            0x04,
             // version to extract 4.5
-            0x2d, 0x00,
+            0x2d,
+            0x00,
             // general purpose flags
-            0x00, 0x08,   // 0000_1000 'for enhanced deflating'
+            0x00,
+            0x08, // 0000_1000 'for enhanced deflating'
             // Deflate
-            0x08, 0x00,
+            0x08,
+            0x00,
             // Last mod file time
-            0x17, 0x9b,
+            0x17,
+            0x9b,
             // Last mod date
-            0x6d, 0x52,
+            0x6d,
+            0x52,
             // CRC32
-            0x0c, 0x7e, 0x7f, 0xd8,
+            0x0c,
+            0x7e,
+            0x7f,
+            0xd8,
             // compressed size
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // UNcompressed size
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // file name length
-            0x08, 0x00,
+            0x08,
+            0x00,
             // extra field length
-            0x38, 0x00,
+            0x38,
+            0x00,
             // filename
-            0x66, 0x69, 0x6c, 0x65, 0x2e, 0x74, 0x78, 0x74,
+            0x66,
+            0x69,
+            0x6c,
+            0x65,
+            0x2e,
+            0x74,
+            0x78,
+            0x74,
             // -----Zip64 extra field tag
-            0x01, 0x00,
+            0x01,
+            0x00,
             // size of extra field block
-            0x10, 0x00,
-                    // 8 byte Zip64 UNcompressed size, index 42
-                    0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // 8 byte Zip64 compressed size, index 50
-                    0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x10,
+            0x00,
+            // 8 byte Zip64 UNcompressed size, index 42
+            0x04,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // 8 byte Zip64 compressed size, index 50
+            0x06,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // ----- NTFS extra field tag
-            0x0a, 0x00,
+            0x0a,
+            0x00,
             // size of extra field block
-            0x20, 0x00,
-                    // reserved
-                    0x00, 0x00, 0x00, 0x00,
-                    // tag #1
-                    0x01, 0x00,
-                    // size of tag #1
-                    0x18, 0x00,
-                            // Mtime, CTime, Atime
-                            0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                            0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                            0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
+            0x20,
+            0x00,
+            // reserved
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // tag #1
+            0x01,
+            0x00,
+            // size of tag #1
+            0x18,
+            0x00,
+            // Mtime, CTime, Atime
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
             // -------------
             // Data!
-            0x2b, 0x49, 0x2d, 0x2e, 0x01, 0x00,
+            0x2b,
+            0x49,
+            0x2d,
+            0x2e,
+            0x01,
+            0x00,
             // -------- Central directory signature 0x02014b50
-            0x50, 0x4b, 0x01, 0x02,
+            0x50,
+            0x4b,
+            0x01,
+            0x02,
             // version made by 4.5
-            0x2d, 0x00,
+            0x2d,
+            0x00,
             // version to extract 4.5
-            0x2d, 0x00,
+            0x2d,
+            0x00,
             // general purpose flags
-            0x00, 0x08,
+            0x00,
+            0x08,
             // Deflate
-            0x08, 0x00,
+            0x08,
+            0x00,
             // Last mod file time
-            0x17, 0x9b,
+            0x17,
+            0x9b,
             // Last mod date
-            0x6d, 0x52,
+            0x6d,
+            0x52,
             // CRC32
-            0x0c, 0x7e, 0x7f, 0xd8,
+            0x0c,
+            0x7e,
+            0x7f,
+            0xd8,
             // 4 byte compressed size, index 120 (-1 indicates refer to Zip64 extra field)
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // 4 byte UNcompressed size, index 124 (-1 indicates refer to Zip64 extra field)
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // file name length
-            0x08, 0x00,
+            0x08,
+            0x00,
             // extra field length
-            0x44, 0x00,
+            0x44,
+            0x00,
             // file comment length
-            0x00, 0x00,
+            0x00,
+            0x00,
             // disk number start (-1 indicates refer to Zip64 extra field)
-            0x00, 0x00,
+            0x00,
+            0x00,
             // internal file attributes
-            0x00, 0x00,
+            0x00,
+            0x00,
             // external file attributes
-            0x00, 0x00, 0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // relative offset of local header (-1 indicates refer to Zip64 extra field)
-            0x00, 0x00, 0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // file name
-            0x66, 0x69, 0x6c, 0x65, 0x2e, 0x74, 0x78, 0x74,
+            0x66,
+            0x69,
+            0x6c,
+            0x65,
+            0x2e,
+            0x74,
+            0x78,
+            0x74,
             // extra field, content similar to before
-            0x01, 0x00,
-            0x1c, 0x00,
-                    0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x00, 0x00, 0x00, 0x00,
-            0x0a, 0x00,
-            0x20, 0x00,
-                    0x00, 0x00, 0x00, 0x00,
-                    0x01, 0x00, 0x18, 0x00,
-                    0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                    0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                    0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
+            0x01,
+            0x00,
+            0x1c,
+            0x00,
+            0x04,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x06,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x0a,
+            0x00,
+            0x20,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x01,
+            0x00,
+            0x18,
+            0x00,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
             // == 'end of zip64 central directory record' signature 0x06064b50
-            0x50, 0x4b, 0x06, 0x06,
+            0x50,
+            0x4b,
+            0x06,
+            0x06,
             // size
-            0x2c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // version made by, version needed
-                    0x2d, 0x00, 0x2d, 0x00,
-                    // disk number, disk number with CD
-                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // total number of CD records
-                    0x01, 0x00, 0x00, 0x00,
-                    // size of CD
-                    0x00, 0x00, 0x00, 0x00,
-                    // offset of start of CD wrt starting disk
-                    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // zip64 extensible data sector
-                    0x7a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x2c,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // version made by, version needed
+            0x2d,
+            0x00,
+            0x2d,
+            0x00,
+            // disk number, disk number with CD
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // total number of CD records
+            0x01,
+            0x00,
+            0x00,
+            0x00,
+            // size of CD
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // offset of start of CD wrt starting disk
+            0x01,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // zip64 extensible data sector
+            0x7a,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x64,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // == 'zip64 end of CD locator' signature 0x07064b50
-            0x50, 0x4b, 0x06, 0x07,
+            0x50,
+            0x4b,
+            0x06,
+            0x07,
             // number of disk with zip64 CD
-            0x00, 0x00, 0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // relative offset of zip64 ECD
-            0xde, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0xde,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // total number of disks
-            0x01, 0x00, 0x00, 0x00,
+            0x01,
+            0x00,
+            0x00,
+            0x00,
             // == 'end of CD' signature 0x06054b50
-            0x50, 0x4b, 0x05, 0x06,
+            0x50,
+            0x4b,
+            0x05,
+            0x06,
             // disk number, disk number with CD (-1 indicates refer to Zip64 extra field)
-            0x00, 0x00,
-            0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // total number of entries in CD on this disk, and overall  (-1 indicates refer to Zip64 extra fields)
-            0xff, 0xff,
-            0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // size of CD (-1 indicates refer to Zip64 extra field)
-            0x7a, 0x00, 0x00, 0x00,
+            0x7a,
+            0x00,
+            0x00,
+            0x00,
             // offset of start of CD wrt start disk (-1 indicates refer to Zip64 extra field)
-            0x64, 0x00, 0x00, 0x00,
+            0x64,
+            0x00,
+            0x00,
+            0x00,
             // comment length
-            0x00, 0x00
+            0x00,
+            0x00,
         };
 
         private static readonly byte[] s_zip64WithBigStartDiskNumber =
         {
             // ===== Local file header signature 0x04034b50
-            0x50, 0x4b, 0x03, 0x04,
+            0x50,
+            0x4b,
+            0x03,
+            0x04,
             // version to extract 4.5
-            0x2d, 0x00,
+            0x2d,
+            0x00,
             // general purpose flags
-            0x00, 0x08,   // 0000_1000 'for enhanced deflating'
+            0x00,
+            0x08, // 0000_1000 'for enhanced deflating'
             // Deflate
-            0x08, 0x00,
+            0x08,
+            0x00,
             // Last mod file time
-            0x17, 0x9b,
+            0x17,
+            0x9b,
             // Last mod date
-            0x6d, 0x52,
+            0x6d,
+            0x52,
             // CRC32
-            0x0c, 0x7e, 0x7f, 0xd8,
+            0x0c,
+            0x7e,
+            0x7f,
+            0xd8,
             // compressed size
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // UNcompressed size
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // file name length
-            
-            0x08, 0x00,
+
+            0x08,
+            0x00,
             // extra field length
-            0x20, 0x00,
+            0x20,
+            0x00,
             // filename
-            0x66, 0x69, 0x6c, 0x65, 0x2e, 0x74, 0x78, 0x74,
+            0x66,
+            0x69,
+            0x6c,
+            0x65,
+            0x2e,
+            0x74,
+            0x78,
+            0x74,
             // -----Zip64 extra field tag
-            0x01, 0x00,
+            0x01,
+            0x00,
             // size of extra field block
-            0x20, 0x00,
-                    // 8 byte Zip64 UNcompressed size, index 42
-                    0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // 8 byte Zip64 compressed size, index 50
-                    0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // 8 byte Relative Header Offset 
-                    0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // Disk Start Number
-                    0xff, 0xff, 0xff, 0xfe, 
+            0x20,
+            0x00,
+            // 8 byte Zip64 UNcompressed size, index 42
+            0x04,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // 8 byte Zip64 compressed size, index 50
+            0x06,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // 8 byte Relative Header Offset
+            0x0c,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // Disk Start Number
+            0xff,
+            0xff,
+            0xff,
+            0xfe,
             // ----- NTFS extra field tag
-            0x0a, 0x00,
+            0x0a,
+            0x00,
             // size of extra field block
-            0x20, 0x00,
-                    // reserved
-                    0x00, 0x00, 0x00, 0x00,
-                    // tag #1
-                    0x01, 0x00,
-                    // size of tag #1
-                    0x18, 0x00,
-                            // Mtime, CTime, Atime
-                            0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                            0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                            0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
+            0x20,
+            0x00,
+            // reserved
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // tag #1
+            0x01,
+            0x00,
+            // size of tag #1
+            0x18,
+            0x00,
+            // Mtime, CTime, Atime
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
             // -------------
             // Data!
-            0x2b, 0x49, 0x2d, 0x2e, 0x01, 0x00,
+            0x2b,
+            0x49,
+            0x2d,
+            0x2e,
+            0x01,
+            0x00,
             // -------- Central directory signature 0x02014b50
-            0x50, 0x4b, 0x01, 0x02,
+            0x50,
+            0x4b,
+            0x01,
+            0x02,
             // version made by 4.5
-            0x2d, 0x00,
+            0x2d,
+            0x00,
             // version to extract 4.5
-            0x2d, 0x00,
+            0x2d,
+            0x00,
             // general purpose flags
-            0x00, 0x08,
+            0x00,
+            0x08,
             // Deflate
-            0x08, 0x00,
+            0x08,
+            0x00,
             // Last mod file time
-            0x17, 0x9b,
+            0x17,
+            0x9b,
             // Last mod date
-            0x6d, 0x52,
+            0x6d,
+            0x52,
             // CRC32
-            0x0c, 0x7e, 0x7f, 0xd8,
+            0x0c,
+            0x7e,
+            0x7f,
+            0xd8,
             // 4 byte compressed size, index 120 (-1 indicates refer to Zip64 extra field)
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // 4 byte UNcompressed size, index 124 (-1 indicates refer to Zip64 extra field)
-            0xff, 0xff, 0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // file name length
-            0x08, 0x00,
+            0x08,
+            0x00,
             // extra field length
-            0x44, 0x00,
+            0x44,
+            0x00,
             // file comment length
-            0x00, 0x00,
+            0x00,
+            0x00,
             // disk number start (-1 indicates refer to Zip64 extra field)
-            0xff, 0xff,
+            0xff,
+            0xff,
             // internal file attributes
-            0x00, 0x00,
+            0x00,
+            0x00,
             // external file attributes
-            0x00, 0x00, 0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // relative offset of local header (-1 indicates refer to Zip64 extra field)
-            0x00, 0x00, 0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // file name
-            0x66, 0x69, 0x6c, 0x65, 0x2e, 0x74, 0x78, 0x74,
+            0x66,
+            0x69,
+            0x6c,
+            0x65,
+            0x2e,
+            0x74,
+            0x78,
+            0x74,
             // extra field, content similar to before
-            0x01, 0x00,
-            0x1c, 0x00,
-                    0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // Disk start number
-                    0xff, 0xff, 0xff, 0xfe,
-            0x0a, 0x00,
-            0x20, 0x00,
-                    0x00, 0x00, 0x00, 0x00,
-                    0x01, 0x00, 0x18, 0x00,
-                    0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                    0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
-                    0xa8, 0xb1, 0xf6, 0x61, 0x25, 0x18, 0xd7, 0x01,
+            0x01,
+            0x00,
+            0x1c,
+            0x00,
+            0x04,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x06,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // Disk start number
+            0xff,
+            0xff,
+            0xff,
+            0xfe,
+            0x0a,
+            0x00,
+            0x20,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x01,
+            0x00,
+            0x18,
+            0x00,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
+            0xa8,
+            0xb1,
+            0xf6,
+            0x61,
+            0x25,
+            0x18,
+            0xd7,
+            0x01,
             // == 'end of zip64 central directory record' signature 0x06064b50
-            0x50, 0x4b, 0x06, 0x06,
+            0x50,
+            0x4b,
+            0x06,
+            0x06,
             // size
-            0x2c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // version made by, version needed
-                    0x2d, 0x00, 0x2d, 0x00,
-                    // disk number, disk number with CD
-                    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // total number of CD records
-                    0x01, 0x00, 0x00, 0x00,
-                    // size of CD
-                    0x00, 0x00, 0x00, 0x00,
-                    // offset of start of CD wrt starting disk
-                    0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // zip64 extensible data sector
-                    0x7a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-                    // offset of start cd
-                    0x70, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x2c,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // version made by, version needed
+            0x2d,
+            0x00,
+            0x2d,
+            0x00,
+            // disk number, disk number with CD
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // total number of CD records
+            0x01,
+            0x00,
+            0x00,
+            0x00,
+            // size of CD
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // offset of start of CD wrt starting disk
+            0x01,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // zip64 extensible data sector
+            0x7a,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            // offset of start cd
+            0x70,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // == 'zip64 end of CD locator' signature 0x07064b50
-            0x50, 0x4b, 0x06, 0x07,
+            0x50,
+            0x4b,
+            0x06,
+            0x07,
             // number of disk with zip64 CD
-            0x00, 0x00, 0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // relative offset of zip64 ECD
-            0xea, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0xea,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // total number of disks
-            0x01, 0x00, 0x00, 0x00,
+            0x01,
+            0x00,
+            0x00,
+            0x00,
             // == 'end of CD' signature 0x06054b50
-            0x50, 0x4b, 0x05, 0x06,
+            0x50,
+            0x4b,
+            0x05,
+            0x06,
             // disk number, disk number with CD (-1 indicates refer to Zip64 extra field)
-            0x00, 0x00,
-            0x00, 0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
             // total number of entries in CD on this disk, and overall  (-1 indicates refer to Zip64 extra fields)
-            0xff, 0xff,
-            0xff, 0xff,
+            0xff,
+            0xff,
+            0xff,
+            0xff,
             // size of CD (-1 indicates refer to Zip64 extra field)
-            0x7a, 0x00, 0x00, 0x00,
+            0x7a,
+            0x00,
+            0x00,
+            0x00,
             // offset of start of CD wrt start disk (-1 indicates refer to Zip64 extra field)
-            0x70, 0x00, 0x00, 0x00,
+            0x70,
+            0x00,
+            0x00,
+            0x00,
             // comment length
-            0x00, 0x00
+            0x00,
+            0x00,
         };
     }
 }

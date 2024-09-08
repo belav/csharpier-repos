@@ -10,7 +10,7 @@ namespace System.ComponentModel.Tests
     {
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerator<T> enumerator)
         {
-            while(enumerator.MoveNext())
+            while (enumerator.MoveNext())
                 yield return enumerator.Current;
         }
 
@@ -18,7 +18,7 @@ namespace System.ComponentModel.Tests
         {
             while (iterator.MoveNext())
             {
-                yield return (T) iterator.Current;
+                yield return (T)iterator.Current;
             }
         }
     }

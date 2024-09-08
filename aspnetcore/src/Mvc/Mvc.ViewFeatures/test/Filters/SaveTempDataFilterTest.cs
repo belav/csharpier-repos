@@ -18,10 +18,10 @@ public class SaveTempDataFilterTest
         get
         {
             return new TheoryData<IActionResult>()
-                {
-                    new TestActionResult(),
-                    new TestKeepTempDataActionResult()
-                };
+            {
+                new TestActionResult(),
+                new TestKeepTempDataActionResult(),
+            };
         }
     }
 
@@ -32,9 +32,7 @@ public class SaveTempDataFilterTest
         var responseFeature = new TestResponseFeature(hasStarted: true);
         var httpContext = GetHttpContext(responseFeature);
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Loose);
-        tempDataFactory
-            .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-            .Verifiable();
+        tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
         var filter = new SaveTempDataFilter(tempDataFactory.Object);
         var context = GetResultExecutingContext(httpContext);
         filter.OnResultExecuting(context);
@@ -52,14 +50,10 @@ public class SaveTempDataFilterTest
         responseFeature
             .Setup(rf => rf.OnStarting(It.IsAny<Func<object, Task>>(), It.IsAny<object>()))
             .Verifiable();
-        responseFeature
-            .SetupGet(rf => rf.HasStarted)
-            .Returns(false);
+        responseFeature.SetupGet(rf => rf.HasStarted).Returns(false);
 
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-        tempDataFactory
-            .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-            .Verifiable();
+        tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
         var filter = new SaveTempDataFilter(tempDataFactory.Object);
         var httpContext = GetHttpContext(responseFeature.Object);
         var context = GetResourceExecutingContext(httpContext);
@@ -99,11 +93,10 @@ public class SaveTempDataFilterTest
         // Arrange
         var responseFeature = new TestResponseFeature();
         var httpContext = GetHttpContext(responseFeature);
-        httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] = new SaveTempDataFilter.SaveTempDataContext() { TempDataSaved = true };
+        httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] =
+            new SaveTempDataFilter.SaveTempDataContext() { TempDataSaved = true };
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-        tempDataFactory
-            .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-            .Verifiable();
+        tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
         var filter = new SaveTempDataFilter(tempDataFactory.Object);
         var context = GetResourceExecutingContext(httpContext);
         filter.OnResourceExecuting(context); // registers callback
@@ -121,11 +114,10 @@ public class SaveTempDataFilterTest
         // Arrange
         var responseFeature = new TestResponseFeature();
         var httpContext = GetHttpContext(responseFeature);
-        httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] = new SaveTempDataFilter.SaveTempDataContext() { RequestHasUnhandledException = true };
+        httpContext.Items[SaveTempDataFilter.SaveTempDataFilterContextKey] =
+            new SaveTempDataFilter.SaveTempDataContext() { RequestHasUnhandledException = true };
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-        tempDataFactory
-            .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-            .Verifiable();
+        tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
         var filter = new SaveTempDataFilter(tempDataFactory.Object);
         var context = GetResourceExecutingContext(httpContext);
         filter.OnResourceExecuting(context); // registers callback
@@ -139,7 +131,9 @@ public class SaveTempDataFilterTest
 
     [Theory]
     [MemberData(nameof(ActionResultsData))]
-    public async Task OnResultExecuting_SavesTempData_WhenTempData_NotSavedAlready(IActionResult result)
+    public async Task OnResultExecuting_SavesTempData_WhenTempData_NotSavedAlready(
+        IActionResult result
+    )
     {
         // Arrange
         var tempDataDictionary = GetTempDataDictionary();
@@ -167,7 +161,10 @@ public class SaveTempDataFilterTest
         var responseFeature = new TestResponseFeature();
         var httpContext = GetHttpContext(responseFeature);
         var resourceContext = GetResourceExecutingContext(httpContext);
-        var resultContext = GetResultExecutedContext(httpContext, new TestKeepTempDataActionResult());
+        var resultContext = GetResultExecutedContext(
+            httpContext,
+            new TestKeepTempDataActionResult()
+        );
         filter.OnResourceExecuting(resourceContext); // registers callback
         filter.OnResultExecuted(resultContext);
 
@@ -203,9 +200,7 @@ public class SaveTempDataFilterTest
     {
         // Arrange
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
-        tempDataFactory
-            .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-            .Verifiable();
+        tempDataFactory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Verifiable();
         var filter = new SaveTempDataFilter(tempDataFactory.Object);
         var httpContext = GetHttpContext(new TestResponseFeature(hasStarted: true));
         var context = GetResultExecutedContext(httpContext);
@@ -271,7 +266,9 @@ public class SaveTempDataFilterTest
         return new SaveTempDataFilter(tempDataFactory.Object);
     }
 
-    private Mock<ITempDataDictionaryFactory> GetTempDataDictionaryFactory(ITempDataDictionary tempDataDictionary)
+    private Mock<ITempDataDictionaryFactory> GetTempDataDictionaryFactory(
+        ITempDataDictionary tempDataDictionary
+    )
     {
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>(MockBehavior.Strict);
         tempDataFactory
@@ -283,12 +280,8 @@ public class SaveTempDataFilterTest
     private Mock<ITempDataDictionary> GetTempDataDictionary()
     {
         var tempDataDictionary = new Mock<ITempDataDictionary>(MockBehavior.Strict);
-        tempDataDictionary
-            .Setup(tdd => tdd.Keep())
-            .Verifiable();
-        tempDataDictionary
-            .Setup(tdd => tdd.Save())
-            .Verifiable();
+        tempDataDictionary.Setup(tdd => tdd.Keep()).Verifiable();
+        tempDataDictionary.Setup(tdd => tdd.Save()).Verifiable();
         return tempDataDictionary;
     }
 
@@ -307,7 +300,10 @@ public class SaveTempDataFilterTest
         return new ResourceExecutingContext(actionContext, filters, valueProviderFactories);
     }
 
-    private ResultExecutedContext GetResultExecutedContext(HttpContext httpContext = null, IActionResult actionResult = null)
+    private ResultExecutedContext GetResultExecutedContext(
+        HttpContext httpContext = null,
+        IActionResult actionResult = null
+    )
     {
         if (httpContext == null)
         {
@@ -321,10 +317,14 @@ public class SaveTempDataFilterTest
             new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
             new IFilterMetadata[] { },
             actionResult,
-            new TestController());
+            new TestController()
+        );
     }
 
-    private ResultExecutingContext GetResultExecutingContext(ActionContext actionContext, IActionResult actionResult = null)
+    private ResultExecutingContext GetResultExecutingContext(
+        ActionContext actionContext,
+        IActionResult actionResult = null
+    )
     {
         if (actionResult == null)
         {
@@ -334,10 +334,14 @@ public class SaveTempDataFilterTest
             actionContext,
             new IFilterMetadata[] { },
             actionResult,
-            new TestController());
+            new TestController()
+        );
     }
 
-    private ResultExecutingContext GetResultExecutingContext(HttpContext httpContext = null, IActionResult actionResult = null)
+    private ResultExecutingContext GetResultExecutingContext(
+        HttpContext httpContext = null,
+        IActionResult actionResult = null
+    )
     {
         if (httpContext == null)
         {
@@ -351,7 +355,8 @@ public class SaveTempDataFilterTest
             new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
             new IFilterMetadata[] { },
             new Mock<IActionResult>().Object,
-            new TestController());
+            new TestController()
+        );
     }
 
     private HttpContext GetHttpContext(IHttpResponseFeature responseFeature = null)
@@ -374,15 +379,15 @@ public class SaveTempDataFilterTest
         return new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
     }
 
-    private class TestController : Controller
-    {
-    }
+    private class TestController : Controller { }
 
     private class TestActionResult : IActionResult
     {
         public Task ExecuteResultAsync(ActionContext context)
         {
-            return context.HttpContext.Response.WriteAsync($"Hello from {nameof(TestActionResult)}");
+            return context.HttpContext.Response.WriteAsync(
+                $"Hello from {nameof(TestActionResult)}"
+            );
         }
     }
 
@@ -390,7 +395,9 @@ public class SaveTempDataFilterTest
     {
         public Task ExecuteResultAsync(ActionContext context)
         {
-            return context.HttpContext.Response.WriteAsync($"Hello from {nameof(TestKeepTempDataActionResult)}");
+            return context.HttpContext.Response.WriteAsync(
+                $"Hello from {nameof(TestKeepTempDataActionResult)}"
+            );
         }
     }
 
@@ -406,10 +413,7 @@ public class SaveTempDataFilterTest
 
         public override bool HasStarted
         {
-            get
-            {
-                return _hasStarted;
-            }
+            get { return _hasStarted; }
         }
 
         public override void OnStarting(Func<object, Task> callback, object state)

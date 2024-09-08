@@ -47,100 +47,194 @@ namespace System.Web.Razor.Test.Parser
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnEndSpan()
         {
-            RunOnEndSpanTest(spanCallback => new CallbackVisitor(spanCallback, _ => { }, _ => { }, _ => { }));
+            RunOnEndSpanTest(spanCallback => new CallbackVisitor(
+                spanCallback,
+                _ => { },
+                _ => { },
+                _ => { }
+            ));
         }
 
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnError()
         {
-            RunOnErrorTest(errorCallback => new CallbackVisitor(_ => { }, errorCallback, _ => { }, _ => { }));
+            RunOnErrorTest(errorCallback => new CallbackVisitor(
+                _ => { },
+                errorCallback,
+                _ => { },
+                _ => { }
+            ));
         }
 
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnStartBlock()
         {
-            RunOnStartBlockTest(startBlockCallback => new CallbackVisitor(_ => { }, _ => { }, startBlockCallback, _ => { }));
+            RunOnStartBlockTest(startBlockCallback => new CallbackVisitor(
+                _ => { },
+                _ => { },
+                startBlockCallback,
+                _ => { }
+            ));
         }
 
         [Fact]
         public void ListenerConstructedWithAllCallbacksCallsCallbackOnEndBlock()
         {
-            RunOnEndBlockTest(endBlockCallback => new CallbackVisitor(_ => { }, _ => { }, _ => { }, endBlockCallback));
+            RunOnEndBlockTest(endBlockCallback => new CallbackVisitor(
+                _ => { },
+                _ => { },
+                _ => { },
+                endBlockCallback
+            ));
         }
 
         [Fact]
         public void ListenerCallsOnEndSpanCallbackUsingSynchronizationContextIfSpecified()
         {
-            RunSyncContextTest(new SpanBuilder().Build(),
-                               spanCallback => new CallbackVisitor(spanCallback, _ => { }, _ => { }, _ => { }),
-                               (listener, expected) => listener.VisitSpan(expected));
+            RunSyncContextTest(
+                new SpanBuilder().Build(),
+                spanCallback => new CallbackVisitor(spanCallback, _ => { }, _ => { }, _ => { }),
+                (listener, expected) => listener.VisitSpan(expected)
+            );
         }
 
         [Fact]
         public void ListenerCallsOnStartBlockCallbackUsingSynchronizationContextIfSpecified()
         {
-            RunSyncContextTest(BlockType.Template,
-                               startBlockCallback => new CallbackVisitor(_ => { }, _ => { }, startBlockCallback, _ => { }),
-                               (listener, expected) => listener.VisitStartBlock(new BlockBuilder() { Type = expected }.Build()));
+            RunSyncContextTest(
+                BlockType.Template,
+                startBlockCallback => new CallbackVisitor(
+                    _ => { },
+                    _ => { },
+                    startBlockCallback,
+                    _ => { }
+                ),
+                (listener, expected) =>
+                    listener.VisitStartBlock(new BlockBuilder() { Type = expected }.Build())
+            );
         }
 
         [Fact]
         public void ListenerCallsOnEndBlockCallbackUsingSynchronizationContextIfSpecified()
         {
-            RunSyncContextTest(BlockType.Template,
-                               endBlockCallback => new CallbackVisitor(_ => { }, _ => { }, _ => { }, endBlockCallback),
-                               (listener, expected) => listener.VisitEndBlock(new BlockBuilder() { Type = expected }.Build()));
+            RunSyncContextTest(
+                BlockType.Template,
+                endBlockCallback => new CallbackVisitor(
+                    _ => { },
+                    _ => { },
+                    _ => { },
+                    endBlockCallback
+                ),
+                (listener, expected) =>
+                    listener.VisitEndBlock(new BlockBuilder() { Type = expected }.Build())
+            );
         }
 
         [Fact]
         public void ListenerCallsOnErrorCallbackUsingSynchronizationContextIfSpecified()
         {
-            RunSyncContextTest(new RazorError("Bar", 42, 42, 42),
-                               errorCallback => new CallbackVisitor(_ => { }, errorCallback, _ => { }, _ => { }),
-                               (listener, expected) => listener.VisitError(expected));
+            RunSyncContextTest(
+                new RazorError("Bar", 42, 42, 42),
+                errorCallback => new CallbackVisitor(_ => { }, errorCallback, _ => { }, _ => { }),
+                (listener, expected) => listener.VisitError(expected)
+            );
         }
 
-        private static void RunSyncContextTest<T>(T expected, Func<Action<T>, CallbackVisitor> ctor, Action<CallbackVisitor, T> call)
+        private static void RunSyncContextTest<T>(
+            T expected,
+            Func<Action<T>, CallbackVisitor> ctor,
+            Action<CallbackVisitor, T> call
+        )
         {
             // Arrange
             Mock<SynchronizationContext> mockContext = new Mock<SynchronizationContext>();
-            mockContext.Setup(c => c.Post(It.IsAny<SendOrPostCallback>(), It.IsAny<object>()))
-                .Callback<SendOrPostCallback, object>((callback, state) => { callback(expected); });
+            mockContext
+                .Setup(c => c.Post(It.IsAny<SendOrPostCallback>(), It.IsAny<object>()))
+                .Callback<SendOrPostCallback, object>(
+                    (callback, state) =>
+                    {
+                        callback(expected);
+                    }
+                );
 
             // Act/Assert
-            RunCallbackTest<T>(default(T), callback =>
-            {
-                CallbackVisitor listener = ctor(callback);
-                listener.SynchronizationContext = mockContext.Object;
-                return listener;
-            }, call, (original, actual) =>
-            {
-                Assert.NotEqual(original, actual);
-                Assert.Equal(expected, actual);
-            });
+            RunCallbackTest<T>(
+                default(T),
+                callback =>
+                {
+                    CallbackVisitor listener = ctor(callback);
+                    listener.SynchronizationContext = mockContext.Object;
+                    return listener;
+                },
+                call,
+                (original, actual) =>
+                {
+                    Assert.NotEqual(original, actual);
+                    Assert.Equal(expected, actual);
+                }
+            );
         }
 
-        private static void RunOnStartBlockTest(Func<Action<BlockType>, CallbackVisitor> ctor, Action<BlockType, BlockType> verifyResults = null)
+        private static void RunOnStartBlockTest(
+            Func<Action<BlockType>, CallbackVisitor> ctor,
+            Action<BlockType, BlockType> verifyResults = null
+        )
         {
-            RunCallbackTest(BlockType.Markup, ctor, (listener, expected) => listener.VisitStartBlock(new BlockBuilder() { Type = expected }.Build()), verifyResults);
+            RunCallbackTest(
+                BlockType.Markup,
+                ctor,
+                (listener, expected) =>
+                    listener.VisitStartBlock(new BlockBuilder() { Type = expected }.Build()),
+                verifyResults
+            );
         }
 
-        private static void RunOnEndBlockTest(Func<Action<BlockType>, CallbackVisitor> ctor, Action<BlockType, BlockType> verifyResults = null)
+        private static void RunOnEndBlockTest(
+            Func<Action<BlockType>, CallbackVisitor> ctor,
+            Action<BlockType, BlockType> verifyResults = null
+        )
         {
-            RunCallbackTest(BlockType.Markup, ctor, (listener, expected) => listener.VisitEndBlock(new BlockBuilder() { Type = expected }.Build()), verifyResults);
+            RunCallbackTest(
+                BlockType.Markup,
+                ctor,
+                (listener, expected) =>
+                    listener.VisitEndBlock(new BlockBuilder() { Type = expected }.Build()),
+                verifyResults
+            );
         }
 
-        private static void RunOnErrorTest(Func<Action<RazorError>, CallbackVisitor> ctor, Action<RazorError, RazorError> verifyResults = null)
+        private static void RunOnErrorTest(
+            Func<Action<RazorError>, CallbackVisitor> ctor,
+            Action<RazorError, RazorError> verifyResults = null
+        )
         {
-            RunCallbackTest(new RazorError("Foo", SourceLocation.Zero), ctor, (listener, expected) => listener.VisitError(expected), verifyResults);
+            RunCallbackTest(
+                new RazorError("Foo", SourceLocation.Zero),
+                ctor,
+                (listener, expected) => listener.VisitError(expected),
+                verifyResults
+            );
         }
 
-        private static void RunOnEndSpanTest(Func<Action<Span>, CallbackVisitor> ctor, Action<Span, Span> verifyResults = null)
+        private static void RunOnEndSpanTest(
+            Func<Action<Span>, CallbackVisitor> ctor,
+            Action<Span, Span> verifyResults = null
+        )
         {
-            RunCallbackTest(new SpanBuilder().Build(), ctor, (listener, expected) => listener.VisitSpan(expected), verifyResults);
+            RunCallbackTest(
+                new SpanBuilder().Build(),
+                ctor,
+                (listener, expected) => listener.VisitSpan(expected),
+                verifyResults
+            );
         }
 
-        private static void RunCallbackTest<T>(T expected, Func<Action<T>, CallbackVisitor> ctor, Action<CallbackVisitor, T> call, Action<T, T> verifyResults = null)
+        private static void RunCallbackTest<T>(
+            T expected,
+            Func<Action<T>, CallbackVisitor> ctor,
+            Action<CallbackVisitor, T> call,
+            Action<T, T> verifyResults = null
+        )
         {
             // Arrange
             object actual = null;

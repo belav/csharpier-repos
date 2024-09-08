@@ -7,7 +7,6 @@ namespace Identity.DefaultUI.WebSite;
 
 public class ApplicationUserStartup : StartupBase<ApplicationUser, ApplicationDbContext>
 {
-    public ApplicationUserStartup(IConfiguration configuration) : base(configuration)
-    {
-    }
+    public ApplicationUserStartup(IConfiguration configuration)
+        : base(configuration) { }
 }

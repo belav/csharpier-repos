@@ -8,7 +8,8 @@ public abstract class MultipleEntryJumpTableTest
     internal abstract JumpTable CreateTable(
         int defaultDestination,
         int exitDestination,
-        params (string text, int destination)[] entries);
+        params (string text, int destination)[] entries
+    );
 
     [Fact]
     public void GetDestination_ZeroLengthSegment_JumpsToExit()

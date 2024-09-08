@@ -23,7 +23,8 @@ internal sealed class AttributeRoute : IRouter
     public AttributeRoute(
         IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
         IServiceProvider services,
-        Func<ActionDescriptor[], IRouter> handlerFactory)
+        Func<ActionDescriptor[], IRouter> handlerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(actionDescriptorCollectionProvider);
         ArgumentNullException.ThrowIfNull(services);
@@ -93,14 +94,16 @@ internal sealed class AttributeRoute : IRouter
                     routeInfo.RouteTemplate,
                     defaults,
                     routeInfo.RouteName,
-                    routeInfo.Order);
+                    routeInfo.Order
+                );
             }
             catch (RouteCreationException routeCreationException)
             {
                 throw new RouteCreationException(
-                    "An error occurred while adding a route to the route builder. " +
-                    $"Route name '{routeInfo.RouteName}' and template '{routeInfo.RouteTemplate!.TemplateText}'.",
-                    routeCreationException);
+                    "An error occurred while adding a route to the route builder. "
+                        + $"Route name '{routeInfo.RouteName}' and template '{routeInfo.RouteTemplate!.TemplateText}'.",
+                    routeCreationException
+                );
             }
         }
 
@@ -121,11 +124,14 @@ internal sealed class AttributeRoute : IRouter
                 handler,
                 group.Key.RouteTemplate,
                 group.Key.RouteName,
-                group.Key.Order);
+                group.Key.Order
+            );
         }
     }
 
-    private static IEnumerable<IGrouping<RouteInfo, ActionDescriptor>> GetInboundRouteGroups(List<RouteInfo> routeInfos)
+    private static IEnumerable<IGrouping<RouteInfo, ActionDescriptor>> GetInboundRouteGroups(
+        List<RouteInfo> routeInfos
+    )
     {
         return routeInfos
             .Where(routeInfo => !routeInfo.SuppressPathMatching)
@@ -162,13 +168,19 @@ internal sealed class AttributeRoute : IRouter
         {
             var allErrors = string.Join(
                 Environment.NewLine + Environment.NewLine,
-                errors.Select(
-                    e => Resources.FormatAttributeRoute_IndividualErrorMessage(
+                errors.Select(e =>
+                    Resources.FormatAttributeRoute_IndividualErrorMessage(
                         e.ActionDescriptor.DisplayName,
                         Environment.NewLine,
-                        e.ErrorMessage)));
+                        e.ErrorMessage
+                    )
+                )
+            );
 
-            var message = Resources.FormatAttributeRoute_AggregateErrorMessage(Environment.NewLine, allErrors);
+            var message = Resources.FormatAttributeRoute_AggregateErrorMessage(
+                Environment.NewLine,
+                allErrors
+            );
             throw new RouteCreationException(message);
         }
 
@@ -177,12 +189,10 @@ internal sealed class AttributeRoute : IRouter
 
     private static RouteInfo GetRouteInfo(
         Dictionary<string, RouteTemplate> templateCache,
-        ActionDescriptor action)
+        ActionDescriptor action
+    )
     {
-        var routeInfo = new RouteInfo()
-        {
-            ActionDescriptor = action,
-        };
+        var routeInfo = new RouteInfo() { ActionDescriptor = action };
 
         try
         {
@@ -213,7 +223,8 @@ internal sealed class AttributeRoute : IRouter
                     routeInfo.ErrorMessage = Resources.FormatAttributeRoute_CannotContainParameter(
                         routeInfo.RouteTemplate.TemplateText,
                         kvp.Key,
-                        kvp.Value);
+                        kvp.Value
+                    );
 
                     return routeInfo;
                 }
@@ -266,7 +277,8 @@ internal sealed class AttributeRoute : IRouter
                 return string.Equals(
                     x.RouteTemplate!.TemplateText,
                     y.RouteTemplate!.TemplateText,
-                    StringComparison.OrdinalIgnoreCase);
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
         }
 

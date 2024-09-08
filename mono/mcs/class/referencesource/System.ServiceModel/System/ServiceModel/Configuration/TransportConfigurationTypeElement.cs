@@ -9,9 +9,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class TransportConfigurationTypeElement : ConfigurationElement
     {
-        public TransportConfigurationTypeElement()
-        {
-        }
+        public TransportConfigurationTypeElement() { }
 
         public TransportConfigurationTypeElement(string name)
             : this()
@@ -28,12 +26,17 @@ namespace System.ServiceModel.Configuration
         {
             if (String.IsNullOrEmpty(transportConfigurationTypeName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("transportConfigurationTypeName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "transportConfigurationTypeName"
+                );
             }
             this.TransportConfigurationType = transportConfigurationTypeName;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string Name
         {
@@ -49,7 +52,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransportConfigurationType, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransportConfigurationType,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string TransportConfigurationType
         {
@@ -64,6 +70,5 @@ namespace System.ServiceModel.Configuration
                 base[ConfigurationStrings.TransportConfigurationType] = value;
             }
         }
-
     }
 }

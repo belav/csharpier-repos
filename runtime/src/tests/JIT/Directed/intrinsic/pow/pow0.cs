@@ -13,7 +13,9 @@ public class pow0
     public static int TestEntryPoint()
     {
         bool pass = true;
-        double x, y, z;
+        double x,
+            y,
+            z;
         double n;
 
         y = 0;
@@ -31,7 +33,7 @@ public class pow0
         }
 
         x = 1;
-        for (n = 1; n < 100000;)
+        for (n = 1; n < 100000; )
         {
             n += Math.Pow(n, 0);
             if (n != ++x)
@@ -63,4 +65,3 @@ public class pow0
         }
     }
 }
-

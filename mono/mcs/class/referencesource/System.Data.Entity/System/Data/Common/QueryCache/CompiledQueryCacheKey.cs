@@ -11,7 +11,7 @@ namespace System.Data.Common.QueryCache
 {
     using System;
     using System.Diagnostics;
-    
+
     internal sealed class CompiledQueryCacheKey : QueryCacheKey
     {
         private readonly Guid _cacheIdentity;

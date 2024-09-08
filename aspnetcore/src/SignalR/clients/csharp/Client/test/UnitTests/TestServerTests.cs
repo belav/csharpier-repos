@@ -19,24 +19,27 @@ public class TestServerTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            var builder = new WebHostBuilder().ConfigureServices(s =>
-            {
-                s.AddLogging();
-                s.AddSingleton(LoggerFactory);
-                s.AddSignalR();
-            }).Configure(app =>
-            {
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+            var builder = new WebHostBuilder()
+                .ConfigureServices(s =>
                 {
-                    endpoints.MapHub<EchoHub>("/echo");
+                    s.AddLogging();
+                    s.AddSingleton(LoggerFactory);
+                    s.AddSignalR();
+                })
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(endpoints =>
+                    {
+                        endpoints.MapHub<EchoHub>("/echo");
+                    });
                 });
-            });
             var server = new TestServer(builder);
 
             var webSocketFactoryCalled = false;
-            var connectionBuilder = new HubConnectionBuilder()
-                .WithUrl(server.BaseAddress + "echo", options =>
+            var connectionBuilder = new HubConnectionBuilder().WithUrl(
+                server.BaseAddress + "echo",
+                options =>
                 {
                     options.Transports = Http.Connections.HttpTransportType.WebSockets;
                     options.HttpMessageHandlerFactory = _ =>
@@ -49,16 +52,20 @@ public class TestServerTests : VerifiableLoggedTest
                         var wsClient = server.CreateWebSocketClient();
                         return await wsClient.ConnectAsync(context.Uri, default);
                     };
-                });
+                }
+            );
             connectionBuilder.Services.AddLogging();
             connectionBuilder.Services.AddSingleton(LoggerFactory);
             var connection = connectionBuilder.Build();
 
             var originalMessage = "message";
-            connection.On<string>("Echo", (receivedMessage) =>
-            {
-                Assert.Equal(originalMessage, receivedMessage);
-            });
+            connection.On<string>(
+                "Echo",
+                (receivedMessage) =>
+                {
+                    Assert.Equal(originalMessage, receivedMessage);
+                }
+            );
 
             await connection.StartAsync();
             await connection.InvokeAsync("Echo", originalMessage);
@@ -71,39 +78,46 @@ public class TestServerTests : VerifiableLoggedTest
     {
         using (StartVerifiableLog())
         {
-            var builder = new WebHostBuilder().ConfigureServices(s =>
-            {
-                s.AddLogging();
-                s.AddSingleton(LoggerFactory);
-                s.AddSignalR();
-            }).Configure(app =>
-            {
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
+            var builder = new WebHostBuilder()
+                .ConfigureServices(s =>
                 {
-                    endpoints.MapHub<EchoHub>("/echo");
+                    s.AddLogging();
+                    s.AddSingleton(LoggerFactory);
+                    s.AddSignalR();
+                })
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(endpoints =>
+                    {
+                        endpoints.MapHub<EchoHub>("/echo");
+                    });
                 });
-            });
             var server = new TestServer(builder);
 
-            var connectionBuilder = new HubConnectionBuilder()
-                .WithUrl(server.BaseAddress + "echo", options =>
+            var connectionBuilder = new HubConnectionBuilder().WithUrl(
+                server.BaseAddress + "echo",
+                options =>
                 {
                     options.Transports = Http.Connections.HttpTransportType.LongPolling;
                     options.HttpMessageHandlerFactory = _ =>
                     {
                         return server.CreateHandler();
                     };
-                });
+                }
+            );
             connectionBuilder.Services.AddLogging();
             connectionBuilder.Services.AddSingleton(LoggerFactory);
             var connection = connectionBuilder.Build();
 
             var originalMessage = "message";
-            connection.On<string>("Echo", (receivedMessage) =>
-            {
-                Assert.Equal(originalMessage, receivedMessage);
-            });
+            connection.On<string>(
+                "Echo",
+                (receivedMessage) =>
+                {
+                    Assert.Equal(originalMessage, receivedMessage);
+                }
+            );
 
             await connection.StartAsync();
             await connection.InvokeAsync("Echo", originalMessage);

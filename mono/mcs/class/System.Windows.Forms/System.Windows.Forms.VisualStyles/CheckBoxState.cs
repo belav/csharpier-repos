@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,19 +28,19 @@
 
 namespace System.Windows.Forms.VisualStyles
 {
-	public enum CheckBoxState
-	{
-		UncheckedNormal = 1,
-		UncheckedHot = 2,
-		UncheckedPressed = 3,
-		UncheckedDisabled = 4,
-		CheckedNormal = 5,
-		CheckedHot = 6,
-		CheckedPressed = 7,
-		CheckedDisabled = 8,
-		MixedNormal = 9,
-		MixedHot = 10,
-		MixedPressed = 11,
-		MixedDisabled = 12
-	}
+    public enum CheckBoxState
+    {
+        UncheckedNormal = 1,
+        UncheckedHot = 2,
+        UncheckedPressed = 3,
+        UncheckedDisabled = 4,
+        CheckedNormal = 5,
+        CheckedHot = 6,
+        CheckedPressed = 7,
+        CheckedDisabled = 8,
+        MixedNormal = 9,
+        MixedHot = 10,
+        MixedPressed = 11,
+        MixedDisabled = 12,
+    }
 }

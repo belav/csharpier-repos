@@ -7,13 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Text;
 using System.Xml;
-using System.Security.Permissions;
-
 
 namespace System.Data.Metadata.Edm
 {
@@ -36,7 +35,6 @@ namespace System.Data.Metadata.Edm
         {
             _reader = xmlReader;
             _resourceUri = xmlReader.BaseURI;
-
         }
 
         public override string Path
@@ -61,7 +59,8 @@ namespace System.Data.Metadata.Edm
         /// <returns>0 if the loaders are "equal" (i.e., have the same _path value)</returns>
         public int CompareTo(object obj)
         {
-            MetadataArtifactLoaderXmlReaderWrapper loader = obj as MetadataArtifactLoaderXmlReaderWrapper;
+            MetadataArtifactLoaderXmlReaderWrapper loader =
+                obj as MetadataArtifactLoaderXmlReaderWrapper;
             if (loader != null)
             {
                 if (Object.ReferenceEquals(this._reader, loader._reader))
@@ -130,7 +129,9 @@ namespace System.Data.Metadata.Edm
         /// Get XmlReaders for all resources
         /// </summary>
         /// <returns>A List of XmlReaders for all resources</returns>
-        public override List<XmlReader> GetReaders(Dictionary<MetadataArtifactLoader, XmlReader> sourceDictionary)
+        public override List<XmlReader> GetReaders(
+            Dictionary<MetadataArtifactLoader, XmlReader> sourceDictionary
+        )
         {
             List<XmlReader> list = new List<XmlReader>();
 

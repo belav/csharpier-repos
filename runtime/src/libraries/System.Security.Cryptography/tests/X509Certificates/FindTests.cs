@@ -20,12 +20,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             RunTest((msCer, pfxCer, col1) => test(col1));
         }
 
-        private static void RunTest(Action<X509Certificate2, X509Certificate2, X509Certificate2Collection> test)
+        private static void RunTest(
+            Action<X509Certificate2, X509Certificate2, X509Certificate2Collection> test
+        )
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
             using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
             {
-                X509Certificate2Collection col1 = new X509Certificate2Collection(new[] { msCer, pfxCer });
+                X509Certificate2Collection col1 = new X509Certificate2Collection(
+                    new[] { msCer, pfxCer }
+                );
 
                 test(msCer, pfxCer, col1);
             }
@@ -37,8 +41,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             RunTest(
                 (msCer, pfxCer, col1) =>
                 {
-                    Assert.Throws<TException>(() => col1.Find(findType, findValue, validOnly: false));
-                });
+                    Assert.Throws<TException>(
+                        () => col1.Find(findType, findValue, validOnly: false)
+                    );
+                }
+            );
         }
 
         private static void RunZeroMatchTest(X509FindType findType, object findValue)
@@ -46,13 +53,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             RunTest(
                 (msCer, pfxCer, col1) =>
                 {
-                    X509Certificate2Collection col2 = col1.Find(findType, findValue, validOnly: false);
+                    X509Certificate2Collection col2 = col1.Find(
+                        findType,
+                        findValue,
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(0, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         private static void RunSingleMatchTest_MsCer(X509FindType findType, object findValue)
@@ -61,7 +73,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 (msCer, pfxCer, col1) =>
                 {
                     EvaluateSingleMatch(msCer, col1, findType, findValue);
-                });
+                }
+            );
         }
 
         private static void RunSingleMatchTest_PfxCer(X509FindType findType, object findValue)
@@ -70,17 +83,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 (msCer, pfxCer, col1) =>
                 {
                     EvaluateSingleMatch(pfxCer, col1, findType, findValue);
-                });
+                }
+            );
         }
 
         private static void EvaluateSingleMatch(
             X509Certificate2 expected,
             X509Certificate2Collection col1,
             X509FindType findType,
-            object findValue)
+            object findValue
+        )
         {
-            X509Certificate2Collection col2 =
-                col1.Find(findType, findValue, validOnly: false);
+            X509Certificate2Collection col2 = col1.Find(findType, findValue, validOnly: false);
 
             using (new ImportedCollection(col2))
             {
@@ -161,7 +175,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void FindByInvalidThumbprint_RightLength()
         {
-            RunZeroMatchTest(X509FindType.FindByThumbprint, "ffffffffffffffffffffffffffffffffffffffff");
+            RunZeroMatchTest(
+                X509FindType.FindByThumbprint,
+                "ffffffffffffffffffffffffffffffffffffffff"
+            );
         }
 
         [Fact]
@@ -174,8 +191,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         pfxCer,
                         col1,
                         X509FindType.FindByThumbprint,
-                        pfxCer.Thumbprint);
-                });
+                        pfxCer.Thumbprint
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -188,8 +207,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         pfxCer,
                         col1,
                         X509FindType.FindByThumbprint,
-                        LeftToRightMark + pfxCer.Thumbprint);
-                });
+                        LeftToRightMark + pfxCer.Thumbprint
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -201,8 +222,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 var col1 = new X509Certificate2Collection(msCer);
 
-                X509Certificate2Collection col2 =
-                    col1.Find(X509FindType.FindByThumbprint, msCer.Thumbprint, validOnly);
+                X509Certificate2Collection col2 = col1.Find(
+                    X509FindType.FindByThumbprint,
+                    msCer.Thumbprint,
+                    validOnly
+                );
 
                 using (new ImportedCollection(col2))
                 {
@@ -232,10 +256,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(PlatformSupport.MobileAppleCrypto, "Root certificate store is not accessible")]
+        [SkipOnPlatform(
+            PlatformSupport.MobileAppleCrypto,
+            "Root certificate store is not accessible"
+        )]
         public static void FindByValidThumbprint_RootCert()
         {
-            using (X509Store machineRoot = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
+            using (
+                X509Store machineRoot = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
+            )
             {
                 machineRoot.Open(OpenFlags.ReadOnly);
 
@@ -278,8 +307,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         const X509KeyUsageFlags RequiredFlags = X509KeyUsageFlags.KeyCertSign;
 
                         // No key usage extension means "good for all usages"
-                        if (keyUsageExtension != null &&
-                            (keyUsageExtension.KeyUsages & RequiredFlags) != RequiredFlags)
+                        if (
+                            keyUsageExtension != null
+                            && (keyUsageExtension.KeyUsages & RequiredFlags) != RequiredFlags
+                        )
                         {
                             // Not a valid KeyUsage, skip.
                             continue;
@@ -287,7 +318,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         using (ChainHolder chainHolder = new ChainHolder())
                         {
-                            chainHolder.Chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+                            chainHolder.Chain.ChainPolicy.RevocationMode =
+                                X509RevocationMode.NoCheck;
 
                             if (!chainHolder.Chain.Build(cert))
                             {
@@ -304,8 +336,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // Just in case someone has a system with no valid trusted root certs whatsoever.
                     if (rootCert != null)
                     {
-                        X509Certificate2Collection matches =
-                            storeCerts.Find(X509FindType.FindByThumbprint, rootCert.Thumbprint, true);
+                        X509Certificate2Collection matches = storeCerts.Find(
+                            X509FindType.FindByThumbprint,
+                            rootCert.Thumbprint,
+                            true
+                        );
 
                         using (new ImportedCollection(matches))
                         {
@@ -313,7 +348,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             // machine might be different
                             if (matches.Count == 0)
                             {
-                                Assert.Fail($"Root certificate '{rootCert.Subject}' ({rootCert.NotBefore} - {rootCert.NotAfter}) is findable with thumbprint '{rootCert.Thumbprint}' and validOnly=true");
+                                Assert.Fail(
+                                    $"Root certificate '{rootCert.Subject}' ({rootCert.NotBefore} - {rootCert.NotAfter}) is findable with thumbprint '{rootCert.Thumbprint}' and validOnly=true"
+                                );
                             }
 
                             Assert.NotSame(rootCert, matches[0]);
@@ -352,21 +389,36 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData("Nothing")]
         [InlineData("ou=mopr, o=microsoft corporation")]
         [InlineData("CN=Microsoft Corporation")]
-        [InlineData("CN=Microsoft Corporation,     OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
-        [InlineData("CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US    ")]
-        [InlineData("    CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
+        [InlineData(
+            "CN=Microsoft Corporation,     OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
+        [InlineData(
+            "CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US    "
+        )]
+        [InlineData(
+            "    CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
         public static void TestDistinguishedSubjectName_NoMatch(string distinguishedSubjectName)
         {
             RunZeroMatchTest(X509FindType.FindBySubjectDistinguishedName, distinguishedSubjectName);
         }
 
         [Theory]
-        [InlineData("CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
-        [InlineData("CN=microsoft corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
-        [InlineData("cn=microsoft corporation, ou=mopr, o=microsoft corporation, l=redmond, s=washington, c=us")]
+        [InlineData(
+            "CN=Microsoft Corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
+        [InlineData(
+            "CN=microsoft corporation, OU=MOPR, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
+        [InlineData(
+            "cn=microsoft corporation, ou=mopr, o=microsoft corporation, l=redmond, s=washington, c=us"
+        )]
         public static void TestDistinguishedSubjectName_Match(string distinguishedSubjectName)
         {
-            RunSingleMatchTest_MsCer(X509FindType.FindBySubjectDistinguishedName, distinguishedSubjectName);
+            RunSingleMatchTest_MsCer(
+                X509FindType.FindBySubjectDistinguishedName,
+                distinguishedSubjectName
+            );
         }
 
         [Fact]
@@ -394,21 +446,36 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [InlineData("")]
         [InlineData("Nothing")]
         [InlineData("CN=Microsoft Code Signing PCA")]
-        [InlineData("CN=Microsoft Code Signing PCA,     O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
-        [InlineData("CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US    ")]
-        [InlineData("    CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
+        [InlineData(
+            "CN=Microsoft Code Signing PCA,     O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
+        [InlineData(
+            "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US    "
+        )]
+        [InlineData(
+            "    CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
         public static void TestDistinguishedIssuerName_NoMatch(string issuerDistinguishedName)
         {
             RunZeroMatchTest(X509FindType.FindByIssuerDistinguishedName, issuerDistinguishedName);
         }
 
         [Theory]
-        [InlineData("CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
-        [InlineData("CN=microsoft Code signing pca, O=Microsoft Corporation, L=Redmond, S=Washington, C=US")]
-        [InlineData("cn=microsoft code signing pca, o=microsoft corporation, l=redmond, s=washington, c=us")]
+        [InlineData(
+            "CN=Microsoft Code Signing PCA, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
+        [InlineData(
+            "CN=microsoft Code signing pca, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
+        )]
+        [InlineData(
+            "cn=microsoft code signing pca, o=microsoft corporation, l=redmond, s=washington, c=us"
+        )]
         public static void TestDistinguishedIssuerName_Match(string issuerDistinguishedName)
         {
-            RunSingleMatchTest_MsCer(X509FindType.FindByIssuerDistinguishedName, issuerDistinguishedName);
+            RunSingleMatchTest_MsCer(
+                X509FindType.FindByIssuerDistinguishedName,
+                issuerDistinguishedName
+            );
         }
 
         [Fact]
@@ -422,13 +489,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeValid,
                         earliest - TimeSpan.FromSeconds(1),
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(0, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -442,13 +511,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeValid,
                         latest + TimeSpan.FromSeconds(1),
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(0, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -471,13 +542,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeValid,
                         noMatchTime,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(0, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -490,8 +563,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         msCer,
                         col1,
                         X509FindType.FindByTimeValid,
-                        msCer.NotBefore + TimeSpan.FromSeconds(1));
-                });
+                        msCer.NotBefore + TimeSpan.FromSeconds(1)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -515,13 +590,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeNotYetValid,
                         matchTime,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(1, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -545,13 +622,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeNotYetValid,
                         noMatchTime,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(0, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -575,13 +654,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeExpired,
                         matchTime,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(1, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -605,13 +686,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection col2 = col1.Find(
                         X509FindType.FindByTimeExpired,
                         noMatchTime,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     using (new ImportedCollection(col2))
                     {
                         Assert.Equal(0, col2.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -620,7 +703,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Decimal string is an allowed input format.
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySerialNumber,
-                "284069184166497622998429950103047369500");
+                "284069184166497622998429950103047369500"
+            );
         }
 
         [Fact]
@@ -628,8 +712,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             // Checking that leading zeros are ignored.
             RunSingleMatchTest_PfxCer(
-               X509FindType.FindBySerialNumber,
-               "000" + "284069184166497622998429950103047369500");
+                X509FindType.FindBySerialNumber,
+                "000" + "284069184166497622998429950103047369500"
+            );
         }
 
         [Theory]
@@ -649,7 +734,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Hex string is also an allowed input format.
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySerialNumber,
-                "D5B5BC1C458A558845BFF51CB4DFF31C");
+                "D5B5BC1C458A558845BFF51CB4DFF31C"
+            );
         }
 
         [Fact]
@@ -658,7 +744,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Hex string is also an allowed input format and case-blind
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySerialNumber,
-                "d5b5bc1c458a558845bff51cb4dff31c");
+                "d5b5bc1c458a558845bff51cb4dff31c"
+            );
         }
 
         [Fact]
@@ -667,7 +754,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Checking that leading zeros are ignored.
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySerialNumber,
-                "0000" + "D5B5BC1C458A558845BFF51CB4DFF31C");
+                "0000" + "D5B5BC1C458A558845BFF51CB4DFF31C"
+            );
         }
 
         [Fact]
@@ -676,7 +764,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Hex string is also an allowed input format and case-blind
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySerialNumber,
-                "d5 b5 bc 1c 45 8a 55 88 45 bf f5 1c b4 df f3 1c");
+                "d5 b5 bc 1c 45 8a 55 88 45 bf f5 1c b4 df f3 1c"
+            );
         }
 
         [Fact]
@@ -685,7 +774,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // Hex string is also an allowed input format and case-blind
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySerialNumber,
-                LeftToRightMark + "d5 b5 bc 1c 45 8a 55 88 45 bf f5 1c b4 df f3 1c");
+                LeftToRightMark + "d5 b5 bc 1c 45 8a 55 88 45 bf f5 1c b4 df f3 1c"
+            );
         }
 
         [Fact]
@@ -693,7 +783,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             RunZeroMatchTest(
                 X509FindType.FindBySerialNumber,
-                "23000000B011AF0A8BD03B9FDD0001000000B0");
+                "23000000B011AF0A8BD03B9FDD0001000000B0"
+            );
         }
 
         [Theory]
@@ -708,7 +799,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             // Cannot just say "Enhanced Key Usage" here because the extension name is localized.
             // Instead, look it up via the OID.
-            RunSingleMatchTest_MsCer(X509FindType.FindByExtension, new Oid("2.5.29.37").FriendlyName);
+            RunSingleMatchTest_MsCer(
+                X509FindType.FindByExtension,
+                new Oid("2.5.29.37").FriendlyName
+            );
         }
 
         [Fact]
@@ -744,7 +838,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             RunSingleMatchTest_PfxCer(
                 X509FindType.FindBySubjectKeyIdentifier,
-                "B4D738B2D4978AFF290A0B02987BABD114FEE9C7");
+                "B4D738B2D4978AFF290A0B02987BABD114FEE9C7"
+            );
         }
 
         [Theory]
@@ -755,9 +850,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         // produce a build warning (which becomes an error):
         //     EXEC : warning : '(not included here)', hexadecimal value 0x0C, is an invalid character.
         [InlineData(
-            "59\u000971\u000aA6\u30005A\u205f33\u000d4D\u0020DA\u008598\u00a007\u1680" +
-            "80\u2000FF\u200184\u20021E\u2003BE\u200487\u2005F9\u200672\u200732\u2008" +
-            "4\u20091\u200aF\u20282\u2029\u202f")]
+            "59\u000971\u000aA6\u30005A\u205f33\u000d4D\u0020DA\u008598\u00a007\u1680"
+                + "80\u2000FF\u200184\u20021E\u2003BE\u200487\u2005F9\u200672\u200732\u2008"
+                + "4\u20091\u200aF\u20282\u2029\u202f"
+        )]
         // Non-byte-aligned whitespace is allowed
         [InlineData("597 1A6 5A3 34D DA9 807 80F F84 1EB E87 F97 232 41F 2")]
         // Non-symmetric whitespace is allowed
@@ -769,12 +865,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         // Should ignore Left-to-right mark \u200E
         [Theory]
-        [InlineData(LeftToRightMark + "59 71 A6 5A 33 4D DA 98 07 80 FF 84 1E BE 87 F9 72 32 41 F2")]
+        [InlineData(
+            LeftToRightMark + "59 71 A6 5A 33 4D DA 98 07 80 FF 84 1E BE 87 F9 72 32 41 F2"
+        )]
         // Compat: Lone trailing nybbles are ignored
-        [InlineData(LeftToRightMark + "59 71 A6 5A 33 4D DA 98 07 80 FF 84 1E BE 87 F9 72 32 41 F2 3")]
+        [InlineData(
+            LeftToRightMark + "59 71 A6 5A 33 4D DA 98 07 80 FF 84 1E BE 87 F9 72 32 41 F2 3"
+        )]
         // Compat: Lone trailing nybbles are ignored, even if not hex
-        [InlineData(LeftToRightMark + "59 71 A6 5A 33 4D DA 98 07 80 FF 84 1E BE 87 F9 72 32 41 F2 p")]
-        public static void TestBySubjectKeyIdentifier_ExtensionPresentWithLTM(string subjectKeyIdentifier)
+        [InlineData(
+            LeftToRightMark + "59 71 A6 5A 33 4D DA 98 07 80 FF 84 1E BE 87 F9 72 32 41 F2 p"
+        )]
+        public static void TestBySubjectKeyIdentifier_ExtensionPresentWithLTM(
+            string subjectKeyIdentifier
+        )
         {
             RunSingleMatchTest_MsCer(X509FindType.FindBySubjectKeyIdentifier, subjectKeyIdentifier);
         }
@@ -804,7 +908,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             RunZeroMatchTest(
                 X509FindType.FindBySubjectKeyIdentifier,
-                "5971A65A334DDA980780FF841EBE87F9723241F0");
+                "5971A65A334DDA980780FF841EBE87F9723241F0"
+            );
         }
 
         [Fact]
@@ -813,8 +918,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             RunTest(
                 (msCer, pfxCer, col1) =>
                 {
-                    X509Certificate2Collection results =
-                        col1.Find(X509FindType.FindByApplicationPolicy, "1.3.6.1.5.5.7.3.3", false);
+                    X509Certificate2Collection results = col1.Find(
+                        X509FindType.FindByApplicationPolicy,
+                        "1.3.6.1.5.5.7.3.3",
+                        false
+                    );
 
                     using (new ImportedCollection(results))
                     {
@@ -823,7 +931,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.True(results.Contains(msCer));
                         Assert.True(results.Contains(pfxCer));
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -842,14 +951,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // Per TestByApplicationPolicy_NoPolicyAlwaysMatches we know that pfxCer will match, so remove it.
                     col1.Remove(pfxCer);
 
-                    X509Certificate2Collection results =
-                        col1.Find(X509FindType.FindByApplicationPolicy, "2.2", false);
+                    X509Certificate2Collection results = col1.Find(
+                        X509FindType.FindByApplicationPolicy,
+                        "2.2",
+                        false
+                    );
 
                     using (new ImportedCollection(results))
                     {
                         Assert.Equal(0, results.Count);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -861,7 +974,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     policyCert,
                     new X509Certificate2Collection(policyCert),
                     X509FindType.FindByCertificatePolicy,
-                    "2.18.19");
+                    "2.18.19"
+                );
             }
         }
 
@@ -874,7 +988,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     policyCert,
                     new X509Certificate2Collection(policyCert),
                     X509FindType.FindByCertificatePolicy,
-                    "2.32.33");
+                    "2.32.33"
+                );
             }
         }
 
@@ -885,7 +1000,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 X509Certificate2Collection col1 = new X509Certificate2Collection(policyCert);
 
-                X509Certificate2Collection results = col1.Find(X509FindType.FindByCertificatePolicy, "2.999", false);
+                X509Certificate2Collection results = col1.Find(
+                    X509FindType.FindByCertificatePolicy,
+                    "2.999",
+                    false
+                );
 
                 using (new ImportedCollection(results))
                 {
@@ -903,7 +1022,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     templatedCert,
                     new X509Certificate2Collection(templatedCert),
                     X509FindType.FindByTemplateName,
-                    "Hello");
+                    "Hello"
+                );
             }
         }
 
@@ -916,7 +1036,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     templatedCert,
                     new X509Certificate2Collection(templatedCert),
                     X509FindType.FindByTemplateName,
-                    "2.7.8.9");
+                    "2.7.8.9"
+                );
             }
         }
 
@@ -927,7 +1048,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 X509Certificate2Collection col1 = new X509Certificate2Collection(templatedCert);
 
-                X509Certificate2Collection results = col1.Find(X509FindType.FindByTemplateName, "2.999", false);
+                X509Certificate2Collection results = col1.Find(
+                    X509FindType.FindByTemplateName,
+                    "2.999",
+                    false
+                );
 
                 using (new ImportedCollection(results))
                 {
@@ -964,8 +1089,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var noKeyUsages2 = new X509Certificate2(TestFiles.TestCertFile))
             using (var keyUsages = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                var coll = new X509Certificate2Collection { noKeyUsages, noKeyUsages2, keyUsages, };
-                X509Certificate2Collection results = coll.Find(X509FindType.FindByKeyUsage, matchCriteria, false);
+                var coll = new X509Certificate2Collection { noKeyUsages, noKeyUsages2, keyUsages };
+                X509Certificate2Collection results = coll.Find(
+                    X509FindType.FindByKeyUsage,
+                    matchCriteria,
+                    false
+                );
 
                 using (new ImportedCollection(results))
                 {
@@ -988,13 +1117,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             }
                         }
 
-                        Assert.True(found, "Certificate with key usages was found in the collection");
+                        Assert.True(
+                            found,
+                            "Certificate with key usages was found in the collection"
+                        );
                     }
                     else
                     {
                         Assert.False(
                             results.Contains(keyUsages),
-                            "KeyUsages certificate is not present in the collection");
+                            "KeyUsages certificate is not present in the collection"
+                        );
                     }
                 }
             }
@@ -1006,7 +1139,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 const string seedDec = "1137338006039264696476027508428304567989436592";
 
-                string[] nonHexWords = { "wow", "its", "tough", "using", "only", "high", "lttr", "vlus" };
+                string[] nonHexWords =
+                {
+                    "wow",
+                    "its",
+                    "tough",
+                    "using",
+                    "only",
+                    "high",
+                    "lttr",
+                    "vlus",
+                };
                 string gluedTogether = string.Join("", nonHexWords);
                 string withSpaces = string.Join(" ", nonHexWords);
 
@@ -1066,10 +1209,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             get
             {
-                X509FindType[] oidTypes =
-                {
-                    X509FindType.FindByApplicationPolicy,
-                };
+                X509FindType[] oidTypes = { X509FindType.FindByApplicationPolicy };
 
                 string[] invalidOids =
                 {
@@ -1083,13 +1223,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     "1.2.",
                 };
 
-                List<object[]> combinations = new List<object[]>(oidTypes.Length * invalidOids.Length);
+                List<object[]> combinations = new List<object[]>(
+                    oidTypes.Length * invalidOids.Length
+                );
 
                 for (int findTypeIndex = 0; findTypeIndex < oidTypes.Length; findTypeIndex++)
                 {
                     for (int oidIndex = 0; oidIndex < invalidOids.Length; oidIndex++)
                     {
-                        combinations.Add(new object[] { oidTypes[findTypeIndex], invalidOids[oidIndex] });
+                        combinations.Add(
+                            new object[] { oidTypes[findTypeIndex], invalidOids[oidIndex] }
+                        );
                     }
                 }
 

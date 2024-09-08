@@ -13,7 +13,11 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.WebTransport;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.WebTransport;
 
-internal sealed class WebTransportStream : ConnectionContext, IStreamDirectionFeature, IStreamIdFeature, IConnectionItemsFeature
+internal sealed class WebTransportStream
+    : ConnectionContext,
+        IStreamDirectionFeature,
+        IStreamIdFeature,
+        IConnectionItemsFeature
 {
     private readonly CancellationTokenRegistration _connectionClosedRegistration;
     private readonly bool _canWrite;
@@ -25,9 +29,17 @@ internal sealed class WebTransportStream : ConnectionContext, IStreamDirectionFe
     private IDictionary<object, object?>? _items;
     private bool _isClosed;
 
-    public override string ConnectionId { get => _streamId.ToString(NumberFormatInfo.InvariantInfo); set => throw new NotSupportedException(); }
+    public override string ConnectionId
+    {
+        get => _streamId.ToString(NumberFormatInfo.InvariantInfo);
+        set => throw new NotSupportedException();
+    }
 
-    public override IDuplexPipe Transport { get => _duplexPipe; set => throw new NotSupportedException(); }
+    public override IDuplexPipe Transport
+    {
+        get => _duplexPipe;
+        set => throw new NotSupportedException();
+    }
 
     public override IFeatureCollection Features => _features;
 
@@ -61,15 +73,20 @@ internal sealed class WebTransportStream : ConnectionContext, IStreamDirectionFe
 
         // will not trigger if closed only of of the directions of a stream. Stream must be fully
         // ended before this will be called. Then it will be considered an abort
-        _connectionClosedRegistration = context.StreamContext.ConnectionClosed.Register(static state =>
-        {
-            var localContext = (Http3StreamContext)state!;
-            // get the stream id here again to minimize allocations that would have been created
-            // if we pass stuff via a value tuple
-            var streamId = localContext.ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>().StreamId;
+        _connectionClosedRegistration = context.StreamContext.ConnectionClosed.Register(
+            static state =>
+            {
+                var localContext = (Http3StreamContext)state!;
+                // get the stream id here again to minimize allocations that would have been created
+                // if we pass stuff via a value tuple
+                var streamId = localContext
+                    .ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>()
+                    .StreamId;
 
-            localContext.WebTransportSession?.TryRemoveStream(streamId);
-        }, context);
+                localContext.WebTransportSession?.TryRemoveStream(streamId);
+            },
+            context
+        );
 
         ConnectionClosed = _connectionClosedRegistration.Token;
     }

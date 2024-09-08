@@ -67,18 +67,15 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 FullName = "Steve Stockholder",
                 Businesses = new List<Business>
                 {
-                    new Hotel
-                    {
-                        Name = "Hudson Hotel",
-                        Stars = 4
-                    }
-                }
+                    new Hotel { Name = "Hudson Hotel", Stars = 4 },
+                },
             };
 
-            string jsonTypeNameAll = JsonConvert.SerializeObject(stockholder, Formatting.Indented, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            });
+            string jsonTypeNameAll = JsonConvert.SerializeObject(
+                stockholder,
+                Formatting.Indented,
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }
+            );
 
             Console.WriteLine(jsonTypeNameAll);
             // {
@@ -96,10 +93,11 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   }
             // }
 
-            string jsonTypeNameAuto = JsonConvert.SerializeObject(stockholder, Formatting.Indented, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            });
+            string jsonTypeNameAuto = JsonConvert.SerializeObject(
+                stockholder,
+                Formatting.Indented,
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }
+            );
 
             Console.WriteLine(jsonTypeNameAuto);
             // {
@@ -114,10 +112,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
 
             // for security TypeNameHandling is required when deserializing
-            Stockholder newStockholder = JsonConvert.DeserializeObject<Stockholder>(jsonTypeNameAuto, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            });
+            Stockholder newStockholder = JsonConvert.DeserializeObject<Stockholder>(
+                jsonTypeNameAuto,
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto }
+            );
 
             Console.WriteLine(newStockholder.Businesses[0].GetType().Name);
             // Hotel

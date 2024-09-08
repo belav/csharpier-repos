@@ -55,53 +55,53 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.IO;
 using System.Collections;
-
+using System.IO;
 using RabbitMQ.Client;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Constructs AMQP Basic-class messages binary-compatible
     ///with QPid's "MapMessage" wire encoding.</summary>
-    public class MapMessageBuilder: BasicMessageBuilder, IMapMessageBuilder {
+    public class MapMessageBuilder : BasicMessageBuilder, IMapMessageBuilder
+    {
         ///<summary>MIME type associated with QPid MapMessages.</summary>
         public readonly static string MimeType = "jms/map-message";
 
-	protected IDictionary m_table = new Hashtable();
+        protected IDictionary m_table = new Hashtable();
 
-	///<summary>Implement IMapMessageBuilder.Body</summary>
-	public IDictionary Body {
-	    get {
-		return m_table;
-	    }
-	}
+        ///<summary>Implement IMapMessageBuilder.Body</summary>
+        public IDictionary Body
+        {
+            get { return m_table; }
+        }
 
         ///<summary>Construct an instance for writing. See superclass.</summary>
         public MapMessageBuilder(IModel model)
-            : base(model)
-        {}
+            : base(model) { }
 
         ///<summary>Construct an instance for writing. See superclass.</summary>
         public MapMessageBuilder(IModel model, int initialAccumulatorSize)
-            : base(model, initialAccumulatorSize)
-        {}
+            : base(model, initialAccumulatorSize) { }
 
         ///<summary>Override superclass method to answer our characteristic MIME type.</summary>
-        public override string GetDefaultContentType() {
+        public override string GetDefaultContentType()
+        {
             return MimeType;
         }
 
-	///<summary>Override superclass method to write Body out into
-	///the message BodyStream before retrieving the final byte
-	///array.</summary>
-	///<remarks>
-	/// Calling this message clears Body to null. Subsequent calls
-	/// will fault.
-	///</remarks>
-	public override byte[] GetContentBody() {
+        ///<summary>Override superclass method to write Body out into
+        ///the message BodyStream before retrieving the final byte
+        ///array.</summary>
+        ///<remarks>
+        /// Calling this message clears Body to null. Subsequent calls
+        /// will fault.
+        ///</remarks>
+        public override byte[] GetContentBody()
+        {
             MapWireFormatting.WriteMap(Writer, m_table);
-	    m_table = null;
-	    return base.GetContentBody();
-	}
+            m_table = null;
+            return base.GetContentBody();
+        }
     }
 }

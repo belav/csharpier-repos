@@ -7,8 +7,7 @@ public class StartupWithCookieTempDataProviderAndCookieConsent
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddMvc()
-            .AddNewtonsoftJson();
+        services.AddMvc().AddNewtonsoftJson();
 
         services.Configure<CookiePolicyOptions>(o =>
         {
@@ -31,4 +30,3 @@ public class StartupWithCookieTempDataProviderAndCookieConsent
         });
     }
 }
-

@@ -16,9 +16,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             [MarshalAs(UnmanagedType.Struct)] out object pvargDest,
             [In, MarshalAs(UnmanagedType.Struct)] ref object pvargSrc,
             ushort wFlags,
-            VarEnum vt);
+            VarEnum vt
+        );
 
-        public static bool CanChangedVariantType(object source, VarEnum variantType)
-            => ErrorHandler.Succeeded(VariantChangeType(out _, ref source, 0, variantType));
+        public static bool CanChangedVariantType(object source, VarEnum variantType) =>
+            ErrorHandler.Succeeded(VariantChangeType(out _, ref source, 0, variantType));
     }
 }

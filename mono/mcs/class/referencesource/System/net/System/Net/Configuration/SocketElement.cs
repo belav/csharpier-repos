@@ -28,31 +28,43 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            try {
+            try
+            {
                 ExceptionHelper.UnrestrictedSocketPermission.Demand();
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw new ConfigurationErrorsException(
-                              SR.GetString(SR.net_config_element_permission, 
-                                           ConfigurationStrings.Socket),
-                              exception);
+                    SR.GetString(SR.net_config_element_permission, ConfigurationStrings.Socket),
+                    exception
+                );
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AlwaysUseCompletionPortsForAccept, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AlwaysUseCompletionPortsForAccept,
+            DefaultValue = false
+        )]
         public bool AlwaysUseCompletionPortsForAccept
         {
             get { return (bool)this[this.alwaysUseCompletionPortsForAccept]; }
             set { this[this.alwaysUseCompletionPortsForAccept] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AlwaysUseCompletionPortsForConnect, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AlwaysUseCompletionPortsForConnect,
+            DefaultValue = false
+        )]
         public bool AlwaysUseCompletionPortsForConnect
         {
             get { return (bool)this[this.alwaysUseCompletionPortsForConnect]; }
             set { this[this.alwaysUseCompletionPortsForConnect] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IPProtectionLevel, DefaultValue = IPProtectionLevel.Unspecified)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IPProtectionLevel,
+            DefaultValue = IPProtectionLevel.Unspecified
+        )]
         public IPProtectionLevel IPProtectionLevel
         {
             get { return (IPProtectionLevel)this[this.ipProtectionLevel]; }
@@ -61,26 +73,32 @@ namespace System.Net.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
         readonly ConfigurationProperty alwaysUseCompletionPortsForConnect =
-            new ConfigurationProperty(ConfigurationStrings.AlwaysUseCompletionPortsForConnect, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                ConfigurationStrings.AlwaysUseCompletionPortsForConnect,
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
 
         readonly ConfigurationProperty alwaysUseCompletionPortsForAccept =
-            new ConfigurationProperty(ConfigurationStrings.AlwaysUseCompletionPortsForAccept, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                ConfigurationStrings.AlwaysUseCompletionPortsForAccept,
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
 
-        readonly ConfigurationProperty ipProtectionLevel =
-            new ConfigurationProperty(ConfigurationStrings.IPProtectionLevel, typeof(IPProtectionLevel), 
-                    IPProtectionLevel.Unspecified, ConfigurationPropertyOptions.None);
-
+        readonly ConfigurationProperty ipProtectionLevel = new ConfigurationProperty(
+            ConfigurationStrings.IPProtectionLevel,
+            typeof(IPProtectionLevel),
+            IPProtectionLevel.Unspecified,
+            ConfigurationPropertyOptions.None
+        );
     }
 }
-

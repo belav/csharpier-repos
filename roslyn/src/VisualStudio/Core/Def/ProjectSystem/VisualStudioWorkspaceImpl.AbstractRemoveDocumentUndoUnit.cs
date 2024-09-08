@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             protected AbstractRemoveDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
-                DocumentId documentId)
+                DocumentId documentId
+            )
                 : base(workspace, documentId.ProjectId)
             {
                 DocumentId = documentId;
@@ -32,8 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 var currentSolution = Workspace.CurrentSolution;
                 var fromProject = currentSolution.GetProject(FromProjectId);
 
-                if (fromProject != null &&
-                    GetDocumentIds(fromProject).Contains(DocumentId))
+                if (fromProject != null && GetDocumentIds(fromProject).Contains(DocumentId))
                 {
                     var updatedProject = fromProject.RemoveDocument(DocumentId);
                     Workspace.TryApplyChanges(updatedProject.Solution);

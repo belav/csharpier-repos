@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
     {
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelBinding.ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(
+            typeof(ModelBinding.ModelStateDictionary),
+            StatusCodes.Status400BadRequest
+        )]
         [ProducesDefaultResponseType]
         public IActionResult GetItem(int id)
         {

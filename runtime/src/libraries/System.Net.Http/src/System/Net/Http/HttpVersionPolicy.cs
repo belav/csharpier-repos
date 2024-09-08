@@ -38,6 +38,6 @@ namespace System.Net.Http
         /// <remarks>
         /// Note that this option allows to use prenegotiated clear text connection for the requested version.
         /// </remarks>
-        RequestVersionExact
+        RequestVersionExact,
     }
 }

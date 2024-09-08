@@ -20,7 +20,10 @@ namespace System.ComponentModel.Composition.Factories
             return Create(contractName, (IDictionary<string, object>)null);
         }
 
-        public static ExportDefinition Create(string contractName, IDictionary<string, object> metadata)
+        public static ExportDefinition Create(
+            string contractName,
+            IDictionary<string, object> metadata
+        )
         {
             return new DerivedExportDefinition(contractName, metadata);
         }

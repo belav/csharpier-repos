@@ -16,17 +16,30 @@ namespace System.Web.Razor.Tokenizer.Symbols
             return GetContent(span, e => e);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended type for generic delegates and requires this level of nesting")]
-        public static LocationTagged<string> GetContent(this SpanBuilder span, Func<IEnumerable<ISymbol>, IEnumerable<ISymbol>> filter)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended type for generic delegates and requires this level of nesting"
+        )]
+        public static LocationTagged<string> GetContent(
+            this SpanBuilder span,
+            Func<IEnumerable<ISymbol>, IEnumerable<ISymbol>> filter
+        )
         {
             return GetContent(filter(span.Symbols), span.Start);
         }
 
-        public static LocationTagged<string> GetContent(this IEnumerable<ISymbol> symbols, SourceLocation spanStart)
+        public static LocationTagged<string> GetContent(
+            this IEnumerable<ISymbol> symbols,
+            SourceLocation spanStart
+        )
         {
             if (symbols.Any())
             {
-                return new LocationTagged<string>(String.Concat(symbols.Select(s => s.Content)), spanStart + symbols.First().Start);
+                return new LocationTagged<string>(
+                    String.Concat(symbols.Select(s => s.Content)),
+                    spanStart + symbols.First().Start
+                );
             }
             else
             {

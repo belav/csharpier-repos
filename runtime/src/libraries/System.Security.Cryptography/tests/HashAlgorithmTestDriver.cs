@@ -10,19 +10,31 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public abstract class HashAlgorithmTestDriver<THashTrait> where THashTrait : IHashTrait
+    public abstract class HashAlgorithmTestDriver<THashTrait>
+        where THashTrait : IHashTrait
     {
         public static bool IsSupported => THashTrait.IsSupported;
         public static bool IsNotSupported => !IsSupported;
         protected abstract HashAlgorithm Create();
-        protected abstract bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten);
+        protected abstract bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        );
         protected abstract byte[] HashData(byte[] source);
         protected abstract byte[] HashData(ReadOnlySpan<byte> source);
         protected abstract int HashData(ReadOnlySpan<byte> source, Span<byte> destination);
         protected abstract int HashData(Stream source, Span<byte> destination);
         protected abstract byte[] HashData(Stream source);
-        protected abstract ValueTask<int> HashDataAsync(Stream source, Memory<byte> destination, CancellationToken cancellationToken);
-        protected abstract ValueTask<byte[]> HashDataAsync(Stream source, CancellationToken cancellationToken);
+        protected abstract ValueTask<int> HashDataAsync(
+            Stream source,
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        );
+        protected abstract ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            CancellationToken cancellationToken
+        );
         protected abstract HashAlgorithmName HashAlgorithm { get; }
 
         protected void Verify(string input, string output)
@@ -101,7 +113,10 @@ namespace System.Security.Cryptography.Tests
             AssertExtensions.SequenceEqual(expected, buffer.Slice(0, written));
         }
 
-        private async Task VerifyOneShotStreamAsync_CryptographicOperations(Stream input, string output)
+        private async Task VerifyOneShotStreamAsync_CryptographicOperations(
+            Stream input,
+            string output
+        )
         {
             byte[] expected = ByteUtils.HexToByteArray(output);
             Memory<byte> buffer = new byte[512 / 8];
@@ -110,12 +125,16 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithm,
                 input,
                 buffer,
-                cancellationToken: default);
+                cancellationToken: default
+            );
 
             AssertExtensions.SequenceEqual(expected, buffer.Slice(0, written).Span);
         }
 
-        private void VerifyOneShotAllocatingStream_CryptographicOperations(Stream input, string output)
+        private void VerifyOneShotAllocatingStream_CryptographicOperations(
+            Stream input,
+            string output
+        )
         {
             byte[] expected = ByteUtils.HexToByteArray(output);
 
@@ -123,11 +142,18 @@ namespace System.Security.Cryptography.Tests
             Assert.Equal(expected, digest);
         }
 
-        private async Task VerifyOneShotAllocatingStreamAsync_CryptographicOperations(Stream input, string output)
+        private async Task VerifyOneShotAllocatingStreamAsync_CryptographicOperations(
+            Stream input,
+            string output
+        )
         {
             byte[] expected = ByteUtils.HexToByteArray(output);
 
-            byte[] digest = await CryptographicOperations.HashDataAsync(HashAlgorithm, input, cancellationToken: default);
+            byte[] digest = await CryptographicOperations.HashDataAsync(
+                HashAlgorithm,
+                input,
+                cancellationToken: default
+            );
             Assert.Equal(expected, digest);
         }
 
@@ -152,7 +178,12 @@ namespace System.Security.Cryptography.Tests
             Assert.Equal(expected, actual);
         }
 
-        protected void VerifyMultiBlock(string block1, string block2, string expectedHash, string emptyHash)
+        protected void VerifyMultiBlock(
+            string block1,
+            string block2,
+            string expectedHash,
+            string emptyHash
+        )
         {
             byte[] block1_bytes = ByteUtils.AsciiBytes(block1);
             byte[] block2_bytes = ByteUtils.AsciiBytes(block2);
@@ -161,7 +192,12 @@ namespace System.Security.Cryptography.Tests
 
             VerifyTransformBlockOutput(block1_bytes, block2_bytes);
             VerifyTransformBlockHash(block1_bytes, block2_bytes, expected_bytes, emptyHash_bytes);
-            VerifyTransformBlockComputeHashInteraction(block1_bytes, block2_bytes, expected_bytes, emptyHash_bytes);
+            VerifyTransformBlockComputeHashInteraction(
+                block1_bytes,
+                block2_bytes,
+                expected_bytes,
+                emptyHash_bytes
+            );
         }
 
         private void VerifyTransformBlockOutput(byte[] block1, byte[] block2)
@@ -178,7 +214,12 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        private void VerifyTransformBlockHash(byte[] block1, byte[] block2, byte[] expected, byte[] expectedEmpty)
+        private void VerifyTransformBlockHash(
+            byte[] block1,
+            byte[] block2,
+            byte[] expected,
+            byte[] expectedEmpty
+        )
         {
             using (HashAlgorithm hash = Create())
             {
@@ -209,7 +250,12 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        private void VerifyTransformBlockComputeHashInteraction(byte[] block1, byte[] block2, byte[] expected, byte[] expectedEmpty)
+        private void VerifyTransformBlockComputeHashInteraction(
+            byte[] block1,
+            byte[] block2,
+            byte[] expected,
+            byte[] expectedEmpty
+        )
         {
             using (HashAlgorithm hash = Create())
             {
@@ -242,21 +288,28 @@ namespace System.Security.Cryptography.Tests
         [ConditionalFact(nameof(IsSupported))]
         public void CryptographicOperations_HashData_ByteArray_Null()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source",
-                () => CryptographicOperations.HashData(HashAlgorithm, (byte[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => CryptographicOperations.HashData(HashAlgorithm, (byte[])null)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_BufferTooSmall()
         {
-            AssertExtensions.Throws<ArgumentException>("destination", () => HashData(Span<byte>.Empty, default));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => HashData(Span<byte>.Empty, default)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void CryptographicOperations_HashData_BufferTooSmall()
         {
-            AssertExtensions.Throws<ArgumentException>("destination",
-                () => CryptographicOperations.HashData(HashAlgorithm, Span<byte>.Empty, default));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => CryptographicOperations.HashData(HashAlgorithm, Span<byte>.Empty, default)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -266,10 +319,16 @@ namespace System.Security.Cryptography.Tests
             hash.Dispose();
             Assert.Throws<ObjectDisposedException>(() => hash.Hash);
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(Array.Empty<byte>()));
-            Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(Array.Empty<byte>(), 0, 0));
+            Assert.Throws<ObjectDisposedException>(
+                () => hash.ComputeHash(Array.Empty<byte>(), 0, 0)
+            );
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash((Stream)null));
-            Assert.Throws<ObjectDisposedException>(() => hash.TransformBlock(Array.Empty<byte>(), 0, 0, null, 0));
-            Assert.Throws<ObjectDisposedException>(() => hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0));
+            Assert.Throws<ObjectDisposedException>(
+                () => hash.TransformBlock(Array.Empty<byte>(), 0, 0, null, 0)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -287,8 +346,14 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash((byte[])null));
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash(null, 0, 0));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash((byte[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash(null, 0, 0)
+                );
             }
         }
 
@@ -297,10 +362,22 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("inputBuffer", () => hash.TransformBlock(null, 0, 0, null, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () => hash.TransformBlock(Array.Empty<byte>(), -1, 0, null, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.TransformBlock(Array.Empty<byte>(), 0, 1, null, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.TransformBlock(Array.Empty<byte>(), 1, 0, null, 0));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "inputBuffer",
+                    () => hash.TransformBlock(null, 0, 0, null, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "inputOffset",
+                    () => hash.TransformBlock(Array.Empty<byte>(), -1, 0, null, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.TransformBlock(Array.Empty<byte>(), 0, 1, null, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.TransformBlock(Array.Empty<byte>(), 1, 0, null, 0)
+                );
             }
         }
 
@@ -309,11 +386,26 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("inputBuffer", () => hash.TransformFinalBlock(null, 0, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("inputOffset", () => hash.TransformFinalBlock(Array.Empty<byte>(), -1, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.TransformFinalBlock(Array.Empty<byte>(), 1, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.TransformFinalBlock(Array.Empty<byte>(), 0, -1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.TransformFinalBlock(Array.Empty<byte>(), 0, 1));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "inputBuffer",
+                    () => hash.TransformFinalBlock(null, 0, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "inputOffset",
+                    () => hash.TransformFinalBlock(Array.Empty<byte>(), -1, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.TransformFinalBlock(Array.Empty<byte>(), 1, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.TransformFinalBlock(Array.Empty<byte>(), 0, -1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.TransformFinalBlock(Array.Empty<byte>(), 0, 1)
+                );
             }
         }
 
@@ -334,7 +426,10 @@ namespace System.Security.Cryptography.Tests
             // big enough
             bool result = TryHashData(input, destination, out int bytesWritten);
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(destination.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(destination.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             //too small
             result = TryHashData(input, default, out bytesWritten);
@@ -347,23 +442,39 @@ namespace System.Security.Cryptography.Tests
             // overlapping
             result = TryHashData(inputOutput.Slice(0, input.Length), inputOutput, out bytesWritten);
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             // partial overlapping forward
             input.AsSpan().CopyTo(inputOutput);
-            result = TryHashData(inputOutput.Slice(0, input.Length), inputOutput.Slice(1), out bytesWritten);
+            result = TryHashData(
+                inputOutput.Slice(0, input.Length),
+                inputOutput.Slice(1),
+                out bytesWritten
+            );
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(inputOutput.Slice(1, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(inputOutput.Slice(1, bytesWritten)),
+                "expected equals destination"
+            );
 
             // partial overlapping backward
             input.AsSpan().CopyTo(inputOutput.Slice(1));
             result = TryHashData(inputOutput.Slice(1, input.Length), inputOutput, out bytesWritten);
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             // throwing span one-shot
             bytesWritten = HashData(input, destination);
-            Assert.True(expected.SequenceEqual(destination.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(destination.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             // byte array allocating one-shot
             byte[] allocatingArrayResult = HashData(input);
@@ -381,12 +492,25 @@ namespace System.Security.Cryptography.Tests
             ReadOnlySpan<byte> expected = expectedArray;
 
             // big enough
-            bool result = CryptographicOperations.TryHashData(HashAlgorithm, input, destination, out int bytesWritten);
+            bool result = CryptographicOperations.TryHashData(
+                HashAlgorithm,
+                input,
+                destination,
+                out int bytesWritten
+            );
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(destination.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(destination.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             //too small
-            result = CryptographicOperations.TryHashData(HashAlgorithm, input, default, out bytesWritten);
+            result = CryptographicOperations.TryHashData(
+                HashAlgorithm,
+                input,
+                default,
+                out bytesWritten
+            );
             Assert.False(result, "TryHashData false");
             Assert.Equal(0, bytesWritten);
 
@@ -398,10 +522,14 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithm,
                 inputOutput.Slice(0, input.Length),
                 inputOutput,
-                out bytesWritten);
+                out bytesWritten
+            );
 
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             // partial overlapping forward
             input.AsSpan().CopyTo(inputOutput);
@@ -409,10 +537,14 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithm,
                 inputOutput.Slice(0, input.Length),
                 inputOutput.Slice(1),
-                out bytesWritten);
+                out bytesWritten
+            );
 
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(inputOutput.Slice(1, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(inputOutput.Slice(1, bytesWritten)),
+                "expected equals destination"
+            );
 
             // partial overlapping backward
             input.AsSpan().CopyTo(inputOutput.Slice(1));
@@ -420,21 +552,31 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithm,
                 inputOutput.Slice(1, input.Length),
                 inputOutput,
-                out bytesWritten);
+                out bytesWritten
+            );
 
             Assert.True(result, "TryHashData true");
-            Assert.True(expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(inputOutput.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             // throwing span one-shot
             bytesWritten = CryptographicOperations.HashData(HashAlgorithm, input, destination);
-            Assert.True(expected.SequenceEqual(destination.Slice(0, bytesWritten)), "expected equals destination");
+            Assert.True(
+                expected.SequenceEqual(destination.Slice(0, bytesWritten)),
+                "expected equals destination"
+            );
 
             // byte array allocating one-shot
             byte[] allocatingArrayResult = CryptographicOperations.HashData(HashAlgorithm, input);
             Assert.Equal(expectedArray, allocatingArrayResult);
 
             // byte span allocating one-shot
-            byte[] allocatingSpanResult = CryptographicOperations.HashData(HashAlgorithm, new ReadOnlySpan<byte>(input));
+            byte[] allocatingSpanResult = CryptographicOperations.HashData(
+                HashAlgorithm,
+                new ReadOnlySpan<byte>(input)
+            );
             Assert.Equal(expectedArray, allocatingSpanResult);
         }
 
@@ -551,15 +693,21 @@ namespace System.Security.Cryptography.Tests
             byte[] buffer = new byte[THashTrait.HashSizeInBytes];
             Assert.Throws<PlatformNotSupportedException>(() => HashData(Array.Empty<byte>()));
             Assert.Throws<PlatformNotSupportedException>(() => HashData(ReadOnlySpan<byte>.Empty));
-            Assert.Throws<PlatformNotSupportedException>(() => HashData(ReadOnlySpan<byte>.Empty, buffer));
-            Assert.Throws<PlatformNotSupportedException>(() => TryHashData(ReadOnlySpan<byte>.Empty, buffer, out _));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => HashData(ReadOnlySpan<byte>.Empty, buffer)
+            );
+            Assert.Throws<PlatformNotSupportedException>(
+                () => TryHashData(ReadOnlySpan<byte>.Empty, buffer, out _)
+            );
 
             Assert.Throws<PlatformNotSupportedException>(() => HashData(Stream.Null));
             Assert.Throws<PlatformNotSupportedException>(() => HashData(Stream.Null, buffer));
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                await HashDataAsync(Stream.Null, default(CancellationToken)));
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                await HashDataAsync(Stream.Null, buffer, default(CancellationToken)));
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () => await HashDataAsync(Stream.Null, default(CancellationToken))
+            );
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () => await HashDataAsync(Stream.Null, buffer, default(CancellationToken))
+            );
         }
 
         [ConditionalFact(nameof(IsNotSupported))]
@@ -567,22 +715,52 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] buffer = new byte[THashTrait.HashSizeInBytes];
             Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, Array.Empty<byte>()));
+                () => CryptographicOperations.HashData(HashAlgorithm, Array.Empty<byte>())
+            );
             Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, ReadOnlySpan<byte>.Empty));
+                () => CryptographicOperations.HashData(HashAlgorithm, ReadOnlySpan<byte>.Empty)
+            );
             Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, ReadOnlySpan<byte>.Empty, buffer));
+                () =>
+                    CryptographicOperations.HashData(
+                        HashAlgorithm,
+                        ReadOnlySpan<byte>.Empty,
+                        buffer
+                    )
+            );
             Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.TryHashData(HashAlgorithm, ReadOnlySpan<byte>.Empty, buffer, out _));
+                () =>
+                    CryptographicOperations.TryHashData(
+                        HashAlgorithm,
+                        ReadOnlySpan<byte>.Empty,
+                        buffer,
+                        out _
+                    )
+            );
 
             Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null));
+                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null)
+            );
             Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null, buffer));
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                await CryptographicOperations.HashDataAsync(HashAlgorithm, Stream.Null, default(CancellationToken)));
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
-                await CryptographicOperations.HashDataAsync(HashAlgorithm, Stream.Null, buffer, default(CancellationToken)));
+                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null, buffer)
+            );
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () =>
+                    await CryptographicOperations.HashDataAsync(
+                        HashAlgorithm,
+                        Stream.Null,
+                        default(CancellationToken)
+                    )
+            );
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () =>
+                    await CryptographicOperations.HashDataAsync(
+                        HashAlgorithm,
+                        Stream.Null,
+                        buffer,
+                        default(CancellationToken)
+                    )
+            );
         }
 
         [ConditionalFact(nameof(IsNotSupported))]
@@ -595,29 +773,42 @@ namespace System.Security.Cryptography.Tests
         public void HashData_Null_Stream_Throws()
         {
             AssertExtensions.Throws<ArgumentNullException>("source", () => HashData((Stream)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => HashData((Stream)null, Span<byte>.Empty));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => HashData((Stream)null, Span<byte>.Empty)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_ShortDestination_Stream_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>("destination", () => HashData(Stream.Null, Span<byte>.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => HashData(Stream.Null, Span<byte>.Empty)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_Null_Stream_CryptographicOperations_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source",
-                () => CryptographicOperations.HashData(HashAlgorithm, (Stream)null));
-            AssertExtensions.Throws<ArgumentNullException>("source",
-                () => CryptographicOperations.HashData(HashAlgorithm, (Stream)null, Span<byte>.Empty));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => CryptographicOperations.HashData(HashAlgorithm, (Stream)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    CryptographicOperations.HashData(HashAlgorithm, (Stream)null, Span<byte>.Empty)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void HashData_ShortDestination_Stream_CryptographicOperations_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>("destination",
-                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null, Span<byte>.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null, Span<byte>.Empty)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -625,11 +816,13 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => HashDataAsync((Stream)null, cancellationToken: default));
+                () => HashDataAsync((Stream)null, cancellationToken: default)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => HashDataAsync((Stream)null, Memory<byte>.Empty, cancellationToken: default));
+                () => HashDataAsync((Stream)null, Memory<byte>.Empty, cancellationToken: default)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -637,11 +830,24 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => CryptographicOperations.HashDataAsync(HashAlgorithm, (Stream)null, cancellationToken: default));
+                () =>
+                    CryptographicOperations.HashDataAsync(
+                        HashAlgorithm,
+                        (Stream)null,
+                        cancellationToken: default
+                    )
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "source",
-                () => CryptographicOperations.HashDataAsync(HashAlgorithm, (Stream)null, Memory<byte>.Empty, cancellationToken: default));
+                () =>
+                    CryptographicOperations.HashDataAsync(
+                        HashAlgorithm,
+                        (Stream)null,
+                        Memory<byte>.Empty,
+                        cancellationToken: default
+                    )
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -649,7 +855,8 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => HashDataAsync(Stream.Null, Memory<byte>.Empty, cancellationToken: default));
+                () => HashDataAsync(Stream.Null, Memory<byte>.Empty, cancellationToken: default)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -675,7 +882,14 @@ namespace System.Security.Cryptography.Tests
         {
             AssertExtensions.Throws<ArgumentException>(
                 "destination",
-                () => CryptographicOperations.HashDataAsync(HashAlgorithm, Stream.Null, Memory<byte>.Empty, cancellationToken: default));
+                () =>
+                    CryptographicOperations.HashDataAsync(
+                        HashAlgorithm,
+                        Stream.Null,
+                        Memory<byte>.Empty,
+                        cancellationToken: default
+                    )
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -683,7 +897,12 @@ namespace System.Security.Cryptography.Tests
         {
             Memory<byte> buffer = new byte[512 / 8];
             CancellationToken cancelledToken = new CancellationToken(canceled: true);
-            ValueTask<int> waitable = CryptographicOperations.HashDataAsync(HashAlgorithm, Stream.Null, buffer, cancelledToken);
+            ValueTask<int> waitable = CryptographicOperations.HashDataAsync(
+                HashAlgorithm,
+                Stream.Null,
+                buffer,
+                cancelledToken
+            );
             Assert.True(waitable.IsCanceled, nameof(waitable.IsCanceled));
             AssertExtensions.FilledWith<byte>(0, buffer.Span);
         }
@@ -692,7 +911,11 @@ namespace System.Security.Cryptography.Tests
         public void HashDataAsync_Allocating_CryptographicOperations_CancelledToken()
         {
             CancellationToken cancelledToken = new CancellationToken(canceled: true);
-            ValueTask<byte[]> waitable = CryptographicOperations.HashDataAsync(HashAlgorithm, Stream.Null, cancelledToken);
+            ValueTask<byte[]> waitable = CryptographicOperations.HashDataAsync(
+                HashAlgorithm,
+                Stream.Null,
+                cancelledToken
+            );
             Assert.True(waitable.IsCanceled, nameof(waitable.IsCanceled));
         }
 
@@ -701,8 +924,14 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash((byte[])null));
-                AssertExtensions.Throws<ArgumentNullException>("buffer", () => hash.ComputeHash(null, 0, 0));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash((byte[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "buffer",
+                    () => hash.ComputeHash(null, 0, 0)
+                );
                 Assert.Throws<NullReferenceException>(() => hash.ComputeHash((Stream)null));
             }
         }
@@ -712,7 +941,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => hash.ComputeHash(Array.Empty<byte>(), -1, 0));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => hash.ComputeHash(Array.Empty<byte>(), -1, 0)
+                );
             }
         }
 
@@ -721,7 +953,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 0, -1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 0, -1)
+                );
             }
         }
 
@@ -730,7 +965,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 1, 0));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 1, 0)
+                );
             }
         }
 
@@ -741,10 +979,22 @@ namespace System.Security.Cryptography.Tests
 
             using (HashAlgorithm hash = Create())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => hash.ComputeHash(Array.Empty<byte>(), 0, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 0, nonEmpty.Length + 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 1, nonEmpty.Length)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(nonEmpty, 2, nonEmpty.Length - 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => hash.ComputeHash(Array.Empty<byte>(), 0, 1)
+                );
             }
         }
 
@@ -816,7 +1066,9 @@ namespace System.Security.Cryptography.Tests
             HashAlgorithm hash = Create();
             hash.Dispose();
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(new byte[1]));
-            Assert.Throws<ObjectDisposedException>(() => hash.TryComputeHash(new byte[1], new byte[1], out int bytesWritten));
+            Assert.Throws<ObjectDisposedException>(
+                () => hash.TryComputeHash(new byte[1], new byte[1], out int bytesWritten)
+            );
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -892,43 +1144,100 @@ namespace System.Security.Cryptography.Tests
             CheckArguments<ArgumentNullException>(new HashAlgorithmName(null));
             CheckArguments<ArgumentException>(new HashAlgorithmName(""));
 
-            static void CheckArguments<T>(HashAlgorithmName hashAlgorithm) where T : ArgumentException
+            static void CheckArguments<T>(HashAlgorithmName hashAlgorithm)
+                where T : ArgumentException
             {
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashData(hashAlgorithm, Array.Empty<byte>()));
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashData(hashAlgorithm, ReadOnlySpan<byte>.Empty));
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashData(hashAlgorithm, ReadOnlySpan<byte>.Empty, Span<byte>.Empty));
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.TryHashData(hashAlgorithm, ReadOnlySpan<byte>.Empty, Span<byte>.Empty, out _));
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () => CryptographicOperations.HashData(hashAlgorithm, Array.Empty<byte>())
+                );
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () => CryptographicOperations.HashData(hashAlgorithm, ReadOnlySpan<byte>.Empty)
+                );
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () =>
+                        CryptographicOperations.HashData(
+                            hashAlgorithm,
+                            ReadOnlySpan<byte>.Empty,
+                            Span<byte>.Empty
+                        )
+                );
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () =>
+                        CryptographicOperations.TryHashData(
+                            hashAlgorithm,
+                            ReadOnlySpan<byte>.Empty,
+                            Span<byte>.Empty,
+                            out _
+                        )
+                );
 
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashData(hashAlgorithm, Stream.Null));
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashData(hashAlgorithm, Stream.Null, Span<byte>.Empty));
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () => CryptographicOperations.HashData(hashAlgorithm, Stream.Null)
+                );
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () =>
+                        CryptographicOperations.HashData(
+                            hashAlgorithm,
+                            Stream.Null,
+                            Span<byte>.Empty
+                        )
+                );
 
                 // These exceptions should be thrown synchronously, so skip awaiting them.
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashDataAsync(hashAlgorithm, Stream.Null));
-                Assert.Throws<T>("hashAlgorithm", () =>
-                    CryptographicOperations.HashDataAsync(hashAlgorithm, Stream.Null, Memory<byte>.Empty));
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () => CryptographicOperations.HashDataAsync(hashAlgorithm, Stream.Null)
+                );
+                Assert.Throws<T>(
+                    "hashAlgorithm",
+                    () =>
+                        CryptographicOperations.HashDataAsync(
+                            hashAlgorithm,
+                            Stream.Null,
+                            Memory<byte>.Empty
+                        )
+                );
             }
         }
 
         [ConditionalFact(nameof(IsSupported))]
         public void CryptographicOperations_HashData_ArgValidation_UnreadableStream()
         {
-            Assert.Throws<ArgumentException>("source", () =>
-                CryptographicOperations.HashData(HashAlgorithm, UntouchableStream.Instance));
-            Assert.Throws<ArgumentException>("source", () =>
-                CryptographicOperations.HashData(HashAlgorithm, UntouchableStream.Instance, Span<byte>.Empty));
+            Assert.Throws<ArgumentException>(
+                "source",
+                () => CryptographicOperations.HashData(HashAlgorithm, UntouchableStream.Instance)
+            );
+            Assert.Throws<ArgumentException>(
+                "source",
+                () =>
+                    CryptographicOperations.HashData(
+                        HashAlgorithm,
+                        UntouchableStream.Instance,
+                        Span<byte>.Empty
+                    )
+            );
 
             // These exceptions should be thrown synchronously, so skip awaiting them.
-            Assert.Throws<ArgumentException>("source", () =>
-                CryptographicOperations.HashDataAsync(HashAlgorithm, UntouchableStream.Instance));
-            Assert.Throws<ArgumentException>("source", () =>
-                CryptographicOperations.HashDataAsync(HashAlgorithm, UntouchableStream.Instance, Memory<byte>.Empty));
+            Assert.Throws<ArgumentException>(
+                "source",
+                () =>
+                    CryptographicOperations.HashDataAsync(HashAlgorithm, UntouchableStream.Instance)
+            );
+            Assert.Throws<ArgumentException>(
+                "source",
+                () =>
+                    CryptographicOperations.HashDataAsync(
+                        HashAlgorithm,
+                        UntouchableStream.Instance,
+                        Memory<byte>.Empty
+                    )
+            );
         }
     }
 

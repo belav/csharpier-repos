@@ -11,8 +11,8 @@ using System;
 using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Common.Utils;
+using System.Data.EntityModel.SchemaObjectModel;
 using System.Reflection;
 
 namespace System.Data.EntityModel.Emitters
@@ -23,14 +23,17 @@ namespace System.Data.EntityModel.Emitters
     internal class TypeReference
     {
         #region Fields
-        internal static readonly Type ComplexTypeBaseClassType = typeof(System.Data.Objects.DataClasses.ComplexObject);
-        internal static readonly Type EntityTypeBaseClassType = typeof(System.Data.Objects.DataClasses.EntityObject);
+        internal static readonly Type ComplexTypeBaseClassType =
+            typeof(System.Data.Objects.DataClasses.ComplexObject);
+        internal static readonly Type EntityTypeBaseClassType =
+            typeof(System.Data.Objects.DataClasses.EntityObject);
         private const string IEntityWithRelationshipsTypeBaseClassName = "IEntityWithRelationships";
         private const string NewContextClassName = "ObjectContext";
         private const string EntitySetClassName = "EntitySet";
         private const string ObjectResultClassName = "ObjectResult";
 
-        public const string FQMetaDataWorkspaceTypeName = "System.Data.Metadata.Edm.MetadataWorkspace";
+        public const string FQMetaDataWorkspaceTypeName =
+            "System.Data.Metadata.Edm.MetadataWorkspace";
 
         private static CodeTypeReference _byteArray;
         private static CodeTypeReference _dateTime;
@@ -41,17 +44,32 @@ namespace System.Data.EntityModel.Emitters
         private static CodeTypeReference _timeSpan;
         private readonly Memoizer<Type, CodeTypeReference> _forTypeMemoizer;
         private readonly Memoizer<Type, CodeTypeReference> _nullableForTypeMemoizer;
-        private readonly Memoizer<KeyValuePair<string, bool>, CodeTypeReference> _fromStringMemoizer;
-        private readonly Memoizer<KeyValuePair<string, CodeTypeReference>, CodeTypeReference> _fromStringGenericMemoizer;
+        private readonly Memoizer<
+            KeyValuePair<string, bool>,
+            CodeTypeReference
+        > _fromStringMemoizer;
+        private readonly Memoizer<
+            KeyValuePair<string, CodeTypeReference>,
+            CodeTypeReference
+        > _fromStringGenericMemoizer;
         #endregion
 
         #region Constructors
         internal TypeReference()
         {
             _forTypeMemoizer = new Memoizer<Type, CodeTypeReference>(ComputeForType, null);
-            _fromStringMemoizer = new Memoizer<KeyValuePair<string, bool>, CodeTypeReference>(ComputeFromString, null);
-            _nullableForTypeMemoizer = new Memoizer<Type, CodeTypeReference>(ComputeNullableForType, null);
-            _fromStringGenericMemoizer = new Memoizer<KeyValuePair<string, CodeTypeReference>, CodeTypeReference>(ComputeFromStringGeneric, null);
+            _fromStringMemoizer = new Memoizer<KeyValuePair<string, bool>, CodeTypeReference>(
+                ComputeFromString,
+                null
+            );
+            _nullableForTypeMemoizer = new Memoizer<Type, CodeTypeReference>(
+                ComputeNullableForType,
+                null
+            );
+            _fromStringGenericMemoizer = new Memoizer<
+                KeyValuePair<string, CodeTypeReference>,
+                CodeTypeReference
+            >(ComputeFromStringGeneric, null);
         }
         #endregion
 
@@ -68,9 +86,12 @@ namespace System.Data.EntityModel.Emitters
 
         private CodeTypeReference ComputeForType(Type type)
         {
-            // we know that we can safely global:: qualify this because it was already 
+            // we know that we can safely global:: qualify this because it was already
             // compiled before we are emitting or else we wouldn't have a Type object
-            CodeTypeReference value = new CodeTypeReference(type, CodeTypeReferenceOptions.GlobalReference);
+            CodeTypeReference value = new CodeTypeReference(
+                type,
+                CodeTypeReferenceOptions.GlobalReference
+            );
             return value;
         }
 
@@ -84,16 +105,18 @@ namespace System.Data.EntityModel.Emitters
         /// <returns>the associated TypeReference object</returns>
         public CodeTypeReference ForType(Type generic, CodeTypeReference argument)
         {
-            // we know that we can safely global:: qualify this because it was already 
+            // we know that we can safely global:: qualify this because it was already
             // compiled before we are emitting or else we wouldn't have a Type object
-            CodeTypeReference typeRef = new CodeTypeReference(generic, CodeTypeReferenceOptions.GlobalReference);
+            CodeTypeReference typeRef = new CodeTypeReference(
+                generic,
+                CodeTypeReferenceOptions.GlobalReference
+            );
             typeRef.TypeArguments.Add(argument);
             return typeRef;
         }
 
-
         /// <summary>
-        /// Get TypeReference for a type represented by a namespace quailifed string 
+        /// Get TypeReference for a type represented by a namespace quailifed string
         /// </summary>
         /// <param name="type">namespace qualified string</param>
         /// <returns>the TypeReference</returns>
@@ -111,7 +134,9 @@ namespace System.Data.EntityModel.Emitters
         /// <returns>the TypeReference</returns>
         public CodeTypeReference FromString(string type, bool addGlobalQualifier)
         {
-            return _fromStringMemoizer.Evaluate(new KeyValuePair<string, bool>(type, addGlobalQualifier));
+            return _fromStringMemoizer.Evaluate(
+                new KeyValuePair<string, bool>(type, addGlobalQualifier)
+            );
         }
 
         private CodeTypeReference ComputeFromString(KeyValuePair<string, bool> arguments)
@@ -176,19 +201,30 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="name">the name of the generic framework class</param>
         /// <param name="typeParameter">the type parameter for the framework class</param>
         /// <returns>TypeReference for the bound framework class</returns>
-        public CodeTypeReference AdoFrameworkGenericClass(string name, CodeTypeReference typeParameter)
+        public CodeTypeReference AdoFrameworkGenericClass(
+            string name,
+            CodeTypeReference typeParameter
+        )
         {
             return FrameworkGenericClass(Utils.AdoFrameworkNamespace, name, typeParameter);
         }
+
         /// <summary>
         /// Get TypeReference for a bound generic framework data class
         /// </summary>
         /// <param name="name">the name of the generic framework data class</param>
         /// <param name="typeParameter">the type parameter for the framework data class</param>
         /// <returns>TypeReference for the bound framework data class</returns>
-        public CodeTypeReference AdoFrameworkGenericDataClass(string name, CodeTypeReference typeParameter)
+        public CodeTypeReference AdoFrameworkGenericDataClass(
+            string name,
+            CodeTypeReference typeParameter
+        )
         {
-            return FrameworkGenericClass(Utils.AdoFrameworkDataClassesNamespace, name, typeParameter);
+            return FrameworkGenericClass(
+                Utils.AdoFrameworkDataClassesNamespace,
+                name,
+                typeParameter
+            );
         }
 
         /// <summary>
@@ -198,16 +234,29 @@ namespace System.Data.EntityModel.Emitters
         /// <param name="name">the name of the generic framework class</param>
         /// <param name="typeParameter">the type parameter for the framework class</param>
         /// <returns>TypeReference for the bound framework class</returns>
-        private CodeTypeReference FrameworkGenericClass(string namespaceName, string name, CodeTypeReference typeParameter)
+        private CodeTypeReference FrameworkGenericClass(
+            string namespaceName,
+            string name,
+            CodeTypeReference typeParameter
+        )
         {
-            return _fromStringGenericMemoizer.Evaluate(new KeyValuePair<string, CodeTypeReference>(namespaceName + "." + name, typeParameter));
+            return _fromStringGenericMemoizer.Evaluate(
+                new KeyValuePair<string, CodeTypeReference>(
+                    namespaceName + "." + name,
+                    typeParameter
+                )
+            );
         }
 
-        private CodeTypeReference ComputeFromStringGeneric(KeyValuePair<string, CodeTypeReference> arguments)
+        private CodeTypeReference ComputeFromStringGeneric(
+            KeyValuePair<string, CodeTypeReference> arguments
+        )
         {
             string name = arguments.Key;
             CodeTypeReference typeParameter = arguments.Value;
-            CodeTypeReference typeRef = ComputeFromString(new KeyValuePair<string, bool>(name, true));
+            CodeTypeReference typeRef = ComputeFromString(
+                new KeyValuePair<string, bool>(name, true)
+            );
             typeRef.TypeArguments.Add(typeParameter);
             return typeRef;
         }
@@ -226,13 +275,16 @@ namespace System.Data.EntityModel.Emitters
         {
             // can't use FromString because it will return the same Generic type reference
             // but it will already have a previous type parameter (because of caching)
-            CodeTypeReference typeRef = new CodeTypeReference(typeof(System.Nullable<>), CodeTypeReferenceOptions.GlobalReference);
+            CodeTypeReference typeRef = new CodeTypeReference(
+                typeof(System.Nullable<>),
+                CodeTypeReferenceOptions.GlobalReference
+            );
             typeRef.TypeArguments.Add(ForType(innerType));
             return typeRef;
         }
 
         /// <summary>
-        /// Gets an ObjectResult of elementType CodeTypeReference. 
+        /// Gets an ObjectResult of elementType CodeTypeReference.
         /// </summary>
         public CodeTypeReference ObjectResult(CodeTypeReference elementType)
         {
@@ -328,22 +380,15 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         public CodeTypeReference ComplexTypeBaseClass
         {
-            get
-            {
-                return ForType(ComplexTypeBaseClassType);
-            }
+            get { return ForType(ComplexTypeBaseClassType); }
         }
-
 
         /// <summary>
         /// TypeReference for the Framework base class for EntityTypes
         /// </summary>
         public CodeTypeReference EntityTypeBaseClass
         {
-            get
-            {
-                return ForType(EntityTypeBaseClassType);
-            }
+            get { return ForType(EntityTypeBaseClassType); }
         }
 
         /// <summary>
@@ -351,10 +396,7 @@ namespace System.Data.EntityModel.Emitters
         /// </summary>
         public CodeTypeReference IEntityWithRelationshipsTypeBaseClass
         {
-            get
-            {
-                return AdoFrameworkDataClassesType(IEntityWithRelationshipsTypeBaseClassName);
-            }
+            get { return AdoFrameworkDataClassesType(IEntityWithRelationshipsTypeBaseClassName); }
         }
 
         /// <summary>
@@ -387,6 +429,5 @@ namespace System.Data.EntityModel.Emitters
             }
         }
         #endregion
-
     }
 }

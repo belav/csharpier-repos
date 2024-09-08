@@ -16,26 +16,39 @@ namespace System.Reflection.TypeLoading
         //
         // For complex custom attributes, use this overload to defer the work of constructing the argument lists until needed.
         //
-        internal RoPseudoCustomAttributeData(ConstructorInfo constructor, Func<CustomAttributeArguments> argumentsPromise)
+        internal RoPseudoCustomAttributeData(
+            ConstructorInfo constructor,
+            Func<CustomAttributeArguments> argumentsPromise
+        )
         {
             _constructor = constructor;
             _argumentsPromise = argumentsPromise;
         }
 
-        internal RoPseudoCustomAttributeData(ConstructorInfo constructor, IList<CustomAttributeTypedArgument>? fixedArguments = null, IList<CustomAttributeNamedArgument>? namedArguments = null)
+        internal RoPseudoCustomAttributeData(
+            ConstructorInfo constructor,
+            IList<CustomAttributeTypedArgument>? fixedArguments = null,
+            IList<CustomAttributeNamedArgument>? namedArguments = null
+        )
         {
             _constructor = constructor;
             _lazyFixedArguments = fixedArguments ?? Array.Empty<CustomAttributeTypedArgument>();
             _lazyNamedArguments = namedArguments ?? Array.Empty<CustomAttributeNamedArgument>();
         }
 
-        public sealed override IList<CustomAttributeTypedArgument> ConstructorArguments => GetLatchedFixedArguments().CloneForApiReturn();
-        public sealed override IList<CustomAttributeNamedArgument> NamedArguments => GetLatchedNamedArguments().CloneForApiReturn();
+        public sealed override IList<CustomAttributeTypedArgument> ConstructorArguments =>
+            GetLatchedFixedArguments().CloneForApiReturn();
+        public sealed override IList<CustomAttributeNamedArgument> NamedArguments =>
+            GetLatchedNamedArguments().CloneForApiReturn();
 
-        private IList<CustomAttributeTypedArgument> GetLatchedFixedArguments() => _lazyFixedArguments ?? LazilyComputeArguments().FixedArguments;
-        private IList<CustomAttributeNamedArgument> GetLatchedNamedArguments() => _lazyNamedArguments ?? LazilyComputeArguments().NamedArguments;
+        private IList<CustomAttributeTypedArgument> GetLatchedFixedArguments() =>
+            _lazyFixedArguments ?? LazilyComputeArguments().FixedArguments;
+
+        private IList<CustomAttributeNamedArgument> GetLatchedNamedArguments() =>
+            _lazyNamedArguments ?? LazilyComputeArguments().NamedArguments;
 
         protected sealed override Type? ComputeAttributeType() => _constructor.DeclaringType;
+
         protected sealed override ConstructorInfo ComputeConstructor() => _constructor;
 
         private CustomAttributeArguments LazilyComputeArguments()

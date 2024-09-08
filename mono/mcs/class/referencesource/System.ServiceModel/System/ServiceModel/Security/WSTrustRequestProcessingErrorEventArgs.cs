@@ -19,7 +19,7 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="requestType">The Trust Request Type that failed.</param>
         /// <param name="exception">The exception happend during this Request.</param>
-        public WSTrustRequestProcessingErrorEventArgs( string requestType, Exception exception )
+        public WSTrustRequestProcessingErrorEventArgs(string requestType, Exception exception)
         {
             _exception = exception;
             _requestType = requestType;

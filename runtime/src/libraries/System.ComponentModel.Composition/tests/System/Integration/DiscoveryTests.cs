@@ -18,16 +18,24 @@ namespace Tests.Integration
         public abstract class AbstractClassWithExports
         {
             [Export("StaticExport")]
-            public static string StaticExport { get { return "ExportedValue"; } }
+            public static string StaticExport
+            {
+                get { return "ExportedValue"; }
+            }
 
             [Export("InstanceExport")]
-            public string InstanceExport { get { return "InstanceExportedValue"; } }
+            public string InstanceExport
+            {
+                get { return "InstanceExportedValue"; }
+            }
         }
 
         [Fact]
         public void Export_StaticOnAbstractClass_ShouldExist()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(AbstractClassWithExports));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(AbstractClassWithExports)
+            );
 
             Assert.True(container.IsPresent("StaticExport"));
             Assert.False(container.IsPresent("InstanceExport"));
@@ -36,17 +44,17 @@ namespace Tests.Integration
         public class ClassWithStaticImport
         {
             [Import("StaticImport")]
-            public static string MyImport
-            {
-                get; set;
-            }
+            public static string MyImport { get; set; }
         }
 
         [Fact]
         public void Import_StaticImport_ShouldNotBeSet()
         {
             var container = ContainerFactory.Create();
-            container.AddAndComposeExportedValue("StaticImport", "String that shouldn't be imported");
+            container.AddAndComposeExportedValue(
+                "StaticImport",
+                "String that shouldn't be imported"
+            );
 
             var importer = new ClassWithStaticImport();
 
@@ -61,19 +69,21 @@ namespace Tests.Integration
             [Import("BasePrivateImport")]
             private string _basePrivateImport = null;
 
-            public string BasePrivateImport { get { return this._basePrivateImport; } }
+            public string BasePrivateImport
+            {
+                get { return this._basePrivateImport; }
+            }
         }
 
         [Export]
-        public class DerivedBaseWithNonPublicImportAndExport : BaseWithNonPublicImportAndExport
-        {
-
-        }
+        public class DerivedBaseWithNonPublicImportAndExport : BaseWithNonPublicImportAndExport { }
 
         [Fact]
         public void Import_PrivateOnClass_ShouldSetImport()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(BaseWithNonPublicImportAndExport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(BaseWithNonPublicImportAndExport)
+            );
             container.AddAndComposeExportedValue("BasePrivateImport", "Imported String");
 
             var importer = container.GetExportedValue<BaseWithNonPublicImportAndExport>();
@@ -83,7 +93,9 @@ namespace Tests.Integration
         [Fact]
         public void Import_PrivateOnBase_ShouldSetImport()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(DerivedBaseWithNonPublicImportAndExport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(DerivedBaseWithNonPublicImportAndExport)
+            );
             container.AddAndComposeExportedValue("BasePrivateImport", "Imported String");
 
             var importer = container.GetExportedValue<DerivedBaseWithNonPublicImportAndExport>();
@@ -107,7 +119,8 @@ namespace Tests.Integration
         {
             var catalog = CatalogFactory.CreateAttributed(
                 typeof(InterfaceWithImport),
-                typeof(InterfaceWithExport));
+                typeof(InterfaceWithExport)
+            );
 
             Assert.Equal(0, catalog.Parts.Count());
         }
@@ -122,13 +135,17 @@ namespace Tests.Integration
         public void Import_InheritImportFromInterface_ShouldExposeImport()
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(ClassWithInterfaceInheritedImport));
+                typeof(ClassWithInterfaceInheritedImport)
+            );
 
             container.AddAndComposeExportedValue("InterfaceImport", 42);
 
             var importer = container.GetExportedValue<ClassWithInterfaceInheritedImport>();
 
-            Assert.True(importer.MyImport == default(int), "Imports declared on interfaces should not be discovered");
+            Assert.True(
+                importer.MyImport == default(int),
+                "Imports declared on interfaces should not be discovered"
+            );
         }
 
         public class ClassWithInterfaceInheritedExport : InterfaceWithExport
@@ -145,9 +162,13 @@ namespace Tests.Integration
         public void Import_InheritExportFromInterface_ShouldNotExposeExport()
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(ClassWithInterfaceInheritedExport));
+                typeof(ClassWithInterfaceInheritedExport)
+            );
 
-            Assert.False(container.IsPresent("InterfaceExport"), "Export defined on interface should not be discovered!");
+            Assert.False(
+                container.IsPresent("InterfaceExport"),
+                "Export defined on interface should not be discovered!"
+            );
         }
 
         public interface IFoo { }
@@ -171,7 +192,8 @@ namespace Tests.Integration
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(BaseWithVirtualExport),
-                typeof(DerivedWithOverrideExport));
+                typeof(DerivedWithOverrideExport)
+            );
 
             var exports1 = container.GetExportedValues<BaseWithVirtualExport>();
             Assert.Equal(1, exports1.Count());
@@ -184,22 +206,19 @@ namespace Tests.Integration
 
         [Export(typeof(IDocument))]
         [ExportMetadata("Name", "TextDocument")]
-        public class TextDocument : IDocument
-        {
-        }
+        public class TextDocument : IDocument { }
 
         [Export(typeof(IDocument))]
         [ExportMetadata("Name", "XmlDocument")]
-        public class XmlDocument : TextDocument
-        {
-        }
+        public class XmlDocument : TextDocument { }
 
         [Fact]
         public void Export_ExportingSameContractInDerived_ShouldResultInHidingBaseExport()
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(IDocument),
-                typeof(XmlDocument));
+                typeof(XmlDocument)
+            );
 
             var export = container.GetExport<IDocument, IDictionary<string, object>>();
 
@@ -212,7 +231,8 @@ namespace Tests.Integration
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(IDocument),
                 typeof(TextDocument),
-                typeof(XmlDocument));
+                typeof(XmlDocument)
+            );
 
             var exports = container.GetExports<IDocument, IDictionary<string, object>>();
 
@@ -229,15 +249,12 @@ namespace Tests.Integration
         [Export(typeof(IDocument))]
         [Export(typeof(IObjectSerializer))]
         [ExportMetadata("Name", "XamlDocument")]
-        public class XamlDocument : XmlDocument, IObjectSerializer
-        {
-        }
+        public class XamlDocument : XmlDocument, IObjectSerializer { }
 
         [Fact]
         public void Export_ExportingSameContractInDerivedAndNewContract_ShouldResultInHidingBaseAndExportingNewContract()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(XamlDocument));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(XamlDocument));
 
             var export = container.GetExport<IDocument, IDictionary<string, object>>();
 
@@ -250,15 +267,12 @@ namespace Tests.Integration
 
         [Export(typeof(IDocument))]
         [ExportMetadata("Name", "WPFDocument")]
-        public class WPFDocument : XamlDocument
-        {
-        }
+        public class WPFDocument : XamlDocument { }
 
         [Fact]
         public void Export_ExportingSameContractInDerivedAndAnotherContractInBase_ShouldResultInHidingOneBaseAndInheritingNewContract()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(WPFDocument));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(WPFDocument));
 
             var export = container.GetExport<IDocument, IDictionary<string, object>>();
 
@@ -279,10 +293,7 @@ namespace Tests.Integration
 
             public virtual int Version
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
         }
 
@@ -297,15 +308,12 @@ namespace Tests.Integration
             Assert.Equal(version, plugin.Version);
         }
 
-        public class Plugin1 : Plugin
-        {
-        }
+        public class Plugin1 : Plugin { }
 
         [Fact]
         public void Export_Plugin1()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(Plugin1));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Plugin1));
 
             VerifyValidPlugin(container, 0, "NoWhere");
         }
@@ -316,20 +324,17 @@ namespace Tests.Integration
             {
                 return "SomeWhere";
             }
+
             public override int Version
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
         }
 
         [Fact]
         public void Export_Plugin2()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(Plugin2));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Plugin2));
 
             VerifyValidPlugin(container, 1, "SomeWhere");
         }
@@ -345,18 +350,14 @@ namespace Tests.Integration
             [Export("PluginVersion")]
             public override int Version
             {
-                get
-                {
-                    return 3;
-                }
+                get { return 3; }
             }
         }
 
         [Fact]
         public void Export_Plugin3()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(Plugin3));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Plugin3));
 
             VerifyValidPlugin(container, 3, "SomeWhere3");
 
@@ -377,18 +378,14 @@ namespace Tests.Integration
 
             public override int Version
             {
-                get
-                {
-                    return 4;
-                }
+                get { return 4; }
             }
         }
 
         [Fact]
         public void Export_Plugin4()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(Plugin4));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Plugin4));
 
             VerifyValidPlugin(container, 4, "SomeWhere4");
         }
@@ -401,14 +398,16 @@ namespace Tests.Integration
         public class MyPlugin : IPlugin
         {
             [Export("PluginId")]
-            public int Id { get { return 0; } }
+            public int Id
+            {
+                get { return 0; }
+            }
         }
 
         [Fact]
         public void Export_MyPlugin()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MyPlugin));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MyPlugin));
 
             var export = container.GetExportedValue<int>("PluginId");
         }
@@ -430,7 +429,10 @@ namespace Tests.Integration
         public class MyToolbarPlugin : IToolbarPlugin
         {
             [Export("ApplicationPluginNames")]
-            public string Name { get { return "MyToolbarPlugin"; } }
+            public string Name
+            {
+                get { return "MyToolbarPlugin"; }
+            }
 
             [Import("Application")]
             public object Application { get; set; }
@@ -442,8 +444,7 @@ namespace Tests.Integration
         [Fact]
         public void TestInterfaces()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(
-                typeof(MyToolbarPlugin));
+            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(MyToolbarPlugin));
 
             var app = new object();
             container.AddAndComposeExportedValue<object>("Application", app);
@@ -469,10 +470,7 @@ namespace Tests.Integration
             [Import("VirtualImport")]
             public virtual int VirtualImport
             {
-                get
-                {
-                    return this._value;
-                }
+                get { return this._value; }
                 set
                 {
                     this._value = value;
@@ -486,14 +484,8 @@ namespace Tests.Integration
             [Import("VirtualImport")]
             public override int VirtualImport
             {
-                get
-                {
-                    return base.VirtualImport;
-                }
-                set
-                {
-                    base.VirtualImport = value;
-                }
+                get { return base.VirtualImport; }
+                set { base.VirtualImport = value; }
             }
         }
 
@@ -521,10 +513,7 @@ namespace Tests.Integration
             [Import("OverriddenImport")]
             public override int VirtualImport
             {
-                set
-                {
-                    base.VirtualImport = value;
-                }
+                set { base.VirtualImport = value; }
             }
         }
 
@@ -554,20 +543,17 @@ namespace Tests.Integration
         [InheritedExport]
         public interface IOrderScreen { }
 
-        public class NorthwindOrderScreen : IOrderScreen
-        {
-        }
+        public class NorthwindOrderScreen : IOrderScreen { }
 
-        public class SouthsandOrderScreen : IOrderScreen
-        {
-        }
+        public class SouthsandOrderScreen : IOrderScreen { }
 
         [Fact]
         public void Export_ExportOnlyOnBaseInterfacewithInheritedMarked_ShouldFindAllImplementers()
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(NorthwindOrderScreen),
-                typeof(SouthsandOrderScreen));
+                typeof(SouthsandOrderScreen)
+            );
 
             var exports = container.GetExportedValues<IOrderScreen>();
 
@@ -588,11 +574,15 @@ namespace Tests.Integration
         [Fact]
         public void StaticConstructor()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(PartWithStaticConstructor));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(PartWithStaticConstructor)
+            );
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue,
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotGetExportedValue,
                 ErrorId.ImportEngine_PartCannotActivate,
-                () => container.GetExportedValue<PartWithStaticConstructor>());
+                () => container.GetExportedValue<PartWithStaticConstructor>()
+            );
         }
 
         public interface IAddin
@@ -617,59 +607,63 @@ namespace Tests.Integration
                 this._id = id;
             }
 
-            public string Name { get { return this._name; } }
-            public string Version { get { return this._version; } }
-            public string Id { get { return this._id; } }
+            public string Name
+            {
+                get { return this._name; }
+            }
+            public string Version
+            {
+                get { return this._version; }
+            }
+            public string Id
+            {
+                get { return this._id; }
+            }
         }
 
         [Addin("Addin1", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101C}")]
         public class Addin1 : IAddin
         {
-            public void LoadAddin(object application)
-            {
-            }
-            public void Shutdown()
-            {
-            }
+            public void LoadAddin(object application) { }
+
+            public void Shutdown() { }
         }
 
         [Addin("Addin2", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101D}")]
         public class Addin2 : IAddin
         {
-            public void LoadAddin(object application)
-            {
-            }
-            public void Shutdown()
-            {
-            }
+            public void LoadAddin(object application) { }
+
+            public void Shutdown() { }
         }
 
         [Addin("Addin3", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101E}")]
         public class Addin3 : IAddin
         {
-            public void LoadAddin(object application)
-            {
-            }
-            public void Shutdown()
-            {
-            }
+            public void LoadAddin(object application) { }
+
+            public void Shutdown() { }
         }
 
         [Fact]
         public void DiscoverAddinsWithCombinedCustomExportAndMetadataAttribute()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(Addin1), typeof(Addin2), typeof(Addin3));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(Addin1),
+                typeof(Addin2),
+                typeof(Addin3)
+            );
 
             var addins = container.GetExports<IAddin, ITrans_AddinMetadata>().ToArray();
 
             Assert.Equal(3, addins.Length);
 
             var values = new AddinAttribute[]
-                {
-                    new AddinAttribute("Addin1", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101C}"),
-                    new AddinAttribute("Addin2", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101D}"),
-                    new AddinAttribute("Addin3", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101E}"),
-                };
+            {
+                new AddinAttribute("Addin1", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101C}"),
+                new AddinAttribute("Addin2", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101D}"),
+                new AddinAttribute("Addin3", "1.0", "{63D1B00F-AD2F-4F14-8A36-FFA59E4A101E}"),
+            };
 
             for (int i = 0; i < values.Length; i++)
             {
@@ -689,15 +683,16 @@ namespace Tests.Integration
 
             Assert.Equal(4, addin.Metadata.Count); // 3 metadata values and type identity
 
-            Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(IAddin)), addin.Metadata[CompositionConstants.ExportTypeIdentityMetadataName]);
+            Assert.Equal(
+                AttributedModelServices.GetTypeIdentity(typeof(IAddin)),
+                addin.Metadata[CompositionConstants.ExportTypeIdentityMetadataName]
+            );
             Assert.Equal("Addin1", addin.Metadata["Name"]);
             Assert.Equal("1.0", addin.Metadata["Version"]);
             Assert.Equal("{63D1B00F-AD2F-4F14-8A36-FFA59E4A101C}", addin.Metadata["Id"]);
         }
 
-        public class CustomInheritedExportAttribute : InheritedExportAttribute
-        {
-        }
+        public class CustomInheritedExportAttribute : InheritedExportAttribute { }
 
         [CustomInheritedExport]
         public interface IUsesCustomInheritedExport
@@ -716,7 +711,9 @@ namespace Tests.Integration
         [Fact]
         public void Test_CustomInheritedExportAttribute_OnInterface()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(UsesCustomInheritedExportOnInterface));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(UsesCustomInheritedExportOnInterface)
+            );
             var exporter = container.GetExportedValue<IUsesCustomInheritedExport>();
             Assert.Equal(42, exporter.Property);
         }
@@ -738,7 +735,9 @@ namespace Tests.Integration
         [Fact]
         public void Test_CustomInheritedExportAttribute_OnBaseClass()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(DerivedFromBaseWithCustomInheritedExport));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(DerivedFromBaseWithCustomInheritedExport)
+            );
             var exporter = container.GetExportedValue<BaseClassWithCustomInheritedExport>();
             Assert.Equal(43, exporter.Property);
         }
@@ -753,9 +752,7 @@ namespace Tests.Integration
 
         [InheritedExport("Foo")]
         [ExportMetadata("Name", "FooWithOneFoo")]
-        public class FooWithOneFoo : IFoo1
-        {
-        }
+        public class FooWithOneFoo : IFoo1 { }
 
         [Fact]
         public void InheritedExport_OnTypeAndInterface()
@@ -780,7 +777,10 @@ namespace Tests.Integration
 
             Assert.Equal(2, foos.Length);
 
-            Assert.Equal(new string[] { "IFoo1", "IFoo2" }, foos.Select(e => (string)e.Metadata["Name"]));
+            Assert.Equal(
+                new string[] { "IFoo1", "IFoo2" },
+                foos.Select(e => (string)e.Metadata["Name"])
+            );
         }
 
         public class FooWithIfaceByOneFoo : FooWithOneFoo, IFoo1 { }
@@ -788,7 +788,9 @@ namespace Tests.Integration
         [Fact]
         public void InheritedExport_BaseAndInterface()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(FooWithIfaceByOneFoo));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(FooWithIfaceByOneFoo)
+            );
 
             var foos = container.GetExports<object, IDictionary<string, object>>("Foo").ToArray();
 
@@ -804,7 +806,9 @@ namespace Tests.Integration
         [Fact]
         public void InheritedExport_BaseInterfaceAndSelf()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(FooWithInheritedOnSelf));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(FooWithInheritedOnSelf)
+            );
 
             var foos = container.GetExports<object, IDictionary<string, object>>("Foo").ToArray();
 
@@ -823,12 +827,17 @@ namespace Tests.Integration
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void InheritedExport_InterfaceHierarchy()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(FooWithInterfaceWithMultipleFoos));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(FooWithInterfaceWithMultipleFoos)
+            );
 
             var foos = container.GetExports<object, IDictionary<string, object>>("Foo").ToArray();
             Assert.Equal(2, foos.Length);
 
-            Assert.Equal(new string[] { "IFoo1", "IFoo3" }, foos.Select(e => (string)e.Metadata["Name"]));
+            Assert.Equal(
+                new string[] { "IFoo1", "IFoo3" },
+                foos.Select(e => (string)e.Metadata["Name"])
+            );
         }
 
         [InheritedExport("Foo2")]
@@ -838,7 +847,9 @@ namespace Tests.Integration
         [Fact]
         public void InheritedExport_MultipleDifferentContracts()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(FooWithMultipleInheritedExports));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(FooWithMultipleInheritedExports)
+            );
 
             var foos = container.GetExports<object, IDictionary<string, object>>("Foo").ToArray();
 

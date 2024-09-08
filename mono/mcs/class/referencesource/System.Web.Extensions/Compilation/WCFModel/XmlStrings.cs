@@ -24,7 +24,12 @@ namespace Microsoft.VSDesigner.WCFModel
         internal class DISCO
         {
             internal const string Prefix = "disco";
-            internal const string NamespaceUri = System.Web.Services.Discovery.DiscoveryDocument.Namespace;
+            internal const string NamespaceUri = System
+                .Web
+                .Services
+                .Discovery
+                .DiscoveryDocument
+                .Namespace;
 
             internal class Elements
             {
@@ -39,7 +44,12 @@ namespace Microsoft.VSDesigner.WCFModel
         internal class WSDL
         {
             internal const string Prefix = "wsdl";
-            internal const string NamespaceUri = System.Web.Services.Description.ServiceDescription.Namespace;
+            internal const string NamespaceUri = System
+                .Web
+                .Services
+                .Description
+                .ServiceDescription
+                .Namespace;
 
             internal class Elements
             {
@@ -95,7 +105,8 @@ namespace Microsoft.VSDesigner.WCFModel
         internal class WsdlContractInheritance
         {
             internal const string Prefix = "wsdl-ex";
-            internal const string NamespaceUri = "http://schemas.microsoft.com/ws/2005/01/WSDL/Extensions/ContractInheritance";
+            internal const string NamespaceUri =
+                "http://schemas.microsoft.com/ws/2005/01/WSDL/Extensions/ContractInheritance";
         }
 
         /// <summary>
@@ -128,7 +139,8 @@ namespace Microsoft.VSDesigner.WCFModel
         internal class Wsu
         {
             internal const string Prefix = "wsu";
-            internal const string NamespaceUri = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+            internal const string NamespaceUri =
+                "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
 
             internal class Attributes
             {
@@ -150,6 +162,7 @@ namespace Microsoft.VSDesigner.WCFModel
             {
                 internal const string PolicyURIs = "PolicyURIs";
             }
+
             internal class Elements
             {
                 internal const string PolicyReference = "PolicyReference";
@@ -170,5 +183,3 @@ namespace Microsoft.VSDesigner.WCFModel
         }
     }
 }
-
-

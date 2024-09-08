@@ -21,82 +21,98 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicEndConstruct(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicEndConstruct))
-        {
-        }
+            : base(instanceFactory, nameof(BasicEndConstruct)) { }
 
         [WpfFact]
         public void EndConstruct()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class Program
     Sub Main()
         If True Then $$
     End Sub
-End Class");
+End Class"
+            );
             // Send a space to convert virtual whitespace into real whitespace
             VisualStudio.Editor.SendKeys(VirtualKey.Enter, " ");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class Program
     Sub Main()
         If True Then
              $$
         End If
     End Sub
-End Class", assertCaretPosition: true);
+End Class",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void IntelliSenseCompletedWhile()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class Program
     Sub Main()
         $$
     End Sub
-End Class");
+End Class"
+            );
             // Send a space to convert virtual whitespace into real whitespace
             VisualStudio.Editor.SendKeys("While True", VirtualKey.Enter, " ");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class Program
     Sub Main()
         While True
              $$
         End While
     End Sub
-End Class", assertCaretPosition: true);
+End Class",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void InterfaceToClassFixup()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Interface$$ C
-End Interface");
+End Interface"
+            );
 
             VisualStudio.Editor.SendKeys(new KeyPress(VirtualKey.Backspace, ShiftState.Ctrl));
             VisualStudio.Editor.SendKeys("Class", VirtualKey.Tab);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class C
-End Class");
+End Class"
+            );
         }
 
         [WpfFact]
         public void CaseInsensitiveSubToFunction()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class C
     Public Sub$$ Goo()
     End Sub
-End Class");
+End Class"
+            );
 
             VisualStudio.Editor.SendKeys(new KeyPress(VirtualKey.Backspace, ShiftState.Ctrl));
             VisualStudio.Editor.SendKeys("fu", VirtualKey.Tab);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Class C
     Public Function Goo()
     End Function
-End Class");
+End Class"
+            );
         }
     }
 }

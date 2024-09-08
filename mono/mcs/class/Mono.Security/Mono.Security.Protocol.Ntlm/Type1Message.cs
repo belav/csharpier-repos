@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,107 +37,113 @@ using System;
 using System.Globalization;
 using System.Text;
 
-namespace Mono.Security.Protocol.Ntlm {
+namespace Mono.Security.Protocol.Ntlm
+{
+    public class Type1Message : MessageBase
+    {
+        private string _host;
+        private string _domain;
 
-	public class Type1Message : MessageBase {
+        public Type1Message()
+            : base(1)
+        {
+            // default values
+            _domain = Environment.UserDomainName;
+            _host = Environment.MachineName;
+            Flags = (NtlmFlags)0xb207;
+        }
 
-		private string _host;
-		private string _domain;
+        public Type1Message(byte[] message)
+            : base(1)
+        {
+            Decode(message);
+        }
 
-		public Type1Message () : base (1)
-		{
-			// default values
-			_domain = Environment.UserDomainName;
-			_host = Environment.MachineName;
-			Flags = (NtlmFlags) 0xb207;
-		}
+        // properties
 
-		public Type1Message (byte[] message) : base (1)
-		{
-			Decode (message);
-		}
+        public string Domain
+        {
+            get { return _domain; }
+            set
+            {
+                if (value == null)
+                    value = "";
+                if (value == "")
+                    Flags &= ~NtlmFlags.NegotiateDomainSupplied;
+                else
+                    Flags |= NtlmFlags.NegotiateDomainSupplied;
 
-		// properties
+                _domain = value;
+            }
+        }
 
-		public string Domain {
-			get { return _domain; }
-			set {
-				if (value == null)
-					value = "";
-				if (value == "")
-					Flags &= ~NtlmFlags.NegotiateDomainSupplied;
-				else
-					Flags |= NtlmFlags.NegotiateDomainSupplied;
+        public string Host
+        {
+            get { return _host; }
+            set
+            {
+                if (value == null)
+                    value = "";
+                if (value == "")
+                    Flags &= ~NtlmFlags.NegotiateWorkstationSupplied;
+                else
+                    Flags |= NtlmFlags.NegotiateWorkstationSupplied;
 
-				_domain = value;
-			}
-		}
+                _host = value;
+            }
+        }
 
-		public string Host {
-			get { return _host; }
-			set {
-				if (value == null)
-					value = "";
-				if (value == "")
-					Flags &= ~NtlmFlags.NegotiateWorkstationSupplied;
-				else
-					Flags |= NtlmFlags.NegotiateWorkstationSupplied;
+        // methods
 
-				_host = value;
-			}
-		}
+        protected override void Decode(byte[] message)
+        {
+            base.Decode(message);
 
-		// methods
+            Flags = (NtlmFlags)BitConverterLE.ToUInt32(message, 12);
 
-		protected override void Decode (byte[] message) 
-		{
-			base.Decode (message);
+            int dom_len = BitConverterLE.ToUInt16(message, 16);
+            int dom_off = BitConverterLE.ToUInt16(message, 20);
+            _domain = Encoding.ASCII.GetString(message, dom_off, dom_len);
 
-			Flags = (NtlmFlags) BitConverterLE.ToUInt32 (message, 12);
+            int host_len = BitConverterLE.ToUInt16(message, 24);
+            _host = Encoding.ASCII.GetString(message, 32, host_len);
+        }
 
-			int dom_len = BitConverterLE.ToUInt16 (message, 16);
-			int dom_off = BitConverterLE.ToUInt16 (message, 20);
-			_domain = Encoding.ASCII.GetString (message, dom_off, dom_len);
+        public override byte[] GetBytes()
+        {
+            short dom_len = (short)_domain.Length;
+            short host_len = (short)_host.Length;
 
-			int host_len = BitConverterLE.ToUInt16 (message, 24);
-			_host = Encoding.ASCII.GetString (message, 32, host_len);
-		}
+            byte[] data = PrepareMessage(32 + dom_len + host_len);
 
-		public override byte[] GetBytes () 
-		{
-			short dom_len = (short) _domain.Length;
-			short host_len = (short) _host.Length;
+            data[12] = (byte)Flags;
+            data[13] = (byte)((uint)Flags >> 8);
+            data[14] = (byte)((uint)Flags >> 16);
+            data[15] = (byte)((uint)Flags >> 24);
 
-			byte[] data = PrepareMessage (32 + dom_len + host_len);
+            short dom_off = (short)(32 + host_len);
 
-			data [12] = (byte) Flags;
-			data [13] = (byte)((uint)Flags >> 8);
-			data [14] = (byte)((uint)Flags >> 16);
-			data [15] = (byte)((uint)Flags >> 24);
+            data[16] = (byte)dom_len;
+            data[17] = (byte)(dom_len >> 8);
+            data[18] = data[16];
+            data[19] = data[17];
+            data[20] = (byte)dom_off;
+            data[21] = (byte)(dom_off >> 8);
 
-			short dom_off = (short)(32 + host_len);
+            data[24] = (byte)host_len;
+            data[25] = (byte)(host_len >> 8);
+            data[26] = data[24];
+            data[27] = data[25];
+            data[28] = 0x20;
+            data[29] = 0x00;
 
-			data [16] = (byte) dom_len;
-			data [17] = (byte)(dom_len >> 8);
-			data [18] = data [16];
-			data [19] = data [17];
-			data [20] = (byte) dom_off;
-			data [21] = (byte)(dom_off >> 8);
+            byte[] host = Encoding.ASCII.GetBytes(_host.ToUpper(CultureInfo.InvariantCulture));
+            Buffer.BlockCopy(host, 0, data, 32, host.Length);
 
-			data [24] = (byte) host_len;
-			data [25] = (byte)(host_len >> 8);
-			data [26] = data [24];
-			data [27] = data [25];
-			data [28] = 0x20;
-			data [29] = 0x00;
+            byte[] domain = Encoding.ASCII.GetBytes(_domain.ToUpper(CultureInfo.InvariantCulture));
+            Buffer.BlockCopy(domain, 0, data, dom_off, domain.Length);
 
-			byte[] host = Encoding.ASCII.GetBytes (_host.ToUpper (CultureInfo.InvariantCulture));
-			Buffer.BlockCopy (host, 0, data, 32, host.Length);
-
-			byte[] domain = Encoding.ASCII.GetBytes (_domain.ToUpper (CultureInfo.InvariantCulture));
-			Buffer.BlockCopy (domain, 0, data, dom_off, domain.Length);
-
-			return data;
-		}
-	}
+            return data;
+        }
+    }
 }

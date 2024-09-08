@@ -21,10 +21,16 @@ namespace System.Data.Mapping.Update.Internal
     internal class KeyManager
     {
         #region Fields
-        private readonly Dictionary<Tuple<EntityKey, string, bool>, int> _foreignKeyIdentifiers = new Dictionary<Tuple<EntityKey, string, bool>, int>();
-        private readonly Dictionary<EntityKey, EntityKey> _valueKeyToTempKey = new Dictionary<EntityKey, EntityKey>();
-        private readonly Dictionary<EntityKey, int> _keyIdentifiers = new Dictionary<EntityKey, int>();
-        private readonly List<IdentifierInfo> _identifiers = new List<IdentifierInfo>() { new IdentifierInfo() };
+        private readonly Dictionary<Tuple<EntityKey, string, bool>, int> _foreignKeyIdentifiers =
+            new Dictionary<Tuple<EntityKey, string, bool>, int>();
+        private readonly Dictionary<EntityKey, EntityKey> _valueKeyToTempKey =
+            new Dictionary<EntityKey, EntityKey>();
+        private readonly Dictionary<EntityKey, int> _keyIdentifiers =
+            new Dictionary<EntityKey, int>();
+        private readonly List<IdentifierInfo> _identifiers = new List<IdentifierInfo>()
+        {
+            new IdentifierInfo(),
+        };
         private readonly UpdateTranslator _translator;
         private const NodeColor White = 0;
         private const NodeColor Black = 1;
@@ -58,7 +64,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Indicate that the principal identifier controls the value for the dependent identifier.
         /// </summary>
-        internal void AddReferentialConstraint(IEntityStateEntry dependentStateEntry, int dependentIdentifier, int principalIdentifier)
+        internal void AddReferentialConstraint(
+            IEntityStateEntry dependentStateEntry,
+            int dependentIdentifier,
+            int principalIdentifier
+        )
         {
             IdentifierInfo dependentInfo = _identifiers[dependentIdentifier];
 
@@ -75,7 +85,10 @@ namespace System.Data.Mapping.Update.Internal
                 LinkedList<int>.Add(ref principalInfo.ReferencedBy, dependentIdentifier);
             }
 
-            LinkedList<IEntityStateEntry>.Add(ref dependentInfo.DependentStateEntries, dependentStateEntry);
+            LinkedList<IEntityStateEntry>.Add(
+                ref dependentInfo.DependentStateEntries,
+                dependentStateEntry
+            );
         }
 
         /// <summary>
@@ -84,8 +97,10 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         internal void RegisterIdentifierOwner(PropagatorResult owner)
         {
-            Debug.Assert(PropagatorResult.NullIdentifier != owner.Identifier, "invalid operation for a " +
-                "result without an identifier");
+            Debug.Assert(
+                PropagatorResult.NullIdentifier != owner.Identifier,
+                "invalid operation for a " + "result without an identifier"
+            );
 
             _identifiers[owner.Identifier].Owner = owner;
         }
@@ -103,7 +118,11 @@ namespace System.Data.Mapping.Update.Internal
         /// Gets identifier for an entity key member at the given offset (ordinal of the property
         /// in the key properties for the relevant entity set)
         /// </summary>
-        internal int GetKeyIdentifierForMemberOffset(EntityKey entityKey, int memberOffset, int keyMemberCount)
+        internal int GetKeyIdentifierForMemberOffset(
+            EntityKey entityKey,
+            int memberOffset,
+            int keyMemberCount
+        )
         {
             int result;
 
@@ -126,7 +145,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Creates identifier for a (non-key) entity member (or return existing identifier).
         /// </summary>
-        internal int GetKeyIdentifierForMember(EntityKey entityKey, string member, bool currentValues)
+        internal int GetKeyIdentifierForMember(
+            EntityKey entityKey,
+            string member,
+            bool currentValues
+        )
         {
             int result;
             var position = Tuple.Create(entityKey, member, currentValues);
@@ -148,7 +171,9 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         internal IEnumerable<IEntityStateEntry> GetDependentStateEntries(int identifier)
         {
-            return LinkedList<IEntityStateEntry>.Enumerate(_identifiers[identifier].DependentStateEntries);
+            return LinkedList<IEntityStateEntry>.Enumerate(
+                _identifiers[identifier].DependentStateEntries
+            );
         }
 
         /// <summary>
@@ -181,9 +206,20 @@ namespace System.Data.Mapping.Update.Internal
                     else
                     {
                         // subsequent results are validated for consistency with the first
-                        if (!ByValueEqualityComparer.Default.Equals(value, ownerResult.GetSimpleValue()))
+                        if (
+                            !ByValueEqualityComparer.Default.Equals(
+                                value,
+                                ownerResult.GetSimpleValue()
+                            )
+                        )
                         {
-                            throw EntityUtil.Constraint(System.Data.Entity.Strings.Update_ReferentialConstraintIntegrityViolation);
+                            throw EntityUtil.Constraint(
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .Update_ReferentialConstraintIntegrityViolation
+                            );
                         }
                     }
                 }
@@ -205,7 +241,6 @@ namespace System.Data.Mapping.Update.Internal
             return WalkGraph(identifier, (info) => info.References, true);
         }
 
-
         /// <summary>
         /// Gives all direct references of the given identifier
         /// </summary>
@@ -215,7 +250,7 @@ namespace System.Data.Mapping.Update.Internal
             foreach (int i in LinkedList<int>.Enumerate(references))
             {
                 yield return i;
-            }                
+            }
         }
 
         /// <summary>
@@ -226,7 +261,11 @@ namespace System.Data.Mapping.Update.Internal
             return WalkGraph(identifier, (info) => info.ReferencedBy, false);
         }
 
-        private IEnumerable<int> WalkGraph(int identifier, Func<IdentifierInfo, LinkedList<int>> successorFunction, bool leavesOnly)
+        private IEnumerable<int> WalkGraph(
+            int identifier,
+            Func<IdentifierInfo, LinkedList<int>> successorFunction,
+            bool leavesOnly
+        )
         {
             var stack = new Stack<int>();
             stack.Push(identifier);
@@ -330,9 +369,10 @@ namespace System.Data.Mapping.Update.Internal
             }
             else
             {
-                valueKey = keyValues.Length == 1
-                    ? new EntityKey(addedEntry.EntitySet, keyValues[0])
-                    : new EntityKey(addedEntry.EntitySet, keyValues);
+                valueKey =
+                    keyValues.Length == 1
+                        ? new EntityKey(addedEntry.EntitySet, keyValues[0])
+                        : new EntityKey(addedEntry.EntitySet, keyValues);
             }
 
             if (_valueKeyToTempKey.ContainsKey(valueKey))
@@ -348,7 +388,7 @@ namespace System.Data.Mapping.Update.Internal
 
         /// <summary>
         /// There are three states:
-        /// 
+        ///
         /// - No temp keys with the given value exists (return false, out null)
         /// - A single temp key exists with the given value (return true, out non null)
         /// - Multiple temp keys exist with the given value (return true, out null)
@@ -358,7 +398,11 @@ namespace System.Data.Mapping.Update.Internal
             return _valueKeyToTempKey.TryGetValue(valueKey, out tempKey);
         }
 
-        private void ValidateReferentialIntegrityGraphAcyclic(int node, NodeColor[] color, LinkedList<int> parent)
+        private void ValidateReferentialIntegrityGraphAcyclic(
+            int node,
+            NodeColor[] color,
+            LinkedList<int> parent
+        )
         {
             color[node] = Gray; // color the node to indicate we're visiting it
             LinkedList<int>.Add(ref parent, node);
@@ -371,27 +415,31 @@ namespace System.Data.Mapping.Update.Internal
                         ValidateReferentialIntegrityGraphAcyclic(successor, color, parent);
                         break;
                     case Gray:
+                    {
+                        // recover all affected entities from the path (keep on walking
+                        // until we hit the 'successor' again which bounds the cycle)
+                        List<IEntityStateEntry> stateEntriesInCycle = new List<IEntityStateEntry>();
+                        foreach (int identifierInCycle in LinkedList<int>.Enumerate(parent))
                         {
-                            // recover all affected entities from the path (keep on walking
-                            // until we hit the 'successor' again which bounds the cycle)
-                            List<IEntityStateEntry> stateEntriesInCycle = new List<IEntityStateEntry>();
-                            foreach (int identifierInCycle in LinkedList<int>.Enumerate(parent))
+                            PropagatorResult owner = _identifiers[identifierInCycle].Owner;
+                            if (null != owner)
                             {
-                                PropagatorResult owner = _identifiers[identifierInCycle].Owner;
-                                if (null != owner)
-                                {
-                                    stateEntriesInCycle.Add(owner.StateEntry);
-                                }
-
-                                if (identifierInCycle == successor)
-                                {
-                                    // cycle complete
-                                    break;
-                                }
+                                stateEntriesInCycle.Add(owner.StateEntry);
                             }
 
-                            throw EntityUtil.Update(Strings.Update_CircularRelationships, null, stateEntriesInCycle);
+                            if (identifierInCycle == successor)
+                            {
+                                // cycle complete
+                                break;
+                            }
                         }
+
+                        throw EntityUtil.Update(
+                            Strings.Update_CircularRelationships,
+                            null,
+                            stateEntriesInCycle
+                        );
+                    }
                     default:
                         // done
                         break;

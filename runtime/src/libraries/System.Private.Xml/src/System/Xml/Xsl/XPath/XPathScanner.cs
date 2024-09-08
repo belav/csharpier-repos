@@ -11,33 +11,33 @@ namespace System.Xml.Xsl.XPath
     // Extends XPathOperator enumeration
     internal enum LexKind
     {
-        Unknown,        // Unknown lexeme
-        Or,             // Operator 'or'
-        And,            // Operator 'and'
-        Eq,             // Operator '='
-        Ne,             // Operator '!='
-        Lt,             // Operator '<'
-        Le,             // Operator '<='
-        Gt,             // Operator '>'
-        Ge,             // Operator '>='
-        Plus,           // Operator '+'
-        Minus,          // Operator '-'
-        Multiply,       // Operator '*'
-        Divide,         // Operator 'div'
-        Modulo,         // Operator 'mod'
-        UnaryMinus,     // Not used
-        Union,          // Operator '|'
+        Unknown, // Unknown lexeme
+        Or, // Operator 'or'
+        And, // Operator 'and'
+        Eq, // Operator '='
+        Ne, // Operator '!='
+        Lt, // Operator '<'
+        Le, // Operator '<='
+        Gt, // Operator '>'
+        Ge, // Operator '>='
+        Plus, // Operator '+'
+        Minus, // Operator '-'
+        Multiply, // Operator '*'
+        Divide, // Operator 'div'
+        Modulo, // Operator 'mod'
+        UnaryMinus, // Not used
+        Union, // Operator '|'
         LastOperator = Union,
 
-        DotDot,         // '..'
-        ColonColon,     // '::'
-        SlashSlash,     // Operator '//'
-        Number,         // Number (numeric literal)
-        Axis,           // AxisName
+        DotDot, // '..'
+        ColonColon, // '::'
+        SlashSlash, // Operator '//'
+        Number, // Number (numeric literal)
+        Axis, // AxisName
 
-        Name,           // NameTest, NodeType, FunctionName, AxisName, second part of VariableReference
-        String,         // Literal (string literal)
-        Eof,            // End of the expression
+        Name, // NameTest, NodeType, FunctionName, AxisName, second part of VariableReference
+        String, // Literal (string literal)
+        Eof, // End of the expression
 
         FirstStringable = Name,
         LastNonChar = Eof,
@@ -50,10 +50,10 @@ namespace System.Xml.Xsl.XPath
         At = '@',
         Comma = ',',
 
-        Star = '*',      // NameTest
-        Slash = '/',      // Operator '/'
-        Dollar = '$',      // First part of VariableReference
-        RBrace = '}',      // Used for AVTs
+        Star = '*', // NameTest
+        Slash = '/', // Operator '/'
+        Dollar = '$', // First part of VariableReference
+        RBrace = '}', // Used for AVTs
     };
 
     internal sealed class XPathScanner
@@ -71,7 +71,8 @@ namespace System.Xml.Xsl.XPath
         private LexKind _prevKind;
         private XPathAxis _axis;
 
-        public XPathScanner(string xpathExpr) : this(xpathExpr, 0) { }
+        public XPathScanner(string xpathExpr)
+            : this(xpathExpr, 0) { }
 
         public XPathScanner(string xpathExpr, int startFrom)
         {
@@ -82,11 +83,26 @@ namespace System.Xml.Xsl.XPath
             NextLex();
         }
 
-        public string Source { get { return _xpathExpr; } }
-        public LexKind Kind { get { return _kind; } }
-        public int LexStart { get { return _lexStart; } }
-        public int LexSize { get { return _curIndex - _lexStart; } }
-        public int PrevLexEnd { get { return _prevLexEnd; } }
+        public string Source
+        {
+            get { return _xpathExpr; }
+        }
+        public LexKind Kind
+        {
+            get { return _kind; }
+        }
+        public int LexStart
+        {
+            get { return _lexStart; }
+        }
+        public int LexSize
+        {
+            get { return _curIndex - _lexStart; }
+        }
+        public int PrevLexEnd
+        {
+            get { return _prevLexEnd; }
+        }
 
         private void SetSourceIndex(int index)
         {
@@ -349,13 +365,13 @@ namespace System.Xml.Xsl.XPath
                         {
                             NextChar();
                             if (_curChar == ':')
-                            {   // "foo::" -> OperatorName, AxisName
+                            { // "foo::" -> OperatorName, AxisName
                                 NextChar();
                                 colonColon = true;
                                 SetSourceIndex(saveSourceIndex);
                             }
                             else
-                            {                // "foo:bar", "foo:*" or "foo:?"
+                            { // "foo:bar", "foo:*" or "foo:?"
                                 if (_curChar == '*')
                                 {
                                     NextChar();
@@ -373,7 +389,7 @@ namespace System.Xml.Xsl.XPath
                                     SetSourceIndex(saveSourceIndex);
                                 }
                                 else
-                                {            // "foo:?" -> OperatorName, NameTest
+                                { // "foo:?" -> OperatorName, NameTest
                                     // Return "foo" and leave ":" to be reported later as an unknown lexeme
                                     SetSourceIndex(saveSourceIndex);
                                 }
@@ -383,7 +399,7 @@ namespace System.Xml.Xsl.XPath
                         {
                             SkipSpace();
                             if (_curChar == ':')
-                            {   // "foo ::" or "foo :?"
+                            { // "foo ::" or "foo :?"
                                 NextChar();
                                 if (_curChar == ':')
                                 {
@@ -428,11 +444,20 @@ namespace System.Xml.Xsl.XPath
 
                 switch (_name)
                 {
-                    case "or": opKind = LexKind.Or; break;
-                    case "and": opKind = LexKind.And; break;
-                    case "div": opKind = LexKind.Divide; break;
-                    case "mod": opKind = LexKind.Modulo; break;
-                    default: return false;
+                    case "or":
+                        opKind = LexKind.Or;
+                        break;
+                    case "and":
+                        opKind = LexKind.And;
+                        break;
+                    case "div":
+                        opKind = LexKind.Divide;
+                        break;
+                    case "mod":
+                        opKind = LexKind.Modulo;
+                        break;
+                    default:
+                        return false;
                 }
             }
 
@@ -463,20 +488,35 @@ namespace System.Xml.Xsl.XPath
             _kind = LexKind.Axis;
             switch (_name)
             {
-                case "ancestor": return XPathAxis.Ancestor;
-                case "ancestor-or-self": return XPathAxis.AncestorOrSelf;
-                case "attribute": return XPathAxis.Attribute;
-                case "child": return XPathAxis.Child;
-                case "descendant": return XPathAxis.Descendant;
-                case "descendant-or-self": return XPathAxis.DescendantOrSelf;
-                case "following": return XPathAxis.Following;
-                case "following-sibling": return XPathAxis.FollowingSibling;
-                case "namespace": return XPathAxis.Namespace;
-                case "parent": return XPathAxis.Parent;
-                case "preceding": return XPathAxis.Preceding;
-                case "preceding-sibling": return XPathAxis.PrecedingSibling;
-                case "self": return XPathAxis.Self;
-                default: _kind = LexKind.Name; return XPathAxis.Unknown;
+                case "ancestor":
+                    return XPathAxis.Ancestor;
+                case "ancestor-or-self":
+                    return XPathAxis.AncestorOrSelf;
+                case "attribute":
+                    return XPathAxis.Attribute;
+                case "child":
+                    return XPathAxis.Child;
+                case "descendant":
+                    return XPathAxis.Descendant;
+                case "descendant-or-self":
+                    return XPathAxis.DescendantOrSelf;
+                case "following":
+                    return XPathAxis.Following;
+                case "following-sibling":
+                    return XPathAxis.FollowingSibling;
+                case "namespace":
+                    return XPathAxis.Namespace;
+                case "parent":
+                    return XPathAxis.Parent;
+                case "preceding":
+                    return XPathAxis.Preceding;
+                case "preceding-sibling":
+                    return XPathAxis.PrecedingSibling;
+                case "self":
+                    return XPathAxis.Self;
+                default:
+                    _kind = LexKind.Name;
+                    return XPathAxis.Unknown;
             }
         }
 
@@ -578,9 +618,12 @@ namespace System.Xml.Xsl.XPath
 
             switch (t)
             {
-                case LexKind.Name: return "<name>";
-                case LexKind.String: return "<string literal>";
-                case LexKind.Eof: return "<eof>";
+                case LexKind.Name:
+                    return "<name>";
+                case LexKind.String:
+                    return "<string literal>";
+                case LexKind.Eof:
+                    return "<eof>";
                 default:
                     Debug.Fail($"Unexpected LexKind: {t}");
                     return string.Empty;

@@ -16,15 +16,15 @@ namespace System.Linq.Parallel
     /// <summary>
     /// An inlined average aggregation operator and its enumerator, for decimals.
     /// </summary>
-    internal sealed class DecimalAverageAggregationOperator : InlinedAggregationOperator<decimal, Pair<decimal, long>, decimal>
+    internal sealed class DecimalAverageAggregationOperator
+        : InlinedAggregationOperator<decimal, Pair<decimal, long>, decimal>
     {
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of an average associative operator.
         //
 
-        internal DecimalAverageAggregationOperator(IEnumerable<decimal> child) : base(child)
-        {
-        }
+        internal DecimalAverageAggregationOperator(IEnumerable<decimal> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -40,7 +40,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<Pair<decimal, long>> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<Pair<decimal, long>> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Throw an error for empty results.
                 if (!enumerator.MoveNext())
@@ -71,9 +76,18 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<Pair<decimal, long>, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<decimal, TKey> source, object? sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<decimal, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new DecimalAverageAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
+            return new DecimalAverageAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -81,7 +95,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class DecimalAverageAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<Pair<decimal, long>>
+        private sealed class DecimalAverageAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<Pair<decimal, long>>
         {
             private readonly QueryOperatorEnumerator<decimal, TKey> _source; // The source data.
 
@@ -89,9 +104,12 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal DecimalAverageAggregationOperatorEnumerator(QueryOperatorEnumerator<decimal, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal DecimalAverageAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<decimal, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;
@@ -119,14 +137,12 @@ namespace System.Linq.Parallel
                     {
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
-
                         checked
                         {
                             sum += current;
                             count++;
                         }
-                    }
-                    while (source.MoveNext(ref current, ref keyUnused));
+                    } while (source.MoveNext(ref current, ref keyUnused));
 
                     currentElement = new Pair<decimal, long>(sum, count);
 

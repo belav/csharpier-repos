@@ -26,13 +26,13 @@ namespace System.Xml.Serialization
         private readonly TypeScope _typeScope;
         private readonly XmlAttributeOverrides _attributeOverrides;
         private readonly XmlAttributes _defaultAttributes = new XmlAttributes();
-        private readonly NameTable _types = new NameTable();      // xmltypename + xmlns -> Mapping
-        private readonly NameTable _nullables = new NameTable();  // xmltypename + xmlns -> NullableMapping
-        private readonly NameTable _elements = new NameTable();   // xmlelementname + xmlns -> ElementAccessor
-        private NameTable? _xsdAttributes;   // xmlattributetname + xmlns -> AttributeAccessor
-        private Hashtable? _specials;   // type -> SpecialMapping
-        private readonly Hashtable _anonymous = new Hashtable();   // type -> AnonymousMapping
-        private NameTable? _serializables;  // type name --> new SerializableMapping
+        private readonly NameTable _types = new NameTable(); // xmltypename + xmlns -> Mapping
+        private readonly NameTable _nullables = new NameTable(); // xmltypename + xmlns -> NullableMapping
+        private readonly NameTable _elements = new NameTable(); // xmlelementname + xmlns -> ElementAccessor
+        private NameTable? _xsdAttributes; // xmlattributetname + xmlns -> AttributeAccessor
+        private Hashtable? _specials; // type -> SpecialMapping
+        private readonly Hashtable _anonymous = new Hashtable(); // type -> AnonymousMapping
+        private NameTable? _serializables; // type name --> new SerializableMapping
         private StructMapping? _root;
         private readonly string _defaultNs;
         private readonly ModelScope _modelScope;
@@ -45,34 +45,34 @@ namespace System.Xml.Serialization
         {
             Text,
             Attribute,
-            Element
+            Element,
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter() : this(null, null)
-        {
-        }
+        public XmlReflectionImporter()
+            : this(null, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter(string? defaultNamespace) : this(null, defaultNamespace)
-        {
-        }
+        public XmlReflectionImporter(string? defaultNamespace)
+            : this(null, defaultNamespace) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter(XmlAttributeOverrides? attributeOverrides) : this(attributeOverrides, null)
-        {
-        }
+        public XmlReflectionImporter(XmlAttributeOverrides? attributeOverrides)
+            : this(attributeOverrides, null) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter(XmlAttributeOverrides? attributeOverrides, string? defaultNamespace)
+        public XmlReflectionImporter(
+            XmlAttributeOverrides? attributeOverrides,
+            string? defaultNamespace
+        )
         {
             _defaultNs = defaultNamespace ?? string.Empty;
             _attributeOverrides = attributeOverrides ?? new XmlAttributeOverrides();
@@ -119,11 +119,20 @@ namespace System.Xml.Serialization
             _savedArrayItemAttributes = null;
             _savedArrayNamespace = null;
 
-            TypeMapping mapping = ImportTypeMapping(_modelScope.GetTypeModel(type), _defaultNs, ImportContext.Element, string.Empty, null, limiter);
+            TypeMapping mapping = ImportTypeMapping(
+                _modelScope.GetTypeModel(type),
+                _defaultNs,
+                ImportContext.Element,
+                string.Empty,
+                null,
+                limiter
+            );
             if (mapping.IsAnonymousType && !mapping.TypeDesc!.IsSpecial)
             {
                 //XmlAnonymousInclude=Cannot include anonymous type '{0}'.
-                throw new InvalidOperationException(SR.Format(SR.XmlAnonymousInclude, type.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlAnonymousInclude, type.FullName)
+                );
             }
             _arrayNestingLevel = previousNestingLevel;
             _savedArrayItemAttributes = previousArrayItemAttributes;
@@ -161,11 +170,23 @@ namespace System.Xml.Serialization
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        public XmlTypeMapping ImportTypeMapping(Type type, XmlRootAttribute? root, string? defaultNamespace)
+        public XmlTypeMapping ImportTypeMapping(
+            Type type,
+            XmlRootAttribute? root,
+            string? defaultNamespace
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
-            XmlTypeMapping xmlMapping = new XmlTypeMapping(_typeScope, ImportElement(_modelScope.GetTypeModel(type), root, defaultNamespace, new RecursionLimiter()));
+            XmlTypeMapping xmlMapping = new XmlTypeMapping(
+                _typeScope,
+                ImportElement(
+                    _modelScope.GetTypeModel(type),
+                    root,
+                    defaultNamespace,
+                    new RecursionLimiter()
+                )
+            );
             xmlMapping.SetKeyInternal(XmlMapping.GenerateKey(type, root, defaultNamespace));
             xmlMapping.GenerateSerializer = true;
             return xmlMapping;
@@ -175,7 +196,12 @@ namespace System.Xml.Serialization
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        public XmlMembersMapping ImportMembersMapping(string? elementName, string? ns, XmlReflectionMember[] members, bool hasWrapperElement)
+        public XmlMembersMapping ImportMembersMapping(
+            string? elementName,
+            string? ns,
+            XmlReflectionMember[] members,
+            bool hasWrapperElement
+        )
         {
             return ImportMembersMapping(elementName, ns, members, hasWrapperElement, false);
         }
@@ -184,7 +210,13 @@ namespace System.Xml.Serialization
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        public XmlMembersMapping ImportMembersMapping(string? elementName, string? ns, XmlReflectionMember[] members, bool hasWrapperElement, bool rpc)
+        public XmlMembersMapping ImportMembersMapping(
+            string? elementName,
+            string? ns,
+            XmlReflectionMember[] members,
+            bool hasWrapperElement,
+            bool rpc
+        )
         {
             return ImportMembersMapping(elementName, ns, members, hasWrapperElement, rpc, false);
         }
@@ -194,9 +226,24 @@ namespace System.Xml.Serialization
         /// </devdoc>
         ///
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        public XmlMembersMapping ImportMembersMapping(string? elementName, string? ns, XmlReflectionMember[] members, bool hasWrapperElement, bool rpc, bool openModel)
+        public XmlMembersMapping ImportMembersMapping(
+            string? elementName,
+            string? ns,
+            XmlReflectionMember[] members,
+            bool hasWrapperElement,
+            bool rpc,
+            bool openModel
+        )
         {
-            return ImportMembersMapping(elementName, ns, members, hasWrapperElement, rpc, openModel, XmlMappingAccess.Read | XmlMappingAccess.Write);
+            return ImportMembersMapping(
+                elementName,
+                ns,
+                members,
+                hasWrapperElement,
+                rpc,
+                openModel,
+                XmlMappingAccess.Read | XmlMappingAccess.Write
+            );
         }
 
         /// <devdoc>
@@ -204,15 +251,32 @@ namespace System.Xml.Serialization
         /// </devdoc>
         ///
         [RequiresUnreferencedCode(XmlSerializer.TrimSerializationWarning)]
-        public XmlMembersMapping ImportMembersMapping(string? elementName, string? ns, XmlReflectionMember[] members, bool hasWrapperElement, bool rpc, bool openModel, XmlMappingAccess access)
+        public XmlMembersMapping ImportMembersMapping(
+            string? elementName,
+            string? ns,
+            XmlReflectionMember[] members,
+            bool hasWrapperElement,
+            bool rpc,
+            bool openModel,
+            XmlMappingAccess access
+        )
         {
             ElementAccessor element = new ElementAccessor();
-            element.Name = string.IsNullOrEmpty(elementName) ? elementName : XmlConvert.EncodeLocalName(elementName);
+            element.Name = string.IsNullOrEmpty(elementName)
+                ? elementName
+                : XmlConvert.EncodeLocalName(elementName);
             element.Namespace = ns;
 
-            MembersMapping membersMapping = ImportMembersMapping(members, ns, hasWrapperElement, rpc, openModel, new RecursionLimiter());
+            MembersMapping membersMapping = ImportMembersMapping(
+                members,
+                ns,
+                hasWrapperElement,
+                rpc,
+                openModel,
+                new RecursionLimiter()
+            );
             element.Mapping = membersMapping;
-            element.Form = XmlSchemaForm.Qualified;   // elements within soap:body are always qualified
+            element.Form = XmlSchemaForm.Qualified; // elements within soap:body are always qualified
             if (!rpc)
             {
                 if (hasWrapperElement)
@@ -223,7 +287,10 @@ namespace System.Xml.Serialization
                     {
                         if (mapping.Elements != null && mapping.Elements.Length > 0)
                         {
-                            mapping.Elements[0] = (ElementAccessor)ReconcileAccessor(mapping.Elements[0], _elements);
+                            mapping.Elements[0] = (ElementAccessor)ReconcileAccessor(
+                                mapping.Elements[0],
+                                _elements
+                            );
                         }
                     }
                 }
@@ -236,7 +303,8 @@ namespace System.Xml.Serialization
         private XmlAttributes GetAttributes(Type type, bool canBeSimpleType)
         {
             XmlAttributes? attrs = _attributeOverrides[type];
-            if (attrs != null) return attrs;
+            if (attrs != null)
+                return attrs;
             if (canBeSimpleType && TypeScope.IsKnownType(type))
             {
                 return _defaultAttributes;
@@ -247,12 +315,18 @@ namespace System.Xml.Serialization
         private XmlAttributes GetAttributes(MemberInfo memberInfo)
         {
             XmlAttributes? attrs = _attributeOverrides[memberInfo.DeclaringType!, memberInfo.Name];
-            if (attrs != null) return attrs;
+            if (attrs != null)
+                return attrs;
             return new XmlAttributes(memberInfo);
         }
 
         [RequiresUnreferencedCode("calls ImportTypeMapping")]
-        private ElementAccessor ImportElement(TypeModel model, XmlRootAttribute? root, string? defaultNamespace, RecursionLimiter limiter)
+        private ElementAccessor ImportElement(
+            TypeModel model,
+            XmlRootAttribute? root,
+            string? defaultNamespace,
+            RecursionLimiter limiter
+        )
         {
             XmlAttributes a = GetAttributes(model.Type, true);
 
@@ -262,16 +336,31 @@ namespace System.Xml.Serialization
             _arrayNestingLevel = -1;
             _savedArrayItemAttributes = null;
             _savedArrayNamespace = null;
-            ElementAccessor element = CreateElementAccessor(ImportTypeMapping(model, ns, ImportContext.Element, string.Empty, a, limiter), ns);
+            ElementAccessor element = CreateElementAccessor(
+                ImportTypeMapping(model, ns, ImportContext.Element, string.Empty, a, limiter),
+                ns
+            );
 
             if (root != null)
             {
                 if (root.ElementName.Length > 0)
                     element.Name = XmlConvert.EncodeLocalName(root.ElementName);
-                if (root.GetIsNullableSpecified() && !root.IsNullable && model.TypeDesc.IsOptionalValue)
+                if (
+                    root.GetIsNullableSpecified()
+                    && !root.IsNullable
+                    && model.TypeDesc.IsOptionalValue
+                )
                     //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
-                    throw new InvalidOperationException(SR.Format(SR.XmlInvalidNotNullable, model.TypeDesc.BaseTypeDesc!.FullName, "XmlRoot"));
-                element.IsNullable = root.GetIsNullableSpecified() ? root.IsNullable : model.TypeDesc.IsNullable || model.TypeDesc.IsOptionalValue;
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlInvalidNotNullable,
+                            model.TypeDesc.BaseTypeDesc!.FullName,
+                            "XmlRoot"
+                        )
+                    );
+                element.IsNullable = root.GetIsNullableSpecified()
+                    ? root.IsNullable
+                    : model.TypeDesc.IsNullable || model.TypeDesc.IsOptionalValue;
                 CheckNullable(element.IsNullable, model.TypeDesc, element.Mapping!);
             }
             else
@@ -292,7 +381,8 @@ namespace System.Xml.Serialization
 
         private ElementAccessor ReconcileLocalAccessor(ElementAccessor accessor, string? ns)
         {
-            if (accessor.Namespace == ns) return accessor;
+            if (accessor.Namespace == ns)
+                return accessor;
             return (ElementAccessor)ReconcileAccessor(accessor, _elements);
         }
 
@@ -314,32 +404,68 @@ namespace System.Xml.Serialization
 
             if (!(accessor.Mapping is MembersMapping) && !(existing.Mapping is MembersMapping))
             {
-                if (accessor.Mapping!.TypeDesc == existing.Mapping!.TypeDesc
-                    || (existing.Mapping is NullableMapping && accessor.Mapping.TypeDesc == ((NullableMapping)existing.Mapping).BaseMapping!.TypeDesc)
-                    || (accessor.Mapping is NullableMapping && ((NullableMapping)accessor.Mapping).BaseMapping!.TypeDesc == existing.Mapping.TypeDesc))
+                if (
+                    accessor.Mapping!.TypeDesc == existing.Mapping!.TypeDesc
+                    || (
+                        existing.Mapping is NullableMapping
+                        && accessor.Mapping.TypeDesc
+                            == ((NullableMapping)existing.Mapping).BaseMapping!.TypeDesc
+                    )
+                    || (
+                        accessor.Mapping is NullableMapping
+                        && ((NullableMapping)accessor.Mapping).BaseMapping!.TypeDesc
+                            == existing.Mapping.TypeDesc
+                    )
+                )
                 {
                     // need to compare default values
-                    string? value1 = Convert.ToString(accessor.Default, CultureInfo.InvariantCulture);
-                    string? value2 = Convert.ToString(existing.Default, CultureInfo.InvariantCulture);
+                    string? value1 = Convert.ToString(
+                        accessor.Default,
+                        CultureInfo.InvariantCulture
+                    );
+                    string? value2 = Convert.ToString(
+                        existing.Default,
+                        CultureInfo.InvariantCulture
+                    );
                     if (value1 == value2)
                     {
                         return existing;
                     }
-                    throw new InvalidOperationException(SR.Format(SR.XmlCannotReconcileAccessorDefault, accessor.Name, accessor.Namespace, value1, value2));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlCannotReconcileAccessorDefault,
+                            accessor.Name,
+                            accessor.Namespace,
+                            value1,
+                            value2
+                        )
+                    );
                 }
             }
 
             if (accessor.Mapping is MembersMapping || existing.Mapping is MembersMapping)
-                throw new InvalidOperationException(SR.Format(SR.XmlMethodTypeNameConflict, accessor.Name, accessor.Namespace));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlMethodTypeNameConflict, accessor.Name, accessor.Namespace)
+                );
 
             if (accessor.Mapping is ArrayMapping)
             {
                 if (!(existing.Mapping is ArrayMapping))
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlCannotReconcileAccessor, accessor.Name, accessor.Namespace, GetMappingName(existing.Mapping!), GetMappingName(accessor.Mapping)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlCannotReconcileAccessor,
+                            accessor.Name,
+                            accessor.Namespace,
+                            GetMappingName(existing.Mapping!),
+                            GetMappingName(accessor.Mapping)
+                        )
+                    );
                 }
                 ArrayMapping mapping = (ArrayMapping)accessor.Mapping;
-                ArrayMapping? existingMapping = mapping.IsAnonymousType ? null : (ArrayMapping?)_types[existing.Mapping.TypeName!, existing.Mapping.Namespace];
+                ArrayMapping? existingMapping = mapping.IsAnonymousType
+                    ? null
+                    : (ArrayMapping?)_types[existing.Mapping.TypeName!, existing.Mapping.Namespace];
                 ArrayMapping? first = existingMapping;
                 while (existingMapping != null)
                 {
@@ -353,92 +479,195 @@ namespace System.Xml.Serialization
                 return existing;
             }
             if (accessor is AttributeAccessor)
-                throw new InvalidOperationException(SR.Format(SR.XmlCannotReconcileAttributeAccessor, accessor.Name, accessor.Namespace, GetMappingName(existing.Mapping!), GetMappingName(accessor.Mapping!)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlCannotReconcileAttributeAccessor,
+                        accessor.Name,
+                        accessor.Namespace,
+                        GetMappingName(existing.Mapping!),
+                        GetMappingName(accessor.Mapping!)
+                    )
+                );
             else
-                throw new InvalidOperationException(SR.Format(SR.XmlCannotReconcileAccessor, accessor.Name, accessor.Namespace, GetMappingName(existing.Mapping!), GetMappingName(accessor.Mapping!)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlCannotReconcileAccessor,
+                        accessor.Name,
+                        accessor.Namespace,
+                        GetMappingName(existing.Mapping!),
+                        GetMappingName(accessor.Mapping!)
+                    )
+                );
         }
 
-        private static InvalidOperationException CreateReflectionException(string context, Exception e)
+        private static InvalidOperationException CreateReflectionException(
+            string context,
+            Exception e
+        )
         {
             return new InvalidOperationException(SR.Format(SR.XmlReflectionError, context), e);
         }
 
-        private static InvalidOperationException CreateTypeReflectionException(string context, Exception e)
+        private static InvalidOperationException CreateTypeReflectionException(
+            string context,
+            Exception e
+        )
         {
             return new InvalidOperationException(SR.Format(SR.XmlTypeReflectionError, context), e);
         }
 
-        private static InvalidOperationException CreateMemberReflectionException(FieldModel model, Exception e)
+        private static InvalidOperationException CreateMemberReflectionException(
+            FieldModel model,
+            Exception e
+        )
         {
-            return new InvalidOperationException(SR.Format(model.IsProperty ? SR.XmlPropertyReflectionError : SR.XmlFieldReflectionError, model.Name), e);
+            return new InvalidOperationException(
+                SR.Format(
+                    model.IsProperty ? SR.XmlPropertyReflectionError : SR.XmlFieldReflectionError,
+                    model.Name
+                ),
+                e
+            );
         }
 
         [RequiresUnreferencedCode("calls ImportTypeMapping")]
-        private TypeMapping ImportTypeMapping(TypeModel model, string? ns, ImportContext context, string dataType, XmlAttributes? a, RecursionLimiter limiter)
+        private TypeMapping ImportTypeMapping(
+            TypeModel model,
+            string? ns,
+            ImportContext context,
+            string dataType,
+            XmlAttributes? a,
+            RecursionLimiter limiter
+        )
         {
             return ImportTypeMapping(model, ns, context, dataType, a, false, false, limiter);
         }
 
         [RequiresUnreferencedCode("calls ImportEnumMapping")]
-        private TypeMapping ImportTypeMapping(TypeModel model, string? ns, ImportContext context, string dataType, XmlAttributes? a, bool repeats, bool openModel, RecursionLimiter limiter)
+        private TypeMapping ImportTypeMapping(
+            TypeModel model,
+            string? ns,
+            ImportContext context,
+            string dataType,
+            XmlAttributes? a,
+            bool repeats,
+            bool openModel,
+            RecursionLimiter limiter
+        )
         {
             try
             {
                 if (dataType.Length > 0)
                 {
-                    TypeDesc modelTypeDesc = TypeScope.IsOptionalValue(model.Type) ? model.TypeDesc.BaseTypeDesc! : model.TypeDesc;
+                    TypeDesc modelTypeDesc = TypeScope.IsOptionalValue(model.Type)
+                        ? model.TypeDesc.BaseTypeDesc!
+                        : model.TypeDesc;
                     if (!modelTypeDesc.IsPrimitive)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlInvalidDataTypeUsage, dataType, "XmlElementAttribute.DataType"));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlInvalidDataTypeUsage,
+                                dataType,
+                                "XmlElementAttribute.DataType"
+                            )
+                        );
                     }
                     TypeDesc? td = TypeScope.GetTypeDesc(dataType, XmlSchema.Namespace);
                     if (td == null)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlInvalidXsdDataType, dataType, "XmlElementAttribute.DataType", new XmlQualifiedName(dataType, XmlSchema.Namespace).ToString()));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlInvalidXsdDataType,
+                                dataType,
+                                "XmlElementAttribute.DataType",
+                                new XmlQualifiedName(dataType, XmlSchema.Namespace).ToString()
+                            )
+                        );
                     }
                     if (modelTypeDesc.FullName != td.FullName)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlDataTypeMismatch, dataType, "XmlElementAttribute.DataType", modelTypeDesc.FullName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlDataTypeMismatch,
+                                dataType,
+                                "XmlElementAttribute.DataType",
+                                modelTypeDesc.FullName
+                            )
+                        );
                     }
                 }
 
                 a ??= GetAttributes(model.Type, false);
 
                 if ((a.XmlFlags & ~(XmlAttributeFlags.Type | XmlAttributeFlags.Root)) != 0)
-                    throw new InvalidOperationException(SR.Format(SR.XmlInvalidTypeAttributes, model.Type.FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlInvalidTypeAttributes, model.Type.FullName)
+                    );
 
                 switch (model.TypeDesc.Kind)
                 {
                     case TypeKind.Enum:
                         return ImportEnumMapping((EnumModel)model, ns, repeats);
                     case TypeKind.Primitive:
-                        if (a.XmlFlags != 0) throw InvalidAttributeUseException(model.Type);
-                        return ImportPrimitiveMapping((PrimitiveModel)model, context, dataType, repeats);
+                        if (a.XmlFlags != 0)
+                            throw InvalidAttributeUseException(model.Type);
+                        return ImportPrimitiveMapping(
+                            (PrimitiveModel)model,
+                            context,
+                            dataType,
+                            repeats
+                        );
                     case TypeKind.Array:
                     case TypeKind.Collection:
                     case TypeKind.Enumerable:
                         //if (a.XmlFlags != 0) throw InvalidAttributeUseException(model.Type);
-                        if (context != ImportContext.Element) throw UnsupportedException(model.TypeDesc, context);
+                        if (context != ImportContext.Element)
+                            throw UnsupportedException(model.TypeDesc, context);
                         _arrayNestingLevel++;
-                        ArrayMapping arrayMapping = ImportArrayLikeMapping((ArrayModel)model, ns, limiter);
+                        ArrayMapping arrayMapping = ImportArrayLikeMapping(
+                            (ArrayModel)model,
+                            ns,
+                            limiter
+                        );
                         _arrayNestingLevel--;
                         return arrayMapping;
                     case TypeKind.Root:
                     case TypeKind.Class:
                     case TypeKind.Struct:
-                        if (context != ImportContext.Element) throw UnsupportedException(model.TypeDesc, context);
+                        if (context != ImportContext.Element)
+                            throw UnsupportedException(model.TypeDesc, context);
                         if (model.TypeDesc.IsOptionalValue)
                         {
-                            TypeDesc valueTypeDesc = string.IsNullOrEmpty(dataType) ? model.TypeDesc.BaseTypeDesc! : TypeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
-                            string? xsdTypeName = valueTypeDesc.DataType == null ? valueTypeDesc.Name : valueTypeDesc.DataType.Name;
+                            TypeDesc valueTypeDesc = string.IsNullOrEmpty(dataType)
+                                ? model.TypeDesc.BaseTypeDesc!
+                                : TypeScope.GetTypeDesc(dataType, XmlSchema.Namespace)!;
+                            string? xsdTypeName =
+                                valueTypeDesc.DataType == null
+                                    ? valueTypeDesc.Name
+                                    : valueTypeDesc.DataType.Name;
                             TypeMapping baseMapping =
-                                GetTypeMapping(xsdTypeName, ns, valueTypeDesc, _types, null) ??
-                                ImportTypeMapping(_modelScope.GetTypeModel(model.TypeDesc.BaseTypeDesc!.Type!), ns, context, dataType, null, repeats, openModel, limiter);
+                                GetTypeMapping(xsdTypeName, ns, valueTypeDesc, _types, null)
+                                ?? ImportTypeMapping(
+                                    _modelScope.GetTypeModel(model.TypeDesc.BaseTypeDesc!.Type!),
+                                    ns,
+                                    context,
+                                    dataType,
+                                    null,
+                                    repeats,
+                                    openModel,
+                                    limiter
+                                );
                             return CreateNullableMapping(baseMapping, model.TypeDesc.Type!);
                         }
                         else
                         {
-                            return ImportStructLikeMapping((StructModel)model, ns, openModel, a, limiter);
+                            return ImportStructLikeMapping(
+                                (StructModel)model,
+                                ns,
+                                openModel,
+                                a,
+                                limiter
+                            );
                         }
                     default:
                         if (model.TypeDesc.Kind == TypeKind.Serializable)
@@ -446,12 +675,19 @@ namespace System.Xml.Serialization
                             // We allow XmlRoot attribute on IXmlSerializable, but not others
                             if ((a.XmlFlags & ~XmlAttributeFlags.Root) != 0)
                             {
-                                throw new InvalidOperationException(SR.Format(SR.XmlSerializableAttributes, model.TypeDesc.FullName, nameof(XmlSchemaProviderAttribute)));
+                                throw new InvalidOperationException(
+                                    SR.Format(
+                                        SR.XmlSerializableAttributes,
+                                        model.TypeDesc.FullName,
+                                        nameof(XmlSchemaProviderAttribute)
+                                    )
+                                );
                             }
                         }
                         else
                         {
-                            if (a.XmlFlags != 0) throw InvalidAttributeUseException(model.Type);
+                            if (a.XmlFlags != 0)
+                                throw InvalidAttributeUseException(model.Type);
                         }
                         if (model.TypeDesc.IsSpecial)
                             return ImportSpecialMapping(model.Type, model.TypeDesc, ns, context);
@@ -468,8 +704,10 @@ namespace System.Xml.Serialization
             }
         }
 
-        internal static MethodInfo? GetMethodFromSchemaProvider(XmlSchemaProviderAttribute provider,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type)
+        internal static MethodInfo? GetMethodFromSchemaProvider(
+            XmlSchemaProviderAttribute provider,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
+        )
         {
             if (provider.IsAny)
             {
@@ -478,20 +716,51 @@ namespace System.Xml.Serialization
             }
             ArgumentNullException.ThrowIfNull(provider.MethodName, nameof(provider.MethodName));
             if (!CSharpHelpers.IsValidLanguageIndependentIdentifier(provider.MethodName))
-                throw new ArgumentException(SR.Format(SR.XmlGetSchemaMethodName, provider.MethodName), nameof(provider.MethodName));
+                throw new ArgumentException(
+                    SR.Format(SR.XmlGetSchemaMethodName, provider.MethodName),
+                    nameof(provider.MethodName)
+                );
 
-            MethodInfo? getMethod = getMethod = type.GetMethod(provider.MethodName, /* BindingFlags.DeclaredOnly | */ BindingFlags.Static | BindingFlags.Public, new Type[] { typeof(XmlSchemaSet) });
+            MethodInfo? getMethod = getMethod = type.GetMethod(
+                provider.MethodName, /* BindingFlags.DeclaredOnly | */
+                BindingFlags.Static | BindingFlags.Public,
+                new Type[] { typeof(XmlSchemaSet) }
+            );
             if (getMethod == null)
-                throw new InvalidOperationException(SR.Format(SR.XmlGetSchemaMethodMissing, provider.MethodName, nameof(XmlSchemaSet), type.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlGetSchemaMethodMissing,
+                        provider.MethodName,
+                        nameof(XmlSchemaSet),
+                        type.FullName
+                    )
+                );
 
-            if (!(typeof(XmlQualifiedName).IsAssignableFrom(getMethod.ReturnType)) && !(typeof(XmlSchemaType).IsAssignableFrom(getMethod.ReturnType)))
-                throw new InvalidOperationException(SR.Format(SR.XmlGetSchemaMethodReturnType, type.Name, provider.MethodName, nameof(XmlSchemaProviderAttribute), typeof(XmlQualifiedName).FullName, typeof(XmlSchemaType).FullName));
+            if (
+                !(typeof(XmlQualifiedName).IsAssignableFrom(getMethod.ReturnType))
+                && !(typeof(XmlSchemaType).IsAssignableFrom(getMethod.ReturnType))
+            )
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlGetSchemaMethodReturnType,
+                        type.Name,
+                        provider.MethodName,
+                        nameof(XmlSchemaProviderAttribute),
+                        typeof(XmlQualifiedName).FullName,
+                        typeof(XmlSchemaType).FullName
+                    )
+                );
 
             return getMethod;
         }
 
         [RequiresUnreferencedCode("calls IncludeTypes")]
-        private SpecialMapping ImportSpecialMapping(Type type, TypeDesc typeDesc, string? ns, ImportContext context)
+        private SpecialMapping ImportSpecialMapping(
+            Type type,
+            TypeDesc typeDesc,
+            string? ns,
+            ImportContext context
+        )
         {
             _specials ??= new Hashtable();
             SpecialMapping? mapping = (SpecialMapping?)_specials[type];
@@ -505,7 +774,10 @@ namespace System.Xml.Serialization
                 SerializableMapping? serializableMapping;
 
                 // get the schema method info
-                object[] attrs = type.GetCustomAttributes(typeof(XmlSchemaProviderAttribute), false);
+                object[] attrs = type.GetCustomAttributes(
+                    typeof(XmlSchemaProviderAttribute),
+                    false
+                );
 
                 if (attrs.Length > 0)
                 {
@@ -517,7 +789,8 @@ namespace System.Xml.Serialization
                     if (qname != null && !qname.IsEmpty)
                     {
                         _serializables ??= new NameTable();
-                        SerializableMapping? existingMapping = (SerializableMapping?)_serializables[qname];
+                        SerializableMapping? existingMapping = (SerializableMapping?)
+                            _serializables[qname];
                         if (existingMapping != null)
                         {
                             if (existingMapping.Type == null)
@@ -568,18 +841,29 @@ namespace System.Xml.Serialization
 
         internal void SetBase(SerializableMapping mapping, XmlQualifiedName baseQname)
         {
-            if (baseQname.IsEmpty) return;
-            if (baseQname.Namespace == XmlSchema.Namespace) return;
+            if (baseQname.IsEmpty)
+                return;
+            if (baseQname.Namespace == XmlSchema.Namespace)
+                return;
             XmlSchemaSet schemas = mapping.Schemas!;
             ArrayList srcSchemas = (ArrayList)schemas.Schemas(baseQname.Namespace);
 
             if (srcSchemas.Count == 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.XmlMissingSchema, baseQname.Namespace));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlMissingSchema, baseQname.Namespace)
+                );
             }
             if (srcSchemas.Count > 1)
             {
-                throw new InvalidOperationException(SR.Format(SR.XmlGetSchemaInclude, baseQname.Namespace, nameof(IXmlSerializable), "GetSchema"));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlGetSchemaInclude,
+                        baseQname.Namespace,
+                        nameof(IXmlSerializable),
+                        "GetSchema"
+                    )
+                );
             }
             XmlSchema s = (XmlSchema)srcSchemas[0]!;
 
@@ -606,12 +890,19 @@ namespace System.Xml.Serialization
 
         private static InvalidOperationException InvalidAttributeUseException(Type type)
         {
-            return new InvalidOperationException(SR.Format(SR.XmlInvalidAttributeUse, type.FullName));
+            return new InvalidOperationException(
+                SR.Format(SR.XmlInvalidAttributeUse, type.FullName)
+            );
         }
 
-        private static InvalidOperationException UnsupportedException(TypeDesc typeDesc, ImportContext context)
+        private static InvalidOperationException UnsupportedException(
+            TypeDesc typeDesc,
+            ImportContext context
+        )
         {
-            return new InvalidOperationException(SR.Format(SR.XmlIllegalTypeContext, typeDesc.FullName, GetContextName(context)));
+            return new InvalidOperationException(
+                SR.Format(SR.XmlIllegalTypeContext, typeDesc.FullName, GetContextName(context))
+            );
         }
 
         [RequiresUnreferencedCode("calls GetTypeDesc")]
@@ -627,14 +918,17 @@ namespace System.Xml.Serialization
             return mapping;
         }
 
-        private NullableMapping CreateNullableMapping(TypeMapping baseMapping,
-           [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type)
+        private NullableMapping CreateNullableMapping(
+            TypeMapping baseMapping,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+        )
         {
             TypeDesc typeDesc = baseMapping.TypeDesc!.GetNullableTypeDesc(type);
             TypeMapping? existingMapping;
             if (!baseMapping.IsAnonymousType)
             {
-                existingMapping = (TypeMapping?)_nullables[baseMapping.TypeName!, baseMapping.Namespace];
+                existingMapping = (TypeMapping?)
+                    _nullables[baseMapping.TypeName!, baseMapping.Namespace];
             }
             else
             {
@@ -655,12 +949,28 @@ namespace System.Xml.Serialization
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlTypesDuplicate, typeDesc.FullName, existingMapping.TypeDesc!.FullName, typeDesc.Name, existingMapping.Namespace));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlTypesDuplicate,
+                                typeDesc.FullName,
+                                existingMapping.TypeDesc!.FullName,
+                                typeDesc.Name,
+                                existingMapping.Namespace
+                            )
+                        );
                     }
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlTypesDuplicate, typeDesc.FullName, existingMapping.TypeDesc!.FullName, typeDesc.Name, existingMapping.Namespace));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlTypesDuplicate,
+                            typeDesc.FullName,
+                            existingMapping.TypeDesc!.FullName,
+                            typeDesc.Name,
+                            existingMapping.Namespace
+                        )
+                    );
                 }
             }
             mapping = new NullableMapping();
@@ -693,7 +1003,13 @@ namespace System.Xml.Serialization
             return _root;
         }
 
-        private TypeMapping? GetTypeMapping(string? typeName, string? ns, TypeDesc typeDesc, NameTable typeLib, Type? type)
+        private TypeMapping? GetTypeMapping(
+            string? typeName,
+            string? ns,
+            TypeDesc typeDesc,
+            NameTable typeLib,
+            Type? type
+        )
         {
             TypeMapping? mapping;
             if (string.IsNullOrEmpty(typeName))
@@ -701,16 +1017,32 @@ namespace System.Xml.Serialization
             else
                 mapping = (TypeMapping?)typeLib[typeName, ns];
 
-            if (mapping == null) return null;
+            if (mapping == null)
+                return null;
             if (!mapping.IsAnonymousType && mapping.TypeDesc != typeDesc)
-                throw new InvalidOperationException(SR.Format(SR.XmlTypesDuplicate, typeDesc.FullName, mapping.TypeDesc!.FullName, typeName, ns));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlTypesDuplicate,
+                        typeDesc.FullName,
+                        mapping.TypeDesc!.FullName,
+                        typeName,
+                        ns
+                    )
+                );
             return mapping;
         }
 
         [RequiresUnreferencedCode("calls GetRootMapping")]
-        private StructMapping ImportStructLikeMapping(StructModel model, string? ns, bool openModel, XmlAttributes? a, RecursionLimiter limiter)
+        private StructMapping ImportStructLikeMapping(
+            StructModel model,
+            string? ns,
+            bool openModel,
+            XmlAttributes? a,
+            RecursionLimiter limiter
+        )
         {
-            if (model.TypeDesc.Kind == TypeKind.Root) return GetRootMapping();
+            if (model.TypeDesc.Kind == TypeKind.Root)
+                return GetRootMapping();
             a ??= GetAttributes(model.Type, false);
 
             string? typeNs = ns;
@@ -719,10 +1051,18 @@ namespace System.Xml.Serialization
             else if (a.XmlRoot != null && a.XmlRoot.Namespace != null)
                 typeNs = a.XmlRoot.Namespace;
 
-            string? typeName = IsAnonymousType(a, ns) ? null : XsdTypeName(model.Type, a, model.TypeDesc.Name);
+            string? typeName = IsAnonymousType(a, ns)
+                ? null
+                : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            StructMapping? mapping = (StructMapping?)GetTypeMapping(typeName, typeNs, model.TypeDesc, _types, model.Type);
+            StructMapping? mapping = (StructMapping?)GetTypeMapping(
+                typeName,
+                typeNs,
+                model.TypeDesc,
+                _types,
+                model.Type
+            );
             if (mapping == null)
             {
                 mapping = new StructMapping();
@@ -751,7 +1091,15 @@ namespace System.Xml.Serialization
                 {
                     int index = limiter.DeferredWorkItems.Count - 1;
                     ImportStructWorkItem item = limiter.DeferredWorkItems[index];
-                    if (InitializeStructMembers(item.Mapping, item.Model, openModel, typeName, limiter))
+                    if (
+                        InitializeStructMembers(
+                            item.Mapping,
+                            item.Model,
+                            openModel,
+                            typeName,
+                            limiter
+                        )
+                    )
                     {
                         //
                         // if InitializeStructMembers returns true, then there were *no* changes to the DeferredWorkItems
@@ -759,9 +1107,19 @@ namespace System.Xml.Serialization
 #if DEBUG
                         // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
                         if (index != limiter.DeferredWorkItems.Count - 1)
-                            throw new InvalidOperationException(SR.Format(SR.XmlInternalErrorDetails, "DeferredWorkItems.Count have changed"));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlInternalErrorDetails,
+                                    "DeferredWorkItems.Count have changed"
+                                )
+                            );
                         if (item != limiter.DeferredWorkItems[index])
-                            throw new InvalidOperationException(SR.Format(SR.XmlInternalErrorDetails, "DeferredWorkItems.Top have changed"));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlInternalErrorDetails,
+                                    "DeferredWorkItems.Top have changed"
+                                )
+                            );
 #endif
                         // Remove the last work item
                         limiter.DeferredWorkItems.RemoveAt(index);
@@ -773,7 +1131,13 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("calls GetTypeModel")]
-        private bool InitializeStructMembers(StructMapping mapping, StructModel model, bool openModel, string? typeName, RecursionLimiter limiter)
+        private bool InitializeStructMembers(
+            StructMapping mapping,
+            StructModel model,
+            bool openModel,
+            string? typeName,
+            RecursionLimiter limiter
+        )
         {
             if (mapping.IsFullyInitialized)
                 return true;
@@ -784,9 +1148,17 @@ namespace System.Xml.Serialization
                 if (!(baseModel is StructModel))
                 {
                     //XmlUnsupportedInheritance=Using '{0}' as a base type for a class is not supported by XmlSerializer.
-                    throw new NotSupportedException(SR.Format(SR.XmlUnsupportedInheritance, model.Type.BaseType!.FullName));
+                    throw new NotSupportedException(
+                        SR.Format(SR.XmlUnsupportedInheritance, model.Type.BaseType!.FullName)
+                    );
                 }
-                StructMapping baseMapping = ImportStructLikeMapping((StructModel)baseModel, mapping.Namespace, openModel, null, limiter);
+                StructMapping baseMapping = ImportStructLikeMapping(
+                    (StructModel)baseModel,
+                    mapping.Namespace,
+                    openModel,
+                    null,
+                    limiter
+                );
                 // check to see if the import of the baseMapping was deferred
                 int baseIndex = limiter.DeferredWorkItems.IndexOf(baseMapping);
                 if (baseIndex < 0)
@@ -818,7 +1190,9 @@ namespace System.Xml.Serialization
                     int top = limiter.DeferredWorkItems.Count - 1;
                     if (baseIndex < top)
                     {
-                        ImportStructWorkItem baseMappingWorkItem = limiter.DeferredWorkItems[baseIndex];
+                        ImportStructWorkItem baseMappingWorkItem = limiter.DeferredWorkItems[
+                            baseIndex
+                        ];
                         limiter.DeferredWorkItems[baseIndex] = limiter.DeferredWorkItems[top];
                         limiter.DeferredWorkItems[top] = baseMappingWorkItem;
                     }
@@ -835,35 +1209,64 @@ namespace System.Xml.Serialization
                 if (!(memberInfo is FieldInfo || memberInfo is PropertyInfo))
                     continue;
                 XmlAttributes memberAttrs = GetAttributes(memberInfo);
-                if (memberAttrs.XmlIgnore) continue;
+                if (memberAttrs.XmlIgnore)
+                    continue;
                 FieldModel? fieldModel = model.GetFieldModel(memberInfo);
-                if (fieldModel == null) continue;
+                if (fieldModel == null)
+                    continue;
                 try
                 {
-                    MemberMapping? member = ImportFieldMapping(model, fieldModel, memberAttrs, mapping.Namespace, limiter);
-                    if (member == null) continue;
+                    MemberMapping? member = ImportFieldMapping(
+                        model,
+                        fieldModel,
+                        memberAttrs,
+                        mapping.Namespace,
+                        limiter
+                    );
+                    if (member == null)
+                        continue;
                     if (mapping.BaseMapping != null)
                     {
-                        if (mapping.BaseMapping.Declares(member, mapping.TypeName)) continue;
+                        if (mapping.BaseMapping.Declares(member, mapping.TypeName))
+                            continue;
                     }
                     isSequence |= member.IsSequence;
                     // add All member accessors to the scope accessors
-                    AddUniqueAccessor(member, mapping.LocalElements, mapping.LocalAttributes, isSequence);
+                    AddUniqueAccessor(
+                        member,
+                        mapping.LocalElements,
+                        mapping.LocalAttributes,
+                        isSequence
+                    );
 
                     if (member.Text != null)
                     {
-                        if (!member.Text.Mapping!.TypeDesc!.CanBeTextValue && member.Text.Mapping.IsList)
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalTypedTextAttribute, typeName, member.Text.Name, member.Text.Mapping.TypeDesc.FullName));
+                        if (
+                            !member.Text.Mapping!.TypeDesc!.CanBeTextValue
+                            && member.Text.Mapping.IsList
+                        )
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlIllegalTypedTextAttribute,
+                                    typeName,
+                                    member.Text.Name,
+                                    member.Text.Mapping.TypeDesc.FullName
+                                )
+                            );
                         if (textAccessor != null)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalMultipleText, model.Type.FullName));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlIllegalMultipleText, model.Type.FullName)
+                            );
                         }
                         textAccessor = member.Text;
                     }
                     if (member.Xmlns != null)
                     {
                         if (mapping.XmlnsMember != null)
-                            throw new InvalidOperationException(SR.Format(SR.XmlMultipleXmlns, model.Type.FullName));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlMultipleXmlns, model.Type.FullName)
+                            );
                         mapping.XmlnsMember = member;
                     }
                     if (member.Elements != null && member.Elements.Length != 0)
@@ -894,13 +1297,22 @@ namespace System.Xml.Serialization
                     {
                         if (ids[member.SequenceId] != null)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlSequenceUnique, member.SequenceId.ToString(CultureInfo.InvariantCulture), "Order", member.Name));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlSequenceUnique,
+                                    member.SequenceId.ToString(CultureInfo.InvariantCulture),
+                                    "Order",
+                                    member.Name
+                                )
+                            );
                         }
                         ids[member.SequenceId] = member;
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlSequenceInconsistent, "Order", member.Name));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.XmlSequenceInconsistent, "Order", member.Name)
+                        );
                     }
                 }
                 members.Sort(new MemberMappingComparer());
@@ -910,7 +1322,9 @@ namespace System.Xml.Serialization
             mapping.BaseMapping ??= GetRootMapping();
 
             if (mapping.XmlnsMember != null && mapping.BaseMapping.HasXmlnsMember)
-                throw new InvalidOperationException(SR.Format(SR.XmlMultipleXmlns, model.Type.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlMultipleXmlns, model.Type.FullName)
+                );
 
             IncludeTypes(model.Type, limiter);
             _typeScope.AddTypeMapping(mapping);
@@ -938,9 +1352,15 @@ namespace System.Xml.Serialization
         [RequiresUnreferencedCode("calls GetTypeDesc")]
         internal string XsdTypeName(Type type)
         {
-            if (type == typeof(object)) return Soap.UrType;
+            if (type == typeof(object))
+                return Soap.UrType;
             TypeDesc typeDesc = _typeScope.GetTypeDesc(type);
-            if (typeDesc.IsPrimitive && typeDesc.DataType != null && typeDesc.DataType.Name != null && typeDesc.DataType.Name.Length > 0)
+            if (
+                typeDesc.IsPrimitive
+                && typeDesc.DataType != null
+                && typeDesc.DataType.Name != null
+                && typeDesc.DataType.Name.Length > 0
+            )
                 return typeDesc.DataType.Name;
             return XsdTypeName(type, GetAttributes(type, false), typeDesc.Name);
         }
@@ -978,7 +1398,8 @@ namespace System.Xml.Serialization
         {
             int sum = 0;
             for (int i = 0; i < attributes.Count; i++)
-                if (attributes[i]!.NestingLevel == level) sum++;
+                if (attributes[i]!.NestingLevel == level)
+                    sum++;
             return sum;
         }
 
@@ -1033,7 +1454,10 @@ namespace System.Xml.Serialization
             }
             else if (itemTypeMapping != null)
             {
-                ns = itemTypeMapping.Namespace == XmlSchema.Namespace ? defaultNs : itemTypeMapping.Namespace;
+                ns =
+                    itemTypeMapping.Namespace == XmlSchema.Namespace
+                        ? defaultNs
+                        : itemTypeMapping.Namespace;
                 name = itemTypeMapping.DefaultElementName;
             }
             else
@@ -1049,7 +1473,9 @@ namespace System.Xml.Serialization
 
             ns ??= defaultNs;
 
-            string uniqueName = name = generateTypeName ? $"ArrayOf{CodeIdentifier.MakePascal(name)}" : name;
+            string uniqueName = name = generateTypeName
+                ? $"ArrayOf{CodeIdentifier.MakePascal(name)}"
+                : name;
             int i = 1;
             TypeMapping? existingMapping = (TypeMapping?)_types[uniqueName, ns];
             while (existingMapping != null)
@@ -1071,7 +1497,11 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("calls SetArrayMappingType")]
-        private ArrayMapping ImportArrayLikeMapping(ArrayModel model, string? ns, RecursionLimiter limiter)
+        private ArrayMapping ImportArrayLikeMapping(
+            ArrayModel model,
+            string? ns,
+            RecursionLimiter limiter
+        )
         {
             ArrayMapping mapping = new ArrayMapping();
             mapping.TypeDesc = model.TypeDesc;
@@ -1079,13 +1509,22 @@ namespace System.Xml.Serialization
             _savedArrayItemAttributes ??= new XmlArrayItemAttributes();
             if (CountAtLevel(_savedArrayItemAttributes, _arrayNestingLevel) == 0)
                 _savedArrayItemAttributes.Add(CreateArrayItemAttribute(_arrayNestingLevel));
-            CreateArrayElementsFromAttributes(mapping, _savedArrayItemAttributes, model.Element.Type, _savedArrayNamespace ?? ns, limiter);
+            CreateArrayElementsFromAttributes(
+                mapping,
+                _savedArrayItemAttributes,
+                model.Element.Type,
+                _savedArrayNamespace ?? ns,
+                limiter
+            );
             SetArrayMappingType(mapping, ns, model.Type);
 
             // reconcile accessors now that we have the ArrayMapping namespace
             for (int i = 0; i < mapping.Elements!.Length; i++)
             {
-                mapping.Elements[i] = ReconcileLocalAccessor(mapping.Elements[i], mapping.Namespace);
+                mapping.Elements[i] = ReconcileLocalAccessor(
+                    mapping.Elements[i],
+                    mapping.Namespace
+                );
             }
 
             IncludeTypes(model.Type);
@@ -1093,7 +1532,8 @@ namespace System.Xml.Serialization
             // in the case of an ArrayMapping we can have more that one mapping correspond to a type
             // examples of that are ArrayList and object[] both will map tp ArrayOfur-type
             // so we create a link list for all mappings of the same XSD type
-            ArrayMapping? existingMapping = (ArrayMapping?)_types[mapping.TypeName, mapping.Namespace];
+            ArrayMapping? existingMapping = (ArrayMapping?)
+                _types[mapping.TypeName, mapping.Namespace];
             if (existingMapping != null)
             {
                 ArrayMapping? first = existingMapping;
@@ -1123,10 +1563,12 @@ namespace System.Xml.Serialization
             switch (context)
             {
                 case ImportContext.Element:
-                    if (typeDesc.CanBeElementValue) return;
+                    if (typeDesc.CanBeElementValue)
+                        return;
                     break;
                 case ImportContext.Attribute:
-                    if (typeDesc.CanBeAttributeValue) return;
+                    if (typeDesc.CanBeAttributeValue)
+                        return;
                     break;
                 case ImportContext.Text:
                     if (typeDesc.CanBeTextValue || typeDesc.IsEnum || typeDesc.IsPrimitive)
@@ -1138,7 +1580,12 @@ namespace System.Xml.Serialization
             throw UnsupportedException(typeDesc, context);
         }
 
-        private static PrimitiveMapping ImportPrimitiveMapping(PrimitiveModel model, ImportContext context, string dataType, bool repeats)
+        private static PrimitiveMapping ImportPrimitiveMapping(
+            PrimitiveModel model,
+            ImportContext context,
+            string dataType,
+            bool repeats
+        )
         {
             PrimitiveMapping mapping = new PrimitiveMapping();
             if (dataType.Length > 0)
@@ -1150,7 +1597,9 @@ namespace System.Xml.Serialization
                     mapping.TypeDesc = TypeScope.GetTypeDesc(dataType, UrtTypes.Namespace);
                     if (mapping.TypeDesc == null)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlUdeclaredXsdType, dataType));
+                        throw new InvalidOperationException(
+                            SR.Format(SR.XmlUdeclaredXsdType, dataType)
+                        );
                     }
                 }
             }
@@ -1159,7 +1608,9 @@ namespace System.Xml.Serialization
                 mapping.TypeDesc = model.TypeDesc;
             }
             mapping.TypeName = mapping.TypeDesc.DataType!.Name;
-            mapping.Namespace = mapping.TypeDesc.IsXsdType ? XmlSchema.Namespace : UrtTypes.Namespace;
+            mapping.Namespace = mapping.TypeDesc.IsXsdType
+                ? XmlSchema.Namespace
+                : UrtTypes.Namespace;
             mapping.IsList = repeats;
             CheckContext(mapping.TypeDesc, context);
             return mapping;
@@ -1173,10 +1624,18 @@ namespace System.Xml.Serialization
             if (a.XmlType != null && a.XmlType.Namespace != null)
                 typeNs = a.XmlType.Namespace;
 
-            string? typeName = IsAnonymousType(a, ns) ? null : XsdTypeName(model.Type, a, model.TypeDesc.Name);
+            string? typeName = IsAnonymousType(a, ns)
+                ? null
+                : XsdTypeName(model.Type, a, model.TypeDesc.Name);
             typeName = XmlConvert.EncodeLocalName(typeName);
 
-            EnumMapping? mapping = (EnumMapping?)GetTypeMapping(typeName, typeNs, model.TypeDesc, _types, model.Type);
+            EnumMapping? mapping = (EnumMapping?)GetTypeMapping(
+                typeName,
+                typeNs,
+                model.TypeDesc,
+                _types,
+                model.Type
+            );
             if (mapping == null)
             {
                 mapping = new EnumMapping();
@@ -1185,7 +1644,9 @@ namespace System.Xml.Serialization
                 mapping.Namespace = typeNs;
                 mapping.IsFlags = model.Type.IsDefined(typeof(FlagsAttribute), false);
                 if (mapping.IsFlags && repeats)
-                    throw new InvalidOperationException(SR.Format(SR.XmlIllegalAttributeFlagsArray, model.TypeDesc.FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlIllegalAttributeFlagsArray, model.TypeDesc.FullName)
+                    );
                 mapping.IsList = repeats;
                 mapping.IncludeInSchema = a.XmlType == null ? true : a.XmlType.IncludeInSchema;
                 if (!mapping.IsAnonymousType)
@@ -1196,11 +1657,14 @@ namespace System.Xml.Serialization
                 for (int i = 0; i < model.Constants.Length; i++)
                 {
                     ConstantMapping? constant = ImportConstantMapping(model.Constants[i]);
-                    if (constant != null) constants.Add(constant);
+                    if (constant != null)
+                        constants.Add(constant);
                 }
                 if (constants.Count == 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlNoSerializableMembers, model.TypeDesc.FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlNoSerializableMembers, model.TypeDesc.FullName)
+                    );
                 }
                 mapping.Constants = constants.ToArray();
                 _typeScope.AddTypeMapping(mapping);
@@ -1211,7 +1675,8 @@ namespace System.Xml.Serialization
         private ConstantMapping? ImportConstantMapping(ConstantModel model)
         {
             XmlAttributes a = GetAttributes(model.FieldInfo);
-            if (a.XmlIgnore) return null;
+            if (a.XmlIgnore)
+                return null;
             if ((a.XmlFlags & ~XmlAttributeFlags.Enum) != 0)
                 throw new InvalidOperationException(SR.XmlInvalidConstantAttribute);
             a.XmlEnum ??= new XmlEnumAttribute();
@@ -1224,7 +1689,14 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("calls GetTypeDesc")]
-        private MembersMapping ImportMembersMapping(XmlReflectionMember[] xmlReflectionMembers, string? ns, bool hasWrapperElement, bool rpc, bool openModel, RecursionLimiter limiter)
+        private MembersMapping ImportMembersMapping(
+            XmlReflectionMember[] xmlReflectionMembers,
+            string? ns,
+            bool hasWrapperElement,
+            bool rpc,
+            bool openModel,
+            RecursionLimiter limiter
+        )
         {
             MembersMapping members = new MembersMapping();
             members.TypeDesc = _typeScope.GetTypeDesc(typeof(object[]));
@@ -1238,24 +1710,36 @@ namespace System.Xml.Serialization
             {
                 try
                 {
-                    MemberMapping mapping = ImportMemberMapping(xmlReflectionMembers[i], ns, xmlReflectionMembers, rpc, openModel, limiter);
+                    MemberMapping mapping = ImportMemberMapping(
+                        xmlReflectionMembers[i],
+                        ns,
+                        xmlReflectionMembers,
+                        rpc,
+                        openModel,
+                        limiter
+                    );
                     if (!hasWrapperElement)
                     {
                         if (mapping.Attribute != null)
                         {
                             if (rpc)
                             {
-                                throw new InvalidOperationException(SR.XmlRpcLitAttributeAttributes);
+                                throw new InvalidOperationException(
+                                    SR.XmlRpcLitAttributeAttributes
+                                );
                             }
                             else
                             {
-                                throw new InvalidOperationException(SR.Format(SR.XmlInvalidAttributeType, "XmlAttribute"));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.XmlInvalidAttributeType, "XmlAttribute")
+                                );
                             }
                         }
                     }
                     if (rpc && xmlReflectionMembers[i].IsReturnValue)
                     {
-                        if (i > 0) throw new InvalidOperationException(SR.XmlInvalidReturnPosition);
+                        if (i > 0)
+                            throw new InvalidOperationException(SR.XmlInvalidReturnPosition);
                         mapping.IsReturnValue = true;
                     }
                     mappings[i] = mapping;
@@ -1301,8 +1785,17 @@ namespace System.Xml.Serialization
             return members;
         }
 
-        [RequiresUnreferencedCode("Calls TypeScope.GetTypeDesc(Type) and XmlReflectionImporter.ImportAccessorMapping both of which RequireUnreferencedCode")]
-        private MemberMapping ImportMemberMapping(XmlReflectionMember xmlReflectionMember, string? ns, XmlReflectionMember[] xmlReflectionMembers, bool rpc, bool openModel, RecursionLimiter limiter)
+        [RequiresUnreferencedCode(
+            "Calls TypeScope.GetTypeDesc(Type) and XmlReflectionImporter.ImportAccessorMapping both of which RequireUnreferencedCode"
+        )]
+        private MemberMapping ImportMemberMapping(
+            XmlReflectionMember xmlReflectionMember,
+            string? ns,
+            XmlReflectionMember[] xmlReflectionMembers,
+            bool rpc,
+            bool openModel,
+            RecursionLimiter limiter
+        )
         {
             XmlSchemaForm form = rpc ? XmlSchemaForm.Unqualified : XmlSchemaForm.Qualified;
             XmlAttributes a = xmlReflectionMember.XmlAttributes;
@@ -1325,7 +1818,9 @@ namespace System.Xml.Serialization
                     // an XmlRoot attribute on the struct or class.
                     if (typeDesc.IsStructLike)
                     {
-                        XmlAttributes structAttrs = new XmlAttributes(xmlReflectionMember.MemberType!);
+                        XmlAttributes structAttrs = new XmlAttributes(
+                            xmlReflectionMember.MemberType!
+                        );
                         if (structAttrs.XmlRoot != null)
                         {
                             if (structAttrs.XmlRoot.ElementName.Length > 0)
@@ -1357,8 +1852,15 @@ namespace System.Xml.Serialization
             }
             MemberMapping member = new MemberMapping();
             member.Name = xmlReflectionMember.MemberName;
-            bool checkSpecified = FindSpecifiedMember(xmlReflectionMember.MemberName, xmlReflectionMembers) != null;
-            FieldModel model = new FieldModel(xmlReflectionMember.MemberName, xmlReflectionMember.MemberType!, _typeScope.GetTypeDesc(xmlReflectionMember.MemberType!), checkSpecified, false);
+            bool checkSpecified =
+                FindSpecifiedMember(xmlReflectionMember.MemberName, xmlReflectionMembers) != null;
+            FieldModel model = new FieldModel(
+                xmlReflectionMember.MemberName,
+                xmlReflectionMember.MemberType!,
+                _typeScope.GetTypeDesc(xmlReflectionMember.MemberType!),
+                checkSpecified,
+                false
+            );
             member.CheckShouldPersist = model.CheckShouldPersist;
             member.CheckSpecified = model.CheckSpecified;
             member.ReadOnly = model.ReadOnly; // || !model.FieldTypeDesc.HasDefaultConstructor;
@@ -1366,24 +1868,53 @@ namespace System.Xml.Serialization
             Type? choiceIdentifierType = null;
             if (a.XmlChoiceIdentifier != null)
             {
-                choiceIdentifierType = GetChoiceIdentifierType(a.XmlChoiceIdentifier, xmlReflectionMembers, typeDesc.IsArrayLike, model.Name);
+                choiceIdentifierType = GetChoiceIdentifierType(
+                    a.XmlChoiceIdentifier,
+                    xmlReflectionMembers,
+                    typeDesc.IsArrayLike,
+                    model.Name
+                );
             }
-            ImportAccessorMapping(member, model, a, ns, choiceIdentifierType, rpc, openModel, limiter);
+            ImportAccessorMapping(
+                member,
+                model,
+                a,
+                ns,
+                choiceIdentifierType,
+                rpc,
+                openModel,
+                limiter
+            );
             if (xmlReflectionMember.OverrideIsNullable && member.Elements!.Length > 0)
                 member.Elements[0].IsNullable = false;
             return member;
         }
 
-        internal static XmlReflectionMember? FindSpecifiedMember(string memberName, XmlReflectionMember[] reflectionMembers)
+        internal static XmlReflectionMember? FindSpecifiedMember(
+            string memberName,
+            XmlReflectionMember[] reflectionMembers
+        )
         {
             for (int i = 0; i < reflectionMembers.Length; i++)
-                if (string.Equals(reflectionMembers[i].MemberName, $"{memberName}Specified", StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        reflectionMembers[i].MemberName,
+                        $"{memberName}Specified",
+                        StringComparison.Ordinal
+                    )
+                )
                     return reflectionMembers[i];
             return null;
         }
 
         [RequiresUnreferencedCode("calls ImportAccessorMapping")]
-        private MemberMapping ImportFieldMapping(StructModel parent, FieldModel model, XmlAttributes a, string? ns, RecursionLimiter limiter)
+        private MemberMapping ImportFieldMapping(
+            StructModel parent,
+            FieldModel model,
+            XmlAttributes a,
+            string? ns,
+            RecursionLimiter limiter
+        )
         {
             MemberMapping member = new MemberMapping();
             member.Name = model.Name;
@@ -1396,90 +1927,175 @@ namespace System.Xml.Serialization
             Type? choiceIdentifierType = null;
             if (a.XmlChoiceIdentifier != null)
             {
-                choiceIdentifierType = GetChoiceIdentifierType(a.XmlChoiceIdentifier, parent, model.FieldTypeDesc.IsArrayLike, model.Name);
+                choiceIdentifierType = GetChoiceIdentifierType(
+                    a.XmlChoiceIdentifier,
+                    parent,
+                    model.FieldTypeDesc.IsArrayLike,
+                    model.Name
+                );
             }
-            ImportAccessorMapping(member, model, a, ns, choiceIdentifierType, false, false, limiter);
+            ImportAccessorMapping(
+                member,
+                model,
+                a,
+                ns,
+                choiceIdentifierType,
+                false,
+                false,
+                limiter
+            );
             return member;
         }
 
-        private static Type CheckChoiceIdentifierType(Type type, bool isArrayLike, string identifierName, string memberName)
+        private static Type CheckChoiceIdentifierType(
+            Type type,
+            bool isArrayLike,
+            string identifierName,
+            string memberName
+        )
         {
             if (type.IsArray)
             {
                 if (!isArrayLike)
                 {
                     // Inconsistent type of the choice identifier '{0}'.  Please use {1}.
-                    throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierType, identifierName, memberName, type.GetElementType()!.FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlChoiceIdentifierType,
+                            identifierName,
+                            memberName,
+                            type.GetElementType()!.FullName
+                        )
+                    );
                 }
                 type = type.GetElementType()!;
             }
             else if (isArrayLike)
             {
                 // Inconsistent type of the choice identifier '{0}'.  Please use {1}.
-                throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierArrayType, identifierName, memberName, type.FullName));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlChoiceIdentifierArrayType,
+                        identifierName,
+                        memberName,
+                        type.FullName
+                    )
+                );
             }
 
             if (!type!.IsEnum)
             {
                 // Choice identifier '{0}' must be an enum.
-                throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierTypeEnum, identifierName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlChoiceIdentifierTypeEnum, identifierName)
+                );
             }
             return type;
         }
 
-        private static Type GetChoiceIdentifierType(XmlChoiceIdentifierAttribute choice, XmlReflectionMember[] xmlReflectionMembers, bool isArrayLike, string accessorName)
+        private static Type GetChoiceIdentifierType(
+            XmlChoiceIdentifierAttribute choice,
+            XmlReflectionMember[] xmlReflectionMembers,
+            bool isArrayLike,
+            string accessorName
+        )
         {
             for (int i = 0; i < xmlReflectionMembers.Length; i++)
             {
                 if (choice.MemberName == xmlReflectionMembers[i].MemberName)
                 {
-                    return CheckChoiceIdentifierType(xmlReflectionMembers[i].MemberType!, isArrayLike, choice.MemberName, accessorName);
+                    return CheckChoiceIdentifierType(
+                        xmlReflectionMembers[i].MemberType!,
+                        isArrayLike,
+                        choice.MemberName,
+                        accessorName
+                    );
                 }
             }
             // Missing '{0}' needed for serialization of choice '{1}'.
-            throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierMemberMissing, choice.MemberName, accessorName));
+            throw new InvalidOperationException(
+                SR.Format(SR.XmlChoiceIdentifierMemberMissing, choice.MemberName, accessorName)
+            );
         }
 
         [RequiresUnreferencedCode("calls GetFieldModel")]
-        private static Type GetChoiceIdentifierType(XmlChoiceIdentifierAttribute choice, StructModel structModel, bool isArrayLike, string accessorName)
+        private static Type GetChoiceIdentifierType(
+            XmlChoiceIdentifierAttribute choice,
+            StructModel structModel,
+            bool isArrayLike,
+            string accessorName
+        )
         {
             // check that the choice field exists
 
-            MemberInfo[] infos = structModel.Type.GetMember(choice.MemberName, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+            MemberInfo[] infos = structModel.Type.GetMember(
+                choice.MemberName,
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
             if (infos == null || infos.Length == 0)
             {
                 // if we can not find the choice identifier between fields, check properties
-                PropertyInfo? info = structModel.Type.GetProperty(choice.MemberName, BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+                PropertyInfo? info = structModel.Type.GetProperty(
+                    choice.MemberName,
+                    BindingFlags.DeclaredOnly
+                        | BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                );
 
                 if (info == null)
                 {
                     // Missing '{0}' needed for serialization of choice '{1}'.
-                    throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierMemberMissing, choice.MemberName, accessorName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlChoiceIdentifierMemberMissing,
+                            choice.MemberName,
+                            accessorName
+                        )
+                    );
                 }
                 infos = new MemberInfo[] { info };
             }
             else if (infos.Length > 1)
             {
                 // Ambiguous choice identifier: there are several members named '{0}'.
-                throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierAmbiguous, choice.MemberName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlChoiceIdentifierAmbiguous, choice.MemberName)
+                );
             }
 
             FieldModel? member = structModel.GetFieldModel(infos[0]);
             if (member == null)
             {
                 // Missing '{0}' needed for serialization of choice '{1}'.
-                throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierMemberMissing, choice.MemberName, accessorName));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlChoiceIdentifierMemberMissing, choice.MemberName, accessorName)
+                );
             }
             choice.SetMemberInfo(member.MemberInfo);
             Type enumType = member.FieldType;
-            enumType = CheckChoiceIdentifierType(enumType, isArrayLike, choice.MemberName, accessorName);
+            enumType = CheckChoiceIdentifierType(
+                enumType,
+                isArrayLike,
+                choice.MemberName,
+                accessorName
+            );
             return enumType;
         }
 
         [RequiresUnreferencedCode("calls ImportTypeMapping")]
-        private void CreateArrayElementsFromAttributes(ArrayMapping arrayMapping, XmlArrayItemAttributes attributes, Type arrayElementType, string? arrayElementNs, RecursionLimiter limiter)
+        private void CreateArrayElementsFromAttributes(
+            ArrayMapping arrayMapping,
+            XmlArrayItemAttributes attributes,
+            Type arrayElementType,
+            string? arrayElementNs,
+            RecursionLimiter limiter
+        )
         {
-            NameTable arrayItemElements = new NameTable();   // xmlelementname + xmlns -> ElementAccessor
+            NameTable arrayItemElements = new NameTable(); // xmlelementname + xmlns -> ElementAccessor
 
             for (int i = 0; attributes != null && i < attributes.Count; i++)
             {
@@ -1490,19 +2106,48 @@ namespace System.Xml.Serialization
                 TypeDesc targetTypeDesc = _typeScope.GetTypeDesc(targetType);
                 ElementAccessor arrayItemElement = new ElementAccessor();
                 arrayItemElement.Namespace = xmlArrayItem.Namespace ?? arrayElementNs;
-                arrayItemElement.Mapping = ImportTypeMapping(_modelScope.GetTypeModel(targetType), arrayItemElement.Namespace, ImportContext.Element, xmlArrayItem.DataType, null, limiter);
-                arrayItemElement.Name = xmlArrayItem.ElementName.Length == 0 ? arrayItemElement.Mapping.DefaultElementName : XmlConvert.EncodeLocalName(xmlArrayItem.ElementName);
-                arrayItemElement.IsNullable = xmlArrayItem.GetIsNullableSpecified() ? xmlArrayItem.IsNullable : targetTypeDesc.IsNullable || targetTypeDesc.IsOptionalValue;
-                arrayItemElement.Form = xmlArrayItem.Form == XmlSchemaForm.None ? XmlSchemaForm.Qualified : xmlArrayItem.Form;
+                arrayItemElement.Mapping = ImportTypeMapping(
+                    _modelScope.GetTypeModel(targetType),
+                    arrayItemElement.Namespace,
+                    ImportContext.Element,
+                    xmlArrayItem.DataType,
+                    null,
+                    limiter
+                );
+                arrayItemElement.Name =
+                    xmlArrayItem.ElementName.Length == 0
+                        ? arrayItemElement.Mapping.DefaultElementName
+                        : XmlConvert.EncodeLocalName(xmlArrayItem.ElementName);
+                arrayItemElement.IsNullable = xmlArrayItem.GetIsNullableSpecified()
+                    ? xmlArrayItem.IsNullable
+                    : targetTypeDesc.IsNullable || targetTypeDesc.IsOptionalValue;
+                arrayItemElement.Form =
+                    xmlArrayItem.Form == XmlSchemaForm.None
+                        ? XmlSchemaForm.Qualified
+                        : xmlArrayItem.Form;
                 CheckForm(arrayItemElement.Form, arrayElementNs != arrayItemElement.Namespace);
-                CheckNullable(arrayItemElement.IsNullable, targetTypeDesc, arrayItemElement.Mapping);
+                CheckNullable(
+                    arrayItemElement.IsNullable,
+                    targetTypeDesc,
+                    arrayItemElement.Mapping
+                );
                 AddUniqueAccessor(arrayItemElements, arrayItemElement);
             }
-            arrayMapping.Elements = (ElementAccessor[])arrayItemElements.ToArray(typeof(ElementAccessor));
+            arrayMapping.Elements = (ElementAccessor[])
+                arrayItemElements.ToArray(typeof(ElementAccessor));
         }
 
         [RequiresUnreferencedCode("calls GetArrayElementType")]
-        private void ImportAccessorMapping(MemberMapping accessor, FieldModel model, XmlAttributes a, string? ns, Type? choiceIdentifierType, bool rpc, bool openModel, RecursionLimiter limiter)
+        private void ImportAccessorMapping(
+            MemberMapping accessor,
+            FieldModel model,
+            XmlAttributes a,
+            string? ns,
+            Type? choiceIdentifierType,
+            bool rpc,
+            bool openModel,
+            RecursionLimiter limiter
+        )
         {
             XmlSchemaForm elementFormDefault = XmlSchemaForm.Qualified;
             int previousNestingLevel = _arrayNestingLevel;
@@ -1524,8 +2169,13 @@ namespace System.Xml.Serialization
             else
                 CheckAmbiguousChoice(a, accessorType, accessorName);
 
-            XmlAttributeFlags elemFlags = XmlAttributeFlags.Elements | XmlAttributeFlags.Text | XmlAttributeFlags.AnyElements | XmlAttributeFlags.ChoiceIdentifier;
-            XmlAttributeFlags attrFlags = XmlAttributeFlags.Attribute | XmlAttributeFlags.AnyAttribute;
+            XmlAttributeFlags elemFlags =
+                XmlAttributeFlags.Elements
+                | XmlAttributeFlags.Text
+                | XmlAttributeFlags.AnyElements
+                | XmlAttributeFlags.ChoiceIdentifier;
+            XmlAttributeFlags attrFlags =
+                XmlAttributeFlags.Attribute | XmlAttributeFlags.AnyAttribute;
             XmlAttributeFlags arrayFlags = XmlAttributeFlags.Array | XmlAttributeFlags.ArrayItems;
 
             // special case for byte[]. It can be a primitive (base64Binary or hexBinary), or it can
@@ -1538,32 +2188,64 @@ namespace System.Xml.Serialization
                 accessor.ChoiceIdentifier = new ChoiceIdentifierAccessor();
                 accessor.ChoiceIdentifier.MemberName = a.XmlChoiceIdentifier.MemberName;
                 accessor.ChoiceIdentifier.MemberInfo = a.XmlChoiceIdentifier.GetMemberInfo();
-                accessor.ChoiceIdentifier.Mapping = ImportTypeMapping(_modelScope.GetTypeModel(choiceIdentifierType!), ns, ImportContext.Element, string.Empty, null, limiter);
+                accessor.ChoiceIdentifier.Mapping = ImportTypeMapping(
+                    _modelScope.GetTypeModel(choiceIdentifierType!),
+                    ns,
+                    ImportContext.Element,
+                    string.Empty,
+                    null,
+                    limiter
+                );
                 CheckChoiceIdentifierMapping((EnumMapping)accessor.ChoiceIdentifier.Mapping);
             }
 
             if (accessor.TypeDesc.IsArrayLike)
             {
-                Type arrayElementType = TypeScope.GetArrayElementType(accessorType, $"{model.FieldTypeDesc.FullName}.{model.Name}")!;
+                Type arrayElementType = TypeScope.GetArrayElementType(
+                    accessorType,
+                    $"{model.FieldTypeDesc.FullName}.{model.Name}"
+                )!;
 
                 if ((flags & attrFlags) != 0)
                 {
                     if ((flags & attrFlags) != flags)
                         throw new InvalidOperationException(SR.XmlIllegalAttributesArrayAttribute);
 
-                    if (a.XmlAttribute != null && !accessor.TypeDesc.ArrayElementTypeDesc!.IsPrimitive && !accessor.TypeDesc.ArrayElementTypeDesc.IsEnum)
+                    if (
+                        a.XmlAttribute != null
+                        && !accessor.TypeDesc.ArrayElementTypeDesc!.IsPrimitive
+                        && !accessor.TypeDesc.ArrayElementTypeDesc.IsEnum
+                    )
                     {
                         if (accessor.TypeDesc.ArrayElementTypeDesc.Kind == TypeKind.Serializable)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalAttrOrTextInterface, accessorName, accessor.TypeDesc.ArrayElementTypeDesc.FullName, nameof(IXmlSerializable)));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlIllegalAttrOrTextInterface,
+                                    accessorName,
+                                    accessor.TypeDesc.ArrayElementTypeDesc.FullName,
+                                    nameof(IXmlSerializable)
+                                )
+                            );
                         }
                         else
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalAttrOrText, accessorName, accessor.TypeDesc.ArrayElementTypeDesc.FullName));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlIllegalAttrOrText,
+                                    accessorName,
+                                    accessor.TypeDesc.ArrayElementTypeDesc.FullName
+                                )
+                            );
                         }
                     }
 
-                    bool isList = a.XmlAttribute != null && (accessor.TypeDesc.ArrayElementTypeDesc!.IsPrimitive || accessor.TypeDesc.ArrayElementTypeDesc.IsEnum);
+                    bool isList =
+                        a.XmlAttribute != null
+                        && (
+                            accessor.TypeDesc.ArrayElementTypeDesc!.IsPrimitive
+                            || accessor.TypeDesc.ArrayElementTypeDesc.IsEnum
+                        );
 
                     if (a.XmlAnyAttribute != null)
                     {
@@ -1571,9 +2253,14 @@ namespace System.Xml.Serialization
                     }
 
                     AttributeAccessor attribute = new AttributeAccessor();
-                    Type targetType = a.XmlAttribute!.Type == null ? arrayElementType : a.XmlAttribute.Type!;
+                    Type targetType =
+                        a.XmlAttribute!.Type == null ? arrayElementType : a.XmlAttribute.Type!;
                     TypeDesc targetTypeDesc = _typeScope.GetTypeDesc(targetType);
-                    attribute.Name = Accessor.EscapeQName(a.XmlAttribute.AttributeName.Length == 0 ? accessorName : a.XmlAttribute.AttributeName);
+                    attribute.Name = Accessor.EscapeQName(
+                        a.XmlAttribute.AttributeName.Length == 0
+                            ? accessorName
+                            : a.XmlAttribute.AttributeName
+                    );
                     attribute.Namespace = a.XmlAttribute.Namespace ?? ns;
                     attribute.Form = a.XmlAttribute.Form;
                     if (attribute.Form == XmlSchemaForm.None && ns != attribute.Namespace)
@@ -1582,7 +2269,16 @@ namespace System.Xml.Serialization
                     }
                     attribute.CheckSpecial();
                     CheckForm(attribute.Form, ns != attribute.Namespace);
-                    attribute.Mapping = ImportTypeMapping(_modelScope.GetTypeModel(targetType), ns, ImportContext.Attribute, a.XmlAttribute.DataType, null, isList, false, limiter);
+                    attribute.Mapping = ImportTypeMapping(
+                        _modelScope.GetTypeModel(targetType),
+                        ns,
+                        ImportContext.Attribute,
+                        a.XmlAttribute.DataType,
+                        null,
+                        isList,
+                        false,
+                        limiter
+                    );
                     attribute.IsList = isList;
                     attribute.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
                     attribute.Any = (a.XmlAnyAttribute != null);
@@ -1604,13 +2300,31 @@ namespace System.Xml.Serialization
                         Type targetType = a.XmlText.Type ?? arrayElementType;
                         TypeDesc targetTypeDesc = _typeScope.GetTypeDesc(targetType);
                         text.Name = accessorName; // unused except to make more helpful error messages
-                        text.Mapping = ImportTypeMapping(_modelScope.GetTypeModel(targetType), ns, ImportContext.Text, a.XmlText.DataType, null, true, false, limiter);
-                        if (!(text.Mapping is SpecialMapping) && targetTypeDesc != _typeScope.GetTypeDesc(typeof(string)))
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalArrayTextAttribute, accessorName));
+                        text.Mapping = ImportTypeMapping(
+                            _modelScope.GetTypeModel(targetType),
+                            ns,
+                            ImportContext.Text,
+                            a.XmlText.DataType,
+                            null,
+                            true,
+                            false,
+                            limiter
+                        );
+                        if (
+                            !(text.Mapping is SpecialMapping)
+                            && targetTypeDesc != _typeScope.GetTypeDesc(typeof(string))
+                        )
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlIllegalArrayTextAttribute, accessorName)
+                            );
 
                         accessor.Text = text;
                     }
-                    if (a.XmlText == null && a.XmlElements.Count == 0 && a.XmlAnyElements.Count == 0)
+                    if (
+                        a.XmlText == null
+                        && a.XmlElements.Count == 0
+                        && a.XmlAnyElements.Count == 0
+                    )
                         a.XmlElements.Add(CreateElementAttribute(accessor.TypeDesc));
 
                     for (int i = 0; i < a.XmlElements.Count; i++)
@@ -1621,22 +2335,51 @@ namespace System.Xml.Serialization
                         TypeModel typeModel = _modelScope.GetTypeModel(targetType);
                         ElementAccessor element = new ElementAccessor();
                         element.Namespace = rpc ? null : xmlElement.Namespace ?? ns;
-                        element.Mapping = ImportTypeMapping(typeModel, rpc ? ns : element.Namespace, ImportContext.Element, xmlElement.DataType, null, limiter);
+                        element.Mapping = ImportTypeMapping(
+                            typeModel,
+                            rpc ? ns : element.Namespace,
+                            ImportContext.Element,
+                            xmlElement.DataType,
+                            null,
+                            limiter
+                        );
                         if (a.XmlElements.Count == 1)
                         {
-                            element.Name = XmlConvert.EncodeLocalName(xmlElement.ElementName.Length == 0 ? accessorName : xmlElement.ElementName);
+                            element.Name = XmlConvert.EncodeLocalName(
+                                xmlElement.ElementName.Length == 0
+                                    ? accessorName
+                                    : xmlElement.ElementName
+                            );
                             //element.IsUnbounded = element.Mapping is ArrayMapping;
                         }
                         else
                         {
-                            element.Name = xmlElement.ElementName.Length == 0 ? element.Mapping.DefaultElementName : XmlConvert.EncodeLocalName(xmlElement.ElementName);
+                            element.Name =
+                                xmlElement.ElementName.Length == 0
+                                    ? element.Mapping.DefaultElementName
+                                    : XmlConvert.EncodeLocalName(xmlElement.ElementName);
                         }
                         element.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
-                        if (xmlElement.GetIsNullableSpecified() && !xmlElement.IsNullable && typeModel.TypeDesc.IsOptionalValue)
+                        if (
+                            xmlElement.GetIsNullableSpecified()
+                            && !xmlElement.IsNullable
+                            && typeModel.TypeDesc.IsOptionalValue
+                        )
                             //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
-                            throw new InvalidOperationException(SR.Format(SR.XmlInvalidNotNullable, typeModel.TypeDesc.BaseTypeDesc!.FullName, "XmlElement"));
-                        element.IsNullable = xmlElement.GetIsNullableSpecified() ? xmlElement.IsNullable : typeModel.TypeDesc.IsOptionalValue;
-                        element.Form = rpc ? XmlSchemaForm.Unqualified : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault : xmlElement.Form;
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlInvalidNotNullable,
+                                    typeModel.TypeDesc.BaseTypeDesc!.FullName,
+                                    "XmlElement"
+                                )
+                            );
+                        element.IsNullable = xmlElement.GetIsNullableSpecified()
+                            ? xmlElement.IsNullable
+                            : typeModel.TypeDesc.IsOptionalValue;
+                        element.Form =
+                            rpc ? XmlSchemaForm.Unqualified
+                            : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault
+                            : xmlElement.Form;
 
                         CheckNullable(element.IsNullable, targetTypeDesc, element.Mapping);
                         if (!rpc)
@@ -1647,7 +2390,9 @@ namespace System.Xml.Serialization
                         if (xmlElement.Order != -1)
                         {
                             if (xmlElement.Order != sequenceId && sequenceId != -1)
-                                throw new InvalidOperationException(SR.Format(SR.XmlSequenceMatch, "Order"));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.XmlSequenceMatch, "Order")
+                                );
                             sequenceId = xmlElement.Order;
                         }
                         AddUniqueAccessor(elements, element);
@@ -1657,11 +2402,22 @@ namespace System.Xml.Serialization
                     for (int i = 0; i < a.XmlAnyElements.Count; i++)
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
-                        Type targetType = typeof(IXmlSerializable).IsAssignableFrom(arrayElementType) ? arrayElementType : typeof(XmlNode).IsAssignableFrom(arrayElementType) ? arrayElementType : typeof(XmlElement);
+                        Type targetType =
+                            typeof(IXmlSerializable).IsAssignableFrom(arrayElementType)
+                                ? arrayElementType
+                            : typeof(XmlNode).IsAssignableFrom(arrayElementType) ? arrayElementType
+                            : typeof(XmlElement);
                         if (!arrayElementType.IsAssignableFrom(targetType))
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalAnyElement, arrayElementType.FullName));
-                        string anyName = xmlAnyElement.Name.Length == 0 ? xmlAnyElement.Name : XmlConvert.EncodeLocalName(xmlAnyElement.Name);
-                        string? anyNs = xmlAnyElement.GetNamespaceSpecified() ? xmlAnyElement.Namespace : null;
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlIllegalAnyElement, arrayElementType.FullName)
+                            );
+                        string anyName =
+                            xmlAnyElement.Name.Length == 0
+                                ? xmlAnyElement.Name
+                                : XmlConvert.EncodeLocalName(xmlAnyElement.Name);
+                        string? anyNs = xmlAnyElement.GetNamespaceSpecified()
+                            ? xmlAnyElement.Namespace
+                            : null;
                         if (anys[anyName, anyNs] != null)
                         {
                             // ignore duplicate anys
@@ -1670,7 +2426,14 @@ namespace System.Xml.Serialization
                         anys[anyName, anyNs] = xmlAnyElement;
                         if (elements[anyName, anyNs ?? ns] != null)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlAnyElementDuplicate, accessorName, xmlAnyElement.Name, xmlAnyElement.Namespace ?? "null"));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlAnyElementDuplicate,
+                                    accessorName,
+                                    xmlAnyElement.Name,
+                                    xmlAnyElement.Namespace ?? "null"
+                                )
+                            );
                         }
                         ElementAccessor element = new ElementAccessor();
                         element.Name = anyName;
@@ -1681,7 +2444,14 @@ namespace System.Xml.Serialization
                         TypeModel typeModel = _modelScope.GetTypeModel(targetType);
                         if (element.Name.Length > 0)
                             typeModel.TypeDesc.IsMixed = true;
-                        element.Mapping = ImportTypeMapping(typeModel, element.Namespace, ImportContext.Element, string.Empty, null, limiter);
+                        element.Mapping = ImportTypeMapping(
+                            typeModel,
+                            element.Namespace,
+                            ImportContext.Element,
+                            string.Empty,
+                            null,
+                            limiter
+                        );
                         element.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
                         element.IsNullable = false;
                         element.Form = elementFormDefault;
@@ -1697,7 +2467,9 @@ namespace System.Xml.Serialization
                         if (xmlAnyElement.Order != -1)
                         {
                             if (xmlAnyElement.Order != sequenceId && sequenceId != -1)
-                                throw new InvalidOperationException(SR.Format(SR.XmlSequenceMatch, "Order"));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.XmlSequenceMatch, "Order")
+                                );
                             sequenceId = xmlAnyElement.Order;
                         }
                     }
@@ -1715,14 +2487,23 @@ namespace System.Xml.Serialization
                     if (CountAtLevel(a.XmlArrayItems, _arrayNestingLevel) == 0)
                         a.XmlArrayItems.Add(CreateArrayItemAttribute(_arrayNestingLevel));
                     ElementAccessor arrayElement = new ElementAccessor();
-                    arrayElement.Name = XmlConvert.EncodeLocalName(a.XmlArray.ElementName.Length == 0 ? accessorName : a.XmlArray.ElementName);
+                    arrayElement.Name = XmlConvert.EncodeLocalName(
+                        a.XmlArray.ElementName.Length == 0 ? accessorName : a.XmlArray.ElementName
+                    );
                     arrayElement.Namespace = rpc ? null : a.XmlArray.Namespace ?? ns;
                     _savedArrayItemAttributes = a.XmlArrayItems;
                     _savedArrayNamespace = arrayElement.Namespace;
-                    ArrayMapping arrayMapping = ImportArrayLikeMapping(_modelScope.GetArrayModel(accessorType), ns, limiter);
+                    ArrayMapping arrayMapping = ImportArrayLikeMapping(
+                        _modelScope.GetArrayModel(accessorType),
+                        ns,
+                        limiter
+                    );
                     arrayElement.Mapping = arrayMapping;
                     arrayElement.IsNullable = a.XmlArray.IsNullable;
-                    arrayElement.Form = rpc ? XmlSchemaForm.Unqualified : a.XmlArray.Form == XmlSchemaForm.None ? elementFormDefault : a.XmlArray.Form;
+                    arrayElement.Form =
+                        rpc ? XmlSchemaForm.Unqualified
+                        : a.XmlArray.Form == XmlSchemaForm.None ? elementFormDefault
+                        : a.XmlArray.Form;
                     sequenceId = a.XmlArray.Order;
                     CheckNullable(arrayElement.IsNullable, accessor.TypeDesc, arrayElement.Mapping);
                     if (!rpc)
@@ -1739,20 +2520,37 @@ namespace System.Xml.Serialization
             }
             else if (!accessor.TypeDesc.IsVoid)
             {
-                XmlAttributeFlags allFlags = XmlAttributeFlags.Elements | XmlAttributeFlags.Text | XmlAttributeFlags.Attribute | XmlAttributeFlags.AnyElements | XmlAttributeFlags.ChoiceIdentifier | XmlAttributeFlags.XmlnsDeclarations;
+                XmlAttributeFlags allFlags =
+                    XmlAttributeFlags.Elements
+                    | XmlAttributeFlags.Text
+                    | XmlAttributeFlags.Attribute
+                    | XmlAttributeFlags.AnyElements
+                    | XmlAttributeFlags.ChoiceIdentifier
+                    | XmlAttributeFlags.XmlnsDeclarations;
                 if ((flags & allFlags) != flags)
                     throw new InvalidOperationException(SR.XmlIllegalAttribute);
 
                 if (accessor.TypeDesc.IsPrimitive || accessor.TypeDesc.IsEnum)
                 {
-                    if (a.XmlAnyElements.Count > 0) throw new InvalidOperationException(SR.Format(SR.XmlIllegalAnyElement, accessor.TypeDesc.FullName));
+                    if (a.XmlAnyElements.Count > 0)
+                        throw new InvalidOperationException(
+                            SR.Format(SR.XmlIllegalAnyElement, accessor.TypeDesc.FullName)
+                        );
 
                     if (a.XmlAttribute != null)
                     {
-                        if (a.XmlElements.Count > 0) throw new InvalidOperationException(SR.XmlIllegalAttribute);
-                        if (a.XmlAttribute.Type != null) throw new InvalidOperationException(SR.Format(SR.XmlIllegalType, "XmlAttribute"));
+                        if (a.XmlElements.Count > 0)
+                            throw new InvalidOperationException(SR.XmlIllegalAttribute);
+                        if (a.XmlAttribute.Type != null)
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlIllegalType, "XmlAttribute")
+                            );
                         AttributeAccessor attribute = new AttributeAccessor();
-                        attribute.Name = Accessor.EscapeQName(a.XmlAttribute.AttributeName.Length == 0 ? accessorName : a.XmlAttribute.AttributeName);
+                        attribute.Name = Accessor.EscapeQName(
+                            a.XmlAttribute.AttributeName.Length == 0
+                                ? accessorName
+                                : a.XmlAttribute.AttributeName
+                        );
                         attribute.Namespace = a.XmlAttribute.Namespace ?? ns;
                         attribute.Form = a.XmlAttribute.Form;
                         if (attribute.Form == XmlSchemaForm.None && ns != attribute.Namespace)
@@ -1761,13 +2559,27 @@ namespace System.Xml.Serialization
                         }
                         attribute.CheckSpecial();
                         CheckForm(attribute.Form, ns != attribute.Namespace);
-                        attribute.Mapping = ImportTypeMapping(_modelScope.GetTypeModel(accessorType), ns, ImportContext.Attribute, a.XmlAttribute.DataType, null, limiter);
-                        attribute.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
+                        attribute.Mapping = ImportTypeMapping(
+                            _modelScope.GetTypeModel(accessorType),
+                            ns,
+                            ImportContext.Attribute,
+                            a.XmlAttribute.DataType,
+                            null,
+                            limiter
+                        );
+                        attribute.Default = GetDefaultValue(
+                            model.FieldTypeDesc,
+                            model.FieldType,
+                            a
+                        );
                         attribute.Any = a.XmlAnyAttribute != null;
                         if (attribute.Form == XmlSchemaForm.Qualified && attribute.Namespace != ns)
                         {
                             _xsdAttributes ??= new NameTable();
-                            attribute = (AttributeAccessor)ReconcileAccessor(attribute, _xsdAttributes);
+                            attribute = (AttributeAccessor)ReconcileAccessor(
+                                attribute,
+                                _xsdAttributes
+                            );
                         }
                         accessor.Attribute = attribute;
                     }
@@ -1776,10 +2588,19 @@ namespace System.Xml.Serialization
                         if (a.XmlText != null)
                         {
                             if (a.XmlText.Type != null && a.XmlText.Type != accessorType)
-                                throw new InvalidOperationException(SR.Format(SR.XmlIllegalType, "XmlText"));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.XmlIllegalType, "XmlText")
+                                );
                             TextAccessor text = new TextAccessor();
                             text.Name = accessorName; // unused except to make more helpful error messages
-                            text.Mapping = ImportTypeMapping(_modelScope.GetTypeModel(accessorType), ns, ImportContext.Text, a.XmlText.DataType, null, limiter);
+                            text.Mapping = ImportTypeMapping(
+                                _modelScope.GetTypeModel(accessorType),
+                                ns,
+                                ImportContext.Text,
+                                a.XmlText.DataType,
+                                null,
+                                limiter
+                            );
                             accessor.Text = text;
                         }
                         else if (a.XmlElements.Count == 0)
@@ -1793,23 +2614,55 @@ namespace System.Xml.Serialization
                             if (xmlElement!.Type != null)
                             {
                                 if (_typeScope.GetTypeDesc(xmlElement.Type) != accessor.TypeDesc)
-                                    throw new InvalidOperationException(SR.Format(SR.XmlIllegalType, "XmlElement"));
+                                    throw new InvalidOperationException(
+                                        SR.Format(SR.XmlIllegalType, "XmlElement")
+                                    );
                             }
                             ElementAccessor element = new ElementAccessor();
-                            element.Name = XmlConvert.EncodeLocalName(xmlElement.ElementName.Length == 0 ? accessorName : xmlElement.ElementName);
+                            element.Name = XmlConvert.EncodeLocalName(
+                                xmlElement.ElementName.Length == 0
+                                    ? accessorName
+                                    : xmlElement.ElementName
+                            );
                             element.Namespace = rpc ? null : xmlElement.Namespace ?? ns;
                             TypeModel typeModel = _modelScope.GetTypeModel(accessorType);
-                            element.Mapping = ImportTypeMapping(typeModel, rpc ? ns : element.Namespace, ImportContext.Element, xmlElement.DataType, null, limiter);
+                            element.Mapping = ImportTypeMapping(
+                                typeModel,
+                                rpc ? ns : element.Namespace,
+                                ImportContext.Element,
+                                xmlElement.DataType,
+                                null,
+                                limiter
+                            );
                             if (element.Mapping.TypeDesc!.Kind == TypeKind.Node)
                             {
                                 element.Any = true;
                             }
-                            element.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
-                            if (xmlElement.GetIsNullableSpecified() && !xmlElement.IsNullable && typeModel.TypeDesc.IsOptionalValue)
+                            element.Default = GetDefaultValue(
+                                model.FieldTypeDesc,
+                                model.FieldType,
+                                a
+                            );
+                            if (
+                                xmlElement.GetIsNullableSpecified()
+                                && !xmlElement.IsNullable
+                                && typeModel.TypeDesc.IsOptionalValue
+                            )
                                 //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
-                                throw new InvalidOperationException(SR.Format(SR.XmlInvalidNotNullable, typeModel.TypeDesc.BaseTypeDesc!.FullName, "XmlElement"));
-                            element.IsNullable = xmlElement.GetIsNullableSpecified() ? xmlElement.IsNullable : typeModel.TypeDesc.IsOptionalValue;
-                            element.Form = rpc ? XmlSchemaForm.Unqualified : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault : xmlElement.Form;
+                                throw new InvalidOperationException(
+                                    SR.Format(
+                                        SR.XmlInvalidNotNullable,
+                                        typeModel.TypeDesc.BaseTypeDesc!.FullName,
+                                        "XmlElement"
+                                    )
+                                );
+                            element.IsNullable = xmlElement.GetIsNullableSpecified()
+                                ? xmlElement.IsNullable
+                                : typeModel.TypeDesc.IsOptionalValue;
+                            element.Form =
+                                rpc ? XmlSchemaForm.Unqualified
+                                : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault
+                                : xmlElement.Form;
 
                             CheckNullable(element.IsNullable, accessor.TypeDesc, element.Mapping);
                             if (!rpc)
@@ -1820,7 +2673,9 @@ namespace System.Xml.Serialization
                             if (xmlElement.Order != -1)
                             {
                                 if (xmlElement.Order != sequenceId && sequenceId != -1)
-                                    throw new InvalidOperationException(SR.Format(SR.XmlSequenceMatch, "Order"));
+                                    throw new InvalidOperationException(
+                                        SR.Format(SR.XmlSequenceMatch, "Order")
+                                    );
                                 sequenceId = xmlElement.Order;
                             }
                             AddUniqueAccessor(elements, element);
@@ -1835,7 +2690,14 @@ namespace System.Xml.Serialization
 
                     if (accessorType != typeof(System.Xml.Serialization.XmlSerializerNamespaces))
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlXmlnsInvalidType, accessorName, accessorType.FullName, typeof(System.Xml.Serialization.XmlSerializerNamespaces).FullName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlXmlnsInvalidType,
+                                accessorName,
+                                accessorType.FullName,
+                                typeof(System.Xml.Serialization.XmlSerializerNamespaces).FullName
+                            )
+                        );
                     }
                     accessor.Xmlns = new XmlnsAccessor();
                     accessor.Ignore = true;
@@ -1846,11 +2708,20 @@ namespace System.Xml.Serialization
                     {
                         if (accessor.TypeDesc.Kind == TypeKind.Serializable)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalAttrOrTextInterface, accessorName, accessor.TypeDesc.FullName, nameof(IXmlSerializable)));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlIllegalAttrOrTextInterface,
+                                    accessorName,
+                                    accessor.TypeDesc.FullName,
+                                    nameof(IXmlSerializable)
+                                )
+                            );
                         }
                         else
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalAttrOrText, accessorName, accessor.TypeDesc));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlIllegalAttrOrText, accessorName, accessor.TypeDesc)
+                            );
                         }
                     }
                     if (a.XmlElements.Count == 0 && a.XmlAnyElements.Count == 0)
@@ -1863,21 +2734,52 @@ namespace System.Xml.Serialization
                         ElementAccessor element = new ElementAccessor();
                         TypeModel typeModel = _modelScope.GetTypeModel(targetType);
                         element.Namespace = rpc ? null : xmlElement.Namespace ?? ns;
-                        element.Mapping = ImportTypeMapping(typeModel, rpc ? ns : element.Namespace, ImportContext.Element, xmlElement.DataType, null, false, openModel, limiter);
+                        element.Mapping = ImportTypeMapping(
+                            typeModel,
+                            rpc ? ns : element.Namespace,
+                            ImportContext.Element,
+                            xmlElement.DataType,
+                            null,
+                            false,
+                            openModel,
+                            limiter
+                        );
                         if (a.XmlElements.Count == 1)
                         {
-                            element.Name = XmlConvert.EncodeLocalName(xmlElement.ElementName.Length == 0 ? accessorName : xmlElement.ElementName);
+                            element.Name = XmlConvert.EncodeLocalName(
+                                xmlElement.ElementName.Length == 0
+                                    ? accessorName
+                                    : xmlElement.ElementName
+                            );
                         }
                         else
                         {
-                            element.Name = xmlElement.ElementName.Length == 0 ? element.Mapping.DefaultElementName : XmlConvert.EncodeLocalName(xmlElement.ElementName);
+                            element.Name =
+                                xmlElement.ElementName.Length == 0
+                                    ? element.Mapping.DefaultElementName
+                                    : XmlConvert.EncodeLocalName(xmlElement.ElementName);
                         }
                         element.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
-                        if (xmlElement.GetIsNullableSpecified() && !xmlElement.IsNullable && typeModel.TypeDesc.IsOptionalValue)
+                        if (
+                            xmlElement.GetIsNullableSpecified()
+                            && !xmlElement.IsNullable
+                            && typeModel.TypeDesc.IsOptionalValue
+                        )
                             //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
-                            throw new InvalidOperationException(SR.Format(SR.XmlInvalidNotNullable, typeModel.TypeDesc.BaseTypeDesc!.FullName, "XmlElement"));
-                        element.IsNullable = xmlElement.GetIsNullableSpecified() ? xmlElement.IsNullable : typeModel.TypeDesc.IsOptionalValue;
-                        element.Form = rpc ? XmlSchemaForm.Unqualified : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault : xmlElement.Form;
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlInvalidNotNullable,
+                                    typeModel.TypeDesc.BaseTypeDesc!.FullName,
+                                    "XmlElement"
+                                )
+                            );
+                        element.IsNullable = xmlElement.GetIsNullableSpecified()
+                            ? xmlElement.IsNullable
+                            : typeModel.TypeDesc.IsOptionalValue;
+                        element.Form =
+                            rpc ? XmlSchemaForm.Unqualified
+                            : xmlElement.Form == XmlSchemaForm.None ? elementFormDefault
+                            : xmlElement.Form;
                         CheckNullable(element.IsNullable, targetTypeDesc, element.Mapping);
 
                         if (!rpc)
@@ -1888,7 +2790,9 @@ namespace System.Xml.Serialization
                         if (xmlElement.Order != -1)
                         {
                             if (xmlElement.Order != sequenceId && sequenceId != -1)
-                                throw new InvalidOperationException(SR.Format(SR.XmlSequenceMatch, "Order"));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.XmlSequenceMatch, "Order")
+                                );
                             sequenceId = xmlElement.Order;
                         }
                         AddUniqueAccessor(elements, element);
@@ -1898,12 +2802,22 @@ namespace System.Xml.Serialization
                     for (int i = 0; i < a.XmlAnyElements.Count; i++)
                     {
                         XmlAnyElementAttribute xmlAnyElement = a.XmlAnyElements[i]!;
-                        Type targetType = typeof(IXmlSerializable).IsAssignableFrom(accessorType) ? accessorType : typeof(XmlNode).IsAssignableFrom(accessorType) ? accessorType : typeof(XmlElement);
+                        Type targetType =
+                            typeof(IXmlSerializable).IsAssignableFrom(accessorType) ? accessorType
+                            : typeof(XmlNode).IsAssignableFrom(accessorType) ? accessorType
+                            : typeof(XmlElement);
                         if (!accessorType.IsAssignableFrom(targetType))
-                            throw new InvalidOperationException(SR.Format(SR.XmlIllegalAnyElement, accessorType.FullName));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.XmlIllegalAnyElement, accessorType.FullName)
+                            );
 
-                        string anyName = xmlAnyElement.Name.Length == 0 ? xmlAnyElement.Name : XmlConvert.EncodeLocalName(xmlAnyElement.Name);
-                        string? anyNs = xmlAnyElement.GetNamespaceSpecified() ? xmlAnyElement.Namespace : null;
+                        string anyName =
+                            xmlAnyElement.Name.Length == 0
+                                ? xmlAnyElement.Name
+                                : XmlConvert.EncodeLocalName(xmlAnyElement.Name);
+                        string? anyNs = xmlAnyElement.GetNamespaceSpecified()
+                            ? xmlAnyElement.Namespace
+                            : null;
                         if (anys[anyName, anyNs] != null)
                         {
                             // ignore duplicate anys
@@ -1912,7 +2826,14 @@ namespace System.Xml.Serialization
                         anys[anyName, anyNs] = xmlAnyElement;
                         if (elements[anyName, anyNs ?? ns] != null)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.XmlAnyElementDuplicate, accessorName, xmlAnyElement.Name, xmlAnyElement.Namespace ?? "null"));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlAnyElementDuplicate,
+                                    accessorName,
+                                    xmlAnyElement.Name,
+                                    xmlAnyElement.Namespace ?? "null"
+                                )
+                            );
                         }
                         ElementAccessor element = new ElementAccessor();
                         element.Name = anyName;
@@ -1924,7 +2845,16 @@ namespace System.Xml.Serialization
 
                         if (element.Name.Length > 0)
                             typeModel.TypeDesc.IsMixed = true;
-                        element.Mapping = ImportTypeMapping(typeModel, element.Namespace, ImportContext.Element, string.Empty, null, false, openModel, limiter);
+                        element.Mapping = ImportTypeMapping(
+                            typeModel,
+                            element.Namespace,
+                            ImportContext.Element,
+                            string.Empty,
+                            null,
+                            false,
+                            openModel,
+                            limiter
+                        );
                         element.Default = GetDefaultValue(model.FieldTypeDesc, model.FieldType, a);
                         element.IsNullable = false;
                         element.Form = elementFormDefault;
@@ -1937,7 +2867,9 @@ namespace System.Xml.Serialization
                         if (xmlAnyElement.Order != -1)
                         {
                             if (xmlAnyElement.Order != sequenceId && sequenceId != -1)
-                                throw new InvalidOperationException(SR.Format(SR.XmlSequenceMatch, "Order"));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.XmlSequenceMatch, "Order")
+                                );
                             sequenceId = xmlAnyElement.Order;
                         }
                         elements.Add(element.Name, element.Namespace, element);
@@ -1950,11 +2882,19 @@ namespace System.Xml.Serialization
 
             if (rpc)
             {
-                if (accessor.TypeDesc.IsArrayLike && accessor.Elements.Length > 0 && !(accessor.Elements[0].Mapping is ArrayMapping))
-                    throw new InvalidOperationException(SR.Format(SR.XmlRpcLitArrayElement, accessor.Elements[0].Name));
+                if (
+                    accessor.TypeDesc.IsArrayLike
+                    && accessor.Elements.Length > 0
+                    && !(accessor.Elements[0].Mapping is ArrayMapping)
+                )
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlRpcLitArrayElement, accessor.Elements[0].Name)
+                    );
 
                 if (accessor.Xmlns != null)
-                    throw new InvalidOperationException(SR.Format(SR.XmlRpcLitXmlns, accessor.Name));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlRpcLitXmlns, accessor.Name)
+                    );
             }
 
             if (accessor.ChoiceIdentifier != null)
@@ -1975,21 +2915,32 @@ namespace System.Xml.Serialization
                             string anyNs = element.AnyNamespaces ?? "##any";
                             if (xmlName.Substring(0, xmlName.Length - 1) == anyNs)
                             {
-                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping.Constants[j].Name;
+                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping
+                                    .Constants[j]
+                                    .Name;
                                 found = true;
                                 break;
                             }
                             continue;
                         }
                         int colon = xmlName.LastIndexOf(':');
-                        string? choiceNs = colon < 0 ? choiceMapping.Namespace : xmlName.Substring(0, colon);
+                        string? choiceNs =
+                            colon < 0 ? choiceMapping.Namespace : xmlName.Substring(0, colon);
                         string choiceName = colon < 0 ? xmlName : xmlName.Substring(colon + 1);
 
                         if (element.Name == choiceName)
                         {
-                            if ((element.Form == XmlSchemaForm.Unqualified && string.IsNullOrEmpty(choiceNs)) || element.Namespace == choiceNs)
+                            if (
+                                (
+                                    element.Form == XmlSchemaForm.Unqualified
+                                    && string.IsNullOrEmpty(choiceNs)
+                                )
+                                || element.Namespace == choiceNs
+                            )
                             {
-                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping.Constants[j].Name;
+                                accessor.ChoiceIdentifier.MemberIds[i] = choiceMapping
+                                    .Constants[j]
+                                    .Name;
                                 found = true;
                                 break;
                             }
@@ -2000,13 +2951,29 @@ namespace System.Xml.Serialization
                         if (element.Any && element.Name.Length == 0)
                         {
                             // Type {0} is missing enumeration value '##any' for XmlAnyElementAttribute.
-                            throw new InvalidOperationException(SR.Format(SR.XmlChoiceMissingAnyValue, accessor.ChoiceIdentifier.Mapping!.TypeDesc!.FullName));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlChoiceMissingAnyValue,
+                                    accessor.ChoiceIdentifier.Mapping!.TypeDesc!.FullName
+                                )
+                            );
                         }
                         else
                         {
-                            string id = element.Namespace != null && element.Namespace.Length > 0 ? $"{element.Namespace}:{element.Name}" : element.Name;
+                            string id =
+                                element.Namespace != null && element.Namespace.Length > 0
+                                    ? $"{element.Namespace}:{element.Name}"
+                                    : element.Name;
                             // Type {0} is missing value for '{1}'.
-                            throw new InvalidOperationException(SR.Format(SR.XmlChoiceMissingValue, accessor.ChoiceIdentifier.Mapping!.TypeDesc!.FullName, id, element.Name, element.Namespace));
+                            throw new InvalidOperationException(
+                                SR.Format(
+                                    SR.XmlChoiceMissingValue,
+                                    accessor.ChoiceIdentifier.Mapping!.TypeDesc!.FullName,
+                                    id,
+                                    element.Name,
+                                    element.Namespace
+                                )
+                            );
                         }
                     }
                 }
@@ -2016,7 +2983,6 @@ namespace System.Xml.Serialization
             _savedArrayNamespace = previousArrayNamespace;
         }
 
-
         private static void CheckTopLevelAttributes(XmlAttributes a)
         {
             XmlAttributeFlags flags = a.XmlFlags;
@@ -2024,7 +2990,16 @@ namespace System.Xml.Serialization
             if ((flags & (XmlAttributeFlags.Attribute | XmlAttributeFlags.AnyAttribute)) != 0)
                 throw new InvalidOperationException(SR.XmlRpcLitAttributeAttributes);
 
-            if ((flags & (XmlAttributeFlags.Text | XmlAttributeFlags.AnyElements | XmlAttributeFlags.ChoiceIdentifier)) != 0)
+            if (
+                (
+                    flags
+                    & (
+                        XmlAttributeFlags.Text
+                        | XmlAttributeFlags.AnyElements
+                        | XmlAttributeFlags.ChoiceIdentifier
+                    )
+                ) != 0
+            )
                 throw new InvalidOperationException(SR.XmlRpcLitAttributes);
 
             if (a.XmlElements != null && a.XmlElements.Count > 0)
@@ -2036,16 +3011,22 @@ namespace System.Xml.Serialization
                 XmlElementAttribute xmlElement = a.XmlElements[0]!;
                 if (xmlElement.Namespace != null)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlRpcLitElementNamespace, "Namespace", xmlElement.Namespace));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlRpcLitElementNamespace, "Namespace", xmlElement.Namespace)
+                    );
                 }
                 if (xmlElement.IsNullable)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlRpcLitElementNullable, "IsNullable", "true"));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlRpcLitElementNullable, "IsNullable", "true")
+                    );
                 }
             }
             if (a.XmlArray != null && a.XmlArray.Namespace != null)
             {
-                throw new InvalidOperationException(SR.Format(SR.XmlRpcLitElementNamespace, "Namespace", a.XmlArray.Namespace));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlRpcLitElementNamespace, "Namespace", a.XmlArray.Namespace)
+                );
             }
         }
 
@@ -2062,7 +3043,13 @@ namespace System.Xml.Serialization
                     if (choiceTypes.Contains(type))
                     {
                         // You need to add {0} to the '{1}'.
-                        throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierMissing, nameof(XmlChoiceIdentifierAttribute), accessorName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlChoiceIdentifierMissing,
+                                nameof(XmlChoiceIdentifierAttribute),
+                                accessorName
+                            )
+                        );
                     }
                     else
                     {
@@ -2073,7 +3060,13 @@ namespace System.Xml.Serialization
             if (choiceTypes.Contains(typeof(XmlElement)) && a.XmlAnyElements.Count > 0)
             {
                 // You need to add {0} to the '{1}'.
-                throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdentifierMissing, nameof(XmlChoiceIdentifierAttribute), accessorName));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.XmlChoiceIdentifierMissing,
+                        nameof(XmlChoiceIdentifierAttribute),
+                        accessorName
+                    )
+                );
             }
 
             XmlArrayItemAttributes items = a.XmlArrayItems;
@@ -2085,10 +3078,21 @@ namespace System.Xml.Serialization
                 {
                     Type type = items[i]!.Type == null ? accessorType : items[i]!.Type!;
                     string ns = items[i]!.NestingLevel.ToString(CultureInfo.InvariantCulture);
-                    XmlArrayItemAttribute? item = (XmlArrayItemAttribute?)arrayTypes[type.FullName, ns];
+                    XmlArrayItemAttribute? item = (XmlArrayItemAttribute?)
+                        arrayTypes[type.FullName, ns];
                     if (item != null)
                     {
-                        throw new InvalidOperationException(SR.Format(SR.XmlArrayItemAmbiguousTypes, accessorName, item.ElementName, items[i]!.ElementName, nameof(XmlElementAttribute), nameof(XmlChoiceIdentifierAttribute), accessorName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlArrayItemAmbiguousTypes,
+                                accessorName,
+                                item.ElementName,
+                                items[i]!.ElementName,
+                                nameof(XmlElementAttribute),
+                                nameof(XmlChoiceIdentifierAttribute),
+                                accessorName
+                            )
+                        );
                     }
                     else
                     {
@@ -2111,7 +3115,9 @@ namespace System.Xml.Serialization
                 if (ids[choiceName, choiceNs] != null)
                 {
                     // Enum values in the XmlChoiceIdentifier '{0}' have to be unique.  Value '{1}' already present.
-                    throw new InvalidOperationException(SR.Format(SR.XmlChoiceIdDuplicate, choiceMapping.TypeName, choiceId));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlChoiceIdDuplicate, choiceMapping.TypeName, choiceId)
+                    );
                 }
                 ids.Add(choiceName, choiceNs, choiceMapping.Constants[i]);
             }
@@ -2119,7 +3125,8 @@ namespace System.Xml.Serialization
 
         private static object? GetDefaultValue(TypeDesc fieldTypeDesc, Type t, XmlAttributes a)
         {
-            if (a.XmlDefaultValue == null || a.XmlDefaultValue == DBNull.Value) return null;
+            if (a.XmlDefaultValue == null || a.XmlDefaultValue == DBNull.Value)
+                return null;
             if (!(fieldTypeDesc.Kind == TypeKind.Primitive || fieldTypeDesc.Kind == TypeKind.Enum))
             {
                 //throw new InvalidOperationException(SR.XmlIllegalDefault);
@@ -2132,7 +3139,13 @@ namespace System.Xml.Serialization
                 string strValue = Enum.Format(t, a.XmlDefaultValue, "G").Replace(",", " ");
                 string numValue = Enum.Format(t, a.XmlDefaultValue, "D");
                 if (strValue == numValue) // means enum value wasn't recognized
-                    throw new InvalidOperationException(SR.Format(SR.XmlInvalidDefaultValue, strValue, a.XmlDefaultValue.GetType().FullName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.XmlInvalidDefaultValue,
+                            strValue,
+                            a.XmlDefaultValue.GetType().FullName
+                        )
+                    );
                 return strValue;
             }
             return a.XmlDefaultValue;
@@ -2165,15 +3178,24 @@ namespace System.Xml.Serialization
             {
                 if (accessor is ElementAccessor)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.XmlDuplicateElementName, existing.Name, existing.Namespace));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlDuplicateElementName, existing.Name, existing.Namespace)
+                    );
                 }
                 else
                 {
 #if DEBUG
                     if (!(accessor is AttributeAccessor))
-                        throw new InvalidOperationException(SR.Format(SR.XmlInternalErrorDetails, "Bad accessor type " + accessor.GetType().FullName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlInternalErrorDetails,
+                                "Bad accessor type " + accessor.GetType().FullName
+                            )
+                        );
 #endif
-                    throw new InvalidOperationException(SR.Format(SR.XmlDuplicateAttributeName, existing.Name, existing.Namespace));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.XmlDuplicateAttributeName, existing.Name, existing.Namespace)
+                    );
                 }
             }
             else
@@ -2182,7 +3204,12 @@ namespace System.Xml.Serialization
             }
         }
 
-        private static void AddUniqueAccessor(MemberMapping member, INameScope elements, INameScope attributes, bool isSequence)
+        private static void AddUniqueAccessor(
+            MemberMapping member,
+            INameScope elements,
+            INameScope attributes,
+            bool isSequence
+        )
         {
             if (member.Attribute != null)
             {
@@ -2199,14 +3226,20 @@ namespace System.Xml.Serialization
 
         private static void CheckForm(XmlSchemaForm form, bool isQualified)
         {
-            if (isQualified && form == XmlSchemaForm.Unqualified) throw new InvalidOperationException(SR.XmlInvalidFormUnqualified);
+            if (isQualified && form == XmlSchemaForm.Unqualified)
+                throw new InvalidOperationException(SR.XmlInvalidFormUnqualified);
         }
 
         private static void CheckNullable(bool isNullable, TypeDesc typeDesc, TypeMapping? mapping)
         {
-            if (mapping is NullableMapping) return;
-            if (mapping is SerializableMapping) return;
-            if (isNullable && !typeDesc.IsNullable) throw new InvalidOperationException(SR.Format(SR.XmlInvalidIsNullable, typeDesc.FullName));
+            if (mapping is NullableMapping)
+                return;
+            if (mapping is SerializableMapping)
+                return;
+            if (isNullable && !typeDesc.IsNullable)
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlInvalidIsNullable, typeDesc.FullName)
+                );
         }
 
         private static ElementAccessor CreateElementAccessor(TypeMapping mapping, string ns)
@@ -2231,7 +3264,9 @@ namespace System.Xml.Serialization
         }
 
         // will create a shallow type mapping for a top-level type
-        [RequiresUnreferencedCode("Calls TypeScope.GetTypeDesc(Type) which has RequiresUnreferencedCode")]
+        [RequiresUnreferencedCode(
+            "Calls TypeScope.GetTypeDesc(Type) which has RequiresUnreferencedCode"
+        )]
         internal static XmlTypeMapping GetTopLevelMapping(Type type, string? defaultNamespace)
         {
             defaultNamespace ??= string.Empty;
@@ -2260,6 +3295,7 @@ namespace System.Xml.Serialization
             return mapping;
         }
     }
+
     internal sealed class ImportStructWorkItem
     {
         private readonly StructModel _model;
@@ -2271,8 +3307,14 @@ namespace System.Xml.Serialization
             _mapping = mapping;
         }
 
-        internal StructModel Model { get { return _model; } }
-        internal StructMapping Mapping { get { return _mapping; } }
+        internal StructModel Model
+        {
+            get { return _model; }
+        }
+        internal StructMapping Mapping
+        {
+            get { return _mapping; }
+        }
     }
 
     internal sealed class WorkItems
@@ -2281,22 +3323,13 @@ namespace System.Xml.Serialization
 
         internal ImportStructWorkItem this[int index]
         {
-            get
-            {
-                return (ImportStructWorkItem)_list[index]!;
-            }
-            set
-            {
-                _list[index] = value;
-            }
+            get { return (ImportStructWorkItem)_list[index]!; }
+            set { _list[index] = value; }
         }
 
         internal int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         internal void Add(ImportStructWorkItem item)
@@ -2337,8 +3370,15 @@ namespace System.Xml.Serialization
             _maxDepth = DiagnosticsSwitches.NonRecursiveTypeLoading.Enabled ? 1 : int.MaxValue;
         }
 
-        internal bool IsExceededLimit { get { return _depth > _maxDepth; } }
-        internal int Depth { get { return _depth; } set { _depth = value; } }
+        internal bool IsExceededLimit
+        {
+            get { return _depth > _maxDepth; }
+        }
+        internal int Depth
+        {
+            get { return _depth; }
+            set { _depth = value; }
+        }
 
         internal WorkItems DeferredWorkItems => _deferredWorkItems ??= new WorkItems();
     }

@@ -18,9 +18,14 @@ namespace System.Formats.Tar.Tests
         public async Task WriteRegularFile_Async()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            await using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            await using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
-                V7TarEntry oldRegularFile = new V7TarEntry(TarEntryType.V7RegularFile, InitialEntryName);
+                V7TarEntry oldRegularFile = new V7TarEntry(
+                    TarEntryType.V7RegularFile,
+                    InitialEntryName
+                );
                 SetRegularFile(oldRegularFile);
                 VerifyRegularFile(oldRegularFile, isWritable: true);
                 await writer.WriteEntryAsync(oldRegularFile);
@@ -38,7 +43,9 @@ namespace System.Formats.Tar.Tests
         public async Task WriteHardLink_Async()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            await using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            await using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
                 V7TarEntry hardLink = new V7TarEntry(TarEntryType.HardLink, InitialEntryName);
                 SetHardLink(hardLink);
@@ -58,9 +65,14 @@ namespace System.Formats.Tar.Tests
         public async Task WriteSymbolicLink_Async()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            await using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            await using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
-                V7TarEntry symbolicLink = new V7TarEntry(TarEntryType.SymbolicLink, InitialEntryName);
+                V7TarEntry symbolicLink = new V7TarEntry(
+                    TarEntryType.SymbolicLink,
+                    InitialEntryName
+                );
                 SetSymbolicLink(symbolicLink);
                 VerifySymbolicLink(symbolicLink);
                 await writer.WriteEntryAsync(symbolicLink);
@@ -78,7 +90,9 @@ namespace System.Formats.Tar.Tests
         public async Task WriteDirectory_Async()
         {
             using MemoryStream archiveStream = new MemoryStream();
-            await using (TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true))
+            await using (
+                TarWriter writer = new TarWriter(archiveStream, TarEntryFormat.V7, leaveOpen: true)
+            )
             {
                 V7TarEntry directory = new V7TarEntry(TarEntryType.Directory, InitialEntryName);
                 SetDirectory(directory);
@@ -101,7 +115,10 @@ namespace System.Formats.Tar.Tests
         {
             await using MemoryStream archiveStream = new MemoryStream();
             await using TarWriter writer = new TarWriter(archiveStream, leaveOpen: false);
-            await Assert.ThrowsAsync<ArgumentException>("entry", () => writer.WriteEntryAsync(new V7TarEntry(entryType, "link")));
+            await Assert.ThrowsAsync<ArgumentException>(
+                "entry",
+                () => writer.WriteEntryAsync(new V7TarEntry(entryType, "link"))
+            );
         }
     }
 }

@@ -8,8 +8,10 @@ namespace System
 {
     public class ReferenceTracker
     {
-        public readonly List<WeakReference> ReferencesExpectedToBeCollected = new List<WeakReference>();
-        public readonly List<WeakReference> ReferencesNotExpectedToBeCollected = new List<WeakReference>();
+        public readonly List<WeakReference> ReferencesExpectedToBeCollected =
+            new List<WeakReference>();
+        public readonly List<WeakReference> ReferencesNotExpectedToBeCollected =
+            new List<WeakReference>();
 
         public void AddReferencesExpectedToBeCollected(params object[] objects)
         {
@@ -34,8 +36,16 @@ namespace System
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            EqualityExtensions.IsTrueForAll(ReferencesExpectedToBeCollected, wr => wr.Target == null, "Object should have been collected.");
-            EqualityExtensions.IsTrueForAll(ReferencesNotExpectedToBeCollected, wr => wr.Target != null, "Object should be have NOT been collected.");
+            EqualityExtensions.IsTrueForAll(
+                ReferencesExpectedToBeCollected,
+                wr => wr.Target == null,
+                "Object should have been collected."
+            );
+            EqualityExtensions.IsTrueForAll(
+                ReferencesNotExpectedToBeCollected,
+                wr => wr.Target != null,
+                "Object should be have NOT been collected."
+            );
         }
     }
 }

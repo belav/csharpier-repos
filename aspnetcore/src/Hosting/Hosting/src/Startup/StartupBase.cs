@@ -27,9 +27,7 @@ public abstract class StartupBase : IStartup
     /// Register services into the <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
-    public virtual void ConfigureServices(IServiceCollection services)
-    {
-    }
+    public virtual void ConfigureServices(IServiceCollection services) { }
 
     /// <summary>
     /// Creates an <see cref="IServiceProvider" /> instance for a given <see cref="ConfigureServices(IServiceCollection)" />.
@@ -46,7 +44,8 @@ public abstract class StartupBase : IStartup
 /// Base class for initializing services and middlewares used for configuring a <typeparamref name="TBuilder"/>.
 /// </summary>
 /// <typeparam name="TBuilder">The type of builder associated with the startup configuration.</typeparam>
-public abstract class StartupBase<TBuilder> : StartupBase where TBuilder : notnull
+public abstract class StartupBase<TBuilder> : StartupBase
+    where TBuilder : notnull
 {
     private readonly IServiceProviderFactory<TBuilder> _factory;
 
@@ -75,7 +74,5 @@ public abstract class StartupBase<TBuilder> : StartupBase where TBuilder : notnu
     /// Sets up the service container.
     /// </summary>
     /// <param name="builder">The builder associated with the container to configure.</param>
-    public virtual void ConfigureContainer(TBuilder builder)
-    {
-    }
+    public virtual void ConfigureContainer(TBuilder builder) { }
 }

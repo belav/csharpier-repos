@@ -62,7 +62,10 @@ namespace System.Web.Razor.Parser
                     }
                     else
                     {
-                        Context.OnError(CurrentSymbol.Start, RazorResources.ParseError_MarkupBlock_Must_Start_With_Tag);
+                        Context.OnError(
+                            CurrentSymbol.Start,
+                            RazorResources.ParseError_MarkupBlock_Must_Start_With_Tag
+                        );
                     }
                     Output(SpanKind.Markup);
                 }
@@ -78,10 +81,18 @@ namespace System.Web.Razor.Parser
         private void AfterTransition()
         {
             // "@:" => Explicit Single Line Block
-            if (CurrentSymbol.Type == HtmlSymbolType.Text && CurrentSymbol.Content.Length > 0 && CurrentSymbol.Content[0] == ':')
+            if (
+                CurrentSymbol.Type == HtmlSymbolType.Text
+                && CurrentSymbol.Content.Length > 0
+                && CurrentSymbol.Content[0] == ':'
+            )
             {
                 // Split the token
-                Tuple<HtmlSymbol, HtmlSymbol> split = Language.SplitSymbol(CurrentSymbol, 1, HtmlSymbolType.Colon);
+                Tuple<HtmlSymbol, HtmlSymbol> split = Language.SplitSymbol(
+                    CurrentSymbol,
+                    1,
+                    HtmlSymbolType.Colon
+                );
 
                 // The first part (left) is added to this span and we return a MetaCode span
                 Accept(split.Item1);
@@ -146,13 +157,15 @@ namespace System.Web.Razor.Parser
                         complete = AfterTagStart(tagStart, tags);
                     }
                 }
-            }
-            while (tags.Count > 0);
+            } while (tags.Count > 0);
 
             EndTagBlock(tags, complete);
         }
 
-        private bool AfterTagStart(SourceLocation tagStart, Stack<Tuple<HtmlSymbol, SourceLocation>> tags)
+        private bool AfterTagStart(
+            SourceLocation tagStart,
+            Stack<Tuple<HtmlSymbol, SourceLocation>> tags
+        )
         {
             if (!EndOfFile)
             {
@@ -220,13 +233,20 @@ namespace System.Web.Razor.Parser
 
         private bool CData()
         {
-            if (CurrentSymbol.Type == HtmlSymbolType.Text && String.Equals(CurrentSymbol.Content, "cdata", StringComparison.OrdinalIgnoreCase))
+            if (
+                CurrentSymbol.Type == HtmlSymbolType.Text
+                && String.Equals(CurrentSymbol.Content, "cdata", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 if (AcceptAndMoveNext())
                 {
                     if (CurrentSymbol.Type == HtmlSymbolType.LeftBracket)
                     {
-                        return AcceptUntilAll(HtmlSymbolType.RightBracket, HtmlSymbolType.RightBracket, HtmlSymbolType.CloseAngle);
+                        return AcceptUntilAll(
+                            HtmlSymbolType.RightBracket,
+                            HtmlSymbolType.RightBracket,
+                            HtmlSymbolType.CloseAngle
+                        );
                     }
                 }
             }
@@ -254,9 +274,15 @@ namespace System.Web.Razor.Parser
                 }
                 bool matched = RemoveTag(tags, tagName, tagStart);
 
-                if (tags.Count == 0 &&
-                    String.Equals(tagName, SyntaxConstants.TextTagName, StringComparison.OrdinalIgnoreCase) &&
-                    matched)
+                if (
+                    tags.Count == 0
+                    && String.Equals(
+                        tagName,
+                        SyntaxConstants.TextTagName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && matched
+                )
                 {
                     Output(SpanKind.Markup);
                     return EndTextTag(solidus);
@@ -299,11 +325,11 @@ namespace System.Web.Razor.Parser
 
         private bool IsTagRecoveryStopPoint(HtmlSymbol sym)
         {
-            return sym.Type == HtmlSymbolType.CloseAngle ||
-                   sym.Type == HtmlSymbolType.Solidus ||
-                   sym.Type == HtmlSymbolType.OpenAngle ||
-                   sym.Type == HtmlSymbolType.SingleQuote ||
-                   sym.Type == HtmlSymbolType.DoubleQuote;
+            return sym.Type == HtmlSymbolType.CloseAngle
+                || sym.Type == HtmlSymbolType.Solidus
+                || sym.Type == HtmlSymbolType.OpenAngle
+                || sym.Type == HtmlSymbolType.SingleQuote
+                || sym.Type == HtmlSymbolType.DoubleQuote;
         }
 
         private void TagContent()
@@ -343,7 +369,9 @@ namespace System.Web.Razor.Parser
         {
             // http://dev.w3.org/html5/spec/tokenization.html#before-attribute-name-state
             // Capture whitespace
-            var whitespace = ReadWhile(sym => sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine);
+            var whitespace = ReadWhile(sym =>
+                sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine
+            );
 
             if (At(HtmlSymbolType.Transition))
             {
@@ -359,12 +387,13 @@ namespace System.Web.Razor.Parser
             if (At(HtmlSymbolType.Text))
             {
                 name = ReadWhile(sym =>
-                                 sym.Type != HtmlSymbolType.WhiteSpace &&
-                                 sym.Type != HtmlSymbolType.NewLine &&
-                                 sym.Type != HtmlSymbolType.Equals &&
-                                 sym.Type != HtmlSymbolType.CloseAngle &&
-                                 sym.Type != HtmlSymbolType.OpenAngle &&
-                                 (sym.Type != HtmlSymbolType.Solidus || !NextIs(HtmlSymbolType.CloseAngle)));
+                    sym.Type != HtmlSymbolType.WhiteSpace
+                    && sym.Type != HtmlSymbolType.NewLine
+                    && sym.Type != HtmlSymbolType.Equals
+                    && sym.Type != HtmlSymbolType.CloseAngle
+                    && sym.Type != HtmlSymbolType.OpenAngle
+                    && (sym.Type != HtmlSymbolType.Solidus || !NextIs(HtmlSymbolType.CloseAngle))
+                );
             }
             else
             {
@@ -391,11 +420,17 @@ namespace System.Web.Razor.Parser
             }
         }
 
-        private void AttributePrefix(IEnumerable<HtmlSymbol> whitespace, IEnumerable<HtmlSymbol> nameSymbols)
+        private void AttributePrefix(
+            IEnumerable<HtmlSymbol> whitespace,
+            IEnumerable<HtmlSymbol> nameSymbols
+        )
         {
             // First, determine if this is a 'data-' attribute (since those can't use conditional attributes)
             LocationTagged<string> name = nameSymbols.GetContent(Span.Start);
-            bool attributeCanBeConditional = !name.Value.StartsWith("data-", StringComparison.OrdinalIgnoreCase);
+            bool attributeCanBeConditional = !name.Value.StartsWith(
+                "data-",
+                StringComparison.OrdinalIgnoreCase
+            );
 
             // Accept the whitespace and name
             Accept(whitespace);
@@ -424,7 +459,10 @@ namespace System.Web.Razor.Parser
                 }
 
                 // Capture the suffix
-                LocationTagged<string> suffix = new LocationTagged<string>(String.Empty, CurrentLocation);
+                LocationTagged<string> suffix = new LocationTagged<string>(
+                    String.Empty,
+                    CurrentLocation
+                );
                 if (quote != HtmlSymbolType.Unknown && At(quote))
                 {
                     suffix = CurrentSymbol.GetContent();
@@ -439,7 +477,10 @@ namespace System.Web.Razor.Parser
 
                 // Create the block code generator
                 Context.CurrentBlock.CodeGenerator = new AttributeBlockCodeGenerator(
-                    name, prefix, suffix);
+                    name,
+                    prefix,
+                    suffix
+                );
             }
             else
             {
@@ -456,7 +497,9 @@ namespace System.Web.Razor.Parser
         private void AttributeValue(HtmlSymbolType quote)
         {
             SourceLocation prefixStart = CurrentLocation;
-            var prefix = ReadWhile(sym => sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine);
+            var prefix = ReadWhile(sym =>
+                sym.Type == HtmlSymbolType.WhiteSpace || sym.Type == HtmlSymbolType.NewLine
+            );
             Accept(prefix);
 
             if (At(HtmlSymbolType.Transition))
@@ -470,19 +513,28 @@ namespace System.Web.Razor.Parser
                 // Dynamic value, start a new block and set the code generator
                 using (Context.StartBlock(BlockType.Markup))
                 {
-                    Context.CurrentBlock.CodeGenerator = new DynamicAttributeBlockCodeGenerator(prefix.GetContent(prefixStart), valueStart);
+                    Context.CurrentBlock.CodeGenerator = new DynamicAttributeBlockCodeGenerator(
+                        prefix.GetContent(prefixStart),
+                        valueStart
+                    );
 
                     OtherParserBlock();
                 }
             }
-            else if (At(HtmlSymbolType.Text) && CurrentSymbol.Content.Length > 0 && CurrentSymbol.Content[0] == '~' && NextIs(HtmlSymbolType.Solidus))
+            else if (
+                At(HtmlSymbolType.Text)
+                && CurrentSymbol.Content.Length > 0
+                && CurrentSymbol.Content[0] == '~'
+                && NextIs(HtmlSymbolType.Solidus)
+            )
             {
                 // Virtual Path value
                 SourceLocation valueStart = CurrentLocation;
                 VirtualPath();
                 Span.CodeGenerator = new LiteralAttributeCodeGenerator(
                     prefix.GetContent(prefixStart),
-                    new LocationTagged<SpanCodeGenerator>(new ResolveUrlCodeGenerator(), valueStart));
+                    new LocationTagged<SpanCodeGenerator>(new ResolveUrlCodeGenerator(), valueStart)
+                );
             }
             else
             {
@@ -490,38 +542,46 @@ namespace System.Web.Razor.Parser
                 // 'quote' should be "Unknown" if not quoted and symbols coming from the tokenizer should never have "Unknown" type.
                 var value = ReadWhile(sym =>
                     // These three conditions find separators which break the attribute value into portions
-                                      sym.Type != HtmlSymbolType.WhiteSpace &&
-                                      sym.Type != HtmlSymbolType.NewLine &&
-                                      sym.Type != HtmlSymbolType.Transition &&
-                                          // This condition checks for the end of the attribute value (it repeats some of the checks above but for now that's ok)
-                                      !IsEndOfAttributeValue(quote, sym));
+                    sym.Type != HtmlSymbolType.WhiteSpace
+                    && sym.Type != HtmlSymbolType.NewLine
+                    && sym.Type != HtmlSymbolType.Transition
+                    &&
+                    // This condition checks for the end of the attribute value (it repeats some of the checks above but for now that's ok)
+                    !IsEndOfAttributeValue(quote, sym)
+                );
                 Accept(value);
-                Span.CodeGenerator = new LiteralAttributeCodeGenerator(prefix.GetContent(prefixStart), value.GetContent(prefixStart));
+                Span.CodeGenerator = new LiteralAttributeCodeGenerator(
+                    prefix.GetContent(prefixStart),
+                    value.GetContent(prefixStart)
+                );
             }
             Output(SpanKind.Markup);
         }
 
         private bool IsEndOfAttributeValue(HtmlSymbolType quote, HtmlSymbol sym)
         {
-            return EndOfFile || sym == null ||
-                   (quote != HtmlSymbolType.Unknown
+            return EndOfFile
+                || sym == null
+                || (
+                    quote != HtmlSymbolType.Unknown
                         ? sym.Type == quote // If quoted, just wait for the quote
-                        : IsUnquotedEndOfAttributeValue(sym));
+                        : IsUnquotedEndOfAttributeValue(sym)
+                );
         }
 
         private bool IsUnquotedEndOfAttributeValue(HtmlSymbol sym)
         {
-            // If unquoted, we have a larger set of terminating characters: 
+            // If unquoted, we have a larger set of terminating characters:
             // http://dev.w3.org/html5/spec/tokenization.html#attribute-value-unquoted-state
             // Also we need to detect "/" and ">"
-            return sym.Type == HtmlSymbolType.DoubleQuote ||
-                   sym.Type == HtmlSymbolType.SingleQuote ||
-                   sym.Type == HtmlSymbolType.OpenAngle ||
-                   sym.Type == HtmlSymbolType.Equals ||
-                   (sym.Type == HtmlSymbolType.Solidus && NextIs(HtmlSymbolType.CloseAngle)) ||
-                   sym.Type == HtmlSymbolType.CloseAngle ||
-                   sym.Type == HtmlSymbolType.WhiteSpace ||
-                   sym.Type == HtmlSymbolType.NewLine;
+            return sym.Type == HtmlSymbolType.DoubleQuote
+                || sym.Type == HtmlSymbolType.SingleQuote
+                || sym.Type == HtmlSymbolType.OpenAngle
+                || sym.Type == HtmlSymbolType.Equals
+                || (sym.Type == HtmlSymbolType.Solidus && NextIs(HtmlSymbolType.CloseAngle))
+                || sym.Type == HtmlSymbolType.CloseAngle
+                || sym.Type == HtmlSymbolType.WhiteSpace
+                || sym.Type == HtmlSymbolType.NewLine;
         }
 
         private void VirtualPath()
@@ -530,7 +590,13 @@ namespace System.Web.Razor.Parser
             Debug.Assert(CurrentSymbol.Content.Length > 0 && CurrentSymbol.Content[0] == '~');
 
             // Parse until a transition symbol, whitespace, newline or quote. We support only a fairly minimal subset of Virtual Paths
-            AcceptUntil(HtmlSymbolType.Transition, HtmlSymbolType.WhiteSpace, HtmlSymbolType.NewLine, HtmlSymbolType.SingleQuote, HtmlSymbolType.DoubleQuote);
+            AcceptUntil(
+                HtmlSymbolType.Transition,
+                HtmlSymbolType.WhiteSpace,
+                HtmlSymbolType.NewLine,
+                HtmlSymbolType.SingleQuote,
+                HtmlSymbolType.DoubleQuote
+            );
 
             // Output a Virtual Path span
             Span.EditHandler.EditorHints = EditorHints.VirtualPath;
@@ -598,7 +664,14 @@ namespace System.Web.Razor.Parser
 
             Tuple<HtmlSymbol, SourceLocation> tag = Tuple.Create(tagName, _lastTagStart);
 
-            if (tags.Count == 0 && String.Equals(tag.Item1.Content, SyntaxConstants.TextTagName, StringComparison.OrdinalIgnoreCase))
+            if (
+                tags.Count == 0
+                && String.Equals(
+                    tag.Item1.Content,
+                    SyntaxConstants.TextTagName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 Output(SpanKind.Markup);
                 Span.CodeGenerator = SpanCodeGenerator.Null;
@@ -624,7 +697,10 @@ namespace System.Web.Razor.Parser
                 {
                     Context.Source.Position = bookmark;
                     NextToken();
-                    Context.OnError(tag.Item2, RazorResources.ParseError_TextTagCannotContainAttributes);
+                    Context.OnError(
+                        tag.Item2,
+                        RazorResources.ParseError_TextTagCannotContainAttributes
+                    );
                 }
                 else
                 {
@@ -644,7 +720,10 @@ namespace System.Web.Razor.Parser
             return RestOfTag(tag, tags);
         }
 
-        private bool RestOfTag(Tuple<HtmlSymbol, SourceLocation> tag, Stack<Tuple<HtmlSymbol, SourceLocation>> tags)
+        private bool RestOfTag(
+            Tuple<HtmlSymbol, SourceLocation> tag,
+            Stack<Tuple<HtmlSymbol, SourceLocation>> tags
+        )
         {
             TagContent();
 
@@ -666,7 +745,11 @@ namespace System.Web.Razor.Parser
             bool seenClose = Optional(HtmlSymbolType.CloseAngle);
             if (!seenClose)
             {
-                Context.OnError(tag.Item2, RazorResources.ParseError_UnfinishedTag, tag.Item1.Content);
+                Context.OnError(
+                    tag.Item2,
+                    RazorResources.ParseError_UnfinishedTag,
+                    tag.Item1.Content
+                );
             }
             else
             {
@@ -682,7 +765,9 @@ namespace System.Web.Razor.Parser
                         int bookmark = CurrentLocation.AbsoluteIndex;
 
                         // Skip whitespace
-                        IEnumerable<HtmlSymbol> ws = ReadWhile(IsSpacingToken(includeNewLines: true));
+                        IEnumerable<HtmlSymbol> ws = ReadWhile(
+                            IsSpacingToken(includeNewLines: true)
+                        );
 
                         // Open Angle
                         if (At(HtmlSymbolType.OpenAngle) && NextIs(HtmlSymbolType.Solidus))
@@ -692,7 +777,14 @@ namespace System.Web.Razor.Parser
                             Assert(HtmlSymbolType.Solidus);
                             HtmlSymbol solidus = CurrentSymbol;
                             NextToken();
-                            if (At(HtmlSymbolType.Text) && String.Equals(CurrentSymbol.Content, tagName, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                At(HtmlSymbolType.Text)
+                                && String.Equals(
+                                    CurrentSymbol.Content,
+                                    tagName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 // Accept up to here
                                 Accept(ws);
@@ -738,13 +830,24 @@ namespace System.Web.Razor.Parser
                 if (Optional(HtmlSymbolType.Solidus))
                 {
                     AcceptWhile(HtmlSymbolType.WhiteSpace);
-                    if (At(HtmlSymbolType.Text) && String.Equals(CurrentSymbol.Content, "script", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        At(HtmlSymbolType.Text)
+                        && String.Equals(
+                            CurrentSymbol.Content,
+                            "script",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // </script!
                         SkipToAndParseCode(HtmlSymbolType.CloseAngle);
                         if (!Optional(HtmlSymbolType.CloseAngle))
                         {
-                            Context.OnError(tagStart, RazorResources.ParseError_UnfinishedTag, "script");
+                            Context.OnError(
+                                tagStart,
+                                RazorResources.ParseError_UnfinishedTag,
+                                "script"
+                            );
                         }
                         seenEndScript = true;
                     }
@@ -767,13 +870,23 @@ namespace System.Web.Razor.Parser
             return false;
         }
 
-        private bool RemoveTag(Stack<Tuple<HtmlSymbol, SourceLocation>> tags, string tagName, SourceLocation tagStart)
+        private bool RemoveTag(
+            Stack<Tuple<HtmlSymbol, SourceLocation>> tags,
+            string tagName,
+            SourceLocation tagStart
+        )
         {
             Tuple<HtmlSymbol, SourceLocation> currentTag = null;
             while (tags.Count > 0)
             {
                 currentTag = tags.Pop();
-                if (String.Equals(tagName, currentTag.Item1.Content, StringComparison.OrdinalIgnoreCase))
+                if (
+                    String.Equals(
+                        tagName,
+                        currentTag.Item1.Content,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // Matched the tag
                     return true;
@@ -781,7 +894,11 @@ namespace System.Web.Razor.Parser
             }
             if (currentTag != null)
             {
-                Context.OnError(currentTag.Item2, RazorResources.ParseError_MissingEndTag, currentTag.Item1.Content);
+                Context.OnError(
+                    currentTag.Item2,
+                    RazorResources.ParseError_MissingEndTag,
+                    currentTag.Item1.Content
+                );
             }
             else
             {
@@ -800,7 +917,11 @@ namespace System.Web.Razor.Parser
                     tags.Pop();
                 }
                 Tuple<HtmlSymbol, SourceLocation> tag = tags.Pop();
-                Context.OnError(tag.Item2, RazorResources.ParseError_MissingEndTag, tag.Item1.Content);
+                Context.OnError(
+                    tag.Item2,
+                    RazorResources.ParseError_MissingEndTag,
+                    tag.Item1.Content
+                );
             }
             else if (complete)
             {

@@ -12,11 +12,10 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class XmlElementElement : ConfigurationElement
     {
-        public XmlElementElement()
-        {
-        }
+        public XmlElementElement() { }
 
-        public XmlElementElement(XmlElement element) : this()
+        public XmlElementElement(XmlElement element)
+            : this()
         {
             this.XmlElement = element;
         }
@@ -25,7 +24,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == source)
             {
@@ -38,8 +39,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses the critical helper SetIsPresent.",
-            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed).")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses the critical helper SetIsPresent.",
+            Safe = "Controls how/when SetIsPresent is used, not arbitrarily callable from PT (method is protected and class is sealed)."
+        )]
         [SecuritySafeCritical]
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
@@ -58,8 +61,10 @@ namespace System.ServiceModel.Configuration
             this.Reset(element);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls ConfigurationHelpers.SetIsPresent which elevates in order to set a property.",
-            Safe = "Only passes 'this', does not let caller influence parameter.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls ConfigurationHelpers.SetIsPresent which elevates in order to set a property.",
+            Safe = "Only passes 'this', does not let caller influence parameter."
+        )]
         [SecurityCritical]
         void SetIsPresent()
         {
@@ -71,7 +76,13 @@ namespace System.ServiceModel.Configuration
             bool dataToWrite = this.XmlElement != null;
             if (dataToWrite && writer != null)
             {
-                if (!String.Equals(elementName, ConfigurationStrings.XmlElement, StringComparison.Ordinal))
+                if (
+                    !String.Equals(
+                        elementName,
+                        ConfigurationStrings.XmlElement,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     writer.WriteStartElement(elementName);
                 }
@@ -81,7 +92,13 @@ namespace System.ServiceModel.Configuration
                     writer.WriteNode(reader, false);
                 }
 
-                if (!String.Equals(elementName, ConfigurationStrings.XmlElement, StringComparison.Ordinal))
+                if (
+                    !String.Equals(
+                        elementName,
+                        ConfigurationStrings.XmlElement,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     writer.WriteEndElement();
                 }
@@ -99,13 +116,21 @@ namespace System.ServiceModel.Configuration
         {
             if (this.XmlElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigXmlElementMustBeSet),
-                    this.ElementInformation.Source,
-                    this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigXmlElementMustBeSet),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.XmlElement, DefaultValue = null, Options = ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.XmlElement,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
         public XmlElement XmlElement
         {
             get { return (XmlElement)base[ConfigurationStrings.XmlElement]; }
@@ -113,6 +138,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

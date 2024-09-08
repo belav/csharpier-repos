@@ -19,8 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
             _setting = setting;
         }
 
-        protected override void ChangePropertyTo(TabSizeSettings newValue)
-            => _setting.SetValue((int)newValue);
+        protected override void ChangePropertyTo(TabSizeSettings newValue) =>
+            _setting.SetValue((int)newValue);
 
         protected override TabSizeSettings GetCurrentValue()
         {

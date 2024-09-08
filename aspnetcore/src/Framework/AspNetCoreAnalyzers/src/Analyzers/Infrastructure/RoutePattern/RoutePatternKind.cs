@@ -25,18 +25,22 @@ internal enum RoutePatternKind
     TextToken,
     SlashToken,
     TildeToken,
+
     /// <summary>
     /// {
     /// </summary>
     OpenBraceToken,
+
     /// <summary>
     /// }
     /// </summary>
     CloseBraceToken,
+
     /// <summary>
     /// [
     /// </summary>
     OpenBracketToken,
+
     /// <summary>
     /// ]
     /// </summary>
@@ -46,10 +50,12 @@ internal enum RoutePatternKind
     ColonToken,
     ReplacementToken,
     AsteriskToken,
+
     /// <summary>
     /// (
     /// </summary>
     OpenParenToken,
+
     /// <summary>
     /// )
     /// </summary>

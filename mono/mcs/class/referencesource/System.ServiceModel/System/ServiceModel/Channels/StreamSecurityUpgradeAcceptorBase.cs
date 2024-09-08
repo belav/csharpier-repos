@@ -21,7 +21,7 @@ namespace System.ServiceModel.Channels
 
         internal EventTraceActivity EventTraceActivity
         {
-            get 
+            get
             {
                 if (this.eventTraceActivity == null)
                 {
@@ -43,7 +43,11 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        public override IAsyncResult BeginAcceptUpgrade(Stream stream, AsyncCallback callback, object state)
+        public override IAsyncResult BeginAcceptUpgrade(
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (stream == null)
             {
@@ -80,9 +84,18 @@ namespace System.ServiceModel.Channels
             return this.remoteSecurity;
         }
 
-        protected abstract Stream OnAcceptUpgrade(Stream stream, out SecurityMessageProperty remoteSecurity);
-        protected abstract IAsyncResult OnBeginAcceptUpgrade(Stream stream, AsyncCallback callback, object state);
-        protected abstract Stream OnEndAcceptUpgrade(IAsyncResult result,
-            out SecurityMessageProperty remoteSecurity);
+        protected abstract Stream OnAcceptUpgrade(
+            Stream stream,
+            out SecurityMessageProperty remoteSecurity
+        );
+        protected abstract IAsyncResult OnBeginAcceptUpgrade(
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract Stream OnEndAcceptUpgrade(
+            IAsyncResult result,
+            out SecurityMessageProperty remoteSecurity
+        );
     }
 }

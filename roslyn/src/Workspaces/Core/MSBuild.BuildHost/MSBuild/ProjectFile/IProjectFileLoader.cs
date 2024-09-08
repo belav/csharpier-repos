@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
         Task<IProjectFile> LoadProjectFileAsync(
             string path,
             ProjectBuildManager buildManager,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

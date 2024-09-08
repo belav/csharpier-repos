@@ -15,18 +15,33 @@ namespace Microsoft.CodeAnalysis.Navigation;
 internal class AbstractNavigableItemsService : INavigableItemsService
 {
     public async Task<ImmutableArray<INavigableItem>> GetNavigableItemsAsync(
-        Document document, int position, CancellationToken cancellationToken)
+        Document document,
+        int position,
+        CancellationToken cancellationToken
+    )
     {
         var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
-        var (symbol, project, _) = await symbolService.GetSymbolProjectAndBoundSpanAsync(document, position, cancellationToken).ConfigureAwait(false);
+        var (symbol, project, _) = await symbolService
+            .GetSymbolProjectAndBoundSpanAsync(document, position, cancellationToken)
+            .ConfigureAwait(false);
 
         var solution = project.Solution;
-        symbol = await SymbolFinder.FindSourceDefinitionAsync(symbol, solution, cancellationToken).ConfigureAwait(false) ?? symbol;
-        symbol = await GoToDefinitionFeatureHelpers.TryGetPreferredSymbolAsync(solution, symbol, cancellationToken).ConfigureAwait(false);
+        symbol =
+            await SymbolFinder
+                .FindSourceDefinitionAsync(symbol, solution, cancellationToken)
+                .ConfigureAwait(false) ?? symbol;
+        symbol = await GoToDefinitionFeatureHelpers
+            .TryGetPreferredSymbolAsync(solution, symbol, cancellationToken)
+            .ConfigureAwait(false);
 
         // Try to compute source definitions from symbol.
         return symbol != null
-            ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(solution, symbol, displayTaggedParts: FindUsagesHelpers.GetDisplayParts(symbol), cancellationToken: cancellationToken)
+            ? NavigableItemFactory.GetItemsFromPreferredSourceLocations(
+                solution,
+                symbol,
+                displayTaggedParts: FindUsagesHelpers.GetDisplayParts(symbol),
+                cancellationToken: cancellationToken
+            )
             : ImmutableArray<INavigableItem>.Empty;
     }
 }

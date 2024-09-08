@@ -18,12 +18,17 @@ namespace System.Collections.Immutable
         /// but we try to keep this an implementation detail by exposing properties that return
         /// references for these particular facilities, that are implemented as returning "this".
         /// </remarks>
-        internal sealed class Comparers : IEqualityComparer<HashBucket>, IEqualityComparer<KeyValuePair<TKey, TValue>>
+        internal sealed class Comparers
+            : IEqualityComparer<HashBucket>,
+                IEqualityComparer<KeyValuePair<TKey, TValue>>
         {
             /// <summary>
             /// The default instance to use when all the comparers used are their default values.
             /// </summary>
-            internal static readonly Comparers Default = new Comparers(EqualityComparer<TKey>.Default, EqualityComparer<TValue>.Default);
+            internal static readonly Comparers Default = new Comparers(
+                EqualityComparer<TKey>.Default,
+                EqualityComparer<TValue>.Default
+            );
 
             /// <summary>
             /// The equality comparer to use for the key.
@@ -40,7 +45,10 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="keyComparer">The key only comparer.</param>
             /// <param name="valueComparer">The value comparer.</param>
-            internal Comparers(IEqualityComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
+            internal Comparers(
+                IEqualityComparer<TKey> keyComparer,
+                IEqualityComparer<TValue> valueComparer
+            )
             {
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
@@ -125,7 +133,10 @@ namespace System.Collections.Immutable
             /// <returns>
             /// true if the specified objects are equal; otherwise, false.
             /// </returns>
-            bool IEqualityComparer<KeyValuePair<TKey, TValue>>.Equals(KeyValuePair<TKey, TValue> x, KeyValuePair<TKey, TValue> y)
+            bool IEqualityComparer<KeyValuePair<TKey, TValue>>.Equals(
+                KeyValuePair<TKey, TValue> x,
+                KeyValuePair<TKey, TValue> y
+            )
             {
                 return _keyComparer.Equals(x.Key, y.Key);
             }
@@ -137,7 +148,9 @@ namespace System.Collections.Immutable
             /// <returns>
             /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
             /// </returns>
-            int IEqualityComparer<KeyValuePair<TKey, TValue>>.GetHashCode(KeyValuePair<TKey, TValue> obj)
+            int IEqualityComparer<KeyValuePair<TKey, TValue>>.GetHashCode(
+                KeyValuePair<TKey, TValue> obj
+            )
             {
                 return _keyComparer.GetHashCode(obj.Key);
             }
@@ -148,7 +161,10 @@ namespace System.Collections.Immutable
             /// <param name="keyComparer">The key comparer.</param>
             /// <param name="valueComparer">The value comparer.</param>
             /// <returns>An instance of <see cref="Comparers"/></returns>
-            internal static Comparers Get(IEqualityComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
+            internal static Comparers Get(
+                IEqualityComparer<TKey> keyComparer,
+                IEqualityComparer<TValue> valueComparer
+            )
             {
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));

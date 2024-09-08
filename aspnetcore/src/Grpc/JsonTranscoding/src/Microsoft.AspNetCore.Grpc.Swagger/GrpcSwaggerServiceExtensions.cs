@@ -30,34 +30,52 @@ public static class GrpcSwaggerServiceExtensions
 
         services.AddGrpc().AddJsonTranscoding();
 
-        services.TryAddEnumerable(ServiceDescriptor.Transient<IApiDescriptionProvider, GrpcJsonTranscodingDescriptionProvider>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Transient<
+                IApiDescriptionProvider,
+                GrpcJsonTranscodingDescriptionProvider
+            >()
+        );
         services.TryAddSingleton<DescriptorRegistry>();
 
         // Register default description provider in case MVC is not registered
         services.TryAddSingleton<IApiDescriptionGroupCollectionProvider>(serviceProvider =>
         {
-            var actionDescriptorCollectionProvider = serviceProvider.GetService<IActionDescriptorCollectionProvider>();
+            var actionDescriptorCollectionProvider =
+                serviceProvider.GetService<IActionDescriptorCollectionProvider>();
             var apiDescriptionProvider = serviceProvider.GetServices<IApiDescriptionProvider>();
 
             return new ApiDescriptionGroupCollectionProvider(
                 actionDescriptorCollectionProvider ?? new EmptyActionDescriptorCollectionProvider(),
-                apiDescriptionProvider);
+                apiDescriptionProvider
+            );
         });
 
         // Add or replace contract resolver.
-        services.Replace(ServiceDescriptor.Transient<ISerializerDataContractResolver>(s =>
-        {
-            var serializerOptions = s.GetService<IOptions<JsonOptions>>()?.Value?.JsonSerializerOptions ?? new JsonSerializerOptions();
-            var innerContractResolver = new JsonSerializerDataContractResolver(serializerOptions);
-            return new GrpcDataContractResolver(innerContractResolver, s.GetRequiredService<DescriptorRegistry>());
-        }));
+        services.Replace(
+            ServiceDescriptor.Transient<ISerializerDataContractResolver>(s =>
+            {
+                var serializerOptions =
+                    s.GetService<IOptions<JsonOptions>>()?.Value?.JsonSerializerOptions
+                    ?? new JsonSerializerOptions();
+                var innerContractResolver = new JsonSerializerDataContractResolver(
+                    serializerOptions
+                );
+                return new GrpcDataContractResolver(
+                    innerContractResolver,
+                    s.GetRequiredService<DescriptorRegistry>()
+                );
+            })
+        );
 
         return services;
     }
 
     // Dummy type that is only used if MVC is not registered in the app
-    private sealed class EmptyActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
+    private sealed class EmptyActionDescriptorCollectionProvider
+        : IActionDescriptorCollectionProvider
     {
-        public ActionDescriptorCollection ActionDescriptors { get; } = new ActionDescriptorCollection(new List<ActionDescriptor>(), 1);
+        public ActionDescriptorCollection ActionDescriptors { get; } =
+            new ActionDescriptorCollection(new List<ActionDescriptor>(), 1);
     }
 }

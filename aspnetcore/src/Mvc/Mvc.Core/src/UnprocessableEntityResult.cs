@@ -19,7 +19,5 @@ public class UnprocessableEntityResult : StatusCodeResult
     /// Creates a new <see cref="UnprocessableEntityResult"/> instance.
     /// </summary>
     public UnprocessableEntityResult()
-        : base(DefaultStatusCode)
-    {
-    }
+        : base(DefaultStatusCode) { }
 }

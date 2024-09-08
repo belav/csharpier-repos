@@ -19,13 +19,23 @@ namespace Microsoft.Data.Sqlite
         private SqliteConnection? _connection;
         private bool _completed;
 
-        internal SqliteTransaction(SqliteConnection connection, IsolationLevel isolationLevel, bool deferred)
+        internal SqliteTransaction(
+            SqliteConnection connection,
+            IsolationLevel isolationLevel,
+            bool deferred
+        )
         {
-            if ((isolationLevel == IsolationLevel.ReadUncommitted
-                    && ((connection.ConnectionOptions!.Cache != SqliteCacheMode.Shared) || !deferred))
+            if (
+                (
+                    isolationLevel == IsolationLevel.ReadUncommitted
+                    && (
+                        (connection.ConnectionOptions!.Cache != SqliteCacheMode.Shared) || !deferred
+                    )
+                )
                 || isolationLevel == IsolationLevel.ReadCommitted
                 || isolationLevel == IsolationLevel.RepeatableRead
-                || isolationLevel == IsolationLevel.Unspecified)
+                || isolationLevel == IsolationLevel.Unspecified
+            )
             {
                 isolationLevel = IsolationLevel.Serializable;
             }
@@ -45,7 +55,8 @@ namespace Microsoft.Data.Sqlite
             connection.ExecuteNonQuery(
                 IsolationLevel == IsolationLevel.Serializable && !deferred
                     ? "BEGIN IMMEDIATE;"
-                    : "BEGIN;");
+                    : "BEGIN;"
+            );
             sqlite3_rollback_hook(connection.Handle, RollbackExternal, null);
         }
 
@@ -53,15 +64,13 @@ namespace Microsoft.Data.Sqlite
         ///     Gets the connection associated with the transaction.
         /// </summary>
         /// <value>The connection associated with the transaction.</value>
-        public new virtual SqliteConnection? Connection
-            => _connection;
+        public new virtual SqliteConnection? Connection => _connection;
 
         /// <summary>
         ///     Gets the connection associated with the transaction.
         /// </summary>
         /// <value>The connection associated with the transaction.</value>
-        protected override DbConnection? DbConnection
-            => Connection;
+        protected override DbConnection? DbConnection => Connection;
 
         internal bool ExternalRollback { get; private set; }
 
@@ -76,9 +85,7 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         public override void Commit()
         {
-            if (ExternalRollback
-                || _completed
-                || _connection!.State != ConnectionState.Open)
+            if (ExternalRollback || _completed || _connection!.State != ConnectionState.Open)
             {
                 throw new InvalidOperationException(Resources.TransactionCompleted);
             }
@@ -132,7 +139,8 @@ namespace Microsoft.Data.Sqlite
                     .Append("SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
-                    .ToString());
+                    .ToString()
+            );
         }
 
         /// <summary>
@@ -160,7 +168,8 @@ namespace Microsoft.Data.Sqlite
                     .Append("ROLLBACK TO SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
-                    .ToString());
+                    .ToString()
+            );
         }
 
         /// <summary>
@@ -189,7 +198,8 @@ namespace Microsoft.Data.Sqlite
                     .Append("RELEASE SAVEPOINT \"")
                     .Append(savepointName.Replace("\"", "\"\""))
                     .Append("\";")
-                    .ToString());
+                    .ToString()
+            );
         }
 
         /// <summary>
@@ -201,9 +211,7 @@ namespace Microsoft.Data.Sqlite
         /// </param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing
-                && !_completed
-                && _connection!.State == ConnectionState.Open)
+            if (disposing && !_completed && _connection!.State == ConnectionState.Open)
             {
                 RollbackInternal();
             }

@@ -12,11 +12,17 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
 
         public static void Log(string action)
         {
-            Logger.Log(FunctionId.Experiment_KeybindingsReset, KeyValueLogMessage.Create(LogType.UserAction, m =>
-            {
-                m[nameof(Name)] = Name;
-                m[nameof(action)] = action;
-            }));
+            Logger.Log(
+                FunctionId.Experiment_KeybindingsReset,
+                KeyValueLogMessage.Create(
+                    LogType.UserAction,
+                    m =>
+                    {
+                        m[nameof(Name)] = Name;
+                        m[nameof(action)] = action;
+                    }
+                )
+            );
         }
     }
 }

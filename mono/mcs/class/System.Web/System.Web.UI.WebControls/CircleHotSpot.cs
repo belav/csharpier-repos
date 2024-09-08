@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,38 +32,42 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class CircleHotSpot: HotSpot
-	{
-		public override string GetCoordinates ()
-		{
-			return X + "," + Y + "," + Radius;
-		}
-		
-		protected internal override string MarkupName {
-			get { return "circle"; }
-		}
-		
-		[DefaultValueAttribute (0)]
-		public int Radius {
-			get { return ViewState.GetInt ("Radius", 0); }
-			set {
-				if (value < 0)
-					throw new ArgumentOutOfRangeException ();
-				ViewState ["Radius"] = value;
-			}
-		}
+    public sealed class CircleHotSpot : HotSpot
+    {
+        public override string GetCoordinates()
+        {
+            return X + "," + Y + "," + Radius;
+        }
 
-		[DefaultValueAttribute (0)]
-		public int X {
-			get { return ViewState.GetInt ("X", 0); }
-			set { ViewState ["X"] = value; }
-		}
+        protected internal override string MarkupName
+        {
+            get { return "circle"; }
+        }
 
-		[DefaultValueAttribute (0)]
-		public int Y {
-			get { return ViewState.GetInt ("Y", 0); }
-			set { ViewState ["Y"] = value; }
-		}
-	}
+        [DefaultValueAttribute(0)]
+        public int Radius
+        {
+            get { return ViewState.GetInt("Radius", 0); }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
+                ViewState["Radius"] = value;
+            }
+        }
+
+        [DefaultValueAttribute(0)]
+        public int X
+        {
+            get { return ViewState.GetInt("X", 0); }
+            set { ViewState["X"] = value; }
+        }
+
+        [DefaultValueAttribute(0)]
+        public int Y
+        {
+            get { return ViewState.GetInt("Y", 0); }
+            set { ViewState["Y"] = value; }
+        }
+    }
 }
-

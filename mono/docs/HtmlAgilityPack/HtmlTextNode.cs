@@ -15,10 +15,7 @@ namespace HtmlAgilityPack
         #region Constructors
 
         internal HtmlTextNode(HtmlDocument ownerdocument, int index)
-            :
-                base(HtmlNodeType.Text, ownerdocument, index)
-        {
-        }
+            : base(HtmlNodeType.Text, ownerdocument, index) { }
 
         #endregion
 

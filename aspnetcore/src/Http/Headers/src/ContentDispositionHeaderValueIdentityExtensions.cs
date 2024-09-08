@@ -20,7 +20,10 @@ public static class ContentDispositionHeaderValueIdentityExtensions
         ArgumentNullException.ThrowIfNull(header);
 
         return header.DispositionType.Equals("form-data")
-            && (!StringSegment.IsNullOrEmpty(header.FileName) || !StringSegment.IsNullOrEmpty(header.FileNameStar));
+            && (
+                !StringSegment.IsNullOrEmpty(header.FileName)
+                || !StringSegment.IsNullOrEmpty(header.FileNameStar)
+            );
     }
 
     /// <summary>
@@ -33,6 +36,7 @@ public static class ContentDispositionHeaderValueIdentityExtensions
         ArgumentNullException.ThrowIfNull(header);
 
         return header.DispositionType.Equals("form-data")
-           && StringSegment.IsNullOrEmpty(header.FileName) && StringSegment.IsNullOrEmpty(header.FileNameStar);
+            && StringSegment.IsNullOrEmpty(header.FileName)
+            && StringSegment.IsNullOrEmpty(header.FileNameStar);
     }
 }

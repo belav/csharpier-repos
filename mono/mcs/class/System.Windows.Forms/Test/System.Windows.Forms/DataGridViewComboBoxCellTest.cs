@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,39 +25,45 @@
 
 
 
-using NUnit.Framework;
 using System;
+using System.Collections;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
-using System.Collections;
+using NUnit.Framework;
 
-namespace MonoTests.System.Windows.Forms {
+namespace MonoTests.System.Windows.Forms
+{
+    [TestFixture]
+    public class DataGridViewComboBoxCellTest : TestHelper
+    {
+        private DataGridView CreateAndFill()
+        {
+            DataGridView dgv = DataGridViewCommon.CreateAndFill();
+            DataGridViewRow row = new DataGridViewRow();
+            row.Cells.Add(new DataGridViewComboBoxCell());
+            row.Cells.Add(new DataGridViewComboBoxCell());
+            dgv.Rows.Add(row);
+            return dgv;
+        }
 
-	[TestFixture]
-	public class DataGridViewComboBoxCellTest : TestHelper 
-	{
-		private DataGridView CreateAndFill ()
-		{
-			DataGridView dgv = DataGridViewCommon.CreateAndFill ();
-			DataGridViewRow row = new DataGridViewRow ();
-			row.Cells.Add (new DataGridViewComboBoxCell ());
-			row.Cells.Add (new DataGridViewComboBoxCell ());
-			dgv.Rows.Add (row);
-			return dgv;
-		}
-		
-		[Test]
-		public void ToStringTest ()
-		{
-			Assert.AreEqual ("DataGridViewComboBoxCell { ColumnIndex=-1, RowIndex=-1 }", new DataGridViewComboBoxCell ().ToString (), "B");
-			
-			using (DataGridView dgv = CreateAndFill ())
-			{
-				Assert.AreEqual ("DataGridViewComboBoxCell { ColumnIndex=1, RowIndex=2 }", dgv [1, 2].ToString (), "A");
-			}
-			
-			
-		}
-	}
+        [Test]
+        public void ToStringTest()
+        {
+            Assert.AreEqual(
+                "DataGridViewComboBoxCell { ColumnIndex=-1, RowIndex=-1 }",
+                new DataGridViewComboBoxCell().ToString(),
+                "B"
+            );
+
+            using (DataGridView dgv = CreateAndFill())
+            {
+                Assert.AreEqual(
+                    "DataGridViewComboBoxCell { ColumnIndex=1, RowIndex=2 }",
+                    dgv[1, 2].ToString(),
+                    "A"
+                );
+            }
+        }
+    }
 }

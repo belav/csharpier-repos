@@ -7,6 +7,4 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages;
 /// Specifies that the targeted method is not a page handler method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class NonHandlerAttribute : Attribute
-{
-}
+public class NonHandlerAttribute : Attribute { }

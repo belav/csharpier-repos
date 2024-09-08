@@ -27,7 +27,7 @@ namespace System.ServiceModel.Configuration
 
         public override Type BindingElementType
         {
-            get { return typeof( PrivacyNoticeBindingElement ); }
+            get { return typeof(PrivacyNoticeBindingElement); }
         }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
@@ -49,8 +49,8 @@ namespace System.ServiceModel.Configuration
         {
             base.CopyFrom(from);
 
-            PrivacyNoticeElement source = (PrivacyNoticeElement) from;
-    #pragma warning suppress 56506 // Microsoft, base.CopyFrom() validates the argument
+            PrivacyNoticeElement source = (PrivacyNoticeElement)from;
+#pragma warning suppress 56506 // Microsoft, base.CopyFrom() validates the argument
             this.Url = source.Url;
             this.Version = source.Version;
         }
@@ -62,6 +62,5 @@ namespace System.ServiceModel.Configuration
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Url, binding.Url);
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Version, binding.Version);
         }
-
     }
 }

@@ -33,23 +33,54 @@ public class MvcTemplateTest : LoggedTest
     public async Task MvcTemplate_NoAuthFSharp() => await MvcTemplateCore(languageOverride: "F#");
 
     [Fact]
-    public async Task MvcTemplate_NoAuthNoHttpsFSharp() => await MvcTemplateCore(languageOverride: "F#", args: new[] { ArgConstants.NoHttps } );
+    public async Task MvcTemplate_NoAuthNoHttpsFSharp() =>
+        await MvcTemplateCore(languageOverride: "F#", args: new[] { ArgConstants.NoHttps });
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64 + HelixConstants.DebianAmd64)]
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+            + HelixConstants.DebianAmd64
+    )]
     public async Task MvcTemplate_NoAuthCSharp() => await MvcTemplateCore(languageOverride: null);
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64 + HelixConstants.DebianAmd64)]
-    public async Task MvcTemplate_NoAuthNoHttpsCSharp() => await MvcTemplateCore(languageOverride: null, new[] { ArgConstants.NoHttps });
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+            + HelixConstants.DebianAmd64
+    )]
+    public async Task MvcTemplate_NoAuthNoHttpsCSharp() =>
+        await MvcTemplateCore(languageOverride: null, new[] { ArgConstants.NoHttps });
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64 + HelixConstants.DebianAmd64)]
-    public async Task MvcTemplate_ProgramMainNoAuthCSharp() => await MvcTemplateCore(languageOverride: null, new[] { ArgConstants.UseProgramMain });
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+            + HelixConstants.DebianAmd64
+    )]
+    public async Task MvcTemplate_ProgramMainNoAuthCSharp() =>
+        await MvcTemplateCore(languageOverride: null, new[] { ArgConstants.UseProgramMain });
 
     [ConditionalFact]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64 + HelixConstants.DebianAmd64)]
-    public async Task MvcTemplate_ProgramMainNoAuthNoHttpsCSharp() => await MvcTemplateCore(languageOverride: null, new[] { ArgConstants.UseProgramMain, ArgConstants.NoHttps });
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+            + HelixConstants.DebianAmd64
+    )]
+    public async Task MvcTemplate_ProgramMainNoAuthNoHttpsCSharp() =>
+        await MvcTemplateCore(
+            languageOverride: null,
+            new[] { ArgConstants.UseProgramMain, ArgConstants.NoHttps }
+        );
 
     private async Task MvcTemplateCore(string languageOverride, string[] args = null)
     {
@@ -67,7 +98,10 @@ public class MvcTemplateTest : LoggedTest
         var projectFileContents = project.ReadFile($"{project.ProjectName}.{projectExtension}");
         Assert.DoesNotContain(".db", projectFileContents);
         Assert.DoesNotContain("Microsoft.EntityFrameworkCore.Tools", projectFileContents);
-        Assert.DoesNotContain("Microsoft.VisualStudio.Web.CodeGeneration.Design", projectFileContents);
+        Assert.DoesNotContain(
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design",
+            projectFileContents
+        );
         Assert.DoesNotContain("Microsoft.EntityFrameworkCore.Tools.DotNet", projectFileContents);
         Assert.DoesNotContain("Microsoft.Extensions.SecretManager.Tools", projectFileContents);
 
@@ -85,11 +119,12 @@ public class MvcTemplateTest : LoggedTest
 
         await project.RunDotNetBuildAsync();
 
-        IEnumerable<string> menuLinks = new List<string> {
-                PageUrls.HomeUrl,
-                PageUrls.HomeUrl,
-                PageUrls.PrivacyFullUrl
-            };
+        IEnumerable<string> menuLinks = new List<string>
+        {
+            PageUrls.HomeUrl,
+            PageUrls.HomeUrl,
+            PageUrls.PrivacyFullUrl,
+        };
 
         var footerLinks = new string[] { PageUrls.PrivacyFullUrl };
 
@@ -98,20 +133,21 @@ public class MvcTemplateTest : LoggedTest
             new Page
             {
                 Url = PageUrls.HomeUrl,
-                Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks)
+                Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks),
             },
-            new Page
-            {
-                Url = PageUrls.PrivacyFullUrl,
-                Links = menuLinks.Concat(footerLinks)
-            }
+            new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks) },
         };
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertPagesOk(pages);
         }
@@ -120,7 +156,12 @@ public class MvcTemplateTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertPagesOk(pages);
         }
@@ -131,19 +172,40 @@ public class MvcTemplateTest : LoggedTest
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64 + HelixConstants.DebianAmd64)]
-    [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX, SkipReason = "No LocalDb on non-Windows")]
-    public Task MvcTemplate_IndividualAuth_LocalDb(bool useProgramMain, bool noHttps) => MvcTemplate_IndividualAuth_Core(useLocalDB: true, useProgramMain, noHttps);
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+            + HelixConstants.DebianAmd64
+    )]
+    [OSSkipCondition(
+        OperatingSystems.Linux | OperatingSystems.MacOSX,
+        SkipReason = "No LocalDb on non-Windows"
+    )]
+    public Task MvcTemplate_IndividualAuth_LocalDb(bool useProgramMain, bool noHttps) =>
+        MvcTemplate_IndividualAuth_Core(useLocalDB: true, useProgramMain, noHttps);
 
     [ConditionalTheory]
     [InlineData(false, false)]
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    [SkipOnHelix("Cert failure, https://github.com/dotnet/aspnetcore/issues/28090", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64 + HelixConstants.DebianAmd64)]
-    public Task MvcTemplate_IndividualAuth(bool useProgramMain, bool noHttps) => MvcTemplate_IndividualAuth_Core(useLocalDB: false, useProgramMain, noHttps);
+    [SkipOnHelix(
+        "Cert failure, https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = "All.OSX;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+            + HelixConstants.DebianAmd64
+    )]
+    public Task MvcTemplate_IndividualAuth(bool useProgramMain, bool noHttps) =>
+        MvcTemplate_IndividualAuth_Core(useLocalDB: false, useProgramMain, noHttps);
 
-    private async Task MvcTemplate_IndividualAuth_Core(bool useLocalDB, bool useProgramMain, bool noHttps)
+    private async Task MvcTemplate_IndividualAuth_Core(
+        bool useLocalDB,
+        bool useProgramMain,
+        bool noHttps
+    )
     {
         var project = await ProjectFactory.CreateProject(Output);
 
@@ -154,7 +216,12 @@ public class MvcTemplateTest : LoggedTest
             : noHttps
                 ? new[] { ArgConstants.NoHttps }
                 : null;
-        await project.RunDotNetNewAsync("mvc", auth: "Individual", useLocalDB: useLocalDB, args: args);
+        await project.RunDotNetNewAsync(
+            "mvc",
+            auth: "Individual",
+            useLocalDB: useLocalDB,
+            args: args
+        );
 
         var expectedLaunchProfileNames = noHttps
             ? new[] { "http", "IIS Express" }
@@ -179,79 +246,91 @@ public class MvcTemplateTest : LoggedTest
         project.AssertEmptyMigration("mvc");
 
         // Note: if any links are updated here, RazorPagesTemplateTest.cs should be updated as well
-        var pages = new List<Page> {
-                new Page
+        var pages = new List<Page>
+        {
+            new Page
+            {
+                Url = PageUrls.ForgotPassword,
+                Links = new[]
                 {
-                    Url = PageUrls.ForgotPassword,
-                    Links = new [] {
-                        PageUrls.HomeUrl,
-                        PageUrls.HomeUrl,
-                        PageUrls.PrivacyUrl,
-                        PageUrls.RegisterUrl,
-                        PageUrls.LoginUrl,
-                        PageUrls.PrivacyUrl
-                    }
+                    PageUrls.HomeUrl,
+                    PageUrls.HomeUrl,
+                    PageUrls.PrivacyUrl,
+                    PageUrls.RegisterUrl,
+                    PageUrls.LoginUrl,
+                    PageUrls.PrivacyUrl,
                 },
-                new Page
+            },
+            new Page
+            {
+                Url = PageUrls.HomeUrl,
+                Links = new[]
                 {
-                    Url = PageUrls.HomeUrl,
-                    Links = new [] {
-                        PageUrls.HomeUrl,
-                        PageUrls.HomeUrl,
-                        PageUrls.PrivacyUrl,
-                        PageUrls.RegisterUrl,
-                        PageUrls.LoginUrl,
-                        PageUrls.DocsUrl,
-                        PageUrls.PrivacyUrl
-                    }
+                    PageUrls.HomeUrl,
+                    PageUrls.HomeUrl,
+                    PageUrls.PrivacyUrl,
+                    PageUrls.RegisterUrl,
+                    PageUrls.LoginUrl,
+                    PageUrls.DocsUrl,
+                    PageUrls.PrivacyUrl,
                 },
-                new Page
+            },
+            new Page
+            {
+                Url = PageUrls.PrivacyFullUrl,
+                Links = new[]
                 {
-                    Url = PageUrls.PrivacyFullUrl,
-                    Links = new [] {
-                        PageUrls.HomeUrl,
-                        PageUrls.HomeUrl,
-                        PageUrls.PrivacyUrl,
-                        PageUrls.RegisterUrl,
-                        PageUrls.LoginUrl,
-                        PageUrls.PrivacyUrl
-                    }
+                    PageUrls.HomeUrl,
+                    PageUrls.HomeUrl,
+                    PageUrls.PrivacyUrl,
+                    PageUrls.RegisterUrl,
+                    PageUrls.LoginUrl,
+                    PageUrls.PrivacyUrl,
                 },
-                new Page
+            },
+            new Page
+            {
+                Url = PageUrls.LoginUrl,
+                Links = new[]
                 {
-                    Url = PageUrls.LoginUrl,
-                    Links = new [] {
-                        PageUrls.HomeUrl,
-                        PageUrls.HomeUrl,
-                        PageUrls.PrivacyUrl,
-                        PageUrls.RegisterUrl,
-                        PageUrls.LoginUrl,
-                        PageUrls.ForgotPassword,
-                        PageUrls.RegisterUrl,
-                        PageUrls.ResendEmailConfirmation,
-                        PageUrls.ExternalArticle,
-                        PageUrls.PrivacyUrl }
+                    PageUrls.HomeUrl,
+                    PageUrls.HomeUrl,
+                    PageUrls.PrivacyUrl,
+                    PageUrls.RegisterUrl,
+                    PageUrls.LoginUrl,
+                    PageUrls.ForgotPassword,
+                    PageUrls.RegisterUrl,
+                    PageUrls.ResendEmailConfirmation,
+                    PageUrls.ExternalArticle,
+                    PageUrls.PrivacyUrl,
                 },
-                new Page
+            },
+            new Page
+            {
+                Url = PageUrls.RegisterUrl,
+                Links = new[]
                 {
-                    Url = PageUrls.RegisterUrl,
-                    Links = new [] {
-                        PageUrls.HomeUrl,
-                        PageUrls.HomeUrl,
-                        PageUrls.PrivacyUrl,
-                        PageUrls.RegisterUrl,
-                        PageUrls.LoginUrl,
-                        PageUrls.ExternalArticle,
-                        PageUrls.PrivacyUrl
-                    }
-                }
-            };
+                    PageUrls.HomeUrl,
+                    PageUrls.HomeUrl,
+                    PageUrls.PrivacyUrl,
+                    PageUrls.RegisterUrl,
+                    PageUrls.LoginUrl,
+                    PageUrls.ExternalArticle,
+                    PageUrls.PrivacyUrl,
+                },
+            },
+        };
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertPagesOk(pages);
         }
@@ -260,7 +339,12 @@ public class MvcTemplateTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
 
             await aspNetProcess.AssertPagesOk(pages);
         }
@@ -279,14 +363,12 @@ public class MvcTemplateTest : LoggedTest
 
         await project.RunDotNetNewAsync("mvc");
 
-        await project.RunDotNetPublishAsync(additionalArgs: $"/p:PublishSingleFile=true -r {runtimeIdentifer} --self-contained", noRestore: false);
+        await project.RunDotNetPublishAsync(
+            additionalArgs: $"/p:PublishSingleFile=true -r {runtimeIdentifer} --self-contained",
+            noRestore: false
+        );
 
-        var menuLinks = new[]
-        {
-            PageUrls.HomeUrl,
-            PageUrls.HomeUrl,
-            PageUrls.PrivacyFullUrl
-        };
+        var menuLinks = new[] { PageUrls.HomeUrl, PageUrls.HomeUrl, PageUrls.PrivacyFullUrl };
 
         var footerLinks = new[] { PageUrls.PrivacyFullUrl };
 
@@ -297,56 +379,146 @@ public class MvcTemplateTest : LoggedTest
                 Url = PageUrls.HomeUrl,
                 Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks),
             },
-            new Page
-            {
-                Url = PageUrls.PrivacyFullUrl,
-                Links = menuLinks.Concat(footerLinks),
-            }
+            new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks) },
         };
 
         using var aspNetProcess = project.StartPublishedProjectAsync(usePublishedAppHost: true);
         Assert.False(
             aspNetProcess.Process.HasExited,
-            ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+            ErrorMessages.GetFailedProcessMessageOrEmpty(
+                "Run published project",
+                project,
+                aspNetProcess.Process
+            )
+        );
 
         await aspNetProcess.AssertPagesOk(pages);
     }
 
     [ConditionalTheory]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/28090", Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     [InlineData("IndividualB2C", null)]
     [InlineData("IndividualB2C", new[] { ArgConstants.UseProgramMain })]
-    [InlineData("IndividualB2C", new[] { ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite })]
-    [InlineData("IndividualB2C", new[] { ArgConstants.UseProgramMain, ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite })]
-    public Task MvcTemplate_IdentityWeb_IndividualB2C_BuildsAndPublishes(string auth, string[] args) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
+    [InlineData(
+        "IndividualB2C",
+        new[]
+        {
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+        }
+    )]
+    [InlineData(
+        "IndividualB2C",
+        new[]
+        {
+            ArgConstants.UseProgramMain,
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+        }
+    )]
+    public Task MvcTemplate_IdentityWeb_IndividualB2C_BuildsAndPublishes(
+        string auth,
+        string[] args
+    ) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
 
     [ConditionalTheory]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/28090", Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     [InlineData("IndividualB2C", null)]
     [InlineData("IndividualB2C", new[] { ArgConstants.UseProgramMain, ArgConstants.NoHttps })]
-    [InlineData("IndividualB2C", new[] { ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite, ArgConstants.NoHttps })]
-    [InlineData("IndividualB2C", new[] { ArgConstants.UseProgramMain, ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite, ArgConstants.NoHttps })]
-    public Task MvcTemplate_IdentityWeb_IndividualB2C_NoHttps_BuildsAndPublishes(string auth, string[] args) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
+    [InlineData(
+        "IndividualB2C",
+        new[]
+        {
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+            ArgConstants.NoHttps,
+        }
+    )]
+    [InlineData(
+        "IndividualB2C",
+        new[]
+        {
+            ArgConstants.UseProgramMain,
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+            ArgConstants.NoHttps,
+        }
+    )]
+    public Task MvcTemplate_IdentityWeb_IndividualB2C_NoHttps_BuildsAndPublishes(
+        string auth,
+        string[] args
+    ) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
 
     [ConditionalTheory]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/28090", Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     [InlineData("SingleOrg", null)]
     [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain })]
-    [InlineData("SingleOrg", new[] { ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite })]
-    [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain, ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite })]
+    [InlineData(
+        "SingleOrg",
+        new[]
+        {
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+        }
+    )]
+    [InlineData(
+        "SingleOrg",
+        new[]
+        {
+            ArgConstants.UseProgramMain,
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+        }
+    )]
     [InlineData("SingleOrg", new[] { ArgConstants.CallsGraph })]
     [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain, ArgConstants.CallsGraph })]
-    public Task MvcTemplate_IdentityWeb_SingleOrg_BuildsAndPublishes(string auth, string[] args) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
+    public Task MvcTemplate_IdentityWeb_SingleOrg_BuildsAndPublishes(string auth, string[] args) =>
+        MvcTemplateBuildsAndPublishes(auth: auth, args: args);
 
     [ConditionalTheory]
-    [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/28090", Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "https://github.com/dotnet/aspnetcore/issues/28090",
+        Queues = HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64
+    )]
     [InlineData("SingleOrg", null)]
     [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain, ArgConstants.NoHttps })]
-    [InlineData("SingleOrg", new[] { ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite, ArgConstants.NoHttps })]
-    [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain, ArgConstants.CalledApiUrlGraphMicrosoftCom, ArgConstants.CalledApiScopesUserReadWrite, ArgConstants.NoHttps })]
+    [InlineData(
+        "SingleOrg",
+        new[]
+        {
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+            ArgConstants.NoHttps,
+        }
+    )]
+    [InlineData(
+        "SingleOrg",
+        new[]
+        {
+            ArgConstants.UseProgramMain,
+            ArgConstants.CalledApiUrlGraphMicrosoftCom,
+            ArgConstants.CalledApiScopesUserReadWrite,
+            ArgConstants.NoHttps,
+        }
+    )]
     [InlineData("SingleOrg", new[] { ArgConstants.CallsGraph, ArgConstants.NoHttps })]
-    [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain, ArgConstants.CallsGraph, ArgConstants.NoHttps })]
-    public Task MvcTemplate_IdentityWeb_SingleOrg_NoHttps_BuildsAndPublishes(string auth, string[] args) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
+    [InlineData(
+        "SingleOrg",
+        new[] { ArgConstants.UseProgramMain, ArgConstants.CallsGraph, ArgConstants.NoHttps }
+    )]
+    public Task MvcTemplate_IdentityWeb_SingleOrg_NoHttps_BuildsAndPublishes(
+        string auth,
+        string[] args
+    ) => MvcTemplateBuildsAndPublishes(auth: auth, args: args);
 
     private async Task<Project> MvcTemplateBuildsAndPublishes(string auth, string[] args)
     {

@@ -19,54 +19,58 @@ public static class Certificates
         SelfSignedPrimaryRoot = MakeCert(
             "CN=Valid Self Signed Client EKU,OU=dev,DC=idunno-dev,DC=org",
             ClientEku,
-            now);
+            now
+        );
 
         SignedSecondaryRoot = MakeCert(
             "CN=Valid Signed Secondary Root EKU,OU=dev,DC=idunno-dev,DC=org",
             ClientEku,
-            now);
+            now
+        );
 
         SelfSignedValidWithServerEku = MakeCert(
             "CN=Valid Self Signed Server EKU,OU=dev,DC=idunno-dev,DC=org",
             ServerEku,
-            now);
+            now
+        );
 
         SelfSignedValidWithClientEku = MakeCert(
             "CN=Valid Self Signed Server EKU,OU=dev,DC=idunno-dev,DC=org",
             ClientEku,
-            now);
+            now
+        );
 
         SelfSignedValidWithNoEku = MakeCert(
             "CN=Valid Self Signed No EKU,OU=dev,DC=idunno-dev,DC=org",
             eku: null,
-            now);
+            now
+        );
 
         SelfSignedExpired = MakeCert(
             "CN=Expired Self Signed,OU=dev,DC=idunno-dev,DC=org",
             eku: null,
             now.AddYears(-2),
-            now.AddYears(-1));
+            now.AddYears(-1)
+        );
 
         SelfSignedNotYetValid = MakeCert(
             "CN=Not Valid Yet Self Signed,OU=dev,DC=idunno-dev,DC=org",
             eku: null,
             now.AddYears(2),
-            now.AddYears(3));
+            now.AddYears(3)
+        );
 
         SignedClient = MakeCert(
             "CN=Valid Signed Client,OU=dev,DC=idunno-dev,DC=org",
             ClientEku,
-            now);
-
+            now
+        );
     }
 
     private static readonly X509KeyUsageExtension s_digitalSignatureOnlyUsage =
-            new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, true);
+        new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, true);
 
-    private static X509Certificate2 MakeCert(
-        string subjectName,
-        string eku,
-        DateTimeOffset now)
+    private static X509Certificate2 MakeCert(string subjectName, string eku, DateTimeOffset now)
     {
         return MakeCert(subjectName, eku, now, now.AddYears(5));
     }
@@ -75,7 +79,8 @@ public static class Certificates
         string subjectName,
         string eku,
         DateTimeOffset notBefore,
-        DateTimeOffset notAfter)
+        DateTimeOffset notAfter
+    )
     {
         using (var key = RSA.Create(2048))
         {
@@ -83,7 +88,8 @@ public static class Certificates
                 subjectName,
                 key,
                 HashAlgorithmName.SHA256,
-                RSASignaturePadding.Pkcs1);
+                RSASignaturePadding.Pkcs1
+            );
 
             request.CertificateExtensions.Add(s_digitalSignatureOnlyUsage);
 
@@ -91,7 +97,10 @@ public static class Certificates
             {
                 request.CertificateExtensions.Add(
                     new X509EnhancedKeyUsageExtension(
-                        new OidCollection { new Oid(eku, null) }, false));
+                        new OidCollection { new Oid(eku, null) },
+                        false
+                    )
+                );
             }
 
             return request.CreateSelfSigned(notBefore, notAfter);

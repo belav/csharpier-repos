@@ -33,18 +33,18 @@ namespace System.Text.Json.Tests
 {
     public class ImmutableCollectionsTests
     {
-        private static readonly JsonSerializerOptions s_indentedOption = new JsonSerializerOptions { WriteIndented = true };
+        private static readonly JsonSerializerOptions s_indentedOption = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+        };
 
         #region List
         [Fact]
         public void SerializeList()
         {
-            ImmutableList<string> data = ImmutableList.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableList<string> data = ImmutableList.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonSerializer.Serialize(data);
             Assert.Equal(@"[""One"",""II"",""3""]", json);
@@ -53,7 +53,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeList()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -70,13 +71,16 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeListInterface()
         {
-            string json = @"[
+            string json =
+                @"[
         ""Volibear"",
         ""Teemo"",
         ""Katarina""
       ]";
 
-            IImmutableList<string> champions = JsonSerializer.Deserialize<IImmutableList<string>>(json);
+            IImmutableList<string> champions = JsonSerializer.Deserialize<IImmutableList<string>>(
+                json
+            );
 
             Assert.Equal(3, champions.Count);
             Assert.Equal("Volibear", champions[0]);
@@ -89,25 +93,27 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeArray()
         {
-            ImmutableArray<string> data = ImmutableArray.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableArray<string> data = ImmutableArray.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
-            Assert.Equal(@"[
+            Assert.Equal(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json, ignoreLineEndingDifferences: true);
+]",
+                json,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
         public void DeserializeArray()
         {
-            string json = @"[
+            string json =
+                @"[
           ""One"",
           ""II"",
           ""3""
@@ -125,7 +131,9 @@ namespace System.Text.Json.Tests
         public void SerializeDefaultArray()
         {
             // The call to .GetEnumerator() throws this exception. Json.NET fails in the same way.
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(default(ImmutableArray<int>), s_indentedOption));
+            Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(default(ImmutableArray<int>), s_indentedOption)
+            );
         }
         #endregion
 
@@ -133,12 +141,9 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeQueue()
         {
-            ImmutableQueue<string> data = ImmutableQueue.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableQueue<string> data = ImmutableQueue.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonSerializer.Serialize(data);
             Assert.Equal(@"[""One"",""II"",""3""]", json);
@@ -147,7 +152,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeQueue()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -166,13 +172,16 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeQueueInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
 ]";
 
-            IImmutableQueue<string> data = JsonSerializer.Deserialize<IImmutableQueue<string>>(json);
+            IImmutableQueue<string> data = JsonSerializer.Deserialize<IImmutableQueue<string>>(
+                json
+            );
 
             Assert.False(data.IsEmpty);
             Assert.Equal("One", data.Peek());
@@ -187,12 +196,9 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeStack()
         {
-            ImmutableStack<string> data = ImmutableStack.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableStack<string> data = ImmutableStack.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonSerializer.Serialize(data);
             Assert.Equal(@"[""3"",""II"",""One""]", json);
@@ -201,7 +207,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeStack()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -220,13 +227,16 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeStackInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
 ]";
 
-            IImmutableStack<string> data = JsonSerializer.Deserialize<IImmutableStack<string>>(json);
+            IImmutableStack<string> data = JsonSerializer.Deserialize<IImmutableStack<string>>(
+                json
+            );
 
             Assert.False(data.IsEmpty);
             Assert.Equal("3", data.Peek());
@@ -241,12 +251,9 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeHashSet()
         {
-            ImmutableHashSet<string> data = ImmutableHashSet.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableHashSet<string> data = ImmutableHashSet.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
 
@@ -261,7 +268,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeHashSet()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -279,7 +287,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeHashSetInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -298,12 +307,9 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeSortedSet()
         {
-            ImmutableSortedSet<string> data = ImmutableSortedSet.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableSortedSet<string> data = ImmutableSortedSet.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonSerializer.Serialize(data);
             Assert.Equal(@"[""3"",""II"",""One""]", json);
@@ -312,7 +318,8 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeSortedSet()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -333,15 +340,19 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeDictionary()
         {
-            ImmutableDictionary<int, string> data = ImmutableDictionary.CreateRange(new Dictionary<int, string>
-            {
-                { 1, "One" },
-                { 2, "II" },
-                { 3, "3" }
-            });
+            ImmutableDictionary<int, string> data = ImmutableDictionary.CreateRange(
+                new Dictionary<int, string>
+                {
+                    { 1, "One" },
+                    { 2, "II" },
+                    { 3, "3" },
+                }
+            );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
-            ImmutableDictionary<int, string> a = JsonSerializer.Deserialize<ImmutableDictionary<int, string>>(json);
+            ImmutableDictionary<int, string> a = JsonSerializer.Deserialize<
+                ImmutableDictionary<int, string>
+            >(json);
             Assert.Equal(3, a.Count);
             Assert.Equal("One", (string)a[1]);
             Assert.Equal("II", (string)a[2]);
@@ -352,13 +363,16 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
 }";
 
-            ImmutableDictionary<int, string> data = JsonSerializer.Deserialize<ImmutableDictionary<int, string>>(json);
+            ImmutableDictionary<int, string> data = JsonSerializer.Deserialize<
+                ImmutableDictionary<int, string>
+            >(json);
 
             Assert.Equal(3, data.Count);
             Assert.Equal("One", data[1]);
@@ -370,13 +384,16 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeDictionaryInterface()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
 }";
 
-            IImmutableDictionary<int, string> data = JsonSerializer.Deserialize<IImmutableDictionary<int, string>>(json);
+            IImmutableDictionary<int, string> data = JsonSerializer.Deserialize<
+                IImmutableDictionary<int, string>
+            >(json);
 
             Assert.Equal(3, data.Count);
             Assert.Equal("One", data[1]);
@@ -390,32 +407,40 @@ namespace System.Text.Json.Tests
         [Fact]
         public void SerializeSortedDictionary()
         {
-            ImmutableSortedDictionary<int, string> data = ImmutableSortedDictionary.CreateRange(new SortedDictionary<int, string>
-            {
-                { 1, "One" },
-                { 2, "II" },
-                { 3, "3" }
-            });
+            ImmutableSortedDictionary<int, string> data = ImmutableSortedDictionary.CreateRange(
+                new SortedDictionary<int, string>
+                {
+                    { 1, "One" },
+                    { 2, "II" },
+                    { 3, "3" },
+                }
+            );
 
             string json = JsonSerializer.Serialize(data, s_indentedOption);
-            Assert.Equal(@"{
+            Assert.Equal(
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
-}", json);
+}",
+                json
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/30524")]
         [Fact]
         public void DeserializeSortedDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
 }";
 
-            ImmutableSortedDictionary<int, string> data = JsonSerializer.Deserialize<ImmutableSortedDictionary<int, string>>(json);
+            ImmutableSortedDictionary<int, string> data = JsonSerializer.Deserialize<
+                ImmutableSortedDictionary<int, string>
+            >(json);
 
             Assert.Equal(3, data.Count);
             Assert.Equal("One", data[1]);

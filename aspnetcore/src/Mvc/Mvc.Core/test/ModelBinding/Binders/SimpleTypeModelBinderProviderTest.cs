@@ -43,7 +43,5 @@ public class SimpleTypeModelBinderProviderTest
         Assert.IsType<SimpleTypeModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 }

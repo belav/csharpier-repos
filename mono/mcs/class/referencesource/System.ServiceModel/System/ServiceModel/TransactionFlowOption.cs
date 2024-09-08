@@ -14,15 +14,19 @@ namespace System.ServiceModel
     {
         public static bool IsDefined(TransactionFlowOption option)
         {
-            return (option == TransactionFlowOption.NotAllowed ||
-                    option == TransactionFlowOption.Allowed ||
-                    option == TransactionFlowOption.Mandatory);
+            return (
+                option == TransactionFlowOption.NotAllowed
+                || option == TransactionFlowOption.Allowed
+                || option == TransactionFlowOption.Mandatory
+            );
             //option == TransactionFlowOption.Ignore);
         }
+
         internal static bool AllowedOrRequired(TransactionFlowOption option)
         {
-            return (option == TransactionFlowOption.Allowed ||
-                    option == TransactionFlowOption.Mandatory);
+            return (
+                option == TransactionFlowOption.Allowed || option == TransactionFlowOption.Mandatory
+            );
         }
     }
 }

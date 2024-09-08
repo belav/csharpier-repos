@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -67,7 +67,10 @@ namespace System.Data.Services.Client
 
         #region Methods.
 
-        internal static MemberAssignmentAnalysis Analyze(Expression entityInScope, Expression assignmentExpression)
+        internal static MemberAssignmentAnalysis Analyze(
+            Expression entityInScope,
+            Expression assignmentExpression
+        )
         {
             Debug.Assert(entityInScope != null, "entityInScope != null");
             Debug.Assert(assignmentExpression != null, "assignmentExpression != null");
@@ -77,7 +80,10 @@ namespace System.Data.Services.Client
             return result;
         }
 
-        internal Exception CheckCompatibleAssignments(Type targetType, ref MemberAssignmentAnalysis previous)
+        internal Exception CheckCompatibleAssignments(
+            Type targetType,
+            ref MemberAssignmentAnalysis previous
+        )
         {
             if (previous == null)
             {
@@ -87,7 +93,11 @@ namespace System.Data.Services.Client
 
             Expression[] previousExpressions = previous.GetExpressionsToTargetEntity();
             Expression[] candidateExpressions = this.GetExpressionsToTargetEntity();
-            return CheckCompatibleAssignments(targetType, previousExpressions, candidateExpressions);
+            return CheckCompatibleAssignments(
+                targetType,
+                previousExpressions,
+                candidateExpressions
+            );
         }
 
         internal override Expression Visit(Expression expression)
@@ -147,14 +157,20 @@ namespace System.Data.Services.Client
                     continue;
                 }
 
-                MemberAssignmentAnalysis nested = MemberAssignmentAnalysis.Analyze(this.entity, assignment.Expression);
+                MemberAssignmentAnalysis nested = MemberAssignmentAnalysis.Analyze(
+                    this.entity,
+                    assignment.Expression
+                );
                 if (nested.MultiplePathsFound)
                 {
                     this.multiplePathsFound = true;
                     break;
                 }
 
-                Exception incompatibleException = nested.CheckCompatibleAssignments(init.Type, ref previousNested);
+                Exception incompatibleException = nested.CheckCompatibleAssignments(
+                    init.Type,
+                    ref previousNested
+                );
                 if (incompatibleException != null)
                 {
                     this.incompatibleAssignmentsException = incompatibleException;
@@ -194,7 +210,10 @@ namespace System.Data.Services.Client
 
         internal Expression[] GetExpressionsBeyondTargetEntity()
         {
-            Debug.Assert(!this.multiplePathsFound, "this.multiplePathsFound -- otherwise GetExpressionsToTargetEntity won't return reliable (consistent) results");
+            Debug.Assert(
+                !this.multiplePathsFound,
+                "this.multiplePathsFound -- otherwise GetExpressionsToTargetEntity won't return reliable (consistent) results"
+            );
 
             if (this.pathFromEntity.Count <= 1)
             {
@@ -208,7 +227,10 @@ namespace System.Data.Services.Client
 
         internal Expression[] GetExpressionsToTargetEntity()
         {
-            Debug.Assert(!this.multiplePathsFound, "this.multiplePathsFound -- otherwise GetExpressionsToTargetEntity won't return reliable (consistent) results");
+            Debug.Assert(
+                !this.multiplePathsFound,
+                "this.multiplePathsFound -- otherwise GetExpressionsToTargetEntity won't return reliable (consistent) results"
+            );
 
             if (this.pathFromEntity.Count <= 1)
             {
@@ -224,7 +246,11 @@ namespace System.Data.Services.Client
             return result;
         }
 
-        private static Exception CheckCompatibleAssignments(Type targetType, Expression[] previous, Expression[] candidate)
+        private static Exception CheckCompatibleAssignments(
+            Type targetType,
+            Expression[] previous,
+            Expression[] candidate
+        )
         {
             Debug.Assert(targetType != null, "targetType != null");
             Debug.Assert(previous != null, "previous != null");
@@ -263,13 +289,21 @@ namespace System.Data.Services.Client
             return null;
         }
 
-        private static Exception CheckCompatibleAssignmentsFail(Type targetType, Expression[] previous, Expression[] candidate)
+        private static Exception CheckCompatibleAssignmentsFail(
+            Type targetType,
+            Expression[] previous,
+            Expression[] candidate
+        )
         {
             Debug.Assert(targetType != null, "targetType != null");
             Debug.Assert(previous != null, "previous != null");
             Debug.Assert(candidate != null, "candidate != null");
 
-            string message = Strings.ALinq_ProjectionMemberAssignmentMismatch(targetType.FullName, previous.LastOrDefault(), candidate.LastOrDefault());
+            string message = Strings.ALinq_ProjectionMemberAssignmentMismatch(
+                targetType.FullName,
+                previous.LastOrDefault(),
+                candidate.LastOrDefault()
+            );
             return new NotSupportedException(message);
         }
 

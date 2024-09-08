@@ -12,9 +12,7 @@ internal sealed class VaryByRouteValuePolicy : IOutputCachePolicy
 {
     private readonly StringValues _routeValueNames;
 
-    private VaryByRouteValuePolicy()
-    {
-    }
+    private VaryByRouteValuePolicy() { }
 
     public VaryByRouteValuePolicy(string routeValue, params string[] routeValueNames)
     {
@@ -36,20 +34,29 @@ internal sealed class VaryByRouteValuePolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         context.CacheVaryByRules.RouteValueNames = _routeValueNames;
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

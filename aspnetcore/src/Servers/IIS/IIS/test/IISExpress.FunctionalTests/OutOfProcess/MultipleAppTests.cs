@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
@@ -18,9 +18,8 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class MultipleAppTests : IISFunctionalTestBase
 {
-    public MultipleAppTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public MultipleAppTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task Startup()
@@ -34,7 +33,9 @@ public class MultipleAppTests : IISFunctionalTestBase
             // Deploy all apps
             for (var i = 0; i < numApps; i++)
             {
-                var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel: IntegrationTesting.HostingModel.OutOfProcess);
+                var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                    hostingModel: IntegrationTesting.HostingModel.OutOfProcess
+                );
                 var deployer = CreateDeployer(deploymentParameters);
                 deployers.Add(deployer);
                 deploymentResults.Add(await deployer.DeployAsync());

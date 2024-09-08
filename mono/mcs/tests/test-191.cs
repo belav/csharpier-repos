@@ -1,35 +1,33 @@
 //
 // Accessibility tests for NestedPrivate classes
 //
-class X {
+class X
+{
+    private class E { }
 
-	private class E {
-	}
-	
-	private class D {
-
-		private class P {
-			//
-			// Declares an field of a "parent" private class
-			//
-			E c;
-			
-		}
-	}
+    private class D
+    {
+        private class P
+        {
+            //
+            // Declares an field of a "parent" private class
+            //
+            E c;
+        }
+    }
 }
 
-class Y {
-	private class Op {
-		public D d;
-	}
+class Y
+{
+    private class Op
+    {
+        public D d;
+    }
 
-	private enum D {
-	}
+    private enum D { }
 }
 
-class R {
-	public static void Main ()
-	{
-	}
+class R
+{
+    public static void Main() { }
 }
-

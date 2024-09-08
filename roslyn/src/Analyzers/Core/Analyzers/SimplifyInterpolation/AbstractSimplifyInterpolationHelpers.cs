@@ -21,14 +21,22 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
     {
         protected abstract bool PermitNonLiteralAlignmentComponents { get; }
 
-        protected abstract SyntaxNode GetPreservedInterpolationExpressionSyntax(IOperation operation);
+        protected abstract SyntaxNode GetPreservedInterpolationExpressionSyntax(
+            IOperation operation
+        );
 
         public void UnwrapInterpolation<TInterpolationSyntax, TExpressionSyntax>(
-            IVirtualCharService virtualCharService, ISyntaxFacts syntaxFacts, IInterpolationOperation interpolation,
-            out TExpressionSyntax? unwrapped, out TExpressionSyntax? alignment, out bool negate,
-            out string? formatString, out ImmutableArray<Location> unnecessaryLocations)
-                where TInterpolationSyntax : SyntaxNode
-                where TExpressionSyntax : SyntaxNode
+            IVirtualCharService virtualCharService,
+            ISyntaxFacts syntaxFacts,
+            IInterpolationOperation interpolation,
+            out TExpressionSyntax? unwrapped,
+            out TExpressionSyntax? alignment,
+            out bool negate,
+            out string? formatString,
+            out ImmutableArray<Location> unnecessaryLocations
+        )
+            where TInterpolationSyntax : SyntaxNode
+            where TExpressionSyntax : SyntaxNode
         {
             alignment = null;
             negate = false;
@@ -38,10 +46,23 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
 
             var expression = Unwrap(interpolation.Expression);
             if (interpolation.Alignment == null)
-                UnwrapAlignmentPadding(expression, out expression, out alignment, out negate, unnecessarySpans);
+                UnwrapAlignmentPadding(
+                    expression,
+                    out expression,
+                    out alignment,
+                    out negate,
+                    unnecessarySpans
+                );
 
             if (interpolation.FormatString == null)
-                UnwrapFormatString(virtualCharService, syntaxFacts, expression, out expression, out formatString, unnecessarySpans);
+                UnwrapFormatString(
+                    virtualCharService,
+                    syntaxFacts,
+                    expression,
+                    out expression,
+                    out formatString,
+                    unnecessarySpans
+                );
 
             unwrapped = GetPreservedInterpolationExpressionSyntax(expression) as TExpressionSyntax;
 
@@ -73,44 +94,87 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         }
 
         private void UnwrapFormatString(
-            IVirtualCharService virtualCharService, ISyntaxFacts syntaxFacts, IOperation expression, out IOperation unwrapped,
-            out string? formatString, List<TextSpan> unnecessarySpans)
+            IVirtualCharService virtualCharService,
+            ISyntaxFacts syntaxFacts,
+            IOperation expression,
+            out IOperation unwrapped,
+            out string? formatString,
+            List<TextSpan> unnecessarySpans
+        )
         {
             Contract.ThrowIfNull(expression.SemanticModel);
 
-            if (expression is IInvocationOperation { TargetMethod.Name: nameof(ToString) } invocation &&
-                HasNonImplicitInstance(invocation, out var instance) &&
-                !syntaxFacts.IsBaseExpression(instance.Syntax) &&
-                instance.Type != null &&
-                !instance.Type.IsRefLikeType)
+            if (
+                expression
+                    is IInvocationOperation { TargetMethod.Name: nameof(ToString) } invocation
+                && HasNonImplicitInstance(invocation, out var instance)
+                && !syntaxFacts.IsBaseExpression(instance.Syntax)
+                && instance.Type != null
+                && !instance.Type.IsRefLikeType
+            )
             {
-                if (invocation.Arguments.Length == 1
-                    || (invocation.Arguments.Length == 2 && UsesInvariantCultureReferenceInsideFormattableStringInvariant(invocation, formatProviderArgumentIndex: 1)))
+                if (
+                    invocation.Arguments.Length == 1
+                    || (
+                        invocation.Arguments.Length == 2
+                        && UsesInvariantCultureReferenceInsideFormattableStringInvariant(
+                            invocation,
+                            formatProviderArgumentIndex: 1
+                        )
+                    )
+                )
                 {
-                    if (invocation.Arguments[0].Value is ILiteralOperation { ConstantValue: { HasValue: true, Value: string value } } literal &&
-                        FindType<IFormattable>(expression.SemanticModel) is { } systemIFormattable &&
-                        instance.Type.Implements(systemIFormattable))
+                    if (
+                        invocation.Arguments[0].Value
+                            is ILiteralOperation
+                            {
+                                ConstantValue: { HasValue: true, Value: string value }
+                            } literal
+                        && FindType<IFormattable>(expression.SemanticModel)
+                            is { } systemIFormattable
+                        && instance.Type.Implements(systemIFormattable)
+                    )
                     {
                         unwrapped = instance;
                         formatString = value;
 
-                        unnecessarySpans.AddRange(invocation.Syntax.Span
-                            .Subtract(GetPreservedInterpolationExpressionSyntax(instance).FullSpan)
-                            .Subtract(GetSpanWithinLiteralQuotes(virtualCharService, literal.Syntax.GetFirstToken())));
+                        unnecessarySpans.AddRange(
+                            invocation
+                                .Syntax.Span.Subtract(
+                                    GetPreservedInterpolationExpressionSyntax(instance).FullSpan
+                                )
+                                .Subtract(
+                                    GetSpanWithinLiteralQuotes(
+                                        virtualCharService,
+                                        literal.Syntax.GetFirstToken()
+                                    )
+                                )
+                        );
                         return;
                     }
                 }
 
-                if (IsObjectToStringOverride(invocation.TargetMethod)
-                    || (invocation.Arguments.Length == 1 && UsesInvariantCultureReferenceInsideFormattableStringInvariant(invocation, formatProviderArgumentIndex: 0)))
+                if (
+                    IsObjectToStringOverride(invocation.TargetMethod)
+                    || (
+                        invocation.Arguments.Length == 1
+                        && UsesInvariantCultureReferenceInsideFormattableStringInvariant(
+                            invocation,
+                            formatProviderArgumentIndex: 0
+                        )
+                    )
+                )
                 {
                     // A call to `.ToString()` at the end of the interpolation.  This is unnecessary.
                     // Just remove entirely.
                     unwrapped = instance;
                     formatString = "";
 
-                    unnecessarySpans.AddRange(invocation.Syntax.Span
-                        .Subtract(GetPreservedInterpolationExpressionSyntax(instance).FullSpan));
+                    unnecessarySpans.AddRange(
+                        invocation.Syntax.Span.Subtract(
+                            GetPreservedInterpolationExpressionSyntax(instance).FullSpan
+                        )
+                    );
                     return;
                 }
             }
@@ -128,10 +192,14 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 && method.Name == nameof(ToString);
         }
 
-        private static bool UsesInvariantCultureReferenceInsideFormattableStringInvariant(IInvocationOperation invocation, int formatProviderArgumentIndex)
+        private static bool UsesInvariantCultureReferenceInsideFormattableStringInvariant(
+            IInvocationOperation invocation,
+            int formatProviderArgumentIndex
+        )
         {
-            return IsInvariantCultureReference(invocation.Arguments[formatProviderArgumentIndex].Value)
-                && IsInsideFormattableStringInvariant(invocation);
+            return IsInvariantCultureReference(
+                    invocation.Arguments[formatProviderArgumentIndex].Value
+                ) && IsInsideFormattableStringInvariant(invocation);
         }
 
         private static bool IsInvariantCultureReference(IOperation operation)
@@ -146,7 +214,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 if (member.Name == "InvariantInfo")
                 {
                     return IsType<NumberFormatInfo>(member.ContainingType, operation.SemanticModel)
-                        || IsType<DateTimeFormatInfo>(member.ContainingType, operation.SemanticModel);
+                        || IsType<DateTimeFormatInfo>(
+                            member.ContainingType,
+                            operation.SemanticModel
+                        );
                 }
             }
 
@@ -157,22 +228,30 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         {
             Contract.ThrowIfNull(operation.SemanticModel);
 
-            var interpolatedStringOperation = AncestorsAndSelf(operation).OfType<IInterpolatedStringOperation>().FirstOrDefault();
+            var interpolatedStringOperation = AncestorsAndSelf(operation)
+                .OfType<IInterpolatedStringOperation>()
+                .FirstOrDefault();
 
-            return Unwrap(interpolatedStringOperation?.Parent, towardsParent: true) is IArgumentOperation
-            {
-                Parent: IInvocationOperation
-                {
-                    TargetMethod: { Name: nameof(FormattableString.Invariant), ContainingType: var containingType },
-                },
-            } && IsType<FormattableString>(containingType, operation.SemanticModel);
+            return Unwrap(interpolatedStringOperation?.Parent, towardsParent: true)
+                    is IArgumentOperation
+                    {
+                        Parent: IInvocationOperation
+                        {
+                            TargetMethod:
+                            {
+                                Name: nameof(FormattableString.Invariant),
+                                ContainingType: var containingType
+                            },
+                        },
+                    }
+                && IsType<FormattableString>(containingType, operation.SemanticModel);
         }
 
-        private static bool IsType<T>(INamedTypeSymbol type, SemanticModel semanticModel)
-            => SymbolEqualityComparer.Default.Equals(type, FindType<T>(semanticModel));
+        private static bool IsType<T>(INamedTypeSymbol type, SemanticModel semanticModel) =>
+            SymbolEqualityComparer.Default.Equals(type, FindType<T>(semanticModel));
 
-        private static INamedTypeSymbol? FindType<T>(SemanticModel semanticModel)
-            => semanticModel.Compilation.GetTypeByMetadataName(typeof(T).FullName!);
+        private static INamedTypeSymbol? FindType<T>(SemanticModel semanticModel) =>
+            semanticModel.Compilation.GetTypeByMetadataName(typeof(T).FullName!);
 
         private static IEnumerable<IOperation> AncestorsAndSelf(IOperation operation)
         {
@@ -180,7 +259,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                 yield return current;
         }
 
-        private static TextSpan GetSpanWithinLiteralQuotes(IVirtualCharService virtualCharService, SyntaxToken formatToken)
+        private static TextSpan GetSpanWithinLiteralQuotes(
+            IVirtualCharService virtualCharService,
+            SyntaxToken formatToken
+        )
         {
             var sequence = virtualCharService.TryConvertToVirtualChars(formatToken);
             return sequence.IsDefaultOrEmpty
@@ -189,12 +271,18 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
         }
 
         private void UnwrapAlignmentPadding<TExpressionSyntax>(
-            IOperation expression, out IOperation unwrapped,
-            out TExpressionSyntax? alignment, out bool negate, List<TextSpan> unnecessarySpans)
+            IOperation expression,
+            out IOperation unwrapped,
+            out TExpressionSyntax? alignment,
+            out bool negate,
+            List<TextSpan> unnecessarySpans
+        )
             where TExpressionSyntax : SyntaxNode
         {
-            if (expression is IInvocationOperation invocation &&
-                HasNonImplicitInstance(invocation, out var instance))
+            if (
+                expression is IInvocationOperation invocation
+                && HasNonImplicitInstance(invocation, out var instance)
+            )
             {
                 var targetName = invocation.TargetMethod.Name;
                 if (targetName is nameof(string.PadLeft) or nameof(string.PadRight))
@@ -202,14 +290,15 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                     var argCount = invocation.Arguments.Length;
                     if (argCount is 1 or 2)
                     {
-                        if (argCount == 1 ||
-                            IsSpaceChar(invocation.Arguments[1]))
+                        if (argCount == 1 || IsSpaceChar(invocation.Arguments[1]))
                         {
                             var alignmentOp = invocation.Arguments[0].Value;
 
-                            if (PermitNonLiteralAlignmentComponents
-                                ? alignmentOp is { ConstantValue.HasValue: true }
-                                : alignmentOp is { Kind: OperationKind.Literal })
+                            if (
+                                PermitNonLiteralAlignmentComponents
+                                    ? alignmentOp is { ConstantValue.HasValue: true }
+                                    : alignmentOp is { Kind: OperationKind.Literal }
+                            )
                             {
                                 var alignmentSyntax = alignmentOp.Syntax;
 
@@ -217,9 +306,15 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
                                 alignment = alignmentSyntax as TExpressionSyntax;
                                 negate = targetName == nameof(string.PadRight);
 
-                                unnecessarySpans.AddRange(invocation.Syntax.Span
-                                    .Subtract(GetPreservedInterpolationExpressionSyntax(instance).FullSpan)
-                                    .Subtract(alignmentSyntax.FullSpan));
+                                unnecessarySpans.AddRange(
+                                    invocation
+                                        .Syntax.Span.Subtract(
+                                            GetPreservedInterpolationExpressionSyntax(
+                                                instance
+                                            ).FullSpan
+                                        )
+                                        .Subtract(alignmentSyntax.FullSpan)
+                                );
                                 return;
                             }
                         }
@@ -232,7 +327,10 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             negate = false;
         }
 
-        private static bool HasNonImplicitInstance(IInvocationOperation invocation, [NotNullWhen(true)] out IOperation? instance)
+        private static bool HasNonImplicitInstance(
+            IInvocationOperation invocation,
+            [NotNullWhen(true)] out IOperation? instance
+        )
         {
             if (invocation.Instance is { IsImplicit: false })
             {
@@ -244,7 +342,7 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             return false;
         }
 
-        private static bool IsSpaceChar(IArgumentOperation argument)
-            => argument.Value.ConstantValue is { HasValue: true, Value: ' ' };
+        private static bool IsSpaceChar(IArgumentOperation argument) =>
+            argument.Value.ConstantValue is { HasValue: true, Value: ' ' };
     }
 }

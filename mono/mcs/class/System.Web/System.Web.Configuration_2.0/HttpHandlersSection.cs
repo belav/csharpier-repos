@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,68 +34,76 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class HttpHandlersSection: ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty handlersProp;
+    public sealed class HttpHandlersSection : ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty handlersProp;
 
-		static HttpHandlersSection ()
-		{
-			handlersProp = new ConfigurationProperty ("", typeof (HttpHandlerActionCollection), null,
-								  null, PropertyHelper.DefaultValidator,
-								  ConfigurationPropertyOptions.IsDefaultCollection);
+        static HttpHandlersSection()
+        {
+            handlersProp = new ConfigurationProperty(
+                "",
+                typeof(HttpHandlerActionCollection),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
+            properties = new ConfigurationPropertyCollection();
 
-			properties = new ConfigurationPropertyCollection ();
+            properties.Add(handlersProp);
+        }
 
-			properties.Add (handlersProp);
-		}
+        public HttpHandlersSection() { }
 
-		public HttpHandlersSection ()
-		{
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public HttpHandlerActionCollection Handlers
+        {
+            get { return (HttpHandlerActionCollection)base[handlersProp]; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public HttpHandlerActionCollection Handlers {
-			get { return (HttpHandlerActionCollection) base[handlersProp]; }
-		}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        #region CompatabilityCode
+        internal object LocateHandler(string verb, string filepath, out bool allowCache)
+        {
+            int top = Handlers.Count;
 
-#region CompatabilityCode
-		internal object LocateHandler (string verb, string filepath, out bool allowCache)
-		{
-			int top = Handlers.Count;
-			
-			for (int i = 0; i < top; i++){
-				HttpHandlerAction handler = (HttpHandlerAction) Handlers [i];
+            for (int i = 0; i < top; i++)
+            {
+                HttpHandlerAction handler = (HttpHandlerAction)Handlers[i];
 
-				string[] verbs = handler.Verbs;
-				if (verbs == null){
-					if (handler.PathMatches (filepath)) {
-						allowCache = handler.Path != "*";
-						return handler.GetHandlerInstance ();
-					}
-					continue;
-				}
+                string[] verbs = handler.Verbs;
+                if (verbs == null)
+                {
+                    if (handler.PathMatches(filepath))
+                    {
+                        allowCache = handler.Path != "*";
+                        return handler.GetHandlerInstance();
+                    }
+                    continue;
+                }
 
-				for (int j = verbs.Length; j > 0; ){
-					j--;
-					if (verbs [j] != verb)
-						continue;
-					if (handler.PathMatches (filepath)) {
-						allowCache = handler.Path != "*";
-						return handler.GetHandlerInstance ();
-					}
-				}
-			}
+                for (int j = verbs.Length; j > 0; )
+                {
+                    j--;
+                    if (verbs[j] != verb)
+                        continue;
+                    if (handler.PathMatches(filepath))
+                    {
+                        allowCache = handler.Path != "*";
+                        return handler.GetHandlerInstance();
+                    }
+                }
+            }
 
-			allowCache = false;
-			return null;
-		}
-#endregion
-	}
+            allowCache = false;
+            return null;
+        }
+        #endregion
+    }
 }
-

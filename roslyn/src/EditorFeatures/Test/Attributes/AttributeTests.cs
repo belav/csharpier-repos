@@ -37,17 +37,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Attributes
         [Fact]
         public void CreateExportBraceMatcherAttributeWithNullArg()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new ExportBraceMatcherAttribute(null));
+            Assert.Throws<ArgumentNullException>(() => new ExportBraceMatcherAttribute(null));
         }
 
         [Fact]
         public void CreateExportCompletionProviderAttributeWithNullArg()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-                new ExportCompletionProviderMef1Attribute("name", null));
-            Assert.Throws<ArgumentNullException>(() =>
-                new ExportCompletionProviderMef1Attribute(null, "language"));
+            Assert.Throws<ArgumentNullException>(
+                () => new ExportCompletionProviderMef1Attribute("name", null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new ExportCompletionProviderMef1Attribute(null, "language")
+            );
         }
     }
 }

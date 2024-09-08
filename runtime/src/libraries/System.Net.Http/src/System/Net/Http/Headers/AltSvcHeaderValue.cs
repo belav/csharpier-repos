@@ -13,9 +13,22 @@ namespace System.Net.Http.Headers
     /// </remarks>
     internal sealed class AltSvcHeaderValue
     {
-        public static AltSvcHeaderValue Clear { get; } = new AltSvcHeaderValue("clear", host: null, port: 0, maxAge: TimeSpan.Zero, persist: false);
+        public static AltSvcHeaderValue Clear { get; } =
+            new AltSvcHeaderValue(
+                "clear",
+                host: null,
+                port: 0,
+                maxAge: TimeSpan.Zero,
+                persist: false
+            );
 
-        public AltSvcHeaderValue(string alpnProtocolName, string? host, int port, TimeSpan maxAge, bool persist)
+        public AltSvcHeaderValue(
+            string alpnProtocolName,
+            string? host,
+            int port,
+            TimeSpan maxAge,
+            bool persist
+        )
         {
             AlpnProtocolName = alpnProtocolName;
             Host = host;
@@ -65,7 +78,10 @@ namespace System.Net.Http.Headers
             if (MaxAge != TimeSpan.FromTicks(AltSvcHeaderParser.DefaultMaxAgeTicks))
             {
                 sb.Append("; ma=");
-                sb.AppendSpanFormattable(MaxAge.Ticks / TimeSpan.TicksPerSecond, provider: CultureInfo.InvariantCulture);
+                sb.AppendSpanFormattable(
+                    MaxAge.Ticks / TimeSpan.TicksPerSecond,
+                    provider: CultureInfo.InvariantCulture
+                );
             }
 
             if (Persist)

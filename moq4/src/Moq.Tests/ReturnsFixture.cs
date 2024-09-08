@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -138,8 +137,7 @@ namespace Moq.Tests
         public void PassesOneArgumentToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(x => x.Execute(It.IsAny<string>()))
-                .Returns((string s) => s.ToLower());
+            mock.Setup(x => x.Execute(It.IsAny<string>())).Returns((string s) => s.ToLower());
 
             string result = mock.Object.Execute("blah1");
             Assert.Equal("blah1", result);
@@ -171,7 +169,14 @@ namespace Moq.Tests
         public void PassesFourArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+                )
                 .Returns((string s1, string s2, string s3, string s4) => s1 + s2 + s3 + s4);
 
             string result = mock.Object.Execute("blah1", "blah2", "blah3", "blah4");
@@ -182,8 +187,19 @@ namespace Moq.Tests
         public void PassesFiveArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string s1, string s2, string s3, string s4, string s5) => s1 + s2 + s3 + s4 + s5);
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Returns(
+                    (string s1, string s2, string s3, string s4, string s5) =>
+                        s1 + s2 + s3 + s4 + s5
+                );
 
             string result = mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5");
             Assert.Equal("blah1blah2blah3blah4blah5", result);
@@ -193,10 +209,29 @@ namespace Moq.Tests
         public void PassesSixArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string s1, string s2, string s3, string s4, string s5, string s6) => s1 + s2 + s3 + s4 + s5 + s6);
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Returns(
+                    (string s1, string s2, string s3, string s4, string s5, string s6) =>
+                        s1 + s2 + s3 + s4 + s5 + s6
+                );
 
-            string result = mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6");
+            string result = mock.Object.Execute(
+                "blah1",
+                "blah2",
+                "blah3",
+                "blah4",
+                "blah5",
+                "blah6"
+            );
             Assert.Equal("blah1blah2blah3blah4blah5blah6", result);
         }
 
@@ -204,10 +239,31 @@ namespace Moq.Tests
         public void PassesSevenArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string s1, string s2, string s3, string s4, string s5, string s6, string s7) => s1 + s2 + s3 + s4 + s5 + s6 + s7);
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Returns(
+                    (string s1, string s2, string s3, string s4, string s5, string s6, string s7) =>
+                        s1 + s2 + s3 + s4 + s5 + s6 + s7
+                );
 
-            string result = mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7");
+            string result = mock.Object.Execute(
+                "blah1",
+                "blah2",
+                "blah3",
+                "blah4",
+                "blah5",
+                "blah6",
+                "blah7"
+            );
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7", result);
         }
 
@@ -215,10 +271,41 @@ namespace Moq.Tests
         public void PassesEightArgumentsToReturns()
         {
             var mock = new Mock<IFoo>();
-            mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-                .Returns((string s1, string s2, string s3, string s4, string s5, string s6, string s7, string s8) => s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8);
+            mock.Setup(x =>
+                    x.Execute(
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Returns(
+                    (
+                        string s1,
+                        string s2,
+                        string s3,
+                        string s4,
+                        string s5,
+                        string s6,
+                        string s7,
+                        string s8
+                    ) => s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8
+                );
 
-            string result = mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7", "blah8");
+            string result = mock.Object.Execute(
+                "blah1",
+                "blah2",
+                "blah3",
+                "blah4",
+                "blah5",
+                "blah6",
+                "blah7",
+                "blah8"
+            );
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7blah8", result);
         }
 
@@ -275,11 +362,15 @@ namespace Moq.Tests
 
             var mock = new Mock<IFoo>();
             mock.Setup(f => f.Execute(ref input))
-                .Returns(new ExecuteRHandler((ref string arg1) =>
-                {
-                    received = arg1;
-                    return default(string);
-                }));
+                .Returns(
+                    new ExecuteRHandler(
+                        (ref string arg1) =>
+                        {
+                            received = arg1;
+                            return default(string);
+                        }
+                    )
+                );
 
             mock.Object.Execute(ref input);
             Assert.Equal("input", input);
@@ -293,10 +384,14 @@ namespace Moq.Tests
 
             var mock = new Mock<IFoo>();
             mock.Setup(f => f.Execute(ref input))
-                .Returns(new ExecuteRHandler((ref string arg1) =>
-                {
-                    return "result";
-                }));
+                .Returns(
+                    new ExecuteRHandler(
+                        (ref string arg1) =>
+                        {
+                            return "result";
+                        }
+                    )
+                );
 
             var returnValue = mock.Object.Execute(ref input);
             Assert.Equal("result", returnValue);
@@ -309,11 +404,15 @@ namespace Moq.Tests
 
             var mock = new Mock<IFoo>();
             mock.Setup(f => f.Execute(ref value))
-                .Returns(new ExecuteRHandler((ref string arg1) =>
-                {
-                    arg1 = "output";
-                    return default(string);
-                }));
+                .Returns(
+                    new ExecuteRHandler(
+                        (ref string arg1) =>
+                        {
+                            arg1 = "output";
+                            return default(string);
+                        }
+                    )
+                );
 
             Assert.Equal("input", value);
             mock.Object.Execute(ref value);
@@ -328,11 +427,15 @@ namespace Moq.Tests
 
             var mock = new Mock<IFoo>();
             mock.Setup(f => f.Execute(ref _, value))
-                .Returns(new ExecuteRVHandler((ref string arg1, string arg2) =>
-                {
-                    arg2 = "output";
-                    return default(string);
-                }));
+                .Returns(
+                    new ExecuteRVHandler(
+                        (ref string arg1, string arg2) =>
+                        {
+                            arg2 = "output";
+                            return default(string);
+                        }
+                    )
+                );
 
             Assert.Equal("input", value);
             mock.Object.Execute(ref _, value);
@@ -397,9 +500,33 @@ namespace Moq.Tests
             string Execute(string arg1, string arg2, string arg3);
             string Execute(string arg1, string arg2, string arg3, string arg4);
             string Execute(string arg1, string arg2, string arg3, string arg4, string arg5);
-            string Execute(string arg1, string arg2, string arg3, string arg4, string arg5, string arg6);
-            string Execute(string arg1, string arg2, string arg3, string arg4, string arg5, string arg6, string arg7);
-            string Execute(string arg1, string arg2, string arg3, string arg4, string arg5, string arg6, string arg7, string arg8);
+            string Execute(
+                string arg1,
+                string arg2,
+                string arg3,
+                string arg4,
+                string arg5,
+                string arg6
+            );
+            string Execute(
+                string arg1,
+                string arg2,
+                string arg3,
+                string arg4,
+                string arg5,
+                string arg6,
+                string arg7
+            );
+            string Execute(
+                string arg1,
+                string arg2,
+                string arg3,
+                string arg4,
+                string arg5,
+                string arg6,
+                string arg7,
+                string arg8
+            );
 
             string Execute(ref string arg1);
             string Execute(ref string arg1, string arg2);

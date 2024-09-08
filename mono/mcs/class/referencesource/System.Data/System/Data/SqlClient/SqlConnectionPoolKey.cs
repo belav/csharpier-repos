@@ -8,7 +8,6 @@
 
 namespace System.Data.SqlClient
 {
-
     using System;
     using System.Collections;
     using System.Data.Common;
@@ -22,19 +21,28 @@ namespace System.Data.SqlClient
         private int _hashValue;
         private readonly string _accessToken;
 
-        internal SqlConnectionPoolKey(string connectionString, SqlCredential credential, string accessToken) : base(connectionString)
+        internal SqlConnectionPoolKey(
+            string connectionString,
+            SqlCredential credential,
+            string accessToken
+        )
+            : base(connectionString)
         {
-            Debug.Assert(_credential == null || _accessToken == null, "Credential and AccessToken can't have the value at the same time.");
+            Debug.Assert(
+                _credential == null || _accessToken == null,
+                "Credential and AccessToken can't have the value at the same time."
+            );
             _credential = credential;
             _accessToken = accessToken;
             CalculateHashCode();
         }
 
-        private SqlConnectionPoolKey(SqlConnectionPoolKey key) : base (key)
+        private SqlConnectionPoolKey(SqlConnectionPoolKey key)
+            : base(key)
         {
-             _credential = key.Credential;
-             _accessToken = key.AccessToken;
-             CalculateHashCode();
+            _credential = key.Credential;
+            _accessToken = key.AccessToken;
+            CalculateHashCode();
         }
 
         object ICloneable.Clone()
@@ -44,11 +52,7 @@ namespace System.Data.SqlClient
 
         internal override string ConnectionString
         {
-            get
-            {
-                return base.ConnectionString;
-            }
-
+            get { return base.ConnectionString; }
             set
             {
                 base.ConnectionString = value;
@@ -58,25 +62,24 @@ namespace System.Data.SqlClient
 
         internal SqlCredential Credential
         {
-            get
-            {
-                return _credential;
-            }
+            get { return _credential; }
         }
 
         internal string AccessToken
         {
-            get
-            {
-                return _accessToken;
-            }
+            get { return _accessToken; }
         }
 
         public override bool Equals(object obj)
         {
             SqlConnectionPoolKey key = obj as SqlConnectionPoolKey;
 
-            return (key != null && _credential == key._credential && ConnectionString == key.ConnectionString && Object.ReferenceEquals(_accessToken, key._accessToken));
+            return (
+                key != null
+                && _credential == key._credential
+                && ConnectionString == key.ConnectionString
+                && Object.ReferenceEquals(_accessToken, key._accessToken)
+            );
         }
 
         public override int GetHashCode()

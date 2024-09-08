@@ -11,25 +11,19 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 public class VersionOneDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
     public VersionOneDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 }
 
 public class VersionTwoDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
     public VersionTwoDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 }
 
 public class EmptyDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
     public EmptyDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -48,7 +42,6 @@ public class EmptyDbContext : IdentityDbContext<IdentityUser, IdentityRole, stri
             builder.Ignore<IdentityRoleClaim<string>>();
 
             builder.Ignore<IdentityUserRole<string>>();
-
         }
         else
         {
@@ -65,9 +58,7 @@ public class CustomColumn
 public class CustomVersionDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
 {
     public CustomVersionDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<CustomColumn> CustomColumns { get; set; }
 

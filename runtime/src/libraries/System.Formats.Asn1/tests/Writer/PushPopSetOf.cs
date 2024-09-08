@@ -14,8 +14,7 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PopNewWriter(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf());
+            Assert.Throws<InvalidOperationException>(() => writer.PopSetOf());
         }
 
         [Theory]
@@ -26,7 +25,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -39,8 +39,7 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushSetOf();
             writer.PopSetOf();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf());
+            Assert.Throws<InvalidOperationException>(() => writer.PopSetOf());
         }
 
         [Theory]
@@ -54,7 +53,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PopSetOf();
 
             Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -66,8 +66,7 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true));
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf());
+            Assert.Throws<InvalidOperationException>(() => writer.PopSetOf());
         }
 
         [Theory]
@@ -80,7 +79,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushSetOf();
 
             Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                () => writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -302,12 +302,12 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void SimpleContentShift(AsnEncodingRules ruleSet)
         {
             const string ExpectedHex =
-                "318180" +
-                    "047E" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D";
+                "318180"
+                + "047E"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D";
 
             AsnWriter writer = new AsnWriter(ruleSet);
             SimpleContentShiftCore(writer, ExpectedHex);
@@ -317,13 +317,13 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void SimpleContentShift_CER()
         {
             const string ExpectedHex =
-                "3180" +
-                    "047E" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                    "0000";
+                "3180"
+                + "047E"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "0000";
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             SimpleContentShiftCore(writer, ExpectedHex);
@@ -383,16 +383,16 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void BER_DoesNotSort()
         {
             const string ExpectedHex =
-                "311D" +
-                    "0201FF" +
-                    "020100" +
-                    "020200FF" +
-                    "0101FF" +
-                    "450100" +
-                    "02017F" +
-                    "020180" +
-                    "020200FE" +
-                    "020100";
+                "311D"
+                + "0201FF"
+                + "020100"
+                + "020200FF"
+                + "0101FF"
+                + "450100"
+                + "02017F"
+                + "020180"
+                + "020200FE"
+                + "020100";
 
             ValidateDataSorting(AsnEncodingRules.BER, ExpectedHex);
         }
@@ -401,17 +401,17 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void CER_SortsData()
         {
             const string ExpectedHex =
-                "3180" +
-                    "0101FF" +
-                    "020100" +
-                    "020100" +
-                    "02017F" +
-                    "020180" +
-                    "0201FF" +
-                    "020200FE" +
-                    "020200FF" +
-                    "450100" +
-                    "0000";
+                "3180"
+                + "0101FF"
+                + "020100"
+                + "020100"
+                + "02017F"
+                + "020180"
+                + "0201FF"
+                + "020200FE"
+                + "020200FF"
+                + "450100"
+                + "0000";
 
             ValidateDataSorting(AsnEncodingRules.CER, ExpectedHex);
         }
@@ -420,16 +420,16 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void DER_SortsData()
         {
             const string ExpectedHex =
-                "311D" +
-                    "0101FF" +
-                    "020100" +
-                    "020100" +
-                    "02017F" +
-                    "020180" +
-                    "0201FF" +
-                    "020200FE" +
-                    "020200FF" +
-                    "450100";
+                "311D"
+                + "0101FF"
+                + "020100"
+                + "020100"
+                + "02017F"
+                + "020180"
+                + "0201FF"
+                + "020200FE"
+                + "020200FF"
+                + "450100";
 
             ValidateDataSorting(AsnEncodingRules.DER, ExpectedHex);
         }
@@ -458,7 +458,9 @@ namespace System.Formats.Asn1.Tests.Writer
 
             Assert.Throws<InvalidOperationException>(() => writer.GetEncodedLength());
             Assert.Throws<InvalidOperationException>(() => writer.Encode());
-            Assert.Throws<InvalidOperationException>(() => writer.TryEncode(Span<byte>.Empty, out written));
+            Assert.Throws<InvalidOperationException>(
+                () => writer.TryEncode(Span<byte>.Empty, out written)
+            );
             Assert.Equal(-5, written);
 
             byte[] buf = new byte[10];
@@ -474,9 +476,7 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PushSetOf_Null(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.PushSetOf(Asn1Tag.Null));
+            AssertExtensions.Throws<ArgumentException>("tag", () => writer.PushSetOf(Asn1Tag.Null));
         }
 
         [Theory]
@@ -490,8 +490,7 @@ namespace System.Formats.Asn1.Tests.Writer
 
             writer.PushSequence(tag);
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSetOf(tag));
+            Assert.Throws<InvalidOperationException>(() => writer.PopSetOf(tag));
         }
 
         [Theory]

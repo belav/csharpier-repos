@@ -26,7 +26,10 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
-public interface IRelationalConnection : IRelationalTransactionManager, IDisposable, IAsyncDisposable
+public interface IRelationalConnection
+    : IRelationalTransactionManager,
+        IDisposable,
+        IAsyncDisposable
 {
     /// <summary>
     ///     Gets or sets the connection string for the database.

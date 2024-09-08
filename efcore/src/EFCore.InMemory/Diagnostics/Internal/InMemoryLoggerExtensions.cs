@@ -20,7 +20,8 @@ public static class InMemoryLoggerExtensions
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public static void TransactionIgnoredWarning(
-        this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics)
+        this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics
+    )
     {
         var definition = InMemoryResources.LogTransactionsNotSupported(diagnostics);
 
@@ -29,13 +30,25 @@ public static class InMemoryLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EventData(
                 definition,
-                (d, _) => ((EventDefinition)d).GenerateMessage());
+                (d, _) => ((EventDefinition)d).GenerateMessage()
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -48,7 +61,8 @@ public static class InMemoryLoggerExtensions
     public static void ChangesSaved(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         IEnumerable<IUpdateEntry> entries,
-        int rowsAffected)
+        int rowsAffected
+    )
     {
         var definition = InMemoryResources.LogSavedChanges(diagnostics);
 
@@ -57,15 +71,27 @@ public static class InMemoryLoggerExtensions
             definition.Log(diagnostics, rowsAffected);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new SaveChangesEventData(
                 definition,
                 ChangesSaved,
                 entries,
-                rowsAffected);
+                rowsAffected
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 

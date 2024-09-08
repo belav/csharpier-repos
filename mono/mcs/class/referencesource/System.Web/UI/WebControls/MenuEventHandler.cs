@@ -4,9 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System;
-
 
     /// <devdoc>
     /// Represents the method that will handle the events for the <see cref='System.Web.UI.WebControls.Menu'/> class.

@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Routing.Patterns;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.HttpResults;
@@ -18,11 +18,9 @@ public class AcceptedAtRouteOfTResultTests
     public void AcceptedAtRouteResult_ProblemDetails_SetsStatusCodeAndValue()
     {
         // Arrange & Act
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-        {
-            { "test", "case" },
-            { "sample", "route" }
-        });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
         var obj = new HttpValidationProblemDetails();
         var result = new AcceptedAtRoute<HttpValidationProblemDetails>(routeValues, obj);
 
@@ -42,17 +40,16 @@ public class AcceptedAtRouteOfTResultTests
         var stream = new MemoryStream();
         httpContext.Response.Body = stream;
 
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-            {
-                { "test", "case" },
-                { "sample", "route" }
-            });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
 
         // Act
         var result = new AcceptedAtRoute<string>(
             routeName: "sample",
             routeValues: routeValues,
-            value: "Hello world");
+            value: "Hello world"
+        );
         await result.ExecuteAsync(httpContext);
 
         // Assert
@@ -65,19 +62,13 @@ public class AcceptedAtRouteOfTResultTests
         get
         {
             return new TheoryData<object>
-                {
-                    null,
-                    new Dictionary<string, string>()
-                    {
-                        { "hello", "world" }
-                    },
-                    new RouteValueDictionary(
-                        new Dictionary<string, string>()
-                        {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        }),
-                    };
+            {
+                null,
+                new Dictionary<string, string>() { { "hello", "world" } },
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                ),
+            };
         }
     }
 
@@ -97,7 +88,10 @@ public class AcceptedAtRouteOfTResultTests
         // Assert
         Assert.Equal(StatusCodes.Status202Accepted, httpContext.Response.StatusCode);
         Assert.Equal(expectedUrl, httpContext.Response.Headers["Location"]);
-        Assert.Equal(new RouteValueDictionary(values), linkGenerator.RouteValuesAddress.ExplicitValues);
+        Assert.Equal(
+            new RouteValueDictionary(values),
+            linkGenerator.RouteValuesAddress.ExplicitValues
+        );
     }
 
     [Fact]
@@ -111,26 +105,37 @@ public class AcceptedAtRouteOfTResultTests
         var result = new AcceptedAtRoute<object>(
             routeName: null,
             routeValues: new Dictionary<string, object>(),
-            value: null);
+            value: null
+        );
 
         // Assert
-        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(httpContext),
-            "No route matches the supplied values.");
+        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(httpContext),
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        AcceptedAtRoute<Todo> MyApi() { throw new NotImplementedException(); }
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        AcceptedAtRoute<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<AcceptedAtRoute<Todo>>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status202Accepted, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
@@ -144,29 +149,52 @@ public class AcceptedAtRouteOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<AcceptedAtRoute<object>>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<AcceptedAtRoute<object>>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<AcceptedAtRoute<object>>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<AcceptedAtRoute<object>>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]
     public void AcceptedAtRouteResult_Implements_IStatusCodeHttpResult_Correctly()
     {
         // Arrange
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-        {
-            { "test", "case" },
-            { "sample", "route" }
-        });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(new AcceptedAtRoute<string>(routeValues, null));
+        var result = Assert.IsAssignableFrom<IStatusCodeHttpResult>(
+            new AcceptedAtRoute<string>(routeValues, null)
+        );
         Assert.Equal(StatusCodes.Status202Accepted, result.StatusCode);
     }
 
@@ -174,15 +202,15 @@ public class AcceptedAtRouteOfTResultTests
     public void AcceptedAtRouteResult_Implements_IValueHttpResult_Correctly()
     {
         // Arrange
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-        {
-            { "test", "case" },
-            { "sample", "route" }
-        });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
         var value = "Foo";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult>(new AcceptedAtRoute<string>(routeValues, value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult>(
+            new AcceptedAtRoute<string>(routeValues, value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }
@@ -191,15 +219,15 @@ public class AcceptedAtRouteOfTResultTests
     public void AcceptedAtRouteResult_Implements_IValueHttpResultOfT_Correctly()
     {
         // Arrange & Act
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-        {
-            { "test", "case" },
-            { "sample", "route" }
-        });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
         var value = "Foo";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(new AcceptedAtRoute<string>(routeValues, value));
+        var result = Assert.IsAssignableFrom<IValueHttpResult<string>>(
+            new AcceptedAtRoute<string>(routeValues, value)
+        );
         Assert.IsType<string>(result.Value);
         Assert.Equal(value, result.Value);
     }

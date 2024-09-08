@@ -27,7 +27,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static Type LoadContracts()
-            => typeof(ManagedActiveStatementUpdate);
+        private static Type LoadContracts() => typeof(ManagedActiveStatementUpdate);
     }
 }

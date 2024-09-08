@@ -63,7 +63,14 @@ public class HubConnectionBuilderExtensionsTests
 
         var connectionBuilder = new HubConnectionBuilder();
         var uri = new Uri("http://tempuri.org");
-        connectionBuilder.WithUrl(uri, HttpTransportType.LongPolling, options => { options.Proxy = proxy; });
+        connectionBuilder.WithUrl(
+            uri,
+            HttpTransportType.LongPolling,
+            options =>
+            {
+                options.Proxy = proxy;
+            }
+        );
 
         var serviceProvider = connectionBuilder.Services.BuildServiceProvider();
 
@@ -78,7 +85,13 @@ public class HubConnectionBuilderExtensionsTests
         var proxy = Mock.Of<IWebProxy>();
 
         var connectionBuilder = new HubConnectionBuilder();
-        connectionBuilder.WithUrl("http://tempuri.org", options => { options.Proxy = proxy; });
+        connectionBuilder.WithUrl(
+            "http://tempuri.org",
+            options =>
+            {
+                options.Proxy = proxy;
+            }
+        );
 
         var serviceProvider = connectionBuilder.Services.BuildServiceProvider();
 

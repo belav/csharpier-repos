@@ -33,7 +33,8 @@ public class CSharpNamer<T>
     public CSharpNamer(
         Func<T, string> nameGetter,
         ICSharpUtilities cSharpUtilities,
-        Func<string, string>? singularizePluralizer)
+        Func<string, string>? singularizePluralizer
+    )
     {
         _nameGetter = nameGetter;
         _cSharpUtilities = cSharpUtilities;
@@ -54,7 +55,10 @@ public class CSharpNamer<T>
         }
 
         var name = _cSharpUtilities.GenerateCSharpIdentifier(
-            _nameGetter(item), existingIdentifiers: null, singularizePluralizer: _singularizePluralizer);
+            _nameGetter(item),
+            existingIdentifiers: null,
+            singularizePluralizer: _singularizePluralizer
+        );
         NameCache.Add(item, name);
         return name;
     }

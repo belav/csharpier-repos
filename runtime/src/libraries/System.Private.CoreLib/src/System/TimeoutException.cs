@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when the time allotted for a process or operation has expired.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class TimeoutException : SystemException
     {
         public TimeoutException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_TIMEOUT;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected TimeoutException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected TimeoutException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

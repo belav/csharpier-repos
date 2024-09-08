@@ -36,7 +36,12 @@ public class GrpcTemplateTest : LoggedTest
 
     // TODO (https://github.com/dotnet/aspnetcore/issues/47336): Don't skip on macos 11
     [ConditionalFact]
-    [SkipOnHelix("Not supported queues", Queues = "OSX.1100.Amd64.Open;windows.11.arm64.open;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Not supported queues",
+        Queues = "OSX.1100.Amd64.Open;windows.11.arm64.open;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+    )]
     [SkipOnAlpine("https://github.com/grpc/grpc/issues/18338")] // protoc doesn't support Alpine. Note that the issue was closed with a workaround which isn't applied to our OS image.
     public async Task GrpcTemplate()
     {
@@ -54,7 +59,12 @@ public class GrpcTemplateTest : LoggedTest
 
     // TODO (https://github.com/dotnet/aspnetcore/issues/47336): Don't skip on macos 11
     [ConditionalFact]
-    [SkipOnHelix("Not supported queues", Queues = "OSX.1100.Amd64.Open;windows.11.arm64.open;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [SkipOnHelix(
+        "Not supported queues",
+        Queues = "OSX.1100.Amd64.Open;windows.11.arm64.open;"
+            + HelixConstants.Windows10Arm64
+            + HelixConstants.DebianArm64
+    )]
     [SkipOnAlpine("https://github.com/grpc/grpc/issues/18338")] // protoc doesn't support Alpine. Note that the issue was closed with a workaround which isn't applied to our OS image.
     public async Task GrpcTemplateProgramMain()
     {
@@ -67,7 +77,9 @@ public class GrpcTemplateTest : LoggedTest
     [SkipOnAlpine("https://github.com/grpc/grpc/issues/18338")] // protoc doesn't support Alpine. Note that the issue was closed with a workaround which isn't applied to our OS image.
     public async Task GrpcTemplateProgramMainNativeAot()
     {
-        await GrpcTemplateCore(args: new[] { ArgConstants.UseProgramMain, ArgConstants.PublishNativeAot });
+        await GrpcTemplateCore(
+            args: new[] { ArgConstants.UseProgramMain, ArgConstants.PublishNativeAot }
+        );
     }
 
     private async Task GrpcTemplateCore(string[] args = null)
@@ -99,41 +111,75 @@ public class GrpcTemplateTest : LoggedTest
 
         await project.RunDotNetBuildAsync();
 
-        var isWindowsOld = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Environment.OSVersion.Version < new Version(6, 2);
+        var isWindowsOld =
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            && Environment.OSVersion.Version < new Version(6, 2);
 
-        using (var serverProcess = project.StartBuiltProjectAsync(hasListeningUri: !isWindowsOld, logger: Logger))
+        using (
+            var serverProcess = project.StartBuiltProjectAsync(
+                hasListeningUri: !isWindowsOld,
+                logger: Logger
+            )
+        )
         {
             // These templates are HTTPS + HTTP/2 only which is not supported on some platforms.
             if (isWindowsOld)
             {
                 serverProcess.Process.WaitForExit(assertSuccess: false);
                 Assert.True(serverProcess.Process.HasExited, "built");
-                Assert.Contains("System.NotSupportedException: HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.",
-                    ErrorMessages.GetFailedProcessMessageOrEmpty("Run built service", project, serverProcess.Process));
+                Assert.Contains(
+                    "System.NotSupportedException: HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.",
+                    ErrorMessages.GetFailedProcessMessageOrEmpty(
+                        "Run built service",
+                        project,
+                        serverProcess.Process
+                    )
+                );
             }
             else
             {
                 Assert.False(
                     serverProcess.Process.HasExited,
-                    ErrorMessages.GetFailedProcessMessageOrEmpty("Run built service", project, serverProcess.Process));
+                    ErrorMessages.GetFailedProcessMessageOrEmpty(
+                        "Run built service",
+                        project,
+                        serverProcess.Process
+                    )
+                );
             }
         }
 
-        using (var aspNetProcess = project.StartPublishedProjectAsync(hasListeningUri: !isWindowsOld, usePublishedAppHost: nativeAot))
+        using (
+            var aspNetProcess = project.StartPublishedProjectAsync(
+                hasListeningUri: !isWindowsOld,
+                usePublishedAppHost: nativeAot
+            )
+        )
         {
             // These templates are HTTPS + HTTP/2 only which is not supported on some platforms.
             if (isWindowsOld)
             {
                 aspNetProcess.Process.WaitForExit(assertSuccess: false);
                 Assert.True(aspNetProcess.Process.HasExited, "published");
-                Assert.Contains("System.NotSupportedException: HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.",
-                    ErrorMessages.GetFailedProcessMessageOrEmpty("Run published service", project, aspNetProcess.Process));
+                Assert.Contains(
+                    "System.NotSupportedException: HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.",
+                    ErrorMessages.GetFailedProcessMessageOrEmpty(
+                        "Run published service",
+                        project,
+                        aspNetProcess.Process
+                    )
+                );
             }
             else
             {
                 Assert.False(
                     aspNetProcess.Process.HasExited,
-                    ErrorMessages.GetFailedProcessMessageOrEmpty("Run published service", project, aspNetProcess.Process));
+                    ErrorMessages.GetFailedProcessMessageOrEmpty(
+                        "Run published service",
+                        project,
+                        aspNetProcess.Process
+                    )
+                );
             }
         }
     }

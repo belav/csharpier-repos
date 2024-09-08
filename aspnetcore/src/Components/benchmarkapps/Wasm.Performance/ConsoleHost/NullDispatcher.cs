@@ -9,8 +9,7 @@ namespace Wasm.Performance.ConsoleHost;
 
 internal sealed class NullDispatcher : Dispatcher
 {
-    public override bool CheckAccess()
-        => true;
+    public override bool CheckAccess() => true;
 
     public override Task InvokeAsync(Action workItem)
     {
@@ -18,12 +17,10 @@ internal sealed class NullDispatcher : Dispatcher
         return Task.CompletedTask;
     }
 
-    public override Task InvokeAsync(Func<Task> workItem)
-        => workItem();
+    public override Task InvokeAsync(Func<Task> workItem) => workItem();
 
-    public override Task<TResult> InvokeAsync<TResult>(Func<TResult> workItem)
-        => Task.FromResult(workItem());
+    public override Task<TResult> InvokeAsync<TResult>(Func<TResult> workItem) =>
+        Task.FromResult(workItem());
 
-    public override Task<TResult> InvokeAsync<TResult>(Func<Task<TResult>> workItem)
-        => workItem();
+    public override Task<TResult> InvokeAsync<TResult>(Func<Task<TResult>> workItem) => workItem();
 }

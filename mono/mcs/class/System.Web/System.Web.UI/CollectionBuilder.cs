@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,62 +35,72 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	sealed class CollectionBuilder : ControlBuilder
-	{
-		Type[] possibleElementTypes;
+    sealed class CollectionBuilder : ControlBuilder
+    {
+        Type[] possibleElementTypes;
 
-		internal CollectionBuilder ()
-		{
-		}
+        internal CollectionBuilder() { }
 
-		public override void AppendLiteralString (string s)
-		{
-			if (s != null && s.Trim ().Length > 0)
-				throw new HttpException ("Literal content not allowed for " + ControlType);
-		}
+        public override void AppendLiteralString(string s)
+        {
+            if (s != null && s.Trim().Length > 0)
+                throw new HttpException("Literal content not allowed for " + ControlType);
+        }
 
-		public override Type GetChildControlType (string tagName, IDictionary attribs)
-		{
-			Type t = Root.GetChildControlType (tagName, attribs);
-			if (possibleElementTypes != null) {
-                               bool foundMatchingType = false;
-                               for (int i = 0; i < possibleElementTypes.Length && !foundMatchingType; ++i)
-                                       foundMatchingType = possibleElementTypes[i].IsAssignableFrom (t);
-                               
-                               if (!foundMatchingType) {
-                                       StringBuilder possibleTypesString = new StringBuilder ();
-                                       for (int i = 0; i < possibleElementTypes.Length; i++) {
-                                               if (i != 0)
-                                                       possibleTypesString.Append (", ");
-                                               possibleTypesString.Append (possibleElementTypes[i]);
-                                       }
-                                       throw new HttpException ("Cannot add a " + t + " to " + possibleTypesString);
-                               }
-			}
+        public override Type GetChildControlType(string tagName, IDictionary attribs)
+        {
+            Type t = Root.GetChildControlType(tagName, attribs);
+            if (possibleElementTypes != null)
+            {
+                bool foundMatchingType = false;
+                for (int i = 0; i < possibleElementTypes.Length && !foundMatchingType; ++i)
+                    foundMatchingType = possibleElementTypes[i].IsAssignableFrom(t);
 
-			return t;
-		}
+                if (!foundMatchingType)
+                {
+                    StringBuilder possibleTypesString = new StringBuilder();
+                    for (int i = 0; i < possibleElementTypes.Length; i++)
+                    {
+                        if (i != 0)
+                            possibleTypesString.Append(", ");
+                        possibleTypesString.Append(possibleElementTypes[i]);
+                    }
+                    throw new HttpException("Cannot add a " + t + " to " + possibleTypesString);
+                }
+            }
 
-		public override void Init (TemplateParser parser,
-					   ControlBuilder parentBuilder,
-					   Type type,
-					   string tagName,
-					   string id,
-					   IDictionary attribs)
-		{			
-			base.Init (parser, parentBuilder, type, tagName, id, attribs);
+            return t;
+        }
 
-			PropertyInfo prop = parentBuilder.ControlType.GetProperty (tagName, FlagsNoCase);
-			SetControlType (prop.PropertyType);
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            string tagName,
+            string id,
+            IDictionary attribs
+        )
+        {
+            base.Init(parser, parentBuilder, type, tagName, id, attribs);
 
-			MemberInfo[] mems = ControlType.GetMember ("Item", MemberTypes.Property, FlagsNoCase & ~BindingFlags.IgnoreCase);
-			if (mems.Length > 0) {
-                               possibleElementTypes = new Type [mems.Length];
-                               for (int i = 0; i < mems.Length; ++i)
-                                       possibleElementTypes [i] = ((PropertyInfo)mems [i]).PropertyType;
-			} else
-				throw new HttpException ("Collection of type '" + ControlType + "' does not have an indexer.");
-		}
-	}
+            PropertyInfo prop = parentBuilder.ControlType.GetProperty(tagName, FlagsNoCase);
+            SetControlType(prop.PropertyType);
+
+            MemberInfo[] mems = ControlType.GetMember(
+                "Item",
+                MemberTypes.Property,
+                FlagsNoCase & ~BindingFlags.IgnoreCase
+            );
+            if (mems.Length > 0)
+            {
+                possibleElementTypes = new Type[mems.Length];
+                for (int i = 0; i < mems.Length; ++i)
+                    possibleElementTypes[i] = ((PropertyInfo)mems[i]).PropertyType;
+            }
+            else
+                throw new HttpException(
+                    "Collection of type '" + ControlType + "' does not have an indexer."
+                );
+        }
+    }
 }
-

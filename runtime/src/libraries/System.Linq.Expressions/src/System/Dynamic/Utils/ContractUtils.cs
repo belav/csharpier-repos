@@ -125,14 +125,21 @@ namespace System.Dynamic.Utils
             Debug.Assert(Monitor.IsEntered(lockObject), "Expected lock is not held.");
         }
 
-        private static string GetParamName(string paramName, int index) => index >= 0 ? $"{paramName}[{index}]" : paramName;
+        private static string GetParamName(string paramName, int index) =>
+            index >= 0 ? $"{paramName}[{index}]" : paramName;
 
         /// <summary>
         /// Requires the range [offset, offset + count] to be a subset of [0, array.Count].
         /// </summary>
         /// <exception cref="ArgumentNullException">Array is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">Offset or count are out of range.</exception>
-        public static void RequiresArrayRange<T>(IList<T> array, int offset, int count, string offsetName, string countName)
+        public static void RequiresArrayRange<T>(
+            IList<T> array,
+            int offset,
+            int count,
+            string offsetName,
+            string countName
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(offsetName));
             Debug.Assert(!string.IsNullOrEmpty(countName));

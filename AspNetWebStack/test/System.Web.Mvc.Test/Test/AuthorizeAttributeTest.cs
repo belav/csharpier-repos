@@ -28,18 +28,19 @@ namespace System.Web.Mvc.Test
 
         [Authorize(Roles = "foo")]
         [Authorize(Roles = "bar")]
-        private class ClassWithMultipleAuthorizeAttributes
-        {
-        }
+        private class ClassWithMultipleAuthorizeAttributes { }
 
         [Fact]
         public void CanRetrieveMultipleAuthorizeAttributesFromOneClass()
         {
             // Arrange
-            ClassWithMultipleAuthorizeAttributes @class = new ClassWithMultipleAuthorizeAttributes();
+            ClassWithMultipleAuthorizeAttributes @class =
+                new ClassWithMultipleAuthorizeAttributes();
 
             // Act
-            IEnumerable<AuthorizeAttribute> attributes = TypeDescriptor.GetAttributes(@class).OfType<AuthorizeAttribute>();
+            IEnumerable<AuthorizeAttribute> attributes = TypeDescriptor
+                .GetAttributes(@class)
+                .OfType<AuthorizeAttribute>();
 
             // Assert
             Assert.Equal(2, attributes.Count());
@@ -102,7 +103,11 @@ namespace System.Web.Mvc.Test
         public void AuthorizeCoreReturnsTrueIfUserIsAuthenticatedAndNamesOrRolesSpecified()
         {
             // Arrange
-            AuthorizeAttributeHelper helper = new AuthorizeAttributeHelper() { Users = "SomeUser, SomeOtherUser", Roles = "SomeRole, SomeOtherRole" };
+            AuthorizeAttributeHelper helper = new AuthorizeAttributeHelper()
+            {
+                Users = "SomeUser, SomeOtherUser",
+                Roles = "SomeRole, SomeOtherRole",
+            };
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(c => c.User.Identity.IsAuthenticated).Returns(true);
@@ -142,7 +147,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { helper.PublicAuthorizeCore((HttpContextBase)null); }, "httpContext");
+                delegate
+                {
+                    helper.PublicAuthorizeCore((HttpContextBase)null);
+                },
+                "httpContext"
+            );
         }
 
         [Fact]
@@ -154,7 +164,14 @@ namespace System.Web.Mvc.Test
             Mock<AuthorizationContext> mockAuthContext = new Mock<AuthorizationContext>();
             mockAuthContext.Setup(c => c.HttpContext.User.Identity.IsAuthenticated).Returns(false);
             mockAuthContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
-            mockAuthContext.Setup(c => c.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)).Returns(false);
+            mockAuthContext
+                .Setup(c =>
+                    c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                        typeof(AllowAnonymousAttribute),
+                        true
+                    )
+                )
+                .Returns(false);
             AuthorizationContext authContext = mockAuthContext.Object;
 
             // Act
@@ -168,11 +185,19 @@ namespace System.Web.Mvc.Test
         public void OnAuthorizationFailedSetsHttpUnauthorizedResultIfUserUnauthorized()
         {
             // Arrange
-            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(false);
+            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
+            {
+                CallBase = true,
+            };
+            mockHelper
+                .Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()))
+                .Returns(false);
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
-            AuthorizationContext filterContext = new Mock<AuthorizationContext>() { DefaultValue = DefaultValue.Mock }.Object;
+            AuthorizationContext filterContext = new Mock<AuthorizationContext>()
+            {
+                DefaultValue = DefaultValue.Mock,
+            }.Object;
 
             // Act
             helper.OnAuthorization(filterContext);
@@ -185,24 +210,45 @@ namespace System.Web.Mvc.Test
         public void OnAuthorizationHooksCacheValidationIfUserAuthorized()
         {
             // Arrange
-            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>() { CallBase = true };
+            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
+            {
+                CallBase = true,
+            };
             mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(true);
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
-            MethodInfo callbackMethod = typeof(AuthorizeAttribute).GetMethod("CacheValidateHandler", BindingFlags.Instance | BindingFlags.NonPublic);
+            MethodInfo callbackMethod = typeof(AuthorizeAttribute).GetMethod(
+                "CacheValidateHandler",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
-            mockFilterContext.Setup(c => c.HttpContext.Response.Cache.SetProxyMaxAge(new TimeSpan(0))).Verifiable();
+            mockFilterContext
+                .Setup(c => c.HttpContext.Response.Cache.SetProxyMaxAge(new TimeSpan(0)))
+                .Verifiable();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
             mockFilterContext
-                .Setup(c => c.HttpContext.Response.Cache.AddValidationCallback(It.IsAny<HttpCacheValidateHandler>(), null /* data */))
+                .Setup(c =>
+                    c.HttpContext.Response.Cache.AddValidationCallback(
+                        It.IsAny<HttpCacheValidateHandler>(),
+                        null /* data */
+                    )
+                )
                 .Callback(
                     delegate(HttpCacheValidateHandler handler, object data)
                     {
                         Assert.Equal(helper, handler.Target);
                         Assert.Equal(callbackMethod, handler.Method);
-                    })
+                    }
+                )
                 .Verifiable();
-            mockFilterContext.Setup(c => c.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)).Returns(false);
+            mockFilterContext
+                .Setup(c =>
+                    c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                        typeof(AllowAnonymousAttribute),
+                        true
+                    )
+                )
+                .Returns(false);
             AuthorizationContext filterContext = mockFilterContext.Object;
 
             // Act
@@ -220,60 +266,93 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnAuthorization(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnAuthorization(null);
+                },
+                "filterContext"
+            );
         }
 
         [Fact]
         public void OnAuthorizationReturnsWithNoResultIfAllowAnonymousAttributeIsDefinedOnAction()
         {
             // Arrange
-            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>() { CallBase = true };
+            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
+            {
+                CallBase = true,
+            };
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
-            mockFilterContext.Setup(c => c.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)).Returns(true);
+            mockFilterContext
+                .Setup(c => c.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true))
+                .Returns(true);
 
             // Act
             helper.OnAuthorization(mockFilterContext.Object);
 
             // Assert
             Assert.Null(mockFilterContext.Object.Result);
-            mockHelper.Verify(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()), Times.Never());
+            mockHelper.Verify(
+                h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()),
+                Times.Never()
+            );
         }
 
         [Fact]
         public void OnAuthorizationReturnsWithNoResultIfAllowAnonymousAttributeIsDefinedOnController()
         {
             // Arrange
-            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>() { CallBase = true };
+            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
+            {
+                CallBase = true,
+            };
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
             Mock<AuthorizationContext> mockFilterContext = new Mock<AuthorizationContext>();
             mockFilterContext.Setup(c => c.HttpContext.Items).Returns(new Hashtable());
-            mockFilterContext.Setup(c => c.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)).Returns(true);
+            mockFilterContext
+                .Setup(c =>
+                    c.ActionDescriptor.ControllerDescriptor.IsDefined(
+                        typeof(AllowAnonymousAttribute),
+                        true
+                    )
+                )
+                .Returns(true);
 
             // Act
             helper.OnAuthorization(mockFilterContext.Object);
 
             // Assert
             Assert.Null(mockFilterContext.Object.Result);
-            mockHelper.Verify(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()), Times.Never());
+            mockHelper.Verify(
+                h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()),
+                Times.Never()
+            );
         }
 
         [Fact]
         public void OnCacheAuthorizationReturnsIgnoreRequestIfUserIsUnauthorized()
         {
             // Arrange
-            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>() { CallBase = true };
-            mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(false);
+            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
+            {
+                CallBase = true,
+            };
+            mockHelper
+                .Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()))
+                .Returns(false);
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
             mockHttpContext.Setup(c => c.User).Returns(new Mock<IPrincipal>().Object);
 
             // Act
-            HttpValidationStatus validationStatus = helper.PublicOnCacheAuthorization(mockHttpContext.Object);
+            HttpValidationStatus validationStatus = helper.PublicOnCacheAuthorization(
+                mockHttpContext.Object
+            );
 
             // Assert
             Assert.Equal(HttpValidationStatus.IgnoreThisRequest, validationStatus);
@@ -283,7 +362,10 @@ namespace System.Web.Mvc.Test
         public void OnCacheAuthorizationReturnsValidIfUserIsAuthorized()
         {
             // Arrange
-            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>() { CallBase = true };
+            Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
+            {
+                CallBase = true,
+            };
             mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(true);
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
@@ -291,7 +373,9 @@ namespace System.Web.Mvc.Test
             mockHttpContext.Setup(c => c.User).Returns(new Mock<IPrincipal>().Object);
 
             // Act
-            HttpValidationStatus validationStatus = helper.PublicOnCacheAuthorization(mockHttpContext.Object);
+            HttpValidationStatus validationStatus = helper.PublicOnCacheAuthorization(
+                mockHttpContext.Object
+            );
 
             // Assert
             Assert.Equal(HttpValidationStatus.Valid, validationStatus);
@@ -305,7 +389,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { helper.PublicOnCacheAuthorization(null); }, "httpContext");
+                delegate
+                {
+                    helper.PublicOnCacheAuthorization(null);
+                },
+                "httpContext"
+            );
         }
 
         [Fact]
@@ -340,12 +429,16 @@ namespace System.Web.Mvc.Test
                 return PublicAuthorizeCore(httpContext);
             }
 
-            public virtual HttpValidationStatus PublicOnCacheAuthorization(HttpContextBase httpContext)
+            public virtual HttpValidationStatus PublicOnCacheAuthorization(
+                HttpContextBase httpContext
+            )
             {
                 return base.OnCacheAuthorization(httpContext);
             }
 
-            protected override HttpValidationStatus OnCacheAuthorization(HttpContextBase httpContext)
+            protected override HttpValidationStatus OnCacheAuthorization(
+                HttpContextBase httpContext
+            )
             {
                 return PublicOnCacheAuthorization(httpContext);
             }

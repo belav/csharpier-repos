@@ -15,50 +15,61 @@ using Microsoft.CodeAnalysis.MoveDeclarationNearReference;
 
 namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
 {
-    [ExportLanguageService(typeof(IMoveDeclarationNearReferenceService), LanguageNames.CSharp), Shared]
-    internal partial class CSharpMoveDeclarationNearReferenceService :
-        AbstractMoveDeclarationNearReferenceService<
+    [
+        ExportLanguageService(typeof(IMoveDeclarationNearReferenceService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal partial class CSharpMoveDeclarationNearReferenceService
+        : AbstractMoveDeclarationNearReferenceService<
             CSharpMoveDeclarationNearReferenceService,
             StatementSyntax,
             LocalDeclarationStatementSyntax,
-            VariableDeclaratorSyntax>
+            VariableDeclaratorSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMoveDeclarationNearReferenceService()
-        {
-        }
+        public CSharpMoveDeclarationNearReferenceService() { }
 
         protected override bool IsMeaningfulBlock(SyntaxNode node)
         {
-            return node is AnonymousFunctionExpressionSyntax or
-                   LocalFunctionStatementSyntax or
-                   CommonForEachStatementSyntax or
-                   ForStatementSyntax or
-                   WhileStatementSyntax or
-                   DoStatementSyntax or
-                   CheckedStatementSyntax;
+            return node
+                is AnonymousFunctionExpressionSyntax
+                    or LocalFunctionStatementSyntax
+                    or CommonForEachStatementSyntax
+                    or ForStatementSyntax
+                    or WhileStatementSyntax
+                    or DoStatementSyntax
+                    or CheckedStatementSyntax;
         }
 
-        protected override SyntaxNode GetVariableDeclaratorSymbolNode(VariableDeclaratorSyntax variableDeclarator)
-            => variableDeclarator;
+        protected override SyntaxNode GetVariableDeclaratorSymbolNode(
+            VariableDeclaratorSyntax variableDeclarator
+        ) => variableDeclarator;
 
-        protected override bool IsValidVariableDeclarator(VariableDeclaratorSyntax variableDeclarator)
-            => true;
+        protected override bool IsValidVariableDeclarator(
+            VariableDeclaratorSyntax variableDeclarator
+        ) => true;
 
-        protected override SyntaxToken GetIdentifierOfVariableDeclarator(VariableDeclaratorSyntax variableDeclarator)
-            => variableDeclarator.Identifier;
+        protected override SyntaxToken GetIdentifierOfVariableDeclarator(
+            VariableDeclaratorSyntax variableDeclarator
+        ) => variableDeclarator.Identifier;
 
         protected override async Task<bool> TypesAreCompatibleAsync(
-            Document document, ILocalSymbol localSymbol,
+            Document document,
+            ILocalSymbol localSymbol,
             LocalDeclarationStatementSyntax declarationStatement,
-            SyntaxNode right, CancellationToken cancellationToken)
+            SyntaxNode right,
+            CancellationToken cancellationToken
+        )
         {
             var type = declarationStatement.Declaration.Type;
             if (type.IsVar)
             {
                 // Type inference.  Only merge if types match.
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var rightType = semanticModel.GetTypeInfo(right, cancellationToken);
                 return Equals(localSymbol.Type, rightType.Type);
             }
@@ -66,7 +77,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveDeclarationNearReference
             return true;
         }
 
-        protected override bool CanMoveToBlock(ILocalSymbol localSymbol, SyntaxNode currentBlock, SyntaxNode destinationBlock)
-            => localSymbol.CanSafelyMoveLocalToBlock(currentBlock, destinationBlock);
+        protected override bool CanMoveToBlock(
+            ILocalSymbol localSymbol,
+            SyntaxNode currentBlock,
+            SyntaxNode destinationBlock
+        ) => localSymbol.CanSafelyMoveLocalToBlock(currentBlock, destinationBlock);
     }
 }

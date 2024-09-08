@@ -32,10 +32,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
         var model = new TestModel();
-        var source = new ViewDataDictionary<object>(metadataProvider)
-        {
-            Model = model
-        };
+        var source = new ViewDataDictionary<object>(metadataProvider) { Model = model };
         source["foo"] = "bar";
         source.TemplateInfo.HtmlFieldPrefix = "prefix";
 
@@ -114,10 +111,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
         var model = new SupremeTestModel();
-        var source = new ViewDataDictionary(metadataProvider)
-        {
-            Model = model,
-        };
+        var source = new ViewDataDictionary(metadataProvider) { Model = model };
 
         // Act
         var viewData = new ViewDataDictionary(source);
@@ -135,10 +129,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
         var model = new SupremeTestModel();
-        var source = new ViewDataDictionary(metadataProvider)
-        {
-            Model = model,
-        };
+        var source = new ViewDataDictionary(metadataProvider) { Model = model };
 
         // Act
         var viewData = new ViewDataDictionary<TestModel>(source);
@@ -204,19 +195,21 @@ public class ViewDataDictionaryOfTModelTest
     public void CopyConstructors_ThrowInvalidOperation_IfModelIncompatibleWithDeclaredType()
     {
         // Arrange
-        var expectedMessage = "The model item passed into the ViewDataDictionary is of type 'System.Int32', " +
-            "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
+        var expectedMessage =
+            "The model item passed into the ViewDataDictionary is of type 'System.Int32', "
+            + "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary<int>(metadataProvider)
-        {
-            Model = 23,
-        };
+        var source = new ViewDataDictionary<int>(metadataProvider) { Model = 23 };
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => new ViewDataDictionary<string>(source));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => new ViewDataDictionary<string>(source)
+        );
         Assert.Equal(expectedMessage, exception.Message);
 
-        exception = Assert.Throws<InvalidOperationException>(() => new ViewDataDictionary<string>(source, model: 24));
+        exception = Assert.Throws<InvalidOperationException>(
+            () => new ViewDataDictionary<string>(source, model: 24)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -226,15 +219,15 @@ public class ViewDataDictionaryOfTModelTest
         {
             // Small "anything but TestModel" grab bag of instances and expected types.
             return new TheoryData<object, Type>
-                {
-                    { true, typeof(bool) },
-                    { 23, typeof(int) },
-                    { 43.78, typeof(double) },
-                    { "test string", typeof(string) },
-                    { new List<int>(), typeof(List<int>) },
-                    { new List<string>(), typeof(List<string>) },
-                    { new List<TestModel>(), typeof(List<TestModel>) },
-                };
+            {
+                { true, typeof(bool) },
+                { 23, typeof(int) },
+                { 43.78, typeof(double) },
+                { "test string", typeof(string) },
+                { new List<int>(), typeof(List<int>) },
+                { new List<string>(), typeof(List<string>) },
+                { new List<TestModel>(), typeof(List<TestModel>) },
+            };
         }
     }
 
@@ -242,7 +235,8 @@ public class ViewDataDictionaryOfTModelTest
     [MemberData(nameof(IncompatibleModelData))]
     public void CopyConstructorToObject_DoesNotThrow_IfModelIncompatibleWithDeclaredType(
         object model,
-        Type expectedType)
+        Type expectedType
+    )
     {
         // Arrange
         var source = new ViewDataDictionary<TestModel>(new EmptyModelMetadataProvider());
@@ -261,14 +255,13 @@ public class ViewDataDictionaryOfTModelTest
     [Theory]
     [InlineData(null)]
     [InlineData(23)]
-    public void CopyConstructor_DoesNotChangeMetadata_WhenValueCompatibleWithSourceMetadata(int? model)
+    public void CopyConstructor_DoesNotChangeMetadata_WhenValueCompatibleWithSourceMetadata(
+        int? model
+    )
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary<int?>(metadataProvider)
-        {
-            Model = -48,
-        };
+        var source = new ViewDataDictionary<int?>(metadataProvider) { Model = -48 };
 
         // Act
         var viewData = new ViewDataDictionary<int?>(source, model);
@@ -306,10 +299,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var model = new TestModel();
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary<TestModel>(metadataProvider)
-        {
-            Model = model,
-        };
+        var source = new ViewDataDictionary<TestModel>(metadataProvider) { Model = model };
 
         // Act
         var viewData = new ViewDataDictionary<TestModel>(source, model);
@@ -373,8 +363,9 @@ public class ViewDataDictionaryOfTModelTest
     public void ModelSetters_ThrowInvalidOperation_IfModelIncompatibleWithDeclaredType()
     {
         // Arrange
-        var expectedMessage = "The model item passed into the ViewDataDictionary is of type 'System.Int32', " +
-            "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
+        var expectedMessage =
+            "The model item passed into the ViewDataDictionary is of type 'System.Int32', "
+            + "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
         var metadataProvider = new EmptyModelMetadataProvider();
         var viewData1 = (ViewDataDictionary)new ViewDataDictionary<string>(metadataProvider);
         var viewData2 = (ViewDataDictionary)new ViewDataDictionary<string>(viewData1);
@@ -400,8 +391,9 @@ public class ViewDataDictionaryOfTModelTest
     public void ModelSetters_ThrowInvalidOperation_IfModelNullAndTModelNonNullable()
     {
         // Arrange
-        var expectedMessage = "The model item passed is null, " +
-            "but this ViewDataDictionary instance requires a non-null model item of type 'System.Int32'.";
+        var expectedMessage =
+            "The model item passed is null, "
+            + "but this ViewDataDictionary instance requires a non-null model item of type 'System.Int32'.";
         var metadataProvider = new EmptyModelMetadataProvider();
         var viewData1 = (ViewDataDictionary)new ViewDataDictionary<int>(metadataProvider);
         var viewData2 = (ViewDataDictionary)new ViewDataDictionary<int>(viewData1);
@@ -423,11 +415,7 @@ public class ViewDataDictionaryOfTModelTest
         Assert.Equal(expectedMessage, exception.Message);
     }
 
-    private class TestModel
-    {
-    }
+    private class TestModel { }
 
-    private class SupremeTestModel : TestModel
-    {
-    }
+    private class SupremeTestModel : TestModel { }
 }

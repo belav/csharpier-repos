@@ -21,42 +21,33 @@ namespace System.Xml
     internal sealed class TextUtf8RawTextWriter : XmlUtf8RawTextWriter
     {
         // Construct an instance of this class that serializes to a Stream interface.
-        public TextUtf8RawTextWriter(Stream stream, XmlWriterSettings settings) : base(stream, settings)
-        {
-        }
+        public TextUtf8RawTextWriter(Stream stream, XmlWriterSettings settings)
+            : base(stream, settings) { }
 
         //
         // XmlRawWriter
         //
         // Ignore Xml declaration
-        internal override void WriteXmlDeclaration(XmlStandalone standalone)
-        {
-        }
-        internal override void WriteXmlDeclaration(string xmldecl)
-        {
-        }
+        internal override void WriteXmlDeclaration(XmlStandalone standalone) { }
+
+        internal override void WriteXmlDeclaration(string xmldecl) { }
 
         // Ignore DTD
-        public override void WriteDocType(string name, string? pubid, string? sysid, string? subset)
-        {
-        }
+        public override void WriteDocType(
+            string name,
+            string? pubid,
+            string? sysid,
+            string? subset
+        ) { }
 
         // Ignore Elements
-        public override void WriteStartElement(string? prefix, string localName, string? ns)
-        {
-        }
+        public override void WriteStartElement(string? prefix, string localName, string? ns) { }
 
-        internal override void WriteEndElement(string prefix, string localName, string ns)
-        {
-        }
+        internal override void WriteEndElement(string prefix, string localName, string ns) { }
 
-        internal override void WriteFullEndElement(string prefix, string localName, string ns)
-        {
-        }
+        internal override void WriteFullEndElement(string prefix, string localName, string ns) { }
 
-        internal override void StartElementContent()
-        {
-        }
+        internal override void StartElementContent() { }
 
         // Ignore attributes
         public override void WriteStartAttribute(string? prefix, string localName, string? ns)
@@ -70,16 +61,11 @@ namespace System.Xml
         }
 
         // Ignore namespace declarations
-        internal override void WriteNamespaceDeclaration(string prefix, string ns)
-        {
-        }
+        internal override void WriteNamespaceDeclaration(string prefix, string ns) { }
 
         internal override bool SupportsNamespaceDeclarationInChunks
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         // Output content of CDATA sections as plain text without escaping
@@ -89,25 +75,17 @@ namespace System.Xml
         }
 
         // Ignore comments
-        public override void WriteComment(string? text)
-        {
-        }
+        public override void WriteComment(string? text) { }
 
         // Ignore processing instructions
-        public override void WriteProcessingInstruction(string name, string? text)
-        {
-        }
+        public override void WriteProcessingInstruction(string name, string? text) { }
 
         // Ignore entities
-        public override void WriteEntityRef(string name)
-        {
-        }
-        public override void WriteCharEntity(char ch)
-        {
-        }
-        public override void WriteSurrogateCharEntity(char lowChar, char highChar)
-        {
-        }
+        public override void WriteEntityRef(string name) { }
+
+        public override void WriteCharEntity(char ch) { }
+
+        public override void WriteSurrogateCharEntity(char lowChar, char highChar) { }
 
         // Output text content without any escaping; ignore attribute values
         public override void WriteWhitespace(string? ws)

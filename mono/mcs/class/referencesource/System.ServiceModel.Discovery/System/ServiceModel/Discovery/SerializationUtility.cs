@@ -29,12 +29,18 @@ namespace System.ServiceModel.Discovery
                 ns = reader.LookupNamespace(prefix);
                 if (ns == null)
                 {
-                    throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlQNamePrefixNotDefined(prefix, prefixedQName)));
+                    throw FxTrace.Exception.AsError(
+                        new XmlException(
+                            SR2.DiscoveryXmlQNamePrefixNotDefined(prefix, prefixedQName)
+                        )
+                    );
                 }
                 localname = prefixedQName.Substring(index + 1);
                 if (localname == string.Empty)
                 {
-                    throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlQNameLocalnameNotDefined(prefixedQName)));
+                    throw FxTrace.Exception.AsError(
+                        new XmlException(SR2.DiscoveryXmlQNameLocalnameNotDefined(prefixedQName))
+                    );
                 }
             }
             else
@@ -47,13 +53,20 @@ namespace System.ServiceModel.Discovery
             return new XmlQualifiedName(localname, ns);
         }
 
-        public static void ParseQNameList(string listOfQNamesAsString, Collection<XmlQualifiedName> qNameCollection, XmlReader reader)
+        public static void ParseQNameList(
+            string listOfQNamesAsString,
+            Collection<XmlQualifiedName> qNameCollection,
+            XmlReader reader
+        )
         {
             Fx.Assert(listOfQNamesAsString != null, "The listOfQNamesAsString must be non null.");
             Fx.Assert(qNameCollection != null, "The qNameCollection must be non null.");
             Fx.Assert(reader != null, "The reader must be non null.");
 
-            string[] prefixedQNames = listOfQNamesAsString.Split(whiteSpaceChars, StringSplitOptions.RemoveEmptyEntries);
+            string[] prefixedQNames = listOfQNamesAsString.Split(
+                whiteSpaceChars,
+                StringSplitOptions.RemoveEmptyEntries
+            );
             if (prefixedQNames.Length > 0)
             {
                 for (int i = 0; i < prefixedQNames.Length; i++)
@@ -63,12 +76,19 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        public static void ParseUriList(string listOfUrisAsString, Collection<Uri> uriCollection, UriKind uriKind)
+        public static void ParseUriList(
+            string listOfUrisAsString,
+            Collection<Uri> uriCollection,
+            UriKind uriKind
+        )
         {
             Fx.Assert(listOfUrisAsString != null, "The listOfUrisAsString must be non null.");
             Fx.Assert(uriCollection != null, "The uriCollection must be non null.");
 
-            string[] uriStrings = listOfUrisAsString.Split(whiteSpaceChars, StringSplitOptions.RemoveEmptyEntries);
+            string[] uriStrings = listOfUrisAsString.Split(
+                whiteSpaceChars,
+                StringSplitOptions.RemoveEmptyEntries
+            );
             if (uriStrings.Length > 0)
             {
                 for (int i = 0; i < uriStrings.Length; i++)
@@ -81,18 +101,29 @@ namespace System.ServiceModel.Discovery
                     {
                         if (uriKind == UriKind.Absolute)
                         {
-                            throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlAbsoluteUriFormatError(uriStrings[i]), fe));
+                            throw FxTrace.Exception.AsError(
+                                new XmlException(
+                                    SR2.DiscoveryXmlAbsoluteUriFormatError(uriStrings[i]),
+                                    fe
+                                )
+                            );
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlUriFormatError(uriStrings[i]), fe));
+                            throw FxTrace.Exception.AsError(
+                                new XmlException(SR2.DiscoveryXmlUriFormatError(uriStrings[i]), fe)
+                            );
                         }
                     }
                 }
             }
         }
 
-        public static long ReadUInt(string uintString, string notFoundExceptionString, string exceptionString)
+        public static long ReadUInt(
+            string uintString,
+            string notFoundExceptionString,
+            string exceptionString
+        )
         {
             long result;
 
@@ -117,7 +148,13 @@ namespace System.ServiceModel.Discovery
             return result;
         }
 
-        static void PrepareQNameString(StringBuilder listOfQNamesString, ref bool emptyNsDeclared, ref int prefixCount, XmlWriter writer, XmlQualifiedName qname)
+        static void PrepareQNameString(
+            StringBuilder listOfQNamesString,
+            ref bool emptyNsDeclared,
+            ref int prefixCount,
+            XmlWriter writer,
+            XmlQualifiedName qname
+        )
         {
             string prefix;
             string encodedLocalName = XmlConvert.EncodeLocalName(qname.Name.Trim());
@@ -143,11 +180,20 @@ namespace System.ServiceModel.Discovery
 
             if (!string.IsNullOrEmpty(prefix))
             {
-                listOfQNamesString.AppendFormat(CultureInfo.InvariantCulture, "{0}:{1}", prefix, encodedLocalName);
+                listOfQNamesString.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "{0}:{1}",
+                    prefix,
+                    encodedLocalName
+                );
             }
             else
             {
-                listOfQNamesString.AppendFormat(CultureInfo.InvariantCulture, "{0}", encodedLocalName);
+                listOfQNamesString.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "{0}",
+                    encodedLocalName
+                );
             }
         }
 
@@ -177,7 +223,13 @@ namespace System.ServiceModel.Discovery
                 {
                     listOfQNamesString.Append(' ');
                 }
-                PrepareQNameString(listOfQNamesString, ref emptyNsDeclared, ref prefixCount, writer, qname);
+                PrepareQNameString(
+                    listOfQNamesString,
+                    ref emptyNsDeclared,
+                    ref prefixCount,
+                    writer,
+                    qname
+                );
             }
             writer.WriteString(listOfQNamesString.ToString());
         }
@@ -191,11 +243,20 @@ namespace System.ServiceModel.Discovery
             {
                 for (int i = 0; i < uris.Count - 1; i++)
                 {
-                    writer.WriteString(uris[i].GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped));
+                    writer.WriteString(
+                        uris[i]
+                            .GetComponents(
+                                UriComponents.SerializationInfoString,
+                                UriFormat.UriEscaped
+                            )
+                    );
                     writer.WriteWhitespace(" ");
                 }
 
-                writer.WriteString(uris[uris.Count - 1].GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped));
+                writer.WriteString(
+                    uris[uris.Count - 1]
+                        .GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped)
+                );
             }
         }
 
@@ -212,7 +273,9 @@ namespace System.ServiceModel.Discovery
                 maxResults = reader.ReadContentAsInt();
                 if (maxResults <= 0)
                 {
-                    throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlMaxResultsLessThanZero(maxResults)));
+                    throw FxTrace.Exception.AsError(
+                        new XmlException(SR2.DiscoveryXmlMaxResultsLessThanZero(maxResults))
+                    );
                 }
                 reader.ReadEndElement();
             }
@@ -230,10 +293,16 @@ namespace System.ServiceModel.Discovery
             {
                 reader.ReadStartElement();
                 string timeoutString = reader.ReadString();
-                timeout = SerializationUtility.ReadTimespan(timeoutString, SR2.DiscoveryXmlDurationDeserializationError(timeoutString));
+                timeout = SerializationUtility.ReadTimespan(
+                    timeoutString,
+                    SR2.DiscoveryXmlDurationDeserializationError(timeoutString)
+                );
                 if (timeout <= TimeSpan.Zero)
                 {
-                    throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlDurationLessThanZero(timeout)));;
+                    throw FxTrace.Exception.AsError(
+                        new XmlException(SR2.DiscoveryXmlDurationLessThanZero(timeout))
+                    );
+                    ;
                 }
                 reader.ReadEndElement();
             }
@@ -260,14 +329,22 @@ namespace System.ServiceModel.Discovery
             return result;
         }
 
-        public static EndpointAddress ReadEndpointAddress(DiscoveryVersion discoveryVersion, XmlReader reader)
+        public static EndpointAddress ReadEndpointAddress(
+            DiscoveryVersion discoveryVersion,
+            XmlReader reader
+        )
         {
             Fx.Assert(discoveryVersion != null, "The discoveryVersion must be non null");
             Fx.Assert(reader != null, "The reader must be non null");
 
-            if (discoveryVersion == DiscoveryVersion.WSDiscoveryApril2005 || discoveryVersion == DiscoveryVersion.WSDiscoveryCD1)
+            if (
+                discoveryVersion == DiscoveryVersion.WSDiscoveryApril2005
+                || discoveryVersion == DiscoveryVersion.WSDiscoveryCD1
+            )
             {
-                EndpointAddressAugust2004 endpoint = discoveryVersion.Implementation.EprSerializer.ReadObject(reader) as EndpointAddressAugust2004;
+                EndpointAddressAugust2004 endpoint =
+                    discoveryVersion.Implementation.EprSerializer.ReadObject(reader)
+                    as EndpointAddressAugust2004;
                 if (endpoint == null)
                 {
                     throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlEndpointNull));
@@ -276,7 +353,9 @@ namespace System.ServiceModel.Discovery
             }
             else if (discoveryVersion == DiscoveryVersion.WSDiscovery11)
             {
-                EndpointAddress10 endpoint = discoveryVersion.Implementation.EprSerializer.ReadObject(reader) as EndpointAddress10;
+                EndpointAddress10 endpoint =
+                    discoveryVersion.Implementation.EprSerializer.ReadObject(reader)
+                    as EndpointAddress10;
                 if (endpoint == null)
                 {
                     throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlEndpointNull));
@@ -290,25 +369,32 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        public static void ReadContractTypeNames(Collection<XmlQualifiedName> contractTypeNames, XmlReader reader)
+        public static void ReadContractTypeNames(
+            Collection<XmlQualifiedName> contractTypeNames,
+            XmlReader reader
+        )
         {
             if (reader.IsEmptyElement)
             {
                 reader.Read();
             }
             else
-            {                                
+            {
                 reader.ReadStartElement();
 
                 string listOfQNamesAsStr = reader.ReadString();
                 if (!string.IsNullOrEmpty(listOfQNamesAsStr))
-                {             
-                    SerializationUtility.ParseQNameList(listOfQNamesAsStr, contractTypeNames, reader);
+                {
+                    SerializationUtility.ParseQNameList(
+                        listOfQNamesAsStr,
+                        contractTypeNames,
+                        reader
+                    );
                 }
 
                 reader.ReadEndElement();
             }
-        }        
+        }
 
         public static Uri ReadScopes(Collection<Uri> scopes, XmlReader reader)
         {
@@ -317,8 +403,10 @@ namespace System.ServiceModel.Discovery
             {
                 while (reader.MoveToNextAttribute())
                 {
-                    if ((reader.NamespaceURI.Length == 0) &&
-                        (reader.Name.Equals(ProtocolStrings.SchemaNames.MatchByAttribute)))
+                    if (
+                        (reader.NamespaceURI.Length == 0)
+                        && (reader.Name.Equals(ProtocolStrings.SchemaNames.MatchByAttribute))
+                    )
                     {
                         string scopeMatchByStr = reader.Value;
                         try
@@ -327,7 +415,12 @@ namespace System.ServiceModel.Discovery
                         }
                         catch (FormatException fe)
                         {
-                            throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlUriFormatError(scopeMatchByStr), fe));
+                            throw FxTrace.Exception.AsError(
+                                new XmlException(
+                                    SR2.DiscoveryXmlUriFormatError(scopeMatchByStr),
+                                    fe
+                                )
+                            );
                         }
                         break;
                     }
@@ -369,7 +462,11 @@ namespace System.ServiceModel.Discovery
                 string listOfUrisAsString = reader.ReadString();
                 if (!string.IsNullOrEmpty(listOfUrisAsString))
                 {
-                    SerializationUtility.ParseUriList(listOfUrisAsString, listenUris, UriKind.RelativeOrAbsolute);
+                    SerializationUtility.ParseUriList(
+                        listOfUrisAsString,
+                        listenUris,
+                        UriKind.RelativeOrAbsolute
+                    );
                 }
 
                 reader.ReadEndElement();
@@ -384,7 +481,9 @@ namespace System.ServiceModel.Discovery
 
             if (metadataVersion < 0)
             {
-                throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlMetadataVersionLessThanZero(metadataVersion)));
+                throw FxTrace.Exception.AsError(
+                    new XmlException(SR2.DiscoveryXmlMetadataVersionLessThanZero(metadataVersion))
+                );
             }
 
             reader.ReadEndElement();
@@ -392,14 +491,23 @@ namespace System.ServiceModel.Discovery
             return metadataVersion;
         }
 
-        public static void WriteEndPointAddress(DiscoveryVersion discoveryVersion, EndpointAddress endpointAddress, XmlWriter writer)
+        public static void WriteEndPointAddress(
+            DiscoveryVersion discoveryVersion,
+            EndpointAddress endpointAddress,
+            XmlWriter writer
+        )
         {
             Fx.Assert(discoveryVersion != null, "The discoveryVersion must be non null");
             Fx.Assert(writer != null, "The writer must be non null");
 
-            if (discoveryVersion == DiscoveryVersion.WSDiscoveryApril2005 || discoveryVersion == DiscoveryVersion.WSDiscoveryCD1)
+            if (
+                discoveryVersion == DiscoveryVersion.WSDiscoveryApril2005
+                || discoveryVersion == DiscoveryVersion.WSDiscoveryCD1
+            )
             {
-                EndpointAddressAugust2004 endpoint = EndpointAddressAugust2004.FromEndpointAddress(endpointAddress);
+                EndpointAddressAugust2004 endpoint = EndpointAddressAugust2004.FromEndpointAddress(
+                    endpointAddress
+                );
                 discoveryVersion.Implementation.EprSerializer.WriteObject(writer, endpoint);
             }
             else if (discoveryVersion == DiscoveryVersion.WSDiscovery11)
@@ -410,25 +518,35 @@ namespace System.ServiceModel.Discovery
             else
             {
                 Fx.Assert("The discoveryVersion parameter cannot be null.");
-            }   
+            }
         }
 
-        public static void WriteContractTypeNames(DiscoveryVersion discoveryVersion, Collection<XmlQualifiedName> contractTypeNames, XmlWriter writer)
+        public static void WriteContractTypeNames(
+            DiscoveryVersion discoveryVersion,
+            Collection<XmlQualifiedName> contractTypeNames,
+            XmlWriter writer
+        )
         {
             if ((contractTypeNames != null) && (contractTypeNames.Count > 0))
             {
-                // using the prefix here allows us to redefine the empty namespace 
+                // using the prefix here allows us to redefine the empty namespace
                 // for serializing the QNames is required.
                 writer.WriteStartElement(
-                    ProtocolStrings.SchemaNames.DefaultPrefix, 
-                    ProtocolStrings.SchemaNames.TypesElement, 
-                    discoveryVersion.Namespace);
+                    ProtocolStrings.SchemaNames.DefaultPrefix,
+                    ProtocolStrings.SchemaNames.TypesElement,
+                    discoveryVersion.Namespace
+                );
                 SerializationUtility.WriteListOfQNames(writer, contractTypeNames);
                 writer.WriteEndElement();
             }
         }
 
-        public static void WriteScopes(DiscoveryVersion discoveryVersion, Collection<Uri> scopes, Uri scopeMatchBy, XmlWriter writer)
+        public static void WriteScopes(
+            DiscoveryVersion discoveryVersion,
+            Collection<Uri> scopes,
+            Uri scopeMatchBy,
+            XmlWriter writer
+        )
         {
             bool writeScopes = true;
             if (scopes == null || scopes.Count == 0)
@@ -439,14 +557,24 @@ namespace System.ServiceModel.Discovery
 
             if (writeScopes)
             {
-                writer.WriteStartElement(ProtocolStrings.SchemaNames.ScopesElement, discoveryVersion.Namespace);
+                writer.WriteStartElement(
+                    ProtocolStrings.SchemaNames.ScopesElement,
+                    discoveryVersion.Namespace
+                );
                 if (scopeMatchBy != null)
                 {
-                    Uri versionDependentScopeMatchBy = discoveryVersion.Implementation.ToVersionDependentScopeMatchBy(scopeMatchBy);
+                    Uri versionDependentScopeMatchBy =
+                        discoveryVersion.Implementation.ToVersionDependentScopeMatchBy(
+                            scopeMatchBy
+                        );
                     writer.WriteAttributeString(
-                        ProtocolStrings.SchemaNames.MatchByAttribute, 
+                        ProtocolStrings.SchemaNames.MatchByAttribute,
                         string.Empty,
-                        versionDependentScopeMatchBy.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped));
+                        versionDependentScopeMatchBy.GetComponents(
+                            UriComponents.SerializationInfoString,
+                            UriFormat.UriEscaped
+                        )
+                    );
                 }
 
                 if (scopes != null)
@@ -458,19 +586,33 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        public static void WriteListenUris(DiscoveryVersion discoveryVersion, Collection<Uri> listenUris, XmlWriter writer)
+        public static void WriteListenUris(
+            DiscoveryVersion discoveryVersion,
+            Collection<Uri> listenUris,
+            XmlWriter writer
+        )
         {
             if ((listenUris != null) && (listenUris.Count > 0))
             {
-                writer.WriteStartElement(ProtocolStrings.SchemaNames.XAddrsElement, discoveryVersion.Namespace);
+                writer.WriteStartElement(
+                    ProtocolStrings.SchemaNames.XAddrsElement,
+                    discoveryVersion.Namespace
+                );
                 SerializationUtility.WriteListOfUris(writer, listenUris);
                 writer.WriteEndElement();
             }
         }
 
-        public static void WriteMetadataVersion(DiscoveryVersion discoveryVersion, int metadataVersion, XmlWriter writer)
+        public static void WriteMetadataVersion(
+            DiscoveryVersion discoveryVersion,
+            int metadataVersion,
+            XmlWriter writer
+        )
         {
-            writer.WriteStartElement(ProtocolStrings.SchemaNames.MetadataVersionElement, discoveryVersion.Namespace);
+            writer.WriteStartElement(
+                ProtocolStrings.SchemaNames.MetadataVersionElement,
+                discoveryVersion.Namespace
+            );
             writer.WriteValue(metadataVersion);
             writer.WriteEndElement();
         }

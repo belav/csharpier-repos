@@ -40,8 +40,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload01a.overload01a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -78,8 +76,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload01b.overload01b
 {
@@ -118,8 +114,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload02.overload02
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -157,7 +151,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "Parent.Foo(int, int)", "Parent.Foo(int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "Parent.Foo(int, int)",
+                    "Parent.Foo(int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -167,8 +166,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload02b.overload02b
 {
@@ -208,7 +205,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "Parent.Foo(object, object)", "Parent.Foo(object)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "Parent.Foo(object, object)",
+                    "Parent.Foo(object)"
+                );
                 if (ret)
                     return 0;
             }
@@ -218,8 +220,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload03.overload03
 {
@@ -263,7 +263,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "Parent.Foo(string)", "Parent.Foo(int, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "Parent.Foo(string)",
+                    "Parent.Foo(int, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -273,8 +278,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload03b.overload03b
 {
@@ -318,7 +321,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "Parent.Foo(string)", "Parent.Foo(object, object)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "Parent.Foo(string)",
+                    "Parent.Foo(object, object)"
+                );
                 if (ret)
                     return 0;
             }
@@ -328,8 +336,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload04.overload04
 {
@@ -373,8 +379,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload04a.overload04a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -416,8 +420,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload04b.overload04b
 {
@@ -461,8 +463,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload05.overload05
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -500,7 +500,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "Parent.Foo(int, int)", "Parent.Foo(int, string)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "Parent.Foo(int, int)",
+                    "Parent.Foo(int, string)"
+                );
                 if (ret)
                     return 0;
             }
@@ -510,8 +515,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload05b.overload05b
 {
@@ -550,7 +553,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "Parent.Foo(object, int)", "Parent.Foo(object, string)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "Parent.Foo(object, int)",
+                    "Parent.Foo(object, string)"
+                );
                 if (ret)
                     return 0;
             }
@@ -560,8 +568,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload06.overload06
 {
@@ -600,8 +606,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload06a.overload06a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -638,8 +642,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload06b.overload06b
 {
@@ -678,8 +680,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload06c.overload06c
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -717,8 +717,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload07.overload07
 {
@@ -762,8 +760,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload07a.overload07a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -806,8 +802,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload07b.overload07b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -849,8 +843,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload07c.overload07c
 {
@@ -896,8 +888,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload09.overload09
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -930,8 +920,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload09a.overload09a
 {
@@ -966,8 +954,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload09b.overload09b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1000,8 +986,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload09c.overload09c
 {
@@ -1036,8 +1020,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload10.overload10
 {
@@ -1076,8 +1058,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload10a.overload10a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1115,8 +1095,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload10b.overload10b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1153,8 +1131,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload10c.overload10c
 {
@@ -1194,8 +1170,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload11.overload11
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1232,8 +1206,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload11a.overload11a
 {
@@ -1272,8 +1244,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload11b.overload11b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1310,8 +1280,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload12.overload12
 {
@@ -1350,8 +1318,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload12a.overload12a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1388,8 +1354,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload12b.overload12b
 {
@@ -1429,8 +1393,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload13.overload13
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1467,8 +1429,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload13a.overload13a
 {
@@ -1508,8 +1468,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload13b.overload13b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1546,8 +1504,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload13c.overload13c
 {
@@ -1587,8 +1543,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload14.overload14
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1625,8 +1579,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload14a.overload14a
 {
@@ -1665,8 +1617,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload14b.overload14b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1703,8 +1653,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload14c.overload14c
 {
@@ -1744,8 +1692,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload15.overload15
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1782,8 +1728,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload15a.overload15a
 {
@@ -1827,8 +1771,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload15b.overload15b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1865,8 +1807,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload15c.overload15c
 {
@@ -1907,8 +1847,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload16.overload16
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -1945,8 +1883,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload16a.overload16a
 {
@@ -1985,8 +1921,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload16b.overload16b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2023,8 +1957,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload16c.overload16c
 {
@@ -2064,8 +1996,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload17.overload17
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2102,8 +2032,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload17a.overload17a
 {
@@ -2142,8 +2070,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload17b.overload17b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2180,8 +2106,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload17c.overload17c
 {
@@ -2221,8 +2145,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload18.overload18
 {
@@ -2264,8 +2186,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload18a.overload18a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2306,8 +2226,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload18b.overload18b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2347,8 +2265,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload18c.overload18c
 {
@@ -2392,8 +2308,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload19.overload19
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2433,8 +2347,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload19a.overload19a
 {
@@ -2476,8 +2388,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload19b.overload19b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2517,8 +2427,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload19c.overload19c
 {
@@ -2562,8 +2470,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload20.overload20
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2603,8 +2509,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload20a.overload20a
 {
@@ -2646,8 +2550,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload20b.overload20b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2688,8 +2590,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload21.overload21
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2726,8 +2626,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload21b.overload21b
 {
@@ -2767,8 +2665,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload22.overload22
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2805,8 +2701,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload22a.overload22a
 {
@@ -2845,8 +2739,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload22b.overload22b
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2883,8 +2775,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload22c.overload22c
 {
@@ -2925,8 +2815,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload23.overload23
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -2952,7 +2840,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, e.Message, "C.Foo(int, string, string)", "C.Foo(string, int, string)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    e.Message,
+                    "C.Foo(int, string, string)",
+                    "C.Foo(string, int, string)"
+                );
                 if (ret)
                     return 0;
             }
@@ -2960,22 +2853,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             return 1;
         }
 
-        public void Foo(int x, string y, string z)
-        {
-        }
+        public void Foo(int x, string y, string z) { }
 
-        public void Foo(string y, int x, string z)
-        {
-        }
+        public void Foo(string y, int x, string z) { }
 
-        public void Foo(string z, string y, int? x)
-        {
-        }
+        public void Foo(string z, string y, int? x) { }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload24.overload24
 {
@@ -3014,8 +2899,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.overload.overload25.overload25
 {

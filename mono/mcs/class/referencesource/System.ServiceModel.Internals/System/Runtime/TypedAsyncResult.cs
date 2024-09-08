@@ -8,9 +8,7 @@ namespace System.Runtime
         T data;
 
         public TypedAsyncResult(AsyncCallback callback, object state)
-            : base(callback, state)
-        {
-        }
+            : base(callback, state) { }
 
         public T Data
         {

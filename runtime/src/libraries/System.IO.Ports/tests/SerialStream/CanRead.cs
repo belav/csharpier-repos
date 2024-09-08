@@ -15,13 +15,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanRead_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
 
-                Debug.WriteLine("Verifying CanRead property throws exception After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying CanRead property throws exception After Open() then Close()"
+                );
 
                 Assert.False(serialStream.CanRead);
             }
@@ -30,13 +36,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanRead_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying CanRead property throws exception After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying CanRead property throws exception After Open() then BaseStream.Close()"
+                );
 
                 Assert.False(serialStream.CanRead);
             }
@@ -45,7 +57,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void CanRead_AfterOpen()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
 

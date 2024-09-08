@@ -44,7 +44,12 @@ namespace System.Collections.Generic
         /// <param name="array">The destination array.</param>
         /// <param name="arrayIndex">The index in the array to start copying to.</param>
         /// <param name="count">The number of items in the enumerable.</param>
-        internal static void IterativeCopy<T>(IEnumerable<T> source, T[] array, int arrayIndex, int count)
+        internal static void IterativeCopy<T>(
+            IEnumerable<T> source,
+            T[] array,
+            int arrayIndex,
+            int count
+        )
         {
             Debug.Assert(source != null && !(source is ICollection<T>));
             Debug.Assert(arrayIndex >= 0);

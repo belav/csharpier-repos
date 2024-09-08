@@ -66,7 +66,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         False = 0x00001900,
 
         Lifted = 0x00010000,
-        _Logical = 0x00020000, // reserved for binary op              
+        _Logical = 0x00020000, // reserved for binary op
         Checked = 0x00040000,
 
         Error = 0x00000000,
@@ -278,7 +278,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         UserDefinedFalse = UserDefined | False,
 
         // The one time operator true is not user-defined is "if(dyn)" where dyn is of type dynamic.
-        // In that case we bind this as a dynamic "operator true" invocation, rather than as a 
+        // In that case we bind this as a dynamic "operator true" invocation, rather than as a
         // dynamic conversion to bool.
         DynamicTrue = Dynamic | True,
 

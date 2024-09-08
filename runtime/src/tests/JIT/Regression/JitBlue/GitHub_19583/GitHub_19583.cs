@@ -15,17 +15,18 @@ public class Program
     [Fact]
     public static int TestEntryPoint()
     {
-        return 100 +
-            (Test1.Run() == 0 ? 0 : 1) +
-            (Test2.Run() == 1 ? 0 : 2) +
-            (Test3.Run() == 0 ? 0 : 4) +
-            (Test4.Run() == 0 ? 0 : 8);
+        return 100
+            + (Test1.Run() == 0 ? 0 : 1)
+            + (Test2.Run() == 1 ? 0 : 2)
+            + (Test3.Run() == 0 ? 0 : 4)
+            + (Test4.Run() == 0 ? 0 : 8);
     }
 
     class Test1
     {
         static long s_1;
         static int s_3;
+
         public static int Run()
         {
             int vr16 = s_3;
@@ -38,6 +39,7 @@ public class Program
     {
         static int s_32;
         static int s_46 = 1;
+
         public static int Run()
         {
             s_32 = 0;
@@ -55,6 +57,7 @@ public class Program
     {
         static int s_3;
         static int s_11;
+
         public static int Run()
         {
             return M9(s_3, Interlocked.Exchange(ref s_3, 1), s_11++);
@@ -70,12 +73,16 @@ public class Program
     {
         struct vec
         {
-            public int x, y, z, w;
+            public int x,
+                y,
+                z,
+                w;
         }
 
         public static unsafe int Run()
         {
-            if (!Sse2.IsSupported) return 0;
+            if (!Sse2.IsSupported)
+                return 0;
 
             vec v = new vec();
             Vector128<int> o = Vector128.Create(1);

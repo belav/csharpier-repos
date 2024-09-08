@@ -18,15 +18,23 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
     [UseExportProvider]
-    public abstract class AbstractTypingCommandHandlerTest<TCommandArgs> where TCommandArgs : CommandArgs
+    public abstract class AbstractTypingCommandHandlerTest<TCommandArgs>
+        where TCommandArgs : CommandArgs
     {
         internal abstract ICommandHandler<TCommandArgs> GetCommandHandler(TestWorkspace workspace);
 
         protected abstract TestWorkspace CreateTestWorkspace(string initialMarkup);
 
-        protected abstract (TCommandArgs, string insertionText) CreateCommandArgs(ITextView textView, ITextBuffer textBuffer);
+        protected abstract (TCommandArgs, string insertionText) CreateCommandArgs(
+            ITextView textView,
+            ITextBuffer textBuffer
+        );
 
-        protected void Verify(string initialMarkup, string expectedMarkup, Action<TestWorkspace> initializeWorkspace = null)
+        protected void Verify(
+            string initialMarkup,
+            string expectedMarkup,
+            Action<TestWorkspace> initializeWorkspace = null
+        )
         {
             using (var workspace = CreateTestWorkspace(initialMarkup))
             {
@@ -34,7 +42,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
 
                 var testDocument = workspace.Documents.Single();
                 var view = testDocument.GetTextView();
-                view.Caret.MoveTo(new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value));
+                view.Caret.MoveTo(
+                    new SnapshotPoint(view.TextSnapshot, testDocument.CursorPosition.Value)
+                );
 
                 var commandHandler = GetCommandHandler(workspace);
 
@@ -46,18 +56,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
                     nextHandler();
                 }
 
-                MarkupTestFile.GetPosition(expectedMarkup, out var expectedCode, out int expectedPosition);
+                MarkupTestFile.GetPosition(
+                    expectedMarkup,
+                    out var expectedCode,
+                    out int expectedPosition
+                );
 
                 Assert.Equal(expectedCode, view.TextSnapshot.GetText());
 
                 var caretPosition = view.Caret.Position.BufferPosition.Position;
-                Assert.True(expectedPosition == caretPosition,
-                    string.Format("Caret positioned incorrectly. Should have been {0}, but was {1}.", expectedPosition, caretPosition));
+                Assert.True(
+                    expectedPosition == caretPosition,
+                    string.Format(
+                        "Caret positioned incorrectly. Should have been {0}, but was {1}.",
+                        expectedPosition,
+                        caretPosition
+                    )
+                );
             }
         }
 
-        protected void VerifyTabs(string initialMarkup, string expectedMarkup)
-            => Verify(ReplaceTabTags(initialMarkup), ReplaceTabTags(expectedMarkup));
+        protected void VerifyTabs(string initialMarkup, string expectedMarkup) =>
+            Verify(ReplaceTabTags(initialMarkup), ReplaceTabTags(expectedMarkup));
 
         private static string ReplaceTabTags(string markup) => markup.Replace("<tab>", "\t");
 
@@ -67,7 +87,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             {
                 var caretPosition = textView.Caret.Position.BufferPosition;
                 var newSpanshot = textView.TextBuffer.Insert(caretPosition, text);
-                textView.Caret.MoveTo(new SnapshotPoint(newSpanshot, (int)caretPosition + text.Length));
+                textView.Caret.MoveTo(
+                    new SnapshotPoint(newSpanshot, (int)caretPosition + text.Length)
+                );
             };
         }
     }

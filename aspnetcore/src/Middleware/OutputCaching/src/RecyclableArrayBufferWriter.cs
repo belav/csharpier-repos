@@ -11,7 +11,6 @@ namespace Microsoft.AspNetCore.OutputCaching;
 // except it uses the array pool for allocations
 internal sealed class RecyclableArrayBufferWriter<T> : IBufferWriter<T>, IDisposable
 {
-
     // Copy of Array.MaxLength.
     // Used by projects targeting .NET Framework.
     private const int ArrayMaxLength = 0x7FFFFFC7;
@@ -54,8 +53,7 @@ internal sealed class RecyclableArrayBufferWriter<T> : IBufferWriter<T>, IDispos
 
         _index += count;
 
-        static void Throw()
-            => throw new ArgumentOutOfRangeException(nameof(count));
+        static void Throw() => throw new ArgumentOutOfRangeException(nameof(count));
     }
 
     public ReadOnlyMemory<T> GetCommittedMemory() => new ReadOnlyMemory<T>(_buffer, 0, _index); // could also directly expose a ReadOnlySpan<byte> if useful
@@ -126,6 +124,7 @@ internal sealed class RecyclableArrayBufferWriter<T> : IBufferWriter<T>, IDispos
 
         Debug.Assert(FreeCapacity > 0 && FreeCapacity >= sizeHint);
 
-        static void ThrowOutOfMemoryException() => throw new InvalidOperationException("Unable to grow buffer as requested");
+        static void ThrowOutOfMemoryException() =>
+            throw new InvalidOperationException("Unable to grow buffer as requested");
     }
 }

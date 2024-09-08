@@ -37,7 +37,8 @@ internal sealed class ConsoleTable
         if (_columns.Count != values.Length)
         {
             throw new InvalidOperationException(
-                $"The number of columns in the table '{_columns.Count}' does not match the number of columns in the row '{values.Length}'.");
+                $"The number of columns in the table '{_columns.Count}' does not match the number of columns in the row '{values.Length}'."
+            );
         }
 
         _rows.Add(values);
@@ -48,17 +49,25 @@ internal sealed class ConsoleTable
         var builder = new StringBuilder();
 
         var maxColumnLengths = _columns
-            .Select((t, i) => _rows.Select(x => x[i])
-                .Concat(new[] { _columns[i] })
-                .Where(x => x != null)
-                .Select(x => x!.ToString()!.Length).Max())
+            .Select(
+                (t, i) =>
+                    _rows
+                        .Select(x => x[i])
+                        .Concat(new[] { _columns[i] })
+                        .Where(x => x != null)
+                        .Select(x => x!.ToString()!.Length)
+                        .Max()
+            )
             .ToList();
 
         // The table borders constructed using "|" have whitespaces before and after.
         // This number accounts for those spaces to ensure that the table width is not longer than the console window's width.
         var EXCESS_LENGTH_CREATED_BY_BORDERS = 4;
 
-        var equalColumnLengths = Math.Max((Console.WindowWidth / _columns.Count) - EXCESS_LENGTH_CREATED_BY_BORDERS, 5);
+        var equalColumnLengths = Math.Max(
+            (Console.WindowWidth / _columns.Count) - EXCESS_LENGTH_CREATED_BY_BORDERS,
+            5
+        );
 
         var excessLength = 0;
         var numberOfColumnsThatNeedMoreLength = 0;
@@ -86,11 +95,18 @@ internal sealed class ConsoleTable
             }
         }
 
-        var formatRow = Enumerable.Range(0, _columns.Count)
-            .Select(i => " | {" + i + ", " + maxColumnLengths[i] + "}")
-            .Aggregate((previousRowColumn, nextRowColumn) => previousRowColumn + nextRowColumn) + " |";
+        var formatRow =
+            Enumerable
+                .Range(0, _columns.Count)
+                .Select(i => " | {" + i + ", " + maxColumnLengths[i] + "}")
+                .Aggregate((previousRowColumn, nextRowColumn) => previousRowColumn + nextRowColumn)
+            + " |";
 
-        var columnHeaders = string.Format(CultureInfo.InvariantCulture, formatRow, _columns.ToArray());
+        var columnHeaders = string.Format(
+            CultureInfo.InvariantCulture,
+            formatRow,
+            _columns.ToArray()
+        );
         var rowDivider = $" {new string('-', columnHeaders.Length - 1)} ";
 
         builder.AppendLine(rowDivider);
@@ -98,7 +114,12 @@ internal sealed class ConsoleTable
 
         WriteTableContent(_rows, maxColumnLengths, rowDivider, builder);
 
-        void WriteTableContent(List<string[]> rows, List<int> columnLengths, string divider, StringBuilder stringBuilder)
+        void WriteTableContent(
+            List<string[]> rows,
+            List<int> columnLengths,
+            string divider,
+            StringBuilder stringBuilder
+        )
         {
             stringBuilder.AppendLine(divider);
 
@@ -114,12 +135,19 @@ internal sealed class ConsoleTable
 
                         if (rows[i][j].Length <= columnLengths[j])
                         {
-                            outputRow = string.Concat(outputRow, rows[i][j], new string(' ', columnLengths[j] - rows[i][j].Length));
+                            outputRow = string.Concat(
+                                outputRow,
+                                rows[i][j],
+                                new string(' ', columnLengths[j] - rows[i][j].Length)
+                            );
                             rows[i][j] = string.Empty;
                         }
                         else
                         {
-                            outputRow = string.Concat(outputRow, rows[i][j].Substring(0, columnLengths[j]));
+                            outputRow = string.Concat(
+                                outputRow,
+                                rows[i][j].Substring(0, columnLengths[j])
+                            );
                             rows[i][j] = rows[i][j].Substring(columnLengths[j]);
                         }
                     }

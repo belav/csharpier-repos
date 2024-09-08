@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Internal;
 /// <summary>
 /// An <see cref="IDictionary{String, Object}"/> type to hold a small amount of items (10 or less in the common case).
 /// </summary>
-internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
+    : IDictionary<TKey, TValue>,
+        IReadOnlyDictionary<TKey, TValue>
+    where TKey : notnull
 {
     // Threshold for size of array to use.
     private const int DefaultArrayThreshold = 10;
@@ -28,27 +31,21 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
     /// Creates an empty <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
     public AdaptiveCapacityDictionary()
-        : this(0, EqualityComparer<TKey>.Default)
-    {
-    }
+        : this(0, EqualityComparer<TKey>.Default) { }
 
     /// <summary>
     /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
     /// <param name="comparer">Equality comparison.</param>
     public AdaptiveCapacityDictionary(IEqualityComparer<TKey> comparer)
-        : this(0, comparer)
-    {
-    }
+        : this(0, comparer) { }
 
     /// <summary>
     /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
     /// <param name="capacity">Initial capacity.</param>
     public AdaptiveCapacityDictionary(int capacity)
-        : this(capacity, EqualityComparer<TKey>.Default)
-    {
-    }
+        : this(capacity, EqualityComparer<TKey>.Default) { }
 
     /// <summary>
     /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
@@ -105,7 +102,6 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
 
             return value!;
         }
-
         set
         {
             if (key == null)
@@ -230,7 +226,10 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
 
             if (ContainsKeyArray(key))
             {
-                throw new ArgumentException($"An element with the key '{key}' already exists in the {nameof(AdaptiveCapacityDictionary<TKey, TValue>)}.", nameof(key));
+                throw new ArgumentException(
+                    $"An element with the key '{key}' already exists in the {nameof(AdaptiveCapacityDictionary<TKey, TValue>)}.",
+                    nameof(key)
+                );
             }
 
             _arrayStorage[_count] = new KeyValuePair<TKey, TValue>(key, value);
@@ -265,7 +264,8 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
             return ((ICollection<KeyValuePair<TKey, TValue>>)_dictionaryStorage).Contains(item);
         }
 
-        return TryGetValue(item.Key, out var value) && EqualityComparer<object>.Default.Equals(value, item.Value);
+        return TryGetValue(item.Key, out var value)
+            && EqualityComparer<object>.Default.Equals(value, item.Value);
     }
 
     /// <inheritdoc />
@@ -287,7 +287,8 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
     /// <inheritdoc />
     void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
         KeyValuePair<TKey, TValue>[] array,
-        int arrayIndex)
+        int arrayIndex
+    )
     {
         ArgumentNullException.ThrowIfNull(array);
 
@@ -351,7 +352,10 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
 
             var index = FindIndex(item.Key);
             var array = _arrayStorage;
-            if (index >= 0 && EqualityComparer<TValue>.Default.Equals(array[index].Value, item.Value))
+            if (
+                index >= 0
+                && EqualityComparer<TValue>.Default.Equals(array[index].Value, item.Value)
+            )
             {
                 Array.Copy(array, index + 1, array, index, _count - index);
                 _count--;
@@ -534,6 +538,7 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
             _arrayStorage = array;
         }
     }
+
     private Span<KeyValuePair<TKey, TValue>> ArrayStorageSpan
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -597,6 +602,7 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
     {
         private readonly AdaptiveCapacityDictionary<TKey, TValue> _dictionary;
         private int _index;
+
         // Don't mark this as readonly
         private Dictionary<TKey, TValue>.Enumerator? _dictionaryEnumerator;
 
@@ -631,9 +637,7 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue> : IDictionary<TKe
         /// <summary>
         /// Releases resources used by the <see cref="Enumerator"/>.
         /// </summary>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         // Similar to the design of List<T>.Enumerator - Split into fast path and slow path for inlining friendliness
         /// <inheritdoc />

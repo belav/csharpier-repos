@@ -10,13 +10,13 @@ namespace System.Web.WebPages
 {
     /// <summary>
     /// This is a wrapper around PageDataDictionary[[dynamic]] which allows dynamic
-    /// access (e.g. dict.Foo). Like PageDataDictionary, it returns null if the key is not found, 
+    /// access (e.g. dict.Foo). Like PageDataDictionary, it returns null if the key is not found,
     /// instead of throwing an exception.
     /// This class is intended to be used as DynamicPageDataDictionary[[dynamic]]
     /// </summary>
-    // This is a generic type because C# does not allow implementing an interface 
+    // This is a generic type because C# does not allow implementing an interface
     // involving dynamic types (implementing IDictionary<object, dynamic> causes
-    // a compile error 
+    // a compile error
     // http://blogs.msdn.com/cburrows/archive/2009/02/04/c-dynamic-part-vii.aspx).
     internal class DynamicPageDataDictionary<TValue> : DynamicObject, IDictionary<object, TValue>
     {
@@ -73,7 +73,9 @@ namespace System.Web.WebPages
         {
             if (indexes == null || indexes.Length != 1)
             {
-                throw new ArgumentException(WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+                throw new ArgumentException(
+                    WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+                );
             }
 
             result = _data[indexes[0]];
@@ -86,7 +88,9 @@ namespace System.Web.WebPages
         {
             if (indexes == null || indexes.Length != 1)
             {
-                throw new ArgumentException(WebPageResources.DynamicDictionary_InvalidNumberOfIndexes);
+                throw new ArgumentException(
+                    WebPageResources.DynamicDictionary_InvalidNumberOfIndexes
+                );
             }
 
             // This cast should always succeed assuming TValue is dynamic.

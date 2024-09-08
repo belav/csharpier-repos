@@ -14,11 +14,16 @@ namespace System.ServiceModel.Dispatcher
         IDispatchMessageFormatter innerFormatter;
         string outgoingContentType;
 
-        public ContentTypeSettingDispatchMessageFormatter(string outgoingContentType, IDispatchMessageFormatter innerFormatter)
+        public ContentTypeSettingDispatchMessageFormatter(
+            string outgoingContentType,
+            IDispatchMessageFormatter innerFormatter
+        )
         {
             if (outgoingContentType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("outgoingContentType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "outgoingContentType"
+                );
             }
             if (innerFormatter == null)
             {
@@ -33,9 +38,17 @@ namespace System.ServiceModel.Dispatcher
             this.innerFormatter.DeserializeRequest(message, parameters);
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
-            Message message = this.innerFormatter.SerializeReply(messageVersion, parameters, result);
+            Message message = this.innerFormatter.SerializeReply(
+                messageVersion,
+                parameters,
+                result
+            );
             if (message != null)
             {
                 AddResponseContentTypeProperty(message, this.outgoingContentType);
@@ -53,7 +66,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
-            if (OperationContext.Current != null && OperationContext.Current.HasOutgoingMessageProperties)
+            if (
+                OperationContext.Current != null
+                && OperationContext.Current.HasOutgoingMessageProperties
+            )
             {
                 if (string.IsNullOrEmpty(WebOperationContext.Current.OutgoingResponse.ContentType))
                 {
@@ -67,7 +83,7 @@ namespace System.ServiceModel.Dispatcher
                 HttpResponseMessageProperty httpProperty;
                 if (prop != null)
                 {
-                    httpProperty = (HttpResponseMessageProperty) prop;
+                    httpProperty = (HttpResponseMessageProperty)prop;
                 }
                 else
                 {

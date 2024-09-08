@@ -16,10 +16,20 @@ namespace System.Web.Mvc.Test
         {
             //Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new CompareAttribute(null); }, "otherProperty");
+                delegate
+                {
+                    new CompareAttribute(null);
+                },
+                "otherProperty"
+            );
 
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { CompareAttribute.FormatPropertyForClientValidation(null); }, "property");
+                delegate
+                {
+                    CompareAttribute.FormatPropertyForClientValidation(null);
+                },
+                "property"
+            );
         }
 
         [Fact]
@@ -51,7 +61,12 @@ namespace System.Web.Mvc.Test
 
             CompareAttribute attr = new CompareAttribute("CompareProperty");
             Assert.Throws<ValidationException>(
-                delegate { attr.Validate(currentObject.CompareProperty, testContext); }, "'CurrentProperty' and 'CompareProperty' do not match.");
+                delegate
+                {
+                    attr.Validate(currentObject.CompareProperty, testContext);
+                },
+                "'CurrentProperty' and 'CompareProperty' do not match."
+            );
         }
 
         [Fact]
@@ -65,7 +80,12 @@ namespace System.Web.Mvc.Test
 
             CompareAttribute attr = new CompareAttribute("ComparePropertyWithDisplayName");
             Assert.Throws<ValidationException>(
-                delegate { attr.Validate(currentObject.CompareProperty, testContext); }, "'CurrentProperty' and 'DisplayName' do not match.");
+                delegate
+                {
+                    attr.Validate(currentObject.CompareProperty, testContext);
+                },
+                "'CurrentProperty' and 'DisplayName' do not match."
+            );
         }
 
         [Fact]
@@ -81,7 +101,12 @@ namespace System.Web.Mvc.Test
             attr.OtherPropertyDisplayName = "SetDisplayName";
 
             Assert.Throws<ValidationException>(
-                delegate { attr.Validate(currentObject.CompareProperty, testContext); }, "'CurrentProperty' and 'SetDisplayName' do not match.");
+                delegate
+                {
+                    attr.Validate(currentObject.CompareProperty, testContext);
+                },
+                "'CurrentProperty' and 'SetDisplayName' do not match."
+            );
         }
 
         [Fact]
@@ -97,23 +122,35 @@ namespace System.Web.Mvc.Test
             Assert.Throws<ValidationException>(
                 () => attr.Validate(currentObject.CompareProperty, testContext),
                 "Could not find a property named UnknownPropertyName."
-                );
+            );
         }
 
         [Fact]
         public void GetClientValidationRulesReturnsModelClientValidationEqualToRule()
         {
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            Mock<ModelMetadata> metadata = new Mock<ModelMetadata>(provider.Object, null, null, typeof(string), null);
+            Mock<ModelMetadata> metadata = new Mock<ModelMetadata>(
+                provider.Object,
+                null,
+                null,
+                typeof(string),
+                null
+            );
             metadata.Setup(m => m.DisplayName).Returns("CurrentProperty");
 
             CompareAttribute attr = new CompareAttribute("CompareProperty");
-            List<ModelClientValidationRule> ruleList = new List<ModelClientValidationRule>(attr.GetClientValidationRules(metadata.Object, null));
+            List<ModelClientValidationRule> ruleList = new List<ModelClientValidationRule>(
+                attr.GetClientValidationRules(metadata.Object, null)
+            );
 
             ModelClientValidationRule rule = Assert.Single(ruleList);
-            ModelClientValidationEqualToRule actualRule = Assert.IsType<ModelClientValidationEqualToRule>(rule);
+            ModelClientValidationEqualToRule actualRule =
+                Assert.IsType<ModelClientValidationEqualToRule>(rule);
 
-            Assert.Equal("'CurrentProperty' and 'CompareProperty' do not match.", actualRule.ErrorMessage);
+            Assert.Equal(
+                "'CurrentProperty' and 'CompareProperty' do not match.",
+                actualRule.ErrorMessage
+            );
             Assert.Equal("equalto", actualRule.ValidationType);
             Assert.Equal("*.CompareProperty", actualRule.ValidationParameters["other"]);
         }
@@ -122,35 +159,62 @@ namespace System.Web.Mvc.Test
         public void ModelClientValidationEqualToRuleErrorMessageUsesOtherPropertyDisplayName()
         {
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, typeof(CompareObject), null, typeof(string), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                typeof(CompareObject),
+                null,
+                typeof(string),
+                null
+            );
             metadata.DisplayName = "CurrentProperty";
 
             CompareAttribute attr = new CompareAttribute("ComparePropertyWithDisplayName");
-            List<ModelClientValidationRule> ruleList = new List<ModelClientValidationRule>(attr.GetClientValidationRules(metadata, null));
+            List<ModelClientValidationRule> ruleList = new List<ModelClientValidationRule>(
+                attr.GetClientValidationRules(metadata, null)
+            );
 
             ModelClientValidationRule rule = Assert.Single(ruleList);
-            ModelClientValidationEqualToRule actualRule = Assert.IsType<ModelClientValidationEqualToRule>(rule);
+            ModelClientValidationEqualToRule actualRule =
+                Assert.IsType<ModelClientValidationEqualToRule>(rule);
 
-            Assert.Equal("'CurrentProperty' and 'DisplayName' do not match.", actualRule.ErrorMessage);
+            Assert.Equal(
+                "'CurrentProperty' and 'DisplayName' do not match.",
+                actualRule.ErrorMessage
+            );
             Assert.Equal("equalto", actualRule.ValidationType);
-            Assert.Equal("*.ComparePropertyWithDisplayName", actualRule.ValidationParameters["other"]);
+            Assert.Equal(
+                "*.ComparePropertyWithDisplayName",
+                actualRule.ValidationParameters["other"]
+            );
         }
 
         [Fact]
         public void ModelClientValidationEqualToRuleUsesSetDisplayName()
         {
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
-            ModelMetadata metadata = new ModelMetadata(provider.Object, typeof(CompareObject), null, typeof(string), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider.Object,
+                typeof(CompareObject),
+                null,
+                typeof(string),
+                null
+            );
             metadata.DisplayName = "CurrentProperty";
 
             CompareAttribute attr = new CompareAttribute("ComparePropertyWithDisplayName");
             attr.OtherPropertyDisplayName = "SetDisplayName";
 
-            List<ModelClientValidationRule> ruleList = new List<ModelClientValidationRule>(attr.GetClientValidationRules(metadata, null));
+            List<ModelClientValidationRule> ruleList = new List<ModelClientValidationRule>(
+                attr.GetClientValidationRules(metadata, null)
+            );
             ModelClientValidationRule rule = Assert.Single(ruleList);
-            ModelClientValidationEqualToRule actualRule = Assert.IsType<ModelClientValidationEqualToRule>(rule);
+            ModelClientValidationEqualToRule actualRule =
+                Assert.IsType<ModelClientValidationEqualToRule>(rule);
 
-            Assert.Equal("'CurrentProperty' and 'SetDisplayName' do not match.", actualRule.ErrorMessage);
+            Assert.Equal(
+                "'CurrentProperty' and 'SetDisplayName' do not match.",
+                actualRule.ErrorMessage
+            );
         }
 
         [Fact]
@@ -167,9 +231,7 @@ namespace System.Web.Mvc.Test
         private class DerivedCompareAttribute : CompareAttribute
         {
             public DerivedCompareAttribute(string otherProperty)
-                : base(otherProperty)
-            {
-            }
+                : base(otherProperty) { }
 
             public override bool IsValid(object value)
             {

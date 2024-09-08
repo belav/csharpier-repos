@@ -26,6 +26,5 @@ public class SimpleModelFactory
     ///     Creates an empty model with no conventions. All aspects of the model must be exhaustively configured.
     /// </summary>
     /// <returns>The newly created model.</returns>
-    public virtual IMutableModel Create()
-        => new Model();
+    public virtual IMutableModel Create() => new Model();
 }

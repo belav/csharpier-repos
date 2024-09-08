@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store which stores a user's security stamp.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserSecurityStampStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserSecurityStampStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets the provided security <paramref name="stamp"/> for the specified <paramref name="user"/>.

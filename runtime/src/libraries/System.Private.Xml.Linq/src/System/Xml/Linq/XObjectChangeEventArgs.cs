@@ -15,22 +15,30 @@ namespace System.Xml.Linq
         /// <summary>
         /// Event argument for a <see cref="XObjectChange.Add"/> change event.
         /// </summary>
-        public static readonly XObjectChangeEventArgs Add = new XObjectChangeEventArgs(XObjectChange.Add);
+        public static readonly XObjectChangeEventArgs Add = new XObjectChangeEventArgs(
+            XObjectChange.Add
+        );
 
         /// <summary>
         /// Event argument for a <see cref="XObjectChange.Remove"/> change event.
         /// </summary>
-        public static readonly XObjectChangeEventArgs Remove = new XObjectChangeEventArgs(XObjectChange.Remove);
+        public static readonly XObjectChangeEventArgs Remove = new XObjectChangeEventArgs(
+            XObjectChange.Remove
+        );
 
         /// <summary>
         /// Event argument for a <see cref="XObjectChange.Name"/> change event.
         /// </summary>
-        public static readonly XObjectChangeEventArgs Name = new XObjectChangeEventArgs(XObjectChange.Name);
+        public static readonly XObjectChangeEventArgs Name = new XObjectChangeEventArgs(
+            XObjectChange.Name
+        );
 
         /// <summary>
         /// Event argument for a <see cref="XObjectChange.Value"/> change event.
         /// </summary>
-        public static readonly XObjectChangeEventArgs Value = new XObjectChangeEventArgs(XObjectChange.Value);
+        public static readonly XObjectChangeEventArgs Value = new XObjectChangeEventArgs(
+            XObjectChange.Value
+        );
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XObjectChangeEventArgs"/> class.

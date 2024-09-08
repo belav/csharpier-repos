@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         TSwitchOperation,
         TSwitchSyntax,
         TSwitchArmSyntax,
-        TMemberAccessExpression>
-        : SyntaxEditorBasedCodeFixProvider
+        TMemberAccessExpression
+    > : SyntaxEditorBasedCodeFixProvider
         where TSwitchOperation : IOperation
         where TSwitchSyntax : SyntaxNode
         where TSwitchArmSyntax : SyntaxNode
@@ -33,31 +33,57 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; }
 
-        protected AbstractPopulateSwitchCodeFixProvider(string diagnosticId)
-            => FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
+        protected AbstractPopulateSwitchCodeFixProvider(string diagnosticId) =>
+            FixableDiagnosticIds = ImmutableArray.Create(diagnosticId);
 
         protected abstract ITypeSymbol GetSwitchType(TSwitchOperation switchStatement);
-        protected abstract ICollection<ISymbol> GetMissingEnumMembers(TSwitchOperation switchOperation);
+        protected abstract ICollection<ISymbol> GetMissingEnumMembers(
+            TSwitchOperation switchOperation
+        );
         protected abstract bool HasNullSwitchArm(TSwitchOperation switchOperation);
 
-        protected abstract TSwitchArmSyntax CreateSwitchArm(SyntaxGenerator generator, Compilation compilation, TMemberAccessExpression caseLabel);
-        protected abstract TSwitchArmSyntax CreateNullSwitchArm(SyntaxGenerator generator, Compilation compilation);
-        protected abstract TSwitchArmSyntax CreateDefaultSwitchArm(SyntaxGenerator generator, Compilation compilation);
+        protected abstract TSwitchArmSyntax CreateSwitchArm(
+            SyntaxGenerator generator,
+            Compilation compilation,
+            TMemberAccessExpression caseLabel
+        );
+        protected abstract TSwitchArmSyntax CreateNullSwitchArm(
+            SyntaxGenerator generator,
+            Compilation compilation
+        );
+        protected abstract TSwitchArmSyntax CreateDefaultSwitchArm(
+            SyntaxGenerator generator,
+            Compilation compilation
+        );
         protected abstract int InsertPosition(TSwitchOperation switchOperation);
-        protected abstract TSwitchSyntax InsertSwitchArms(SyntaxGenerator generator, TSwitchSyntax switchNode, int insertLocation, List<TSwitchArmSyntax> newArms);
+        protected abstract TSwitchSyntax InsertSwitchArms(
+            SyntaxGenerator generator,
+            TSwitchSyntax switchNode,
+            int insertLocation,
+            List<TSwitchArmSyntax> newArms
+        );
 
         protected abstract void FixOneDiagnostic(
-            Document document, SyntaxEditor editor, SemanticModel semanticModel,
-            bool addCases, bool addDefaultCase, bool onlyOneDiagnostic,
-            bool hasMissingCases, bool hasMissingDefaultCase,
-            TSwitchSyntax switchNode, TSwitchOperation switchOperation);
+            Document document,
+            SyntaxEditor editor,
+            SemanticModel semanticModel,
+            bool addCases,
+            bool addDefaultCase,
+            bool onlyOneDiagnostic,
+            bool hasMissingCases,
+            bool hasMissingDefaultCase,
+            TSwitchSyntax switchNode,
+            TSwitchOperation switchOperation
+        );
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
             var properties = diagnostic.Properties;
             var missingCases = bool.Parse(properties[PopulateSwitchStatementHelpers.MissingCases]!);
-            var missingDefaultCase = bool.Parse(properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!);
+            var missingDefaultCase = bool.Parse(
+                properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!
+            );
 
             Debug.Assert(missingCases || missingDefaultCase);
 
@@ -67,11 +93,18 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         AnalyzersResources.Add_missing_cases,
-                        c => FixAsync(document, diagnostic,
-                            addCases: true, addDefaultCase: false,
-                            cancellationToken: c),
-                        nameof(AnalyzersResources.Add_missing_cases)),
-                    context.Diagnostics);
+                        c =>
+                            FixAsync(
+                                document,
+                                diagnostic,
+                                addCases: true,
+                                addDefaultCase: false,
+                                cancellationToken: c
+                            ),
+                        nameof(AnalyzersResources.Add_missing_cases)
+                    ),
+                    context.Diagnostics
+                );
             }
 
             if (missingDefaultCase)
@@ -79,11 +112,18 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         CodeFixesResources.Add_default_case,
-                        c => FixAsync(document, diagnostic,
-                            addCases: false, addDefaultCase: true,
-                            cancellationToken: c),
-                        nameof(CodeFixesResources.Add_default_case)),
-                    context.Diagnostics);
+                        c =>
+                            FixAsync(
+                                document,
+                                diagnostic,
+                                addCases: false,
+                                addDefaultCase: true,
+                                cancellationToken: c
+                            ),
+                        nameof(CodeFixesResources.Add_default_case)
+                    ),
+                    context.Diagnostics
+                );
             }
 
             if (missingCases && missingDefaultCase)
@@ -91,75 +131,142 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         CodeFixesResources.Add_both,
-                        c => FixAsync(document, diagnostic,
-                            addCases: true, addDefaultCase: true,
-                            cancellationToken: c),
-                        nameof(CodeFixesResources.Add_both)),
-                    context.Diagnostics);
+                        c =>
+                            FixAsync(
+                                document,
+                                diagnostic,
+                                addCases: true,
+                                addDefaultCase: true,
+                                cancellationToken: c
+                            ),
+                        nameof(CodeFixesResources.Add_both)
+                    ),
+                    context.Diagnostics
+                );
             }
 
             return Task.CompletedTask;
         }
 
         private Task<Document> FixAsync(
-            Document document, Diagnostic diagnostic,
-            bool addCases, bool addDefaultCase,
-            CancellationToken cancellationToken)
+            Document document,
+            Diagnostic diagnostic,
+            bool addCases,
+            bool addDefaultCase,
+            CancellationToken cancellationToken
+        )
         {
-            return FixAllAsync(document, ImmutableArray.Create(diagnostic),
-                addCases, addDefaultCase, cancellationToken);
+            return FixAllAsync(
+                document,
+                ImmutableArray.Create(diagnostic),
+                addCases,
+                addDefaultCase,
+                cancellationToken
+            );
         }
 
         private Task<Document> FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            bool addCases, bool addDefaultCase,
-            CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            bool addCases,
+            bool addDefaultCase,
+            CancellationToken cancellationToken
+        )
         {
-            return FixAllWithEditorAsync(document,
-                editor => FixWithEditorAsync(document, editor, diagnostics, addCases, addDefaultCase, cancellationToken),
-                cancellationToken);
+            return FixAllWithEditorAsync(
+                document,
+                editor =>
+                    FixWithEditorAsync(
+                        document,
+                        editor,
+                        diagnostics,
+                        addCases,
+                        addDefaultCase,
+                        cancellationToken
+                    ),
+                cancellationToken
+            );
         }
 
         private async Task FixWithEditorAsync(
-            Document document, SyntaxEditor editor, ImmutableArray<Diagnostic> diagnostics,
-            bool addCases, bool addDefaultCase,
-            CancellationToken cancellationToken)
+            Document document,
+            SyntaxEditor editor,
+            ImmutableArray<Diagnostic> diagnostics,
+            bool addCases,
+            bool addDefaultCase,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
                 await FixOneDiagnosticAsync(
-                    document, editor, diagnostic, addCases, addDefaultCase,
-                    diagnostics.Length == 1, cancellationToken).ConfigureAwait(false);
+                        document,
+                        editor,
+                        diagnostic,
+                        addCases,
+                        addDefaultCase,
+                        diagnostics.Length == 1,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
         private async Task FixOneDiagnosticAsync(
-            Document document, SyntaxEditor editor, Diagnostic diagnostic,
-            bool addCases, bool addDefaultCase, bool onlyOneDiagnostic,
-            CancellationToken cancellationToken)
+            Document document,
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            bool addCases,
+            bool addDefaultCase,
+            bool onlyOneDiagnostic,
+            CancellationToken cancellationToken
+        )
         {
-            var hasMissingCases = bool.Parse(diagnostic.Properties[PopulateSwitchStatementHelpers.MissingCases]!);
-            var hasMissingDefaultCase = bool.Parse(diagnostic.Properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!);
+            var hasMissingCases = bool.Parse(
+                diagnostic.Properties[PopulateSwitchStatementHelpers.MissingCases]!
+            );
+            var hasMissingDefaultCase = bool.Parse(
+                diagnostic.Properties[PopulateSwitchStatementHelpers.MissingDefaultCase]!
+            );
 
             var switchLocation = diagnostic.AdditionalLocations[0];
-            var switchNode = switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken) as TSwitchSyntax;
+            var switchNode =
+                switchLocation.FindNode(getInnermostNodeForTie: true, cancellationToken)
+                as TSwitchSyntax;
             if (switchNode == null)
                 return;
 
-            var model = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var model = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             // https://github.com/dotnet/roslyn/issues/40505
-            var switchStatement = (TSwitchOperation)model.GetOperation(switchNode, cancellationToken)!;
+            var switchStatement = (TSwitchOperation)
+                model.GetOperation(switchNode, cancellationToken)!;
 
             FixOneDiagnostic(
-                document, editor, model, addCases, addDefaultCase, onlyOneDiagnostic,
-                hasMissingCases, hasMissingDefaultCase, switchNode, switchStatement);
+                document,
+                editor,
+                model,
+                addCases,
+                addDefaultCase,
+                onlyOneDiagnostic,
+                hasMissingCases,
+                hasMissingDefaultCase,
+                switchNode,
+                switchStatement
+            );
         }
 
         protected TSwitchSyntax UpdateSwitchNode(
-            SyntaxEditor editor, SemanticModel semanticModel,
-            bool addCases, bool addDefaultCase,
-            bool hasMissingCases, bool hasMissingDefaultCase,
-            TSwitchSyntax switchNode, TSwitchOperation switchOperation)
+            SyntaxEditor editor,
+            SemanticModel semanticModel,
+            bool addCases,
+            bool addDefaultCase,
+            bool hasMissingCases,
+            bool hasMissingDefaultCase,
+            TSwitchSyntax switchNode,
+            TSwitchOperation switchOperation
+        )
         {
             var enumType = GetSwitchType(switchOperation);
             var isNullable = false;
@@ -178,7 +285,10 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             {
                 var missingArms =
                     from e in GetMissingEnumMembers(switchOperation)
-                    let caseLabel = (TMemberAccessExpression)generator.MemberAccessExpression(generator.TypeExpression(enumType), e.Name).WithAdditionalAnnotations(Simplifier.Annotation)
+                    let caseLabel = (TMemberAccessExpression)
+                        generator
+                            .MemberAccessExpression(generator.TypeExpression(enumType), e.Name)
+                            .WithAdditionalAnnotations(Simplifier.Annotation)
                     select CreateSwitchArm(generator, semanticModel.Compilation, caseLabel);
 
                 newArms.AddRange(missingArms);
@@ -203,14 +313,19 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
         protected static void AddMissingBraces(
             Document document,
             ref SyntaxNode root,
-            ref TSwitchSyntax switchNode)
+            ref TSwitchSyntax switchNode
+        )
         {
             // Parsing of the switch may have caused imbalanced braces.  i.e. the switch
             // may have consumed a brace that was intended for a higher level construct.
             // So balance the tree first, then do the switch replacement.
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             syntaxFacts.AddFirstMissingCloseBrace(
-                root, switchNode, out var newRoot, out var newSwitchNode);
+                root,
+                switchNode,
+                out var newRoot,
+                out var newSwitchNode
+            );
 
             root = newRoot;
             switchNode = newSwitchNode;
@@ -220,14 +335,21 @@ namespace Microsoft.CodeAnalysis.PopulateSwitch
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
-            CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             // If the user is performing a fix-all, then fix up all the issues we see. i.e.
             // add missing cases and missing 'default' cases for any switches we reported an
             // issue on.
-            return FixWithEditorAsync(document, editor, diagnostics,
-                addCases: true, addDefaultCase: true,
-                cancellationToken: cancellationToken);
+            return FixWithEditorAsync(
+                document,
+                editor,
+                diagnostics,
+                addCases: true,
+                addDefaultCase: true,
+                cancellationToken: cancellationToken
+            );
         }
     }
 }

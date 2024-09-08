@@ -14,8 +14,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerMultiLineStringMemberTranslator : IMemberTranslator
 {
-    private static readonly MemberInfo IsClosed
-        = typeof(MultiLineString).GetTypeInfo().GetRuntimeProperty(nameof(MultiLineString.IsClosed))!;
+    private static readonly MemberInfo IsClosed = typeof(MultiLineString)
+        .GetTypeInfo()
+        .GetRuntimeProperty(nameof(MultiLineString.IsClosed))!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -40,7 +41,8 @@ public class SqlServerMultiLineStringMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (Equals(member, IsClosed))
         {
@@ -51,7 +53,8 @@ public class SqlServerMultiLineStringMemberTranslator : IMemberTranslator
                 nullable: true,
                 instancePropagatesNullability: true,
                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                returnType);
+                returnType
+            );
         }
 
         return null;

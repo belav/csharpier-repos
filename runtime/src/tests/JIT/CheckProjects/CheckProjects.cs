@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 // Verify that jit test project files specify DebugType properly.
 // Returns error status (-1) if any project files are in error.
@@ -50,8 +50,11 @@ internal class ScanProjectFiles
 
             if (binIndex < 0)
             {
-                Console.WriteLine("No bin directory found in CORE_ROOT path `{0}`," + 
-                    " so no checking will be performed.", coreRoot);
+                Console.WriteLine(
+                    "No bin directory found in CORE_ROOT path `{0}`,"
+                        + " so no checking will be performed.",
+                    coreRoot
+                );
                 return 100;
             }
 
@@ -62,8 +65,10 @@ internal class ScanProjectFiles
         else if (args.Length != 1)
         {
             Console.WriteLine("Usage: CheckProjects [<dir>]");
-            Console.WriteLine("If optional <dir> is specified,"
-                + " all project files under <dir> will be scanned and updates will be attempted.");
+            Console.WriteLine(
+                "If optional <dir> is specified,"
+                    + " all project files under <dir> will be scanned and updates will be attempted."
+            );
             return -1;
         }
         else
@@ -71,12 +76,17 @@ internal class ScanProjectFiles
             projectRoot = args[0];
         }
 
-        Console.WriteLine("Scanning{0}projects under {1}",
-            s_tryAndFix ? " and attempting to update " : " ", projectRoot);
+        Console.WriteLine(
+            "Scanning{0}projects under {1}",
+            s_tryAndFix ? " and attempting to update " : " ",
+            projectRoot
+        );
 
         if (!Directory.Exists(projectRoot))
         {
-            Console.WriteLine("Project directory does not exist, so no checking will be performed.");
+            Console.WriteLine(
+                "Project directory does not exist, so no checking will be performed."
+            );
             return 100;
         }
 
@@ -88,11 +98,14 @@ internal class ScanProjectFiles
             {
                 ParseAndUpdateProj(f.FullName, s_tryAndFix);
             }
-
         }
 
-        Console.WriteLine("{0} projects, {1} needed fixes, {2} were fixed",
-            s_projCount, s_needsFixCount, s_fixedCount);
+        Console.WriteLine(
+            "{0} projects, {1} needed fixes, {2} were fixed",
+            s_projCount,
+            s_needsFixCount,
+            s_fixedCount
+        );
 
         // Return error status if there are unfixed projects
         return (s_needsFixCount == 0 ? 100 : -1);
@@ -106,10 +119,19 @@ internal class ScanProjectFiles
         // Guess at expected settings by looking for suffixes...
         string projFileBase = Path.GetFileNameWithoutExtension(projFile);
 
-        bool isDebugTypeTest = projFileBase.EndsWith("_d") || projFileBase.EndsWith("_do") || projFileBase.EndsWith("_dbg");
-        bool isRelTypeTest = projFileBase.EndsWith("_r") || projFileBase.EndsWith("_ro") || projFileBase.EndsWith("_rel");
+        bool isDebugTypeTest =
+            projFileBase.EndsWith("_d")
+            || projFileBase.EndsWith("_do")
+            || projFileBase.EndsWith("_dbg");
+        bool isRelTypeTest =
+            projFileBase.EndsWith("_r")
+            || projFileBase.EndsWith("_ro")
+            || projFileBase.EndsWith("_rel");
         bool isNotOptTypeTest = projFileBase.EndsWith("_r") || projFileBase.EndsWith("_d");
-        bool isOptTypeTest = projFileBase.EndsWith("_ro") || projFileBase.EndsWith("_do") || projFileBase.EndsWith("_opt");
+        bool isOptTypeTest =
+            projFileBase.EndsWith("_ro")
+            || projFileBase.EndsWith("_do")
+            || projFileBase.EndsWith("_opt");
         bool isSpecificTest = isDebugTypeTest || isRelTypeTest;
         bool updated = false;
 
@@ -117,7 +139,9 @@ internal class ScanProjectFiles
         {
             XElement root = XElement.Load(projFile);
             string nn = "{" + root.Name.NamespaceName + "}";
-            IEnumerable<XElement> props = from el in root.Descendants(nn + "PropertyGroup") select el;
+            IEnumerable<XElement> props =
+                from el in root.Descendants(nn + "PropertyGroup")
+                select el;
             bool hasReleaseCondition = false;
             bool hasDebugCondition = false;
             string oddness = null;
@@ -199,7 +223,13 @@ internal class ScanProjectFiles
                         newOptimizeVal = "False";
                     }
 
-                    if (optimizeVal != null && !optimizeVal.Equals(newOptimizeVal, StringComparison.InvariantCultureIgnoreCase))
+                    if (
+                        optimizeVal != null
+                        && !optimizeVal.Equals(
+                            newOptimizeVal,
+                            StringComparison.InvariantCultureIgnoreCase
+                        )
+                    )
                     {
                         optimizeOddness = "MultipleConflictValues";
                     }
@@ -237,10 +267,12 @@ internal class ScanProjectFiles
                 {
                     if (isRelTypeTest)
                     {
-                        if (debugVal.Equals("pdbonly", StringComparison.OrdinalIgnoreCase)
+                        if (
+                            debugVal.Equals("pdbonly", StringComparison.OrdinalIgnoreCase)
                             || debugVal.Equals("none", StringComparison.OrdinalIgnoreCase)
                             || debugVal.Equals("blank", StringComparison.OrdinalIgnoreCase)
-                            || debugVal.Equals("embedded", StringComparison.OrdinalIgnoreCase))
+                            || debugVal.Equals("embedded", StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             suffixNote = "SuffixRelOk";
                         }
@@ -287,11 +319,21 @@ internal class ScanProjectFiles
                 }
                 else if (hasReleaseCondition || hasDebugCondition)
                 {
-                    Console.WriteLine("{0} DebugType-{1}-Conditional-{2}", projFile, debugVal, suffixNote);
+                    Console.WriteLine(
+                        "{0} DebugType-{1}-Conditional-{2}",
+                        projFile,
+                        debugVal,
+                        suffixNote
+                    );
                 }
                 else
                 {
-                    Console.WriteLine("{0} DebugType-{1}-Unconditional-{2}", projFile, debugVal, suffixNote);
+                    Console.WriteLine(
+                        "{0} DebugType-{1}-Unconditional-{2}",
+                        projFile,
+                        debugVal,
+                        suffixNote
+                    );
                 }
             }
 
@@ -357,9 +399,11 @@ internal class ScanProjectFiles
                 // Fix projects that don't mention debug type at all.
                 Console.WriteLine(".... no DebugType, attempting fix ....");
 
-                XElement newPropGroup = new XElement(nn + "PropertyGroup",
+                XElement newPropGroup = new XElement(
+                    nn + "PropertyGroup",
                     new XElement(nn + "DebugType", isDebugTypeTest ? "Full" : "PdbOnly"),
-                    new XElement(nn + "Optimize", isNotOptTypeTest ? "False" : "True"));
+                    new XElement(nn + "Optimize", isNotOptTypeTest ? "False" : "True")
+                );
 
                 bestPropertyGroupNode.AddAfterSelf(newPropGroup);
 
@@ -491,7 +535,12 @@ internal class ScanProjectFiles
         if (optimizeVal != null)
         {
             string expectedOptimizeValue = isOptType.ToString();
-            if (!optimizeVal.Equals(expectedOptimizeValue, StringComparison.InvariantCultureIgnoreCase))
+            if (
+                !optimizeVal.Equals(
+                    expectedOptimizeValue,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             {
                 return true;
             }

@@ -19,7 +19,9 @@ internal sealed class StartupAnalysisBuilder
         StartupSymbols = startupSymbols;
 
 #pragma warning disable RS1024 // Compare symbols correctly
-        _analysesByType = new Dictionary<INamedTypeSymbol, List<object>>(SymbolEqualityComparer.Default);
+        _analysesByType = new Dictionary<INamedTypeSymbol, List<object>>(
+            SymbolEqualityComparer.Default
+        );
 #pragma warning restore RS1024 // Compare symbols correctly
         _lock = new object();
     }
@@ -32,9 +34,8 @@ internal sealed class StartupAnalysisBuilder
         {
             return new StartupAnalysis(
                 StartupSymbols,
-                _analysesByType.ToImmutableDictionary(
-                    k => k.Key,
-                    v => v.Value.ToImmutableArray()));
+                _analysesByType.ToImmutableDictionary(k => k.Key, v => v.Value.ToImmutableArray())
+            );
         }
     }
 

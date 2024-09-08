@@ -6,8 +6,8 @@ namespace System.IdentityModel.Tokens
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.IO;
     using System.Globalization;
+    using System.IO;
 
     public class SecurityKeyIdentifier : IEnumerable<SecurityKeyIdentifierClause>
     {
@@ -67,11 +67,15 @@ namespace System.IdentityModel.Tokens
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
             if (clause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("clause"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("clause")
+                );
             }
             this.clauses.Add(clause);
         }
@@ -85,15 +89,23 @@ namespace System.IdentityModel.Tokens
                     return this[i].CreateKey();
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.KeyIdentifierCannotCreateKey)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.KeyIdentifierCannotCreateKey))
+            );
         }
 
-        public TClause Find<TClause>() where TClause : SecurityKeyIdentifierClause
+        public TClause Find<TClause>()
+            where TClause : SecurityKeyIdentifierClause
         {
             TClause clause;
             if (!TryFind<TClause>(out clause))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.NoKeyIdentifierClauseFound, typeof(TClause)), "TClause"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.NoKeyIdentifierClauseFound, typeof(TClause)),
+                        "TClause"
+                    )
+                );
             }
             return clause;
         }
@@ -118,14 +130,20 @@ namespace System.IdentityModel.Tokens
                 writer.WriteLine("    Count = {0}{1}", this.Count, this.Count > 0 ? "," : "");
                 for (int i = 0; i < this.Count; i++)
                 {
-                    writer.WriteLine("    Clause[{0}] = {1}{2}", i, this[i], i < this.Count - 1 ? "," : "");
+                    writer.WriteLine(
+                        "    Clause[{0}] = {1}{2}",
+                        i,
+                        this[i],
+                        i < this.Count - 1 ? "," : ""
+                    );
                 }
                 writer.WriteLine("    )");
                 return writer.ToString();
             }
         }
 
-        public bool TryFind<TClause>(out TClause clause) where TClause : SecurityKeyIdentifierClause
+        public bool TryFind<TClause>(out TClause clause)
+            where TClause : SecurityKeyIdentifierClause
         {
             for (int i = 0; i < this.clauses.Count; i++)
             {
@@ -146,4 +164,3 @@ namespace System.IdentityModel.Tokens
         }
     }
 }
-

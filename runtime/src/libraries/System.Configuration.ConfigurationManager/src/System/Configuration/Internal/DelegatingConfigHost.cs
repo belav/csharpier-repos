@@ -33,12 +33,21 @@ namespace System.Configuration.Internal
             Host.Init(configRoot, hostInitParams);
         }
 
-        public virtual void InitForConfiguration(ref string locationSubPath, out string configPath,
+        public virtual void InitForConfiguration(
+            ref string locationSubPath,
+            out string configPath,
             out string locationConfigPath,
-            IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+            IInternalConfigRoot configRoot,
+            params object[] hostInitConfigurationParams
+        )
         {
-            Host.InitForConfiguration(ref locationSubPath, out configPath, out locationConfigPath, configRoot,
-                hostInitConfigurationParams);
+            Host.InitForConfiguration(
+                ref locationSubPath,
+                out configPath,
+                out locationConfigPath,
+                configRoot,
+                hostInitConfigurationParams
+            );
         }
 
         public virtual bool IsConfigRecordRequired(string configPath)
@@ -90,15 +99,28 @@ namespace System.Configuration.Internal
             return Host.OpenStreamForRead(streamName, assertPermissions);
         }
 
-        public virtual Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext)
+        public virtual Stream OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext
+        )
         {
             return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
 
-        public virtual Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext,
-            bool assertPermissions)
+        public virtual Stream OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext,
+            bool assertPermissions
+        )
         {
-            return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext, assertPermissions);
+            return Host.OpenStreamForWrite(
+                streamName,
+                templateStreamName,
+                ref writeContext,
+                assertPermissions
+            );
         }
 
         public virtual void WriteCompleted(string streamName, bool success, object writeContext)
@@ -106,7 +128,12 @@ namespace System.Configuration.Internal
             Host.WriteCompleted(streamName, success, writeContext);
         }
 
-        public virtual void WriteCompleted(string streamName, bool success, object writeContext, bool assertPermissions)
+        public virtual void WriteCompleted(
+            string streamName,
+            bool success,
+            object writeContext,
+            bool assertPermissions
+        )
         {
             Host.WriteCompleted(streamName, success, writeContext, assertPermissions);
         }
@@ -123,12 +150,18 @@ namespace System.Configuration.Internal
 
         public virtual bool SupportsChangeNotifications => Host.SupportsChangeNotifications;
 
-        public virtual object StartMonitoringStreamForChanges(string streamName, StreamChangeCallback callback)
+        public virtual object StartMonitoringStreamForChanges(
+            string streamName,
+            StreamChangeCallback callback
+        )
         {
             return Host.StartMonitoringStreamForChanges(streamName, callback);
         }
 
-        public virtual void StopMonitoringStreamForChanges(string streamName, StreamChangeCallback callback)
+        public virtual void StopMonitoringStreamForChanges(
+            string streamName,
+            StreamChangeCallback callback
+        )
         {
             Host.StopMonitoringStreamForChanges(streamName, callback);
         }
@@ -144,19 +177,34 @@ namespace System.Configuration.Internal
             return Host.IsAboveApplication(configPath);
         }
 
-        public virtual bool IsDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition)
+        public virtual bool IsDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition
+        )
         {
             return Host.IsDefinitionAllowed(configPath, allowDefinition, allowExeDefinition);
         }
 
-        public virtual void VerifyDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition, IConfigErrorInfo errorInfo)
+        public virtual void VerifyDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition,
+            IConfigErrorInfo errorInfo
+        )
         {
-            Host.VerifyDefinitionAllowed(configPath, allowDefinition, allowExeDefinition, errorInfo);
+            Host.VerifyDefinitionAllowed(
+                configPath,
+                allowDefinition,
+                allowExeDefinition,
+                errorInfo
+            );
         }
 
-        public virtual string GetConfigPathFromLocationSubPath(string configPath, string locationSubPath)
+        public virtual string GetConfigPathFromLocationSubPath(
+            string configPath,
+            string locationSubPath
+        )
         {
             return Host.GetConfigPathFromLocationSubPath(configPath, locationSubPath);
         }
@@ -181,20 +229,25 @@ namespace System.Configuration.Internal
             return Host.CreateDeprecatedConfigContext(configPath);
         }
 
-        public virtual object
-            CreateConfigurationContext(string configPath, string locationSubPath)
+        public virtual object CreateConfigurationContext(string configPath, string locationSubPath)
         {
             return Host.CreateConfigurationContext(configPath, locationSubPath);
         }
 
-        public virtual string DecryptSection(string encryptedXml, ProtectedConfigurationProvider protectionProvider,
-            ProtectedConfigurationSection protectedConfigSection)
+        public virtual string DecryptSection(
+            string encryptedXml,
+            ProtectedConfigurationProvider protectionProvider,
+            ProtectedConfigurationSection protectedConfigSection
+        )
         {
             return Host.DecryptSection(encryptedXml, protectionProvider, protectedConfigSection);
         }
 
-        public virtual string EncryptSection(string clearTextXml, ProtectedConfigurationProvider protectionProvider,
-            ProtectedConfigurationSection protectedConfigSection)
+        public virtual string EncryptSection(
+            string clearTextXml,
+            ProtectedConfigurationProvider protectionProvider,
+            ProtectedConfigurationSection protectedConfigSection
+        )
         {
             return Host.EncryptSection(clearTextXml, protectionProvider, protectedConfigSection);
         }
@@ -227,12 +280,22 @@ namespace System.Configuration.Internal
 
         public virtual bool IsTrustedConfigPath(string configPath) => true;
 
-        public virtual bool IsFullTrustSectionWithoutAptcaAllowed(IInternalConfigRecord configRecord) => true;
+        public virtual bool IsFullTrustSectionWithoutAptcaAllowed(
+            IInternalConfigRecord configRecord
+        ) => true;
 
         public virtual IDisposable Impersonate() => new DummyDisposable();
 
-        [System.ObsoleteAttribute("Code Access Security is not supported or honored by the runtime.", DiagnosticId = "SYSLIB0003", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
-        public virtual void GetRestrictedPermissions(IInternalConfigRecord configRecord, out PermissionSet permissionSet, out bool isHostReady)
+        [System.ObsoleteAttribute(
+            "Code Access Security is not supported or honored by the runtime.",
+            DiagnosticId = "SYSLIB0003",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
+        public virtual void GetRestrictedPermissions(
+            IInternalConfigRecord configRecord,
+            out PermissionSet permissionSet,
+            out bool isHostReady
+        )
         {
             permissionSet = new PermissionSet(null);
             isHostReady = true;

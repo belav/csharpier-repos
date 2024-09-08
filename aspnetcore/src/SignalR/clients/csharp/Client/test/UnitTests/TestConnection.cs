@@ -45,14 +45,26 @@ internal class TestConnection : ConnectionContext, IConnectionInherentKeepAliveF
 
     bool IConnectionInherentKeepAliveFeature.HasInherentKeepAlive => _hasInherentKeepAlive;
 
-    public TestConnection(Func<Task> onStart = null, Func<Task> onDispose = null, bool autoHandshake = true, bool hasInherentKeepAlive = false, PipeOptions pipeOptions = null)
+    public TestConnection(
+        Func<Task> onStart = null,
+        Func<Task> onDispose = null,
+        bool autoHandshake = true,
+        bool hasInherentKeepAlive = false,
+        PipeOptions pipeOptions = null
+    )
     {
         _autoHandshake = autoHandshake;
         _onStart = onStart ?? (() => Task.CompletedTask);
         _onDispose = onDispose ?? (() => Task.CompletedTask);
         _hasInherentKeepAlive = hasInherentKeepAlive;
 
-        var options = pipeOptions ?? new PipeOptions(readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options =
+            pipeOptions
+            ?? new PipeOptions(
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
 
         var pair = DuplexPipe.CreateConnectionPair(options, options);
         Application = pair.Application;
@@ -178,7 +190,9 @@ internal class TestConnection : ConnectionContext, IConnectionInherentKeepAliveF
     {
         if (!Disposed.IsCompleted)
         {
-            throw new InvalidOperationException("The connection must be stopped before this method can be used.");
+            throw new InvalidOperationException(
+                "The connection must be stopped before this method can be used."
+            );
         }
 
         var results = new List<string>();
@@ -220,4 +234,3 @@ internal class TestConnection : ConnectionContext, IConnectionInherentKeepAliveF
         return output.ToArray();
     }
 }
-

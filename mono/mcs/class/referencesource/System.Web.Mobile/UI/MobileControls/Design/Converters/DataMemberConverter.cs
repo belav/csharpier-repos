@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataMemberConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
@@ -14,8 +14,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime.InteropServices;
-    using System.Web.UI.Design;
     using System.Security.Permissions;
+    using System.Web.UI.Design;
 
     /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter"]/*' />
     /// <devdoc>
@@ -23,25 +23,30 @@ namespace System.Web.UI.Design.MobileControls.Converters
     ///       Provides design-time support for a component's DataMember properties.
     ///    </para>
     /// </devdoc>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    public class DataMemberConverter : TypeConverter 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    public class DataMemberConverter : TypeConverter
     {
-
         /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.DataMemberConverter"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.Web.UI.Design.DataFieldConverter'/>.
         ///    </para>
         /// </devdoc>
-        public DataMemberConverter() 
-        {
-        }
+        public DataMemberConverter() { }
 
         /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.CanConvertFrom"]/*' />
         /// <devdoc>
@@ -51,9 +56,9 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       using the context.
         ///    </para>
         /// </devdoc>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) 
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string)) 
+            if (sourceType == typeof(string))
             {
                 return true;
             }
@@ -66,13 +71,17 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       Converts the given object to the converter's native type.
         ///    </para>
         /// </devdoc>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
-            if (value == null) 
+            if (value == null)
             {
                 return String.Empty;
             }
-            else if (value.GetType() == typeof(string)) 
+            else if (value.GetType() == typeof(string))
             {
                 return (string)value;
             }
@@ -85,11 +94,11 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       Gets the fields present within the selected data source if information about them is available.
         ///    </para>
         /// </devdoc>
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) 
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             string[] names = null;
-            
-            if (context != null) 
+
+            if (context != null)
             {
                 IComponent component = context.Instance as IComponent;
                 if (component is IDeviceSpecificChoiceDesigner)
@@ -97,21 +106,24 @@ namespace System.Web.UI.Design.MobileControls.Converters
                     component = ((IDeviceSpecificChoiceDesigner)component).UnderlyingControl;
                 }
 
-                if (component != null) 
+                if (component != null)
                 {
                     ISite componentSite = component.Site;
-                    if (componentSite != null) 
+                    if (componentSite != null)
                     {
-                        IDesignerHost designerHost = (IDesignerHost)componentSite.GetService(typeof(IDesignerHost));
-                        if (designerHost != null) 
+                        IDesignerHost designerHost = (IDesignerHost)
+                            componentSite.GetService(typeof(IDesignerHost));
+                        if (designerHost != null)
                         {
                             IDesigner designer = designerHost.GetDesigner(component);
 
-                            if (designer is IDataSourceProvider) 
+                            if (designer is IDataSourceProvider)
                             {
-                                object dataSource = ((IDataSourceProvider)designer).GetSelectedDataSource();
+                                object dataSource = (
+                                    (IDataSourceProvider)designer
+                                ).GetSelectedDataSource();
 
-                                if (dataSource != null) 
+                                if (dataSource != null)
                                 {
                                     names = DesignTimeData.GetDataMembers(dataSource);
                                 }
@@ -119,8 +131,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
                         }
                     }
                 }
-                
-                if (names == null) 
+
+                if (names == null)
                 {
                     names = new string[0];
                 }
@@ -133,11 +145,11 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// <devdoc>
         ///    <para>
         ///       Gets a value indicating whether the collection of standard values returned from
-        ///    <see cref='System.ComponentModel.TypeConverter.GetStandardValues'/> is an exclusive 
+        ///    <see cref='System.ComponentModel.TypeConverter.GetStandardValues'/> is an exclusive
         ///       list of possible values, using the specified context.
         ///    </para>
         /// </devdoc>
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) 
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return false;
         }
@@ -149,9 +161,9 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       that can be picked from a list.
         ///    </para>
         /// </devdoc>
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) 
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
-            if (context.Instance is IComponent) 
+            if (context.Instance is IComponent)
             {
                 // We only support the dropdown in single-select mode.
                 return true;

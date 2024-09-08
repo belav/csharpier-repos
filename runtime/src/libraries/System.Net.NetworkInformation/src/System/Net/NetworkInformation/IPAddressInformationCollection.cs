@@ -9,9 +9,7 @@ namespace System.Net.NetworkInformation
     {
         private readonly List<IPAddressInformation> _addresses = new List<IPAddressInformation>();
 
-        internal IPAddressInformationCollection()
-        {
-        }
+        internal IPAddressInformationCollection() { }
 
         public virtual void CopyTo(IPAddressInformation[] array, int offset)
         {
@@ -20,18 +18,12 @@ namespace System.Net.NetworkInformation
 
         public virtual int Count
         {
-            get
-            {
-                return _addresses.Count;
-            }
+            get { return _addresses.Count; }
         }
 
         public virtual bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public virtual void Add(IPAddressInformation address)
@@ -61,10 +53,7 @@ namespace System.Net.NetworkInformation
 
         public virtual IPAddressInformation this[int index]
         {
-            get
-            {
-                return _addresses[index];
-            }
+            get { return _addresses[index]; }
         }
 
         public virtual bool Remove(IPAddressInformation address)

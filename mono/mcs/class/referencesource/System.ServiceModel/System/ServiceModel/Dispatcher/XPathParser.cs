@@ -16,7 +16,11 @@ namespace System.ServiceModel.Dispatcher
         XPathToken readToken;
         XsltContext context;
 
-        internal XPathParser(string xpath, XmlNamespaceManager namespaces, IFunctionLibrary[] functionLibraries)
+        internal XPathParser(
+            string xpath,
+            XmlNamespaceManager namespaces,
+            IFunctionLibrary[] functionLibraries
+        )
         {
             Fx.Assert(null != xpath, "");
             this.functionLibraries = functionLibraries;
@@ -155,15 +159,39 @@ namespace System.ServiceModel.Dispatcher
 
                     case XPathTokenID.Slash:
                         path = new XPathExprList();
-                        path.Add(new XPathStepExpr(new NodeSelectCriteria(QueryAxisType.Child, NodeQName.Empty, QueryNodeType.Root)));
+                        path.Add(
+                            new XPathStepExpr(
+                                new NodeSelectCriteria(
+                                    QueryAxisType.Child,
+                                    NodeQName.Empty,
+                                    QueryNodeType.Root
+                                )
+                            )
+                        );
                         break;
 
                     case XPathTokenID.DblSlash:
                         // '//' is special. If found at the start of an absolute path, it implies that the descendant-or-self axis
                         // is applied to the ROOT
                         path = new XPathExprList();
-                        path.Add(new XPathStepExpr(new NodeSelectCriteria(QueryAxisType.Child, NodeQName.Empty, QueryNodeType.Root)));
-                        path.Add(new XPathStepExpr(new NodeSelectCriteria(QueryAxisType.DescendantOrSelf, NodeQName.Empty, QueryNodeType.All)));
+                        path.Add(
+                            new XPathStepExpr(
+                                new NodeSelectCriteria(
+                                    QueryAxisType.Child,
+                                    NodeQName.Empty,
+                                    QueryNodeType.Root
+                                )
+                            )
+                        );
+                        path.Add(
+                            new XPathStepExpr(
+                                new NodeSelectCriteria(
+                                    QueryAxisType.DescendantOrSelf,
+                                    NodeQName.Empty,
+                                    QueryNodeType.All
+                                )
+                            )
+                        );
                         break;
                 }
             }
@@ -415,7 +443,13 @@ namespace System.ServiceModel.Dispatcher
                 QueryFunction fun = null;
                 for (int i = 0; i < this.functionLibraries.Length; ++i)
                 {
-                    if (null != (fun = this.functionLibraries[i].Bind(functionName.Name, functionName.Namespace, args)))
+                    if (
+                        null
+                        != (
+                            fun = this.functionLibraries[i]
+                                .Bind(functionName.Name, functionName.Namespace, args)
+                        )
+                    )
                     {
                         functionImpl = new XPathFunctionExpr(fun, args);
                         break;
@@ -432,7 +466,11 @@ namespace System.ServiceModel.Dispatcher
                     argTypes[i] = XPathXsltFunctionExpr.ConvertTypeToXslt(args[i].ReturnType);
                 }
                 string prefix = this.context.LookupPrefix(functionName.Namespace);
-                IXsltContextFunction xsltFun = this.context.ResolveFunction(prefix, functionName.Name, argTypes);
+                IXsltContextFunction xsltFun = this.context.ResolveFunction(
+                    prefix,
+                    functionName.Name,
+                    argTypes
+                );
                 if (xsltFun != null)
                 {
                     functionImpl = new XPathXsltFunctionExpr(this.context, xsltFun, args);
@@ -670,7 +708,11 @@ namespace System.ServiceModel.Dispatcher
                         this.ThrowError(QueryCompileError.InvalidLocationPath);
                     }
 
-                    XPathExpr relPathExpr = new XPathExpr(XPathExprType.RelativePath, ValueDataType.Sequence, relPath);
+                    XPathExpr relPathExpr = new XPathExpr(
+                        XPathExprType.RelativePath,
+                        ValueDataType.Sequence,
+                        relPath
+                    );
 
                     pathExpr = new XPathExpr(XPathExprType.Path, ValueDataType.Sequence);
                     pathExpr.Add(filterExpr);
@@ -686,10 +728,22 @@ namespace System.ServiceModel.Dispatcher
                         this.ThrowError(QueryCompileError.InvalidLocationPath);
                     }
 
-                    XPathExpr relPathExpr = new XPathExpr(XPathExprType.RelativePath, ValueDataType.Sequence, relPath);
+                    XPathExpr relPathExpr = new XPathExpr(
+                        XPathExprType.RelativePath,
+                        ValueDataType.Sequence,
+                        relPath
+                    );
                     pathExpr = new XPathExpr(XPathExprType.Path, ValueDataType.Sequence);
                     pathExpr.Add(filterExpr);
-                    pathExpr.Add(new XPathStepExpr(new NodeSelectCriteria(QueryAxisType.DescendantOrSelf, NodeQName.Empty, QueryNodeType.All)));
+                    pathExpr.Add(
+                        new XPathStepExpr(
+                            new NodeSelectCriteria(
+                                QueryAxisType.DescendantOrSelf,
+                                NodeQName.Empty,
+                                QueryNodeType.All
+                            )
+                        )
+                    );
                     pathExpr.Add(relPathExpr);
                 }
                 else
@@ -803,7 +857,13 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (null != this.NextToken(XPathTokenID.DblSlash))
                 {
-                    step = new XPathStepExpr(new NodeSelectCriteria(QueryAxisType.DescendantOrSelf, NodeQName.Empty, QueryNodeType.All));
+                    step = new XPathStepExpr(
+                        new NodeSelectCriteria(
+                            QueryAxisType.DescendantOrSelf,
+                            NodeQName.Empty,
+                            QueryNodeType.All
+                        )
+                    );
                     path.Add(step);
                     step = this.ParseStep();
                 }
@@ -895,13 +955,21 @@ namespace System.ServiceModel.Dispatcher
                 // No axis specifier. This could be an abbreviated step - shortcuts for 'self' or 'parent'
                 if (null != this.NextToken(XPathTokenID.Period))
                 {
-                    selectDesc = new NodeSelectCriteria(QueryAxisType.Self, NodeQName.Empty, QueryNodeType.All);
+                    selectDesc = new NodeSelectCriteria(
+                        QueryAxisType.Self,
+                        NodeQName.Empty,
+                        QueryNodeType.All
+                    );
                     abbreviatedStep = true;
                 }
                 else if (null != this.NextToken(XPathTokenID.DblPeriod))
                 {
                     // A shortcut for parent
-                    selectDesc = new NodeSelectCriteria(QueryAxisType.Parent, NodeQName.Empty, QueryNodeType.Ancestor);
+                    selectDesc = new NodeSelectCriteria(
+                        QueryAxisType.Parent,
+                        NodeQName.Empty,
+                        QueryNodeType.Ancestor
+                    );
                     abbreviatedStep = true;
                 }
                 else
@@ -933,8 +1001,10 @@ namespace System.ServiceModel.Dispatcher
 
         XPathExpr ParseUnaryExpression()
         {
-            bool negate = false, anyNegate = false;
-            for (; null != this.NextToken(XPathTokenID.Minus); anyNegate = true, negate = !negate);
+            bool negate = false,
+                anyNegate = false;
+            for (; null != this.NextToken(XPathTokenID.Minus); anyNegate = true, negate = !negate)
+                ;
             XPathExpr expr = ParseUnionExpression();
             if (expr != null)
             {
@@ -966,7 +1036,12 @@ namespace System.ServiceModel.Dispatcher
                     }
                     EnsureReturnsNodeSet(rightExpr);
 
-                    return new XPathConjunctExpr(XPathExprType.Union, ValueDataType.Sequence, leftExpr, rightExpr);
+                    return new XPathConjunctExpr(
+                        XPathExprType.Union,
+                        ValueDataType.Sequence,
+                        leftExpr,
+                        rightExpr
+                    );
                 }
             }
 
@@ -1002,7 +1077,9 @@ namespace System.ServiceModel.Dispatcher
 
         internal void ThrowError(QueryCompileError error)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(error, this.lexer.ConsumedSubstring()));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new QueryCompileException(error, this.lexer.ConsumedSubstring())
+            );
         }
 
         internal struct QName
@@ -1020,18 +1097,12 @@ namespace System.ServiceModel.Dispatcher
 
             internal string Prefix
             {
-                get
-                {
-                    return this.prefix;
-                }
+                get { return this.prefix; }
             }
 
             internal string Name
             {
-                get
-                {
-                    return this.name;
-                }
+                get { return this.name; }
             }
         }
     }

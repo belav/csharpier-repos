@@ -12,5 +12,6 @@ namespace Microsoft.Extensions.Options.Generators
         string DeclarationKeyword,
         List<string> ParentTypes,
         bool IsSynthetic,
-        IList<ValidatedModel> ModelsToValidate);
+        IList<ValidatedModel> ModelsToValidate
+    );
 }

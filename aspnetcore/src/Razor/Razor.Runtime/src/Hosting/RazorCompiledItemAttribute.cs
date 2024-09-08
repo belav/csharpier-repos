@@ -6,7 +6,11 @@ namespace Microsoft.AspNetCore.Razor.Hosting;
 /// <summary>
 /// Specifies that an assembly contains a compiled Razor asset.
 /// </summary>
-[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Assembly | AttributeTargets.Class,
+    AllowMultiple = true,
+    Inherited = false
+)]
 public sealed class RazorCompiledItemAttribute : Attribute
 {
     /// <summary>

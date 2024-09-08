@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         TXmlElementSyntax,
         TXmlElementStartTagSyntax,
         TXmlElementEndTagSyntax,
-        TDocumentationCommentTriviaSyntax>
-        (ITextUndoHistoryRegistry undoHistory) : IChainedCommandHandler<TypeCharCommandArgs>
+        TDocumentationCommentTriviaSyntax
+    >(ITextUndoHistoryRegistry undoHistory) : IChainedCommandHandler<TypeCharCommandArgs>
         where TXmlNameSyntax : SyntaxNode
         where TXmlTextSyntax : SyntaxNode
         where TXmlElementSyntax : SyntaxNode
@@ -42,10 +42,16 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         protected abstract TXmlNameSyntax GetName(TXmlElementEndTagSyntax endTag);
         protected abstract SyntaxToken GetLocalName(TXmlNameSyntax name);
 
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
-            => nextHandler();
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => nextHandler();
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             // Ensure completion and any other buffer edits happen first.
             nextHandler();
@@ -71,7 +77,12 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             if (args.TypedChar is not '>' and not '/')
                 return;
 
-            using (context.OperationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Completing_Tag))
+            using (
+                context.OperationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Completing_Tag
+                )
+            )
             {
                 var buffer = args.SubjectBuffer;
 
@@ -86,13 +97,27 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 if (!position.HasValue)
                     return;
 
-                TryCompleteTag(args.TextView, args.SubjectBuffer, document, position.Value, context.OperationContext.UserCancellationToken);
+                TryCompleteTag(
+                    args.TextView,
+                    args.SubjectBuffer,
+                    document,
+                    position.Value,
+                    context.OperationContext.UserCancellationToken
+                );
             }
         }
 
-        protected void InsertTextAndMoveCaret(ITextView textView, ITextBuffer subjectBuffer, SnapshotPoint position, string insertionText, int? finalCaretPosition)
+        protected void InsertTextAndMoveCaret(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            SnapshotPoint position,
+            string insertionText,
+            int? finalCaretPosition
+        )
         {
-            using var transaction = _undoHistory.GetHistory(textView.TextBuffer).CreateTransaction("XmlTagCompletion");
+            using var transaction = _undoHistory
+                .GetHistory(textView.TextBuffer)
+                .CreateTransaction("XmlTagCompletion");
 
             subjectBuffer.Insert(position, insertionText);
 
@@ -105,16 +130,26 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             transaction.Complete();
         }
 
-        private SyntaxToken GetLocalName(TXmlElementStartTagSyntax startTag)
-            => GetLocalName(GetName(startTag));
+        private SyntaxToken GetLocalName(TXmlElementStartTagSyntax startTag) =>
+            GetLocalName(GetName(startTag));
 
-        private SyntaxToken GetLocalName(TXmlElementEndTagSyntax startTag)
-            => GetLocalName(GetName(startTag));
+        private SyntaxToken GetLocalName(TXmlElementEndTagSyntax startTag) =>
+            GetLocalName(GetName(startTag));
 
-        private void TryCompleteTag(ITextView textView, ITextBuffer subjectBuffer, Document document, SnapshotPoint position, CancellationToken cancellationToken)
+        private void TryCompleteTag(
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            Document document,
+            SnapshotPoint position,
+            CancellationToken cancellationToken
+        )
         {
             var tree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
-            var token = tree.FindTokenOnLeftOfPosition(position, cancellationToken, includeDocumentationComments: true);
+            var token = tree.FindTokenOnLeftOfPosition(
+                position,
+                cancellationToken,
+                includeDocumentationComments: true
+            );
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxKinds = syntaxFacts.SyntaxKinds;
 
@@ -124,28 +159,46 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             if (token.RawKind == syntaxKinds.GreaterThanToken)
             {
-                if (token.Parent is not TXmlElementStartTagSyntax parentStartTag ||
-                    parentStartTag.Parent is not TXmlElementSyntax parentElement)
+                if (
+                    token.Parent is not TXmlElementStartTagSyntax parentStartTag
+                    || parentStartTag.Parent is not TXmlElementSyntax parentElement
+                )
                 {
                     return;
                 }
 
                 // Slightly special case: <blah><blah$$</blah>
-                // If we already have a matching end tag and we're parented by 
-                // an xml element with the same start tag and a missing/non-matching end tag, 
+                // If we already have a matching end tag and we're parented by
+                // an xml element with the same start tag and a missing/non-matching end tag,
                 // do completion anyway. Generally, if this is the case, we have to walk
                 // up the parent elements until we find an unmatched start tag.
 
-                if (GetLocalName(parentStartTag).ValueText.Length > 0 && HasMatchingEndTag(parentElement))
+                if (
+                    GetLocalName(parentStartTag).ValueText.Length > 0
+                    && HasMatchingEndTag(parentElement)
+                )
                 {
                     if (HasUnmatchedIdenticalParent(parentElement))
                     {
-                        InsertTextAndMoveCaret(textView, subjectBuffer, position, "</" + GetLocalName(parentStartTag).ValueText + ">", position);
+                        InsertTextAndMoveCaret(
+                            textView,
+                            subjectBuffer,
+                            position,
+                            "</" + GetLocalName(parentStartTag).ValueText + ">",
+                            position
+                        );
                         return;
                     }
                 }
 
-                CheckNameAndInsertText(textView, subjectBuffer, position, parentElement, position.Position, "</{0}>");
+                CheckNameAndInsertText(
+                    textView,
+                    subjectBuffer,
+                    position,
+                    parentElement,
+                    position.Position,
+                    "</{0}>"
+                );
             }
             else if (token.RawKind == syntaxKinds.LessThanSlashToken)
             {
@@ -154,13 +207,24 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 // /// </summary>
                 // We need to check for non-trivia XML text tokens after $$ that match the expected end tag text.
 
-                if (token.Parent is TXmlElementEndTagSyntax { Parent: TXmlElementSyntax parentElement })
+                if (
+                    token.Parent is TXmlElementEndTagSyntax
+                    {
+                        Parent: TXmlElementSyntax parentElement
+                    }
+                )
                 {
                     var startTag = GetStartTag(parentElement);
-                    if (startTag != null &&
-                        !HasFollowingEndTagTrivia(startTag, token))
+                    if (startTag != null && !HasFollowingEndTagTrivia(startTag, token))
                     {
-                        CheckNameAndInsertText(textView, subjectBuffer, position, parentElement, null, "{0}>");
+                        CheckNameAndInsertText(
+                            textView,
+                            subjectBuffer,
+                            position,
+                            parentElement,
+                            null,
+                            "{0}>"
+                        );
                     }
                 }
             }
@@ -168,7 +232,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
         private bool HasFollowingEndTagTrivia(
             TXmlElementStartTagSyntax startTag,
-            SyntaxToken lessThanSlashToken)
+            SyntaxToken lessThanSlashToken
+        )
         {
             var tagName = GetLocalName(startTag).ValueText;
             var expectedEndTagText = "</" + tagName + ">";
@@ -182,8 +247,10 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 token = token.GetNextToken(includeDocumentationComments: true);
             }
 
-            if (token.Parent is TXmlElementEndTagSyntax endTag &&
-                GetLocalName(endTag).ValueText == tagName)
+            if (
+                token.Parent is TXmlElementEndTagSyntax endTag
+                && GetLocalName(endTag).ValueText == tagName
+            )
             {
                 return true;
             }
@@ -196,7 +263,10 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             if (parentElement.Parent is TXmlElementSyntax grandParentElement)
             {
                 var parentStartTag = GetStartTag(parentElement);
-                if (GetLocalName(GetStartTag(grandParentElement)).ValueText == GetLocalName(parentStartTag).ValueText)
+                if (
+                    GetLocalName(GetStartTag(grandParentElement)).ValueText
+                    == GetLocalName(parentStartTag).ValueText
+                )
                 {
                     if (HasMatchingEndTag(grandParentElement))
                     {
@@ -214,9 +284,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         {
             var startTag = GetStartTag(parentElement);
             var endTag = GetEndTag(parentElement);
-            return endTag != null &&
-                !endTag.IsMissing &&
-                GetLocalName(endTag).ValueText == GetLocalName(startTag).ValueText;
+            return endTag != null
+                && !endTag.IsMissing
+                && GetLocalName(endTag).ValueText == GetLocalName(startTag).ValueText;
         }
 
         private void CheckNameAndInsertText(
@@ -225,7 +295,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             SnapshotPoint position,
             TXmlElementSyntax parentElement,
             int? finalCaretPosition,
-            string formatString)
+            string formatString
+        )
         {
             var startTag = GetStartTag(parentElement);
             var endTag = GetEndTag(parentElement);
@@ -234,10 +305,15 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
             var elementName = GetLocalName(startTag).ValueText;
 
-            if (elementName.Length > 0 &&
-                GetLocalName(endTag).ValueText != elementName)
+            if (elementName.Length > 0 && GetLocalName(endTag).ValueText != elementName)
             {
-                InsertTextAndMoveCaret(textView, subjectBuffer, position, string.Format(formatString, elementName), finalCaretPosition);
+                InsertTextAndMoveCaret(
+                    textView,
+                    subjectBuffer,
+                    position,
+                    string.Format(formatString, elementName),
+                    finalCaretPosition
+                );
             }
         }
     }

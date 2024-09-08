@@ -32,7 +32,12 @@ public static class WebRenderTreeBuilderExtensions
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="eventName">The name of the event to be affected.</param>
     /// <param name="value">True if the default action is to be prevented, otherwise false.</param>
-    public static void AddEventPreventDefaultAttribute(this RenderTreeBuilder builder, int sequence, string eventName, bool value)
+    public static void AddEventPreventDefaultAttribute(
+        this RenderTreeBuilder builder,
+        int sequence,
+        string eventName,
+        bool value
+    )
     {
         builder.AddAttribute(sequence, $"__internal_preventDefault_{eventName}", value);
     }
@@ -45,7 +50,12 @@ public static class WebRenderTreeBuilderExtensions
     /// <param name="sequence">An integer that represents the position of the instruction in the source code.</param>
     /// <param name="eventName">The name of the event to be affected.</param>
     /// <param name="value">True if propagation should be stopped here, otherwise false.</param>
-    public static void AddEventStopPropagationAttribute(this RenderTreeBuilder builder, int sequence, string eventName, bool value)
+    public static void AddEventStopPropagationAttribute(
+        this RenderTreeBuilder builder,
+        int sequence,
+        string eventName,
+        bool value
+    )
     {
         builder.AddAttribute(sequence, $"__internal_stopPropagation_{eventName}", value);
     }

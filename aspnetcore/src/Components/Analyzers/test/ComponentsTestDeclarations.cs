@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Components.Analyzers;
 
 public static class ComponentsTestDeclarations
 {
-    public static readonly string Source = $@"
+    public static readonly string Source =
+        $@"
     namespace {typeof(ParameterAttribute).Namespace}
     {{
         public class {typeof(ParameterAttribute).Name} : System.Attribute

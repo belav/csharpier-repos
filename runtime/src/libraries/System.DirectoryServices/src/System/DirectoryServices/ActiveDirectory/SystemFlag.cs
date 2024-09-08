@@ -6,6 +6,6 @@ namespace System.DirectoryServices.ActiveDirectory
     internal enum SystemFlag : int
     {
         SystemFlagNtdsNC = 1,
-        SystemFlagNtdsDomain = 2
+        SystemFlagNtdsDomain = 2,
     }
 }

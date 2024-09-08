@@ -25,7 +25,8 @@ public class RequestScopedConstraintAttribute : Attribute, IActionConstraintFact
     private Constraint CreateInstanceCore(IServiceProvider services)
     {
         var constraintType = typeof(Constraint);
-        return (Constraint)ActivatorUtilities.CreateInstance(services, typeof(Constraint), new[] { _requestId });
+        return (Constraint)
+            ActivatorUtilities.CreateInstance(services, typeof(Constraint), new[] { _requestId });
     }
 
     private class Constraint : IActionConstraint

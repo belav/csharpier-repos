@@ -20,13 +20,15 @@ public sealed class SectionOutlet : IComponent, IDisposable
     /// Gets or sets the <see cref="string"/> ID that determines which <see cref="SectionContent"/> instances will provide
     /// content to this instance.
     /// </summary>
-    [Parameter] public string? SectionName { get; set; }
+    [Parameter]
+    public string? SectionName { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="object"/> ID that determines which <see cref="SectionContent"/> instances will provide
     /// content to this instance.
     /// </summary>
-    [Parameter] public object? SectionId { get; set; }
+    [Parameter]
+    public object? SectionId { get; set; }
 
     internal IComponent? CurrentLogicalParent => _currentContentProvider;
 
@@ -44,7 +46,9 @@ public sealed class SectionOutlet : IComponent, IDisposable
 
         if (SectionName is not null && SectionId is not null)
         {
-            throw new InvalidOperationException($"{nameof(SectionOutlet)} requires that '{nameof(SectionName)}' and '{nameof(SectionId)}' cannot both have non-null values.");
+            throw new InvalidOperationException(
+                $"{nameof(SectionOutlet)} requires that '{nameof(SectionName)}' and '{nameof(SectionId)}' cannot both have non-null values."
+            );
         }
         else if (SectionName is not null)
         {
@@ -56,7 +60,9 @@ public sealed class SectionOutlet : IComponent, IDisposable
         }
         else
         {
-            throw new InvalidOperationException($"{nameof(SectionOutlet)} requires a non-null value either for '{nameof(SectionName)}' or '{nameof(SectionId)}'.");
+            throw new InvalidOperationException(
+                $"{nameof(SectionOutlet)} requires a non-null value either for '{nameof(SectionName)}' or '{nameof(SectionId)}'."
+            );
         }
 
         if (!object.Equals(identifier, _subscribedIdentifier))
@@ -100,7 +106,11 @@ public sealed class SectionOutlet : IComponent, IDisposable
 
         builder.OpenComponent<SectionOutletContentRenderer>(0);
         builder.SetKey(fragment);
-        builder.AddComponentParameter(1, SectionOutletContentRenderer.ContentParameterName, fragment);
+        builder.AddComponentParameter(
+            1,
+            SectionOutletContentRenderer.ContentParameterName,
+            fragment
+        );
         builder.CloseComponent();
     }
 

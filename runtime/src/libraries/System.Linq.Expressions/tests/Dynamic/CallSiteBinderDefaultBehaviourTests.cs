@@ -14,7 +14,11 @@ namespace System.Runtime.CompilerServices.Tests
         {
             // Adds no behavior.
 
-            public override Expression Bind(object[] args, ReadOnlyCollection<ParameterExpression> parameters, LabelTarget returnLabel)
+            public override Expression Bind(
+                object[] args,
+                ReadOnlyCollection<ParameterExpression> parameters,
+                LabelTarget returnLabel
+            )
             {
                 throw new NotImplementedException();
             }

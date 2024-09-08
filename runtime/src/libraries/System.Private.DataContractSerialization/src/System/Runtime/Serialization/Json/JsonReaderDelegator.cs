@@ -14,9 +14,7 @@ namespace System.Runtime.Serialization.Json
         private DateTimeArrayJsonHelperWithString? _dateTimeArrayHelper;
 
         public JsonReaderDelegator(XmlReader reader)
-            : base(reader)
-        {
-        }
+            : base(reader) { }
 
         public JsonReaderDelegator(XmlReader reader, DateTimeFormat? dateTimeFormat)
             : this(reader)
@@ -31,7 +29,8 @@ namespace System.Runtime.Serialization.Json
 
         internal static XmlQualifiedName ParseQualifiedName(string qname)
         {
-            string name, ns;
+            string name,
+                ns;
             if (string.IsNullOrEmpty(qname))
             {
                 name = ns = string.Empty;
@@ -78,12 +77,23 @@ namespace System.Runtime.Serialization.Json
 
             if (dictionaryReader == null)
             {
-                XmlDictionaryReader tempDictionaryReader = XmlDictionaryReader.CreateDictionaryReader(reader);
-                buffer = ByteArrayHelperWithString.Instance.ReadArray(tempDictionaryReader, JsonGlobals.itemString, string.Empty, tempDictionaryReader.Quotas.MaxArrayLength);
+                XmlDictionaryReader tempDictionaryReader =
+                    XmlDictionaryReader.CreateDictionaryReader(reader);
+                buffer = ByteArrayHelperWithString.Instance.ReadArray(
+                    tempDictionaryReader,
+                    JsonGlobals.itemString,
+                    string.Empty,
+                    tempDictionaryReader.Quotas.MaxArrayLength
+                );
             }
             else
             {
-                buffer = ByteArrayHelperWithString.Instance.ReadArray(dictionaryReader, JsonGlobals.itemString, string.Empty, dictionaryReader.Quotas.MaxArrayLength);
+                buffer = ByteArrayHelperWithString.Instance.ReadArray(
+                    dictionaryReader,
+                    JsonGlobals.itemString,
+                    string.Empty,
+                    dictionaryReader.Quotas.MaxArrayLength
+                );
             }
             return buffer;
         }
@@ -118,7 +128,10 @@ namespace System.Runtime.Serialization.Json
             return ParseJsonDate(ReadContentAsString(), _dateTimeFormat);
         }
 
-        internal static DateTime ParseJsonDate(string originalDateTimeValue, DateTimeFormat? dateTimeFormat)
+        internal static DateTime ParseJsonDate(
+            string originalDateTimeValue,
+            DateTimeFormat? dateTimeFormat
+        )
         {
             if (dateTimeFormat == null)
             {
@@ -126,7 +139,12 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                return DateTime.ParseExact(originalDateTimeValue, dateTimeFormat.FormatString, dateTimeFormat.FormatProvider, dateTimeFormat.DateTimeStyles);
+                return DateTime.ParseExact(
+                    originalDateTimeValue,
+                    dateTimeFormat.FormatString,
+                    dateTimeFormat.FormatProvider,
+                    dateTimeFormat.DateTimeStyles
+                );
             }
         }
 
@@ -146,11 +164,26 @@ namespace System.Runtime.Serialization.Json
                 dateTimeValue = originalDateTimeValue;
             }
 
-            if (string.IsNullOrEmpty(dateTimeValue) ||
-                !dateTimeValue.StartsWith(JsonGlobals.DateTimeStartGuardReader, StringComparison.Ordinal) ||
-                !dateTimeValue.EndsWith(JsonGlobals.DateTimeEndGuardReader, StringComparison.Ordinal))
+            if (
+                string.IsNullOrEmpty(dateTimeValue)
+                || !dateTimeValue.StartsWith(
+                    JsonGlobals.DateTimeStartGuardReader,
+                    StringComparison.Ordinal
+                )
+                || !dateTimeValue.EndsWith(
+                    JsonGlobals.DateTimeEndGuardReader,
+                    StringComparison.Ordinal
+                )
+            )
             {
-                throw new FormatException(SR.Format(SR.JsonInvalidDateTimeString, originalDateTimeValue, JsonGlobals.DateTimeStartGuardWriter, JsonGlobals.DateTimeEndGuardWriter));
+                throw new FormatException(
+                    SR.Format(
+                        SR.JsonInvalidDateTimeString,
+                        originalDateTimeValue,
+                        JsonGlobals.DateTimeStartGuardWriter,
+                        JsonGlobals.DateTimeEndGuardWriter
+                    )
+                );
             }
 
             ReadOnlySpan<char> ticksvalue = dateTimeValue.AsSpan(6, dateTimeValue.Length - 8);
@@ -173,9 +206,14 @@ namespace System.Runtime.Serialization.Json
             {
                 millisecondsSinceUnixEpoch = long.Parse(ticksvalue, CultureInfo.InvariantCulture);
             }
-            catch (Exception exception) when (exception is ArgumentException or FormatException or OverflowException)
+            catch (Exception exception)
+                when (exception is ArgumentException or FormatException or OverflowException)
             {
-                throw XmlExceptionHelper.CreateConversionException(ticksvalue.ToString(), "Int64", exception);
+                throw XmlExceptionHelper.CreateConversionException(
+                    ticksvalue.ToString(),
+                    "Int64",
+                    exception
+                );
             }
 
             // Convert from # milliseconds since epoch to # of 100-nanosecond units, which is what DateTime understands
@@ -189,7 +227,10 @@ namespace System.Runtime.Serialization.Json
                     case DateTimeKind.Local:
                         return dateTime.ToLocalTime();
                     case DateTimeKind.Unspecified:
-                        return DateTime.SpecifyKind(dateTime.ToLocalTime(), DateTimeKind.Unspecified);
+                        return DateTime.SpecifyKind(
+                            dateTime.ToLocalTime(),
+                            DateTimeKind.Unspecified
+                        );
                     case DateTimeKind.Utc:
                     default:
                         return dateTime;
@@ -197,7 +238,11 @@ namespace System.Runtime.Serialization.Json
             }
             catch (ArgumentException exception)
             {
-                throw XmlExceptionHelper.CreateConversionException(ticksvalue.ToString(), "DateTime", exception);
+                throw XmlExceptionHelper.CreateConversionException(
+                    ticksvalue.ToString(),
+                    "DateTime",
+                    exception
+                );
             }
         }
 
@@ -206,16 +251,30 @@ namespace System.Runtime.Serialization.Json
             return ParseJsonDate(ReadElementContentAsString(), _dateTimeFormat);
         }
 
-        internal override bool TryReadDateTimeArray(XmlObjectSerializerReadContext context,
-        XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out DateTime[]? array)
+        internal override bool TryReadDateTimeArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out DateTime[]? array
+        )
         {
-            return TryReadJsonDateTimeArray(context, itemName, itemNamespace, arrayLength, out array);
+            return TryReadJsonDateTimeArray(
+                context,
+                itemName,
+                itemNamespace,
+                arrayLength,
+                out array
+            );
         }
 
-        internal bool TryReadJsonDateTimeArray(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out DateTime[]? array)
+        internal bool TryReadJsonDateTimeArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out DateTime[]? array
+        )
         {
             if ((dictionaryReader == null) || (arrayLength != -1))
             {
@@ -223,7 +282,12 @@ namespace System.Runtime.Serialization.Json
                 return false;
             }
 
-            array = this.DateTimeArrayHelper.ReadArray(dictionaryReader, XmlDictionaryString.GetString(itemName), XmlDictionaryString.GetString(itemNamespace), GetArrayLengthQuota(context));
+            array = this.DateTimeArrayHelper.ReadArray(
+                dictionaryReader,
+                XmlDictionaryString.GetString(itemName),
+                XmlDictionaryString.GetString(itemNamespace),
+                GetArrayLengthQuota(context)
+            );
             context.IncrementItemCount(array.Length);
 
             return true;
@@ -238,19 +302,39 @@ namespace System.Runtime.Serialization.Json
                 _dateTimeFormat = dateTimeFormat;
             }
 
-            protected override int ReadArray(XmlDictionaryReader reader, string localName, string namespaceUri, DateTime[] array, int offset, int count)
+            protected override int ReadArray(
+                XmlDictionaryReader reader,
+                string localName,
+                string namespaceUri,
+                DateTime[] array,
+                int offset,
+                int count
+            )
             {
                 XmlJsonReader.CheckArray(array, offset, count);
                 int actual = 0;
-                while (actual < count && reader.IsStartElement(JsonGlobals.itemString, string.Empty))
+                while (
+                    actual < count && reader.IsStartElement(JsonGlobals.itemString, string.Empty)
+                )
                 {
-                    array[offset + actual] = JsonReaderDelegator.ParseJsonDate(reader.ReadElementContentAsString(), _dateTimeFormat);
+                    array[offset + actual] = JsonReaderDelegator.ParseJsonDate(
+                        reader.ReadElementContentAsString(),
+                        _dateTimeFormat
+                    );
                     actual++;
                 }
                 return actual;
             }
 
-            protected override void WriteArray(XmlDictionaryWriter writer, string prefix, string localName, string namespaceUri, DateTime[] array, int offset, int count)
+            protected override void WriteArray(
+                XmlDictionaryWriter writer,
+                string prefix,
+                string localName,
+                string namespaceUri,
+                DateTime[] array,
+                int offset,
+                int count
+            )
             {
                 throw NotImplemented.ByDesign;
             }
@@ -263,7 +347,12 @@ namespace System.Runtime.Serialization.Json
 
             if (string.IsNullOrEmpty(value))
             {
-                throw new XmlException(XmlObjectSerializer.TryAddLineInfo(this, SR.Format(SR.XmlInvalidConversion, value, "UInt64")));
+                throw new XmlException(
+                    XmlObjectSerializer.TryAddLineInfo(
+                        this,
+                        SR.Format(SR.XmlInvalidConversion, value, "UInt64")
+                    )
+                );
             }
 
             try
@@ -296,7 +385,12 @@ namespace System.Runtime.Serialization.Json
 
             if (string.IsNullOrEmpty(value))
             {
-                throw new XmlException(XmlObjectSerializer.TryAddLineInfo(this, SR.Format(SR.XmlInvalidConversion, value, "UInt64")));
+                throw new XmlException(
+                    XmlObjectSerializer.TryAddLineInfo(
+                        this,
+                        SR.Format(SR.XmlInvalidConversion, value, "UInt64")
+                    )
+                );
             }
 
             try

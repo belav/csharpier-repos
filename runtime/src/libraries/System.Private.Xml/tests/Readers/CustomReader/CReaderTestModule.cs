@@ -21,7 +21,12 @@ namespace System.Xml.CustomReaderTests
             var module = new CReaderTestModule();
 
             module.Init(null);
-            module.AddChild(new TCReadReader() { Attribute = new TestCase() { Name = "Read", Desc = "CustomInheritedReader" } });
+            module.AddChild(
+                new TCReadReader()
+                {
+                    Attribute = new TestCase() { Name = "Read", Desc = "CustomInheritedReader" },
+                }
+            );
 
             return module;
         }

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 public static class OpenApiRouteHandlerBuilderExtensions
 {
-    private static readonly ExcludeFromDescriptionAttribute _excludeFromDescriptionMetadataAttribute = new();
+    private static readonly ExcludeFromDescriptionAttribute _excludeFromDescriptionMetadataAttribute =
+        new();
 
     /// <summary>
     /// Adds the <see cref="IExcludeFromDescriptionMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all endpoints
@@ -22,8 +23,9 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static TBuilder ExcludeFromDescription<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
-        => builder.WithMetadata(_excludeFromDescriptionMetadataAttribute);
+    public static TBuilder ExcludeFromDescription<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder =>
+        builder.WithMetadata(_excludeFromDescriptionMetadataAttribute);
 
     /// <summary>
     /// Adds the <see cref="IExcludeFromDescriptionMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all endpoints
@@ -31,8 +33,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder ExcludeFromDescription(this RouteHandlerBuilder builder)
-        => ExcludeFromDescription<RouteHandlerBuilder>(builder);
+    public static RouteHandlerBuilder ExcludeFromDescription(this RouteHandlerBuilder builder) =>
+        ExcludeFromDescription<RouteHandlerBuilder>(builder);
 
     /// <summary>
     /// Adds an <see cref="IProducesResponseTypeMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all endpoints
@@ -50,9 +52,16 @@ public static class OpenApiRouteHandlerBuilderExtensions
         this RouteHandlerBuilder builder,
         int statusCode = StatusCodes.Status200OK,
         string? contentType = null,
-        params string[] additionalContentTypes)
+        params string[] additionalContentTypes
+    )
     {
-        return Produces(builder, statusCode, typeof(TResponse), contentType, additionalContentTypes);
+        return Produces(
+            builder,
+            statusCode,
+            typeof(TResponse),
+            contentType,
+            additionalContentTypes
+        );
     }
 
     /// <summary>
@@ -72,7 +81,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
         int statusCode,
         Type? responseType = null,
         string? contentType = null,
-        params string[] additionalContentTypes)
+        params string[] additionalContentTypes
+    )
     {
         if (responseType is Type && string.IsNullOrEmpty(contentType))
         {
@@ -81,14 +91,18 @@ public static class OpenApiRouteHandlerBuilderExtensions
 
         if (contentType is null)
         {
-            return builder.WithMetadata(new ProducesResponseTypeMetadata(statusCode, responseType ?? typeof(void)));
+            return builder.WithMetadata(
+                new ProducesResponseTypeMetadata(statusCode, responseType ?? typeof(void))
+            );
         }
 
         var contentTypes = new string[additionalContentTypes.Length + 1];
         contentTypes[0] = contentType;
         additionalContentTypes.CopyTo(contentTypes, 1);
 
-        return builder.WithMetadata(new ProducesResponseTypeMetadata(statusCode, responseType ?? typeof(void), contentTypes));
+        return builder.WithMetadata(
+            new ProducesResponseTypeMetadata(statusCode, responseType ?? typeof(void), contentTypes)
+        );
     }
 
     /// <summary>
@@ -99,7 +113,11 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="statusCode">The response status code.</param>
     /// <param name="contentType">The response content type. Defaults to "application/problem+json".</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder ProducesProblem(this RouteHandlerBuilder builder, int statusCode, string? contentType = null)
+    public static RouteHandlerBuilder ProducesProblem(
+        this RouteHandlerBuilder builder,
+        int statusCode,
+        string? contentType = null
+    )
     {
         if (string.IsNullOrEmpty(contentType))
         {
@@ -120,7 +138,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
     public static RouteHandlerBuilder ProducesValidationProblem(
         this RouteHandlerBuilder builder,
         int statusCode = StatusCodes.Status400BadRequest,
-        string? contentType = null)
+        string? contentType = null
+    )
     {
         if (string.IsNullOrEmpty(contentType))
         {
@@ -142,8 +161,9 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="tags">A collection of tags to be associated with the endpoint.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static TBuilder WithTags<TBuilder>(this TBuilder builder, params string[] tags) where TBuilder : IEndpointConventionBuilder
-        => builder.WithMetadata(new TagsAttribute(tags));
+    public static TBuilder WithTags<TBuilder>(this TBuilder builder, params string[] tags)
+        where TBuilder : IEndpointConventionBuilder =>
+        builder.WithMetadata(new TagsAttribute(tags));
 
     /// <summary>
     /// Adds the <see cref="ITagsMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all endpoints
@@ -157,8 +177,10 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="tags">A collection of tags to be associated with the endpoint.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static RouteHandlerBuilder WithTags(this RouteHandlerBuilder builder, params string[] tags)
-        => WithTags<RouteHandlerBuilder>(builder, tags);
+    public static RouteHandlerBuilder WithTags(
+        this RouteHandlerBuilder builder,
+        params string[] tags
+    ) => WithTags<RouteHandlerBuilder>(builder, tags);
 
     /// <summary>
     /// Adds <see cref="IAcceptsMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all endpoints
@@ -172,7 +194,9 @@ public static class OpenApiRouteHandlerBuilderExtensions
     public static RouteHandlerBuilder Accepts<TRequest>(
         this RouteHandlerBuilder builder,
         string contentType,
-        params string[] additionalContentTypes) where TRequest : notnull
+        params string[] additionalContentTypes
+    )
+        where TRequest : notnull
     {
         return Accepts(builder, typeof(TRequest), contentType, additionalContentTypes);
     }
@@ -191,7 +215,9 @@ public static class OpenApiRouteHandlerBuilderExtensions
         this RouteHandlerBuilder builder,
         bool isOptional,
         string contentType,
-        params string[] additionalContentTypes) where TRequest : notnull
+        params string[] additionalContentTypes
+    )
+        where TRequest : notnull
     {
         return Accepts(builder, typeof(TRequest), isOptional, contentType, additionalContentTypes);
     }
@@ -209,9 +235,16 @@ public static class OpenApiRouteHandlerBuilderExtensions
         this RouteHandlerBuilder builder,
         Type requestType,
         string contentType,
-        params string[] additionalContentTypes)
+        params string[] additionalContentTypes
+    )
     {
-        return Accepts(builder, requestType, isOptional: false, contentType, additionalContentTypes);
+        return Accepts(
+            builder,
+            requestType,
+            isOptional: false,
+            contentType,
+            additionalContentTypes
+        );
     }
 
     /// <summary>
@@ -229,7 +262,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
         Type requestType,
         bool isOptional,
         string contentType,
-        params string[] additionalContentTypes)
+        params string[] additionalContentTypes
+    )
     {
         var contentTypes = GetAllContentTypes(contentType, additionalContentTypes);
         return builder.WithMetadata(new AcceptsMetadata(contentTypes, requestType, isOptional));
@@ -242,8 +276,9 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="description">A string representing a detailed description of the endpoint.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static TBuilder WithDescription<TBuilder>(this TBuilder builder, string description) where TBuilder : IEndpointConventionBuilder
-        => builder.WithMetadata(new EndpointDescriptionAttribute(description));
+    public static TBuilder WithDescription<TBuilder>(this TBuilder builder, string description)
+        where TBuilder : IEndpointConventionBuilder =>
+        builder.WithMetadata(new EndpointDescriptionAttribute(description));
 
     /// <summary>
     /// Adds <see cref="IEndpointSummaryMetadata"/> to <see cref="EndpointBuilder.Metadata"/> for all endpoints
@@ -252,8 +287,9 @@ public static class OpenApiRouteHandlerBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="summary">A string representing a brief description of the endpoint.</param>
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
-    public static TBuilder WithSummary<TBuilder>(this TBuilder builder, string summary) where TBuilder : IEndpointConventionBuilder
-        => builder.WithMetadata(new EndpointSummaryAttribute(summary));
+    public static TBuilder WithSummary<TBuilder>(this TBuilder builder, string summary)
+        where TBuilder : IEndpointConventionBuilder =>
+        builder.WithMetadata(new EndpointSummaryAttribute(summary));
 
     private static string[] GetAllContentTypes(string contentType, string[] additionalContentTypes)
     {

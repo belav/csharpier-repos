@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -22,7 +22,7 @@ namespace System.Diagnostics.Tests
             finally
             {
                 EventLog.DeleteEventSource(source);
-                Helpers.Retry(() => EventLog.Delete(log));  // unlike other tests, throw if delete fails
+                Helpers.Retry(() => EventLog.Delete(log)); // unlike other tests, throw if delete fails
             }
 
             Assert.False(EventLog.SourceExists(source));
@@ -69,7 +69,9 @@ namespace System.Diagnostics.Tests
             {
                 EventLog.CreateEventSource(firstSource, firstLog);
                 Assert.True(EventLog.SourceExists(firstSource));
-                Assert.Throws<ArgumentException>(() => EventLog.CreateEventSource(secondSource, secondLog));
+                Assert.Throws<ArgumentException>(
+                    () => EventLog.CreateEventSource(secondSource, secondLog)
+                );
             }
             finally
             {
@@ -98,7 +100,9 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
         public void DeleteUnregisteredSource()
         {
-            Assert.Throws<ArgumentException>(() => EventLog.DeleteEventSource(Guid.NewGuid().ToString("N")));
+            Assert.Throws<ArgumentException>(
+                () => EventLog.DeleteEventSource(Guid.NewGuid().ToString("N"))
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]

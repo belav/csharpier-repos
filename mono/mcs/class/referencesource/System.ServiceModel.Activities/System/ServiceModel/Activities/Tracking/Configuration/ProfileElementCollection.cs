@@ -7,10 +7,12 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     using System.Configuration;
     using System.Runtime;
 
-    [ConfigurationCollection(typeof(ProfileElement),
+    [ConfigurationCollection(
+        typeof(ProfileElement),
         AddItemName = TrackingConfigurationStrings.TrackingProfile,
         RemoveItemName = TrackingConfigurationStrings.Remove,
-        ClearItemsName = TrackingConfigurationStrings.Clear)]
+        ClearItemsName = TrackingConfigurationStrings.Clear
+    )]
     [Fx.Tag.XamlVisible(false)]
     public sealed class ProfileElementCollection : TrackingConfigurationCollection<ProfileElement>
     {

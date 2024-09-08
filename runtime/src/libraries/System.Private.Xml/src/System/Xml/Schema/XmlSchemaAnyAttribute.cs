@@ -27,7 +27,6 @@ namespace System.Xml.Schema
             set { _processContents = value; }
         }
 
-
         [XmlIgnore]
         internal NamespaceList? NamespaceList
         {
@@ -37,7 +36,12 @@ namespace System.Xml.Schema
         [XmlIgnore]
         internal XmlSchemaContentProcessing ProcessContentsCorrect
         {
-            get { return _processContents == XmlSchemaContentProcessing.None ? XmlSchemaContentProcessing.Strict : _processContents; }
+            get
+            {
+                return _processContents == XmlSchemaContentProcessing.None
+                    ? XmlSchemaContentProcessing.Strict
+                    : _processContents;
+            }
         }
 
         internal void BuildNamespaceList(string? targetNamespace)
@@ -74,9 +78,17 @@ namespace System.Xml.Schema
             return NamespaceList.IsSubset(sub.NamespaceList!, super.NamespaceList!);
         }
 
-        internal static XmlSchemaAnyAttribute? Intersection(XmlSchemaAnyAttribute o1, XmlSchemaAnyAttribute o2, bool v1Compat)
+        internal static XmlSchemaAnyAttribute? Intersection(
+            XmlSchemaAnyAttribute o1,
+            XmlSchemaAnyAttribute o2,
+            bool v1Compat
+        )
         {
-            NamespaceList? nsl = NamespaceList.Intersection(o1.NamespaceList!, o2.NamespaceList!, v1Compat);
+            NamespaceList? nsl = NamespaceList.Intersection(
+                o1.NamespaceList!,
+                o2.NamespaceList!,
+                v1Compat
+            );
             if (nsl != null)
             {
                 XmlSchemaAnyAttribute anyAttribute = new XmlSchemaAnyAttribute();
@@ -92,9 +104,17 @@ namespace System.Xml.Schema
             }
         }
 
-        internal static XmlSchemaAnyAttribute? Union(XmlSchemaAnyAttribute o1, XmlSchemaAnyAttribute o2, bool v1Compat)
+        internal static XmlSchemaAnyAttribute? Union(
+            XmlSchemaAnyAttribute o1,
+            XmlSchemaAnyAttribute o2,
+            bool v1Compat
+        )
         {
-            NamespaceList? nsl = NamespaceList.Union(o1.NamespaceList!, o2.NamespaceList!, v1Compat);
+            NamespaceList? nsl = NamespaceList.Union(
+                o1.NamespaceList!,
+                o2.NamespaceList!,
+                v1Compat
+            );
             if (nsl != null)
             {
                 XmlSchemaAnyAttribute anyAttribute = new XmlSchemaAnyAttribute();

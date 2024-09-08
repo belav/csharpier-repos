@@ -50,7 +50,8 @@ public sealed record ModelSourceDependencies
     public ModelSourceDependencies(
         IModelCustomizer modelCustomizer,
         IModelCacheKeyFactory modelCacheKeyFactory,
-        IMemoryCache memoryCache)
+        IMemoryCache memoryCache
+    )
     {
         ModelCustomizer = modelCustomizer;
         ModelCacheKeyFactory = modelCacheKeyFactory;

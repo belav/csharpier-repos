@@ -18,32 +18,38 @@ using Microsoft.Web.Infrastructure.DynamicValidationHelper;
 namespace System.Web.Mvc
 {
     [SuppressMessage(
-        "Microsoft.Maintainability", 
+        "Microsoft.Maintainability",
         "CA1506:AvoidExcessiveClassCoupling",
-        Justification = "This class has to work with both traditional and direct routing, which is the cause of the high" +
-        "number of classes it uses.")]
+        Justification = "This class has to work with both traditional and direct routing, which is the cause of the high"
+            + "number of classes it uses."
+    )]
     public class ControllerActionInvoker : IActionInvoker
     {
-        private static readonly ControllerDescriptorCache _staticDescriptorCache = new ControllerDescriptorCache();
+        private static readonly ControllerDescriptorCache _staticDescriptorCache =
+            new ControllerDescriptorCache();
 
         private ModelBinderDictionary _binders;
-        private Func<ControllerContext, ActionDescriptor, IEnumerable<Filter>> _getFiltersThunk = FilterProviders.Providers.GetFilters;
+        private Func<ControllerContext, ActionDescriptor, IEnumerable<Filter>> _getFiltersThunk =
+            FilterProviders.Providers.GetFilters;
         private ControllerDescriptorCache _instanceDescriptorCache;
 
-        public ControllerActionInvoker()
-        {
-        }
+        public ControllerActionInvoker() { }
 
         internal ControllerActionInvoker(params object[] filters)
             : this()
         {
             if (filters != null)
             {
-                _getFiltersThunk = (cc, ad) => filters.Select(f => new Filter(f, FilterScope.Action, null));
+                _getFiltersThunk = (cc, ad) =>
+                    filters.Select(f => new Filter(f, FilterScope.Action, null));
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Property is settable so that the dictionary can be provided for unit testing purposes.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Property is settable so that the dictionary can be provided for unit testing purposes."
+        )]
         protected internal ModelBinderDictionary Binders
         {
             get
@@ -70,30 +76,45 @@ namespace System.Web.Mvc
             set { _instanceDescriptorCache = value; }
         }
 
-        protected virtual ActionResult CreateActionResult(ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue)
+        protected virtual ActionResult CreateActionResult(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor,
+            object actionReturnValue
+        )
         {
             if (actionReturnValue == null)
             {
                 return new EmptyResult();
             }
 
-            ActionResult actionResult = (actionReturnValue as ActionResult) ??
-                                        new ContentResult { Content = Convert.ToString(actionReturnValue, CultureInfo.InvariantCulture) };
+            ActionResult actionResult =
+                (actionReturnValue as ActionResult)
+                ?? new ContentResult
+                {
+                    Content = Convert.ToString(actionReturnValue, CultureInfo.InvariantCulture),
+                };
             return actionResult;
         }
 
-        protected virtual ControllerDescriptor GetControllerDescriptor(ControllerContext controllerContext)
+        protected virtual ControllerDescriptor GetControllerDescriptor(
+            ControllerContext controllerContext
+        )
         {
             // Frequently called, so ensure delegate is static
             Type controllerType = controllerContext.Controller.GetType();
             ControllerDescriptor controllerDescriptor = DescriptorCache.GetDescriptor(
                 controllerType: controllerType,
                 creator: (Type innerType) => new ReflectedControllerDescriptor(innerType),
-                state: controllerType);
+                state: controllerType
+            );
             return controllerDescriptor;
         }
 
-        protected virtual ActionDescriptor FindAction(ControllerContext controllerContext, ControllerDescriptor controllerDescriptor, string actionName)
+        protected virtual ActionDescriptor FindAction(
+            ControllerContext controllerContext,
+            ControllerDescriptor controllerDescriptor,
+            string actionName
+        )
         {
             Contract.Assert(controllerContext != null);
             Contract.Assert(controllerContext.RouteData != null);
@@ -103,7 +124,10 @@ namespace System.Web.Mvc
             {
                 List<DirectRouteCandidate> candidates = GetDirectRouteCandidates(controllerContext);
 
-                DirectRouteCandidate bestCandidate = DirectRouteCandidate.SelectBestCandidate(candidates, controllerContext);
+                DirectRouteCandidate bestCandidate = DirectRouteCandidate.SelectBestCandidate(
+                    candidates,
+                    controllerContext
+                );
                 if (bestCandidate == null)
                 {
                     return null;
@@ -116,19 +140,26 @@ namespace System.Web.Mvc
                     controllerContext.RequestContext.RouteData = bestCandidate.RouteData;
 
                     // We need to remove any optional parameters that haven't gotten a value (See MvcHandler)
-                    bestCandidate.RouteData.Values.RemoveFromDictionary((entry) => entry.Value == UrlParameter.Optional);
+                    bestCandidate.RouteData.Values.RemoveFromDictionary(
+                        (entry) => entry.Value == UrlParameter.Optional
+                    );
 
                     return bestCandidate.ActionDescriptor;
                 }
             }
             else
             {
-                ActionDescriptor actionDescriptor = controllerDescriptor.FindAction(controllerContext, actionName);
+                ActionDescriptor actionDescriptor = controllerDescriptor.FindAction(
+                    controllerContext,
+                    actionName
+                );
                 return actionDescriptor;
             }
         }
 
-        private static List<DirectRouteCandidate> GetDirectRouteCandidates(ControllerContext controllerContext)
+        private static List<DirectRouteCandidate> GetDirectRouteCandidates(
+            ControllerContext controllerContext
+        )
         {
             Debug.Assert(controllerContext != null);
             Debug.Assert(controllerContext.RouteData != null);
@@ -143,31 +174,38 @@ namespace System.Web.Mvc
                     continue;
                 }
 
-                ControllerDescriptor controllerDescriptor = directRoute.GetTargetControllerDescriptor();
+                ControllerDescriptor controllerDescriptor =
+                    directRoute.GetTargetControllerDescriptor();
                 if (controllerDescriptor == null)
                 {
-                    throw new InvalidOperationException(MvcResources.DirectRoute_MissingControllerDescriptor);
+                    throw new InvalidOperationException(
+                        MvcResources.DirectRoute_MissingControllerDescriptor
+                    );
                 }
 
                 ActionDescriptor[] actionDescriptors = directRoute.GetTargetActionDescriptors();
                 if (actionDescriptors == null || actionDescriptors.Length == 0)
                 {
-                    throw new InvalidOperationException(MvcResources.DirectRoute_MissingActionDescriptors);
+                    throw new InvalidOperationException(
+                        MvcResources.DirectRoute_MissingActionDescriptors
+                    );
                 }
 
                 foreach (var actionDescriptor in actionDescriptors)
                 {
                     if (actionDescriptor != null)
                     {
-                        candiates.Add(new DirectRouteCandidate()
-                        {
-                            ActionDescriptor = actionDescriptor,
-                            ActionNameSelectors = actionDescriptor.GetNameSelectors(),
-                            ActionSelectors = actionDescriptor.GetSelectors(),
-                            Order = directRoute.GetOrder(),
-                            Precedence = directRoute.GetPrecedence(),
-                            RouteData = directRoute,
-                        });
+                        candiates.Add(
+                            new DirectRouteCandidate()
+                            {
+                                ActionDescriptor = actionDescriptor,
+                                ActionNameSelectors = actionDescriptor.GetNameSelectors(),
+                                ActionSelectors = actionDescriptor.GetSelectors(),
+                                Order = directRoute.GetOrder(),
+                                Precedence = directRoute.GetPrecedence(),
+                                RouteData = directRoute,
+                            }
+                        );
                     }
                 }
             }
@@ -175,7 +213,10 @@ namespace System.Web.Mvc
             return candiates;
         }
 
-        protected virtual FilterInfo GetFilters(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+        protected virtual FilterInfo GetFilters(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
             return new FilterInfo(_getFiltersThunk(controllerContext, actionDescriptor));
         }
@@ -183,41 +224,57 @@ namespace System.Web.Mvc
         private IModelBinder GetModelBinder(ParameterDescriptor parameterDescriptor)
         {
             // look on the parameter itself, then look in the global table
-            return parameterDescriptor.BindingInfo.Binder ?? Binders.GetBinder(parameterDescriptor.ParameterType);
+            return parameterDescriptor.BindingInfo.Binder
+                ?? Binders.GetBinder(parameterDescriptor.ParameterType);
         }
 
-        protected virtual object GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+        protected virtual object GetParameterValue(
+            ControllerContext controllerContext,
+            ParameterDescriptor parameterDescriptor
+        )
         {
             // collect all of the necessary binding properties
             Type parameterType = parameterDescriptor.ParameterType;
             IModelBinder binder = GetModelBinder(parameterDescriptor);
             IValueProvider valueProvider = controllerContext.Controller.ValueProvider;
-            string parameterName = parameterDescriptor.BindingInfo.Prefix ?? parameterDescriptor.ParameterName;
+            string parameterName =
+                parameterDescriptor.BindingInfo.Prefix ?? parameterDescriptor.ParameterName;
             Predicate<string> propertyFilter = GetPropertyFilter(parameterDescriptor);
 
             // finally, call into the binder
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 FallbackToEmptyPrefix = (parameterDescriptor.BindingInfo.Prefix == null), // only fall back if prefix not specified
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(null, parameterType),
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    null,
+                    parameterType
+                ),
                 ModelName = parameterName,
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = propertyFilter,
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
 
             object result = binder.BindModel(controllerContext, bindingContext);
             return result ?? parameterDescriptor.DefaultValue;
         }
 
-        protected virtual IDictionary<string, object> GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+        protected virtual IDictionary<string, object> GetParameterValues(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor
+        )
         {
-            Dictionary<string, object> parametersDict = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, object> parametersDict = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
             ParameterDescriptor[] parameterDescriptors = actionDescriptor.GetParameters();
 
             foreach (ParameterDescriptor parameterDescriptor in parameterDescriptors)
             {
-                parametersDict[parameterDescriptor.ParameterName] = GetParameterValue(controllerContext, parameterDescriptor);
+                parametersDict[parameterDescriptor.ParameterName] = GetParameterValue(
+                    controllerContext,
+                    parameterDescriptor
+                );
             }
             return parametersDict;
         }
@@ -225,7 +282,12 @@ namespace System.Web.Mvc
         private static Predicate<string> GetPropertyFilter(ParameterDescriptor parameterDescriptor)
         {
             ParameterBindingInfo bindingInfo = parameterDescriptor.BindingInfo;
-            return propertyName => BindAttribute.IsPropertyAllowed(propertyName, bindingInfo.Include, bindingInfo.Exclude);
+            return propertyName =>
+                BindAttribute.IsPropertyAllowed(
+                    propertyName,
+                    bindingInfo.Include,
+                    bindingInfo.Exclude
+                );
         }
 
         public virtual bool InvokeAction(ControllerContext controllerContext, string actionName)
@@ -236,13 +298,20 @@ namespace System.Web.Mvc
             }
 
             Contract.Assert(controllerContext.RouteData != null);
-            if (String.IsNullOrEmpty(actionName) && !controllerContext.RouteData.HasDirectRouteMatch())
+            if (
+                String.IsNullOrEmpty(actionName)
+                && !controllerContext.RouteData.HasDirectRouteMatch()
+            )
             {
                 throw new ArgumentException(MvcResources.Common_NullOrEmpty, "actionName");
             }
 
             ControllerDescriptor controllerDescriptor = GetControllerDescriptor(controllerContext);
-            ActionDescriptor actionDescriptor = FindAction(controllerContext, controllerDescriptor, actionName);
+            ActionDescriptor actionDescriptor = FindAction(
+                controllerContext,
+                controllerDescriptor,
+                actionName
+            );
 
             if (actionDescriptor != null)
             {
@@ -250,30 +319,52 @@ namespace System.Web.Mvc
 
                 try
                 {
-                    AuthenticationContext authenticationContext = InvokeAuthenticationFilters(controllerContext, filterInfo.AuthenticationFilters, actionDescriptor);
+                    AuthenticationContext authenticationContext = InvokeAuthenticationFilters(
+                        controllerContext,
+                        filterInfo.AuthenticationFilters,
+                        actionDescriptor
+                    );
 
                     if (authenticationContext.Result != null)
                     {
                         // An authentication filter signaled that we should short-circuit the request. Let all
                         // authentication filters contribute to an action result (to combine authentication
                         // challenges). Then, run this action result.
-                        AuthenticationChallengeContext challengeContext = InvokeAuthenticationFiltersChallenge(
-                            controllerContext, filterInfo.AuthenticationFilters, actionDescriptor,
-                            authenticationContext.Result);
-                        InvokeActionResult(controllerContext, challengeContext.Result ?? authenticationContext.Result);
+                        AuthenticationChallengeContext challengeContext =
+                            InvokeAuthenticationFiltersChallenge(
+                                controllerContext,
+                                filterInfo.AuthenticationFilters,
+                                actionDescriptor,
+                                authenticationContext.Result
+                            );
+                        InvokeActionResult(
+                            controllerContext,
+                            challengeContext.Result ?? authenticationContext.Result
+                        );
                     }
                     else
                     {
-                        AuthorizationContext authorizationContext = InvokeAuthorizationFilters(controllerContext, filterInfo.AuthorizationFilters, actionDescriptor);
+                        AuthorizationContext authorizationContext = InvokeAuthorizationFilters(
+                            controllerContext,
+                            filterInfo.AuthorizationFilters,
+                            actionDescriptor
+                        );
                         if (authorizationContext.Result != null)
                         {
                             // An authorization filter signaled that we should short-circuit the request. Let all
                             // authentication filters contribute to an action result (to combine authentication
                             // challenges). Then, run this action result.
-                            AuthenticationChallengeContext challengeContext = InvokeAuthenticationFiltersChallenge(
-                                controllerContext, filterInfo.AuthenticationFilters, actionDescriptor,
-                                authorizationContext.Result);
-                            InvokeActionResult(controllerContext, challengeContext.Result ?? authorizationContext.Result);
+                            AuthenticationChallengeContext challengeContext =
+                                InvokeAuthenticationFiltersChallenge(
+                                    controllerContext,
+                                    filterInfo.AuthenticationFilters,
+                                    actionDescriptor,
+                                    authorizationContext.Result
+                                );
+                            InvokeActionResult(
+                                controllerContext,
+                                challengeContext.Result ?? authorizationContext.Result
+                            );
                         }
                         else
                         {
@@ -282,17 +373,32 @@ namespace System.Web.Mvc
                                 ValidateRequest(controllerContext);
                             }
 
-                            IDictionary<string, object> parameters = GetParameterValues(controllerContext, actionDescriptor);
-                            ActionExecutedContext postActionContext = InvokeActionMethodWithFilters(controllerContext, filterInfo.ActionFilters, actionDescriptor, parameters);
+                            IDictionary<string, object> parameters = GetParameterValues(
+                                controllerContext,
+                                actionDescriptor
+                            );
+                            ActionExecutedContext postActionContext = InvokeActionMethodWithFilters(
+                                controllerContext,
+                                filterInfo.ActionFilters,
+                                actionDescriptor,
+                                parameters
+                            );
 
                             // The action succeeded. Let all authentication filters contribute to an action result (to
                             // combine authentication challenges; some authentication filters need to do negotiation
                             // even on a successful result). Then, run this action result.
-                            AuthenticationChallengeContext challengeContext = InvokeAuthenticationFiltersChallenge(
-                                controllerContext, filterInfo.AuthenticationFilters, actionDescriptor,
-                                postActionContext.Result);
-                            InvokeActionResultWithFilters(controllerContext, filterInfo.ResultFilters,
-                                challengeContext.Result ?? postActionContext.Result);
+                            AuthenticationChallengeContext challengeContext =
+                                InvokeAuthenticationFiltersChallenge(
+                                    controllerContext,
+                                    filterInfo.AuthenticationFilters,
+                                    actionDescriptor,
+                                    postActionContext.Result
+                                );
+                            InvokeActionResultWithFilters(
+                                controllerContext,
+                                filterInfo.ResultFilters,
+                                challengeContext.Result ?? postActionContext.Result
+                            );
                         }
                     }
                 }
@@ -305,7 +411,11 @@ namespace System.Web.Mvc
                 catch (Exception ex)
                 {
                     // something blew up, so execute the exception filters
-                    ExceptionContext exceptionContext = InvokeExceptionFilters(controllerContext, filterInfo.ExceptionFilters, ex);
+                    ExceptionContext exceptionContext = InvokeExceptionFilters(
+                        controllerContext,
+                        filterInfo.ExceptionFilters,
+                        ex
+                    );
                     if (!exceptionContext.ExceptionHandled)
                     {
                         throw;
@@ -320,21 +430,39 @@ namespace System.Web.Mvc
             return false;
         }
 
-        protected virtual ActionResult InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary<string, object> parameters)
+        protected virtual ActionResult InvokeActionMethod(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor,
+            IDictionary<string, object> parameters
+        )
         {
             object returnValue = actionDescriptor.Execute(controllerContext, parameters);
-            ActionResult result = CreateActionResult(controllerContext, actionDescriptor, returnValue);
+            ActionResult result = CreateActionResult(
+                controllerContext,
+                actionDescriptor,
+                returnValue
+            );
             return result;
         }
 
-        internal static ActionExecutedContext InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func<ActionExecutedContext> continuation)
+        internal static ActionExecutedContext InvokeActionMethodFilter(
+            IActionFilter filter,
+            ActionExecutingContext preContext,
+            Func<ActionExecutedContext> continuation
+        )
         {
             filter.OnActionExecuting(preContext);
             if (preContext.Result != null)
             {
-                return new ActionExecutedContext(preContext, preContext.ActionDescriptor, true /* canceled */, null /* exception */)
+                return new ActionExecutedContext(
+                    preContext,
+                    preContext.ActionDescriptor,
+                    true /* canceled */
+                    ,
+                    null /* exception */
+                )
                 {
-                    Result = preContext.Result
+                    Result = preContext.Result,
                 };
             }
 
@@ -348,14 +476,26 @@ namespace System.Web.Mvc
             {
                 // This type of exception occurs as a result of Response.Redirect(), but we special-case so that
                 // the filters don't see this as an error.
-                postContext = new ActionExecutedContext(preContext, preContext.ActionDescriptor, false /* canceled */, null /* exception */);
+                postContext = new ActionExecutedContext(
+                    preContext,
+                    preContext.ActionDescriptor,
+                    false /* canceled */
+                    ,
+                    null /* exception */
+                );
                 filter.OnActionExecuted(postContext);
                 throw;
             }
             catch (Exception ex)
             {
                 wasError = true;
-                postContext = new ActionExecutedContext(preContext, preContext.ActionDescriptor, false /* canceled */, ex);
+                postContext = new ActionExecutedContext(
+                    preContext,
+                    preContext.ActionDescriptor,
+                    false /* canceled */
+                    ,
+                    ex
+                );
                 filter.OnActionExecuted(postContext);
                 if (!postContext.ExceptionHandled)
                 {
@@ -369,27 +509,55 @@ namespace System.Web.Mvc
             return postContext;
         }
 
-        protected virtual ActionExecutedContext InvokeActionMethodWithFilters(ControllerContext controllerContext, IList<IActionFilter> filters, ActionDescriptor actionDescriptor, IDictionary<string, object> parameters)
+        protected virtual ActionExecutedContext InvokeActionMethodWithFilters(
+            ControllerContext controllerContext,
+            IList<IActionFilter> filters,
+            ActionDescriptor actionDescriptor,
+            IDictionary<string, object> parameters
+        )
         {
-            ActionExecutingContext preContext = new ActionExecutingContext(controllerContext, actionDescriptor, parameters);
+            ActionExecutingContext preContext = new ActionExecutingContext(
+                controllerContext,
+                actionDescriptor,
+                parameters
+            );
             Func<ActionExecutedContext> continuation = () =>
-                                                       new ActionExecutedContext(controllerContext, actionDescriptor, false /* canceled */, null /* exception */)
-                                                       {
-                                                           Result = InvokeActionMethod(controllerContext, actionDescriptor, parameters)
-                                                       };
+                new ActionExecutedContext(
+                    controllerContext,
+                    actionDescriptor,
+                    false /* canceled */
+                    ,
+                    null /* exception */
+                )
+                {
+                    Result = InvokeActionMethod(controllerContext, actionDescriptor, parameters),
+                };
 
             // need to reverse the filter list because the continuations are built up backward
-            Func<ActionExecutedContext> thunk = filters.Reverse().Aggregate(continuation,
-                                                                            (next, filter) => () => InvokeActionMethodFilter(filter, preContext, next));
+            Func<ActionExecutedContext> thunk = filters
+                .Reverse()
+                .Aggregate(
+                    continuation,
+                    (next, filter) => () => InvokeActionMethodFilter(filter, preContext, next)
+                );
             return thunk();
         }
 
-        protected virtual void InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+        protected virtual void InvokeActionResult(
+            ControllerContext controllerContext,
+            ActionResult actionResult
+        )
         {
             actionResult.ExecuteResult(controllerContext);
         }
 
-        private ResultExecutedContext InvokeActionResultFilterRecursive(IList<IResultFilter> filters, int filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+        private ResultExecutedContext InvokeActionResultFilterRecursive(
+            IList<IResultFilter> filters,
+            int filterIndex,
+            ResultExecutingContext preContext,
+            ControllerContext controllerContext,
+            ActionResult actionResult
+        )
         {
             // Performance-sensitive
 
@@ -404,7 +572,12 @@ namespace System.Web.Mvc
             if (filterIndex > filters.Count - 1)
             {
                 InvokeActionResult(controllerContext, actionResult);
-                return new ResultExecutedContext(controllerContext, actionResult, canceled: false, exception: null);
+                return new ResultExecutedContext(
+                    controllerContext,
+                    actionResult,
+                    canceled: false,
+                    exception: null
+                );
             }
 
             // Otherwise process the filters recursively
@@ -412,7 +585,12 @@ namespace System.Web.Mvc
             filter.OnResultExecuting(preContext);
             if (preContext.Cancel)
             {
-                return new ResultExecutedContext(preContext, preContext.Result, canceled: true, exception: null);
+                return new ResultExecutedContext(
+                    preContext,
+                    preContext.Result,
+                    canceled: true,
+                    exception: null
+                );
             }
 
             bool wasError = false;
@@ -421,20 +599,36 @@ namespace System.Web.Mvc
             {
                 // Use the filters in forward direction
                 int nextFilterIndex = filterIndex + 1;
-                postContext = InvokeActionResultFilterRecursive(filters, nextFilterIndex, preContext, controllerContext, actionResult);
+                postContext = InvokeActionResultFilterRecursive(
+                    filters,
+                    nextFilterIndex,
+                    preContext,
+                    controllerContext,
+                    actionResult
+                );
             }
             catch (ThreadAbortException)
             {
                 // This type of exception occurs as a result of Response.Redirect(), but we special-case so that
                 // the filters don't see this as an error.
-                postContext = new ResultExecutedContext(preContext, preContext.Result, canceled: false, exception: null);
+                postContext = new ResultExecutedContext(
+                    preContext,
+                    preContext.Result,
+                    canceled: false,
+                    exception: null
+                );
                 filter.OnResultExecuted(postContext);
                 throw;
             }
             catch (Exception ex)
             {
                 wasError = true;
-                postContext = new ResultExecutedContext(preContext, preContext.Result, canceled: false, exception: ex);
+                postContext = new ResultExecutedContext(
+                    preContext,
+                    preContext.Result,
+                    canceled: false,
+                    exception: ex
+                );
                 filter.OnResultExecuted(postContext);
                 if (!postContext.ExceptionHandled)
                 {
@@ -448,16 +642,32 @@ namespace System.Web.Mvc
             return postContext;
         }
 
-        protected virtual ResultExecutedContext InvokeActionResultWithFilters(ControllerContext controllerContext, IList<IResultFilter> filters, ActionResult actionResult)
+        protected virtual ResultExecutedContext InvokeActionResultWithFilters(
+            ControllerContext controllerContext,
+            IList<IResultFilter> filters,
+            ActionResult actionResult
+        )
         {
-            ResultExecutingContext preContext = new ResultExecutingContext(controllerContext, actionResult);
+            ResultExecutingContext preContext = new ResultExecutingContext(
+                controllerContext,
+                actionResult
+            );
 
             int startingFilterIndex = 0;
-            return InvokeActionResultFilterRecursive(filters, startingFilterIndex, preContext, controllerContext, actionResult);
+            return InvokeActionResultFilterRecursive(
+                filters,
+                startingFilterIndex,
+                preContext,
+                controllerContext,
+                actionResult
+            );
         }
 
-        protected virtual AuthenticationContext InvokeAuthenticationFilters(ControllerContext controllerContext,
-            IList<IAuthenticationFilter> filters, ActionDescriptor actionDescriptor)
+        protected virtual AuthenticationContext InvokeAuthenticationFilters(
+            ControllerContext controllerContext,
+            IList<IAuthenticationFilter> filters,
+            ActionDescriptor actionDescriptor
+        )
         {
             if (controllerContext == null)
             {
@@ -466,8 +676,11 @@ namespace System.Web.Mvc
 
             Contract.Assert(controllerContext.HttpContext != null);
             IPrincipal originalPrincipal = controllerContext.HttpContext.User;
-            AuthenticationContext context = new AuthenticationContext(controllerContext, actionDescriptor,
-                originalPrincipal);
+            AuthenticationContext context = new AuthenticationContext(
+                controllerContext,
+                actionDescriptor,
+                originalPrincipal
+            );
             foreach (IAuthenticationFilter filter in filters)
             {
                 filter.OnAuthentication(context);
@@ -491,11 +704,17 @@ namespace System.Web.Mvc
         }
 
         protected virtual AuthenticationChallengeContext InvokeAuthenticationFiltersChallenge(
-            ControllerContext controllerContext, IList<IAuthenticationFilter> filters,
-            ActionDescriptor actionDescriptor, ActionResult result)
+            ControllerContext controllerContext,
+            IList<IAuthenticationFilter> filters,
+            ActionDescriptor actionDescriptor,
+            ActionResult result
+        )
         {
-            AuthenticationChallengeContext context = new AuthenticationChallengeContext(controllerContext,
-                actionDescriptor, result);
+            AuthenticationChallengeContext context = new AuthenticationChallengeContext(
+                controllerContext,
+                actionDescriptor,
+                result
+            );
             foreach (IAuthenticationFilter filter in filters)
             {
                 filter.OnAuthenticationChallenge(context);
@@ -506,9 +725,16 @@ namespace System.Web.Mvc
             return context;
         }
 
-        protected virtual AuthorizationContext InvokeAuthorizationFilters(ControllerContext controllerContext, IList<IAuthorizationFilter> filters, ActionDescriptor actionDescriptor)
+        protected virtual AuthorizationContext InvokeAuthorizationFilters(
+            ControllerContext controllerContext,
+            IList<IAuthorizationFilter> filters,
+            ActionDescriptor actionDescriptor
+        )
         {
-            AuthorizationContext context = new AuthorizationContext(controllerContext, actionDescriptor);
+            AuthorizationContext context = new AuthorizationContext(
+                controllerContext,
+                actionDescriptor
+            );
             foreach (IAuthorizationFilter filter in filters)
             {
                 filter.OnAuthorization(context);
@@ -522,7 +748,11 @@ namespace System.Web.Mvc
             return context;
         }
 
-        protected virtual ExceptionContext InvokeExceptionFilters(ControllerContext controllerContext, IList<IExceptionFilter> filters, Exception exception)
+        protected virtual ExceptionContext InvokeExceptionFilters(
+            ControllerContext controllerContext,
+            IList<IExceptionFilter> filters,
+            Exception exception
+        )
         {
             ExceptionContext context = new ExceptionContext(controllerContext, exception);
             foreach (IExceptionFilter filter in filters.Reverse())
@@ -541,7 +771,7 @@ namespace System.Web.Mvc
             }
 
             // DevDiv 214040: Enable Request Validation by default for all controller requests
-            // 
+            //
             // Earlier versions of this method dereferenced Request.RawUrl to force validation of
             // that field. This was necessary for Routing before ASP.NET v4, which read the incoming
             // path from RawUrl. Request validation has been moved earlier in the pipeline by default and

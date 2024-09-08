@@ -11,5 +11,5 @@ public enum RuntimeFrameworks
     None = 0,
     Mono = 1 << 0,
     CLR = 1 << 1,
-    CoreCLR = 1 << 2
+    CoreCLR = 1 << 2,
 }

@@ -15,16 +15,21 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Venus;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.Venus
 {
-    [ExportLanguageService(typeof(IAdditionalFormattingRuleLanguageService), LanguageNames.CSharp), Shared]
-    internal class CSharpAdditionalFormattingRuleLanguageService : IAdditionalFormattingRuleLanguageService
+    [
+        ExportLanguageService(
+            typeof(IAdditionalFormattingRuleLanguageService),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
+    internal class CSharpAdditionalFormattingRuleLanguageService
+        : IAdditionalFormattingRuleLanguageService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAdditionalFormattingRuleLanguageService()
-        {
-        }
+        public CSharpAdditionalFormattingRuleLanguageService() { }
 
-        public AbstractFormattingRule GetAdditionalCodeGenerationRule()
-            => BlankLineInGeneratedMethodFormattingRule.Instance;
+        public AbstractFormattingRule GetAdditionalCodeGenerationRule() =>
+            BlankLineInGeneratedMethodFormattingRule.Instance;
     }
 }

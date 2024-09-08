@@ -20,14 +20,17 @@ namespace System.Activities.DynamicUpdate
         string activityInstanceId;
         string originalActivityId;
         string updatedActivityId;
-        string reason;       
+        string reason;
 
         public ActivityBlockingUpdate(Activity activity, string originalActivityId, string reason)
-            : this(activity, originalActivityId, reason, null)
-        {
-        }
+            : this(activity, originalActivityId, reason, null) { }
 
-        public ActivityBlockingUpdate(Activity activity, string originalActivityId, string reason, string activityInstanceId)
+        public ActivityBlockingUpdate(
+            Activity activity,
+            string originalActivityId,
+            string reason,
+            string activityInstanceId
+        )
         {
             this.activity = activity;
             this.Reason = reason;
@@ -39,12 +42,19 @@ namespace System.Activities.DynamicUpdate
             }
         }
 
-        public ActivityBlockingUpdate(string updatedActivityId, string originalActivityId, string reason)
-            : this(updatedActivityId, originalActivityId, reason, null)
-        {
-        }
+        public ActivityBlockingUpdate(
+            string updatedActivityId,
+            string originalActivityId,
+            string reason
+        )
+            : this(updatedActivityId, originalActivityId, reason, null) { }
 
-        public ActivityBlockingUpdate(string updatedActivityId, string originalActivityId, string reason, string activityInstanceId)
+        public ActivityBlockingUpdate(
+            string updatedActivityId,
+            string originalActivityId,
+            string reason,
+            string activityInstanceId
+        )
         {
             this.UpdatedActivityId = updatedActivityId;
             this.OriginalActivityId = originalActivityId;
@@ -54,58 +64,31 @@ namespace System.Activities.DynamicUpdate
 
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
-        
+
         public string ActivityInstanceId
         {
-            get
-            {
-                return this.activityInstanceId;
-            }
-            private set
-            {
-                this.activityInstanceId = value;
-            }
+            get { return this.activityInstanceId; }
+            private set { this.activityInstanceId = value; }
         }
-        
+
         public string OriginalActivityId
         {
-            get
-            {
-                return this.originalActivityId;
-            }
-            private set
-            {
-                this.originalActivityId = value;
-            }
+            get { return this.originalActivityId; }
+            private set { this.originalActivityId = value; }
         }
-        
+
         public string UpdatedActivityId
         {
-            get
-            {
-                return this.updatedActivityId;
-            }
-            private set
-            {
-                this.updatedActivityId = value;
-            }
+            get { return this.updatedActivityId; }
+            private set { this.updatedActivityId = value; }
         }
-        
+
         public string Reason
         {
-            get
-            {
-                return this.reason;
-            }
-            private set
-            {
-                this.reason = value;
-            }
+            get { return this.reason; }
+            private set { this.reason = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "ActivityInstanceId")]
@@ -136,25 +119,47 @@ namespace System.Activities.DynamicUpdate
             set { this.Reason = value; }
         }
 
-        internal static void AddBlockingActivity(ref Collection<ActivityBlockingUpdate> blockingActivities, Activity activity, string originalActivityId, string reason, string activityInstanceId)
+        internal static void AddBlockingActivity(
+            ref Collection<ActivityBlockingUpdate> blockingActivities,
+            Activity activity,
+            string originalActivityId,
+            string reason,
+            string activityInstanceId
+        )
         {
             if (blockingActivities == null)
             {
                 blockingActivities = new Collection<ActivityBlockingUpdate>();
             }
 
-            ActivityBlockingUpdate blockingActivity = new ActivityBlockingUpdate(activity, originalActivityId, reason, activityInstanceId);
+            ActivityBlockingUpdate blockingActivity = new ActivityBlockingUpdate(
+                activity,
+                originalActivityId,
+                reason,
+                activityInstanceId
+            );
             blockingActivities.Add(blockingActivity);
         }
 
-        internal static void AddBlockingActivity(ref Collection<ActivityBlockingUpdate> blockingActivities, string updatedActivityId, string originalActivityId, string reason, string activityInstanceId)
+        internal static void AddBlockingActivity(
+            ref Collection<ActivityBlockingUpdate> blockingActivities,
+            string updatedActivityId,
+            string originalActivityId,
+            string reason,
+            string activityInstanceId
+        )
         {
             if (blockingActivities == null)
             {
                 blockingActivities = new Collection<ActivityBlockingUpdate>();
             }
 
-            ActivityBlockingUpdate blockingActivity = new ActivityBlockingUpdate(updatedActivityId, originalActivityId, reason, activityInstanceId);
+            ActivityBlockingUpdate blockingActivity = new ActivityBlockingUpdate(
+                updatedActivityId,
+                originalActivityId,
+                reason,
+                activityInstanceId
+            );
             blockingActivities.Add(blockingActivity);
         }
     }

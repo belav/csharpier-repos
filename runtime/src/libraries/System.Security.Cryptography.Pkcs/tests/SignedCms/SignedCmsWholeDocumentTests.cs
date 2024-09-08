@@ -23,7 +23,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 cms.Decode(SignedDocuments.RsaPssDocument.AsSpan());
 #else
                 throw new Xunit.Sdk.XunitException(
-                    "This test should not evaluate for .NET Framework, the API is missing.");
+                    "This test should not evaluate for .NET Framework, the API is missing."
+                );
 #endif
             }
             else
@@ -46,11 +47,13 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(
                 new DateTimeOffset(2016, 3, 2, 2, 37, 54, TimeSpan.Zero),
-                new DateTimeOffset(topLevelCert.NotBefore));
+                new DateTimeOffset(topLevelCert.NotBefore)
+            );
 
             Assert.Equal(
                 new DateTimeOffset(2017, 3, 2, 2, 37, 54, TimeSpan.Zero),
-                new DateTimeOffset(topLevelCert.NotAfter));
+                new DateTimeOffset(topLevelCert.NotAfter)
+            );
 
             SignerInfoCollection signers = cms.SignerInfos;
             Assert.Single(signers);
@@ -83,32 +86,36 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Pkcs9SigningTime signingTimeAttr = (Pkcs9SigningTime)signedAttrs[1].Values[0];
             Assert.Equal(
                 new DateTimeOffset(2017, 10, 26, 1, 6, 25, TimeSpan.Zero),
-                new DateTimeOffset(signingTimeAttr.SigningTime));
+                new DateTimeOffset(signingTimeAttr.SigningTime)
+            );
 
             Pkcs9MessageDigest messageDigestAttr = (Pkcs9MessageDigest)signedAttrs[2].Values[0];
             Assert.Equal(
                 "07849DC26FCBB2F3BD5F57BDF214BAE374575F1BD4E6816482324799417CB379",
-                messageDigestAttr.MessageDigest.ByteArrayToHex());
+                messageDigestAttr.MessageDigest.ByteArrayToHex()
+            );
 
             Assert.IsType<Pkcs9AttributeObject>(signedAttrs[3].Values[0]);
 #if !NETCOREAPP
             Assert.NotSame(signedAttrs[3].Oid, signedAttrs[3].Values[0].Oid);
 #endif
             Assert.Equal(
-                "306A300B060960864801650304012A300B0609608648016503040116300B0609" +
-                    "608648016503040102300A06082A864886F70D0307300E06082A864886F70D03" +
-                    "0202020080300D06082A864886F70D0302020140300706052B0E030207300D06" +
-                    "082A864886F70D0302020128",
-                signedAttrs[3].Values[0].RawData.ByteArrayToHex());
+                "306A300B060960864801650304012A300B0609608648016503040116300B0609"
+                    + "608648016503040102300A06082A864886F70D0307300E06082A864886F70D03"
+                    + "0202020080300D06082A864886F70D0302020140300706052B0E030207300D06"
+                    + "082A864886F70D0302020128",
+                signedAttrs[3].Values[0].RawData.ByteArrayToHex()
+            );
 
 #if NETCOREAPP
             Assert.Equal(
-                "B93E81D141B3C9F159AB0021910635DC72E8E860BE43C28E5D53243D6DC247B7" +
-                    "D4F18C20195E80DEDCC75B29C43CE5047AD775B65BFC93589BD748B950C68BAD" +
-                    "DF1A4673130302BBDA8667D5DDE5EA91ECCB13A9B4C04F1C4842FEB1697B7669" +
-                    "C7692DD3BDAE13B5AA8EE3EB5679F3729D1DC4F2EB9DC89B7E8773F2F8C6108C" +
-                    "05",
-                signer.GetSignature().ByteArrayToHex());
+                "B93E81D141B3C9F159AB0021910635DC72E8E860BE43C28E5D53243D6DC247B7"
+                    + "D4F18C20195E80DEDCC75B29C43CE5047AD775B65BFC93589BD748B950C68BAD"
+                    + "DF1A4673130302BBDA8667D5DDE5EA91ECCB13A9B4C04F1C4842FEB1697B7669"
+                    + "C7692DD3BDAE13B5AA8EE3EB5679F3729D1DC4F2EB9DC89B7E8773F2F8C6108C"
+                    + "05",
+                signer.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             CryptographicAttributeObjectCollection unsignedAttrs = signer.UnsignedAttributes;
@@ -120,7 +127,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             X509Certificate2 signerCertificate = signer.Certificate;
             Assert.Equal(
                 "CN=localhost, OU=.NET Framework, O=Microsoft Corp., L=Redmond, S=Washington, C=US",
-                signerCertificate.SubjectName.Name);
+                signerCertificate.SubjectName.Name
+            );
 
             // CheckHash always throws for certificate-based signers.
             Assert.Throws<CryptographicException>(() => signer.CheckHash());
@@ -136,7 +144,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<CryptographicException>(() => cms.CheckSignature(true));
         }
 
-        [ConditionalFact(typeof(SignatureSupport), nameof(SignatureSupport.SupportsRsaSha1Signatures))]
+        [ConditionalFact(
+            typeof(SignatureSupport),
+            nameof(SignatureSupport.SupportsRsaSha1Signatures)
+        )]
         public static void ReadRsaPkcs1SimpleDocument()
         {
             SignedCms cms = new SignedCms();
@@ -148,7 +159,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             ContentInfo contentInfo = cms.ContentInfo;
 
             Assert.Equal("1.2.840.113549.1.7.1", contentInfo.ContentType.Value);
-            Assert.Equal("4D6963726F736F667420436F72706F726174696F6E", contentInfo.Content.ByteArrayToHex());
+            Assert.Equal(
+                "4D6963726F736F667420436F72706F726174696F6E",
+                contentInfo.Content.ByteArrayToHex()
+            );
 
             SignerInfoCollection signers = cms.SignerInfos;
             Assert.Single(signers);
@@ -174,11 +188,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Rsa, signer.SignatureAlgorithm.Value);
 
             Assert.Equal(
-                "5A1717621D450130B3463662160EEC06F7AE77E017DD95F294E97A0BDD433FE6" +
-                    "B2CCB34FAAC33AEA50BFD7D9E78DC7174836284619F744278AE77B8495091E09" +
-                    "6EEF682D9CA95F6E81C7DDCEDDA6A12316B453C894B5000701EB09DF57A53B73" +
-                    "3A4E80DA27FA710870BD88C86E2FDB9DCA14D18BEB2F0C87E9632ABF02BE2FE3",
-                signer.GetSignature().ByteArrayToHex());
+                "5A1717621D450130B3463662160EEC06F7AE77E017DD95F294E97A0BDD433FE6"
+                    + "B2CCB34FAAC33AEA50BFD7D9E78DC7174836284619F744278AE77B8495091E09"
+                    + "6EEF682D9CA95F6E81C7DDCEDDA6A12316B453C894B5000701EB09DF57A53B73"
+                    + "3A4E80DA27FA710870BD88C86E2FDB9DCA14D18BEB2F0C87E9632ABF02BE2FE3",
+                signer.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             CryptographicAttributeObjectCollection signedAttrs = signer.SignedAttributes;
@@ -204,7 +219,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.CheckSignature(true);
         }
 
-        [ConditionalFact(typeof(SignatureSupport), nameof(SignatureSupport.SupportsRsaSha1Signatures))]
+        [ConditionalFact(
+            typeof(SignatureSupport),
+            nameof(SignatureSupport.SupportsRsaSha1Signatures)
+        )]
         public static void ReadRsaPkcs1CounterSigned()
         {
             SignedCms cms = new SignedCms();
@@ -215,7 +233,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             ContentInfo contentInfo = cms.ContentInfo;
             Assert.Equal("1.2.840.113549.1.7.1", contentInfo.ContentType.Value);
-            Assert.Equal("4D6963726F736F667420436F72706F726174696F6E", contentInfo.Content.ByteArrayToHex());
+            Assert.Equal(
+                "4D6963726F736F667420436F72706F726174696F6E",
+                contentInfo.Content.ByteArrayToHex()
+            );
 
             SignerInfoCollection signers = cms.SignerInfos;
             Assert.Single(signers);
@@ -241,11 +262,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Rsa, signer.SignatureAlgorithm.Value);
 
             Assert.Equal(
-                "5A1717621D450130B3463662160EEC06F7AE77E017DD95F294E97A0BDD433FE6" +
-                    "B2CCB34FAAC33AEA50BFD7D9E78DC7174836284619F744278AE77B8495091E09" +
-                    "6EEF682D9CA95F6E81C7DDCEDDA6A12316B453C894B5000701EB09DF57A53B73" +
-                    "3A4E80DA27FA710870BD88C86E2FDB9DCA14D18BEB2F0C87E9632ABF02BE2FE3",
-                signer.GetSignature().ByteArrayToHex());
+                "5A1717621D450130B3463662160EEC06F7AE77E017DD95F294E97A0BDD433FE6"
+                    + "B2CCB34FAAC33AEA50BFD7D9E78DC7174836284619F744278AE77B8495091E09"
+                    + "6EEF682D9CA95F6E81C7DDCEDDA6A12316B453C894B5000701EB09DF57A53B73"
+                    + "3A4E80DA27FA710870BD88C86E2FDB9DCA14D18BEB2F0C87E9632ABF02BE2FE3",
+                signer.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             CryptographicAttributeObjectCollection signedAttrs = signer.SignedAttributes;
@@ -260,7 +282,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Single(counterSigners);
             SignerInfo counterSigner = counterSigners[0];
 
-            Assert.Equal(SubjectIdentifierType.SubjectKeyIdentifier, counterSigner.SignerIdentifier.Type);
+            Assert.Equal(
+                SubjectIdentifierType.SubjectKeyIdentifier,
+                counterSigner.SignerIdentifier.Type
+            );
 
             // Not universally true, but is in this case.
             Assert.Equal(signer.Certificate, counterSigner.Certificate);
@@ -285,7 +310,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.CheckHash();
         }
 
-        [ConditionalFact(typeof(SignatureSupport), nameof(SignatureSupport.SupportsRsaSha1Signatures))]
+        [ConditionalFact(
+            typeof(SignatureSupport),
+            nameof(SignatureSupport.SupportsRsaSha1Signatures)
+        )]
         public static void CheckNoSignatureDocument()
         {
             SignedCms cms = new SignedCms();
@@ -296,7 +324,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(
                 "4D6963726F736F667420436F72706F726174696F6E",
-                cms.ContentInfo.Content.ByteArrayToHex());
+                cms.ContentInfo.Content.ByteArrayToHex()
+            );
 
             X509Certificate2Collection cmsCerts = cms.Certificates;
             Assert.Single(cmsCerts);
@@ -316,7 +345,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(
                 "8B70D20D0477A35CD84AB962C10DC52FBA6FAD6B",
-                signer.GetSignature().ByteArrayToHex());
+                signer.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             CryptographicAttributeObjectCollection signedAttrs = signer.SignedAttributes;
@@ -333,7 +363,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Pkcs7Data, contentType.ContentType.Value);
             Assert.Equal(
                 new DateTimeOffset(2017, 11, 1, 17, 17, 17, TimeSpan.Zero),
-                signingTime.SigningTime);
+                signingTime.SigningTime
+            );
 
             Assert.Equal(DateTimeKind.Utc, signingTime.SigningTime.Kind);
 
@@ -341,7 +372,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             {
                 Assert.Equal(
                     sha1.ComputeHash(cms.ContentInfo.Content).ByteArrayToHex(),
-                    messageDigest.MessageDigest.ByteArrayToHex());
+                    messageDigest.MessageDigest.ByteArrayToHex()
+                );
             }
 
             CryptographicAttributeObjectCollection unsignedAttrs = signer.UnsignedAttributes;
@@ -353,8 +385,14 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             SignerInfo counterSigner = counterSigners[0];
             Assert.Equal(3, counterSigner.Version);
-            Assert.Equal(SubjectIdentifierType.SubjectKeyIdentifier, counterSigner.SignerIdentifier.Type);
-            Assert.Equal("6B4A6B92FDED07EE0119F3674A96D1A70D2A588D", (string)counterSigner.SignerIdentifier.Value);
+            Assert.Equal(
+                SubjectIdentifierType.SubjectKeyIdentifier,
+                counterSigner.SignerIdentifier.Type
+            );
+            Assert.Equal(
+                "6B4A6B92FDED07EE0119F3674A96D1A70D2A588D",
+                (string)counterSigner.SignerIdentifier.Value
+            );
             Assert.Equal(Oids.Sha1, counterSigner.DigestAlgorithm.Value);
 
             CryptographicAttributeObjectCollection csSignedAttrs = counterSigner.SignedAttributes;
@@ -368,17 +406,19 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Pkcs7Data, csContentType.ContentType.Value);
             Assert.Equal(
                 "833378066BDCCBA7047EF6919843D181A57D6479",
-                csMessageDigest.MessageDigest.ByteArrayToHex());
+                csMessageDigest.MessageDigest.ByteArrayToHex()
+            );
 
 #if NETCOREAPP
             Assert.Equal(Oids.Rsa, counterSigner.SignatureAlgorithm.Value);
 
             Assert.Equal(
-                "2155D226DD744166E582D040E60535210195050EA00F2C179897198521DABD0E" +
-                    "6B27750FD8BA5F9AAF58B4863B6226456F38553A22453CAF0A0F106766C7AB6F" +
-                    "3D6AFD106753DC50F8A6E4F9E5508426D236C2DBB4BCB8162FA42E995CBA16A3" +
-                    "40FD7C793569DF1B71368E68253299BC74E38312B40B8F52EAEDE10DF414A522",
-                counterSigner.GetSignature().ByteArrayToHex());
+                "2155D226DD744166E582D040E60535210195050EA00F2C179897198521DABD0E"
+                    + "6B27750FD8BA5F9AAF58B4863B6226456F38553A22453CAF0A0F106766C7AB6F"
+                    + "3D6AFD106753DC50F8A6E4F9E5508426D236C2DBB4BCB8162FA42E995CBA16A3"
+                    + "40FD7C793569DF1B71368E68253299BC74E38312B40B8F52EAEDE10DF414A522",
+                counterSigner.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             using (X509Certificate2 capiCert = Certificates.RSAKeyTransferCapi1.GetCertificate())
@@ -405,7 +445,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<CryptographicException>(() => cms.CheckSignature(true));
         }
 
-        [ConditionalFact(typeof(SignatureSupport), nameof(SignatureSupport.SupportsRsaSha1Signatures))]
+        [ConditionalFact(
+            typeof(SignatureSupport),
+            nameof(SignatureSupport.SupportsRsaSha1Signatures)
+        )]
         public static void NonEmbeddedCertificate()
         {
             SignedCms cms = new SignedCms();
@@ -416,7 +459,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(
                 "4D6963726F736F667420436F72706F726174696F6E",
-                cms.ContentInfo.Content.ByteArrayToHex());
+                cms.ContentInfo.Content.ByteArrayToHex()
+            );
 
             Assert.Empty(cms.Certificates);
 
@@ -426,7 +470,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignerInfo signer = signers[0];
             Assert.Equal(3, signer.Version);
             Assert.Equal(SubjectIdentifierType.SubjectKeyIdentifier, signer.SignerIdentifier.Type);
-            Assert.Equal("6B4A6B92FDED07EE0119F3674A96D1A70D2A588D", (string)signer.SignerIdentifier.Value);
+            Assert.Equal(
+                "6B4A6B92FDED07EE0119F3674A96D1A70D2A588D",
+                (string)signer.SignerIdentifier.Value
+            );
             Assert.Equal(Oids.Sha1, signer.DigestAlgorithm.Value);
 
             CryptographicAttributeObjectCollection signedAttrs = signer.SignedAttributes;
@@ -439,7 +486,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Pkcs7Data, contentType.ContentType.Value);
             Assert.Equal(
                 new DateTimeOffset(2017, 11, 2, 15, 34, 4, TimeSpan.Zero),
-                signingTime.SigningTime);
+                signingTime.SigningTime
+            );
 
             Assert.Equal(DateTimeKind.Utc, signingTime.SigningTime.Kind);
 
@@ -451,18 +499,20 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Rsa, signer.SignatureAlgorithm.Value);
 
             Assert.Equal(
-                "0EDE3870B8A80B45A21BAEC4681D059B46502E1B1AA6B8920CF50D4D837646A5" +
-                    "5559B4C05849126C655D95FF3C6C1B420E07DC42629F294EE69822FEA56F32D4" +
-                    "1B824CBB6BF809B7583C27E77B7AC58DFC925B1C60EA4A67AA84D73FC9E9191D" +
-                    "33B36645F17FD6748A2D8B12C6C384C3C734D27273386211E4518FE2B4ED0147",
-                signer.GetSignature().ByteArrayToHex());
+                "0EDE3870B8A80B45A21BAEC4681D059B46502E1B1AA6B8920CF50D4D837646A5"
+                    + "5559B4C05849126C655D95FF3C6C1B420E07DC42629F294EE69822FEA56F32D4"
+                    + "1B824CBB6BF809B7583C27E77B7AC58DFC925B1C60EA4A67AA84D73FC9E9191D"
+                    + "33B36645F17FD6748A2D8B12C6C384C3C734D27273386211E4518FE2B4ED0147",
+                signer.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             using (SHA1 sha1 = SHA1.Create())
             {
                 Assert.Equal(
                     sha1.ComputeHash(cms.ContentInfo.Content).ByteArrayToHex(),
-                    messageDigest.MessageDigest.ByteArrayToHex());
+                    messageDigest.MessageDigest.ByteArrayToHex()
+                );
             }
 
             // Since it's not NoSignature CheckHash will throw.
@@ -518,7 +568,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             }
         }
 
-        [ConditionalFact(typeof(SignatureSupport), nameof(SignatureSupport.SupportsRsaSha1Signatures))]
+        [ConditionalFact(
+            typeof(SignatureSupport),
+            nameof(SignatureSupport.SupportsRsaSha1Signatures)
+        )]
         public static void ReadRsaPkcs1DoubleCounterSigned()
         {
             SignedCms cms = new SignedCms();
@@ -529,7 +582,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             ContentInfo contentInfo = cms.ContentInfo;
             Assert.Equal("1.2.840.113549.1.7.1", contentInfo.ContentType.Value);
-            Assert.Equal("4D6963726F736F667420436F72706F726174696F6E", contentInfo.Content.ByteArrayToHex());
+            Assert.Equal(
+                "4D6963726F736F667420436F72706F726174696F6E",
+                contentInfo.Content.ByteArrayToHex()
+            );
 
             SignerInfoCollection signers = cms.SignerInfos;
             Assert.Single(signers);
@@ -555,11 +611,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(Oids.Rsa, signer.SignatureAlgorithm.Value);
 
             Assert.Equal(
-                "5A1717621D450130B3463662160EEC06F7AE77E017DD95F294E97A0BDD433FE6" +
-                    "B2CCB34FAAC33AEA50BFD7D9E78DC7174836284619F744278AE77B8495091E09" +
-                    "6EEF682D9CA95F6E81C7DDCEDDA6A12316B453C894B5000701EB09DF57A53B73" +
-                    "3A4E80DA27FA710870BD88C86E2FDB9DCA14D18BEB2F0C87E9632ABF02BE2FE3",
-                signer.GetSignature().ByteArrayToHex());
+                "5A1717621D450130B3463662160EEC06F7AE77E017DD95F294E97A0BDD433FE6"
+                    + "B2CCB34FAAC33AEA50BFD7D9E78DC7174836284619F744278AE77B8495091E09"
+                    + "6EEF682D9CA95F6E81C7DDCEDDA6A12316B453C894B5000701EB09DF57A53B73"
+                    + "3A4E80DA27FA710870BD88C86E2FDB9DCA14D18BEB2F0C87E9632ABF02BE2FE3",
+                signer.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             CryptographicAttributeObjectCollection signedAttrs = signer.SignedAttributes;
@@ -599,11 +656,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
 #if NETCOREAPP
             Assert.Equal(
-                "1AA282DBED4D862D7CEA30F803E790BDB0C97EE852778CEEDDCD94BB9304A155" +
-                    "2E60A8D36052AC8C2D28755F3B2F473824100AB3A6ABD4C15ABD77E0FFE13D0D" +
-                    "F253BCD99C718FA673B6CB0CBBC68CE5A4AC671298C0A07C7223522E0E7FFF15" +
-                    "CEDBAB55AAA99588517674671691065EB083FB729D1E9C04B2BF99A9953DAA5E",
-                cs2.GetSignature().ByteArrayToHex());
+                "1AA282DBED4D862D7CEA30F803E790BDB0C97EE852778CEEDDCD94BB9304A155"
+                    + "2E60A8D36052AC8C2D28755F3B2F473824100AB3A6ABD4C15ABD77E0FFE13D0D"
+                    + "F253BCD99C718FA673B6CB0CBBC68CE5A4AC671298C0A07C7223522E0E7FFF15"
+                    + "CEDBAB55AAA99588517674671691065EB083FB729D1E9C04B2BF99A9953DAA5E",
+                cs2.GetSignature().ByteArrayToHex()
+            );
 #endif
 
             // If CheckSignature succeeds then CheckHash cannot.

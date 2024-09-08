@@ -13,6 +13,6 @@ namespace Microsoft.CodeAnalysis
     {
         Module = 1,
         Assembly = 2,
-        Compilation = 3
+        Compilation = 3,
     }
 }

@@ -54,7 +54,8 @@ internal sealed class ConnectionLogScope : IReadOnlyList<KeyValuePair<string, ob
                 _cachedToString = string.Format(
                     CultureInfo.InvariantCulture,
                     "TransportConnectionId:{0}",
-                    ConnectionId);
+                    ConnectionId
+                );
             }
         }
 

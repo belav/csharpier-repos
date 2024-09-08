@@ -6,15 +6,13 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Configuration;
+    using System.Globalization;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-    using System.Globalization;
 
     public sealed partial class ClaimTypeElement : ConfigurationElement
     {
-        public ClaimTypeElement()
-        {
-        }
+        public ClaimTypeElement() { }
 
         public ClaimTypeElement(string claimType, bool isOptional)
         {
@@ -22,7 +20,11 @@ namespace System.ServiceModel.Configuration
             this.IsOptional = isOptional;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ClaimType, DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ClaimType,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 0)]
         public string ClaimType
         {
@@ -37,7 +39,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IsOptional, DefaultValue = ClaimTypeRequirement.DefaultIsOptional)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IsOptional,
+            DefaultValue = ClaimTypeRequirement.DefaultIsOptional
+        )]
         public bool IsOptional
         {
             get { return (bool)base[ConfigurationStrings.IsOptional]; }
@@ -45,6 +50,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

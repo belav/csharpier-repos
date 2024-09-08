@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,63 +26,72 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.EnterpriseServices;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.Util;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.Util {
+namespace MonoCasTests.System.Web.Util
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TransactionsCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted()
+        {
+            new Transactions();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TransactionsCas : AspNetHostingMinimal {
+        private void Callback() { }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new Transactions ();
-		}
+        [Test]
+        // LAMESPEC - documented as AspNetHostingPermission, Level Medium
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void InvokeTransacted2_Deny_Unrestricted()
+        {
+            try
+            {
+                Transactions.InvokeTransacted(
+                    new TransactedCallback(Callback),
+                    TransactionOption.Required
+                );
+            }
+            catch (PlatformNotSupportedException)
+            {
+                // Mono and Windows prior to NT
+            }
+        }
 
-		private void Callback ()
-		{
-		}
+        [Test]
+        // LAMESPEC - documented as AspNetHostingPermission, Level Medium
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void InvokeTransacted3_Deny_Unrestricted()
+        {
+            try
+            {
+                bool aborted = false;
+                Transactions.InvokeTransacted(
+                    new TransactedCallback(Callback),
+                    TransactionOption.Required,
+                    ref aborted
+                );
+            }
+            catch (PlatformNotSupportedException)
+            {
+                // Mono and Windows prior to NT
+            }
+        }
 
-		[Test]
-		// LAMESPEC - documented as AspNetHostingPermission, Level Medium
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void InvokeTransacted2_Deny_Unrestricted ()
-		{
-			try {
-				Transactions.InvokeTransacted (new TransactedCallback (Callback), TransactionOption.Required);
-			}
-			catch (PlatformNotSupportedException) {
-				// Mono and Windows prior to NT
-			}
-		}
+        // LinkDemand
 
-		[Test]
-		// LAMESPEC - documented as AspNetHostingPermission, Level Medium
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void InvokeTransacted3_Deny_Unrestricted ()
-		{
-			try {
-				bool aborted = false;
-				Transactions.InvokeTransacted (new TransactedCallback (Callback), TransactionOption.Required, ref aborted);
-			}
-			catch (PlatformNotSupportedException) {
-				// Mono and Windows prior to NT
-			}
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (Transactions); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Transactions); }
+        }
+    }
 }

@@ -14,6 +14,7 @@ namespace System.Linq.Tests
             return array;
         }
 
-        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) => Shuffle(source.ToArray());
+        public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) =>
+            Shuffle(source.ToArray());
     }
 }

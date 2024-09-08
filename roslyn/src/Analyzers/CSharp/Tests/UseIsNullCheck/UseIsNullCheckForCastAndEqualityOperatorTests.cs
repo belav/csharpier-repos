@@ -16,15 +16,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseIsNullCheck)]
-    public partial class UseIsNullCheckForCastAndEqualityOperatorTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseIsNullCheckForCastAndEqualityOperatorTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseIsNullCheckForCastAndEqualityOperatorTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer(), new CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseIsNullCheckForCastAndEqualityOperatorDiagnosticAnalyzer(),
+                new CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestEquality()
@@ -53,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58483")]
@@ -72,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIsNullCheck
                     }
                 }
                 """,
-new[] { CSharpAnalyzersResources.Use_is_null_check });
+                new[] { CSharpAnalyzersResources.Use_is_null_check }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58483")]
@@ -91,8 +97,13 @@ new[] { CSharpAnalyzersResources.Use_is_null_check });
                     }
                 }
                 """,
-new[] { CSharpAnalyzersResources.Use_is_object_check },
-new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                new[] { CSharpAnalyzersResources.Use_is_object_check },
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp8
+                    )
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58483")]
@@ -111,8 +122,13 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                     }
                 }
                 """,
-new[] { CSharpAnalyzersResources.Use_is_not_null_check },
-new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)));
+                new[] { CSharpAnalyzersResources.Use_is_not_null_check },
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp9
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -142,7 +158,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -172,7 +189,11 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact]
@@ -202,7 +223,11 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact]
@@ -232,7 +257,11 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact]
@@ -262,7 +291,11 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """, parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+                """,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact]
@@ -280,7 +313,13 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -298,7 +337,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -334,7 +374,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -364,7 +405,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -394,7 +436,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -424,7 +467,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -454,7 +498,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -472,7 +517,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -502,7 +548,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -520,7 +567,8 @@ new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
                             return;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class GitHub_19601
 {
     static ushort s_2;
-    static short[] s_5 = new short[]{1};
+    static short[] s_5 = new short[] { 1 };
     static ulong s_8;
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -22,4 +24,3 @@ public class GitHub_19601
         s_8 <<= (0 & s_2) + 186;
     }
 }
-

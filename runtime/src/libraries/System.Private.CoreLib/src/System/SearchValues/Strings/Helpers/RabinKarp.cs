@@ -111,12 +111,17 @@ namespace System.Buffers
 
             if (span.Length >= hashLength)
             {
-                ref char end = ref Unsafe.Add(ref MemoryMarshal.GetReference(span), (uint)(span.Length - hashLength));
+                ref char end = ref Unsafe.Add(
+                    ref MemoryMarshal.GetReference(span),
+                    (uint)(span.Length - hashLength)
+                );
 
                 nuint hash = 0;
                 for (uint i = 0; i < hashLength; i++)
                 {
-                    hash = (hash << HashShiftPerElement) + TCaseSensitivity.TransformInput(Unsafe.Add(ref current, i));
+                    hash =
+                        (hash << HashShiftPerElement)
+                        + TCaseSensitivity.TransformInput(Unsafe.Add(ref current, i));
                 }
 
                 Debug.Assert(_buckets is not null);
@@ -128,9 +133,19 @@ namespace System.Buffers
 
                     if (Unsafe.Add(ref bucketsRef, hash % BucketCount) is string[] bucket)
                     {
-                        int startOffset = (int)((nuint)Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref current) / sizeof(char));
+                        int startOffset = (int)(
+                            (nuint)
+                                Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref current)
+                            / sizeof(char)
+                        );
 
-                        if (StartsWith<TCaseSensitivity>(ref current, span.Length - startOffset, bucket))
+                        if (
+                            StartsWith<TCaseSensitivity>(
+                                ref current,
+                                span.Length - startOffset,
+                                bucket
+                            )
+                        )
                         {
                             return startOffset;
                         }
@@ -142,10 +157,13 @@ namespace System.Buffers
                     }
 
                     char previous = TCaseSensitivity.TransformInput(current);
-                    char next = TCaseSensitivity.TransformInput(Unsafe.Add(ref current, (uint)hashLength));
+                    char next = TCaseSensitivity.TransformInput(
+                        Unsafe.Add(ref current, (uint)hashLength)
+                    );
 
                     // Update the hash by removing the previous character and adding the next one.
-                    hash = ((hash - (previous * _hashUpdateMultiplier)) << HashShiftPerElement) + next;
+                    hash =
+                        ((hash - (previous * _hashUpdateMultiplier)) << HashShiftPerElement) + next;
                     current = ref Unsafe.Add(ref current, 1);
                 }
             }

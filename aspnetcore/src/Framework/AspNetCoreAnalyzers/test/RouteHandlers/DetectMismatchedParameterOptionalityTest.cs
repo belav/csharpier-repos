@@ -4,7 +4,8 @@
 using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
     Microsoft.AspNetCore.Analyzers.RouteHandlers.RouteHandlerAnalyzer,
-    Microsoft.AspNetCore.Analyzers.RouteHandlers.Fixers.DetectMismatchedParameterOptionalityFixer>;
+    Microsoft.AspNetCore.Analyzers.RouteHandlers.Fixers.DetectMismatchedParameterOptionalityFixer
+>;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteHandlers;
 
@@ -13,21 +14,27 @@ public partial class DetectMismatchedParameterOptionalityTest
     [Fact]
     public async Task MatchingRequiredOptionality_CanBeFixed()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}"", ({|#0:string name|}) => $""Hello {name}"");";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}"", (string? name) => $""Hello {name}"");";
 
-        var expectedDiagnostics = new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(0);
+        var expectedDiagnostics = new DiagnosticResult(
+            DiagnosticDescriptors.DetectMismatchedParameterOptionality
+        )
+            .WithArguments("name")
+            .WithLocation(0);
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
     }
@@ -35,47 +42,59 @@ app.MapGet(""/hello/{name?}"", (string? name) => $""Hello {name}"");";
     [Fact]
     public async Task MatchingMultipleRequiredOptionality_CanBeFixed()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}/{title?}"", ({|#0:string name|}, {|#1:string title|}) => $""Hello {name}, you are a {title}."");
 ";
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}/{title?}"", (string? name, string? title) => $""Hello {name}, you are a {title}."");
 ";
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("title").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("name")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("title")
+                .WithLocation(1),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
-
     }
 
     [Fact]
     public async Task MatchingSingleRequiredOptionality_CanBeFixed()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}/{title?}"", ({|#0:string name|}, string? title) => $""Hello {name}, you are a {title}."");
 ";
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}/{title?}"", (string? name, string? title) => $""Hello {name}, you are a {title}."");
 ";
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(0);
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.DetectMismatchedParameterOptionality
+        )
+            .WithArguments("name")
+            .WithLocation(0);
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostic, fixedSource);
     }
@@ -83,7 +102,8 @@ app.MapGet(""/hello/{name?}/{title?}"", (string? name, string? title) => $""Hell
     [Fact]
     public async Task MismatchedOptionalityInMethodGroup_CanBeFixed()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -91,7 +111,8 @@ var app = WebApplication.Create();
 string SayHello({|#0:string name|}, {|#1:string title|}) => $""Hello {name}, you are a {title}."";
 app.MapGet(""/hello/{name?}/{title?}"", SayHello);
 ";
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -100,9 +121,14 @@ string SayHello(string? name, string? title) => $""Hello {name}, you are a {titl
 app.MapGet(""/hello/{name?}/{title?}"", SayHello);
 ";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("title").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("name")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("title")
+                .WithLocation(1),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -111,7 +137,8 @@ app.MapGet(""/hello/{name?}/{title?}"", SayHello);
     [Fact]
     public async Task MismatchedOptionalityInMethodGroupFromPartialMethod_CanBeFixed()
     {
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -131,7 +158,8 @@ public partial class ExternalImplementation
     }
 }
 ";
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -153,11 +181,20 @@ public partial class ExternalImplementation
 ";
         // Diagnostics are produced at both the declaration and definition syntax
         // for partial method definitions to support the CodeFix correctly resolving both.
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("title").WithLocation(1),
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(2),
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("title").WithLocation(3)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("name")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("title")
+                .WithLocation(1),
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("name")
+                .WithLocation(2),
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("title")
+                .WithLocation(3),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -166,14 +203,16 @@ public partial class ExternalImplementation
     [Fact]
     public async Task MismatchedOptionalityInSeparateSource_CanBeFixed()
     {
-        var usageSource = @"
+        var usageSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}/{title?}"", Helpers.SayHello);
 ";
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using System;
 
@@ -184,7 +223,8 @@ public static class Helpers
         return $""Hello {name}, you are a {title}."";
     }
 }";
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using System;
 
@@ -196,19 +236,30 @@ public static class Helpers
     }
 }";
 
-        var expectedDiagnostics = new[] {
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("name").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("title").WithLocation(1)
+        var expectedDiagnostics = new[]
+        {
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("name")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
+                .WithArguments("title")
+                .WithLocation(1),
         };
 
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, usageSource: usageSource);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            usageSource: usageSource
+        );
     }
 
     [Fact]
     public async Task MatchingRequiredOptionality_DoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -223,7 +274,8 @@ app.MapGet(""/hello/{name}"", (string name) => $""Hello {name}"");
     public async Task ParameterFromRouteOrQuery_DoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -238,7 +290,8 @@ app.MapGet(""/hello/{name}"", (string name) => $""Hello {name}"");
     public async Task MatchingOptionality_DoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -253,7 +306,8 @@ app.MapGet(""/hello/{name?}"", (string? name) => $""Hello {name}"");
     public async Task RequiredRouteParamOptionalArgument_DoesNotProduceDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -268,7 +322,8 @@ app.MapGet(""/hello/{name}"", (string? name) => $""Hello {name}"");
     public async Task OptionalRouteParamRequiredArgument_WithFromRoute_ProducesDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -277,7 +332,8 @@ var app = WebApplication.Create();
 app.MapGet(""/hello/{Age?}"", ({|#0:[FromRoute] int age|}) => $""Age: {age}"");
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -286,7 +342,11 @@ var app = WebApplication.Create();
 app.MapGet(""/hello/{Age?}"", ([FromRoute] int? age) => $""Age: {age}"");
 ";
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("age").WithLocation(0);
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.DetectMismatchedParameterOptionality
+        )
+            .WithArguments("age")
+            .WithLocation(0);
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostic, fixedSource);
     }
@@ -295,7 +355,8 @@ app.MapGet(""/hello/{Age?}"", ([FromRoute] int? age) => $""Age: {age}"");
     public async Task OptionalRouteParamRequiredArgument_WithRegexConstraint_ProducesDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -303,14 +364,19 @@ var app = WebApplication.Create();
 app.MapGet(""/hello/{age:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)?}"", ({|#0:int age|}) => $""Age: {age}"");
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{age:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)?}"", (int? age) => $""Age: {age}"");
 ";
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("age").WithLocation(0);
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.DetectMismatchedParameterOptionality
+        )
+            .WithArguments("age")
+            .WithLocation(0);
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostic, fixedSource);
     }
@@ -319,7 +385,8 @@ app.MapGet(""/hello/{age:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)?}"", (int? age) => 
     public async Task OptionalRouteParamRequiredArgument_WithTypeConstraint_ProducesDiagnostics()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -327,7 +394,8 @@ var app = WebApplication.Create();
 app.MapGet(""/hello/{age:int?}"", ({|#0:int age|}) => $""Age: {age}"");
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable enable
 using Microsoft.AspNetCore.Builder;
 
@@ -335,7 +403,11 @@ var app = WebApplication.Create();
 app.MapGet(""/hello/{age:int?}"", (int? age) => $""Age: {age}"");
 ";
 
-        var expectedDiagnostic = new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality).WithArguments("age").WithLocation(0);
+        var expectedDiagnostic = new DiagnosticResult(
+            DiagnosticDescriptors.DetectMismatchedParameterOptionality
+        )
+            .WithArguments("age")
+            .WithLocation(0);
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostic, fixedSource);
     }
@@ -343,14 +415,16 @@ app.MapGet(""/hello/{age:int?}"", (int? age) => $""Age: {age}"");
     [Fact]
     public async Task MatchingRequiredOptionality_WithDisabledNullability()
     {
-        var source = @"
+        var source =
+            @"
 #nullable disable
 using Microsoft.AspNetCore.Builder;
 
 var app = WebApplication.Create();
 app.MapGet(""/hello/{name?}"", (string name) => $""Hello {name}"");
 ";
-        var fixedSource = @"
+        var fixedSource =
+            @"
 #nullable disable
 using Microsoft.AspNetCore.Builder;
 

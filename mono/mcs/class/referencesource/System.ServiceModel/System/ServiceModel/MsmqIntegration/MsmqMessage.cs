@@ -21,8 +21,7 @@ namespace System.ServiceModel.MsmqIntegration
             this.property.Body = body;
         }
 
-        internal MsmqMessage()
-        { }
+        internal MsmqMessage() { }
 
         public T Body
         {

@@ -6,38 +6,49 @@
 
 using System;
 using System.Collections;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
-using System.Xml;
-using System.Collections.Specialized;
-using System.Globalization;
-using System.ComponentModel;
 using System.Security;
+using System.Security.Permissions;
 using System.Text;
+using System.Xml;
 
-namespace System.Configuration {
-
-    public sealed class InfiniteIntConverter : ConfigurationConverterBase {
-
-        public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type) {
+namespace System.Configuration
+{
+    public sealed class InfiniteIntConverter : ConfigurationConverterBase
+    {
+        public override object ConvertTo(
+            ITypeDescriptorContext ctx,
+            CultureInfo ci,
+            object value,
+            Type type
+        )
+        {
             ValidateType(value, typeof(int));
 
-            if ((int)value == int.MaxValue) {
+            if ((int)value == int.MaxValue)
+            {
                 return "Infinite";
             }
-            else {
+            else
+            {
                 return ((int)value).ToString(CultureInfo.InvariantCulture);
             }
         }
-        
-        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data) {
+
+        public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
+        {
             Debug.Assert(data is string, "data is string");
 
-            if ((string)data == "Infinite") {
+            if ((string)data == "Infinite")
+            {
                 return int.MaxValue;
             }
-            else {
+            else
+            {
                 return Convert.ToInt32((string)data, 10);
             }
         }

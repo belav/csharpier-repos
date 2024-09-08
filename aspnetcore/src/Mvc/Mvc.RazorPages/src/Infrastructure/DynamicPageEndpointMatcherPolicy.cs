@@ -17,7 +17,11 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
     private readonly PageLoader _loader;
     private readonly EndpointMetadataComparer _comparer;
 
-    public DynamicPageEndpointMatcherPolicy(DynamicPageEndpointSelectorCache selectorCache, PageLoader loader, EndpointMetadataComparer comparer)
+    public DynamicPageEndpointMatcherPolicy(
+        DynamicPageEndpointSelectorCache selectorCache,
+        PageLoader loader,
+        EndpointMetadataComparer comparer
+    )
     {
         ArgumentNullException.ThrowIfNull(selectorCache);
         ArgumentNullException.ThrowIfNull(loader);
@@ -48,7 +52,10 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
                 return true;
             }
 
-            if (endpoints[i].Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>() != null)
+            if (
+                endpoints[i].Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>()
+                != null
+            )
             {
                 // Found a dynamic page endpoint
                 return true;
@@ -83,7 +90,8 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
             // We don't expect both of these to be provided, and they are internal so there's
             // no realistic way this could happen.
             var dynamicPageMetadata = endpoint.Metadata.GetMetadata<DynamicPageMetadata>();
-            var transformerMetadata = endpoint.Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>();
+            var transformerMetadata =
+                endpoint.Metadata.GetMetadata<DynamicPageRouteValueTransformerMetadata>();
             DynamicRouteValueTransformer? transformer = null;
             if (dynamicPageMetadata != null)
             {
@@ -91,10 +99,17 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
             }
             else if (transformerMetadata != null)
             {
-                transformer = (DynamicRouteValueTransformer)httpContext.RequestServices.GetRequiredService(transformerMetadata.SelectorType);
+                transformer = (DynamicRouteValueTransformer)
+                    httpContext.RequestServices.GetRequiredService(
+                        transformerMetadata.SelectorType
+                    );
                 if (transformer.State != null)
                 {
-                    throw new InvalidOperationException(Resources.FormatStateShouldBeNullForRouteValueTransformers(transformerMetadata.SelectorType.Name));
+                    throw new InvalidOperationException(
+                        Resources.FormatStateShouldBeNullForRouteValueTransformers(
+                            transformerMetadata.SelectorType.Name
+                        )
+                    );
                 }
                 transformer.State = transformerMetadata.State;
                 dynamicValues = await transformer.TransformAsync(httpContext, originalValues!);
@@ -118,8 +133,11 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
                 // Having no match for a fallback is a configuration error. We can't really check
                 // during startup that the action you configured exists, so this is the best we can do.
                 throw new InvalidOperationException(
-                    "Cannot find the fallback endpoint specified by route values: " +
-                    "{ " + string.Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}")) + " }.");
+                    "Cannot find the fallback endpoint specified by route values: "
+                        + "{ "
+                        + string.Join(", ", dynamicValues.Select(kvp => $"{kvp.Key}: {kvp.Value}"))
+                        + " }."
+                );
             }
             else if (endpoints.Count == 0)
             {
@@ -165,8 +183,9 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
                 else
                 {
                     // We're working with a runtime-compiled page and have to Load it.
-                    var compiled = actionDescriptor!.CompiledPageDescriptor ??
-                        await _loader.LoadAsync(actionDescriptor, endpoint.Metadata);
+                    var compiled =
+                        actionDescriptor!.CompiledPageDescriptor
+                        ?? await _loader.LoadAsync(actionDescriptor, endpoint.Metadata);
                     loadedEndpoints[j] = compiled.Endpoint!;
                 }
             }
@@ -176,7 +195,10 @@ internal sealed class DynamicPageEndpointMatcherPolicy : MatcherPolicy, IEndpoin
         }
     }
 
-    private DynamicPageEndpointSelector ResolveSelector(DynamicPageEndpointSelector? currentSelector, Endpoint endpoint)
+    private DynamicPageEndpointSelector ResolveSelector(
+        DynamicPageEndpointSelector? currentSelector,
+        Endpoint endpoint
+    )
     {
         var selector = _selectorCache.GetEndpointSelector(endpoint);
 

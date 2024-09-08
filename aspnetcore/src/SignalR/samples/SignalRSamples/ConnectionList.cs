@@ -9,7 +9,8 @@ namespace SignalRSamples;
 
 internal class ConnectionList : IReadOnlyCollection<ConnectionContext>
 {
-    private readonly ConcurrentDictionary<string, ConnectionContext> _connections = new ConcurrentDictionary<string, ConnectionContext>(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, ConnectionContext> _connections =
+        new ConcurrentDictionary<string, ConnectionContext>(StringComparer.Ordinal);
 
     public ConnectionContext this[string connectionId]
     {

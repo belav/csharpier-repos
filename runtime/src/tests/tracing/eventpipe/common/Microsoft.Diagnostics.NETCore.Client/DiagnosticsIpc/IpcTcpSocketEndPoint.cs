@@ -20,7 +20,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 ParseTcpIpEndPoint(endPoint, out _, out _);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 result = false;
             }
@@ -41,7 +41,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             DualMode = string.CompareOrdinal(host, "*") == 0;
         }
 
-        public static implicit operator EndPoint(IpcTcpSocketEndPoint endPoint) => endPoint.EndPoint;
+        public static implicit operator EndPoint(IpcTcpSocketEndPoint endPoint) =>
+            endPoint.EndPoint;
 
         private static void ParseTcpIpEndPoint(string endPoint, out string host, out int port)
         {
@@ -49,7 +50,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
             port = -1;
 
             bool usesWildcardHost = false;
-            string uriToParse= "";
+            string uriToParse = "";
 
             if (endPoint.Contains("://"))
             {
@@ -68,21 +69,31 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             try
             {
-                if (!string.IsNullOrEmpty(uriToParse) && Uri.TryCreate(uriToParse, UriKind.RelativeOrAbsolute, out Uri uri))
+                if (
+                    !string.IsNullOrEmpty(uriToParse)
+                    && Uri.TryCreate(uriToParse, UriKind.RelativeOrAbsolute, out Uri uri)
+                )
                 {
-                    if (string.Compare(uri.Scheme, Uri.UriSchemeNetTcp, StringComparison.OrdinalIgnoreCase) != 0 &&
-                        string.Compare(uri.Scheme, "tcp", StringComparison.OrdinalIgnoreCase) != 0)
+                    if (
+                        string.Compare(
+                            uri.Scheme,
+                            Uri.UriSchemeNetTcp,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                        && string.Compare(uri.Scheme, "tcp", StringComparison.OrdinalIgnoreCase)
+                            != 0
+                    )
                     {
-                        throw new ArgumentException(string.Format("Unsupported Uri schema, \"{0}\"", uri.Scheme));
+                        throw new ArgumentException(
+                            string.Format("Unsupported Uri schema, \"{0}\"", uri.Scheme)
+                        );
                     }
 
                     host = usesWildcardHost ? "*" : uri.Host;
                     port = uri.IsDefaultPort ? 0 : uri.Port;
                 }
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
 
             if (string.IsNullOrEmpty(host) || port == -1)
             {
@@ -102,7 +113,13 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 {
                     if (!IPAddress.TryParse(host, out _))
                     {
-                        if (!Uri.TryCreate(Uri.UriSchemeNetTcp + "://" + host + ":" + port, UriKind.RelativeOrAbsolute, out _))
+                        if (
+                            !Uri.TryCreate(
+                                Uri.UriSchemeNetTcp + "://" + host + ":" + port,
+                                UriKind.RelativeOrAbsolute,
+                                out _
+                            )
+                        )
                         {
                             host = "";
                             port = -1;
@@ -113,7 +130,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
             if (string.IsNullOrEmpty(host) || port == -1)
             {
-                throw new ArgumentException(string.Format("Could not parse {0} into host, port", endPoint));
+                throw new ArgumentException(
+                    string.Format("Could not parse {0} into host, port", endPoint)
+                );
             }
         }
 
@@ -140,12 +159,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         ipAddress = hostEntry.AddressList[0];
                 }
             }
-            catch(Exception)
-            {
-            }
+            catch (Exception) { }
 
             if (ipAddress == null)
-                throw new ArgumentException(string.Format("Could not resolve {0} into an IP address", host));
+                throw new ArgumentException(
+                    string.Format("Could not resolve {0} into an IP address", host)
+                );
 
             return new IPEndPoint(ipAddress, port);
         }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlTableCell.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,40 +10,38 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlTableCell'/>
-///       class defines the properties, methods, and events for the HtmlTableCell control.
-///       This class allows programmatic access on the server to individual HTML
-///       &lt;td&gt; and &lt;th&gt; elements enclosed within an
-///    <see langword='HtmlTableRow'/>
-///    control.
-/// </para>
-/// </devdoc>
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlTableCell'/>
+    ///       class defines the properties, methods, and events for the HtmlTableCell control.
+    ///       This class allows programmatic access on the server to individual HTML
+    ///       &lt;td&gt; and &lt;th&gt; elements enclosed within an
+    ///    <see langword='HtmlTableRow'/>
+    ///    control.
+    /// </para>
+    /// </devdoc>
     [ConstructorNeedsTag(true)]
-    public class HtmlTableCell : HtmlContainerControl {
+    public class HtmlTableCell : HtmlContainerControl
+    {
+        /// <devdoc>
+        /// </devdoc>
+        public HtmlTableCell()
+            : base("td") { }
 
         /// <devdoc>
         /// </devdoc>
-        public HtmlTableCell() : base("td") {
-        }
-
-
-        /// <devdoc>
-        /// </devdoc>
-        public HtmlTableCell(string tagName) : base(tagName) {
-        }
-
+        public HtmlTableCell(string tagName)
+            : base(tagName) { }
 
         /// <devdoc>
         ///    <para>
@@ -52,21 +50,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Align {
-            get {
+        public string Align
+        {
+            get
+            {
                 string s = Attributes["align"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["align"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["align"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -75,21 +71,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string BgColor {
-            get {
+        public string BgColor
+        {
+            get
+            {
                 string s = Attributes["bgcolor"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["bgcolor"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["bgcolor"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -98,19 +92,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string BorderColor {
-            get {
+        public string BorderColor
+        {
+            get
+            {
                 string s = Attributes["bordercolor"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["bordercolor"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["bordercolor"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -123,20 +116,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int ColSpan {
-            get {
+        public int ColSpan
+        {
+            get
+            {
                 string s = Attributes["colspan"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-            set {
-                Attributes["colspan"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["colspan"] = MapIntegerAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -145,19 +137,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Height {
-            get {
+        public string Height
+        {
+            get
+            {
                 string s = Attributes["height"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["height"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["height"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -172,21 +163,23 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        TypeConverter(typeof(MinimizableAttributeTypeConverter))
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            TypeConverter(typeof(MinimizableAttributeTypeConverter))
         ]
-        public bool NoWrap {
-            get {
+        public bool NoWrap
+        {
+            get
+            {
                 string s = Attributes["nowrap"];
-                return((s != null) ? (s.Equals("nowrap")) : false);
+                return ((s != null) ? (s.Equals("nowrap")) : false);
             }
-
-            set {
-                if (value) 
+            set
+            {
+                if (value)
                     Attributes["nowrap"] = "nowrap";
-                else 
+                else
                     Attributes["nowrap"] = null;
             }
         }
@@ -202,20 +195,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int RowSpan {
-            get {
+        public int RowSpan
+        {
+            get
+            {
                 string s = Attributes["rowspan"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-            set {
-                Attributes["rowspan"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["rowspan"] = MapIntegerAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -224,21 +216,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string VAlign {
-            get {
+        public string VAlign
+        {
+            get
+            {
                 string s = Attributes["valign"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["valign"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["valign"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -247,29 +237,27 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Layout"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Layout"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Width {
-            get {
+        public string Width
+        {
+            get
+            {
                 string s = Attributes["width"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-
-            set {
-                Attributes["width"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["width"] = MapStringAttributeToString(value); }
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderEndTag(HtmlTextWriter writer) {
+        protected override void RenderEndTag(HtmlTextWriter writer)
+        {
             base.RenderEndTag(writer);
             writer.WriteLine();
         }
-
     }
 }

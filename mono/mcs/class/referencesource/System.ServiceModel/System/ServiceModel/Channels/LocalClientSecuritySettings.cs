@@ -43,28 +43,24 @@ namespace System.ServiceModel.Channels
 
         public bool DetectReplays
         {
-            get
-            {
-                return this.detectReplays;
-            }
-            set
-            {
-                this.detectReplays = value;
-            }
+            get { return this.detectReplays; }
+            set { this.detectReplays = value; }
         }
 
         public int ReplayCacheSize
         {
-            get
-            {
-                return this.replayCacheSize;
-            }
+            get { return this.replayCacheSize; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.replayCacheSize = value;
             }
@@ -72,22 +68,29 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan ReplayWindow
         {
-            get
-            {
-                return this.replayWindow;
-            }
+            get { return this.replayWindow; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.replayWindow = value;
@@ -96,22 +99,29 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan MaxClockSkew
         {
-            get
-            {
-                return this.maxClockSkew;
-            }
+            get { return this.maxClockSkew; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.maxClockSkew = value;
@@ -120,34 +130,35 @@ namespace System.ServiceModel.Channels
 
         public NonceCache NonceCache
         {
-            get
-            {
-                return this.nonceCache;
-            }
-            set
-            {
-                this.nonceCache = value;
-            }
+            get { return this.nonceCache; }
+            set { this.nonceCache = value; }
         }
 
         public TimeSpan TimestampValidityDuration
         {
-            get
-            {
-                return this.timestampValidityDuration;
-            }
+            get { return this.timestampValidityDuration; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.timestampValidityDuration = value;
@@ -156,34 +167,35 @@ namespace System.ServiceModel.Channels
 
         public bool CacheCookies
         {
-            get
-            {
-                return this.cacheCookies;
-            }
-            set
-            {
-                this.cacheCookies = value;
-            }
+            get { return this.cacheCookies; }
+            set { this.cacheCookies = value; }
         }
 
         public TimeSpan MaxCookieCachingTime
         {
-            get
-            {
-                return this.maxCookieCachingTime;
-            }
+            get { return this.maxCookieCachingTime; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.maxCookieCachingTime = value;
@@ -192,16 +204,18 @@ namespace System.ServiceModel.Channels
 
         public int CookieRenewalThresholdPercentage
         {
-            get
-            {
-                return this.cookieRenewalThresholdPercentage;
-            }
+            get { return this.cookieRenewalThresholdPercentage; }
             set
             {
                 if (value < 0 || value > 100)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, 100)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeInRange, 0, 100)
+                        )
+                    );
                 }
                 this.cookieRenewalThresholdPercentage = value;
             }
@@ -209,22 +223,29 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan SessionKeyRenewalInterval
         {
-            get
-            {
-                return this.sessionKeyRenewalInterval;
-            }
+            get { return this.sessionKeyRenewalInterval; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.sessionKeyRenewalInterval = value;
@@ -233,22 +254,29 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan SessionKeyRolloverInterval
         {
-            get
-            {
-                return this.sessionKeyRolloverInterval;
-            }
+            get { return this.sessionKeyRolloverInterval; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.sessionKeyRolloverInterval = value;
@@ -257,26 +285,14 @@ namespace System.ServiceModel.Channels
 
         public bool ReconnectTransportOnFailure
         {
-            get
-            {
-                return this.reconnectTransportOnFailure;
-            }
-            set
-            {
-                this.reconnectTransportOnFailure = value;
-            }
+            get { return this.reconnectTransportOnFailure; }
+            set { this.reconnectTransportOnFailure = value; }
         }
 
         public IdentityVerifier IdentityVerifier
         {
-            get
-            {
-                return this.identityVerifier;
-            }
-            set
-            {
-                this.identityVerifier = value;
-            }
+            get { return this.identityVerifier; }
+            set { this.identityVerifier = value; }
         }
 
         public LocalClientSecuritySettings()
@@ -285,13 +301,20 @@ namespace System.ServiceModel.Channels
             this.ReplayCacheSize = SecurityProtocolFactory.defaultMaxCachedNonces;
             this.ReplayWindow = SecurityProtocolFactory.defaultReplayWindow;
             this.MaxClockSkew = SecurityProtocolFactory.defaultMaxClockSkew;
-            this.TimestampValidityDuration = SecurityProtocolFactory.defaultTimestampValidityDuration;
-            this.CacheCookies = IssuanceTokenProviderBase<IssuanceTokenProviderState>.defaultClientCacheTokens;
-            this.MaxCookieCachingTime = IssuanceTokenProviderBase<IssuanceTokenProviderState>.DefaultClientMaxTokenCachingTime;
-            this.SessionKeyRenewalInterval = SecuritySessionClientSettings.defaultKeyRenewalInterval;
-            this.SessionKeyRolloverInterval = SecuritySessionClientSettings.defaultKeyRolloverInterval;
-            this.ReconnectTransportOnFailure = SecuritySessionClientSettings.defaultTolerateTransportFailures;
-            this.CookieRenewalThresholdPercentage = SpnegoTokenProvider.defaultServiceTokenValidityThresholdPercentage;
+            this.TimestampValidityDuration =
+                SecurityProtocolFactory.defaultTimestampValidityDuration;
+            this.CacheCookies =
+                IssuanceTokenProviderBase<IssuanceTokenProviderState>.defaultClientCacheTokens;
+            this.MaxCookieCachingTime =
+                IssuanceTokenProviderBase<IssuanceTokenProviderState>.DefaultClientMaxTokenCachingTime;
+            this.SessionKeyRenewalInterval =
+                SecuritySessionClientSettings.defaultKeyRenewalInterval;
+            this.SessionKeyRolloverInterval =
+                SecuritySessionClientSettings.defaultKeyRolloverInterval;
+            this.ReconnectTransportOnFailure =
+                SecuritySessionClientSettings.defaultTolerateTransportFailures;
+            this.CookieRenewalThresholdPercentage =
+                SpnegoTokenProvider.defaultServiceTokenValidityThresholdPercentage;
             this.IdentityVerifier = IdentityVerifier.CreateDefault();
             this.nonceCache = null;
         }
@@ -302,5 +325,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-
-

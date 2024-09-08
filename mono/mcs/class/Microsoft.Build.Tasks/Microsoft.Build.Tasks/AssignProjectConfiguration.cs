@@ -29,148 +29,171 @@
 
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class AssignProjectConfiguration : ResolveProjectBase {
-	
-		ITaskItem[]	assignedProjects;
-		string		solutionConfigurationContents;
-		ITaskItem[]	unassignedProjects;
-		Dictionary<Guid, string> guidToConfigPlatform;
-		Dictionary<string, string> absolutePathToConfigPlatform;
-	
-		public AssignProjectConfiguration ()
-		{
-		}
-		
-		[MonoTODO]
-		public override bool Execute ()
-		{
-			if (String.IsNullOrEmpty (solutionConfigurationContents))
-				return true;
+namespace Microsoft.Build.Tasks
+{
+    public class AssignProjectConfiguration : ResolveProjectBase
+    {
+        ITaskItem[] assignedProjects;
+        string solutionConfigurationContents;
+        ITaskItem[] unassignedProjects;
+        Dictionary<Guid, string> guidToConfigPlatform;
+        Dictionary<string, string> absolutePathToConfigPlatform;
 
-			XmlReader xr = null;
-			guidToConfigPlatform = new Dictionary<Guid, string> ();
-			absolutePathToConfigPlatform = new Dictionary<string, string> ();
-			try {
-				xr = XmlReader.Create (new StringReader (solutionConfigurationContents));
+        public AssignProjectConfiguration() { }
 
-				xr.Read ();
-				while (!xr.EOF) {
-					xr.Read ();
-					if (xr.NodeType != XmlNodeType.Element)
-						continue;
+        [MonoTODO]
+        public override bool Execute()
+        {
+            if (String.IsNullOrEmpty(solutionConfigurationContents))
+                return true;
 
-					string guid_str = xr.GetAttribute ("Project");
-					string abs_path = xr.GetAttribute ("AbsolutePath");
-					string config_str = xr.ReadString ();
+            XmlReader xr = null;
+            guidToConfigPlatform = new Dictionary<Guid, string>();
+            absolutePathToConfigPlatform = new Dictionary<string, string>();
+            try
+            {
+                xr = XmlReader.Create(new StringReader(solutionConfigurationContents));
 
-					if (String.IsNullOrEmpty (config_str))
-						continue;
+                xr.Read();
+                while (!xr.EOF)
+                {
+                    xr.Read();
+                    if (xr.NodeType != XmlNodeType.Element)
+                        continue;
 
-					Guid guid;
-					if (TryParseGuid (guid_str, out guid))
-						guidToConfigPlatform [guid] = config_str;
+                    string guid_str = xr.GetAttribute("Project");
+                    string abs_path = xr.GetAttribute("AbsolutePath");
+                    string config_str = xr.ReadString();
 
-					if (!String.IsNullOrEmpty (abs_path)) {
-						abs_path = Path.GetFullPath (abs_path);
-						absolutePathToConfigPlatform [abs_path] = config_str;
-					}
-				}
-			} catch (XmlException xe) {
-				Log.LogError ("XmlException while parsing SolutionConfigurationContents: {0}",
-						xe.ToString ());
+                    if (String.IsNullOrEmpty(config_str))
+                        continue;
 
-				return false;
-			} finally {
-				((IDisposable)xr).Dispose ();
-			}
+                    Guid guid;
+                    if (TryParseGuid(guid_str, out guid))
+                        guidToConfigPlatform[guid] = config_str;
 
-			List<ITaskItem> tempAssignedProjects = new List<ITaskItem> ();
-			List<ITaskItem> tempUnassignedProjects = new List<ITaskItem> ();
-			foreach (ITaskItem item in ProjectReferences) {
-				string config = GetConfigPlatformFromProjectReference (item);
+                    if (!String.IsNullOrEmpty(abs_path))
+                    {
+                        abs_path = Path.GetFullPath(abs_path);
+                        absolutePathToConfigPlatform[abs_path] = config_str;
+                    }
+                }
+            }
+            catch (XmlException xe)
+            {
+                Log.LogError(
+                    "XmlException while parsing SolutionConfigurationContents: {0}",
+                    xe.ToString()
+                );
 
-				if (String.IsNullOrEmpty (config)) {
-					tempUnassignedProjects.Add (item);
-					continue;
-				}
+                return false;
+            }
+            finally
+            {
+                ((IDisposable)xr).Dispose();
+            }
 
-				string [] parts = config.Split (new char [] {'|'}, 2);
+            List<ITaskItem> tempAssignedProjects = new List<ITaskItem>();
+            List<ITaskItem> tempUnassignedProjects = new List<ITaskItem>();
+            foreach (ITaskItem item in ProjectReferences)
+            {
+                string config = GetConfigPlatformFromProjectReference(item);
 
-				ITaskItem new_item = new TaskItem (item);
+                if (String.IsNullOrEmpty(config))
+                {
+                    tempUnassignedProjects.Add(item);
+                    continue;
+                }
 
-				new_item.SetMetadata ("SetConfiguration", "Configuration=" + parts [0]);
-				new_item.SetMetadata ("SetPlatform", "Platform=" +
-						((parts.Length > 1) ? parts [1] : String.Empty));
+                string[] parts = config.Split(new char[] { '|' }, 2);
 
-				tempAssignedProjects.Add (new_item);
-			}
+                ITaskItem new_item = new TaskItem(item);
 
-			assignedProjects = tempAssignedProjects.ToArray ();
-			unassignedProjects = tempUnassignedProjects.ToArray ();
+                new_item.SetMetadata("SetConfiguration", "Configuration=" + parts[0]);
+                new_item.SetMetadata(
+                    "SetPlatform",
+                    "Platform=" + ((parts.Length > 1) ? parts[1] : String.Empty)
+                );
 
-			return true;
-		}
+                tempAssignedProjects.Add(new_item);
+            }
 
-		string GetConfigPlatformFromProjectReference (ITaskItem item)
-		{
-			string guid_str = item.GetMetadata ("Project");
-			string proj_full_path = item.GetMetadata ("FullPath");
+            assignedProjects = tempAssignedProjects.ToArray();
+            unassignedProjects = tempUnassignedProjects.ToArray();
 
-			string config;
-			Guid guid = Guid.Empty;
-			if (TryParseGuid (guid_str, out guid) && guidToConfigPlatform.TryGetValue (guid, out config))
-				return config;
+            return true;
+        }
 
-			string abs_path = item.GetMetadata ("FullPath");
-			if (absolutePathToConfigPlatform.TryGetValue (abs_path, out config))
-				return config;
+        string GetConfigPlatformFromProjectReference(ITaskItem item)
+        {
+            string guid_str = item.GetMetadata("Project");
+            string proj_full_path = item.GetMetadata("FullPath");
 
-			return null;
-		}
+            string config;
+            Guid guid = Guid.Empty;
+            if (
+                TryParseGuid(guid_str, out guid)
+                && guidToConfigPlatform.TryGetValue(guid, out config)
+            )
+                return config;
 
-		bool TryParseGuid (string guid_str, out Guid guid)
-		{
-			guid = Guid.Empty;
-			if (String.IsNullOrEmpty (guid_str))
-				return false;
+            string abs_path = item.GetMetadata("FullPath");
+            if (absolutePathToConfigPlatform.TryGetValue(abs_path, out config))
+                return config;
 
-			try {
-				guid = new Guid (guid_str);
-			} catch (ArgumentNullException) {
-				return false;
-			} catch (FormatException) {
-				return false;
-			} catch (OverflowException) {
-				return false;
-			}
+            return null;
+        }
 
-			return true;
-		}
+        bool TryParseGuid(string guid_str, out Guid guid)
+        {
+            guid = Guid.Empty;
+            if (String.IsNullOrEmpty(guid_str))
+                return false;
 
+            try
+            {
+                guid = new Guid(guid_str);
+            }
+            catch (ArgumentNullException)
+            {
+                return false;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+            catch (OverflowException)
+            {
+                return false;
+            }
 
-		[Output]
-		public ITaskItem[] AssignedProjects {
-			get { return assignedProjects; }
-			set { assignedProjects = value; }
-		}
-		
-		public string SolutionConfigurationContents {
-			get { return solutionConfigurationContents; }
-			set { solutionConfigurationContents = value; }
-		}
-		
-		[Output]
-		public ITaskItem[] UnassignedProjects {
-			get { return unassignedProjects; }
-			set { unassignedProjects = value; }
-		}
-	}
+            return true;
+        }
+
+        [Output]
+        public ITaskItem[] AssignedProjects
+        {
+            get { return assignedProjects; }
+            set { assignedProjects = value; }
+        }
+
+        public string SolutionConfigurationContents
+        {
+            get { return solutionConfigurationContents; }
+            set { solutionConfigurationContents = value; }
+        }
+
+        [Output]
+        public ITaskItem[] UnassignedProjects
+        {
+            get { return unassignedProjects; }
+            set { unassignedProjects = value; }
+        }
+    }
 }
-

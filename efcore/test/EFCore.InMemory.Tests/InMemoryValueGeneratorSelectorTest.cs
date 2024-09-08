@@ -15,28 +15,70 @@ public class InMemoryValueGeneratorSelectorTest
         var model = BuildModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = InMemoryTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = InMemoryTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
-        Assert.IsType<CustomValueGenerator>(selector.Select(entityType.FindProperty("Custom"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<int>>(selector.Select(entityType.FindProperty("Id"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<long>>(selector.Select(entityType.FindProperty("Long"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<short>>(selector.Select(entityType.FindProperty("Short"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<byte>>(selector.Select(entityType.FindProperty("Byte"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<int>>(selector.Select(entityType.FindProperty("NullableInt"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<long>>(selector.Select(entityType.FindProperty("NullableLong"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<short>>(selector.Select(entityType.FindProperty("NullableShort"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<byte>>(selector.Select(entityType.FindProperty("NullableByte"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<uint>>(selector.Select(entityType.FindProperty("UInt"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<ulong>>(selector.Select(entityType.FindProperty("ULong"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<ushort>>(selector.Select(entityType.FindProperty("UShort"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<sbyte>>(selector.Select(entityType.FindProperty("SByte"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<uint>>(selector.Select(entityType.FindProperty("NullableUInt"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<ulong>>(selector.Select(entityType.FindProperty("NullableULong"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<ushort>>(selector.Select(entityType.FindProperty("NullableUShort"), entityType));
-        Assert.IsType<InMemoryIntegerValueGenerator<sbyte>>(selector.Select(entityType.FindProperty("NullableSByte"), entityType));
-        Assert.IsType<StringValueGenerator>(selector.Select(entityType.FindProperty("String"), entityType));
-        Assert.IsType<GuidValueGenerator>(selector.Select(entityType.FindProperty("Guid"), entityType));
-        Assert.IsType<BinaryValueGenerator>(selector.Select(entityType.FindProperty("Binary"), entityType));
+        Assert.IsType<CustomValueGenerator>(
+            selector.Select(entityType.FindProperty("Custom"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<int>>(
+            selector.Select(entityType.FindProperty("Id"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<long>>(
+            selector.Select(entityType.FindProperty("Long"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<short>>(
+            selector.Select(entityType.FindProperty("Short"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<byte>>(
+            selector.Select(entityType.FindProperty("Byte"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<int>>(
+            selector.Select(entityType.FindProperty("NullableInt"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<long>>(
+            selector.Select(entityType.FindProperty("NullableLong"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<short>>(
+            selector.Select(entityType.FindProperty("NullableShort"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<byte>>(
+            selector.Select(entityType.FindProperty("NullableByte"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<uint>>(
+            selector.Select(entityType.FindProperty("UInt"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<ulong>>(
+            selector.Select(entityType.FindProperty("ULong"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<ushort>>(
+            selector.Select(entityType.FindProperty("UShort"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<sbyte>>(
+            selector.Select(entityType.FindProperty("SByte"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<uint>>(
+            selector.Select(entityType.FindProperty("NullableUInt"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<ulong>>(
+            selector.Select(entityType.FindProperty("NullableULong"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<ushort>>(
+            selector.Select(entityType.FindProperty("NullableUShort"), entityType)
+        );
+        Assert.IsType<InMemoryIntegerValueGenerator<sbyte>>(
+            selector.Select(entityType.FindProperty("NullableSByte"), entityType)
+        );
+        Assert.IsType<StringValueGenerator>(
+            selector.Select(entityType.FindProperty("String"), entityType)
+        );
+        Assert.IsType<GuidValueGenerator>(
+            selector.Select(entityType.FindProperty("Guid"), entityType)
+        );
+        Assert.IsType<BinaryValueGenerator>(
+            selector.Select(entityType.FindProperty("Binary"), entityType)
+        );
     }
 
     [ConditionalFact]
@@ -67,7 +109,9 @@ public class InMemoryValueGeneratorSelectorTest
     {
         var model = BuildModel();
 
-        var selector = InMemoryTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = InMemoryTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
         return selector.Select(property, property.DeclaringType).Next(null);
     }
@@ -78,17 +122,27 @@ public class InMemoryValueGeneratorSelectorTest
         var model = BuildModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = InMemoryTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = InMemoryTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
         Assert.Equal(
             CoreStrings.NoValueGenerator("Float", "AnEntity", "float"),
-            Assert.Throws<NotSupportedException>(() => selector.Select(entityType.FindProperty("Float"), entityType)).Message);
+            Assert
+                .Throws<NotSupportedException>(
+                    () => selector.Select(entityType.FindProperty("Float"), entityType)
+                )
+                .Message
+        );
     }
 
     private static IModel BuildModel(bool generateValues = true)
     {
         var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-        builder.Entity<AnEntity>().Property(e => e.Custom).HasValueGenerator<CustomValueGenerator>();
+        builder
+            .Entity<AnEntity>()
+            .Property(e => e.Custom)
+            .HasValueGenerator<CustomValueGenerator>();
         var model = builder.Model;
         var entityType = model.FindEntityType(typeof(AnEntity));
 
@@ -127,10 +181,8 @@ public class InMemoryValueGeneratorSelectorTest
 
     private class CustomValueGenerator : ValueGenerator<int>
     {
-        public override int Next(EntityEntry entry)
-            => throw new NotImplementedException();
+        public override int Next(EntityEntry entry) => throw new NotImplementedException();
 
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
     }
 }

@@ -18,7 +18,13 @@ internal sealed class ForwardedHeadersStartupFilter : IStartupFilter
 
     public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
     {
-        if (!string.Equals("true", _configuration["ForwardedHeaders_Enabled"], StringComparison.OrdinalIgnoreCase))
+        if (
+            !string.Equals(
+                "true",
+                _configuration["ForwardedHeaders_Enabled"],
+                StringComparison.OrdinalIgnoreCase
+            )
+        )
         {
             return next;
         }

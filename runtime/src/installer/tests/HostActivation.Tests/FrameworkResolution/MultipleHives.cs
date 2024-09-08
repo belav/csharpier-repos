@@ -11,9 +11,9 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
-    public class MultipleHives :
-        FrameworkResolutionBase,
-        IClassFixture<MultipleHives.SharedTestState>
+    public class MultipleHives
+        : FrameworkResolutionBase,
+            IClassFixture<MultipleHives.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 
@@ -41,31 +41,44 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [InlineData("6.0.0", "net6.0", true, "6.1.4")] // Global hive with better version (higher patch)
         [InlineData("6.0.0", "net6.0", null, "6.1.4")] // MLL is on by default, so same as true
         [InlineData("6.0.0", "net6.0", false, "6.1.3")] // No globla hive, so the main hive version is picked
-        public void FrameworkHiveSelection(string requestedVersion, string tfm, bool? multiLevelLookup, string resolvedVersion)
+        public void FrameworkHiveSelection(
+            string requestedVersion,
+            string tfm,
+            bool? multiLevelLookup,
+            string resolvedVersion
+        )
         {
             // Multi-level lookup is only supported on Windows.
             if (!OperatingSystem.IsWindows() && multiLevelLookup != false)
                 return;
 
             RunTest(
-                runtimeConfig => runtimeConfig
-                    .WithTfm(tfm)
-                    .WithFramework(MicrosoftNETCoreApp, requestedVersion),
-                multiLevelLookup)
+                    runtimeConfig =>
+                        runtimeConfig
+                            .WithTfm(tfm)
+                            .WithFramework(MicrosoftNETCoreApp, requestedVersion),
+                    multiLevelLookup
+                )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, resolvedVersion)
-                .And.HaveStdErrContaining($"Ignoring FX version [{requestedVersion}] without .deps.json");
+                .And.HaveStdErrContaining(
+                    $"Ignoring FX version [{requestedVersion}] without .deps.json"
+                );
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Multiple hives are only supported on Windows.
         public void FrameworkHiveSelection_CurrentDirectoryIsIgnored()
         {
-            RunTest(new TestSettings()
-                    .WithRuntimeConfigCustomizer(runtimeConfig => runtimeConfig
-                        .WithTfm("net6.0")
-                        .WithFramework(MicrosoftNETCoreApp, "5.0.0"))
-                    .WithWorkingDirectory(SharedState.DotNetCurrentHive.BinPath),
-                multiLevelLookup: true)
+            RunTest(
+                    new TestSettings()
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig
+                                .WithTfm("net6.0")
+                                .WithFramework(MicrosoftNETCoreApp, "5.0.0")
+                        )
+                        .WithWorkingDirectory(SharedState.DotNetCurrentHive.BinPath),
+                    multiLevelLookup: true
+                )
                 .ShouldHaveResolvedFramework(MicrosoftNETCoreApp, "5.1.2");
         }
 
@@ -77,26 +90,38 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [InlineData("6.1.4", "net6.0", true, "6.1.4", true)]
         [InlineData("6.1.4", "net6.0", null, "6.1.4", true)]
         [InlineData("6.1.4", "net6.0", false, ResolvedFramework.NotFound, false)]
-        [InlineData("6.1.4", "net7.0", true, ResolvedFramework.NotFound, false)]  // MLL disabled for 7.0+
-        [InlineData("7.1.2", "net6.0", true, "7.1.2", false)]  // 7.1.2 is in both main and global hives - the main should always win with exact match
+        [InlineData("6.1.4", "net7.0", true, ResolvedFramework.NotFound, false)] // MLL disabled for 7.0+
+        [InlineData("7.1.2", "net6.0", true, "7.1.2", false)] // 7.1.2 is in both main and global hives - the main should always win with exact match
         [InlineData("7.1.2", "net6.0", null, "7.1.2", false)]
         [InlineData("7.1.2", "net6.0", false, "7.1.2", false)]
         [InlineData("7.1.2", "net7.0", true, "7.1.2", false)]
-        public void FxVersionCLI(string fxVersion, string tfm, bool? multiLevelLookup, string resolvedVersion, bool fromGlobalHive)
+        public void FxVersionCLI(
+            string fxVersion,
+            string tfm,
+            bool? multiLevelLookup,
+            string resolvedVersion,
+            bool fromGlobalHive
+        )
         {
             // Multi-level lookup is only supported on Windows.
             if (!OperatingSystem.IsWindows() && multiLevelLookup != false)
                 return;
 
             RunTest(
-                new TestSettings()
-                    .WithRuntimeConfigCustomizer(
-                        runtimeConfig => runtimeConfig
-                            .WithTfm(tfm)
-                            .WithFramework(MicrosoftNETCoreApp, "4.0.0"))
-                    .WithCommandLine(Constants.FxVersion.CommandLineArgument, fxVersion),
-                multiLevelLookup)
-                .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedVersion, fromGlobalHive ? SharedState.DotNetGlobalHive.BinPath : SharedState.DotNetMainHive.BinPath);
+                    new TestSettings()
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithTfm(tfm).WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        )
+                        .WithCommandLine(Constants.FxVersion.CommandLineArgument, fxVersion),
+                    multiLevelLookup
+                )
+                .ShouldHaveResolvedFrameworkOrFailToFind(
+                    MicrosoftNETCoreApp,
+                    resolvedVersion,
+                    fromGlobalHive
+                        ? SharedState.DotNetGlobalHive.BinPath
+                        : SharedState.DotNetMainHive.BinPath
+                );
         }
 
         private record struct FrameworkInfo(string Name, string Version, int Level, string Path);
@@ -105,35 +130,101 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         {
             // The runtimes should be ordered by version number
             List<FrameworkInfo> expectedList = new();
-            expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "5.2.0", 1, SharedState.DotNetMainHive.BinPath));
-            expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "6.1.2", 1, SharedState.DotNetMainHive.BinPath));
-            expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "6.1.3", 1, SharedState.DotNetMainHive.BinPath));
-            expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "7.1.2", 1, SharedState.DotNetMainHive.BinPath));
+            expectedList.Add(
+                new FrameworkInfo(
+                    MicrosoftNETCoreApp,
+                    "5.2.0",
+                    1,
+                    SharedState.DotNetMainHive.BinPath
+                )
+            );
+            expectedList.Add(
+                new FrameworkInfo(
+                    MicrosoftNETCoreApp,
+                    "6.1.2",
+                    1,
+                    SharedState.DotNetMainHive.BinPath
+                )
+            );
+            expectedList.Add(
+                new FrameworkInfo(
+                    MicrosoftNETCoreApp,
+                    "6.1.3",
+                    1,
+                    SharedState.DotNetMainHive.BinPath
+                )
+            );
+            expectedList.Add(
+                new FrameworkInfo(
+                    MicrosoftNETCoreApp,
+                    "7.1.2",
+                    1,
+                    SharedState.DotNetMainHive.BinPath
+                )
+            );
             if (multiLevelLookup is null || multiLevelLookup == true)
             {
-                expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "5.1.2", 2, SharedState.DotNetGlobalHive.BinPath));
-                expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "6.1.4", 2, SharedState.DotNetGlobalHive.BinPath));
-                expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "6.2.0", 2, SharedState.DotNetGlobalHive.BinPath));
-                expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "7.0.1", 2, SharedState.DotNetGlobalHive.BinPath));
-                expectedList.Add(new FrameworkInfo(MicrosoftNETCoreApp, "7.1.2", 2, SharedState.DotNetGlobalHive.BinPath));
+                expectedList.Add(
+                    new FrameworkInfo(
+                        MicrosoftNETCoreApp,
+                        "5.1.2",
+                        2,
+                        SharedState.DotNetGlobalHive.BinPath
+                    )
+                );
+                expectedList.Add(
+                    new FrameworkInfo(
+                        MicrosoftNETCoreApp,
+                        "6.1.4",
+                        2,
+                        SharedState.DotNetGlobalHive.BinPath
+                    )
+                );
+                expectedList.Add(
+                    new FrameworkInfo(
+                        MicrosoftNETCoreApp,
+                        "6.2.0",
+                        2,
+                        SharedState.DotNetGlobalHive.BinPath
+                    )
+                );
+                expectedList.Add(
+                    new FrameworkInfo(
+                        MicrosoftNETCoreApp,
+                        "7.0.1",
+                        2,
+                        SharedState.DotNetGlobalHive.BinPath
+                    )
+                );
+                expectedList.Add(
+                    new FrameworkInfo(
+                        MicrosoftNETCoreApp,
+                        "7.1.2",
+                        2,
+                        SharedState.DotNetGlobalHive.BinPath
+                    )
+                );
             }
-            expectedList.Sort((a, b) => {
-                int result = a.Name.CompareTo(b.Name);
-                if (result != 0)
-                    return result;
+            expectedList.Sort(
+                (a, b) =>
+                {
+                    int result = a.Name.CompareTo(b.Name);
+                    if (result != 0)
+                        return result;
 
-                if (!Version.TryParse(a.Version, out var aVersion))
-                    return -1;
+                    if (!Version.TryParse(a.Version, out var aVersion))
+                        return -1;
 
-                if (!Version.TryParse(b.Version, out var bVersion))
-                    return 1;
+                    if (!Version.TryParse(b.Version, out var bVersion))
+                        return 1;
 
-                result = aVersion.CompareTo(bVersion);
-                if (result != 0)
-                    return result;
+                    result = aVersion.CompareTo(bVersion);
+                    if (result != 0)
+                        return result;
 
-                return b.Level.CompareTo(a.Level);
-            });
+                    return b.Level.CompareTo(a.Level);
+                }
+            );
             return expectedList;
         }
 
@@ -150,15 +241,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             string expectedOutput = string.Join(
                 string.Empty,
                 GetExpectedFrameworks(false) // MLL Is always disabled for dotnet --list-runtimes
-                    .Select(t => $"{MicrosoftNETCoreApp} {t.Version} [{Path.Combine(t.Path, "shared", MicrosoftNETCoreApp)}]{Environment.NewLine}"));
+                    .Select(t =>
+                        $"{MicrosoftNETCoreApp} {t.Version} [{Path.Combine(t.Path, "shared", MicrosoftNETCoreApp)}]{Environment.NewLine}"
+                    )
+            );
 
             // !!IMPORTANT!!: This test verifies the exact match of the entire output of the command (not a substring!)
             // This is important as the output of --list-runtimes is considered machine readable and thus must not change even in a minor way (unintentionally)
             RunTest(
-                new TestSettings().WithCommandLine("--list-runtimes"),
-                multiLevelLookup,
-                testApp: null)
-                .Should().HaveStdOut(expectedOutput)
+                    new TestSettings().WithCommandLine("--list-runtimes"),
+                    multiLevelLookup,
+                    testApp: null
+                )
+                .Should()
+                .HaveStdOut(expectedOutput)
                 .And.HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
         }
 
@@ -173,16 +269,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 return;
 
             string expectedOutput =
-                $".NET runtimes installed:{Environment.NewLine}" +
-                string.Join(string.Empty,
+                $".NET runtimes installed:{Environment.NewLine}"
+                + string.Join(
+                    string.Empty,
                     GetExpectedFrameworks(false) // MLL is always disabled for dotnet --info
-                        .Select(t => $"  {MicrosoftNETCoreApp} {t.Version} [{Path.Combine(t.Path, "shared", MicrosoftNETCoreApp)}]{Environment.NewLine}"));
+                        .Select(t =>
+                            $"  {MicrosoftNETCoreApp} {t.Version} [{Path.Combine(t.Path, "shared", MicrosoftNETCoreApp)}]{Environment.NewLine}"
+                        )
+                );
 
-            RunTest(
-                new TestSettings().WithCommandLine("--info"),
-                multiLevelLookup,
-                testApp: null)
-                .Should().HaveStdOutContaining(expectedOutput)
+            RunTest(new TestSettings().WithCommandLine("--info"), multiLevelLookup, testApp: null)
+                .Should()
+                .HaveStdOutContaining(expectedOutput)
                 .And.HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
         }
 
@@ -194,47 +292,71 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         [InlineData("net7.0", true, false)]
         [InlineData("net7.0", null, false)]
         [InlineData("net7.0", false, false)]
-        public void FrameworkResolutionError(string tfm, bool? multiLevelLookup, bool effectiveMultiLevelLookup)
+        public void FrameworkResolutionError(
+            string tfm,
+            bool? multiLevelLookup,
+            bool effectiveMultiLevelLookup
+        )
         {
             // Multi-level lookup is only supported on Windows.
             if (!OperatingSystem.IsWindows() && multiLevelLookup != false)
                 return;
 
             string expectedOutput =
-                $"The following frameworks were found:{Environment.NewLine}" +
-                string.Join(string.Empty,
+                $"The following frameworks were found:{Environment.NewLine}"
+                + string.Join(
+                    string.Empty,
                     GetExpectedFrameworks(effectiveMultiLevelLookup)
-                        .Select(t => $"  {t.Version} at [{Path.Combine(t.Path, "shared", MicrosoftNETCoreApp)}]{Environment.NewLine}"));
+                        .Select(t =>
+                            $"  {t.Version} at [{Path.Combine(t.Path, "shared", MicrosoftNETCoreApp)}]{Environment.NewLine}"
+                        )
+                );
 
             RunTest(
-                runtimeConfig => runtimeConfig
-                    .WithTfm(tfm)
-                    .WithFramework(MicrosoftNETCoreApp, "9999.9.9"),
-                multiLevelLookup)
-                .Should().Fail()
+                    runtimeConfig =>
+                        runtimeConfig.WithTfm(tfm).WithFramework(MicrosoftNETCoreApp, "9999.9.9"),
+                    multiLevelLookup
+                )
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining(expectedOutput)
                 .And.HaveStdErrContaining("https://aka.ms/dotnet/app-launch-failed")
                 .And.HaveStdErrContaining("Ignoring FX version [9999.9.9] without .deps.json");
         }
 
-        private CommandResult RunTest(Func<RuntimeConfig, RuntimeConfig> runtimeConfig, bool? multiLevelLookup = true)
-            => RunTest(new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig), multiLevelLookup);
+        private CommandResult RunTest(
+            Func<RuntimeConfig, RuntimeConfig> runtimeConfig,
+            bool? multiLevelLookup = true
+        ) =>
+            RunTest(
+                new TestSettings().WithRuntimeConfigCustomizer(runtimeConfig),
+                multiLevelLookup
+            );
 
-        private CommandResult RunTest(TestSettings testSettings, bool? multiLevelLookup)
-            => RunTest(testSettings, multiLevelLookup, SharedState.FrameworkReferenceApp);
+        private CommandResult RunTest(TestSettings testSettings, bool? multiLevelLookup) =>
+            RunTest(testSettings, multiLevelLookup, SharedState.FrameworkReferenceApp);
 
-        private CommandResult RunTest(TestSettings testSettings, bool? multiLevelLookup, TestApp testApp)
+        private CommandResult RunTest(
+            TestSettings testSettings,
+            bool? multiLevelLookup,
+            TestApp testApp
+        )
         {
             return RunTest(
                 SharedState.DotNetMainHive,
                 testApp,
                 testSettings
-                    .WithEnvironment(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, SharedState.DotNetGlobalHive.BinPath)
+                    .WithEnvironment(
+                        Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                        SharedState.DotNetGlobalHive.BinPath
+                    )
                     .WithEnvironment( // Redirect the default install location to an invalid location so that a machine-wide install is not used
                         Constants.TestOnlyEnvironmentVariables.DefaultInstallPath,
-                        System.IO.Path.Combine(SharedState.DotNetMainHive.BinPath, "invalid")),
+                        System.IO.Path.Combine(SharedState.DotNetMainHive.BinPath, "invalid")
+                    ),
                 // Must enable multi-level lookup otherwise multiple hives are not enabled
-                multiLevelLookup: multiLevelLookup);
+                multiLevelLookup: multiLevelLookup
+            );
         }
 
         public class SharedTestState : SharedTestStateBase
@@ -260,7 +382,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
                 // Empty Microsoft.NETCore.App directory - should not be recognized as a valid framework
                 // Version is the best match for some test cases, but they should be ignored
-                string netCoreAppDir = Path.Combine(DotNetMainHive.BinPath, "shared", Constants.MicrosoftNETCoreApp);
+                string netCoreAppDir = Path.Combine(
+                    DotNetMainHive.BinPath,
+                    "shared",
+                    Constants.MicrosoftNETCoreApp
+                );
                 Directory.CreateDirectory(Path.Combine(netCoreAppDir, "5.0.0"));
                 Directory.CreateDirectory(Path.Combine(netCoreAppDir, "6.0.0"));
                 Directory.CreateDirectory(Path.Combine(netCoreAppDir, "7.0.0"));
@@ -281,7 +407,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
                 FrameworkReferenceApp = CreateFrameworkReferenceApp();
 
-                _testOnlyProductBehaviorScope = TestOnlyProductBehavior.Enable(DotNetMainHive.GreatestVersionHostFxrFilePath);
+                _testOnlyProductBehaviorScope = TestOnlyProductBehavior.Enable(
+                    DotNetMainHive.GreatestVersionHostFxrFilePath
+                );
             }
 
             protected override void Dispose(bool disposing)

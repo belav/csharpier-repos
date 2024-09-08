@@ -11,9 +11,7 @@ namespace System.Net.Http.Formatting.Mocks
 
     public class MockHttpContent : HttpContent
     {
-        public MockHttpContent()
-        {
-        }
+        public MockHttpContent() { }
 
         public MockHttpContent(HttpContent innerContent)
         {
@@ -68,7 +66,9 @@ namespace System.Net.Http.Formatting.Mocks
             }
             else
             {
-                throw new InvalidOperationException("Construct with inner HttpContent or set SerializeToStreamCallback first.");
+                throw new InvalidOperationException(
+                    "Construct with inner HttpContent or set SerializeToStreamCallback first."
+                );
             }
         }
 

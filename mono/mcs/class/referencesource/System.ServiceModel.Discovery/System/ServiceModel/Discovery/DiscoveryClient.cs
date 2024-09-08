@@ -9,19 +9,22 @@ namespace System.ServiceModel.Discovery
     using System.ComponentModel;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Discovery.Configuration;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Xml;
     using SR2 = System.ServiceModel.Discovery.SR;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
-    using System.Threading.Tasks;
 
     [Fx.Tag.XamlVisible(false)]
-    public sealed class DiscoveryClient : ICommunicationObject, IDiscoveryInnerClientResponse, IDisposable
+    public sealed class DiscoveryClient
+        : ICommunicationObject,
+            IDiscoveryInnerClientResponse,
+            IDisposable
     {
         static TimeSpan defaultCloseDuration = TimeSpan.FromSeconds(60);
 
@@ -40,13 +43,14 @@ namespace System.ServiceModel.Discovery
         [Fx.Tag.Queue(typeof(AsyncOperationContext))]
         AsyncOperationLifetimeManager asyncOperationsLifetimeManager;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int closeCalled;
 
         public DiscoveryClient()
-            : this("*")
-        {
-        }
+            : this("*") { }
 
         public DiscoveryClient(string endpointConfigurationName)
         {
@@ -57,7 +61,8 @@ namespace System.ServiceModel.Discovery
 
             DiscoveryEndpoint discoveryEndpoint =
                 ConfigurationUtility.LookupEndpointFromClientSection<DiscoveryEndpoint>(
-                endpointConfigurationName);
+                    endpointConfigurationName
+                );
 
             this.Initialize(discoveryEndpoint);
         }
@@ -107,7 +112,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalOpened += value;
             }
-
             remove
             {
                 this.InternalOpened -= value;
@@ -128,7 +132,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalClosing += value;
             }
-
             remove
             {
                 this.InternalClosing -= value;
@@ -149,7 +152,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalClosed += value;
             }
-
             remove
             {
                 this.InternalClosed -= value;
@@ -170,7 +172,6 @@ namespace System.ServiceModel.Discovery
                 }
                 this.InternalFaulted += value;
             }
-
             remove
             {
                 this.InternalFaulted -= value;
@@ -189,104 +190,108 @@ namespace System.ServiceModel.Discovery
 
         public ChannelFactory ChannelFactory
         {
-            get
-            {
-                return this.InnerClient.ChannelFactory;
-            }
+            get { return this.InnerClient.ChannelFactory; }
         }
 
         public ClientCredentials ClientCredentials
         {
-            get
-            {
-                return this.InnerClient.ClientCredentials;
-            }
+            get { return this.InnerClient.ClientCredentials; }
         }
 
         public ServiceEndpoint Endpoint
         {
-            get
-            {
-                return this.InnerClient.Endpoint;
-            }
+            get { return this.InnerClient.Endpoint; }
         }
 
         public IClientChannel InnerChannel
         {
-            get
-            {
-                return this.InnerClient.InnerChannel;
-            }
+            get { return this.InnerClient.InnerChannel; }
         }
 
         CommunicationState ICommunicationObject.State
         {
-            get
-            {
-                return this.InnerCommunicationObject.State;
-            }
+            get { return this.InnerCommunicationObject.State; }
         }
 
         IDiscoveryInnerClient InnerClient
         {
-            get
-            {
-                return this.innerClient;
-            }
+            get { return this.innerClient; }
         }
 
         ICommunicationObject InnerCommunicationObject
         {
-            get
-            {
-                return this.InnerClient.InnerCommunicationObject;
-            }
+            get { return this.InnerClient.InnerCommunicationObject; }
         }
 
         [Fx.Tag.InheritThrows(From = "Open", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         void ICommunicationObject.Open()
         {
             this.InnerCommunicationObject.Open();
         }
 
         [Fx.Tag.InheritThrows(From = "Open", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         void ICommunicationObject.Open(TimeSpan timeout)
         {
             this.InnerCommunicationObject.Open(timeout);
         }
 
         [Fx.Tag.InheritThrows(From = "BeginOpen", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         IAsyncResult ICommunicationObject.BeginOpen(AsyncCallback callback, object state)
         {
             return this.InnerCommunicationObject.BeginOpen(callback, state);
         }
 
         [Fx.Tag.InheritThrows(From = "BeginOpen", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
-        IAsyncResult ICommunicationObject.BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
+        IAsyncResult ICommunicationObject.BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerCommunicationObject.BeginOpen(timeout, callback, state);
         }
 
         [Fx.Tag.InheritThrows(From = "EndOpen", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         void ICommunicationObject.EndOpen(IAsyncResult result)
         {
             this.InnerCommunicationObject.EndOpen(result);
         }
 
         [Fx.Tag.InheritThrows(From = "Close", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         void ICommunicationObject.Close()
         {
             ((ICommunicationObject)this).Close(defaultCloseDuration);
         }
 
         [Fx.Tag.InheritThrows(From = "Close", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         void ICommunicationObject.Close(TimeSpan timeout)
         {
             if (this.IsCloseOrAbortCalled())
@@ -308,7 +313,9 @@ namespace System.ServiceModel.Discovery
             if (timeoutException != null)
             {
                 ((ICommunicationObject)this).Abort();
-                throw FxTrace.Exception.AsError(new TimeoutException(SR2.DiscoveryCloseTimedOut(timeout), timeoutException));
+                throw FxTrace.Exception.AsError(
+                    new TimeoutException(SR2.DiscoveryCloseTimedOut(timeout), timeoutException)
+                );
             }
             else
             {
@@ -319,27 +326,46 @@ namespace System.ServiceModel.Discovery
                 catch (ProtocolException protocolException)
                 {
                     // no-op, When the client has received the required Matches and tries to
-                    // close the connection, there could be a ProtocolException if the service is 
-                    // trying to send more Matches. We catch such an exception and suppress it.                    
+                    // close the connection, there could be a ProtocolException if the service is
+                    // trying to send more Matches. We catch such an exception and suppress it.
                     if (TD.DiscoveryClientProtocolExceptionSuppressedIsEnabled())
                     {
                         TD.DiscoveryClientProtocolExceptionSuppressed(protocolException);
                     }
                 }
             }
-
         }
 
-        [Fx.Tag.InheritThrows(From = "BeginClose", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.InheritThrows(
+            From = "BeginClose",
+            FromDeclaringType = typeof(ICommunicationObject)
+        )]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         IAsyncResult ICommunicationObject.BeginClose(AsyncCallback callback, object state)
         {
-            return ((ICommunicationObject)this).BeginClose(DiscoveryClient.defaultCloseDuration, callback, state);
+            return ((ICommunicationObject)this).BeginClose(
+                DiscoveryClient.defaultCloseDuration,
+                callback,
+                state
+            );
         }
 
-        [Fx.Tag.InheritThrows(From = "BeginClose", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
-        IAsyncResult ICommunicationObject.BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        [Fx.Tag.InheritThrows(
+            From = "BeginClose",
+            FromDeclaringType = typeof(ICommunicationObject)
+        )]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
+        IAsyncResult ICommunicationObject.BeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.IsCloseOrAbortCalled())
             {
@@ -352,7 +378,10 @@ namespace System.ServiceModel.Discovery
         }
 
         [Fx.Tag.InheritThrows(From = "EndClose", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         void ICommunicationObject.EndClose(IAsyncResult result)
         {
             CloseAsyncResult.End(result);
@@ -371,13 +400,19 @@ namespace System.ServiceModel.Discovery
         }
 
         [Fx.Tag.InheritThrows(From = "Open", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         public void Open()
         {
             ((ICommunicationObject)this).Open();
         }
 
-        [Fx.Tag.Throws(typeof(CommunicationException), "A communication failure interrupted this operation.")]
+        [Fx.Tag.Throws(
+            typeof(CommunicationException),
+            "A communication failure interrupted this operation."
+        )]
         [Fx.Tag.Throws.TimeoutAttribute]
         [Fx.Tag.Blocking(CancelMethod = "Abort")]
         public FindResponse Find(FindCriteria criteria)
@@ -387,9 +422,14 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("criteria");
             }
 
-            if ((criteria.MaxResults == int.MaxValue) && (criteria.Duration.Equals(TimeSpan.MaxValue)))
+            if (
+                (criteria.MaxResults == int.MaxValue)
+                && (criteria.Duration.Equals(TimeSpan.MaxValue))
+            )
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR2.DiscoveryFindCanNeverComplete));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(SR2.DiscoveryFindCanNeverComplete)
+                );
             }
 
             SyncOperationState syncOperationState = new SyncOperationState();
@@ -428,15 +468,24 @@ namespace System.ServiceModel.Discovery
         }
 
         [Fx.Tag.Throws(typeof(AggregateException), "Inherits from the Task exception contract.")]
-        public Task<FindResponse> FindTaskAsync(FindCriteria criteria, CancellationToken cancellationToken)
+        public Task<FindResponse> FindTaskAsync(
+            FindCriteria criteria,
+            CancellationToken cancellationToken
+        )
         {
             if (criteria == null)
             {
                 throw FxTrace.Exception.ArgumentNull("criteria");
             }
 
-            TaskCompletionSource<FindResponse> taskCompletionSource = new TaskCompletionSource<FindResponse>();
-            TaskAsyncOperationState<FindResponse> taskAsyncOperationState = new TaskAsyncOperationState<FindResponse>(this, taskCompletionSource, cancellationToken);
+            TaskCompletionSource<FindResponse> taskCompletionSource =
+                new TaskCompletionSource<FindResponse>();
+            TaskAsyncOperationState<FindResponse> taskAsyncOperationState =
+                new TaskAsyncOperationState<FindResponse>(
+                    this,
+                    taskCompletionSource,
+                    cancellationToken
+                );
             Task<FindResponse> task = taskCompletionSource.Task;
             this.FindAsync(criteria, taskAsyncOperationState);
             return task;
@@ -449,21 +498,33 @@ namespace System.ServiceModel.Discovery
         }
 
         [Fx.Tag.Throws(typeof(AggregateException), "Inherits from the Task exception contract.")]
-        public Task<ResolveResponse> ResolveTaskAsync(ResolveCriteria criteria, CancellationToken cancellationToken)
+        public Task<ResolveResponse> ResolveTaskAsync(
+            ResolveCriteria criteria,
+            CancellationToken cancellationToken
+        )
         {
             if (criteria == null)
             {
                 throw FxTrace.Exception.ArgumentNull("criteria");
             }
 
-            TaskCompletionSource<ResolveResponse> taskCompletionSource = new TaskCompletionSource<ResolveResponse>();
-            TaskAsyncOperationState<ResolveResponse> taskAsyncOperationState = new TaskAsyncOperationState<ResolveResponse>(this, taskCompletionSource, cancellationToken);
+            TaskCompletionSource<ResolveResponse> taskCompletionSource =
+                new TaskCompletionSource<ResolveResponse>();
+            TaskAsyncOperationState<ResolveResponse> taskAsyncOperationState =
+                new TaskAsyncOperationState<ResolveResponse>(
+                    this,
+                    taskCompletionSource,
+                    cancellationToken
+                );
             Task<ResolveResponse> task = taskCompletionSource.Task;
             this.ResolveAsync(criteria, taskAsyncOperationState);
             return task;
         }
 
-        [Fx.Tag.Throws(typeof(CommunicationException), "A communication failure interrupted this operation.")]
+        [Fx.Tag.Throws(
+            typeof(CommunicationException),
+            "A communication failure interrupted this operation."
+        )]
         [Fx.Tag.Throws.TimeoutAttribute]
         [Fx.Tag.Blocking(CancelMethod = "Abort")]
         public ResolveResponse Resolve(ResolveCriteria criteria)
@@ -497,7 +558,10 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        [Fx.Tag.Throws(typeof(InvalidOperationException), "If there are more than one operations pending that are associated with the specified userState.")]
+        [Fx.Tag.Throws(
+            typeof(InvalidOperationException),
+            "If there are more than one operations pending that are associated with the specified userState."
+        )]
         public void CancelAsync(object userState)
         {
             if (userState == null)
@@ -521,44 +585,70 @@ namespace System.ServiceModel.Discovery
             {
                 if (context != null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.DiscoveryMultiplePendingOperationsPerUserState));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR2.DiscoveryMultiplePendingOperationsPerUserState
+                        )
+                    );
                 }
             }
         }
 
         [Fx.Tag.InheritThrows(From = "Close", FromDeclaringType = typeof(ICommunicationObject))]
-        [Fx.Tag.Blocking(CancelMethod = "Abort", CancelDeclaringType = typeof(ICommunicationObject))]
+        [Fx.Tag.Blocking(
+            CancelMethod = "Abort",
+            CancelDeclaringType = typeof(ICommunicationObject)
+        )]
         public void Close()
         {
             ((ICommunicationObject)this).Close();
         }
 
-        void IDiscoveryInnerClientResponse.PostFindCompletedAndRemove(UniqueId operationId, bool cancelled, Exception error)
+        void IDiscoveryInnerClientResponse.PostFindCompletedAndRemove(
+            UniqueId operationId,
+            bool cancelled,
+            Exception error
+        )
         {
-            FindAsyncOperationContext context = this.asyncOperationsLifetimeManager.Remove<FindAsyncOperationContext>(operationId);
+            FindAsyncOperationContext context =
+                this.asyncOperationsLifetimeManager.Remove<FindAsyncOperationContext>(operationId);
             if (context != null)
             {
                 this.PostFindCompleted(context, cancelled, error);
             }
         }
 
-        void IDiscoveryInnerClientResponse.PostResolveCompletedAndRemove(UniqueId operationId, bool cancelled, Exception error)
+        void IDiscoveryInnerClientResponse.PostResolveCompletedAndRemove(
+            UniqueId operationId,
+            bool cancelled,
+            Exception error
+        )
         {
-            ResolveAsyncOperationContext context = this.asyncOperationsLifetimeManager.Remove<ResolveAsyncOperationContext>(operationId);
+            ResolveAsyncOperationContext context =
+                this.asyncOperationsLifetimeManager.Remove<ResolveAsyncOperationContext>(
+                    operationId
+                );
             if (context != null)
             {
                 this.PostResolveCompleted(context, cancelled, error);
             }
         }
 
-        void IDiscoveryInnerClientResponse.ProbeMatchOperation(UniqueId relatesTo, DiscoveryMessageSequence discoveryMessageSequence, Collection<EndpointDiscoveryMetadata> endpointDiscoveryMetadataCollection, bool findCompleted)
+        void IDiscoveryInnerClientResponse.ProbeMatchOperation(
+            UniqueId relatesTo,
+            DiscoveryMessageSequence discoveryMessageSequence,
+            Collection<EndpointDiscoveryMetadata> endpointDiscoveryMetadataCollection,
+            bool findCompleted
+        )
         {
             EventTraceActivity eventTraceActivity = null;
             OperationContext operationContext = OperationContext.Current;
 
             if (Fx.Trace.IsEtwProviderEnabled && operationContext != null)
             {
-                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(operationContext.IncomingMessage);
+                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    operationContext.IncomingMessage
+                );
             }
 
             if (relatesTo == null)
@@ -568,23 +658,33 @@ namespace System.ServiceModel.Discovery
                     TD.DiscoveryMessageWithNullRelatesTo(
                         eventTraceActivity,
                         ProtocolStrings.TracingStrings.ProbeMatches,
-                        operationContext.IncomingMessageHeaders.MessageId.ToString());
+                        operationContext.IncomingMessageHeaders.MessageId.ToString()
+                    );
                 }
 
                 return;
             }
 
             FindAsyncOperationContext context = null;
-            if (!this.asyncOperationsLifetimeManager.TryLookup<FindAsyncOperationContext>(relatesTo, out context))
+            if (
+                !this.asyncOperationsLifetimeManager.TryLookup<FindAsyncOperationContext>(
+                    relatesTo,
+                    out context
+                )
+            )
             {
-                if (TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompletedIsEnabled() && operationContext != null)
+                if (
+                    TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompletedIsEnabled()
+                    && operationContext != null
+                )
                 {
                     TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompleted(
                         eventTraceActivity,
                         ProtocolStrings.TracingStrings.ProbeMatches,
                         operationContext.IncomingMessageHeaders.MessageId.ToString(),
                         relatesTo.ToString(),
-                        ProtocolStrings.TracingStrings.FindOperation);
+                        ProtocolStrings.TracingStrings.FindOperation
+                    );
                 }
 
                 return;
@@ -595,16 +695,31 @@ namespace System.ServiceModel.Discovery
             {
                 if (!context.IsCompleted && (context.Result.Endpoints.Count < context.MaxResults))
                 {
-                    bool postProgress = (!context.IsSyncOperation && !context.IsTaskBasedOperation && this.FindProgressChanged != null);
+                    bool postProgress = (
+                        !context.IsSyncOperation
+                        && !context.IsTaskBasedOperation
+                        && this.FindProgressChanged != null
+                    );
 
-                    foreach (EndpointDiscoveryMetadata endpointDiscoveryMetadata in endpointDiscoveryMetadataCollection)
+                    foreach (
+                        EndpointDiscoveryMetadata endpointDiscoveryMetadata in endpointDiscoveryMetadataCollection
+                    )
                     {
-                        context.Result.AddDiscoveredEndpoint(endpointDiscoveryMetadata, discoveryMessageSequence);
+                        context.Result.AddDiscoveredEndpoint(
+                            endpointDiscoveryMetadata,
+                            discoveryMessageSequence
+                        );
                         if (postProgress)
                         {
                             context.AsyncOperation.Post(
                                 this.findProgressChangedDelegate,
-                                new FindProgressChangedEventArgs(context.Progress, context.UserState, endpointDiscoveryMetadata, discoveryMessageSequence));
+                                new FindProgressChangedEventArgs(
+                                    context.Progress,
+                                    context.UserState,
+                                    endpointDiscoveryMetadata,
+                                    discoveryMessageSequence
+                                )
+                            );
                         }
 
                         if (context.Result.Endpoints.Count == context.MaxResults)
@@ -616,31 +731,45 @@ namespace System.ServiceModel.Discovery
                 }
                 else
                 {
-                    if (TD.DiscoveryMessageReceivedAfterOperationCompletedIsEnabled() && operationContext != null)
+                    if (
+                        TD.DiscoveryMessageReceivedAfterOperationCompletedIsEnabled()
+                        && operationContext != null
+                    )
                     {
                         TD.DiscoveryMessageReceivedAfterOperationCompleted(
                             eventTraceActivity,
                             ProtocolStrings.TracingStrings.ProbeMatches,
                             operationContext.IncomingMessageHeaders.MessageId.ToString(),
-                            ProtocolStrings.TracingStrings.FindOperation);
+                            ProtocolStrings.TracingStrings.FindOperation
+                        );
                     }
                 }
             }
 
             if (postCompleted || findCompleted)
             {
-                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(context.OperationId, false, null);
+                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
+                    context.OperationId,
+                    false,
+                    null
+                );
             }
         }
 
-        void IDiscoveryInnerClientResponse.ResolveMatchOperation(UniqueId relatesTo, DiscoveryMessageSequence discoveryMessageSequence, EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+        void IDiscoveryInnerClientResponse.ResolveMatchOperation(
+            UniqueId relatesTo,
+            DiscoveryMessageSequence discoveryMessageSequence,
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
         {
             EventTraceActivity eventTraceActivity = null;
             OperationContext operationContext = OperationContext.Current;
 
             if (Fx.Trace.IsEtwProviderEnabled && operationContext != null)
             {
-                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(operationContext.IncomingMessage);
+                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    operationContext.IncomingMessage
+                );
             }
 
             if (relatesTo == null)
@@ -650,23 +779,33 @@ namespace System.ServiceModel.Discovery
                     TD.DiscoveryMessageWithNullRelatesTo(
                         eventTraceActivity,
                         ProtocolStrings.TracingStrings.ResolveMatches,
-                        operationContext.IncomingMessageHeaders.MessageId.ToString());
+                        operationContext.IncomingMessageHeaders.MessageId.ToString()
+                    );
                 }
 
                 return;
             }
 
             ResolveAsyncOperationContext context = null;
-            if (!this.asyncOperationsLifetimeManager.TryLookup<ResolveAsyncOperationContext>(relatesTo, out context))
+            if (
+                !this.asyncOperationsLifetimeManager.TryLookup<ResolveAsyncOperationContext>(
+                    relatesTo,
+                    out context
+                )
+            )
             {
-                if (TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompletedIsEnabled() && operationContext != null)
+                if (
+                    TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompletedIsEnabled()
+                    && operationContext != null
+                )
                 {
                     TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompleted(
                         eventTraceActivity,
                         ProtocolStrings.TracingStrings.ResolveMatches,
                         operationContext.IncomingMessageHeaders.MessageId.ToString(),
                         relatesTo.ToString(),
-                        ProtocolStrings.TracingStrings.ResolveOperation);
+                        ProtocolStrings.TracingStrings.ResolveOperation
+                    );
                 }
 
                 return;
@@ -683,31 +822,45 @@ namespace System.ServiceModel.Discovery
                 }
                 else
                 {
-                    if (TD.DiscoveryMessageReceivedAfterOperationCompletedIsEnabled() && operationContext != null)
+                    if (
+                        TD.DiscoveryMessageReceivedAfterOperationCompletedIsEnabled()
+                        && operationContext != null
+                    )
                     {
                         TD.DiscoveryMessageReceivedAfterOperationCompleted(
                             eventTraceActivity,
                             ProtocolStrings.TracingStrings.ResolveMatches,
                             operationContext.IncomingMessageHeaders.MessageId.ToString(),
-                            ProtocolStrings.TracingStrings.ResolveOperation);
+                            ProtocolStrings.TracingStrings.ResolveOperation
+                        );
                     }
                 }
             }
 
             if (postCompleted)
             {
-                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(context.OperationId, false, null);
+                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
+                    context.OperationId,
+                    false,
+                    null
+                );
             }
         }
 
-        void IDiscoveryInnerClientResponse.HelloOperation(UniqueId relatesTo, DiscoveryMessageSequence proxyMessageSequence, EndpointDiscoveryMetadata proxyEndpointMetadata)
+        void IDiscoveryInnerClientResponse.HelloOperation(
+            UniqueId relatesTo,
+            DiscoveryMessageSequence proxyMessageSequence,
+            EndpointDiscoveryMetadata proxyEndpointMetadata
+        )
         {
             EventTraceActivity eventTraceActivity = null;
             OperationContext operationContext = OperationContext.Current;
 
             if (Fx.Trace.IsEtwProviderEnabled && operationContext != null)
             {
-                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(operationContext.IncomingMessage);
+                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    operationContext.IncomingMessage
+                );
             }
 
             if (relatesTo == null)
@@ -717,7 +870,8 @@ namespace System.ServiceModel.Discovery
                     TD.DiscoveryMessageWithNullRelatesTo(
                         eventTraceActivity,
                         ProtocolStrings.TracingStrings.Hello,
-                        operationContext.IncomingMessageHeaders.MessageId.ToString());
+                        operationContext.IncomingMessageHeaders.MessageId.ToString()
+                    );
                 }
 
                 return;
@@ -726,7 +880,10 @@ namespace System.ServiceModel.Discovery
             AsyncOperationContext context = null;
             if (!this.asyncOperationsLifetimeManager.TryLookup(relatesTo, out context))
             {
-                if (TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompletedIsEnabled() && operationContext != null)
+                if (
+                    TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompletedIsEnabled()
+                    && operationContext != null
+                )
                 {
                     TD.DiscoveryMessageWithInvalidRelatesToOrOperationCompleted(
                         eventTraceActivity,
@@ -737,7 +894,9 @@ namespace System.ServiceModel.Discovery
                             CultureInfo.InvariantCulture,
                             "{0}/{1}",
                             ProtocolStrings.TracingStrings.FindOperation,
-                            ProtocolStrings.TracingStrings.ResolveOperation));
+                            ProtocolStrings.TracingStrings.ResolveOperation
+                        )
+                    );
                 }
 
                 return;
@@ -748,7 +907,10 @@ namespace System.ServiceModel.Discovery
 
         void Initialize(DiscoveryEndpoint discoveryEndpoint)
         {
-            if (discoveryEndpoint.Binding != null && discoveryEndpoint.Binding.MessageVersion.Addressing == AddressingVersion.None)
+            if (
+                discoveryEndpoint.Binding != null
+                && discoveryEndpoint.Binding.MessageVersion.Addressing == AddressingVersion.None
+            )
             {
                 throw FxTrace.Exception.Argument(
                     "discoveryEndpoint",
@@ -757,24 +919,48 @@ namespace System.ServiceModel.Discovery
                         AddressingVersion.None,
                         this.GetType().Name,
                         AddressingVersion.WSAddressing10,
-                        AddressingVersion.WSAddressingAugust2004));
+                        AddressingVersion.WSAddressingAugust2004
+                    )
+                );
             }
 
-            this.innerClient = discoveryEndpoint.DiscoveryVersion.Implementation.CreateDiscoveryInnerClient(discoveryEndpoint, this);
+            this.innerClient =
+                discoveryEndpoint.DiscoveryVersion.Implementation.CreateDiscoveryInnerClient(
+                    discoveryEndpoint,
+                    this
+                );
 
             this.asyncOperationsLifetimeManager = new AsyncOperationLifetimeManager();
 
-            this.findCompletedDelegate = Fx.ThunkCallback(new SendOrPostCallback(RaiseFindCompleted));
-            this.findProgressChangedDelegate = Fx.ThunkCallback(new SendOrPostCallback(RaiseFindProgressChanged));
-            this.resolveCompletedDelegate = Fx.ThunkCallback(new SendOrPostCallback(RaiseResolveCompleted));
-            this.proxyAvailableDelegate = Fx.ThunkCallback(new SendOrPostCallback(RaiseProxyAvailable));
-            this.findOperationTimeoutCallbackDelegate = new Action<object>(FindOperationTimeoutCallback);
-            this.resolveOperationTimeoutCallbackDelegate = new Action<object>(ResolveOperationTimeoutCallback);
+            this.findCompletedDelegate = Fx.ThunkCallback(
+                new SendOrPostCallback(RaiseFindCompleted)
+            );
+            this.findProgressChangedDelegate = Fx.ThunkCallback(
+                new SendOrPostCallback(RaiseFindProgressChanged)
+            );
+            this.resolveCompletedDelegate = Fx.ThunkCallback(
+                new SendOrPostCallback(RaiseResolveCompleted)
+            );
+            this.proxyAvailableDelegate = Fx.ThunkCallback(
+                new SendOrPostCallback(RaiseProxyAvailable)
+            );
+            this.findOperationTimeoutCallbackDelegate = new Action<object>(
+                FindOperationTimeoutCallback
+            );
+            this.resolveOperationTimeoutCallbackDelegate = new Action<object>(
+                ResolveOperationTimeoutCallback
+            );
 
-            this.probeOperationCallbackDelegate = Fx.ThunkCallback(new AsyncCallback(ProbeOperationCompletedCallback));
-            this.resolveOperationCallbackDelegate = Fx.ThunkCallback(new AsyncCallback(ResolveOperationCompletedCallback));
+            this.probeOperationCallbackDelegate = Fx.ThunkCallback(
+                new AsyncCallback(ProbeOperationCompletedCallback)
+            );
+            this.resolveOperationCallbackDelegate = Fx.ThunkCallback(
+                new AsyncCallback(ResolveOperationCompletedCallback)
+            );
 
-            this.cancelTaskCallbackDelegate = Fx.ThunkCallback(new Action<object>(this.CancelAsync));
+            this.cancelTaskCallbackDelegate = Fx.ThunkCallback(
+                new Action<object>(this.CancelAsync)
+            );
 
             this.closeCalled = 0;
         }
@@ -815,13 +1001,17 @@ namespace System.ServiceModel.Discovery
         void FindAsyncOperation(FindCriteria criteria, object userState)
         {
             Fx.Assert(OperationContext.Current != null, "OperationContext.Current cannot be null.");
-            Fx.Assert(OperationContext.Current.OutgoingMessageHeaders != null, "OperationContext.Current.OutgoingMessageHeaders cannot be null.");
+            Fx.Assert(
+                OperationContext.Current.OutgoingMessageHeaders != null,
+                "OperationContext.Current.OutgoingMessageHeaders cannot be null."
+            );
 
             AsyncOperationContext context = new FindAsyncOperationContext(
                 OperationContext.Current.OutgoingMessageHeaders.MessageId,
                 criteria.MaxResults,
                 criteria.Duration,
-                userState);
+                userState
+            );
 
             this.InitializeAsyncOperation(context);
 
@@ -837,7 +1027,11 @@ namespace System.ServiceModel.Discovery
                     }
                     else
                     {
-                        IAsyncResult result = InnerClient.BeginProbeOperation(criteria, this.probeOperationCallbackDelegate, context);
+                        IAsyncResult result = InnerClient.BeginProbeOperation(
+                            criteria,
+                            this.probeOperationCallbackDelegate,
+                            context
+                        );
                         if (result.CompletedSynchronously)
                         {
                             this.CompleteProbeOperation(result);
@@ -855,20 +1049,27 @@ namespace System.ServiceModel.Discovery
             }
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(context.OperationId, false, error);
+                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
+                    context.OperationId,
+                    false,
+                    error
+                );
             }
         }
 
         void ResolveAsyncOperation(ResolveCriteria criteria, object userState)
         {
             Fx.Assert(OperationContext.Current != null, "OperationContext.Current cannot be null.");
-            Fx.Assert(OperationContext.Current.OutgoingMessageHeaders != null, "OperationContext.Current.OutgoingMessageHeaders cannot be null.");
+            Fx.Assert(
+                OperationContext.Current.OutgoingMessageHeaders != null,
+                "OperationContext.Current.OutgoingMessageHeaders cannot be null."
+            );
 
-            AsyncOperationContext context =
-                new ResolveAsyncOperationContext(
+            AsyncOperationContext context = new ResolveAsyncOperationContext(
                 OperationContext.Current.OutgoingMessageHeaders.MessageId,
                 criteria.Duration,
-                userState);
+                userState
+            );
 
             this.InitializeAsyncOperation(context);
 
@@ -882,7 +1083,11 @@ namespace System.ServiceModel.Discovery
                 }
                 else
                 {
-                    IAsyncResult result = InnerClient.BeginResolveOperation(criteria, this.resolveOperationCallbackDelegate, context);
+                    IAsyncResult result = InnerClient.BeginResolveOperation(
+                        criteria,
+                        this.resolveOperationCallbackDelegate,
+                        context
+                    );
                     if (result.CompletedSynchronously)
                     {
                         this.CompleteResolveOperation(result);
@@ -899,7 +1104,11 @@ namespace System.ServiceModel.Discovery
             }
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(context.OperationId, false, error);
+                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
+                    context.OperationId,
+                    false,
+                    error
+                );
             }
         }
 
@@ -908,20 +1117,32 @@ namespace System.ServiceModel.Discovery
             context.AsyncOperation = AsyncOperationManager.CreateOperation(context.UserState);
             if (!this.asyncOperationsLifetimeManager.TryAdd(context))
             {
-                if (this.asyncOperationsLifetimeManager.IsClosed || this.asyncOperationsLifetimeManager.IsAborted)
+                if (
+                    this.asyncOperationsLifetimeManager.IsClosed
+                    || this.asyncOperationsLifetimeManager.IsAborted
+                )
                 {
-                    throw FxTrace.Exception.AsError(new ObjectDisposedException(this.GetType().Name));
+                    throw FxTrace.Exception.AsError(
+                        new ObjectDisposedException(this.GetType().Name)
+                    );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DiscoveryDuplicateOperationId(context.OperationId)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.DiscoveryDuplicateOperationId(context.OperationId)
+                        )
+                    );
                 }
             }
         }
 
         bool IsCloseOrAbortCalled()
         {
-            return ((Interlocked.CompareExchange(ref this.closeCalled, 1, 0) == 1) || this.asyncOperationsLifetimeManager.IsAborted);
+            return (
+                (Interlocked.CompareExchange(ref this.closeCalled, 1, 0) == 1)
+                || this.asyncOperationsLifetimeManager.IsAborted
+            );
         }
 
         void ProbeOperationCompletedCallback(IAsyncResult result)
@@ -937,7 +1158,11 @@ namespace System.ServiceModel.Discovery
         void FindOperationTimeoutCallback(object state)
         {
             AsyncOperationContext context = (AsyncOperationContext)state;
-            ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(context.OperationId, false, null);
+            ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
+                context.OperationId,
+                false,
+                null
+            );
         }
 
         void CompleteProbeOperation(IAsyncResult result)
@@ -960,7 +1185,11 @@ namespace System.ServiceModel.Discovery
 
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(context.OperationId, false, error);
+                ((IDiscoveryInnerClientResponse)this).PostFindCompletedAndRemove(
+                    context.OperationId,
+                    false,
+                    error
+                );
             }
             else
             {
@@ -982,11 +1211,23 @@ namespace System.ServiceModel.Discovery
 
             if (completed)
             {
-                FindCompletedEventArgs e = new FindCompletedEventArgs(error, cancelled, context.UserState, context.Result);
+                FindCompletedEventArgs e = new FindCompletedEventArgs(
+                    error,
+                    cancelled,
+                    context.UserState,
+                    context.Result
+                );
 
-                if (this.DispatchToSyncOperation(e) || 
-                    this.DispatchToTaskAyncOperation<FindResponse>(context.UserState, context.Result, error, cancelled) ||
-                    this.FindCompleted == null)
+                if (
+                    this.DispatchToSyncOperation(e)
+                    || this.DispatchToTaskAyncOperation<FindResponse>(
+                        context.UserState,
+                        context.Result,
+                        error,
+                        cancelled
+                    )
+                    || this.FindCompleted == null
+                )
                 {
                     context.AsyncOperation.OperationCompleted();
                 }
@@ -1028,7 +1269,11 @@ namespace System.ServiceModel.Discovery
         void ResolveOperationTimeoutCallback(object state)
         {
             AsyncOperationContext context = (AsyncOperationContext)state;
-            ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(context.OperationId, false, null);
+            ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
+                context.OperationId,
+                false,
+                null
+            );
         }
 
         void CompleteResolveOperation(IAsyncResult result)
@@ -1050,7 +1295,11 @@ namespace System.ServiceModel.Discovery
             }
             if (error != null)
             {
-                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(context.OperationId, false, error);
+                ((IDiscoveryInnerClientResponse)this).PostResolveCompletedAndRemove(
+                    context.OperationId,
+                    false,
+                    error
+                );
             }
             else
             {
@@ -1058,7 +1307,11 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        void PostResolveCompleted(ResolveAsyncOperationContext context, bool cancelled, Exception error)
+        void PostResolveCompleted(
+            ResolveAsyncOperationContext context,
+            bool cancelled,
+            Exception error
+        )
         {
             bool completed = false;
             lock (context.SyncRoot)
@@ -1072,11 +1325,23 @@ namespace System.ServiceModel.Discovery
 
             if (completed)
             {
-                ResolveCompletedEventArgs e = new ResolveCompletedEventArgs(error, cancelled, context.UserState, context.Result);
+                ResolveCompletedEventArgs e = new ResolveCompletedEventArgs(
+                    error,
+                    cancelled,
+                    context.UserState,
+                    context.Result
+                );
 
-                if (this.DispatchToSyncOperation(e) || 
-                    this.DispatchToTaskAyncOperation<ResolveResponse>(context.UserState, context.Result, error, cancelled) ||
-                    this.ResolveCompleted == null)
+                if (
+                    this.DispatchToSyncOperation(e)
+                    || this.DispatchToTaskAyncOperation<ResolveResponse>(
+                        context.UserState,
+                        context.Result,
+                        error,
+                        cancelled
+                    )
+                    || this.ResolveCompleted == null
+                )
                 {
                     context.AsyncOperation.OperationCompleted();
                 }
@@ -1099,7 +1364,8 @@ namespace System.ServiceModel.Discovery
         void PostProxyAvailable(
             AsyncOperationContext context,
             EndpointDiscoveryMetadata proxyEndpointMetadata,
-            DiscoveryMessageSequence proxyMessageSequence)
+            DiscoveryMessageSequence proxyMessageSequence
+        )
         {
             if (TD.DiscoveryClientReceivedMulticastSuppressionIsEnabled())
             {
@@ -1112,7 +1378,10 @@ namespace System.ServiceModel.Discovery
                 {
                     if (!context.IsCompleted)
                     {
-                        AnnouncementEventArgs e = new AnnouncementEventArgs(proxyMessageSequence, proxyEndpointMetadata);
+                        AnnouncementEventArgs e = new AnnouncementEventArgs(
+                            proxyMessageSequence,
+                            proxyEndpointMetadata
+                        );
                         context.AsyncOperation.Post(this.proxyAvailableDelegate, e);
                     }
                 }
@@ -1128,7 +1397,10 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        void StartTimer(AsyncOperationContext context, Action<object> operationTimeoutCallbackDelegate)
+        void StartTimer(
+            AsyncOperationContext context,
+            Action<object> operationTimeoutCallbackDelegate
+        )
         {
             if (!this.InnerClient.IsRequestResponse)
             {
@@ -1157,9 +1429,15 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        bool DispatchToTaskAyncOperation<TResult>(object userState, TResult result, Exception error, bool cancelled)
+        bool DispatchToTaskAyncOperation<TResult>(
+            object userState,
+            TResult result,
+            Exception error,
+            bool cancelled
+        )
         {
-            TaskAsyncOperationState<TResult> operationState = userState as TaskAsyncOperationState<TResult>;
+            TaskAsyncOperationState<TResult> operationState =
+                userState as TaskAsyncOperationState<TResult>;
             if (operationState != null)
             {
                 operationState.Complete(result, error, cancelled);
@@ -1179,19 +1457,31 @@ namespace System.ServiceModel.Discovery
             {
                 if (activeOperations[i] is FindAsyncOperationContext)
                 {
-                    this.PostFindCompleted((FindAsyncOperationContext)activeOperations[i], true, null);
+                    this.PostFindCompleted(
+                        (FindAsyncOperationContext)activeOperations[i],
+                        true,
+                        null
+                    );
                 }
                 else
                 {
-                    this.PostResolveCompleted((ResolveAsyncOperationContext)activeOperations[i], true, null);
+                    this.PostResolveCompleted(
+                        (ResolveAsyncOperationContext)activeOperations[i],
+                        true,
+                        null
+                    );
                 }
             }
         }
 
         class CloseAsyncResult : AsyncResult
         {
-            static AsyncCompletion onAsyncLifetimeManangerCloseCompleted = new AsyncCompletion(OnAsyncLifetimeManagerCloseCompleted);
-            static AsyncCompletion onInnerCommunicationObjectCloseCompleted = new AsyncCompletion(OnInnerCommunicationObjectCloseCompleted);
+            static AsyncCompletion onAsyncLifetimeManangerCloseCompleted = new AsyncCompletion(
+                OnAsyncLifetimeManagerCloseCompleted
+            );
+            static AsyncCompletion onInnerCommunicationObjectCloseCompleted = new AsyncCompletion(
+                OnInnerCommunicationObjectCloseCompleted
+            );
 
             DiscoveryClient client;
             TimeoutHelper timeoutHelper;
@@ -1202,7 +1492,12 @@ namespace System.ServiceModel.Discovery
                 Complete(true);
             }
 
-            internal CloseAsyncResult(DiscoveryClient client, TimeSpan timeout, AsyncCallback callback, object state)
+            internal CloseAsyncResult(
+                DiscoveryClient client,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.client = client;
@@ -1211,7 +1506,8 @@ namespace System.ServiceModel.Discovery
                 IAsyncResult result = this.client.asyncOperationsLifetimeManager.BeginClose(
                     this.timeoutHelper.RemainingTime(),
                     this.PrepareAsyncCompletion(onAsyncLifetimeManangerCloseCompleted),
-                    this);
+                    this
+                );
 
                 if (result.CompletedSynchronously && OnAsyncLifetimeManagerCloseCompleted(result))
                 {
@@ -1242,14 +1538,17 @@ namespace System.ServiceModel.Discovery
                     ((ICommunicationObject)thisPtr.client).Abort();
                     throw FxTrace.Exception.AsError(
                         new TimeoutException(
-                        SR2.DiscoveryCloseTimedOut(thisPtr.timeoutHelper.OriginalTimeout),
-                        timeoutException));
+                            SR2.DiscoveryCloseTimedOut(thisPtr.timeoutHelper.OriginalTimeout),
+                            timeoutException
+                        )
+                    );
                 }
 
                 IAsyncResult closeAsyncResult = thisPtr.client.InnerCommunicationObject.BeginClose(
                     thisPtr.timeoutHelper.RemainingTime(),
                     thisPtr.PrepareAsyncCompletion(onInnerCommunicationObjectCloseCompleted),
-                    thisPtr);
+                    thisPtr
+                );
 
                 if (closeAsyncResult.CompletedSynchronously)
                 {
@@ -1281,7 +1580,10 @@ namespace System.ServiceModel.Discovery
                 if (DiscoveryUtility.IsCompatible(OperationContext.Current, clientChannel))
                 {
                     // reuse the same context
-                    this.originalMessageId = OperationContext.Current.OutgoingMessageHeaders.MessageId;
+                    this.originalMessageId = OperationContext
+                        .Current
+                        .OutgoingMessageHeaders
+                        .MessageId;
                     this.originalReplyTo = OperationContext.Current.OutgoingMessageHeaders.ReplyTo;
                     this.originalTo = OperationContext.Current.OutgoingMessageHeaders.To;
                 }
@@ -1297,8 +1599,11 @@ namespace System.ServiceModel.Discovery
                     OperationContext.Current.OutgoingMessageHeaders.MessageId = new UniqueId();
                 }
 
-                OperationContext.Current.OutgoingMessageHeaders.ReplyTo = clientChannel.LocalAddress;
-                OperationContext.Current.OutgoingMessageHeaders.To = clientChannel.RemoteAddress.Uri;
+                OperationContext.Current.OutgoingMessageHeaders.ReplyTo =
+                    clientChannel.LocalAddress;
+                OperationContext.Current.OutgoingMessageHeaders.To = clientChannel
+                    .RemoteAddress
+                    .Uri;
             }
 
             public void Dispose()
@@ -1309,7 +1614,8 @@ namespace System.ServiceModel.Discovery
                 }
                 else
                 {
-                    OperationContext.Current.OutgoingMessageHeaders.MessageId = this.originalMessageId;
+                    OperationContext.Current.OutgoingMessageHeaders.MessageId =
+                        this.originalMessageId;
                     OperationContext.Current.OutgoingMessageHeaders.ReplyTo = this.originalReplyTo;
                     OperationContext.Current.OutgoingMessageHeaders.To = this.originalTo;
                 }
@@ -1321,7 +1627,12 @@ namespace System.ServiceModel.Discovery
             private static Type TaskAsyncOperationStateType = typeof(TaskAsyncOperationState<>);
             FindResponse result;
 
-            internal FindAsyncOperationContext(UniqueId operationId, int maxResults, TimeSpan duration, object userState)
+            internal FindAsyncOperationContext(
+                UniqueId operationId,
+                int maxResults,
+                TimeSpan duration,
+                object userState
+            )
                 : base(operationId, maxResults, duration, userState)
             {
                 this.result = new FindResponse();
@@ -1330,7 +1641,10 @@ namespace System.ServiceModel.Discovery
                 if (this.UserState != null)
                 {
                     Type userStateType = this.UserState.GetType();
-                    if (userStateType.IsGenericType && userStateType.GetGenericTypeDefinition() == TaskAsyncOperationStateType)
+                    if (
+                        userStateType.IsGenericType
+                        && userStateType.GetGenericTypeDefinition() == TaskAsyncOperationStateType
+                    )
                     {
                         this.IsTaskBasedOperation = true;
                     }
@@ -1339,10 +1653,7 @@ namespace System.ServiceModel.Discovery
 
             public FindResponse Result
             {
-                get
-                {
-                    return this.result;
-                }
+                get { return this.result; }
             }
 
             public bool IsTaskBasedOperation { get; private set; }
@@ -1360,7 +1671,9 @@ namespace System.ServiceModel.Discovery
                     else if (StartedAt != null)
                     {
                         TimeSpan elaspedTime = DateTime.UtcNow.Subtract(StartedAt.Value);
-                        progress = (int)(elaspedTime.TotalMilliseconds / Duration.TotalMilliseconds * 100);
+                        progress = (int)(
+                            elaspedTime.TotalMilliseconds / Duration.TotalMilliseconds * 100
+                        );
                     }
 
                     return progress;
@@ -1372,7 +1685,11 @@ namespace System.ServiceModel.Discovery
         {
             ResolveResponse result;
 
-            internal ResolveAsyncOperationContext(UniqueId operationId, TimeSpan duration, object userState)
+            internal ResolveAsyncOperationContext(
+                UniqueId operationId,
+                TimeSpan duration,
+                object userState
+            )
                 : base(operationId, 1, duration, userState)
             {
                 this.result = new ResolveResponse();
@@ -1380,10 +1697,7 @@ namespace System.ServiceModel.Discovery
 
             public ResolveResponse Result
             {
-                get
-                {
-                    return this.result;
-                }
+                get { return this.result; }
             }
         }
 
@@ -1393,7 +1707,11 @@ namespace System.ServiceModel.Discovery
             TaskCompletionSource<TResult> taskCompletionSource;
             CancellationToken cancellationToken;
 
-            internal TaskAsyncOperationState(DiscoveryClient discoveryClient, TaskCompletionSource<TResult> taskCompletionSource, CancellationToken cancellationToken)
+            internal TaskAsyncOperationState(
+                DiscoveryClient discoveryClient,
+                TaskCompletionSource<TResult> taskCompletionSource,
+                CancellationToken cancellationToken
+            )
             {
                 Fx.Assert(discoveryClient != null, "discoveryClient cannot be null");
                 Fx.Assert(taskCompletionSource != null, "taskCompletionSource cannot be null");

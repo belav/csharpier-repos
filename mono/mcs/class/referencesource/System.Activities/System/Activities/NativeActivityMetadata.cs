@@ -14,7 +14,11 @@ namespace System.Activities
         LocationReferenceEnvironment environment;
         bool createEmptyBindings;
 
-        internal NativeActivityMetadata(Activity activity, LocationReferenceEnvironment environment, bool createEmptyBindings)
+        internal NativeActivityMetadata(
+            Activity activity,
+            LocationReferenceEnvironment environment,
+            bool createEmptyBindings
+        )
         {
             this.activity = activity;
             this.environment = environment;
@@ -23,18 +27,12 @@ namespace System.Activities
 
         internal bool CreateEmptyBindings
         {
-            get
-            {
-                return this.createEmptyBindings;
-            }
+            get { return this.createEmptyBindings; }
         }
 
         public LocationReferenceEnvironment Environment
         {
-            get
-            {
-                return this.environment;
-            }
+            get { return this.environment; }
         }
 
         public bool HasViolations
@@ -70,7 +68,8 @@ namespace System.Activities
             }
 
             NativeActivityMetadata other = (NativeActivityMetadata)obj;
-            return other.activity == this.activity && other.Environment == this.Environment
+            return other.activity == this.activity
+                && other.Environment == this.Environment
                 && other.CreateEmptyBindings == this.CreateEmptyBindings;
         }
 
@@ -235,7 +234,10 @@ namespace System.Activities
             if (activityDelegate != null)
             {
                 this.activity.AddDelegate(activityDelegate);
-                if (activityDelegate.Handler != null && activityDelegate.Handler.CacheId != this.activity.CacheId)
+                if (
+                    activityDelegate.Handler != null
+                    && activityDelegate.Handler.CacheId != this.activity.CacheId
+                )
                 {
                     activityDelegate.Handler.Origin = origin;
                 }
@@ -244,7 +246,9 @@ namespace System.Activities
             }
         }
 
-        public void SetImplementationDelegatesCollection(Collection<ActivityDelegate> implementationDelegates)
+        public void SetImplementationDelegatesCollection(
+            Collection<ActivityDelegate> implementationDelegates
+        )
         {
             ThrowIfDisposed();
 
@@ -285,7 +289,10 @@ namespace System.Activities
             if (importedDelegate != null)
             {
                 this.activity.AddImportedDelegate(importedDelegate);
-                if (importedDelegate.Handler != null && importedDelegate.Handler.CacheId != this.activity.CacheId)
+                if (
+                    importedDelegate.Handler != null
+                    && importedDelegate.Handler.CacheId != this.activity.CacheId
+                )
                 {
                     importedDelegate.Handler.Origin = origin;
                 }
@@ -319,7 +326,10 @@ namespace System.Activities
                 if (variable.CacheId != this.activity.CacheId)
                 {
                     variable.Origin = origin;
-                    if (variable.Default != null && variable.Default.CacheId != this.activity.CacheId)
+                    if (
+                        variable.Default != null
+                        && variable.Default.CacheId != this.activity.CacheId
+                    )
                     {
                         variable.Default.Origin = origin;
                     }
@@ -327,7 +337,9 @@ namespace System.Activities
             }
         }
 
-        public void SetImplementationVariablesCollection(Collection<Variable> implementationVariables)
+        public void SetImplementationVariablesCollection(
+            Collection<Variable> implementationVariables
+        )
         {
             ThrowIfDisposed();
 
@@ -390,7 +402,10 @@ namespace System.Activities
             }
             if (extensionType.IsValueType)
             {
-                throw FxTrace.Exception.Argument("extensionType", SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName));
+                throw FxTrace.Exception.Argument(
+                    "extensionType",
+                    SR.RequireExtensionOnlyAcceptsReferenceTypes(extensionType.FullName)
+                );
             }
             this.activity.RequireExtension(extensionType);
         }

@@ -12,24 +12,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         private class ExpressionSyntaxGeneratorVisitor : SymbolVisitor<ExpressionSyntax>
         {
-            private static readonly ExpressionSyntaxGeneratorVisitor NameOnlyInstance = new(nameOnly: true);
-            private static readonly ExpressionSyntaxGeneratorVisitor NotNameOnlyInstance = new(nameOnly: false);
+            private static readonly ExpressionSyntaxGeneratorVisitor NameOnlyInstance =
+                new(nameOnly: true);
+            private static readonly ExpressionSyntaxGeneratorVisitor NotNameOnlyInstance =
+                new(nameOnly: false);
 
             private readonly bool _nameOnly;
 
-            private ExpressionSyntaxGeneratorVisitor(bool nameOnly)
-                => _nameOnly = nameOnly;
+            private ExpressionSyntaxGeneratorVisitor(bool nameOnly) => _nameOnly = nameOnly;
 
-            public static ExpressionSyntaxGeneratorVisitor Create(bool nameOnly)
-                => nameOnly ? NameOnlyInstance : NotNameOnlyInstance;
+            public static ExpressionSyntaxGeneratorVisitor Create(bool nameOnly) =>
+                nameOnly ? NameOnlyInstance : NotNameOnlyInstance;
 
-            public override ExpressionSyntax DefaultVisit(ISymbol symbol)
-                => symbol.Accept(TypeSyntaxGeneratorVisitor.Create(_nameOnly))!;
+            public override ExpressionSyntax DefaultVisit(ISymbol symbol) =>
+                symbol.Accept(TypeSyntaxGeneratorVisitor.Create(_nameOnly))!;
 
-            private static TExpressionSyntax AddInformationTo<TExpressionSyntax>(TExpressionSyntax syntax, ISymbol symbol)
+            private static TExpressionSyntax AddInformationTo<TExpressionSyntax>(
+                TExpressionSyntax syntax,
+                ISymbol symbol
+            )
                 where TExpressionSyntax : ExpressionSyntax
             {
-                syntax = syntax.WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker).WithAppendedTrailingTrivia(SyntaxFactory.ElasticMarker);
+                syntax = syntax
+                    .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)
+                    .WithAppendedTrailingTrivia(SyntaxFactory.ElasticMarker);
                 syntax = syntax.WithAdditionalAnnotations(SymbolAnnotation.Create(symbol));
 
                 return syntax;
@@ -37,7 +43,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             public override ExpressionSyntax VisitNamedType(INamedTypeSymbol symbol)
             {
-                if (!_nameOnly && TypeSyntaxGeneratorVisitor.TryCreateNativeIntegerType(symbol, out var typeSyntax))
+                if (
+                    !_nameOnly
+                    && TypeSyntaxGeneratorVisitor.TryCreateNativeIntegerType(
+                        symbol,
+                        out var typeSyntax
+                    )
+                )
                     return typeSyntax;
 
                 typeSyntax = TypeSyntaxGeneratorVisitor.Create().CreateSimpleTypeSyntax(symbol);
@@ -65,8 +77,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         {
                             return AddInformationTo(
                                 SyntaxFactory.AliasQualifiedName(
-                                    SyntaxFactory.IdentifierName(SyntaxFactory.Token(SyntaxKind.GlobalKeyword)),
-                                    simpleNameSyntax), symbol);
+                                    SyntaxFactory.IdentifierName(
+                                        SyntaxFactory.Token(SyntaxKind.GlobalKeyword)
+                                    ),
+                                    simpleNameSyntax
+                                ),
+                                symbol
+                            );
                         }
                     }
                     else
@@ -91,8 +108,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 {
                     return AddInformationTo(
                         SyntaxFactory.AliasQualifiedName(
-                            SyntaxFactory.IdentifierName(SyntaxFactory.Token(SyntaxKind.GlobalKeyword)),
-                            syntax), symbol);
+                            SyntaxFactory.IdentifierName(
+                                SyntaxFactory.Token(SyntaxKind.GlobalKeyword)
+                            ),
+                            syntax
+                        ),
+                        symbol
+                    );
                 }
                 else
                 {
@@ -102,11 +124,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             private static MemberAccessExpressionSyntax CreateMemberAccessExpression(
-                ISymbol symbol, ExpressionSyntax container, SimpleNameSyntax syntax)
+                ISymbol symbol,
+                ExpressionSyntax container,
+                SimpleNameSyntax syntax
+            )
             {
-                return AddInformationTo(SyntaxFactory.MemberAccessExpression(
-                    SyntaxKind.SimpleMemberAccessExpression,
-                    container, syntax), symbol);
+                return AddInformationTo(
+                    SyntaxFactory.MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        container,
+                        syntax
+                    ),
+                    symbol
+                );
             }
         }
     }

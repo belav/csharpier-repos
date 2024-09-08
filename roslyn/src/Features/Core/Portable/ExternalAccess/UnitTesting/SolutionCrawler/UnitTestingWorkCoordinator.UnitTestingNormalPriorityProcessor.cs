@@ -9,13 +9,12 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.ErrorReporting;
+using Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
 using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.CodeAnalysis.Notification;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api;
-
 #if DEBUG
 using System.Diagnostics;
 #endif
@@ -28,10 +27,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         {
             private sealed partial class UnitTestingIncrementalAnalyzerProcessor
             {
-                private sealed class UnitTestingNormalPriorityProcessor : AbstractUnitTestingPriorityProcessor
+                private sealed class UnitTestingNormalPriorityProcessor
+                    : AbstractUnitTestingPriorityProcessor
                 {
                     private readonly UnitTestingAsyncDocumentWorkItemQueue _workItemQueue;
-                    private readonly ConcurrentDictionary<DocumentId, /*unused*/ object?> _higherPriorityDocumentsNotProcessed;
+                    private readonly ConcurrentDictionary<
+                        DocumentId, /*unused*/
+                        object?
+                    > _higherPriorityDocumentsNotProcessed;
 
                     private ProjectId? _currentProjectProcessing;
 
@@ -49,12 +52,25 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         Lazy<ImmutableArray<IUnitTestingIncrementalAnalyzer>> lazyAnalyzers,
                         IGlobalOperationNotificationService? globalOperationNotificationService,
                         TimeSpan backOffTimeSpan,
-                        CancellationToken shutdownToken)
-                        : base(listener, processor, lazyAnalyzers, globalOperationNotificationService, backOffTimeSpan, shutdownToken)
+                        CancellationToken shutdownToken
+                    )
+                        : base(
+                            listener,
+                            processor,
+                            lazyAnalyzers,
+                            globalOperationNotificationService,
+                            backOffTimeSpan,
+                            shutdownToken
+                        )
                     {
                         _running = Task.CompletedTask;
-                        _workItemQueue = new UnitTestingAsyncDocumentWorkItemQueue(processor._registration.ProgressReporter);
-                        _higherPriorityDocumentsNotProcessed = new ConcurrentDictionary<DocumentId, object?>(concurrencyLevel: 2, capacity: 20);
+                        _workItemQueue = new UnitTestingAsyncDocumentWorkItemQueue(
+                            processor._registration.ProgressReporter
+                        );
+                        _higherPriorityDocumentsNotProcessed = new ConcurrentDictionary<
+                            DocumentId,
+                            object?
+                        >(concurrencyLevel: 2, capacity: 20);
 
                         _currentProjectProcessing = null;
 
@@ -63,25 +79,45 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                     public void Enqueue(UnitTestingWorkItem item)
                     {
-                        Contract.ThrowIfFalse(item.DocumentId != null, "can only enqueue a document work item");
+                        Contract.ThrowIfFalse(
+                            item.DocumentId != null,
+                            "can only enqueue a document work item"
+                        );
 
                         UpdateLastAccessTime();
 
                         var added = _workItemQueue.AddOrReplace(item);
 
-                        Logger.Log(FunctionId.WorkCoordinator_DocumentWorker_Enqueue, s_enqueueLogger, Environment.TickCount, item.DocumentId, !added);
+                        Logger.Log(
+                            FunctionId.WorkCoordinator_DocumentWorker_Enqueue,
+                            s_enqueueLogger,
+                            Environment.TickCount,
+                            item.DocumentId,
+                            !added
+                        );
 
                         CheckHigherPriorityDocument(item);
 
                         UnitTestingSolutionCrawlerLogger.LogWorkItemEnqueue(
-                            Processor._logAggregator, item.Language, item.DocumentId, item.InvocationReasons, item.IsLowPriority, item.ActiveMember, added);
+                            Processor._logAggregator,
+                            item.Language,
+                            item.DocumentId,
+                            item.InvocationReasons,
+                            item.IsLowPriority,
+                            item.ActiveMember,
+                            added
+                        );
                     }
 
                     private void CheckHigherPriorityDocument(UnitTestingWorkItem item)
                     {
                         Contract.ThrowIfFalse(item.DocumentId != null);
 
-                        if (!item.InvocationReasons.Contains(UnitTestingPredefinedInvocationReasons.HighPriority))
+                        if (
+                            !item.InvocationReasons.Contains(
+                                UnitTestingPredefinedInvocationReasons.HighPriority
+                            )
+                        )
                         {
                             return;
                         }
@@ -91,12 +127,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                     private void AddHigherPriorityDocument(DocumentId id)
                     {
-                        _higherPriorityDocumentsNotProcessed.TryAdd(id, /*unused*/null);
-                        UnitTestingSolutionCrawlerLogger.LogHigherPriority(Processor._logAggregator, id.Id);
+                        _higherPriorityDocumentsNotProcessed.TryAdd(
+                            id, /*unused*/
+                            null
+                        );
+                        UnitTestingSolutionCrawlerLogger.LogHigherPriority(
+                            Processor._logAggregator,
+                            id.Id
+                        );
                     }
 
-                    protected override Task WaitAsync(CancellationToken cancellationToken)
-                        => _workItemQueue.WaitAsync(cancellationToken);
+                    protected override Task WaitAsync(CancellationToken cancellationToken) =>
+                        _workItemQueue.WaitAsync(cancellationToken);
 
                     public Task Running => _running;
                     public int WorkItemCount => _workItemQueue.WorkItemCount;
@@ -120,21 +162,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             // okay, there must be at least one item in the map
                             ResetStates();
 
-                            if (await TryProcessOneHigherPriorityDocumentAsync().ConfigureAwait(false))
+                            if (
+                                await TryProcessOneHigherPriorityDocumentAsync()
+                                    .ConfigureAwait(false)
+                            )
                             {
                                 // successfully processed a high priority document.
                                 return;
                             }
 
                             // process one of documents remaining
-                            if (!_workItemQueue.TryTakeAnyWork(
+                            if (
+                                !_workItemQueue.TryTakeAnyWork(
                                     _currentProjectProcessing,
 #if false // Not used in unit testing crawling
                                     Processor.DependencyGraph,
                                     Processor.DiagnosticAnalyzerService,
 #endif
                                     out var workItem,
-                                    out var documentCancellation))
+                                    out var documentCancellation
+                                )
+                            )
                             {
                                 return;
                             }
@@ -149,7 +197,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             SetProjectProcessing(workItem.ProjectId);
 
                             // process the new document
-                            await ProcessDocumentAsync(Analyzers, workItem, documentCancellation).ConfigureAwait(false);
+                            await ProcessDocumentAsync(Analyzers, workItem, documentCancellation)
+                                .ConfigureAwait(false);
                         }
                         catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
                         {
@@ -207,7 +256,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         }
 
                         // Now any visible documents
-                        foreach (var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments())
+                        foreach (
+                            var visibleDocumentId in Processor._documentTracker.GetVisibleDocuments()
+                        )
                         {
                             yield return visibleDocumentId;
                         }
@@ -237,18 +288,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                                 // this is a best effort algorithm with some shortcomings.
                                 //
-                                // the most obvious issue is if there is a new work item (without a solution change - but very unlikely) 
+                                // the most obvious issue is if there is a new work item (without a solution change - but very unlikely)
                                 // for a opened document we already processed, the work item will be treated as a regular one rather than higher priority one
                                 // (opened document)
                                 // see whether we have work item for the document
-                                if (!_workItemQueue.TryTake(documentId, out var workItem, out var documentCancellation))
+                                if (
+                                    !_workItemQueue.TryTake(
+                                        documentId,
+                                        out var workItem,
+                                        out var documentCancellation
+                                    )
+                                )
                                 {
                                     RemoveHigherPriorityDocument(documentId);
                                     continue;
                                 }
 
                                 // okay now we have work to do
-                                await ProcessDocumentAsync(Analyzers, workItem, documentCancellation).ConfigureAwait(false);
+                                await ProcessDocumentAsync(
+                                        Analyzers,
+                                        workItem,
+                                        documentCancellation
+                                    )
+                                    .ConfigureAwait(false);
 
                                 RemoveHigherPriorityDocument(documentId);
                                 return true;
@@ -268,7 +330,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         _higherPriorityDocumentsNotProcessed.TryRemove(documentId, out _);
                     }
 
-                    private async Task ProcessDocumentAsync(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, UnitTestingWorkItem workItem, CancellationToken cancellationToken)
+                    private async Task ProcessDocumentAsync(
+                        ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                        UnitTestingWorkItem workItem,
+                        CancellationToken cancellationToken
+                    )
                     {
                         Contract.ThrowIfNull(workItem.DocumentId);
 
@@ -287,23 +353,37 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         // 2.before processing the solution, an workitem got changed
                         // 3.and then the work item got picked up from the queue
                         // 4.and use the work item with the solution that got picked up in step 1
-                        // 
+                        //
                         // step 2 is happening because solution has changed, but step 4 used old solution from step 1
                         // that doesn't have effects of the solution changes.
-                        // 
+                        //
                         // solution crawler must remove the work item from the queue first and then pick up the soluton,
                         // so that the queue gets new work item if there is any solution changes after the work item is removed
                         // from the queue
-                        // 
+                        //
                         // using later version of solution is always fine since, as long as there is new work item in the queue,
                         // solution crawler will eventually call the last workitem with the lastest solution
                         // making everything to catch up
                         var solution = Processor._registration.GetSolutionToAnalyze();
                         try
                         {
-                            using (Logger.LogBlock(FunctionId.WorkCoordinator_ProcessDocumentAsync, w => w.ToString(), workItem, cancellationToken))
+                            using (
+                                Logger.LogBlock(
+                                    FunctionId.WorkCoordinator_ProcessDocumentAsync,
+                                    w => w.ToString(),
+                                    workItem,
+                                    cancellationToken
+                                )
+                            )
                             {
-                                var textDocument = solution.GetTextDocument(documentId) ?? await solution.GetSourceGeneratedDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+                                var textDocument =
+                                    solution.GetTextDocument(documentId)
+                                    ?? await solution
+                                        .GetSourceGeneratedDocumentAsync(
+                                            documentId,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
 
                                 if (textDocument != null)
                                 {
@@ -321,15 +401,30 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
 
                                     // check whether we are having special reanalyze request
-                                    await ProcessReanalyzeDocumentAsync(workItem, textDocument, cancellationToken).ConfigureAwait(false);
+                                    await ProcessReanalyzeDocumentAsync(
+                                            workItem,
+                                            textDocument,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
 
-                                    await Processor.ProcessDocumentAnalyzersAsync(textDocument, analyzers, workItem, cancellationToken).ConfigureAwait(false);
+                                    await Processor
+                                        .ProcessDocumentAnalyzersAsync(
+                                            textDocument,
+                                            analyzers,
+                                            workItem,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
                                 }
                                 else
                                 {
-                                    UnitTestingSolutionCrawlerLogger.LogProcessDocumentNotExist(Processor._logAggregator);
+                                    UnitTestingSolutionCrawlerLogger.LogProcessDocumentNotExist(
+                                        Processor._logAggregator
+                                    );
 
-                                    await RemoveDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+                                    await RemoveDocumentAsync(documentId, cancellationToken)
+                                        .ConfigureAwait(false);
                                 }
 
                                 if (!cancellationToken.IsCancellationRequested)
@@ -338,7 +433,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                                 }
                             }
                         }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                        catch (Exception e)
+                            when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                         {
                             throw ExceptionUtilities.Unreachable();
                         }
@@ -350,10 +446,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             // after that point.
                             if (!processedEverything && !CancellationToken.IsCancellationRequested)
                             {
-                                _workItemQueue.AddOrReplace(workItem.Retry(Listener.BeginAsyncOperation("ReenqueueWorkItem")));
+                                _workItemQueue.AddOrReplace(
+                                    workItem.Retry(
+                                        Listener.BeginAsyncOperation("ReenqueueWorkItem")
+                                    )
+                                );
                             }
 
-                            UnitTestingSolutionCrawlerLogger.LogProcessDocument(Processor._logAggregator, documentId.Id, processedEverything);
+                            UnitTestingSolutionCrawlerLogger.LogProcessDocument(
+                                Processor._logAggregator,
+                                documentId.Id,
+                                processedEverything
+                            );
 
                             // remove one that is finished running
                             _workItemQueue.MarkWorkItemDoneFor(workItem.DocumentId);
@@ -412,12 +516,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     }
 #endif
 
-                    private async Task ProcessReanalyzeDocumentAsync(UnitTestingWorkItem workItem, TextDocument document, CancellationToken cancellationToken)
+                    private async Task ProcessReanalyzeDocumentAsync(
+                        UnitTestingWorkItem workItem,
+                        TextDocument document,
+                        CancellationToken cancellationToken
+                    )
                     {
                         try
                         {
 #if DEBUG
-                            Debug.Assert(!workItem.InvocationReasons.Contains(UnitTestingPredefinedInvocationReasons.Reanalyze) || workItem.SpecificAnalyzers.Count > 0);
+                            Debug.Assert(
+                                !workItem.InvocationReasons.Contains(
+                                    UnitTestingPredefinedInvocationReasons.Reanalyze
+                                )
+                                    || workItem.SpecificAnalyzers.Count > 0
+                            );
 #endif
 
                             // No-reanalyze request or we already have a request to re-analyze every thing
@@ -425,7 +538,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                                 workItem.MustRefresh ||
 #endif
-                                !workItem.InvocationReasons.Contains(UnitTestingPredefinedInvocationReasons.Reanalyze))
+                                !workItem.InvocationReasons.Contains(
+                                    UnitTestingPredefinedInvocationReasons.Reanalyze
+                                )
+                            )
                             {
                                 return;
                             }
@@ -447,20 +563,30 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                             // No request to re-run semantic change analysis. run it here
                             // Note: Semantic analysis is not supported for non-source documents.
-                            if (document is Document sourceDocument &&
-                                !workItem.InvocationReasons.Contains(UnitTestingPredefinedInvocationReasons.SemanticChanged))
+                            if (
+                                document is Document sourceDocument
+                                && !workItem.InvocationReasons.Contains(
+                                    UnitTestingPredefinedInvocationReasons.SemanticChanged
+                                )
+                            )
                             {
-                                await Processor.RunAnalyzersAsync(reanalyzers, sourceDocument, workItem,
-                                    (a, d, c) => a.AnalyzeDocumentAsync(
-                                        d,
+                                await Processor
+                                    .RunAnalyzersAsync(
+                                        reanalyzers,
+                                        sourceDocument,
+                                        workItem,
+                                        (a, d, c) => a.AnalyzeDocumentAsync(d,
 #if false // Not used in unit testing crawling
                                         bodyOpt: null,
 #endif
-                                        reasons,
-                                        c), cancellationToken).ConfigureAwait(false);
+                                                reasons, c),
+                                        cancellationToken
+                                    )
+                                    .ConfigureAwait(false);
                             }
                         }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                        catch (Exception e)
+                            when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                         {
                             throw ExceptionUtilities.Unreachable();
                         }
@@ -496,14 +622,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
                     }
 
-                    private Task RemoveDocumentAsync(DocumentId documentId, CancellationToken cancellationToken)
-                        => RemoveDocumentAsync(Analyzers, documentId, cancellationToken);
+                    private Task RemoveDocumentAsync(
+                        DocumentId documentId,
+                        CancellationToken cancellationToken
+                    ) => RemoveDocumentAsync(Analyzers, documentId, cancellationToken);
 
-                    private static async Task RemoveDocumentAsync(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, DocumentId documentId, CancellationToken cancellationToken)
+                    private static async Task RemoveDocumentAsync(
+                        ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                        DocumentId documentId,
+                        CancellationToken cancellationToken
+                    )
                     {
                         foreach (var analyzer in analyzers)
                         {
-                            await analyzer.RemoveDocumentAsync(documentId, cancellationToken).ConfigureAwait(false);
+                            await analyzer
+                                .RemoveDocumentAsync(documentId, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                     }
 
@@ -530,7 +664,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             }
 #endif
 
-                            UnitTestingSolutionCrawlerLogger.LogResetStates(Processor._logAggregator);
+                            UnitTestingSolutionCrawlerLogger.LogResetStates(
+                                Processor._logAggregator
+                            );
                         }
                         catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
                         {
@@ -556,7 +692,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             return true;
                         }
 
-                        void ResetLogAggregatorIfNeeded(Solution currentSolution, Solution? oldSolution)
+                        void ResetLogAggregatorIfNeeded(
+                            Solution currentSolution,
+                            Solution? oldSolution
+                        )
                         {
                             if (oldSolution == null || currentSolution.Id == oldSolution.Id)
                             {
@@ -570,7 +709,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             // all accumultation is done in VS side and we only send statistics to VS telemetry otherwise, it is too much
                             // data to send
                             UnitTestingSolutionCrawlerLogger.LogIncrementalAnalyzerProcessorStatistics(
-                                Processor._registration.CorrelationId, oldSolution, Processor._logAggregator, Analyzers);
+                                Processor._registration.CorrelationId,
+                                oldSolution,
+                                Processor._logAggregator,
+                                Analyzers
+                            );
 
                             Processor.ResetLogAggregator();
                         }
@@ -592,16 +735,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     {
                         private readonly UnitTestingNormalPriorityProcessor _normalPriorityProcessor;
 
-                        internal TestAccessor(UnitTestingNormalPriorityProcessor normalPriorityProcessor)
+                        internal TestAccessor(
+                            UnitTestingNormalPriorityProcessor normalPriorityProcessor
+                        )
                         {
                             _normalPriorityProcessor = normalPriorityProcessor;
                         }
 
-                        internal void WaitUntilCompletion(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, List<UnitTestingWorkItem> items)
+                        internal void WaitUntilCompletion(
+                            ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                            List<UnitTestingWorkItem> items
+                        )
                         {
                             foreach (var item in items)
                             {
-                                _normalPriorityProcessor.ProcessDocumentAsync(analyzers, item, CancellationToken.None).Wait();
+                                _normalPriorityProcessor
+                                    .ProcessDocumentAsync(analyzers, item, CancellationToken.None)
+                                    .Wait();
                             }
                         }
 

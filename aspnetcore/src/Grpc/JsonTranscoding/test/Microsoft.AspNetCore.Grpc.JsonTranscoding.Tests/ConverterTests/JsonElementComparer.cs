@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests.ConverterTests;
 
 public class JsonElementComparer : IEqualityComparer<JsonElement>
 {
-    public JsonElementComparer() : this(maxHashDepth: -1, compareRawStrings: false) { }
+    public JsonElementComparer()
+        : this(maxHashDepth: -1, compareRawStrings: false) { }
 
     public JsonElementComparer(int maxHashDepth, bool compareRawStrings)
     {
@@ -59,40 +60,46 @@ public class JsonElementComparer : IEqualityComparer<JsonElement>
                 return x.EnumerateArray().SequenceEqual(y.EnumerateArray(), this);
 
             case JsonValueKind.Object:
+            {
+                // Surprisingly, JsonDocument fully supports duplicate property names.
+                // I.e. it's perfectly happy to parse {"Value":"a", "Value" : "b"} and will store both
+                // key/value pairs inside the document!
+                // A close reading of https://www.rfc-editor.org/rfc/rfc8259#section-4 seems to indicate that
+                // such objects are allowed but not recommended, and when they arise, interpretation of
+                // identically-named properties is order-dependent.
+                // So stably sorting by name then comparing values seems the way to go.
+                var xPropertiesUnsorted = x.EnumerateObject().ToList();
+                var yPropertiesUnsorted = y.EnumerateObject().ToList();
+                if (xPropertiesUnsorted.Count != yPropertiesUnsorted.Count)
                 {
-                    // Surprisingly, JsonDocument fully supports duplicate property names.
-                    // I.e. it's perfectly happy to parse {"Value":"a", "Value" : "b"} and will store both
-                    // key/value pairs inside the document!
-                    // A close reading of https://www.rfc-editor.org/rfc/rfc8259#section-4 seems to indicate that
-                    // such objects are allowed but not recommended, and when they arise, interpretation of
-                    // identically-named properties is order-dependent.
-                    // So stably sorting by name then comparing values seems the way to go.
-                    var xPropertiesUnsorted = x.EnumerateObject().ToList();
-                    var yPropertiesUnsorted = y.EnumerateObject().ToList();
-                    if (xPropertiesUnsorted.Count != yPropertiesUnsorted.Count)
+                    return false;
+                }
+
+                var xProperties = xPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
+                var yProperties = yPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
+                foreach (var (px, py) in xProperties.Zip(yProperties))
+                {
+                    if (px.Name != py.Name)
                     {
                         return false;
                     }
 
-                    var xProperties = xPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
-                    var yProperties = yPropertiesUnsorted.OrderBy(p => p.Name, StringComparer.Ordinal);
-                    foreach (var (px, py) in xProperties.Zip(yProperties))
+                    if (!Equals(px.Value, py.Value))
                     {
-                        if (px.Name != py.Name)
-                        {
-                            return false;
-                        }
-
-                        if (!Equals(px.Value, py.Value))
-                        {
-                            return false;
-                        }
+                        return false;
                     }
-                    return true;
                 }
+                return true;
+            }
 
             default:
-                throw new JsonException(string.Format(CultureInfo.InvariantCulture, "Unknown JsonValueKind {0}", x.ValueKind));
+                throw new JsonException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Unknown JsonValueKind {0}",
+                        x.ValueKind
+                    )
+                );
         }
     }
 
@@ -139,7 +146,10 @@ public class JsonElementComparer : IEqualityComparer<JsonElement>
                 break;
 
             case JsonValueKind.Object:
-                foreach (var property in obj.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal))
+                foreach (
+                    var property in obj.EnumerateObject()
+                        .OrderBy(p => p.Name, StringComparer.Ordinal)
+                )
                 {
                     hash.Add(property.Name);
                     if (depth != MaxHashDepth)
@@ -150,7 +160,13 @@ public class JsonElementComparer : IEqualityComparer<JsonElement>
                 break;
 
             default:
-                throw new JsonException(string.Format(CultureInfo.InvariantCulture, "Unknown JsonValueKind {0}", obj.ValueKind));
+                throw new JsonException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Unknown JsonValueKind {0}",
+                        obj.ValueKind
+                    )
+                );
         }
     }
 

@@ -18,12 +18,14 @@ namespace Microsoft.CodeAnalysis
         internal readonly struct SectionNameMatcher
         {
             private readonly ImmutableArray<(int minValue, int maxValue)> _numberRangePairs;
+
             // internal for testing
             internal Regex Regex { get; }
 
             internal SectionNameMatcher(
                 Regex regex,
-                ImmutableArray<(int minValue, int maxValue)> numberRangePairs)
+                ImmutableArray<(int minValue, int maxValue)> numberRangePairs
+            )
             {
                 Debug.Assert(regex.GetGroupNumbers().Length - 1 == numberRangePairs.Length);
                 Regex = regex;
@@ -47,9 +49,11 @@ namespace Microsoft.CodeAnalysis
                 {
                     var (minValue, maxValue) = _numberRangePairs[i];
                     // Index 0 is the whole regex
-                    if (!int.TryParse(match.Groups[i + 1].Value, out int matchedNum) ||
-                        matchedNum < minValue ||
-                        matchedNum > maxValue)
+                    if (
+                        !int.TryParse(match.Groups[i + 1].Value, out int matchedNum)
+                        || matchedNum < minValue
+                        || matchedNum > maxValue
+                    )
                     {
                         return false;
                     }
@@ -111,7 +115,8 @@ namespace Microsoft.CodeAnalysis
             sb.Append('$');
             return new SectionNameMatcher(
                 new Regex(sb.ToString(), RegexOptions.Compiled),
-                numberRangePairs.ToImmutableAndFree());
+                numberRangePairs.ToImmutableAndFree()
+            );
         }
 
         internal static string UnescapeSectionName(string sectionName)
@@ -156,7 +161,7 @@ namespace Microsoft.CodeAnalysis
             // in this implementation we choose to ignore the drive root for the purposes of
             // determining validity. On windows c:/file.cs and /file.cs are both assumed to be
             // valid absolute paths, even though the second one is technically relative to
-            // the current drive of the compiler working directory. 
+            // the current drive of the compiler working directory.
 
             // Note that this check has no impact on config correctness. Files on windows
             // will still be compared using their full path (including drive root) so it's
@@ -223,7 +228,8 @@ namespace Microsoft.CodeAnalysis
             ref SectionNameLexer lexer,
             StringBuilder sb,
             bool parsingChoice,
-            ArrayBuilder<(int minValue, int maxValue)> numberRangePairs)
+            ArrayBuilder<(int minValue, int maxValue)> numberRangePairs
+        )
         {
             while (!lexer.IsDone)
             {
@@ -270,9 +276,13 @@ namespace Microsoft.CodeAnalysis
                         else
                         {
                             (string numStart, string numEnd) = rangeOpt.GetValueOrDefault();
-                            if (int.TryParse(numStart, out var intStart) && int.TryParse(numEnd, out var intEnd))
+                            if (
+                                int.TryParse(numStart, out var intStart)
+                                && int.TryParse(numEnd, out var intEnd)
+                            )
                             {
-                                var pair = intStart < intEnd ? (intStart, intEnd) : (intEnd, intStart);
+                                var pair =
+                                    intStart < intEnd ? (intStart, intEnd) : (intEnd, intStart);
                                 numberRangePairs.Add(pair);
                                 // Group allowing any digit sequence. The validity will be checked outside of the regex
                                 sb.Append("(-?[0-9]+)");
@@ -363,7 +373,8 @@ namespace Microsoft.CodeAnalysis
         private static bool TryCompileChoice(
             ref SectionNameLexer lexer,
             StringBuilder sb,
-            ArrayBuilder<(int, int)> numberRangePairs)
+            ArrayBuilder<(int, int)> numberRangePairs
+        )
         {
             if (lexer.Lex() != TokenKind.OpenCurly)
             {
@@ -410,7 +421,9 @@ namespace Microsoft.CodeAnalysis
         /// <digit> ::= 0-9
         /// ]]>
         /// </summary>
-        private static (string numStart, string numEnd)? TryParseNumberRange(ref SectionNameLexer lexer)
+        private static (string numStart, string numEnd)? TryParseNumberRange(
+            ref SectionNameLexer lexer
+        )
         {
             var saved = lexer.Position;
             if (lexer.Lex() != TokenKind.OpenCurly)
@@ -428,8 +441,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             // The next two characters must be ".."
-            if (!lexer.TryEatCurrentCharacter(out char c) || c != '.' ||
-                !lexer.TryEatCurrentCharacter(out c) || c != '.')
+            if (
+                !lexer.TryEatCurrentCharacter(out char c)
+                || c != '.'
+                || !lexer.TryEatCurrentCharacter(out c)
+                || c != '.'
+            )
             {
                 lexer.Position = saved;
                 return null;
@@ -467,20 +484,19 @@ namespace Microsoft.CodeAnalysis
                 switch (_sectionName[Position])
                 {
                     case '*':
+                    {
+                        int nextPos = Position + 1;
+                        if (nextPos < _sectionName.Length && _sectionName[nextPos] == '*')
                         {
-                            int nextPos = Position + 1;
-                            if (nextPos < _sectionName.Length &&
-                                _sectionName[nextPos] == '*')
-                            {
-                                Position += 2;
-                                return TokenKind.StarStar;
-                            }
-                            else
-                            {
-                                Position++;
-                                return TokenKind.Star;
-                            }
+                            Position += 2;
+                            return TokenKind.StarStar;
                         }
+                        else
+                        {
+                            Position++;
+                            return TokenKind.Star;
+                        }
+                    }
 
                     case '?':
                         Position++;
@@ -503,16 +519,16 @@ namespace Microsoft.CodeAnalysis
                         return TokenKind.OpenBracket;
 
                     case '\\':
+                    {
+                        // Backslash escapes the next character
+                        Position++;
+                        if (IsDone)
                         {
-                            // Backslash escapes the next character
-                            Position++;
-                            if (IsDone)
-                            {
-                                return TokenKind.BadToken;
-                            }
-
-                            return TokenKind.SimpleCharacter;
+                            return TokenKind.BadToken;
                         }
+
+                        return TokenKind.SimpleCharacter;
+                    }
 
                     default:
                         // Don't increment position, since caller needs to fetch the character
@@ -577,9 +593,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var str = sb.ToString();
-                return str.Length == 0 || str == "-"
-                    ? null
-                    : str;
+                return str.Length == 0 || str == "-" ? null : str;
             }
         }
 

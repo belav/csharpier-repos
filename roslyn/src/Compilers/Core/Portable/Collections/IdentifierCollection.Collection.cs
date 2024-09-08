@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (_count == -1)
                     {
-                        _count = this.IdentifierCollection._map.Values.Sum(o => o is string ? 1 : ((ISet<string>)o).Count);
+                        _count = this.IdentifierCollection._map.Values.Sum(o =>
+                            o is string ? 1 : ((ISet<string>)o).Count
+                        );
                     }
 
                     return _count;
@@ -75,7 +77,7 @@ namespace Microsoft.CodeAnalysis
                 return this.GetEnumerator();
             }
 
-            #region Unsupported  
+            #region Unsupported
             public void Add(string item)
             {
                 throw new NotSupportedException();
@@ -95,20 +97,20 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class CaseSensitiveCollection : CollectionBase
         {
-            public CaseSensitiveCollection(IdentifierCollection identifierCollection) : base(identifierCollection)
-            {
-            }
+            public CaseSensitiveCollection(IdentifierCollection identifierCollection)
+                : base(identifierCollection) { }
 
-            public override bool Contains(string item) => IdentifierCollection.CaseSensitiveContains(item);
+            public override bool Contains(string item) =>
+                IdentifierCollection.CaseSensitiveContains(item);
         }
 
         private sealed class CaseInsensitiveCollection : CollectionBase
         {
-            public CaseInsensitiveCollection(IdentifierCollection identifierCollection) : base(identifierCollection)
-            {
-            }
+            public CaseInsensitiveCollection(IdentifierCollection identifierCollection)
+                : base(identifierCollection) { }
 
-            public override bool Contains(string item) => IdentifierCollection.CaseInsensitiveContains(item);
+            public override bool Contains(string item) =>
+                IdentifierCollection.CaseInsensitiveContains(item);
         }
     }
 }

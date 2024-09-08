@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis
         public const DiagnosticSeverity Unknown = (DiagnosticSeverity)InternalErrorCode.Unknown;
 
         /// <summary>
-        /// If an unknown diagnostic is resolved and found to be unnecessary then it is 
+        /// If an unknown diagnostic is resolved and found to be unnecessary then it is
         /// treated as a "Void" diagnostic
         /// </summary>
         public const DiagnosticSeverity Void = (DiagnosticSeverity)InternalErrorCode.Void;

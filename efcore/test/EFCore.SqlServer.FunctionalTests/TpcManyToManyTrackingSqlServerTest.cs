@@ -9,18 +9,15 @@ public class TpcManyToManyTrackingSqlServerTest
     : ManyToManyTrackingSqlServerTestBase<TpcManyToManyTrackingSqlServerTest.TpcManyToManyTrackingSqlServerFixture>
 {
     public TpcManyToManyTrackingSqlServerTest(TpcManyToManyTrackingSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class TpcManyToManyTrackingSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "TpcManyToManyTrackingSqlServerTest";
+        protected override string StoreName => "TpcManyToManyTrackingSqlServerTest";
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(
-                w => w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w => w.Log(RelationalEventId.ForeignKeyTpcPrincipalWarning));
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

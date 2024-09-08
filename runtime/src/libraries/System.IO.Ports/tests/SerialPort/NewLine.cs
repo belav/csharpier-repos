@@ -43,7 +43,11 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyException(string newLine, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, newLine, expectedException);
 
@@ -60,7 +64,10 @@ namespace System.IO.Ports.Tests
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             serPortProp.SetAllPropertiesToDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
@@ -68,18 +75,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
@@ -87,14 +104,20 @@ namespace System.IO.Ports.Tests
             com.NewLine = origNewLine;
         }
 
-
-        private void VerifyExceptionAfterOpen(SerialPort com, string newLine, Type expectedException)
+        private void VerifyExceptionAfterOpen(
+            SerialPort com,
+            string newLine,
+            Type expectedException
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
@@ -102,18 +125,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the NewLine after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the NewLine after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the NewLine after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the NewLine after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the NewLine after Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the NewLine after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 

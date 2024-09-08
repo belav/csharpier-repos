@@ -66,13 +66,13 @@ public class BasicFlattening : AutoMapperSpecBase
         public IEnumerable<int> Ints { get; set; }
     }
 
-
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Address, AddressDTO>();
-        cfg.CreateMap<Customer, CustomerDTO>();
-        cfg.CreateMap<Foo, Foo>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Address, AddressDTO>();
+            cfg.CreateMap<Customer, CustomerDTO>();
+            cfg.CreateMap<Foo, Foo>();
+        });
 
     [Fact]
     public void Should_map()
@@ -83,30 +83,47 @@ public class BasicFlattening : AutoMapperSpecBase
     [Fact]
     public void Should_map_foo()
     {
-        Mapper.Map<Foo, Foo>(new Foo
-        {
-            Name = "foo",
-            Int32 = 12,
-            Int64 = 123123,
-            NullInt = 16,
-            DateTime = DateTime.Now,
-            Doublen = 2312112,
-            Foo1 = new Foo { Name = "foo one" },
-            Foos = new List<Foo>
-                                   {
-                                       new Foo {Name = "j1", Int64 = 123, NullInt = 321},
-                                       new Foo {Name = "j2", Int32 = 12345, NullInt = 54321},
-                                       new Foo {Name = "j3", Int32 = 12345, NullInt = 54321},
-                                   },
-            FooArr = new[]
-                                     {
-                                         new Foo {Name = "a1"},
-                                         new Foo {Name = "a2"},
-                                         new Foo {Name = "a3"},
-                                     },
-            IntArr = new[] { 1, 2, 3, 4, 5 },
-            Ints = new[] { 7, 8, 9 },
-        });
+        Mapper.Map<Foo, Foo>(
+            new Foo
+            {
+                Name = "foo",
+                Int32 = 12,
+                Int64 = 123123,
+                NullInt = 16,
+                DateTime = DateTime.Now,
+                Doublen = 2312112,
+                Foo1 = new Foo { Name = "foo one" },
+                Foos = new List<Foo>
+                {
+                    new Foo
+                    {
+                        Name = "j1",
+                        Int64 = 123,
+                        NullInt = 321,
+                    },
+                    new Foo
+                    {
+                        Name = "j2",
+                        Int32 = 12345,
+                        NullInt = 54321,
+                    },
+                    new Foo
+                    {
+                        Name = "j3",
+                        Int32 = 12345,
+                        NullInt = 54321,
+                    },
+                },
+                FooArr = new[]
+                {
+                    new Foo { Name = "a1" },
+                    new Foo { Name = "a2" },
+                    new Foo { Name = "a3" },
+                },
+                IntArr = new[] { 1, 2, 3, 4, 5 },
+                Ints = new[] { 7, 8, 9 },
+            }
+        );
     }
 }
 
@@ -119,19 +136,22 @@ public class NullFlattening : AutoMapperSpecBase
         public Source Parent { get; set; }
         public Data Data { get; set; }
     }
+
     public class Data
     {
         public int? Integer { get; set; }
     }
+
     public class Destination
     {
         public int? ParentDataInteger { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
@@ -166,7 +186,6 @@ public class NullTypeMapFlattening : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-
     public class OrderDTO
     {
         public CurrencyDTO VendorCurrency { get; set; }
@@ -179,19 +198,16 @@ public class NullTypeMapFlattening : AutoMapperSpecBase
         public string Name { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<OrderModel, OrderDTO>();
-        cfg.CreateMap<CurrencyModel, CurrencyDTO>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<OrderModel, OrderDTO>();
+            cfg.CreateMap<CurrencyModel, CurrencyDTO>();
+        });
 
     protected override void Because_of()
     {
-        var orderModel = new OrderModel()
-        {
-            Number = "1",
-            Vendor = null
-        };
+        var orderModel = new OrderModel() { Number = "1", Vendor = null };
         _dto = Mapper.Map<OrderDTO>(orderModel);
     }
 
@@ -211,6 +227,7 @@ public class FlatteningWithSourceValidation : NonValidatingSpecBase
         public string Name { get; set; }
         public Address Address { get; set; }
     }
+
     public class Address
     {
         public int Id { get; set; }
@@ -218,14 +235,25 @@ public class FlatteningWithSourceValidation : NonValidatingSpecBase
         public string City { get; set; }
         public string Country { get; set; }
     }
+
     public class CustomerDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string AddressCity { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source).ForMember(d=>d.Id, o=>o.MapFrom(s=>s.AnotherId)));
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+            cfg.CreateMap<Customer, CustomerDTO>(MemberList.Source)
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.AnotherId))
+        );
+
     [Fact]
     public void Should_validate() =>
-        new Action(AssertConfigurationIsValid).ShouldThrow<AutoMapperConfigurationException>().Errors.Single().UnmappedPropertyNames.Single().ShouldBe(nameof(Address.Id));
+        new Action(AssertConfigurationIsValid)
+            .ShouldThrow<AutoMapperConfigurationException>()
+            .Errors.Single()
+            .UnmappedPropertyNames.Single()
+            .ShouldBe(nameof(Address.Id));
 }

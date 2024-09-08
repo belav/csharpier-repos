@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DeviceSpecificDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -10,8 +10,8 @@ namespace System.Web.UI.Design.MobileControls
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Globalization;
     using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Web.UI;
@@ -21,22 +21,27 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DeviceSpecificDesigner : MobileTemplatedControlDesigner, IDeviceSpecificDesigner
     {
-        internal static BooleanSwitch DeviceSpecificDesignerSwitch =
-            new BooleanSwitch("DeviceSpecificDesigner", "Enable DeviceSpecific designer general purpose traces.");
+        internal static BooleanSwitch DeviceSpecificDesignerSwitch = new BooleanSwitch(
+            "DeviceSpecificDesigner",
+            "Enable DeviceSpecific designer general purpose traces."
+        );
 
         private DeviceSpecific _ds;
         private bool _isDuplicate;
         private System.Web.UI.MobileControls.Panel _parentContainer;
 
-        internal static readonly String _strictlyFormPanelContainmentErrorMessage = 
-            SR.GetString(SR.MobileControl_StrictlyFormPanelContainmentErrorMessage);
+        internal static readonly String _strictlyFormPanelContainmentErrorMessage = SR.GetString(
+            SR.MobileControl_StrictlyFormPanelContainmentErrorMessage
+        );
 
         private const String _designTimeHTML =
             @"
@@ -64,8 +69,8 @@ namespace System.Web.UI.Design.MobileControls
         private const String _propertyOverridesPropName = "PropertyOverrides";
         private const String _dataBindingsPropName = "DataBindings";
 
-        private const int _headerFooterTemplates            = 0;
-        private const int _contentTemplate                  = 0;
+        private const int _headerFooterTemplates = 0;
+        private const int _contentTemplate = 0;
 
         private bool FormDeviceSpecific
         {
@@ -76,13 +81,18 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        private static readonly String[] _templateFramesForForm =
-            new String [] { Constants.HeaderTemplateTag, Constants.FooterTemplateTag };
+        private static readonly String[] _templateFramesForForm = new String[]
+        {
+            Constants.HeaderTemplateTag,
+            Constants.FooterTemplateTag,
+        };
 
-        private static readonly String[] _templateFramesForPanel = 
-            new String [] { Constants.ContentTemplateTag };
+        private static readonly String[] _templateFramesForPanel = new String[]
+        {
+            Constants.ContentTemplateTag,
+        };
 
-        protected override void Dispose(bool disposing) 
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -92,7 +102,7 @@ namespace System.Web.UI.Design.MobileControls
             base.Dispose(disposing);
         }
 
-        protected override TemplateEditingVerb[] GetCachedTemplateEditingVerbs() 
+        protected override TemplateEditingVerb[] GetCachedTemplateEditingVerbs()
         {
             if (_isDuplicate)
             {
@@ -116,18 +126,19 @@ namespace System.Web.UI.Design.MobileControls
                     if (control is DeviceSpecific && control != _ds)
                     {
                         // found a valid candidate
-                        DeviceSpecific newDS = (DeviceSpecific) control;
+                        DeviceSpecific newDS = (DeviceSpecific)control;
                         if (newDS.Site != null)
                         {
-                            IDesignerHost host = (IDesignerHost) newDS.Site.GetService(typeof(IDesignerHost));
+                            IDesignerHost host = (IDesignerHost)
+                                newDS.Site.GetService(typeof(IDesignerHost));
                             Debug.Assert(host != null, "host is null in DeviceSpecificDesigner");
-                            IDesigner designer = host.GetDesigner((IComponent) newDS);
+                            IDesigner designer = host.GetDesigner((IComponent)newDS);
 
                             // this designer could be null if the page is disposing the controls (Page.Dispose).
                             if (designer != null)
                             {
                                 _parentContainer.DeviceSpecific = newDS;
-                                DeviceSpecificDesigner dsd = (DeviceSpecificDesigner) designer;
+                                DeviceSpecificDesigner dsd = (DeviceSpecificDesigner)designer;
                                 dsd.TreatAsDuplicate(false);
                                 break;
                             }
@@ -139,10 +150,12 @@ namespace System.Web.UI.Design.MobileControls
 
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.DeviceSpecific,
-                         "DeviceSpecificControlDesigner.Initialize - Invalid DeviceSpecific Control");
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.DeviceSpecific,
+                "DeviceSpecificControlDesigner.Initialize - Invalid DeviceSpecific Control"
+            );
 
-            _ds = (System.Web.UI.MobileControls.DeviceSpecific) component;
+            _ds = (System.Web.UI.MobileControls.DeviceSpecific)component;
             base.Initialize(component);
 
             _isDuplicate = false;
@@ -159,7 +172,8 @@ namespace System.Web.UI.Design.MobileControls
 
         protected override String GetDesignTimeNormalHtml()
         {
-            String curChoice, message;
+            String curChoice,
+                message;
             bool _isNonHtmlSchema = false;
 
             if (null == CurrentChoice)
@@ -175,7 +189,9 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 else
                 {
-                    curChoice = HttpUtility.HtmlEncode(DesignerUtility.ChoiceToUniqueIdentifier(CurrentChoice));
+                    curChoice = HttpUtility.HtmlEncode(
+                        DesignerUtility.ChoiceToUniqueIdentifier(CurrentChoice)
+                    );
                 }
 
                 if (IsHTMLSchema(CurrentChoice))
@@ -191,22 +207,32 @@ namespace System.Web.UI.Design.MobileControls
 
             if (_isDuplicate || _isNonHtmlSchema)
             {
-                return String.Format(CultureInfo.CurrentCulture, _duplicateDesignTimeHTML,
-                                     new Object[]
-                                     {
-                                         _ds.Site.Name,
-                                         curChoice,
-                                         message,
-                                         _isDuplicate ? MobileControlDesigner.errorIcon : 
-                                         MobileControlDesigner.infoIcon,
-                                         _isDuplicate ? 
-                                         SR.GetString(SR.DeviceSpecific_DuplicateWarningMessage) :
-                                         SR.GetString(SR.MobileControl_NonHtmlSchemaErrorMessage) 
-                                     });
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    _duplicateDesignTimeHTML,
+                    new Object[]
+                    {
+                        _ds.Site.Name,
+                        curChoice,
+                        message,
+                        _isDuplicate
+                            ? MobileControlDesigner.errorIcon
+                            : MobileControlDesigner.infoIcon,
+                        _isDuplicate
+                            ? SR.GetString(SR.DeviceSpecific_DuplicateWarningMessage)
+                            : SR.GetString(SR.MobileControl_NonHtmlSchemaErrorMessage),
+                    }
+                );
             }
             else
             {
-                return String.Format(CultureInfo.CurrentCulture, _designTimeHTML, _ds.Site.Name, curChoice, message);
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    _designTimeHTML,
+                    _ds.Site.Name,
+                    curChoice,
+                    message
+                );
             }
         }
 
@@ -214,8 +240,10 @@ namespace System.Web.UI.Design.MobileControls
         {
             get
             {
-                return (ContainmentStatus == ContainmentStatus.InForm ||
-                        ContainmentStatus == ContainmentStatus.InPanel);
+                return (
+                    ContainmentStatus == ContainmentStatus.InForm
+                    || ContainmentStatus == ContainmentStatus.InPanel
+                );
             }
         }
 
@@ -236,7 +264,7 @@ namespace System.Web.UI.Design.MobileControls
                     return MobileControlDesigner._mobilePageErrorMessage;
                 }
             }
-            
+
             if (!ValidContainment)
             {
                 return _strictlyFormPanelContainmentErrorMessage;
@@ -257,7 +285,7 @@ namespace System.Web.UI.Design.MobileControls
             UpdateDesignTimeHtml();
         }
 
-        public override void OnSetParent() 
+        public override void OnSetParent()
         {
             // MessageBox.Show("OnSetParent call for _ds.Site.Name=" + _ds.Site.Name + ", _ds.ID=" + _ds.ID);
             base.OnSetParent();
@@ -273,11 +301,18 @@ namespace System.Web.UI.Design.MobileControls
 
             if (parentContainer is System.Web.UI.MobileControls.Panel)
             {
-                _parentContainer = (System.Web.UI.MobileControls.Panel) parentContainer;
+                _parentContainer = (System.Web.UI.MobileControls.Panel)parentContainer;
                 _ds.SetOwner(_parentContainer);
 
-                if (null != _parentContainer.DeviceSpecific &&
-                    0 != String.Compare(_ds.ID, _parentContainer.DeviceSpecific.ID, StringComparison.OrdinalIgnoreCase))
+                if (
+                    null != _parentContainer.DeviceSpecific
+                    && 0
+                        != String.Compare(
+                            _ds.ID,
+                            _parentContainer.DeviceSpecific.ID,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                )
                 {
                     // the parent container already has a deviceSpecific child.
                     // this instance is a duplicate and needs to update its rendering.
@@ -287,11 +322,13 @@ namespace System.Web.UI.Design.MobileControls
                     // the current valid DeviceSpecific is intentionaly refreshed because
                     // if this deviceSpecific instance is recreated via a Undo operation
                     // the current valid DeviceSpecific appears as a duplicate if not refreshed.
-                    IDesignerHost host = (IDesignerHost) GetService(typeof(IDesignerHost));
+                    IDesignerHost host = (IDesignerHost)GetService(typeof(IDesignerHost));
                     Debug.Assert(host != null, "Did not get a valid IDesignerHost reference");
-                    IDesigner designer = host.GetDesigner((IComponent) _parentContainer.DeviceSpecific);
+                    IDesigner designer = host.GetDesigner(
+                        (IComponent)_parentContainer.DeviceSpecific
+                    );
                     Debug.Assert(designer != null, "designer is null in DeviceSpecificDesigner");
-                    DeviceSpecificDesigner dsd = (DeviceSpecificDesigner) designer;
+                    DeviceSpecificDesigner dsd = (DeviceSpecificDesigner)designer;
                     dsd.UpdateRendering();
                 }
                 else
@@ -320,16 +357,19 @@ namespace System.Web.UI.Design.MobileControls
             return FormDeviceSpecific ? _templateFramesForForm : _templateFramesForPanel;
         }
 
-        protected override void PreFilterProperties(IDictionary properties) 
+        protected override void PreFilterProperties(IDictionary properties)
         {
             base.PreFilterProperties(properties);
 
             PropertyDescriptor prop = (PropertyDescriptor)properties[_propertyOverridesPropName];
             Debug.Assert(prop != null);
-            properties[_propertyOverridesPropName] = 
-                TypeDescriptor.CreateProperty(
-                    GetType(), prop,
-                    InTemplateMode || _parentContainer == null? BrowsableAttribute.No : BrowsableAttribute.Yes);
+            properties[_propertyOverridesPropName] = TypeDescriptor.CreateProperty(
+                GetType(),
+                prop,
+                InTemplateMode || _parentContainer == null
+                    ? BrowsableAttribute.No
+                    : BrowsableAttribute.Yes
+            );
         }
 
         protected override TemplateEditingVerb[] GetTemplateVerbs()
@@ -341,29 +381,28 @@ namespace System.Web.UI.Design.MobileControls
                 templateVerbs[0] = new TemplateEditingVerb(
                     SR.GetString(SR.TemplateFrame_HeaderFooterTemplates),
                     _headerFooterTemplates,
-                    this);
+                    this
+                );
             }
             else
             {
                 templateVerbs[0] = new TemplateEditingVerb(
                     SR.GetString(SR.TemplateFrame_ContentTemplate),
                     _contentTemplate,
-                    this);
+                    this
+                );
             }
 
             return templateVerbs;
         }
-        
+
         ////////////////////////////////////////////////////////////////////////
         //  Begin IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
         Object IDeviceSpecificDesigner.UnderlyingObject
         {
-            get
-            {
-                return _parentContainer == null ? (Object)_ds : _parentContainer;
-            }
+            get { return _parentContainer == null ? (Object)_ds : _parentContainer; }
         }
 
         ////////////////////////////////////////////////////////////////////////

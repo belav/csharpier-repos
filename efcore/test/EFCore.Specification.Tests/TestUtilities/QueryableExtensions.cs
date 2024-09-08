@@ -5,6 +5,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public static class QueryableExtensions
 {
-    public static Task<List<TSource>> ToListAsync<TSource>(this IQueryable source, CancellationToken cancellationToken = default)
-        => ((IQueryable<TSource>)source).ToListAsync(cancellationToken);
+    public static Task<List<TSource>> ToListAsync<TSource>(
+        this IQueryable source,
+        CancellationToken cancellationToken = default
+    ) => ((IQueryable<TSource>)source).ToListAsync(cancellationToken);
 }

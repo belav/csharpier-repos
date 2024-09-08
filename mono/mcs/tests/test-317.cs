@@ -1,16 +1,15 @@
 // Compiler options: /warn:4 /warnaserror
 interface IFoo
 {
-	void Test (int t);
+    void Test(int t);
 }
 
 interface IBar : IFoo
 {
-	new int Test (int t);
+    new int Test(int t);
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

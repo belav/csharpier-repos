@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.JsonPatch;
 
-public class TestErrorLogger<T> where T : class
+public class TestErrorLogger<T>
+    where T : class
 {
     public string ErrorMessage { get; set; }
 

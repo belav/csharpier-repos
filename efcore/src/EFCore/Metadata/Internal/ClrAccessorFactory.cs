@@ -14,8 +14,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 public abstract class ClrAccessorFactory<TAccessor>
     where TAccessor : class
 {
-    private static readonly MethodInfo GenericCreate
-        = typeof(ClrAccessorFactory<TAccessor>).GetTypeInfo().GetDeclaredMethods(nameof(CreateGeneric)).Single();
+    private static readonly MethodInfo GenericCreate = typeof(ClrAccessorFactory<TAccessor>)
+        .GetTypeInfo()
+        .GetDeclaredMethods(nameof(CreateGeneric))
+        .Single();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +33,7 @@ public abstract class ClrAccessorFactory<TAccessor>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TAccessor Create(MemberInfo memberInfo)
-        => Create(memberInfo, null);
+    public virtual TAccessor Create(MemberInfo memberInfo) => Create(memberInfo, null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,22 +43,24 @@ public abstract class ClrAccessorFactory<TAccessor>
     /// </summary>
     protected virtual TAccessor Create(MemberInfo memberInfo, IPropertyBase? propertyBase)
     {
-        var boundMethod = propertyBase != null
-            ? GenericCreate.MakeGenericMethod(
-                propertyBase.DeclaringType.ContainingEntityType.ClrType,
-                propertyBase.DeclaringType.ClrType,
-                propertyBase.ClrType,
-                propertyBase.ClrType.UnwrapNullableType())
-            : GenericCreate.MakeGenericMethod(
-                memberInfo.DeclaringType!,
-                memberInfo.DeclaringType!,
-                memberInfo.GetMemberType(),
-                memberInfo.GetMemberType().UnwrapNullableType());
+        var boundMethod =
+            propertyBase != null
+                ? GenericCreate.MakeGenericMethod(
+                    propertyBase.DeclaringType.ContainingEntityType.ClrType,
+                    propertyBase.DeclaringType.ClrType,
+                    propertyBase.ClrType,
+                    propertyBase.ClrType.UnwrapNullableType()
+                )
+                : GenericCreate.MakeGenericMethod(
+                    memberInfo.DeclaringType!,
+                    memberInfo.DeclaringType!,
+                    memberInfo.GetMemberType(),
+                    memberInfo.GetMemberType().UnwrapNullableType()
+                );
 
         try
         {
-            return (TAccessor)boundMethod.Invoke(
-                this, new object?[] { memberInfo, propertyBase })!;
+            return (TAccessor)boundMethod.Invoke(this, new object?[] { memberInfo, propertyBase })!;
         }
         catch (TargetInvocationException e) when (e.InnerException != null)
         {
@@ -72,8 +75,11 @@ public abstract class ClrAccessorFactory<TAccessor>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected abstract TAccessor CreateGeneric<TEntity, TStructuralType, TValue, TNonNullableEnumValue>(
-        MemberInfo memberInfo,
-        IPropertyBase? propertyBase)
+    protected abstract TAccessor CreateGeneric<
+        TEntity,
+        TStructuralType,
+        TValue,
+        TNonNullableEnumValue
+    >(MemberInfo memberInfo, IPropertyBase? propertyBase)
         where TEntity : class;
 }

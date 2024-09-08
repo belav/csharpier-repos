@@ -8,7 +8,10 @@ namespace System.Activities.Expressions
     using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    public class EnvironmentLocationValue<T> : CodeActivity<T>, IExpressionContainer, ILocationReferenceExpression
+    public class EnvironmentLocationValue<T>
+        : CodeActivity<T>,
+            IExpressionContainer,
+            ILocationReferenceExpression
     {
         LocationReference locationReference;
 
@@ -26,10 +29,7 @@ namespace System.Activities.Expressions
 
         public virtual LocationReference LocationReference
         {
-            get
-            {
-                return this.locationReference;
-            }
+            get { return this.locationReference; }
         }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
@@ -51,7 +51,9 @@ namespace System.Activities.Expressions
             }
         }
 
-        ActivityWithResult ILocationReferenceExpression.CreateNewInstance(LocationReference locationReference)
+        ActivityWithResult ILocationReferenceExpression.CreateNewInstance(
+            LocationReference locationReference
+        )
         {
             return new EnvironmentLocationValue<T>(locationReference);
         }

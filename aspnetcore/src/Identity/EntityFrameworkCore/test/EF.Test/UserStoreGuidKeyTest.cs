@@ -27,38 +27,45 @@ public class GuidRole : IdentityRole<Guid>
 public class UserStoreGuidTest : SqlStoreTestBase<GuidUser, GuidRole, Guid>
 {
     public UserStoreGuidTest(ScratchDatabaseFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class ApplicationUserStore : UserStore<GuidUser, GuidRole, TestDbContext, Guid>
     {
-        public ApplicationUserStore(TestDbContext context) : base(context) { }
+        public ApplicationUserStore(TestDbContext context)
+            : base(context) { }
     }
 
     public class ApplicationRoleStore : RoleStore<GuidRole, TestDbContext, Guid>
     {
-        public ApplicationRoleStore(TestDbContext context) : base(context) { }
+        public ApplicationRoleStore(TestDbContext context)
+            : base(context) { }
     }
 
     protected override void AddUserStore(IServiceCollection services, object context = null)
     {
-        services.AddSingleton<IUserStore<GuidUser>>(new ApplicationUserStore((TestDbContext)context));
+        services.AddSingleton<IUserStore<GuidUser>>(
+            new ApplicationUserStore((TestDbContext)context)
+        );
     }
 
     protected override void AddRoleStore(IServiceCollection services, object context = null)
     {
-        services.AddSingleton<IRoleStore<GuidRole>>(new ApplicationRoleStore((TestDbContext)context));
+        services.AddSingleton<IRoleStore<GuidRole>>(
+            new ApplicationRoleStore((TestDbContext)context)
+        );
     }
 
     [Fact]
     public void AddEntityFrameworkStoresCanInferKey()
     {
         var services = new ServiceCollection();
-        services.AddLogging()
+        services
+            .AddLogging()
             .AddSingleton(new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options));
         // This used to throw
-        var builder = services.AddIdentity<GuidUser, GuidRole>().AddEntityFrameworkStores<TestDbContext>();
+        var builder = services
+            .AddIdentity<GuidUser, GuidRole>()
+            .AddEntityFrameworkStores<TestDbContext>();
 
         var sp = services.BuildServiceProvider();
         using (var csope = sp.CreateScope())
@@ -72,10 +79,14 @@ public class UserStoreGuidTest : SqlStoreTestBase<GuidUser, GuidRole, Guid>
     public void AddEntityFrameworkStoresCanInferKeyWithGenericBase()
     {
         var services = new ServiceCollection();
-        services.AddLogging()
+        services
+            .AddLogging()
             .AddSingleton(new TestDbContext(new DbContextOptionsBuilder<TestDbContext>().Options));
         // This used to throw
-        var builder = services.AddIdentityCore<IdentityUser<Guid>>().AddRoles<IdentityRole<Guid>>().AddEntityFrameworkStores<TestDbContext>();
+        var builder = services
+            .AddIdentityCore<IdentityUser<Guid>>()
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<TestDbContext>();
 
         var sp = services.BuildServiceProvider();
         using (var csope = sp.CreateScope())

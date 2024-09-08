@@ -38,8 +38,18 @@ internal static class ApiConventionMatcher
                 var nameMatchBehavior = GetNameMatchBehavior(conventionParameter);
                 var typeMatchBehavior = GetTypeMatchBehavior(conventionParameter);
 
-                if (!IsTypeMatch(methodParameters[i].ParameterType, conventionParameter.ParameterType, typeMatchBehavior) ||
-                    !IsNameMatch(methodParameters[i].Name, conventionParameter.Name, nameMatchBehavior))
+                if (
+                    !IsTypeMatch(
+                        methodParameters[i].ParameterType,
+                        conventionParameter.ParameterType,
+                        typeMatchBehavior
+                    )
+                    || !IsNameMatch(
+                        methodParameters[i].Name,
+                        conventionParameter.Name,
+                        nameMatchBehavior
+                    )
+                )
                 {
                     return false;
                 }
@@ -51,19 +61,25 @@ internal static class ApiConventionMatcher
         }
     }
 
-    internal static ApiConventionNameMatchBehavior GetNameMatchBehavior(ICustomAttributeProvider attributeProvider)
+    internal static ApiConventionNameMatchBehavior GetNameMatchBehavior(
+        ICustomAttributeProvider attributeProvider
+    )
     {
         var attribute = GetCustomAttribute<ApiConventionNameMatchAttribute>(attributeProvider);
         return attribute?.MatchBehavior ?? ApiConventionNameMatchBehavior.Exact;
     }
 
-    internal static ApiConventionTypeMatchBehavior GetTypeMatchBehavior(ICustomAttributeProvider attributeProvider)
+    internal static ApiConventionTypeMatchBehavior GetTypeMatchBehavior(
+        ICustomAttributeProvider attributeProvider
+    )
     {
         var attribute = GetCustomAttribute<ApiConventionTypeMatchAttribute>(attributeProvider);
         return attribute?.MatchBehavior ?? ApiConventionTypeMatchBehavior.AssignableFrom;
     }
 
-    private static TAttribute? GetCustomAttribute<TAttribute>(ICustomAttributeProvider attributeProvider)
+    private static TAttribute? GetCustomAttribute<TAttribute>(
+        ICustomAttributeProvider attributeProvider
+    )
     {
         var attributes = attributeProvider.GetCustomAttributes(inherit: false);
         for (var i = 0; i < attributes.Length; i++)
@@ -77,7 +93,11 @@ internal static class ApiConventionMatcher
         return default;
     }
 
-    internal static bool IsNameMatch(string? name, string? conventionName, ApiConventionNameMatchBehavior nameMatchBehavior)
+    internal static bool IsNameMatch(
+        string? name,
+        string? conventionName,
+        ApiConventionNameMatchBehavior nameMatchBehavior
+    )
     {
         switch (nameMatchBehavior)
         {
@@ -162,11 +182,22 @@ internal static class ApiConventionMatcher
 
             // Match the remaining letters with exact case. i.e. match "ame" from "personName", "name"
             index++;
-            return string.Compare(name, index, conventionName, 1, conventionName.Length - 1, StringComparison.Ordinal) == 0;
+            return string.Compare(
+                    name,
+                    index,
+                    conventionName,
+                    1,
+                    conventionName.Length - 1,
+                    StringComparison.Ordinal
+                ) == 0;
         }
     }
 
-    internal static bool IsTypeMatch(Type type, Type conventionType, ApiConventionTypeMatchBehavior typeMatchBehavior)
+    internal static bool IsTypeMatch(
+        Type type,
+        Type conventionType,
+        ApiConventionTypeMatchBehavior typeMatchBehavior
+    )
     {
         switch (typeMatchBehavior)
         {

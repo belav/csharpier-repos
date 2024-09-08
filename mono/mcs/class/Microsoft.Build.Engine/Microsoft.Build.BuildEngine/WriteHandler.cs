@@ -31,5 +31,5 @@ namespace Microsoft.Build.Logging
 namespace Microsoft.Build.BuildEngine
 #endif
 {
-	public delegate void WriteHandler (string message);
+    public delegate void WriteHandler(string message);
 }

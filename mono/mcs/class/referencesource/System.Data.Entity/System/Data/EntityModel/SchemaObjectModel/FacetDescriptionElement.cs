@@ -8,10 +8,10 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Metadata.Edm;
-using System.Xml;
 using System.Diagnostics;
+using System.Text;
+using System.Xml;
 
 namespace System.Data.EntityModel.SchemaObjectModel
 {
@@ -26,9 +26,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         FacetDescription _facetDescription;
 
         public FacetDescriptionElement(TypeElement type, string name)
-        : base(type, name)
-        {
-        }
+            : base(type, name) { }
 
         protected override bool ProhibitAttribute(string namespaceUri, string localName)
         {
@@ -42,7 +40,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 return false;
             }
             return false;
-
         }
 
         protected override bool HandleAttribute(XmlReader reader)
@@ -51,7 +48,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 return true;
             }
-            else if (CanHandleAttribute(reader,  XmlConstants.MinimumAttribute))
+            else if (CanHandleAttribute(reader, XmlConstants.MinimumAttribute))
             {
                 HandleMinimumAttribute(reader);
                 return true;
@@ -123,18 +120,18 @@ namespace System.Data.EntityModel.SchemaObjectModel
             }
         }
 
-        public abstract EdmType FacetType{ get; }
-        
+        public abstract EdmType FacetType { get; }
+
         public int? MinValue
         {
             get { return _minValue; }
         }
-        
+
         public int? MaxValue
         {
             get { return _maxValue; }
         }
-        
+
         public object DefaultValue
         {
             get { return _defaultValue; }
@@ -145,14 +142,25 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             get
             {
-                Debug.Assert(_facetDescription != null, "Did you forget to call CreateAndValidate first?");
+                Debug.Assert(
+                    _facetDescription != null,
+                    "Did you forget to call CreateAndValidate first?"
+                );
                 return _facetDescription;
             }
         }
 
         internal void CreateAndValidateFacetDescription(string declaringTypeName)
         {
-            _facetDescription = new FacetDescription(Name, FacetType, MinValue, MaxValue, DefaultValue, _isConstant, declaringTypeName);
+            _facetDescription = new FacetDescription(
+                Name,
+                FacetType,
+                MinValue,
+                MaxValue,
+                DefaultValue,
+                _isConstant,
+                declaringTypeName
+            );
         }
     }
 }

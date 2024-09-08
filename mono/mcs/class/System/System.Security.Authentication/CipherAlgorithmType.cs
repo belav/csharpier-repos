@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,18 +31,17 @@
 
 namespace System.Security.Authentication
 {
-	public enum CipherAlgorithmType 
-	{
-		None       = 0,
-		Null	   = 0x6000,
-		Aes        = 0x6611,
-		Aes128     = 0x660e,
-		Aes192     = 0x660f,
-		Aes256     = 0x6610,
-		Des        = 0x6601,
-		Rc2        = 0x6602,
-		Rc4        = 0x6801,
-		TripleDes  = 0x6603
-	}
+    public enum CipherAlgorithmType
+    {
+        None = 0,
+        Null = 0x6000,
+        Aes = 0x6611,
+        Aes128 = 0x660e,
+        Aes192 = 0x660f,
+        Aes256 = 0x6610,
+        Des = 0x6601,
+        Rc2 = 0x6602,
+        Rc4 = 0x6801,
+        TripleDes = 0x6603,
+    }
 }
-

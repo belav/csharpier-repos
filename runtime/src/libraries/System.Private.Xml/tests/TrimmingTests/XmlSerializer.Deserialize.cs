@@ -18,18 +18,24 @@ namespace System.Xml.Serialization.TrimmingTests
         [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(DataUpdatesDataUpdateInfo))]
         public static int Main()
         {
-            using StringReader stringReader = new StringReader(@"<?xml version=""1.0"" encoding=""UTF-8""?>
+            using StringReader stringReader = new StringReader(
+                @"<?xml version=""1.0"" encoding=""UTF-8""?>
 				<Response>
 				    <DataUpdates>
 				        <DataUpdateInfo DataDate=""2009-04-13T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T02:53:19.257"" />
 				        <DataUpdateInfo DataDate=""2009-04-14T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T02:53:19.257"" />
 				        <DataUpdateInfo DataDate=""2009-04-15T00:00:00"" DataType=""Data"" LastUpdatedDate=""2010-12-12T01:52:51.047"" />
 				    </DataUpdates>
-				</Response>");
+				</Response>"
+            );
 
             Response obj = (Response)new XmlSerializer(typeof(Response)).Deserialize(stringReader);
-            if (obj.DataUpdates.DataUpdateInfo.Count == 3 &&
-                obj.DataUpdates.DataUpdateInfo.All(i => i.DataDate.Year == 2009 && i.LastUpdatedDate.Year == 2010))
+            if (
+                obj.DataUpdates.DataUpdateInfo.Count == 3
+                && obj.DataUpdates.DataUpdateInfo.All(i =>
+                    i.DataDate.Year == 2009 && i.LastUpdatedDate.Year == 2010
+                )
+            )
             {
                 return 100;
             }
@@ -70,9 +76,7 @@ namespace System.Xml.Serialization.TrimmingTests
     [XmlType(AnonymousType = true)]
     public class DataUpdatesDataUpdateInfo
     {
-        public DataUpdatesDataUpdateInfo()
-        {
-        }
+        public DataUpdatesDataUpdateInfo() { }
 
         [XmlAttribute]
         public DateTime DataDate { get; set; }

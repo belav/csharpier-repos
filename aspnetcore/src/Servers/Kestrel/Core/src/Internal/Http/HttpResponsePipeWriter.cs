@@ -61,7 +61,10 @@ internal sealed class HttpResponsePipeWriter : PipeWriter
         return _pipeControl.GetSpan(sizeHint);
     }
 
-    public override ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask<FlushResult> WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         ValidateState(cancellationToken);
         return _pipeControl.WritePipeAsync(source, cancellationToken);
@@ -109,7 +112,10 @@ internal sealed class HttpResponsePipeWriter : PipeWriter
 
         static void ThrowObjectDisposedException()
         {
-            throw new ObjectDisposedException(nameof(HttpResponseStream), CoreStrings.WritingToResponseBodyAfterResponseCompleted);
+            throw new ObjectDisposedException(
+                nameof(HttpResponseStream),
+                CoreStrings.WritingToResponseBodyAfterResponseCompleted
+            );
         }
     }
 }

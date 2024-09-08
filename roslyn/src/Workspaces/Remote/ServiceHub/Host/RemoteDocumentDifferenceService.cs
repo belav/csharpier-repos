@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
     /// Provide document difference service specific to remote workspace's behavior.
-    /// 
+    ///
     /// Default <see cref="AbstractDocumentDifferenceService"/> is optimized for typing case in editor where we have events
     /// for each typing. But in remote workspace, we aggregate changes and update solution in bulk and we don't have concept
     /// of active file making default implementation unsuitable. Functionally, default one is still correct, but it often
@@ -23,42 +23,69 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal class RemoteDocumentDifferenceService : IDocumentDifferenceService
     {
-        [ExportLanguageService(typeof(IDocumentDifferenceService), LanguageNames.CSharp, layer: WorkspaceKind.Host), Shared]
+        [
+            ExportLanguageService(
+                typeof(IDocumentDifferenceService),
+                LanguageNames.CSharp,
+                layer: WorkspaceKind.Host
+            ),
+            Shared
+        ]
         internal sealed class CSharpDocumentDifferenceService : RemoteDocumentDifferenceService
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CSharpDocumentDifferenceService()
-            {
-            }
+            public CSharpDocumentDifferenceService() { }
         }
 
-        [ExportLanguageService(typeof(IDocumentDifferenceService), LanguageNames.VisualBasic, layer: WorkspaceKind.Host), Shared]
-        internal sealed class VisualBasicDocumentDifferenceService : AbstractDocumentDifferenceService
+        [
+            ExportLanguageService(
+                typeof(IDocumentDifferenceService),
+                LanguageNames.VisualBasic,
+                layer: WorkspaceKind.Host
+            ),
+            Shared
+        ]
+        internal sealed class VisualBasicDocumentDifferenceService
+            : AbstractDocumentDifferenceService
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public VisualBasicDocumentDifferenceService()
-            {
-            }
+            public VisualBasicDocumentDifferenceService() { }
         }
 
-        public async Task<DocumentDifferenceResult?> GetDifferenceAsync(Document oldDocument, Document newDocument, CancellationToken cancellationToken)
+        public async Task<DocumentDifferenceResult?> GetDifferenceAsync(
+            Document oldDocument,
+            Document newDocument,
+            CancellationToken cancellationToken
+        )
         {
             // in remote workspace, we don't trust any version based on VersionStamp. we only trust content based information such as
             // checksum or tree comparison and etc.
 
             // first check checksum
-            var oldTextChecksum = (await oldDocument.State.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false)).Text;
-            var newTextChecksum = (await newDocument.State.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false)).Text;
+            var oldTextChecksum = (
+                await oldDocument
+                    .State.GetStateChecksumsAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Text;
+            var newTextChecksum = (
+                await newDocument
+                    .State.GetStateChecksumsAsync(cancellationToken)
+                    .ConfigureAwait(false)
+            ).Text;
             if (oldTextChecksum == newTextChecksum)
             {
                 // null means nothing has changed.
                 return null;
             }
 
-            var oldRoot = await oldDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var oldRoot = await oldDocument
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newRoot = await newDocument
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // the service is only registered for C# and VB documents, which must have syntax trees:
             Contract.ThrowIfNull(oldRoot);

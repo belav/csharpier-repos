@@ -22,42 +22,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         internal AbstractCodeType(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         private SyntaxNode GetNamespaceOrTypeNode()
         {
-            return LookupNode().Ancestors()
+            return LookupNode()
+                .Ancestors()
                 .Where(n => CodeModelService.IsNamespace(n) || CodeModelService.IsType(n))
                 .FirstOrDefault();
         }
 
         private SyntaxNode GetNamespaceNode()
         {
-            return LookupNode().Ancestors()
+            return LookupNode()
+                .Ancestors()
                 .Where(n => CodeModelService.IsNamespace(n))
                 .FirstOrDefault();
         }
 
-        internal INamedTypeSymbol LookupTypeSymbol()
-            => (INamedTypeSymbol)LookupSymbol();
+        internal INamedTypeSymbol LookupTypeSymbol() => (INamedTypeSymbol)LookupSymbol();
 
-        protected override object GetExtenderNames()
-            => CodeModelService.GetTypeExtenderNames();
+        protected override object GetExtenderNames() => CodeModelService.GetTypeExtenderNames();
 
-        protected override object GetExtender(string name)
-            => CodeModelService.GetTypeExtender(name, this);
+        protected override object GetExtender(string name) =>
+            CodeModelService.GetTypeExtender(name, this);
 
         public override object Parent
         {
@@ -66,7 +64,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 var containingNamespaceOrType = GetNamespaceOrTypeNode();
 
                 return containingNamespaceOrType != null
-                    ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(containingNamespaceOrType)
+                    ? FileCodeModel.GetOrCreateCodeElement<EnvDTE.CodeElement>(
+                        containingNamespaceOrType
+                    )
                     : this.FileCodeModel;
             }
         }
@@ -75,10 +75,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return UnionCollection.Create(this.State, this,
+                return UnionCollection.Create(
+                    this.State,
+                    this,
                     (ICodeElements)this.Attributes,
-                    (ICodeElements)InheritsImplementsCollection.Create(this.State, this, this.FileCodeModel, this.NodeKey),
-                    (ICodeElements)this.Members);
+                    (ICodeElements)
+                        InheritsImplementsCollection.Create(
+                            this.State,
+                            this,
+                            this.FileCodeModel,
+                            this.NodeKey
+                        ),
+                    (ICodeElements)this.Members
+                );
             }
         }
 
@@ -86,7 +95,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return BasesCollection.Create(this.State, this, this.FileCodeModel, this.NodeKey, interfaces: false);
+                return BasesCollection.Create(
+                    this.State,
+                    this,
+                    this.FileCodeModel,
+                    this.NodeKey,
+                    interfaces: false
+                );
             }
         }
 
@@ -94,13 +109,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return CodeModelService.GetDataTypeKind(LookupNode(), (INamedTypeSymbol)LookupSymbol());
+                return CodeModelService.GetDataTypeKind(
+                    LookupNode(),
+                    (INamedTypeSymbol)LookupSymbol()
+                );
             }
-
-            set
-            {
-                UpdateNode(FileCodeModel.UpdateDataTypeKind, value);
-            }
+            set { UpdateNode(FileCodeModel.UpdateDataTypeKind, value); }
         }
 
         public EnvDTE.CodeElements DerivedTypes
@@ -112,7 +126,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         {
             get
             {
-                return BasesCollection.Create(this.State, this, this.FileCodeModel, this.NodeKey, interfaces: true);
+                return BasesCollection.Create(
+                    this.State,
+                    this,
+                    this.FileCodeModel,
+                    this.NodeKey,
+                    interfaces: true
+                );
             }
         }
 
@@ -164,7 +184,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         public void RemoveMember(object element)
         {
             // Is this an EnvDTE.CodeElement that we created? If so, try to get the underlying code element object.
-            var abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(element);
+            var abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                element
+            );
 
             if (abstractCodeElement == null)
             {
@@ -173,20 +195,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                     // Is at least an EnvDTE.CodeElement? If so, try to retrieve it from the Members collection by name.
                     // Note: This might throw an ArgumentException if the name isn't found in the collection.
 
-                    abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(this.Members.Item(codeElement.Name));
+                    abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                        this.Members.Item(codeElement.Name)
+                    );
                 }
                 else if (element is string or int)
                 {
                     // Is this a string or int? If so, try to retrieve it from the Members collection. Again, this will
                     // throw an ArgumentException if the name or index isn't found in the collection.
 
-                    abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(this.Members.Item(element));
+                    abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
+                        this.Members.Item(element)
+                    );
                 }
             }
 
             if (abstractCodeElement == null)
             {
-                throw new ArgumentException(ServicesVSResources.Element_is_not_valid, nameof(element));
+                throw new ArgumentException(
+                    ServicesVSResources.Element_is_not_valid,
+                    nameof(element)
+                );
             }
 
             abstractCodeElement.Delete();

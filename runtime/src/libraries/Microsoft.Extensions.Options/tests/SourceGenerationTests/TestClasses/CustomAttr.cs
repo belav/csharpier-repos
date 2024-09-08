@@ -12,7 +12,10 @@ namespace CustomAttr
 #pragma warning disable CA1019
 #pragma warning disable IDE0052
 
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class CustomAttribute : ValidationAttribute
     {
         private readonly char _ch;
@@ -26,7 +29,10 @@ namespace CustomAttr
             _extra = extra;
         }
 
-        protected override ValidationResult IsValid(object? value, ValidationContext? validationContext)
+        protected override ValidationResult IsValid(
+            object? value,
+            ValidationContext? validationContext
+        )
         {
             if (value == null)
             {
@@ -62,7 +68,5 @@ namespace CustomAttr
     }
 
     [OptionsValidator]
-    public partial class FirstValidator : IValidateOptions<FirstModel>
-    {
-    }
+    public partial class FirstValidator : IValidateOptions<FirstModel> { }
 }

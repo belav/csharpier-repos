@@ -21,32 +21,40 @@ internal sealed partial class CertificatePathWatcher : IDisposable
 
     /// <remarks>Acquire <see cref="_metadataLock"/> before accessing.</remarks>
     private readonly Dictionary<string, DirectoryWatchMetadata> _metadataForDirectory = new();
+
     /// <remarks>Acquire <see cref="_metadataLock"/> before accessing.</remarks>
     private readonly Dictionary<string, FileWatchMetadata> _metadataForFile = new();
 
     private ConfigurationReloadToken _reloadToken = new();
     private bool _disposed;
 
-    public CertificatePathWatcher(IHostEnvironment hostEnvironment, ILogger<CertificatePathWatcher> logger)
+    public CertificatePathWatcher(
+        IHostEnvironment hostEnvironment,
+        ILogger<CertificatePathWatcher> logger
+    )
         : this(
             hostEnvironment.ContentRootPath,
             logger,
-            dir => Directory.Exists(dir)
-                ? new PhysicalFileProvider(dir, ExclusionFilters.None)
-                {
-                    // Force polling because it monitors both symlinks and their targets,
-                    // whereas the non-polling watcher only monitors the symlinks themselves
-                    UseActivePolling = true,
-                    UsePollingFileWatcher = true,
-                }
-                : null)
-    {
-    }
+            dir =>
+                Directory.Exists(dir)
+                    ? new PhysicalFileProvider(dir, ExclusionFilters.None)
+                    {
+                        // Force polling because it monitors both symlinks and their targets,
+                        // whereas the non-polling watcher only monitors the symlinks themselves
+                        UseActivePolling = true,
+                        UsePollingFileWatcher = true,
+                    }
+                    : null
+        ) { }
 
     /// <remarks>
     /// For testing.
     /// </remarks>
-    internal CertificatePathWatcher(string contentRootPath, ILogger<CertificatePathWatcher> logger, Func<string, IFileProvider?> fileProviderFactory)
+    internal CertificatePathWatcher(
+        string contentRootPath,
+        ILogger<CertificatePathWatcher> logger,
+        Func<string, IFileProvider?> fileProviderFactory
+    )
     {
         _contentRootDir = contentRootPath;
         _logger = logger;
@@ -70,10 +78,19 @@ internal sealed partial class CertificatePathWatcher : IDisposable
     /// <remarks>
     /// Does not consider targets when watching files that are symlinks.
     /// </remarks>
-    public void UpdateWatches(List<CertificateConfig> certificateConfigsToRemove, List<CertificateConfig> certificateConfigsToAdd)
+    public void UpdateWatches(
+        List<CertificateConfig> certificateConfigsToRemove,
+        List<CertificateConfig> certificateConfigsToAdd
+    )
     {
-        var addSet = new HashSet<CertificateConfig>(certificateConfigsToAdd, ReferenceEqualityComparer.Instance);
-        var removeSet = new HashSet<CertificateConfig>(certificateConfigsToRemove, ReferenceEqualityComparer.Instance);
+        var addSet = new HashSet<CertificateConfig>(
+            certificateConfigsToAdd,
+            ReferenceEqualityComparer.Instance
+        );
+        var removeSet = new HashSet<CertificateConfig>(
+            certificateConfigsToRemove,
+            ReferenceEqualityComparer.Instance
+        );
 
         // Don't remove anything we're going to re-add anyway.
         // Don't remove such items from addSet to guard against the (hypothetical) possibility
@@ -140,7 +157,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
             var disposable = ChangeToken.OnChange(
                 () => dirMetadata.FileProvider.Watch(Path.GetFileName(path)),
                 static tuple => tuple.Item1.OnChange(tuple.Item2),
-                ValueTuple.Create(this, path));
+                ValueTuple.Create(this, path)
+            );
 
             fileMetadata = new FileWatchMetadata(disposable);
             _metadataForFile.Add(path, fileMetadata);
@@ -262,10 +280,12 @@ internal sealed partial class CertificatePathWatcher : IDisposable
     internal int TestGetDirectoryWatchCountUnsynchronized() => _metadataForDirectory.Count;
 
     /// <remarks>Test hook</remarks>
-    internal int TestGetFileWatchCountUnsynchronized(string dir) => _metadataForDirectory.TryGetValue(dir, out var metadata) ? metadata.FileWatchCount : 0;
+    internal int TestGetFileWatchCountUnsynchronized(string dir) =>
+        _metadataForDirectory.TryGetValue(dir, out var metadata) ? metadata.FileWatchCount : 0;
 
     /// <remarks>Test hook</remarks>
-    internal int TestGetObserverCountUnsynchronized(string path) => _metadataForFile.TryGetValue(path, out var metadata) ? metadata.Configs.Count : 0;
+    internal int TestGetObserverCountUnsynchronized(string path) =>
+        _metadataForFile.TryGetValue(path, out var metadata) ? metadata.Configs.Count : 0;
 
     void IDisposable.Dispose()
     {
@@ -297,7 +317,8 @@ internal sealed partial class CertificatePathWatcher : IDisposable
     private sealed class FileWatchMetadata(IDisposable disposable) : IDisposable
     {
         public readonly IDisposable Disposable = disposable;
-        public readonly HashSet<CertificateConfig> Configs = new(ReferenceEqualityComparer.Instance);
+        public readonly HashSet<CertificateConfig> Configs =
+            new(ReferenceEqualityComparer.Instance);
 
         public void Dispose() => Disposable.Dispose();
     }

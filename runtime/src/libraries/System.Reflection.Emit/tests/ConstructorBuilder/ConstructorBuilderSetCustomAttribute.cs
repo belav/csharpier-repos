@@ -12,14 +12,22 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuilder_ByteArray()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[] { typeof(int) });
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[] { typeof(int) }
+            );
 
-            ConstructorInfo attributeConstructor = typeof(IntAllAttribute).GetConstructor(new Type[] { typeof(int) });
+            ConstructorInfo attributeConstructor = typeof(IntAllAttribute).GetConstructor(
+                new Type[] { typeof(int) }
+            );
             constructor.SetCustomAttribute(attributeConstructor, new byte[] { 1, 0, 5, 0, 0, 0 });
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
             Type createdType = type.CreateType();
-            ConstructorInfo createdConstructor = createdType.GetConstructor(new Type[] { typeof(int) });
+            ConstructorInfo createdConstructor = createdType.GetConstructor(
+                new Type[] { typeof(int) }
+            );
             Attribute[] attributes = createdConstructor.GetCustomAttributes().ToArray();
             IntAllAttribute attribute = Assert.IsType<IntAllAttribute>(attributes[0]);
             Assert.Equal(5, attribute._i);
@@ -29,26 +37,43 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_ConstructorBuilder_ByteArray_NullConstructorBuilder_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
-            AssertExtensions.Throws<ArgumentNullException>("con", () => constructor.SetCustomAttribute(null, new byte[0]));
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "con",
+                () => constructor.SetCustomAttribute(null, new byte[0])
+            );
         }
 
         [Fact]
         public void SetCustomAttribute_CustomAttributeBuilder()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             ILGenerator ilGenerator = constructor.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_1);
 
-            ConstructorInfo attributeConstructor = typeof(IntAllAttribute).GetConstructor(new Type[] { typeof(int) });
-            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(attributeConstructor, new object[] { 2 });
+            ConstructorInfo attributeConstructor = typeof(IntAllAttribute).GetConstructor(
+                new Type[] { typeof(int) }
+            );
+            CustomAttributeBuilder attributeBuilder = new CustomAttributeBuilder(
+                attributeConstructor,
+                new object[] { 2 }
+            );
 
             constructor.SetCustomAttribute(attributeBuilder);
             Type createdType = type.CreateType();
 
             ConstructorInfo createdConstructor = createdType.GetConstructor(new Type[0]);
-            Attribute[] customAttributes = (Attribute[])CustomAttributeExtensions.GetCustomAttributes(createdConstructor, true).ToArray();
+            Attribute[] customAttributes = (Attribute[])
+                CustomAttributeExtensions.GetCustomAttributes(createdConstructor, true).ToArray();
 
             Assert.Equal(1, customAttributes.Length);
             Assert.Equal(2, ((IntAllAttribute)customAttributes[0])._i);
@@ -58,18 +83,29 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_NullCustomAttributeBuilder_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             ILGenerator ilGenerator = constructor.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_1);
 
-            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () => constructor.SetCustomAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customBuilder",
+                () => constructor.SetCustomAttribute(null)
+            );
         }
 
         [Fact]
         public void GetCustomAttributes_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             Assert.Throws<NotSupportedException>(() => constructor.GetCustomAttributes());
         }
 
@@ -77,8 +113,14 @@ namespace System.Reflection.Emit.Tests
         public void IsDefined_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
-            Assert.Throws<NotSupportedException>(() => constructor.IsDefined(typeof(IntAllAttribute)));
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
+            Assert.Throws<NotSupportedException>(
+                () => constructor.IsDefined(typeof(IntAllAttribute))
+            );
         }
     }
 }

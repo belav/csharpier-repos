@@ -9,9 +9,8 @@ namespace Identity.DefaultUI.WebSite;
 
 public class PocoUserStartup : StartupBase<PocoUser, IdentityDbContext>
 {
-    public PocoUserStartup(IConfiguration configuration) : base(configuration)
-    {
-    }
+    public PocoUserStartup(IConfiguration configuration)
+        : base(configuration) { }
 
     public override void ConfigureServices(IServiceCollection services)
     {
@@ -21,11 +20,14 @@ public class PocoUserStartup : StartupBase<PocoUser, IdentityDbContext>
             options.CheckConsentNeeded = context => true;
         });
 
-        services.AddDefaultIdentity<Microsoft.AspNetCore.Identity.Test.PocoUser>()
+        services
+            .AddDefaultIdentity<Microsoft.AspNetCore.Identity.Test.PocoUser>()
             .AddUserManager<UserManager<Microsoft.AspNetCore.Identity.Test.PocoUser>>();
-        services.AddSingleton<IUserStore<Microsoft.AspNetCore.Identity.Test.PocoUser>, InMemoryUserStore<Microsoft.AspNetCore.Identity.Test.PocoUser>>();
+        services.AddSingleton<
+            IUserStore<Microsoft.AspNetCore.Identity.Test.PocoUser>,
+            InMemoryUserStore<Microsoft.AspNetCore.Identity.Test.PocoUser>
+        >();
 
-        services.AddMvc()
-            .AddNewtonsoftJson();
+        services.AddMvc().AddNewtonsoftJson();
     }
 }

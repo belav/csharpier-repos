@@ -11,9 +11,7 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal CfgGrammar()
-        {
-        }
+        internal CfgGrammar() { }
 
         #endregion
 
@@ -58,9 +56,7 @@ namespace System.Speech.Internal.SrgsCompiler
         [StructLayout(LayoutKind.Sequential)]
         internal class CfgSerializedHeader
         {
-            internal CfgSerializedHeader()
-            {
-            }
+            internal CfgSerializedHeader() { }
 
 #pragma warning disable 56518 // The Binary reader cannot be disposed or it would close the underlying stream
 
@@ -72,7 +68,10 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 BinaryReader br = new(stream);
                 ulTotalSerializedSize = br.ReadUInt32();
-                if (ulTotalSerializedSize < SP_SPCFGSERIALIZEDHEADER_500 || ulTotalSerializedSize > int.MaxValue)
+                if (
+                    ulTotalSerializedSize < SP_SPCFGSERIALIZEDHEADER_500
+                    || ulTotalSerializedSize > int.MaxValue
+                )
                 {
                     // Size is either negative or too small.
                     XmlParser.ThrowSrgsException(SRID.UnsupportedFormat);
@@ -127,12 +126,16 @@ namespace System.Speech.Internal.SrgsCompiler
                 }
                 // Else SAPI 5.0 syntax grammar - parameters set to zero
             }
+
             internal static bool IsCfg(Stream stream, out int cfgLength)
             {
                 cfgLength = 0;
                 BinaryReader br = new(stream);
                 uint ulTotalSerializedSize = br.ReadUInt32();
-                if (ulTotalSerializedSize < SP_SPCFGSERIALIZEDHEADER_500 || ulTotalSerializedSize > int.MaxValue)
+                if (
+                    ulTotalSerializedSize < SP_SPCFGSERIALIZEDHEADER_500
+                    || ulTotalSerializedSize > int.MaxValue
+                )
                 {
                     // Size is either negative or too small.
                     return false;
@@ -240,7 +243,12 @@ namespace System.Speech.Internal.SrgsCompiler
             return ConvertCfgHeader(streamHelper, true, true, out cfgSerializedHeader);
         }
 
-        internal static CfgHeader ConvertCfgHeader(StreamMarshaler streamHelper, bool includeAllGrammarData, bool loadSymbols, out CfgSerializedHeader cfgSerializedHeader)
+        internal static CfgHeader ConvertCfgHeader(
+            StreamMarshaler streamHelper,
+            bool includeAllGrammarData,
+            bool loadSymbols,
+            out CfgSerializedHeader cfgSerializedHeader
+        )
         {
             cfgSerializedHeader = new CfgSerializedHeader(streamHelper.Stream);
 
@@ -256,19 +264,43 @@ namespace System.Speech.Internal.SrgsCompiler
             header.cArcsInLargestState = cfgSerializedHeader.cArcsInLargestState;
 
             // read all the common fields
-            header.rules = Load<CfgRule>(streamHelper, cfgSerializedHeader.pRules, cfgSerializedHeader.cRules);
+            header.rules = Load<CfgRule>(
+                streamHelper,
+                cfgSerializedHeader.pRules,
+                cfgSerializedHeader.cRules
+            );
 
             if (includeAllGrammarData || loadSymbols)
             {
-                header.pszSymbols = LoadStringBlob(streamHelper, cfgSerializedHeader.pszSymbols, cfgSerializedHeader.cchSymbols);
+                header.pszSymbols = LoadStringBlob(
+                    streamHelper,
+                    cfgSerializedHeader.pszSymbols,
+                    cfgSerializedHeader.cchSymbols
+                );
             }
 
             if (includeAllGrammarData)
             {
-                header.pszWords = LoadStringBlob(streamHelper, cfgSerializedHeader.pszWords, cfgSerializedHeader.cchWords);
-                header.arcs = Load<CfgArc>(streamHelper, cfgSerializedHeader.pArcs, cfgSerializedHeader.cArcs);
-                header.tags = Load<CfgSemanticTag>(streamHelper, cfgSerializedHeader.tags, cfgSerializedHeader.cTags);
-                header.weights = Load<float>(streamHelper, cfgSerializedHeader.pWeights, cfgSerializedHeader.cArcs);
+                header.pszWords = LoadStringBlob(
+                    streamHelper,
+                    cfgSerializedHeader.pszWords,
+                    cfgSerializedHeader.cchWords
+                );
+                header.arcs = Load<CfgArc>(
+                    streamHelper,
+                    cfgSerializedHeader.pArcs,
+                    cfgSerializedHeader.cArcs
+                );
+                header.tags = Load<CfgSemanticTag>(
+                    streamHelper,
+                    cfgSerializedHeader.tags,
+                    cfgSerializedHeader.cTags
+                );
+                header.weights = Load<float>(
+                    streamHelper,
+                    cfgSerializedHeader.pWeights,
+                    cfgSerializedHeader.cArcs
+                );
             }
 
             //We know that in SAPI 5.0 grammar format pszWords follows header immediately.
@@ -288,13 +320,19 @@ namespace System.Speech.Internal.SrgsCompiler
                 header.GrammarMode = (GrammarType)cfgSerializedHeader.GrammarMode;
                 if (includeAllGrammarData)
                 {
-                    header.scripts = Load<CfgScriptRef>(streamHelper, cfgSerializedHeader.pScripts, cfgSerializedHeader.cScripts);
+                    header.scripts = Load<CfgScriptRef>(
+                        streamHelper,
+                        cfgSerializedHeader.pScripts,
+                        cfgSerializedHeader.cScripts
+                    );
                 }
                 // The BasePath string is written after the rules - no offset is provided
                 // Get the chars and build the string
                 if (cfgSerializedHeader.cBasePath > 0)
                 {
-                    streamHelper.Stream.Position = (int)cfgSerializedHeader.pRules + (header.rules.Length * Marshal.SizeOf<CfgRule>());
+                    streamHelper.Stream.Position =
+                        (int)cfgSerializedHeader.pRules
+                        + (header.rules.Length * Marshal.SizeOf<CfgRule>());
                     header.BasePath = streamHelper.ReadNullTerminatedString();
                 }
             }
@@ -308,7 +346,10 @@ namespace System.Speech.Internal.SrgsCompiler
         //
         //  This helper converts a serialized CFG grammar header into an in-memory header
         //
-        internal static ScriptRef[] LoadScriptRefs(StreamMarshaler streamHelper, CfgSerializedHeader pFH)
+        internal static ScriptRef[] LoadScriptRefs(
+            StreamMarshaler streamHelper,
+            CfgSerializedHeader pFH
+        )
         {
             //
             //  Because in 64-bit code, pointers != sizeof(ULONG) we copy each member explicitly.
@@ -329,14 +370,22 @@ namespace System.Speech.Internal.SrgsCompiler
             StringBlob symbols = LoadStringBlob(streamHelper, pFH.pszSymbols, pFH.cchSymbols);
 
             // Get the script refs
-            CfgScriptRef[] cfgScripts = Load<CfgScriptRef>(streamHelper, pFH.pScripts, pFH.cScripts);
+            CfgScriptRef[] cfgScripts = Load<CfgScriptRef>(
+                streamHelper,
+                pFH.pScripts,
+                pFH.cScripts
+            );
 
             // Convert the CFG script reference to ScriptRef
             ScriptRef[] scripts = new ScriptRef[cfgScripts.Length];
             for (int i = 0; i < cfgScripts.Length; i++)
             {
                 CfgScriptRef cfgScript = cfgScripts[i];
-                scripts[i] = new ScriptRef(symbols[cfgScript._idRule], symbols[cfgScript._idMethod], cfgScript._method);
+                scripts[i] = new ScriptRef(
+                    symbols[cfgScript._idRule],
+                    symbols[cfgScript._idMethod],
+                    cfgScript._method
+                );
             }
 
             return scripts;
@@ -354,7 +403,12 @@ namespace System.Speech.Internal.SrgsCompiler
             }
         }
 
-        internal static bool LoadIL(Stream stream, out byte[] assemblyContent, out byte[] assemblyDebugSymbols, out ScriptRef[] scripts)
+        internal static bool LoadIL(
+            Stream stream,
+            out byte[] assemblyContent,
+            out byte[] assemblyDebugSymbols,
+            out ScriptRef[] scripts
+        )
         {
             assemblyContent = assemblyDebugSymbols = null;
             scripts = null;
@@ -380,7 +434,8 @@ namespace System.Speech.Internal.SrgsCompiler
                 // Get the assembly content
                 assemblyContent = Load<byte>(streamHelper, pFH.pIL, pFH.cIL);
 
-                assemblyDebugSymbols = pFH.cPDB > 0 ? Load<byte>(streamHelper, pFH.pPDB, pFH.cPDB) : null;
+                assemblyDebugSymbols =
+                    pFH.cPDB > 0 ? Load<byte>(streamHelper, pFH.pPDB, pFH.cPDB) : null;
             }
 
             return true;
@@ -390,7 +445,11 @@ namespace System.Speech.Internal.SrgsCompiler
 
         #region Private Methods
 
-        private static void CheckValidCfgFormat(CfgSerializedHeader pFH, CfgHeader header, bool includeAllGrammarData)
+        private static void CheckValidCfgFormat(
+            CfgSerializedHeader pFH,
+            CfgHeader header,
+            bool includeAllGrammarData
+        )
         {
             //See backend commit method to understand the layout of cfg format
             if (pFH.pszWords < SP_SPCFGSERIALIZEDHEADER_500)
@@ -402,35 +461,65 @@ namespace System.Speech.Internal.SrgsCompiler
 
             //Check the word offset
             //See stringblob implementation. pFH.cchWords * sizeof(WCHAR) isn't exactly the serialized size, but it is close and must be less than the serialized size
-            CheckSetOffsets(pFH.pszWords, pFH.cchWords * Helpers._sizeOfChar, ref ullStartOffset, pFH.ulTotalSerializedSize);
+            CheckSetOffsets(
+                pFH.pszWords,
+                pFH.cchWords * Helpers._sizeOfChar,
+                ref ullStartOffset,
+                pFH.ulTotalSerializedSize
+            );
 
             //Check the symbol offset
             //symbol is right after word
             //pFH.pszSymbols is very close to pFH.pszWords + pFH.cchWords * sizeof(WCHAR)
-            CheckSetOffsets(pFH.pszSymbols, pFH.cchSymbols * Helpers._sizeOfChar, ref ullStartOffset, pFH.ulTotalSerializedSize);
+            CheckSetOffsets(
+                pFH.pszSymbols,
+                pFH.cchSymbols * Helpers._sizeOfChar,
+                ref ullStartOffset,
+                pFH.ulTotalSerializedSize
+            );
 
             //Check the rule offset
             if (pFH.cRules > 0)
             {
-                CheckSetOffsets(pFH.pRules, pFH.cRules * Marshal.SizeOf<CfgRule>(), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.pRules,
+                    pFH.cRules * Marshal.SizeOf<CfgRule>(),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
             }
 
             //Check the arc offset
             if (pFH.cArcs > 0)
             {
-                CheckSetOffsets(pFH.pArcs, pFH.cArcs * Marshal.SizeOf<CfgArc>(), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.pArcs,
+                    pFH.cArcs * Marshal.SizeOf<CfgArc>(),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
             }
 
             //Check the weight offset
             if (pFH.pWeights > 0)
             {
-                CheckSetOffsets(pFH.pWeights, pFH.cArcs * sizeof(float), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.pWeights,
+                    pFH.cArcs * sizeof(float),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
             }
 
             //Check the semantic tag offset
             if (pFH.cTags > 0)
             {
-                CheckSetOffsets(pFH.tags, pFH.cTags * Marshal.SizeOf<CfgSemanticTag>(), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.tags,
+                    pFH.cTags * Marshal.SizeOf<CfgSemanticTag>(),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
 
                 if (includeAllGrammarData)
                 {
@@ -443,17 +532,19 @@ namespace System.Speech.Internal.SrgsCompiler
                         int endArc = (int)header.tags[i].EndArcIndex;
                         int cArcs = header.arcs.Length;
 #pragma warning disable 0618 // VarEnum is obsolete
-                        if (startArc == 0 ||
-                             startArc >= cArcs ||
-                             endArc == 0 ||
-                             endArc >= cArcs ||
-                             (
-                                header.tags[i].PropVariantType != VarEnum.VT_EMPTY &&
-                                header.tags[i].PropVariantType != VarEnum.VT_BSTR &&
-                                header.tags[i].PropVariantType != VarEnum.VT_BOOL &&
-                                header.tags[i].PropVariantType != VarEnum.VT_R8 &&
-                                header.tags[i].PropVariantType != VarEnum.VT_I4)
-                             )
+                        if (
+                            startArc == 0
+                            || startArc >= cArcs
+                            || endArc == 0
+                            || endArc >= cArcs
+                            || (
+                                header.tags[i].PropVariantType != VarEnum.VT_EMPTY
+                                && header.tags[i].PropVariantType != VarEnum.VT_BSTR
+                                && header.tags[i].PropVariantType != VarEnum.VT_BOOL
+                                && header.tags[i].PropVariantType != VarEnum.VT_R8
+                                && header.tags[i].PropVariantType != VarEnum.VT_I4
+                            )
+                        )
                         {
                             XmlParser.ThrowSrgsException(SRID.UnsupportedFormat);
                         }
@@ -465,24 +556,38 @@ namespace System.Speech.Internal.SrgsCompiler
             //Check the offset for the scripts
             if (pFH.cScripts > 0)
             {
-                CheckSetOffsets(pFH.pScripts, pFH.cScripts * Marshal.SizeOf<CfgScriptRef>(), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.pScripts,
+                    pFH.cScripts * Marshal.SizeOf<CfgScriptRef>(),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
             }
 
             if (pFH.cIL > 0)
             {
-                CheckSetOffsets(pFH.pIL, pFH.cIL * sizeof(byte), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.pIL,
+                    pFH.cIL * sizeof(byte),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
             }
 
             if (pFH.cPDB > 0)
             {
-                CheckSetOffsets(pFH.pPDB, pFH.cPDB * sizeof(byte), ref ullStartOffset, pFH.ulTotalSerializedSize);
+                CheckSetOffsets(
+                    pFH.pPDB,
+                    pFH.cPDB * sizeof(byte),
+                    ref ullStartOffset,
+                    pFH.ulTotalSerializedSize
+                );
             }
         }
 
         private static void CheckSetOffsets(uint offset, int size, ref int start, uint max)
         {
-            if (offset < (uint)start ||
- (start = (int)offset + size) > (int)max)
+            if (offset < (uint)start || (start = (int)offset + size) > (int)max)
             {
                 XmlParser.ThrowSrgsException(SRID.UnsupportedFormat);
             }
@@ -500,7 +605,6 @@ namespace System.Speech.Internal.SrgsCompiler
 
         private static T[] Load<T>(StreamMarshaler streamHelper, uint iPos, int c)
         {
-
             T[] t = null;
 
             t = new T[c];
@@ -520,17 +624,15 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal static uint NextHandle
         {
-            get
-            {
-                return ++s_lastHandle;
-            }
+            get { return ++s_lastHandle; }
         }
 
         #endregion
 
         #region Internal Fields
 
-        internal static Guid _SPGDF_ContextFree = new(0x4ddc926d, 0x6ce7, 0x4dc0, 0x99, 0xa7, 0xaf, 0x9e, 0x6b, 0x6a, 0x4e, 0x91);
+        internal static Guid _SPGDF_ContextFree =
+            new(0x4ddc926d, 0x6ce7, 0x4dc0, 0x99, 0xa7, 0xaf, 0x9e, 0x6b, 0x6a, 0x4e, 0x91);
 
         //
         internal const int INFINITE = unchecked((int)0xffffffff);

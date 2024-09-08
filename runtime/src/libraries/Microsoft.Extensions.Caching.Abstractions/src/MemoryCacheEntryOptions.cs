@@ -22,14 +22,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// </summary>
         public DateTimeOffset? AbsoluteExpiration
         {
-            get
-            {
-                return _absoluteExpiration;
-            }
-            set
-            {
-                _absoluteExpiration = value;
-            }
+            get { return _absoluteExpiration; }
+            set { _absoluteExpiration = value; }
         }
 
         /// <summary>
@@ -37,10 +31,7 @@ namespace Microsoft.Extensions.Caching.Memory
         /// </summary>
         public TimeSpan? AbsoluteExpirationRelativeToNow
         {
-            get
-            {
-                return _absoluteExpirationRelativeToNow;
-            }
+            get { return _absoluteExpirationRelativeToNow; }
             set
             {
                 if (value <= TimeSpan.Zero)
@@ -48,7 +39,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     throw new ArgumentOutOfRangeException(
                         nameof(AbsoluteExpirationRelativeToNow),
                         value,
-                        "The relative expiration value must be positive.");
+                        "The relative expiration value must be positive."
+                    );
                 }
 
                 _absoluteExpirationRelativeToNow = value;
@@ -61,10 +53,7 @@ namespace Microsoft.Extensions.Caching.Memory
         /// </summary>
         public TimeSpan? SlidingExpiration
         {
-            get
-            {
-                return _slidingExpiration;
-            }
+            get { return _slidingExpiration; }
             set
             {
                 if (value <= TimeSpan.Zero)
@@ -72,7 +61,8 @@ namespace Microsoft.Extensions.Caching.Memory
                     throw new ArgumentOutOfRangeException(
                         nameof(SlidingExpiration),
                         value,
-                        "The sliding expiration value must be positive.");
+                        "The sliding expiration value must be positive."
+                    );
                 }
                 _slidingExpiration = value;
             }
@@ -86,8 +76,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// <summary>
         /// Gets or sets the callbacks will be fired after the cache entry is evicted from the cache.
         /// </summary>
-        public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks { get; }
-            = new List<PostEvictionCallbackRegistration>();
+        public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks { get; } =
+            new List<PostEvictionCallbackRegistration>();
 
         /// <summary>
         /// Gets or sets the priority for keeping the cache entry in the cache during a
@@ -105,7 +95,11 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"{nameof(value)} must be non-negative.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"{nameof(value)} must be non-negative."
+                    );
                 }
 
                 _size = value;

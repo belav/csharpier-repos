@@ -13,15 +13,19 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ComContractElement : ConfigurationElement
     {
+        public ComContractElement()
+            : base() { }
 
-        public ComContractElement() : base() { }
         public ComContractElement(string contractType)
             : this()
         {
             this.Contract = contractType;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Contract, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Contract,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string Contract
         {
@@ -37,13 +41,23 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ComMethodCollection, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ComMethodCollection,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public ComMethodElementCollection ExposedMethods
         {
-            get { return (ComMethodElementCollection)base[ConfigurationStrings.ComMethodCollection]; }
+            get
+            {
+                return (ComMethodElementCollection)base[ConfigurationStrings.ComMethodCollection];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ComContractName, DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ComContractName,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -59,7 +73,11 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ComContractNamespace, DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ComContractNamespace,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Namespace
         {
@@ -78,17 +96,18 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ComPersistableTypes)]
         public ComPersistableTypeElementCollection PersistableTypes
         {
-            get { return (ComPersistableTypeElementCollection)base[ConfigurationStrings.ComPersistableTypes]; }
+            get
+            {
+                return (ComPersistableTypeElementCollection)
+                    base[ConfigurationStrings.ComPersistableTypes];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ComSessionRequired, DefaultValue = true)]
         public bool RequiresSession
         {
             get { return (bool)base[ConfigurationStrings.ComSessionRequired]; }
-            set
-            {
-                base[ConfigurationStrings.ComSessionRequired] = value;
-            }
+            set { base[ConfigurationStrings.ComSessionRequired] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ComUdtCollection)]
@@ -96,8 +115,5 @@ namespace System.ServiceModel.Configuration
         {
             get { return (ComUdtElementCollection)base[ConfigurationStrings.ComUdtCollection]; }
         }
-
     }
-
-
 }

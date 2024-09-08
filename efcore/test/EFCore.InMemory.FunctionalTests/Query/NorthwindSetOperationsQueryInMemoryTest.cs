@@ -5,13 +5,14 @@ using Microsoft.EntityFrameworkCore.InMemory.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindSetOperationsQueryInMemoryTest : NorthwindSetOperationsQueryTestBase<
-    NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+public class NorthwindSetOperationsQueryInMemoryTest
+    : NorthwindSetOperationsQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
 {
     public NorthwindSetOperationsQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
 #pragma warning restore IDE0060 // Remove unused parameter
         : base(fixture)
     {
@@ -20,15 +21,25 @@ public class NorthwindSetOperationsQueryInMemoryTest : NorthwindSetOperationsQue
 
     public override async Task Collection_projection_before_set_operation_fails(bool async)
         // Client evaluation in projection. Issue #16243.
-        => Assert.Equal(
+        =>
+        Assert.Equal(
             InMemoryStrings.SetOperationsNotAllowedAfterClientEvaluation,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Collection_projection_before_set_operation_fails(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Collection_projection_before_set_operation_fails(async)
+                )
+            ).Message
+        );
 
     public override async Task Client_eval_Union_FirstOrDefault(bool async)
         // Client evaluation in projection. Issue #16243.
-        => Assert.Equal(
+        =>
+        Assert.Equal(
             InMemoryStrings.SetOperationsNotAllowedAfterClientEvaluation,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Client_eval_Union_FirstOrDefault(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Client_eval_Union_FirstOrDefault(async)
+                )
+            ).Message
+        );
 }

@@ -16,14 +16,14 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
 {
     private static readonly (IISCapability Capability, string DllName)[] Modules =
     {
-            (IISCapability.Websockets, "iiswsock.dll"),
-            (IISCapability.WindowsAuthentication, "authsspi.dll"),
-            (IISCapability.DynamicCompression, "compdyn.dll"),
-            (IISCapability.ApplicationInitialization, "warmup.dll"),
-            (IISCapability.TracingModule, "iisetw.dll"),
-            (IISCapability.FailedRequestTracingModule, "iisfreb.dll"),
-            (IISCapability.BasicAuthentication, "authbas.dll"),
-        };
+        (IISCapability.Websockets, "iiswsock.dll"),
+        (IISCapability.WindowsAuthentication, "authsspi.dll"),
+        (IISCapability.DynamicCompression, "compdyn.dll"),
+        (IISCapability.ApplicationInitialization, "warmup.dll"),
+        (IISCapability.TracingModule, "iisetw.dll"),
+        (IISCapability.FailedRequestTracingModule, "iisfreb.dll"),
+        (IISCapability.BasicAuthentication, "authbas.dll"),
+    };
 
     private static readonly bool _isMetStatic;
     private static readonly string _skipReasonStatic;
@@ -46,23 +46,41 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
 
         var identity = WindowsIdentity.GetCurrent();
         var principal = new WindowsPrincipal(identity);
-        if (!principal.IsInRole(WindowsBuiltInRole.Administrator) && !SkipInVSTSAttribute.RunningInVSTS)
+        if (
+            !principal.IsInRole(WindowsBuiltInRole.Administrator)
+            && !SkipInVSTSAttribute.RunningInVSTS
+        )
         {
             _skipReasonStatic += "The current console is not running as admin.";
             return;
         }
 
-        if (!File.Exists(Path.Combine(Environment.SystemDirectory, "inetsrv", "w3wp.exe")) && !SkipInVSTSAttribute.RunningInVSTS)
+        if (
+            !File.Exists(Path.Combine(Environment.SystemDirectory, "inetsrv", "w3wp.exe"))
+            && !SkipInVSTSAttribute.RunningInVSTS
+        )
         {
             _skipReasonStatic += "The machine does not have IIS installed.";
             return;
         }
 
-        var ancmConfigPath = Path.Combine(Environment.SystemDirectory, "inetsrv", "config", "schema", "aspnetcore_schema.xml");
+        var ancmConfigPath = Path.Combine(
+            Environment.SystemDirectory,
+            "inetsrv",
+            "config",
+            "schema",
+            "aspnetcore_schema.xml"
+        );
 
         if (!File.Exists(ancmConfigPath))
         {
-            ancmConfigPath = Path.Combine(Environment.SystemDirectory, "inetsrv", "config", "schema", "aspnetcore_schema_v2.xml");
+            ancmConfigPath = Path.Combine(
+                Environment.SystemDirectory,
+                "inetsrv",
+                "config",
+                "schema",
+                "aspnetcore_schema_v2.xml"
+            );
         }
 
         if (!File.Exists(ancmConfigPath) && !SkipInVSTSAttribute.RunningInVSTS)
@@ -84,21 +102,28 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
         }
 
         _isMetStatic = ancmConfig
-            .Root
-            .Descendants("attribute")
+            .Root.Descendants("attribute")
             .Any(n => "hostingModel".Equals(n.Attribute("name")?.Value, StringComparison.Ordinal));
 
-        _skipReasonStatic = _isMetStatic ? null : "IIS schema needs to be upgraded to support ANCM.";
+        _skipReasonStatic = _isMetStatic
+            ? null
+            : "IIS schema needs to be upgraded to support ANCM.";
 
         foreach (var module in Modules)
         {
-            if (File.Exists(Path.Combine(Environment.SystemDirectory, "inetsrv", module.DllName)) || SkipInVSTSAttribute.RunningInVSTS)
+            if (
+                File.Exists(Path.Combine(Environment.SystemDirectory, "inetsrv", module.DllName))
+                || SkipInVSTSAttribute.RunningInVSTS
+            )
             {
                 _modulesAvailable |= module.Capability;
             }
         }
 
-        var iisRegistryKey = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\InetStp", writable: false);
+        var iisRegistryKey = Registry.LocalMachine.OpenSubKey(
+            @"Software\Microsoft\InetStp",
+            writable: false
+        );
         if (iisRegistryKey == null)
         {
             _poolEnvironmentVariablesAvailable = false;
@@ -124,7 +149,8 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
             IsMet &= _poolEnvironmentVariablesAvailable;
             if (!_poolEnvironmentVariablesAvailable)
             {
-                SkipReason += "The machine does allow for setting environment variables on application pools.";
+                SkipReason +=
+                    "The machine does allow for setting environment variables on application pools.";
             }
         }
 

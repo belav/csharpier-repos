@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Runtime.CompilerServices
@@ -51,10 +50,18 @@ namespace Internal.Runtime.CompilerServices
 
         private static uint s_genericFunctionPointerNextIndex;
         private const uint c_genericDictionaryChunkSize = 1024;
-        private static LowLevelList<IntPtr> s_genericFunctionPointerCollection = new LowLevelList<IntPtr>();
-        private static LowLevelDictionary<GenericMethodDescriptorInfo, uint> s_genericFunctionPointerDictionary = new LowLevelDictionary<GenericMethodDescriptorInfo, uint>();
+        private static LowLevelList<IntPtr> s_genericFunctionPointerCollection =
+            new LowLevelList<IntPtr>();
+        private static LowLevelDictionary<
+            GenericMethodDescriptorInfo,
+            uint
+        > s_genericFunctionPointerDictionary =
+            new LowLevelDictionary<GenericMethodDescriptorInfo, uint>();
 
-        public static unsafe IntPtr GetGenericMethodFunctionPointer(IntPtr canonFunctionPointer, IntPtr instantiationArgument)
+        public static unsafe IntPtr GetGenericMethodFunctionPointer(
+            IntPtr canonFunctionPointer,
+            IntPtr instantiationArgument
+        )
         {
             if (instantiationArgument == IntPtr.Zero)
                 return canonFunctionPointer;
@@ -64,7 +71,7 @@ namespace Internal.Runtime.CompilerServices
                 var key = new GenericMethodDescriptorInfo
                 {
                     MethodFunctionPointer = canonFunctionPointer,
-                    InstantiationArgument = instantiationArgument
+                    InstantiationArgument = instantiationArgument,
                 };
 
                 uint index = 0;
@@ -82,12 +89,17 @@ namespace Internal.Runtime.CompilerServices
                         System.Diagnostics.Debug.Assert(newSubChunkIndex == 0);
 
                         // New generic descriptors are allocated on the native heap and not tracked in the GC.
-                        IntPtr pNewMem = (IntPtr)NativeMemory.Alloc(c_genericDictionaryChunkSize, (nuint)sizeof(GenericMethodDescriptor));
+                        IntPtr pNewMem = (IntPtr)
+                            NativeMemory.Alloc(
+                                c_genericDictionaryChunkSize,
+                                (nuint)sizeof(GenericMethodDescriptor)
+                            );
                         s_genericFunctionPointerCollection.Add(pNewMem);
                     }
 
-                    ((GenericMethodDescriptor*)s_genericFunctionPointerCollection[newChunkIndex])[newSubChunkIndex] =
-                        new GenericMethodDescriptor(canonFunctionPointer, instantiationArgument);
+                    ((GenericMethodDescriptor*)s_genericFunctionPointerCollection[newChunkIndex])[
+                        newSubChunkIndex
+                    ] = new GenericMethodDescriptor(canonFunctionPointer, instantiationArgument);
 
                     s_genericFunctionPointerDictionary.LookupOrAdd(key, index);
 
@@ -98,10 +110,16 @@ namespace Internal.Runtime.CompilerServices
                 // Lookup within list
                 int chunkIndex = (int)(index / c_genericDictionaryChunkSize);
                 uint subChunkIndex = index % c_genericDictionaryChunkSize;
-                GenericMethodDescriptor* genericFunctionPointer = &((GenericMethodDescriptor*)s_genericFunctionPointerCollection[chunkIndex])[subChunkIndex];
+                GenericMethodDescriptor* genericFunctionPointer = &(
+                    (GenericMethodDescriptor*)s_genericFunctionPointerCollection[chunkIndex]
+                )[subChunkIndex];
 
-                System.Diagnostics.Debug.Assert(canonFunctionPointer == genericFunctionPointer->MethodFunctionPointer);
-                System.Diagnostics.Debug.Assert(instantiationArgument == genericFunctionPointer->InstantiationArgument);
+                System.Diagnostics.Debug.Assert(
+                    canonFunctionPointer == genericFunctionPointer->MethodFunctionPointer
+                );
+                System.Diagnostics.Debug.Assert(
+                    instantiationArgument == genericFunctionPointer->InstantiationArgument
+                );
 
                 return (IntPtr)((byte*)genericFunctionPointer + FatFunctionPointerOffset);
             }
@@ -122,7 +140,9 @@ namespace Internal.Runtime.CompilerServices
         }
 
         [CLSCompliant(false)]
-        public static unsafe GenericMethodDescriptor* ConvertToGenericDescriptor(IntPtr functionPointer)
+        public static unsafe GenericMethodDescriptor* ConvertToGenericDescriptor(
+            IntPtr functionPointer
+        )
         {
             return (GenericMethodDescriptor*)((byte*)functionPointer - FatFunctionPointerOffset);
         }

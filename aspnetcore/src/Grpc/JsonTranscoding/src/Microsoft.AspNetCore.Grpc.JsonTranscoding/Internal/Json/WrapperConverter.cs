@@ -7,16 +7,22 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-internal sealed class WrapperConverter<TMessage> : SettingsConverterBase<TMessage> where TMessage : IMessage, new()
+internal sealed class WrapperConverter<TMessage> : SettingsConverterBase<TMessage>
+    where TMessage : IMessage, new()
 {
-    public WrapperConverter(JsonContext context) : base(context)
-    {
-    }
+    public WrapperConverter(JsonContext context)
+        : base(context) { }
 
-    public override TMessage? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TMessage? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var message = new TMessage();
-        var valueDescriptor = message.Descriptor.Fields[JsonConverterHelper.WrapperValueFieldNumber];
+        var valueDescriptor = message.Descriptor.Fields[
+            JsonConverterHelper.WrapperValueFieldNumber
+        ];
         var t = JsonConverterHelper.GetFieldType(valueDescriptor);
         var value = JsonSerializer.Deserialize(ref reader, t, options);
         valueDescriptor.Accessor.SetValue(message, value);

@@ -119,7 +119,11 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.BER, 72057594037927937, "02080100000000000001")]
         [InlineData(AsnEncodingRules.CER, 9223372036854775807, "02087FFFFFFFFFFFFFFF")]
         [InlineData(AsnEncodingRules.DER, 9223372036854775806, "02087FFFFFFFFFFFFFFE")]
-        public void VerifyWriteInteger_Long(AsnEncodingRules ruleSet, long value, string expectedHex)
+        public void VerifyWriteInteger_Long(
+            AsnEncodingRules ruleSet,
+            long value,
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value);
@@ -192,8 +196,12 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.BER, 9223372036854775808, "0209008000000000000000")]
         [InlineData(AsnEncodingRules.CER, 9223372036854775809, "0209008000000000000001")]
         [InlineData(AsnEncodingRules.DER, ulong.MaxValue, "020900FFFFFFFFFFFFFFFF")]
-        [InlineData(AsnEncodingRules.BER, ulong.MaxValue-1, "020900FFFFFFFFFFFFFFFE")]
-        public void VerifyWriteInteger_ULong(AsnEncodingRules ruleSet, ulong value, string expectedHex)
+        [InlineData(AsnEncodingRules.BER, ulong.MaxValue - 1, "020900FFFFFFFFFFFFFFFE")]
+        public void VerifyWriteInteger_ULong(
+            AsnEncodingRules ruleSet,
+            ulong value,
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value);
@@ -211,10 +219,26 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.BER, "9223372036854775808", "0209008000000000000000")]
         [InlineData(AsnEncodingRules.CER, "18446744073709551615", "020900FFFFFFFFFFFFFFFF")]
         [InlineData(AsnEncodingRules.DER, "18446744073709551616", "0209010000000000000000")]
-        [InlineData(AsnEncodingRules.BER, "1339673755198158349044581307228491520", "02100102030405060708090A0B0C0D0E0F00")]
-        [InlineData(AsnEncodingRules.CER, "320182027492359845421654932427609477120", "021100F0E0D0C0B0A090807060504030201000")]
-        [InlineData(AsnEncodingRules.DER, "-1339673755198158349044581307228491520", "0210FEFDFCFBFAF9F8F7F6F5F4F3F2F1F100")]
-        public void VerifyWriteInteger_BigInteger(AsnEncodingRules ruleSet, string decimalValue, string expectedHex)
+        [InlineData(
+            AsnEncodingRules.BER,
+            "1339673755198158349044581307228491520",
+            "02100102030405060708090A0B0C0D0E0F00"
+        )]
+        [InlineData(
+            AsnEncodingRules.CER,
+            "320182027492359845421654932427609477120",
+            "021100F0E0D0C0B0A090807060504030201000"
+        )]
+        [InlineData(
+            AsnEncodingRules.DER,
+            "-1339673755198158349044581307228491520",
+            "0210FEFDFCFBFAF9F8F7F6F5F4F3F2F1F100"
+        )]
+        public void VerifyWriteInteger_BigInteger(
+            AsnEncodingRules ruleSet,
+            string decimalValue,
+            string expectedHex
+        )
         {
             BigInteger value = BigInteger.Parse(decimalValue);
 
@@ -228,7 +252,11 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.BER, 0, "470100")]
         [InlineData(AsnEncodingRules.CER, long.MinValue + 1, "47088000000000000001")]
         [InlineData(AsnEncodingRules.DER, 9223372036854775806, "47087FFFFFFFFFFFFFFE")]
-        public void VerifyWriteInteger_Application7_Long(AsnEncodingRules ruleSet, long value, string expectedHex)
+        public void VerifyWriteInteger_Application7_Long(
+            AsnEncodingRules ruleSet,
+            long value,
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value, new Asn1Tag(TagClass.Application, 7));
@@ -240,7 +268,11 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(AsnEncodingRules.BER, 0, "890100")]
         [InlineData(AsnEncodingRules.CER, 9223372036854775809, "8909008000000000000001")]
         [InlineData(AsnEncodingRules.DER, 9223372036854775806, "89087FFFFFFFFFFFFFFE")]
-        public void VerifyWriteInteger_Context9_ULong(AsnEncodingRules ruleSet, ulong value, string expectedHex)
+        public void VerifyWriteInteger_Context9_ULong(
+            AsnEncodingRules ruleSet,
+            ulong value,
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteInteger(value, new Asn1Tag(TagClass.ContextSpecific, 9));
@@ -250,13 +282,26 @@ namespace System.Formats.Asn1.Tests.Writer
 
         [Theory]
         [InlineData(AsnEncodingRules.BER, "0", "D00100")]
-        [InlineData(AsnEncodingRules.BER, "1339673755198158349044581307228491520", "D0100102030405060708090A0B0C0D0E0F00")]
-        [InlineData(AsnEncodingRules.CER, "320182027492359845421654932427609477120", "D01100F0E0D0C0B0A090807060504030201000")]
-        [InlineData(AsnEncodingRules.DER, "-1339673755198158349044581307228491520", "D010FEFDFCFBFAF9F8F7F6F5F4F3F2F1F100")]
+        [InlineData(
+            AsnEncodingRules.BER,
+            "1339673755198158349044581307228491520",
+            "D0100102030405060708090A0B0C0D0E0F00"
+        )]
+        [InlineData(
+            AsnEncodingRules.CER,
+            "320182027492359845421654932427609477120",
+            "D01100F0E0D0C0B0A090807060504030201000"
+        )]
+        [InlineData(
+            AsnEncodingRules.DER,
+            "-1339673755198158349044581307228491520",
+            "D010FEFDFCFBFAF9F8F7F6F5F4F3F2F1F100"
+        )]
         public void VerifyWriteInteger_Private16_BigInteger(
             AsnEncodingRules ruleSet,
             string decimalValue,
-            string expectedHex)
+            string expectedHex
+        )
         {
             BigInteger value = BigInteger.Parse(decimalValue);
 
@@ -301,7 +346,10 @@ namespace System.Formats.Asn1.Tests.Writer
             string expectedHex = $"84{valueHex.Length / 2:X2}{valueHex}";
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
-            writer.WriteInteger(valueHex.HexToByteArray(), new Asn1Tag(TagClass.ContextSpecific, 4));
+            writer.WriteInteger(
+                valueHex.HexToByteArray(),
+                new Asn1Tag(TagClass.ContextSpecific, 4)
+            );
 
             Verify(writer, expectedHex);
         }
@@ -341,7 +389,10 @@ namespace System.Formats.Asn1.Tests.Writer
             string expectedHex = $"C7{contentLength:X2}{(gainsPaddingByte ? "00" : "")}{valueHex}";
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
-            writer.WriteIntegerUnsigned(valueHex.HexToByteArray(), new Asn1Tag(TagClass.Private, 7));
+            writer.WriteIntegerUnsigned(
+                valueHex.HexToByteArray(),
+                new Asn1Tag(TagClass.Private, 7)
+            );
 
             Verify(writer, expectedHex);
         }
@@ -360,7 +411,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             AssertExtensions.Throws<ArgumentException>(
                 "value",
-                () => writer.WriteInteger(valueHex.HexToByteArray()));
+                () => writer.WriteInteger(valueHex.HexToByteArray())
+            );
         }
 
         [Theory]
@@ -379,7 +431,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "value",
-                () => writer.WriteInteger(valueHex.HexToByteArray(), tag));
+                () => writer.WriteInteger(valueHex.HexToByteArray(), tag)
+            );
         }
 
         [Theory]
@@ -393,7 +446,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             AssertExtensions.Throws<ArgumentException>(
                 "value",
-                () => writer.WriteIntegerUnsigned(valueHex.HexToByteArray()));
+                () => writer.WriteIntegerUnsigned(valueHex.HexToByteArray())
+            );
         }
 
         [Theory]
@@ -402,16 +456,18 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData("0000000000000000000001")]
         [InlineData("0001")]
         [InlineData("007F")]
-        public void VerifyWriteIntegerUnsigned_Application3_InvalidEncodedValue_Throws(string valueHex)
+        public void VerifyWriteIntegerUnsigned_Application3_InvalidEncodedValue_Throws(
+            string valueHex
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 3);
 
             AssertExtensions.Throws<ArgumentException>(
                 "value",
-                () => writer.WriteIntegerUnsigned(valueHex.HexToByteArray(), tag));
+                () => writer.WriteIntegerUnsigned(valueHex.HexToByteArray(), tag)
+            );
         }
-
 
         [Theory]
         [InlineData(AsnEncodingRules.BER)]
@@ -422,15 +478,18 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteInteger(0L, Asn1Tag.Null));
+                () => writer.WriteInteger(0L, Asn1Tag.Null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteInteger(0UL, Asn1Tag.Null));
+                () => writer.WriteInteger(0UL, Asn1Tag.Null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteInteger(BigInteger.Zero, Asn1Tag.Null));
+                () => writer.WriteInteger(BigInteger.Zero, Asn1Tag.Null)
+            );
         }
 
         [Theory]
@@ -444,8 +503,14 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.WriteInteger(0L, new Asn1Tag(TagClass.ContextSpecific, 0, isConstructed: true));
             writer.WriteInteger(0UL, new Asn1Tag(UniversalTagNumber.Integer, isConstructed: true));
             writer.WriteInteger(0UL, new Asn1Tag(TagClass.ContextSpecific, 0, isConstructed: true));
-            writer.WriteInteger(BigInteger.Zero, new Asn1Tag(UniversalTagNumber.Integer, isConstructed: true));
-            writer.WriteInteger(BigInteger.Zero, new Asn1Tag(TagClass.ContextSpecific, 0, isConstructed: true));
+            writer.WriteInteger(
+                BigInteger.Zero,
+                new Asn1Tag(UniversalTagNumber.Integer, isConstructed: true)
+            );
+            writer.WriteInteger(
+                BigInteger.Zero,
+                new Asn1Tag(TagClass.ContextSpecific, 0, isConstructed: true)
+            );
 
             Verify(writer, "020100800100020100800100020100800100");
         }

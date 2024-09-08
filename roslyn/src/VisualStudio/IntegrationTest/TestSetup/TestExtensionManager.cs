@@ -18,8 +18,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup;
 [Shared, ExportWorkspaceService(typeof(IExtensionManager), ServiceLayer.Host)]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal sealed class TestExtensionManager(
-    [Import] TestExtensionErrorHandler errorHandler) : AbstractExtensionManager
+internal sealed class TestExtensionManager([Import] TestExtensionErrorHandler errorHandler)
+    : AbstractExtensionManager
 {
     protected override void HandleNonCancellationException(object provider, Exception exception)
     {

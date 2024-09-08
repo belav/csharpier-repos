@@ -33,12 +33,24 @@ namespace Microsoft.CodeAnalysis.Options
         /// </summary>
         private ImmutableDictionary<OptionKey, object?> _values;
 
-        internal DocumentOptionSet(StructuredAnalyzerConfigOptions? configOptions, OptionSet underlyingOptions, string language)
-            : this(configOptions, underlyingOptions, language, ImmutableDictionary<OptionKey, object?>.Empty)
-        {
-        }
+        internal DocumentOptionSet(
+            StructuredAnalyzerConfigOptions? configOptions,
+            OptionSet underlyingOptions,
+            string language
+        )
+            : this(
+                configOptions,
+                underlyingOptions,
+                language,
+                ImmutableDictionary<OptionKey, object?>.Empty
+            ) { }
 
-        private DocumentOptionSet(StructuredAnalyzerConfigOptions? configOptions, OptionSet underlyingOptions, string language, ImmutableDictionary<OptionKey, object?> values)
+        private DocumentOptionSet(
+            StructuredAnalyzerConfigOptions? configOptions,
+            OptionSet underlyingOptions,
+            string language,
+            ImmutableDictionary<OptionKey, object?> values
+        )
         {
             _language = language;
             _configOptions = configOptions;
@@ -84,7 +96,12 @@ namespace Microsoft.CodeAnalysis.Options
             // Naming style option is not public. We should not call this API internally.
             Contract.ThrowIfTrue(internallyDefinedOption.Type == typeof(NamingStylePreferences));
 
-            if (!_configOptions.TryGetValue(internallyDefinedOption.Definition.ConfigName, out var stringValue))
+            if (
+                !_configOptions.TryGetValue(
+                    internallyDefinedOption.Definition.ConfigName,
+                    out var stringValue
+                )
+            )
             {
                 value = null;
                 return false;
@@ -94,16 +111,23 @@ namespace Microsoft.CodeAnalysis.Options
             return internallyDefinedOption.Definition.Serializer.TryParse(stringValue, out value);
         }
 
-        public T GetOption<T>(PerLanguageOption<T> option)
-            => GetOption(option, _language);
+        public T GetOption<T>(PerLanguageOption<T> option) => GetOption(option, _language);
 
-        internal override OptionSet WithChangedOptionInternal(OptionKey optionKey, object? internalValue)
-            => new DocumentOptionSet(_configOptions, _underlyingOptions, _language, _values.SetItem(optionKey, internalValue));
+        internal override OptionSet WithChangedOptionInternal(
+            OptionKey optionKey,
+            object? internalValue
+        ) =>
+            new DocumentOptionSet(
+                _configOptions,
+                _underlyingOptions,
+                _language,
+                _values.SetItem(optionKey, internalValue)
+            );
 
         /// <summary>
         /// Creates a new <see cref="DocumentOptionSet" /> that contains the changed value.
         /// </summary>
-        public DocumentOptionSet WithChangedOption<T>(PerLanguageOption<T> option, T value)
-            => (DocumentOptionSet)WithChangedOption(option, _language, value);
+        public DocumentOptionSet WithChangedOption<T>(PerLanguageOption<T> option, T value) =>
+            (DocumentOptionSet)WithChangedOption(option, _language, value);
     }
 }

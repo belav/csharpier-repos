@@ -35,6 +35,7 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             Glyph topLevelGlyph,
             Solution newSolution,
             Solution oldSolution,
-            bool showCheckBoxes = true);
+            bool showCheckBoxes = true
+        );
     }
 }

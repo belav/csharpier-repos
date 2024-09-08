@@ -1,34 +1,35 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignerTextWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Web.UI.Design.MobileControls;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Web.UI.Design.MobileControls;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DesignerTextWriter : HtmlMobileTextWriter
     {
         private readonly WriterStyle _defaultWriterStyle;
-        
-        internal DesignerTextWriter() : this(false)
-        {
-        }
 
-        internal DesignerTextWriter(bool maintainState) : 
-            base(new StringWriter(CultureInfo.CurrentCulture), DesignerCapabilities.Instance)
+        internal DesignerTextWriter()
+            : this(false) { }
+
+        internal DesignerTextWriter(bool maintainState)
+            : base(new StringWriter(CultureInfo.CurrentCulture), DesignerCapabilities.Instance)
         {
             MaintainState = maintainState;
             _defaultWriterStyle = new WriterStyle();
@@ -55,14 +56,13 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             return InnerWriter.ToString();
         }
 
-        internal void WriteDesignerStyleAttributes(MobileControl control, 
-            Style style)
+        internal void WriteDesignerStyleAttributes(MobileControl control, Style style)
         {
-            Alignment alignment = (Alignment) style[Style.AlignmentKey, true];
-            Wrapping wrapping = (Wrapping) style[Style.WrappingKey, true];
-            Color backColor = (Color) style[Style.BackColorKey, true];
+            Alignment alignment = (Alignment)style[Style.AlignmentKey, true];
+            Wrapping wrapping = (Wrapping)style[Style.WrappingKey, true];
+            Color backColor = (Color)style[Style.BackColorKey, true];
 
-            bool align  = (alignment != Alignment.NotSet);
+            bool align = (alignment != Alignment.NotSet);
             bool wrap = (wrapping == Wrapping.Wrap || wrapping == Wrapping.NotSet);
 
             String width = DesignerAdapterUtil.GetWidth(control);
@@ -109,10 +109,10 @@ namespace System.Web.UI.Design.MobileControls.Adapters
 
             bool bold = (BooleanOption)style[Style.BoldKey, true] == BooleanOption.True;
             bool italic = (BooleanOption)style[Style.ItalicKey, true] == BooleanOption.True;
-            FontSize  fontSize  = (FontSize) style[Style.FontSizeKey , true];
-            String    fontName  = (String)   style[Style.FontNameKey , true];
-            Color     foreColor = (Color)    style[Style.ForeColorKey, true];
-            Color     backColor = (Color)    style[Style.BackColorKey, true];
+            FontSize fontSize = (FontSize)style[Style.FontSizeKey, true];
+            String fontName = (String)style[Style.FontNameKey, true];
+            Color foreColor = (Color)style[Style.ForeColorKey, true];
+            Color backColor = (Color)style[Style.BackColorKey, true];
 
             Write(" style=\"");
 
@@ -167,10 +167,12 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             Write("\"");
         }
 
-        internal void WriteCssStyleText(Style style,
-                                      String additionalStyle,
-                                      String text,
-                                      bool encodeText)
+        internal void WriteCssStyleText(
+            Style style,
+            String additionalStyle,
+            String text,
+            bool encodeText
+        )
         {
             EnterLayout(style);
             WriteBeginTag("div");
@@ -183,7 +185,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
 
         public override void EnterLayout(Style style)
         {
-            if(MaintainState)
+            if (MaintainState)
             {
                 base.EnterLayout(style);
                 return;
@@ -203,7 +205,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
 
         public override void ExitLayout(Style style, bool breakAfter)
         {
-            if(MaintainState)
+            if (MaintainState)
             {
                 base.ExitLayout(style, breakAfter);
                 return;
@@ -227,4 +229,3 @@ namespace System.Web.UI.Design.MobileControls.Adapters
         }
     }
 }
-

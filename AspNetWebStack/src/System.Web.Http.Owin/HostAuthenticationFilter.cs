@@ -39,7 +39,10 @@ namespace System.Web.Http
         }
 
         /// <inheritdoc />
-        public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
+        public async Task AuthenticateAsync(
+            HttpAuthenticationContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (context == null)
             {
@@ -50,13 +53,17 @@ namespace System.Web.Http
 
             if (request == null)
             {
-                throw new InvalidOperationException(OwinResources.HttpAuthenticationContext_RequestMustNotBeNull);
+                throw new InvalidOperationException(
+                    OwinResources.HttpAuthenticationContext_RequestMustNotBeNull
+                );
             }
 
             IAuthenticationManager authenticationManager = GetAuthenticationManagerOrThrow(request);
 
             cancellationToken.ThrowIfCancellationRequested();
-            AuthenticateResult result = await authenticationManager.AuthenticateAsync(_authenticationType);
+            AuthenticateResult result = await authenticationManager.AuthenticateAsync(
+                _authenticationType
+            );
 
             if (result != null)
             {
@@ -70,7 +77,10 @@ namespace System.Web.Http
         }
 
         /// <inheritdoc />
-        public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
+        public Task ChallengeAsync(
+            HttpAuthenticationChallengeContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (context == null)
             {
@@ -81,14 +91,18 @@ namespace System.Web.Http
 
             if (request == null)
             {
-                throw new InvalidOperationException(OwinResources.HttpAuthenticationChallengeContext_RequestMustNotBeNull);
+                throw new InvalidOperationException(
+                    OwinResources.HttpAuthenticationChallengeContext_RequestMustNotBeNull
+                );
             }
 
             IAuthenticationManager authenticationManager = GetAuthenticationManagerOrThrow(request);
 
             // Control the challenges that OWIN middleware adds later.
             authenticationManager.AuthenticationResponseChallenge = AddChallengeAuthenticationType(
-                authenticationManager.AuthenticationResponseChallenge, _authenticationType);
+                authenticationManager.AuthenticationResponseChallenge,
+                _authenticationType
+            );
 
             return TaskHelpers.Completed();
         }
@@ -100,7 +114,9 @@ namespace System.Web.Http
         }
 
         private static AuthenticationResponseChallenge AddChallengeAuthenticationType(
-            AuthenticationResponseChallenge challenge, string authenticationType)
+            AuthenticationResponseChallenge challenge,
+            string authenticationType
+        )
         {
             Contract.Assert(authenticationType != null);
 
@@ -128,7 +144,9 @@ namespace System.Web.Http
             return new AuthenticationResponseChallenge(authenticationTypes.ToArray(), properties);
         }
 
-        private static IAuthenticationManager GetAuthenticationManagerOrThrow(HttpRequestMessage request)
+        private static IAuthenticationManager GetAuthenticationManagerOrThrow(
+            HttpRequestMessage request
+        )
         {
             Contract.Assert(request != null);
 
@@ -136,7 +154,9 @@ namespace System.Web.Http
 
             if (authenticationManager == null)
             {
-                throw new InvalidOperationException(OwinResources.IAuthenticationManagerNotAvailable);
+                throw new InvalidOperationException(
+                    OwinResources.IAuthenticationManagerNotAvailable
+                );
             }
 
             return authenticationManager;

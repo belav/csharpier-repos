@@ -9,8 +9,8 @@ using System.Linq;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Xunit;
-using VB = Microsoft.CodeAnalysis.VisualBasic;
 using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
@@ -21,21 +21,33 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             foreach (CS.SyntaxKind kind in Enum.GetValues(typeof(CS.SyntaxKind)))
             {
-                Assert.True(CS.CSharpExtensions.IsCSharpKind((int)kind), kind + " should be C# kind");
+                Assert.True(
+                    CS.CSharpExtensions.IsCSharpKind((int)kind),
+                    kind + " should be C# kind"
+                );
 
                 if (kind != CS.SyntaxKind.None && kind != CS.SyntaxKind.List)
                 {
-                    Assert.False(VB.VisualBasicExtensions.IsVisualBasicKind((int)kind), kind + " should not be VB kind");
+                    Assert.False(
+                        VB.VisualBasicExtensions.IsVisualBasicKind((int)kind),
+                        kind + " should not be VB kind"
+                    );
                 }
             }
 
             foreach (VB.SyntaxKind kind in Enum.GetValues(typeof(VB.SyntaxKind)))
             {
-                Assert.True(VB.VisualBasicExtensions.IsVisualBasicKind((int)kind), kind + " should be VB kind");
+                Assert.True(
+                    VB.VisualBasicExtensions.IsVisualBasicKind((int)kind),
+                    kind + " should be VB kind"
+                );
 
                 if (kind != VB.SyntaxKind.None && kind != VB.SyntaxKind.List)
                 {
-                    Assert.False(CS.CSharpExtensions.IsCSharpKind((int)kind), kind + " should not be C# kind");
+                    Assert.False(
+                        CS.CSharpExtensions.IsCSharpKind((int)kind),
+                        kind + " should not be C# kind"
+                    );
                 }
             }
         }
@@ -109,12 +121,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CommonSyntaxTriviaSpan_CSharp()
         {
-            var csharpToken = CSharp.SyntaxFactory.ParseExpression("1 + 123 /*hello*/").GetLastToken();
+            var csharpToken = CSharp
+                .SyntaxFactory.ParseExpression("1 + 123 /*hello*/")
+                .GetLastToken();
             var csharpTriviaList = csharpToken.TrailingTrivia;
             Assert.Equal(2, csharpTriviaList.Count);
 
             var csharpTrivia = csharpTriviaList.ElementAt(1);
-            Assert.Equal(CSharp.SyntaxKind.MultiLineCommentTrivia, CSharp.CSharpExtensions.Kind(csharpTrivia));
+            Assert.Equal(
+                CSharp.SyntaxKind.MultiLineCommentTrivia,
+                CSharp.CSharpExtensions.Kind(csharpTrivia)
+            );
 
             var correctSpan = csharpTrivia.Span;
             Assert.Equal(8, correctSpan.Start);
@@ -207,20 +224,27 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var expr = CSharp.SyntaxFactory.ParseExpression("a + b + c + d");
 
-            var exprB = expr.DescendantNodes().OfType<CSharp.Syntax.IdentifierNameSyntax>().First(n => n.Identifier.ToString() == "b");
+            var exprB = expr.DescendantNodes()
+                .OfType<CSharp.Syntax.IdentifierNameSyntax>()
+                .First(n => n.Identifier.ToString() == "b");
 
             var trackedExpr = expr.TrackNodes(exprB);
 
             // replace each expression with a parenthesized expression
             trackedExpr = trackedExpr.ReplaceNodes(
-                        nodes: trackedExpr.DescendantNodes().OfType<CSharp.Syntax.ExpressionSyntax>(),
-                        computeReplacementNode: (node, rewritten) => CSharp.SyntaxFactory.ParenthesizedExpression(rewritten));
+                nodes: trackedExpr.DescendantNodes().OfType<CSharp.Syntax.ExpressionSyntax>(),
+                computeReplacementNode: (node, rewritten) =>
+                    CSharp.SyntaxFactory.ParenthesizedExpression(rewritten)
+            );
 
             trackedExpr = trackedExpr.NormalizeWhitespace();
             Assert.Equal("(((a) + (b)) + (c)) + (d)", trackedExpr.ToString());
 
             var trackedB = trackedExpr.GetCurrentNodes(exprB).First();
-            Assert.Equal(CSharp.SyntaxKind.ParenthesizedExpression, CSharp.CSharpExtensions.Kind(trackedB.Parent));
+            Assert.Equal(
+                CSharp.SyntaxKind.ParenthesizedExpression,
+                CSharp.CSharpExtensions.Kind(trackedB.Parent)
+            );
         }
 
         [Fact]
@@ -228,22 +252,34 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var expr = CSharp.SyntaxFactory.ParseExpression("a + b + c + d");
 
-            var exprB = expr.DescendantNodes().OfType<CSharp.Syntax.IdentifierNameSyntax>().First(n => n.Identifier.ToString() == "b");
+            var exprB = expr.DescendantNodes()
+                .OfType<CSharp.Syntax.IdentifierNameSyntax>()
+                .First(n => n.Identifier.ToString() == "b");
 
             var trackedExpr = expr.TrackNodes(exprB);
-            var annotation = trackedExpr.GetAnnotatedNodes(SyntaxNodeExtensions.IdAnnotationKind).First()
-                                        .GetAnnotations(SyntaxNodeExtensions.IdAnnotationKind).First();
+            var annotation = trackedExpr
+                .GetAnnotatedNodes(SyntaxNodeExtensions.IdAnnotationKind)
+                .First()
+                .GetAnnotations(SyntaxNodeExtensions.IdAnnotationKind)
+                .First();
 
             // replace each expression with a parenthesized expression
             trackedExpr = trackedExpr.ReplaceNodes(
-                        nodes: trackedExpr.DescendantNodes().OfType<CSharp.Syntax.ExpressionSyntax>(),
-                        computeReplacementNode: (node, rewritten) => CSharp.SyntaxFactory.ParenthesizedExpression(rewritten).WithAdditionalAnnotations(annotation));
+                nodes: trackedExpr.DescendantNodes().OfType<CSharp.Syntax.ExpressionSyntax>(),
+                computeReplacementNode: (node, rewritten) =>
+                    CSharp
+                        .SyntaxFactory.ParenthesizedExpression(rewritten)
+                        .WithAdditionalAnnotations(annotation)
+            );
 
             trackedExpr = trackedExpr.NormalizeWhitespace();
             Assert.Equal("(((a) + (b)) + (c)) + (d)", trackedExpr.ToString());
 
             var trackedB = trackedExpr.GetCurrentNodes(exprB).First();
-            Assert.Equal(CSharp.SyntaxKind.ParenthesizedExpression, CSharp.CSharpExtensions.Kind(trackedB.Parent));
+            Assert.Equal(
+                CSharp.SyntaxKind.ParenthesizedExpression,
+                CSharp.CSharpExtensions.Kind(trackedB.Parent)
+            );
         }
     }
 }

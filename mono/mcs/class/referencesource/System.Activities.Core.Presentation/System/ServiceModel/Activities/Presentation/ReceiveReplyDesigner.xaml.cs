@@ -5,6 +5,7 @@
 namespace System.ServiceModel.Activities.Presentation
 {
     using System;
+    using System.Activities;
     using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
@@ -16,8 +17,6 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Runtime;
     using System.Windows;
     using System.Windows.Input;
-    using System.Activities;
-
 
     partial class ReceiveReplyDesigner
     {
@@ -29,32 +28,71 @@ namespace System.ServiceModel.Activities.Presentation
         static string Action;
         static string DeclaredMessageType;
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
-            Justification = "PropertyValueEditors association needs to be done in the static constructor.")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
+            Justification = "PropertyValueEditors association needs to be done in the static constructor."
+        )]
         static ReceiveReplyDesigner()
         {
             AttributeTableBuilder builder = new AttributeTableBuilder();
             Type receiveType = typeof(ReceiveReply);
 
+            builder.AddCustomAttributes(
+                receiveType,
+                receiveType.GetProperty("CorrelationInitializers"),
+                PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor))
+            );
 
-            builder.AddCustomAttributes(receiveType, receiveType.GetProperty("CorrelationInitializers"), PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor)));
+            var categoryAttribute = new CategoryAttribute(
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    CorrelationsCategoryLabelKey
+                )
+            );
 
-            var categoryAttribute = new CategoryAttribute(EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(CorrelationsCategoryLabelKey));
-
-            builder.AddCustomAttributes(receiveType, receiveType.GetProperty("CorrelationInitializers"), categoryAttribute, BrowsableAttribute.Yes,
-                PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor)));            
-
-            categoryAttribute = new CategoryAttribute(EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(MiscellaneousCategoryLabelKey));
-
-            builder.AddCustomAttributes(receiveType, receiveType.GetProperty("DisplayName"), categoryAttribute);
-            var descriptionAttribute = new DescriptionAttribute(StringResourceDictionary.Instance.GetString("messagingValueHint", "<Value to bind>"));
-            builder.AddCustomAttributes(receiveType, receiveType.GetProperty("Content"), categoryAttribute, descriptionAttribute, PropertyValueEditor.CreateEditorAttribute(typeof(ReceiveContentPropertyEditor)));
-            builder.AddCustomAttributes(receiveType, receiveType.GetProperty("Request"),
+            builder.AddCustomAttributes(
+                receiveType,
+                receiveType.GetProperty("CorrelationInitializers"),
                 categoryAttribute,
-                PropertyValueEditor.CreateEditorAttribute(typeof(ActivityXRefPropertyEditor)));
+                BrowsableAttribute.Yes,
+                PropertyValueEditor.CreateEditorAttribute(typeof(CorrelationInitializerValueEditor))
+            );
+
+            categoryAttribute = new CategoryAttribute(
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTitle(
+                    MiscellaneousCategoryLabelKey
+                )
+            );
+
+            builder.AddCustomAttributes(
+                receiveType,
+                receiveType.GetProperty("DisplayName"),
+                categoryAttribute
+            );
+            var descriptionAttribute = new DescriptionAttribute(
+                StringResourceDictionary.Instance.GetString("messagingValueHint", "<Value to bind>")
+            );
+            builder.AddCustomAttributes(
+                receiveType,
+                receiveType.GetProperty("Content"),
+                categoryAttribute,
+                descriptionAttribute,
+                PropertyValueEditor.CreateEditorAttribute(typeof(ReceiveContentPropertyEditor))
+            );
+            builder.AddCustomAttributes(
+                receiveType,
+                receiveType.GetProperty("Request"),
+                categoryAttribute,
+                PropertyValueEditor.CreateEditorAttribute(typeof(ActivityXRefPropertyEditor))
+            );
 
             var advancedAttribute = new EditorBrowsableAttribute(EditorBrowsableState.Advanced);
-            builder.AddCustomAttributes(receiveType, receiveType.GetProperty("Action"), advancedAttribute, categoryAttribute);
+            builder.AddCustomAttributes(
+                receiveType,
+                receiveType.GetProperty("Action"),
+                advancedAttribute,
+                categoryAttribute
+            );
 
             Action = receiveType.GetProperty("Action").Name;
 
@@ -63,28 +101,34 @@ namespace System.ServiceModel.Activities.Presentation
             DeclaredMessageType = receiveMessageContentType.GetProperty("DeclaredMessageType").Name;
             MetadataStore.AddAttributeTable(builder.CreateTable());
 
-            Func<Activity, IEnumerable<ArgumentAccessor>> argumentAccessorGenerator = (activity) => new ArgumentAccessor[]
-            {
-                new ArgumentAccessor
+            Func<Activity, IEnumerable<ArgumentAccessor>> argumentAccessorGenerator = (activity) =>
+                new ArgumentAccessor[]
                 {
-                    Getter = (ownerActivity) =>
+                    new ArgumentAccessor
                     {
-                        ReceiveReply receiveReply = (ReceiveReply)ownerActivity;
-                        ReceiveMessageContent content = receiveReply.Content as ReceiveMessageContent;
-                        return content != null ? content.Message : null;
-                    },
-                    Setter = (ownerActivity, arg) =>
-                    {
-                        ReceiveReply receiveReply = (ReceiveReply)ownerActivity;
-                        ReceiveMessageContent content = receiveReply.Content as ReceiveMessageContent;
-                        if (content != null)
+                        Getter = (ownerActivity) =>
                         {
-                            content.Message = arg as OutArgument;
-                        }
+                            ReceiveReply receiveReply = (ReceiveReply)ownerActivity;
+                            ReceiveMessageContent content =
+                                receiveReply.Content as ReceiveMessageContent;
+                            return content != null ? content.Message : null;
+                        },
+                        Setter = (ownerActivity, arg) =>
+                        {
+                            ReceiveReply receiveReply = (ReceiveReply)ownerActivity;
+                            ReceiveMessageContent content =
+                                receiveReply.Content as ReceiveMessageContent;
+                            if (content != null)
+                            {
+                                content.Message = arg as OutArgument;
+                            }
+                        },
                     },
-                },
-            };
-            ActivityArgumentHelper.RegisterAccessorsGenerator(receiveType, argumentAccessorGenerator);
+                };
+            ActivityArgumentHelper.RegisterAccessorsGenerator(
+                receiveType,
+                argumentAccessorGenerator
+            );
         }
 
         public ReceiveReplyDesigner()
@@ -105,14 +149,24 @@ namespace System.ServiceModel.Activities.Presentation
         {
             if (string.Equals(e.PropertyName, Message))
             {
-                ReceiveMessageContent messageContent = ((ReceiveReply)this.ModelItem.GetCurrentValue()).Content as ReceiveMessageContent;
-                this.ModelItem.Properties[DeclaredMessageType].SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
+                ReceiveMessageContent messageContent =
+                    ((ReceiveReply)this.ModelItem.GetCurrentValue()).Content
+                    as ReceiveMessageContent;
+                this.ModelItem.Properties[DeclaredMessageType]
+                    .SetValue(null == messageContent ? null : messageContent.Message.ArgumentType);
             }
         }
 
         void OnDefineButtonClicked(object sender, RoutedEventArgs args)
         {
-            using (EditingScope scope = this.Context.Services.GetRequiredService<ModelTreeManager>().CreateEditingScope(StringResourceDictionary.Instance.GetString("editReceiveContent"), true))
+            using (
+                EditingScope scope = this
+                    .Context.Services.GetRequiredService<ModelTreeManager>()
+                    .CreateEditingScope(
+                        StringResourceDictionary.Instance.GetString("editReceiveContent"),
+                        true
+                    )
+            )
             {
                 if (ReceiveContentDialog.ShowDialog(this.ModelItem, this.Context, this))
                 {

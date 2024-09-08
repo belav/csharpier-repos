@@ -14,11 +14,19 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // null handle
-            Assert.Throws<ArgumentNullException>(() => RegistryKey.FromHandle(handle: null, view: RegistryView.Default));
+            Assert.Throws<ArgumentNullException>(
+                () => RegistryKey.FromHandle(handle: null, view: RegistryView.Default)
+            );
 
             // invalid view
-            AssertExtensions.Throws<ArgumentException>("view", () => RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)(-1)));
-            AssertExtensions.Throws<ArgumentException>("view", () => RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)3));
+            AssertExtensions.Throws<ArgumentException>(
+                "view",
+                () => RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)(-1))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "view",
+                () => RegistryKey.FromHandle(TestRegistryKey.Handle, (RegistryView)3)
+            );
 
             // get handle of disposed RegistryKey
             Assert.Throws<ObjectDisposedException>(() =>
@@ -26,7 +34,6 @@ namespace Microsoft.Win32.RegistryTests
                 TestRegistryKey.Dispose();
                 return TestRegistryKey.Handle;
             });
-
         }
 
         [Fact]

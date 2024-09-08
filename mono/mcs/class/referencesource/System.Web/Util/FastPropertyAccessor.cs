@@ -5,14 +5,15 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Threading;
-using System.Collections;
 using System.Security;
 using System.Security.Permissions;
+using System.Threading;
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     /*
      * Property Accessor Generator class
      *
@@ -21,29 +22,34 @@ namespace System.Web.Util {
      * very slow reflection.
      */
 
-    internal class FastPropertyAccessor {
-
+    internal class FastPropertyAccessor
+    {
         private static object s_lockObject = new object();
         private static FastPropertyAccessor s_accessorGenerator;
         private static Hashtable s_accessorCache;
         private static MethodInfo _getPropertyMethod;
         private static MethodInfo _setPropertyMethod;
         private static Type[] _getPropertyParameterList = new Type[] { typeof(object) };
-        private static Type[] _setPropertyParameterList = new Type[] { typeof(object), typeof(object) };
+        private static Type[] _setPropertyParameterList = new Type[]
+        {
+            typeof(object),
+            typeof(object),
+        };
         private static Type[] _interfacesToImplement;
 
-        private static int _uniqueId;   // Used to generate unique type ID's.
+        private static int _uniqueId; // Used to generate unique type ID's.
 
         // Property getter/setter must be public for codegen to access it.
         // Static properties are ignored, since this class only works on instances of objects.
         // Need to use DeclaredOnly to avoid AmbiguousMatchException if a property with
         // a different return type is hidden.
-        private const BindingFlags _declaredFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly;
+        private const BindingFlags _declaredFlags =
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly;
 
         private ModuleBuilder _dynamicModule = null;
 
-        static FastPropertyAccessor() {
-
+        static FastPropertyAccessor()
+        {
             // Get the SetProperty method, and make sure it has
             // the correct signature.
 
@@ -55,12 +61,18 @@ namespace System.Web.Util {
             _interfacesToImplement[0] = typeof(IWebPropertyAccessor);
         }
 
-        private static String GetUniqueCompilationName() {
+        private static String GetUniqueCompilationName()
+        {
             return Guid.NewGuid().ToString().Replace('-', '_');
         }
 
-        Type GetPropertyAccessorTypeWithAssert(Type type, string propertyName,
-            PropertyInfo propInfo, FieldInfo fieldInfo) {
+        Type GetPropertyAccessorTypeWithAssert(
+            Type type,
+            string propertyName,
+            PropertyInfo propInfo,
+            FieldInfo fieldInfo
+        )
+        {
             // Create the dynamic assembly if needed.
             Type accessorType;
 
@@ -68,22 +80,26 @@ namespace System.Web.Util {
             MethodInfo setterMethodInfo = null;
             Type propertyType;
 
-            if (propInfo != null) {
+            if (propInfo != null)
+            {
                 // It'a a property
                 getterMethodInfo = propInfo.GetGetMethod();
                 setterMethodInfo = propInfo.GetSetMethod();
 
                 propertyType = propInfo.PropertyType;
             }
-            else {
+            else
+            {
                 // If not, it must be a field
                 propertyType = fieldInfo.FieldType;
             }
 
-            if (_dynamicModule == null) {
-                lock (this) {
-                    if (_dynamicModule == null) {
-
+            if (_dynamicModule == null)
+            {
+                lock (this)
+                {
+                    if (_dynamicModule == null)
+                    {
                         // Use a unique name for each assembly.
                         String name = GetUniqueCompilationName();
 
@@ -91,13 +107,15 @@ namespace System.Web.Util {
                         assemblyName.Name = "A_" + name;
 
                         // Create a new assembly.
-                        AssemblyBuilder newAssembly =
-                           Thread.GetDomain().DefineDynamicAssembly(assemblyName,
-                                                                    AssemblyBuilderAccess.Run,
-                                                                    null, //directory to persist assembly
-                                                                    true, //isSynchronized
-                                                                    null  //assembly attributes
-                                                                    );
+                        AssemblyBuilder newAssembly = Thread
+                            .GetDomain()
+                            .DefineDynamicAssembly(
+                                assemblyName,
+                                AssemblyBuilderAccess.Run,
+                                null, //directory to persist assembly
+                                true, //isSynchronized
+                                null //assembly attributes
+                            );
 
                         // Create a single module in the assembly.
                         _dynamicModule = newAssembly.DefineDynamicModule("M_" + name);
@@ -107,29 +125,37 @@ namespace System.Web.Util {
 
             // Give the factory a unique name.
 
-            String typeName = System.Web.UI.Util.MakeValidTypeNameFromString(type.Name) +
-                "_" + propertyName + "_" + (_uniqueId++);
+            String typeName =
+                System.Web.UI.Util.MakeValidTypeNameFromString(type.Name)
+                + "_"
+                + propertyName
+                + "_"
+                + (_uniqueId++);
 
-            TypeBuilder accessorTypeBuilder = _dynamicModule.DefineType("T_" + typeName,
-                                                                       TypeAttributes.Public,
-                                                                       typeof(object),
-                                                                       _interfacesToImplement);
+            TypeBuilder accessorTypeBuilder = _dynamicModule.DefineType(
+                "T_" + typeName,
+                TypeAttributes.Public,
+                typeof(object),
+                _interfacesToImplement
+            );
 
             //
             // Define the GetProperty method. It must be virtual to be an interface implementation.
             //
 
-            MethodBuilder method = accessorTypeBuilder.DefineMethod("GetProperty",
-                                                                   MethodAttributes.Public |
-                                                                        MethodAttributes.Virtual,
-                                                                   typeof(Object),
-                                                                   _getPropertyParameterList);
+            MethodBuilder method = accessorTypeBuilder.DefineMethod(
+                "GetProperty",
+                MethodAttributes.Public | MethodAttributes.Virtual,
+                typeof(Object),
+                _getPropertyParameterList
+            );
 
             // Generate IL. The generated IL corresponds to:
             //  "return ((TargetType) target).Blah;"
 
             ILGenerator il = method.GetILGenerator();
-            if (getterMethodInfo != null) {
+            if (getterMethodInfo != null)
+            {
                 il.Emit(OpCodes.Ldarg_1);
                 il.Emit(OpCodes.Castclass, type);
 
@@ -145,30 +171,33 @@ namespace System.Web.Util {
                 // Specify that this method implements GetProperty from the inherited interface.
                 accessorTypeBuilder.DefineMethodOverride(method, _getPropertyMethod);
             }
-            else {
+            else
+            {
                 // Generate IL. The generated IL corresponds to "throw new InvalidOperationException"
-                ConstructorInfo cons = typeof(InvalidOperationException).GetConstructor(Type.EmptyTypes);
+                ConstructorInfo cons = typeof(InvalidOperationException).GetConstructor(
+                    Type.EmptyTypes
+                );
                 il.Emit(OpCodes.Newobj, cons);
                 il.Emit(OpCodes.Throw);
             }
-
 
             //
             // Define the SetProperty method. It must be virtual to be an interface implementation.
             //
 
-            method = accessorTypeBuilder.DefineMethod("SetProperty",
-                                                                   MethodAttributes.Public |
-                                                                        MethodAttributes.Virtual,
-                                                                   null,
-                                                                   _setPropertyParameterList);
+            method = accessorTypeBuilder.DefineMethod(
+                "SetProperty",
+                MethodAttributes.Public | MethodAttributes.Virtual,
+                null,
+                _setPropertyParameterList
+            );
 
             il = method.GetILGenerator();
 
             // Don't generate any code in the setter if it's a readonly property.
             // We still need to have an implementation of SetProperty, but it does nothing.
-            if (fieldInfo != null || setterMethodInfo != null) {
-
+            if (fieldInfo != null || setterMethodInfo != null)
+            {
                 // Generate IL. The generated IL corresponds to:
                 //  "((TargetType) target).Blah = (PropType) val;"
 
@@ -176,60 +205,77 @@ namespace System.Web.Util {
                 il.Emit(OpCodes.Castclass, type);
                 il.Emit(OpCodes.Ldarg_2);
 
-                if (propertyType.IsPrimitive) {
+                if (propertyType.IsPrimitive)
+                {
                     // Primitive type: deal with boxing
                     il.Emit(OpCodes.Unbox, propertyType);
 
                     // Emit the proper instruction for the type
-                    if (propertyType == typeof(sbyte)) {
+                    if (propertyType == typeof(sbyte))
+                    {
                         il.Emit(OpCodes.Ldind_I1);
                     }
-                    else if (propertyType == typeof(byte)) {
+                    else if (propertyType == typeof(byte))
+                    {
                         il.Emit(OpCodes.Ldind_U1);
                     }
-                    else if (propertyType == typeof(short)) {
+                    else if (propertyType == typeof(short))
+                    {
                         il.Emit(OpCodes.Ldind_I2);
                     }
-                    else if (propertyType == typeof(ushort)) {
+                    else if (propertyType == typeof(ushort))
+                    {
                         il.Emit(OpCodes.Ldind_U2);
                     }
-                    else if (propertyType == typeof(uint)) {
+                    else if (propertyType == typeof(uint))
+                    {
                         il.Emit(OpCodes.Ldind_U4);
                     }
-                    else if (propertyType == typeof(int)) {
+                    else if (propertyType == typeof(int))
+                    {
                         il.Emit(OpCodes.Ldind_I4);
                     }
-                    else if (propertyType == typeof(long)) {
+                    else if (propertyType == typeof(long))
+                    {
                         il.Emit(OpCodes.Ldind_I8);
                     }
-                    else if (propertyType == typeof(ulong)) {
-                        il.Emit(OpCodes.Ldind_I8);  // Somehow, there is no Ldind_u8
+                    else if (propertyType == typeof(ulong))
+                    {
+                        il.Emit(OpCodes.Ldind_I8); // Somehow, there is no Ldind_u8
                     }
-                    else if (propertyType == typeof(bool)) {
+                    else if (propertyType == typeof(bool))
+                    {
                         il.Emit(OpCodes.Ldind_I1);
                     }
-                    else if (propertyType == typeof(char)) {
+                    else if (propertyType == typeof(char))
+                    {
                         il.Emit(OpCodes.Ldind_U2);
                     }
-                    else if (propertyType == typeof(decimal)) {
+                    else if (propertyType == typeof(decimal))
+                    {
                         il.Emit(OpCodes.Ldobj, propertyType);
                     }
-                    else if (propertyType == typeof(float)) {
+                    else if (propertyType == typeof(float))
+                    {
                         il.Emit(OpCodes.Ldind_R4);
                     }
-                    else if (propertyType == typeof(double)) {
+                    else if (propertyType == typeof(double))
+                    {
                         il.Emit(OpCodes.Ldind_R8);
                     }
-                    else {
+                    else
+                    {
                         il.Emit(OpCodes.Ldobj, propertyType);
                     }
                 }
-                else if (propertyType.IsValueType) {
+                else if (propertyType.IsValueType)
+                {
                     // Value type: deal with boxing
                     il.Emit(OpCodes.Unbox, propertyType);
                     il.Emit(OpCodes.Ldobj, propertyType);
                 }
-                else {
+                else
+                {
                     // No boxing involved: just generate a standard cast
                     il.Emit(OpCodes.Castclass, propertyType);
                 }
@@ -252,8 +298,14 @@ namespace System.Web.Util {
             return accessorType;
         }
 
-        private static void GetPropertyInfo(Type type, string propertyName, out PropertyInfo propInfo, out FieldInfo fieldInfo, out Type declaringType) {
-        
+        private static void GetPropertyInfo(
+            Type type,
+            string propertyName,
+            out PropertyInfo propInfo,
+            out FieldInfo fieldInfo,
+            out Type declaringType
+        )
+        {
             // First, try to find a property with that name.  Type.GetProperty() without BindingFlags.Declared
             // will throw AmbiguousMatchException if there is a hidden property with the same name and a
             // different type (VSWhidbey 237437).  This method finds the property with the specified name
@@ -261,10 +313,12 @@ namespace System.Web.Util {
             propInfo = GetPropertyMostSpecific(type, propertyName);
             fieldInfo = null;
 
-            if (propInfo != null) {
+            if (propInfo != null)
+            {
                 // Get the most base Type where the property is first declared
                 MethodInfo baseCheckMethodInfo = propInfo.GetGetMethod();
-                if (baseCheckMethodInfo == null) {
+                if (baseCheckMethodInfo == null)
+                {
                     baseCheckMethodInfo = propInfo.GetSetMethod();
                 }
                 declaringType = baseCheckMethodInfo.GetBaseDefinition().DeclaringType;
@@ -275,7 +329,8 @@ namespace System.Web.Util {
                     declaringType = type;
 
                 // If they're different, get a new PropertyInfo
-                if (declaringType != type) {
+                if (declaringType != type)
+                {
                     // We want the propertyInfo for the property specifically declared on the declaringType.
                     // So pass in the correct BindingFlags to avoid an AmbiguousMatchException, which would
                     // be thrown if the declaringType hides a property with the same name and a different type.
@@ -283,7 +338,8 @@ namespace System.Web.Util {
                     propInfo = declaringType.GetProperty(propertyName, _declaredFlags);
                 }
             }
-            else {
+            else
+            {
                 // We couldn't find a property, so try a field
                 // Type.GetField can not throw AmbiguousMatchException like Type.GetProperty above.
                 fieldInfo = type.GetField(propertyName);
@@ -296,11 +352,14 @@ namespace System.Web.Util {
             }
         }
 
-        private static IWebPropertyAccessor GetPropertyAccessor(Type type, string propertyName) {
-
-            if (s_accessorGenerator == null || s_accessorCache == null) {
-                lock (s_lockObject) {
-                    if (s_accessorGenerator == null || s_accessorCache == null) {
+        private static IWebPropertyAccessor GetPropertyAccessor(Type type, string propertyName)
+        {
+            if (s_accessorGenerator == null || s_accessorCache == null)
+            {
+                lock (s_lockObject)
+                {
+                    if (s_accessorGenerator == null || s_accessorCache == null)
+                    {
                         s_accessorGenerator = new FastPropertyAccessor();
                         s_accessorCache = new Hashtable();
                     }
@@ -311,7 +370,9 @@ namespace System.Web.Util {
 
             // Get a hash key based on the Type and the property name
             int cacheKey = HashCodeCombiner.CombineHashCodes(
-                type.GetHashCode(), propertyName.GetHashCode());
+                type.GetHashCode(),
+                propertyName.GetHashCode()
+            );
 
             IWebPropertyAccessor accessor = (IWebPropertyAccessor)s_accessorCache[cacheKey];
 
@@ -330,18 +391,22 @@ namespace System.Web.Util {
             // the number of different accessors we need to create.  e.g. Every control has
             // an ID property, but we'll end up only create one accessor for all of them.
             int declaringTypeCacheKey = 0;
-            if (declaringType != type) {
+            if (declaringType != type)
+            {
                 // Get a hash key based on the declaring Type and the property name
                 declaringTypeCacheKey = HashCodeCombiner.CombineHashCodes(
-                    declaringType.GetHashCode(), propertyName.GetHashCode());
+                    declaringType.GetHashCode(),
+                    propertyName.GetHashCode()
+                );
 
-                accessor = (IWebPropertyAccessor) s_accessorCache[declaringTypeCacheKey];
+                accessor = (IWebPropertyAccessor)s_accessorCache[declaringTypeCacheKey];
 
                 // We have a cached accessor for the declaring type, so use it
-                if (accessor != null) {
-
+                if (accessor != null)
+                {
                     // Cache the declaring type's accessor as ourselves
-                    lock (s_accessorCache.SyncRoot) {
+                    lock (s_accessorCache.SyncRoot)
+                    {
                         s_accessorCache[cacheKey] = accessor;
                     }
 
@@ -349,21 +414,29 @@ namespace System.Web.Util {
                 }
             }
 
-            if (accessor == null) {
+            if (accessor == null)
+            {
                 Type propertyAccessorType;
 
-                lock (s_accessorGenerator) {
+                lock (s_accessorGenerator)
+                {
                     propertyAccessorType = s_accessorGenerator.GetPropertyAccessorTypeWithAssert(
-                        declaringType, propertyName, propInfo, fieldInfo);
+                        declaringType,
+                        propertyName,
+                        propInfo,
+                        fieldInfo
+                    );
                 }
 
                 // Create the type. This is the only place where Activator.CreateInstance is used,
                 // reducing the calls to it from 1 per instance to 1 per type.
-                accessor = (IWebPropertyAccessor) HttpRuntime.CreateNonPublicInstance(propertyAccessorType);
+                accessor = (IWebPropertyAccessor)
+                    HttpRuntime.CreateNonPublicInstance(propertyAccessorType);
             }
 
             // Cache the accessor
-            lock (s_accessorCache.SyncRoot) {
+            lock (s_accessorCache.SyncRoot)
+            {
                 s_accessorCache[cacheKey] = accessor;
 
                 if (declaringTypeCacheKey != 0)
@@ -373,22 +446,33 @@ namespace System.Web.Util {
             return accessor;
         }
 
-        internal static object GetProperty(object target, string propName, bool inDesigner) {
-            if (!inDesigner) {
+        internal static object GetProperty(object target, string propName, bool inDesigner)
+        {
+            if (!inDesigner)
+            {
                 IWebPropertyAccessor accessor = GetPropertyAccessor(target.GetType(), propName);
                 return accessor.GetProperty(target);
             }
-            else {
+            else
+            {
                 // Dev10 bug 491386 - avoid CLR code path that causes an exception when designer uses two
                 // assemblies of the same name at different locations
                 FieldInfo fieldInfo = null;
                 PropertyInfo propInfo = null;
                 Type declaringType;
-                GetPropertyInfo(target.GetType(), propName, out propInfo, out fieldInfo, out declaringType);
-                if (propInfo != null) {
+                GetPropertyInfo(
+                    target.GetType(),
+                    propName,
+                    out propInfo,
+                    out fieldInfo,
+                    out declaringType
+                );
+                if (propInfo != null)
+                {
                     return propInfo.GetValue(target, null);
                 }
-                else if (fieldInfo != null) {
+                else if (fieldInfo != null)
+                {
                     return fieldInfo.GetValue(target);
                 }
                 throw new ArgumentException();
@@ -396,16 +480,20 @@ namespace System.Web.Util {
         }
 
         // Finds the property with the specified name on the most specific type.
-        private static PropertyInfo GetPropertyMostSpecific(Type type, string name) {
+        private static PropertyInfo GetPropertyMostSpecific(Type type, string name)
+        {
             PropertyInfo propInfo;
             Type currentType = type;
 
-            while (currentType != null) {
+            while (currentType != null)
+            {
                 propInfo = currentType.GetProperty(name, _declaredFlags);
-                if (propInfo != null) {
+                if (propInfo != null)
+                {
                     return propInfo;
                 }
-                else {
+                else
+                {
                     currentType = currentType.BaseType;
                 }
             }
@@ -413,32 +501,50 @@ namespace System.Web.Util {
             return null;
         }
 
-        internal static void SetProperty(object target, string propName, object val, bool inDesigner) {
-            if (!inDesigner) {
+        internal static void SetProperty(
+            object target,
+            string propName,
+            object val,
+            bool inDesigner
+        )
+        {
+            if (!inDesigner)
+            {
                 IWebPropertyAccessor accessor = GetPropertyAccessor(target.GetType(), propName);
                 accessor.SetProperty(target, val);
             }
-            else {
+            else
+            {
                 // Dev10 bug 491386 - avoid CLR code path that causes an exception when designer uses two
                 // assemblies of the same name at different locations
                 FieldInfo fieldInfo = null;
                 PropertyInfo propInfo = null;
                 Type declaringType = null;
-                GetPropertyInfo(target.GetType(), propName, out propInfo, out fieldInfo, out declaringType);
-                if (propInfo != null) {
+                GetPropertyInfo(
+                    target.GetType(),
+                    propName,
+                    out propInfo,
+                    out fieldInfo,
+                    out declaringType
+                );
+                if (propInfo != null)
+                {
                     propInfo.SetValue(target, val, null);
                 }
-                else if (fieldInfo != null) {
+                else if (fieldInfo != null)
+                {
                     fieldInfo.SetValue(target, val);
                 }
-                else {
+                else
+                {
                     throw new ArgumentException();
                 }
             }
         }
     }
 
-    public interface IWebPropertyAccessor {
+    public interface IWebPropertyAccessor
+    {
         object GetProperty(object target);
         void SetProperty(object target, object value);
     }

@@ -1,35 +1,42 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlPageAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
 using System.Web.Mobile;
 using System.Web.UI.MobileControls.Adapters;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * HtmlPageAdapter class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlPageAdapter : HtmlControlAdapter, IPageAdapter
     {
         private IList _renderableForms = null;
@@ -41,9 +48,8 @@ namespace System.Web.UI.MobileControls.Adapters
         private IDictionary _cookielessDataDictionary = null;
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.HtmlPageAdapter"]/*' />
-        public HtmlPageAdapter() : this(DefaultPageWeight)
-        {
-        }
+        public HtmlPageAdapter()
+            : this(DefaultPageWeight) { }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.HtmlPageAdapter1"]/*' />
         protected internal HtmlPageAdapter(int defaultPageWeight)
@@ -65,7 +71,6 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-
         ///////////////////////////////////////////////////////////////////////////
         //  Static method used for determining if device should use
         //  this adapter
@@ -76,10 +81,11 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             String type = ((MobileCapabilities)context.Request.Browser).PreferredRenderingType;
             bool javascriptSupported = context.Request.Browser.JavaScript;
-            bool qualifies = (type == MobileCapabilities.PreferredRenderingTypeHtml32) && javascriptSupported;
+            bool qualifies =
+                (type == MobileCapabilities.PreferredRenderingTypeHtml32) && javascriptSupported;
             return qualifies;
         }
-        
+
         ///////////////////////////////////////////////////////////////////////////
         //  IControlAdapter implementation
         ///////////////////////////////////////////////////////////////////////////
@@ -159,9 +165,11 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderPostBackEvent"]/*' />
-        public virtual void RenderPostBackEvent(HtmlMobileTextWriter writer, 
-                                                String target, 
-                                                String argument)
+        public virtual void RenderPostBackEvent(
+            HtmlMobileTextWriter writer,
+            String target,
+            String argument
+        )
         {
             writer.Write("javascript:__doPostBack('");
             writer.Write(target);
@@ -171,9 +179,11 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderUrlPostBackEvent"]/*' />
-        public virtual void RenderUrlPostBackEvent(HtmlMobileTextWriter writer,
-                                                   String target, 
-                                                   String argument)
+        public virtual void RenderUrlPostBackEvent(
+            HtmlMobileTextWriter writer,
+            String target,
+            String argument
+        )
         {
             writer.WriteEncodedUrl(Page.RelativeFilePath);
             writer.Write("?");
@@ -211,19 +221,13 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.EventSourceKey"]/*' />
         protected virtual String EventSourceKey
         {
-            get
-            {
-                return MobilePage.HiddenPostEventSourceId;
-            }
+            get { return MobilePage.HiddenPostEventSourceId; }
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.EventArgumentKey"]/*' />
         protected virtual String EventArgumentKey
         {
-            get
-            {
-                return MobilePage.HiddenPostEventArgumentId;
-            }
+            get { return MobilePage.HiddenPostEventArgumentId; }
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.RenderHiddenVariables"]/*' />
@@ -236,8 +240,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     if (entry.Value != null)
                     {
-                        writer.WriteHiddenField(hiddenVariablePrefix + (String)entry.Key, 
-                                            (String)entry.Value);
+                        writer.WriteHiddenField(
+                            hiddenVariablePrefix + (String)entry.Key,
+                            (String)entry.Value
+                        );
                     }
                 }
             }
@@ -251,8 +257,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 foreach (DictionaryEntry entry in Page.HiddenVariables)
                 {
                     writer.Write("&");
-                    writer.WriteUrlParameter(hiddenVariablePrefix + (String)entry.Key,
-                                             (String)entry.Value);
+                    writer.WriteUrlParameter(
+                        hiddenVariablePrefix + (String)entry.Key,
+                        (String)entry.Value
+                    );
                 }
             }
         }
@@ -294,47 +302,28 @@ namespace System.Web.UI.MobileControls.Adapters
         ///////////////////////////////////////////////////////////////////////////
 
         private MobilePage _page;
-        
+
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.Page"]/*' />
         public override MobilePage Page
         {
-            get
-            {
-                return _page;
-            }
-            set
-            {
-                _page = value;
-            }
+            get { return _page; }
+            set { _page = value; }
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.CookielessDataDictionary"]/*' />
         public IDictionary CookielessDataDictionary
         {
-            get
-            {
-                return _cookielessDataDictionary;
-            }
-
-            set
-            {
-                _cookielessDataDictionary = value;
-            }
+            get { return _cookielessDataDictionary; }
+            set { _cookielessDataDictionary = value; }
         }
 
         private bool _persistCookielessData = true;
+
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.PersistCookielessData"]/*' />
         public bool PersistCookielessData
         {
-            get
-            {
-                return _persistCookielessData;
-            }
-            
-            set
-            {
-                _persistCookielessData = value;
-            }
+            get { return _persistCookielessData; }
+            set { _persistCookielessData = value; }
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.CreateTextWriter"]/*' />
@@ -348,10 +337,10 @@ namespace System.Web.UI.MobileControls.Adapters
             HttpRequest request,
             String postEventSourceID,
             String postEventArgumentID,
-            NameValueCollection baseCollection)
+            NameValueCollection baseCollection
+        )
         {
-            if (baseCollection != null && 
-                baseCollection[EventSourceKey] == _postedFromOtherFile)
+            if (baseCollection != null && baseCollection[EventSourceKey] == _postedFromOtherFile)
             {
                 return null;
             }
@@ -361,10 +350,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.CacheVaryByHeaders"]/*' />
         public virtual IList CacheVaryByHeaders
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <include file='doc\HtmlPageAdapter.uex' path='docs/doc[@for="HtmlPageAdapter.HandleError"]/*' />
@@ -388,28 +374,35 @@ namespace System.Web.UI.MobileControls.Adapters
             return false;
         }
 
-
-        internal static void SetPreferredEncodings(HttpContext context) {
+        internal static void SetPreferredEncodings(HttpContext context)
+        {
             // context can be null when in design mode
-            if (context == null) {
+            if (context == null)
+            {
                 return;
             }
 
             //handle preferred response and request encoding here
             MobileCapabilities caps = (MobileCapabilities)context.Request.Browser;
-            if(caps != null) {
+            if (caps != null)
+            {
                 string preferredResponseEncoding = (string)caps["preferredResponseEncoding"];
-                string preferredRequestEncoding =  (string)caps["preferredRequestEncoding"];
+                string preferredRequestEncoding = (string)caps["preferredRequestEncoding"];
 
-                if(preferredResponseEncoding != null && preferredResponseEncoding.Length > 0) {
-                    context.Response.ContentEncoding = Encoding.GetEncoding(preferredResponseEncoding);
+                if (preferredResponseEncoding != null && preferredResponseEncoding.Length > 0)
+                {
+                    context.Response.ContentEncoding = Encoding.GetEncoding(
+                        preferredResponseEncoding
+                    );
                 }
 
-                if(preferredRequestEncoding != null && preferredRequestEncoding.Length > 0) {
-                    context.Request.ContentEncoding = Encoding.GetEncoding(preferredRequestEncoding);
+                if (preferredRequestEncoding != null && preferredRequestEncoding.Length > 0)
+                {
+                    context.Request.ContentEncoding = Encoding.GetEncoding(
+                        preferredRequestEncoding
+                    );
                 }
             }
         }
     }
-
 }

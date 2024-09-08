@@ -1,21 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="Wildcard.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Wildcard
- * 
+ *
  * wildcard wrappers for Regex
  *
  * (1) Wildcard does straight string wildcarding with no path separator awareness
  * (2) WildcardUrl recognizes that forward / slashes are special and can't match * or ?
  * (3) WildcardDos recognizes that backward \ and : are special and can't match * or ?
- * 
+ *
  * Copyright (c) 1999, Microsoft Corporation
  */
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System.Runtime.Serialization.Formatters;
     using System.Text.RegularExpressions;
 
@@ -31,13 +32,17 @@ namespace System.Web.Util {
      * Note that by each alternative is surrounded by \A...\z to anchor
      * at the edges of the string.
      */
-    internal class Wildcard {
+    internal class Wildcard
+    {
 #if NOT_USED
-        internal /*public*/ Wildcard(String pattern) : this (pattern, false) {
-        }
+        internal /*public*/
+        Wildcard(String pattern)
+            : this(pattern, false) { }
 #endif
 
-        internal /*public*/ Wildcard(String pattern, bool caseInsensitive) {
+        internal /*public*/
+        Wildcard(String pattern, bool caseInsensitive)
+        {
             _pattern = pattern;
             _caseInsensitive = caseInsensitive;
         }
@@ -57,24 +62,28 @@ namespace System.Web.Util {
          * IsMatch returns true if the input is an exact match for the
          * wildcard pattern.
          */
-        internal /*public*/ bool IsMatch(String input) {
+        internal /*public*/
+        bool IsMatch(String input)
+        {
             EnsureRegex();
 
-            bool result =  _regex.IsMatch(input);
+            bool result = _regex.IsMatch(input);
 
             return result;
         }
+
 #if DONT_COMPILE
-        internal /*public*/ String Pattern {
-            get {
-                return _pattern;
-            }
+        internal /*public*/
+        String Pattern
+        {
+            get { return _pattern; }
         }
 #endif
         /*
          * Builds the matching regex when needed
          */
-        protected void EnsureRegex() {
+        protected void EnsureRegex()
+        {
             // threadsafe without protection because of gc
 
             if (_regex != null)
@@ -86,7 +95,8 @@ namespace System.Web.Util {
         /*
          * Basic wildcard -> Regex conversion, no slashes
          */
-        protected virtual Regex RegexFromWildcard(String pattern, bool caseInsensitive) {
+        protected virtual Regex RegexFromWildcard(String pattern, bool caseInsensitive)
+        {
             RegexOptions options = RegexOptions.None;
 
             // match right-to-left (for speed) if the pattern starts with a *
@@ -117,16 +127,19 @@ namespace System.Web.Util {
         }
     }
 
-    abstract internal class WildcardPath : Wildcard {
-#if NOT_USED        
-        internal /*public*/ WildcardPath(String pattern) : base(pattern) {
-        }
+    internal abstract class WildcardPath : Wildcard
+    {
+#if NOT_USED
+        internal /*public*/
+        WildcardPath(String pattern)
+            : base(pattern) { }
 
         private Regex[][] _dirs;
 #endif
 
-        internal /*public*/ WildcardPath(String pattern, bool caseInsensitive) : base(pattern, caseInsensitive) {
-        }
+        internal /*public*/
+        WildcardPath(String pattern, bool caseInsensitive)
+            : base(pattern, caseInsensitive) { }
 
         private Regex _suffix;
 
@@ -134,29 +147,35 @@ namespace System.Web.Util {
          * IsSuffix returns true if a suffix of the input is an exact
          * match for the wildcard pattern.
          */
-        internal /*public*/ bool IsSuffix(String input) {
+        internal /*public*/
+        bool IsSuffix(String input)
+        {
             EnsureSuffix();
             return _suffix.IsMatch(input);
         }
 
-#if NOT_USED        
+#if NOT_USED
         /*
          * AllowPrefix returns true if the input is an exact match for
          * a prefix-directory of the wildcard pattern (i.e., if it
          * is possible to match the wildcard pattern by adding
          * more subdirectories or a filename at the end of the path).
          */
-        internal /*public*/ bool AllowPrefix(String prefix) {
+        internal /*public*/
+        bool AllowPrefix(String prefix)
+        {
             String[] dirs = SplitDirs(prefix);
 
             EnsureDirs();
 
-            for (int i = 0; i < _dirs.Length; i++) {
+            for (int i = 0; i < _dirs.Length; i++)
+            {
                 // pattern is shorter than prefix: reject
                 if (_dirs[i].Length < dirs.Length)
                     goto NextAlt;
 
-                for (int j = 0; j < dirs.Length; j++) {
+                for (int j = 0; j < dirs.Length; j++)
+                {
                     // the jth directory doesn't match; path is not a prefix
                     if (!_dirs[i][j].IsMatch(dirs[j]))
                         goto NextAlt;
@@ -166,7 +185,7 @@ namespace System.Web.Util {
 
                 return true;
 
-                NextAlt: 
+                NextAlt:
                 ;
             }
 
@@ -176,7 +195,8 @@ namespace System.Web.Util {
         /*
          * Builds the matching regex array when needed
          */
-        protected void EnsureDirs() {
+        protected void EnsureDirs()
+        {
             // threadsafe without protection because of gc
 
             if (_dirs != null)
@@ -189,7 +209,8 @@ namespace System.Web.Util {
         /*
          * Builds the matching regex when needed
          */
-        protected void EnsureSuffix() {
+        protected void EnsureSuffix()
+        {
             // threadsafe without protection because of gc
 
             if (_suffix != null)
@@ -197,7 +218,6 @@ namespace System.Web.Util {
 
             _suffix = SuffixFromWildcard(_pattern, _caseInsensitive);
         }
-
 
         /*
          * Specialize for forward-slash and backward-slash cases
@@ -214,19 +234,25 @@ namespace System.Web.Util {
      * and we can do an exact suffix match that starts after
      * any /, and we can also do a prefix prune.
      */
-    internal class WildcardUrl : WildcardPath {
+    internal class WildcardUrl : WildcardPath
+    {
 #if NOT_USED
-        internal /*public*/ WildcardUrl(String pattern) : base(pattern) {
-        }
+        internal /*public*/
+        WildcardUrl(String pattern)
+            : base(pattern) { }
 #endif
-        internal /*public*/ WildcardUrl(String pattern, bool caseInsensitive) : base(pattern, caseInsensitive) {
-        }
 
-        protected override String[] SplitDirs(String input) {
+        internal /*public*/
+        WildcardUrl(String pattern, bool caseInsensitive)
+            : base(pattern, caseInsensitive) { }
+
+        protected override String[] SplitDirs(String input)
+        {
             return slashRegex.Split(input);
         }
 
-        protected override Regex RegexFromWildcard(String pattern, bool caseInsensitive) {
+        protected override Regex RegexFromWildcard(String pattern, bool caseInsensitive)
+        {
             RegexOptions options;
 
             // match right-to-left (for speed) if the pattern starts with a *
@@ -256,7 +282,8 @@ namespace System.Web.Util {
             return new Regex("\\A" + pattern + "\\z", options);
         }
 
-        protected override Regex SuffixFromWildcard(String pattern, bool caseInsensitive) {
+        protected override Regex SuffixFromWildcard(String pattern, bool caseInsensitive)
+        {
             RegexOptions options;
 
             // match right-to-left (for speed)
@@ -283,23 +310,28 @@ namespace System.Web.Util {
             return new Regex("(?:\\A|(?<=/))" + pattern + "\\z", options);
         }
 
-        protected override Regex[][] DirsFromWildcard(String pattern) {
+        protected override Regex[][] DirsFromWildcard(String pattern)
+        {
             String[] alts = commaRegex.Split(pattern);
             Regex[][] dirs = new Regex[alts.Length][];
 
-            for (int i = 0; i < alts.Length; i++) {
+            for (int i = 0; i < alts.Length; i++)
+            {
                 String[] dirpats = slashRegex.Split(alts[i]);
 
                 Regex[] dirregex = new Regex[dirpats.Length];
 
-                if (alts.Length == 1 && dirpats.Length == 1) {
+                if (alts.Length == 1 && dirpats.Length == 1)
+                {
                     // common case: no commas, no slashes: dir regex is same as top regex.
 
                     EnsureRegex();
                     dirregex[0] = _regex;
                 }
-                else {
-                    for (int j = 0; j < dirpats.Length; j++) {
+                else
+                {
+                    for (int j = 0; j < dirpats.Length; j++)
+                    {
                         dirregex[j] = RegexFromWildcard(dirpats[j], _caseInsensitive);
                     }
                 }

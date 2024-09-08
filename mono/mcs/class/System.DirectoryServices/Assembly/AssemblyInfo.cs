@@ -10,29 +10,29 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Security;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the System.DirectoryServices assembly
 
-[assembly: AssemblyTitle ("System.DirectoryServices.dll")]
-[assembly: AssemblyDescription ("System.DirectoryServices.dll")]
-[assembly: AssemblyDefaultAlias ("System.DirectoryServices.dll")]
+[assembly: AssemblyTitle("System.DirectoryServices.dll")]
+[assembly: AssemblyDescription("System.DirectoryServices.dll")]
+[assembly: AssemblyDefaultAlias("System.DirectoryServices.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-	[assembly: CLSCompliant (true)]
-	[assembly: AssemblyDelaySign (true)]
+[assembly: CLSCompliant(true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 [assembly: AllowPartiallyTrustedCallers]

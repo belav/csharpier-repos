@@ -18,18 +18,12 @@ namespace System.ComponentModel
 
         public int ProgressPercentage
         {
-            get
-            {
-                return _progressPercentage;
-            }
+            get { return _progressPercentage; }
         }
 
         public object? UserState
         {
-            get
-            {
-                return _userState;
-            }
+            get { return _userState; }
         }
     }
 }

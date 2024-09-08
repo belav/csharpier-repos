@@ -38,7 +38,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             usages.Add(oid1);
             usages.Add(oid2);
 
-            EncodeDecode(usages, false, "301606082b06010505070301060a2b0601040182370a0301".HexToByteArray());
+            EncodeDecode(
+                usages,
+                false,
+                "301606082b06010505070301060a2b0601040182370a0301".HexToByteArray()
+            );
         }
 
         [Theory]
@@ -47,12 +51,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         [InlineData("Invalid Value")]
         public static void Encode_InvalidOid(string invalidOidValue)
         {
-            OidCollection oids = new OidCollection
-            {
-                new Oid(invalidOidValue)
-            };
+            OidCollection oids = new OidCollection { new Oid(invalidOidValue) };
 
-            Assert.ThrowsAny<CryptographicException>(() => new X509EnhancedKeyUsageExtension(oids, false));
+            Assert.ThrowsAny<CryptographicException>(
+                () => new X509EnhancedKeyUsageExtension(oids, false)
+            );
         }
 
         [Fact]
@@ -69,10 +72,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             Assert.NotSame(e.EnhancedKeyUsages, e.EnhancedKeyUsages);
         }
 
-        private static void EncodeDecode(
-            OidCollection usages,
-            bool critical,
-            byte[] expectedDer)
+        private static void EncodeDecode(OidCollection usages, bool critical, byte[] expectedDer)
         {
             X509EnhancedKeyUsageExtension ext = new X509EnhancedKeyUsageExtension(usages, critical);
             byte[] rawData = ext.RawData;

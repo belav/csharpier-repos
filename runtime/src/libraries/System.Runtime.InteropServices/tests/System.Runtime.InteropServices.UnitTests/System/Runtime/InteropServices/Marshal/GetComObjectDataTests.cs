@@ -8,23 +8,30 @@ namespace System.Runtime.InteropServices.Tests
     public partial class GetComObjectDataTests
     {
         [Fact]
-
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetComObjectData_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetComObjectData(null, null));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.GetComObjectData(null, null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComObjectData_NullObj_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("obj", () => Marshal.GetComObjectData(null, new object()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "obj",
+                () => Marshal.GetComObjectData(null, new object())
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComObjectData_NullKey_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("key", () => Marshal.GetComObjectData(new object(), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => Marshal.GetComObjectData(new object(), null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

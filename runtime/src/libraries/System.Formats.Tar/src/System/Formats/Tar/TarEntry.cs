@@ -31,7 +31,12 @@ namespace System.Formats.Tar
         }
 
         // Constructor called when the user creates a TarEntry instance from scratch.
-        internal TarEntry(TarEntryType entryType, string entryName, TarEntryFormat format, bool isGea)
+        internal TarEntry(
+            TarEntryType entryType,
+            string entryName,
+            TarEntryFormat format,
+            bool isGea
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(entryName);
 
@@ -43,7 +48,13 @@ namespace System.Formats.Tar
             }
 
             // Default values for fields shared by all supported formats
-            _header = new TarHeader(format, entryName, TarHelpers.GetDefaultMode(entryType), DateTimeOffset.UtcNow, entryType);
+            _header = new TarHeader(
+                format,
+                entryName,
+                TarHelpers.GetDefaultMode(entryType),
+                DateTimeOffset.UtcNow,
+                entryType
+            );
         }
 
         // Constructor called when converting an entry to the selected format.
@@ -51,10 +62,16 @@ namespace System.Formats.Tar
         {
             if (other is PaxGlobalExtendedAttributesTarEntry)
             {
-                throw new ArgumentException(SR.TarCannotConvertPaxGlobalExtendedAttributesEntry, nameof(other));
+                throw new ArgumentException(
+                    SR.TarCannotConvertPaxGlobalExtendedAttributesEntry,
+                    nameof(other)
+                );
             }
 
-            TarEntryType compatibleEntryType = TarHelpers.GetCorrectTypeFlagForFormat(format, other.EntryType);
+            TarEntryType compatibleEntryType = TarHelpers.GetCorrectTypeFlagForFormat(
+                format,
+                other.EntryType
+            );
 
             TarHelpers.ThrowIfEntryTypeNotSupported(compatibleEntryType, format, nameof(other));
 
@@ -107,7 +124,8 @@ namespace System.Formats.Tar
         /// When the <see cref="EntryType"/> indicates an entry that can contain data, this property returns the length in bytes of such data.
         /// </summary>
         /// <remarks>The entry type that commonly contains data is <see cref="TarEntryType.RegularFile"/> (or <see cref="TarEntryType.V7RegularFile"/> in the <see cref="TarEntryFormat.V7"/> format). Other uncommon entry types that can also contain data are: <see cref="TarEntryType.ContiguousFile"/>, <see cref="TarEntryType.DirectoryList"/>, <see cref="TarEntryType.MultiVolume"/> and <see cref="TarEntryType.SparseFile"/>.</remarks>
-        public long Length => _header._dataStream != null ? _header._dataStream.Length : _header._size;
+        public long Length =>
+            _header._dataStream != null ? _header._dataStream.Length : _header._size;
 
         /// <summary>
         /// When the <see cref="EntryType"/> indicates a <see cref="TarEntryType.SymbolicLink"/> or a <see cref="TarEntryType.HardLink"/>, this property returns the link target path of such link.
@@ -120,7 +138,9 @@ namespace System.Formats.Tar
             get => _header._linkName ?? string.Empty;
             set
             {
-                if (_header._typeFlag is not TarEntryType.HardLink and not TarEntryType.SymbolicLink)
+                if (
+                    _header._typeFlag is not TarEntryType.HardLink and not TarEntryType.SymbolicLink
+                )
                 {
                     throw new InvalidOperationException(SR.TarEntryHardLinkOrSymLinkExpected);
                 }
@@ -194,9 +214,16 @@ namespace System.Formats.Tar
         public void ExtractToFile(string destinationFileName, bool overwrite)
         {
             ArgumentException.ThrowIfNullOrEmpty(destinationFileName);
-            if (EntryType is TarEntryType.SymbolicLink or TarEntryType.HardLink or TarEntryType.GlobalExtendedAttributes)
+            if (
+                EntryType
+                is TarEntryType.SymbolicLink
+                    or TarEntryType.HardLink
+                    or TarEntryType.GlobalExtendedAttributes
+            )
             {
-                throw new InvalidOperationException(SR.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType));
+                throw new InvalidOperationException(
+                    SR.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType)
+                );
             }
             ExtractToFileInternal(destinationFileName, linkTargetPath: null, overwrite);
         }
@@ -221,18 +248,36 @@ namespace System.Formats.Tar
         /// <para>An I/O problem occurred.</para></exception>
         /// <exception cref="InvalidOperationException">Attempted to extract an unsupported entry type.</exception>
         /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient permissions.</exception>
-        public Task ExtractToFileAsync(string destinationFileName, bool overwrite, CancellationToken cancellationToken = default)
+        public Task ExtractToFileAsync(
+            string destinationFileName,
+            bool overwrite,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
             }
             ArgumentException.ThrowIfNullOrEmpty(destinationFileName);
-            if (EntryType is TarEntryType.SymbolicLink or TarEntryType.HardLink or TarEntryType.GlobalExtendedAttributes)
+            if (
+                EntryType
+                is TarEntryType.SymbolicLink
+                    or TarEntryType.HardLink
+                    or TarEntryType.GlobalExtendedAttributes
+            )
             {
-                return Task.FromException(new InvalidOperationException(SR.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType)));
+                return Task.FromException(
+                    new InvalidOperationException(
+                        SR.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType)
+                    )
+                );
             }
-            return ExtractToFileInternalAsync(destinationFileName, linkTargetPath: null, overwrite, cancellationToken);
+            return ExtractToFileInternalAsync(
+                destinationFileName,
+                linkTargetPath: null,
+                overwrite,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -251,7 +296,9 @@ namespace System.Formats.Tar
             {
                 if (!IsDataStreamSetterSupported())
                 {
-                    throw new InvalidOperationException(SR.Format(SR.TarEntryDoesNotSupportDataStream, Name, EntryType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.TarEntryDoesNotSupportDataStream, Name, EntryType)
+                    );
                 }
 
                 if (value != null && !value.CanRead)
@@ -285,44 +332,80 @@ namespace System.Formats.Tar
         internal abstract bool IsDataStreamSetterSupported();
 
         // Extracts the current entry to a location relative to the specified directory.
-        internal void ExtractRelativeToDirectory(string destinationDirectoryPath, bool overwrite, SortedDictionary<string, UnixFileMode>? pendingModes, Stack<(string, DateTimeOffset)> directoryModificationTimes)
+        internal void ExtractRelativeToDirectory(
+            string destinationDirectoryPath,
+            bool overwrite,
+            SortedDictionary<string, UnixFileMode>? pendingModes,
+            Stack<(string, DateTimeOffset)> directoryModificationTimes
+        )
         {
-            (string destinationFullPath, string? linkTargetPath) = GetDestinationAndLinkPaths(destinationDirectoryPath);
+            (string destinationFullPath, string? linkTargetPath) = GetDestinationAndLinkPaths(
+                destinationDirectoryPath
+            );
 
             if (EntryType == TarEntryType.Directory)
             {
                 TarHelpers.CreateDirectory(destinationFullPath, Mode, pendingModes);
-                TarHelpers.UpdatePendingModificationTimes(directoryModificationTimes, destinationFullPath, ModificationTime);
+                TarHelpers.UpdatePendingModificationTimes(
+                    directoryModificationTimes,
+                    destinationFullPath,
+                    ModificationTime
+                );
             }
             else
             {
                 // If it is a file, create containing directory.
-                TarHelpers.CreateDirectory(Path.GetDirectoryName(destinationFullPath)!, mode: null, pendingModes);
+                TarHelpers.CreateDirectory(
+                    Path.GetDirectoryName(destinationFullPath)!,
+                    mode: null,
+                    pendingModes
+                );
                 ExtractToFileInternal(destinationFullPath, linkTargetPath, overwrite);
             }
         }
 
         // Asynchronously extracts the current entry to a location relative to the specified directory.
-        internal Task ExtractRelativeToDirectoryAsync(string destinationDirectoryPath, bool overwrite, SortedDictionary<string, UnixFileMode>? pendingModes, Stack<(string, DateTimeOffset)> directoryModificationTimes, CancellationToken cancellationToken)
+        internal Task ExtractRelativeToDirectoryAsync(
+            string destinationDirectoryPath,
+            bool overwrite,
+            SortedDictionary<string, UnixFileMode>? pendingModes,
+            Stack<(string, DateTimeOffset)> directoryModificationTimes,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
             }
 
-            (string destinationFullPath, string? linkTargetPath) = GetDestinationAndLinkPaths(destinationDirectoryPath);
+            (string destinationFullPath, string? linkTargetPath) = GetDestinationAndLinkPaths(
+                destinationDirectoryPath
+            );
 
             if (EntryType == TarEntryType.Directory)
             {
                 TarHelpers.CreateDirectory(destinationFullPath, Mode, pendingModes);
-                TarHelpers.UpdatePendingModificationTimes(directoryModificationTimes, destinationFullPath, ModificationTime);
+                TarHelpers.UpdatePendingModificationTimes(
+                    directoryModificationTimes,
+                    destinationFullPath,
+                    ModificationTime
+                );
                 return Task.CompletedTask;
             }
             else
             {
                 // If it is a file, create containing directory.
-                TarHelpers.CreateDirectory(Path.GetDirectoryName(destinationFullPath)!, mode: null, pendingModes);
-                return ExtractToFileInternalAsync(destinationFullPath, linkTargetPath, overwrite, cancellationToken);
+                TarHelpers.CreateDirectory(
+                    Path.GetDirectoryName(destinationFullPath)!,
+                    mode: null,
+                    pendingModes
+                );
+                return ExtractToFileInternalAsync(
+                    destinationFullPath,
+                    linkTargetPath,
+                    overwrite,
+                    cancellationToken
+                );
             }
         }
 
@@ -334,11 +417,14 @@ namespace System.Formats.Tar
 
             string name = ArchivingUtils.SanitizeEntryFilePath(Name, preserveDriveRoot: true);
             string? fileDestinationPath = GetFullDestinationPath(
-                                                destinationDirectoryPath,
-                                                Path.IsPathFullyQualified(name) ? name : Path.Join(destinationDirectoryPath, name));
+                destinationDirectoryPath,
+                Path.IsPathFullyQualified(name) ? name : Path.Join(destinationDirectoryPath, name)
+            );
             if (fileDestinationPath == null)
             {
-                throw new IOException(SR.Format(SR.TarExtractingResultsFileOutside, name, destinationDirectoryPath));
+                throw new IOException(
+                    SR.Format(SR.TarExtractingResultsFileOutside, name, destinationDirectoryPath)
+                );
             }
 
             string? linkTargetPath = null;
@@ -346,13 +432,25 @@ namespace System.Formats.Tar
             {
                 // LinkName is an absolute path, or path relative to the fileDestinationPath directory.
                 // We don't check if the LinkName is empty. In that case, creation of the link will fail because link targets can't be empty.
-                string linkName = ArchivingUtils.SanitizeEntryFilePath(LinkName, preserveDriveRoot: true);
+                string linkName = ArchivingUtils.SanitizeEntryFilePath(
+                    LinkName,
+                    preserveDriveRoot: true
+                );
                 string? linkDestination = GetFullDestinationPath(
-                                            destinationDirectoryPath,
-                                            Path.IsPathFullyQualified(linkName) ? linkName : Path.Join(Path.GetDirectoryName(fileDestinationPath), linkName));
+                    destinationDirectoryPath,
+                    Path.IsPathFullyQualified(linkName)
+                        ? linkName
+                        : Path.Join(Path.GetDirectoryName(fileDestinationPath), linkName)
+                );
                 if (linkDestination is null)
                 {
-                    throw new IOException(SR.Format(SR.TarExtractingResultsLinkOutside, linkName, destinationDirectoryPath));
+                    throw new IOException(
+                        SR.Format(
+                            SR.TarExtractingResultsLinkOutside,
+                            linkName,
+                            destinationDirectoryPath
+                        )
+                    );
                 }
                 // Use the linkName for creating the symbolic link.
                 linkTargetPath = linkName;
@@ -361,13 +459,23 @@ namespace System.Formats.Tar
             {
                 // LinkName is path relative to the destinationDirectoryPath.
                 // We don't check if the LinkName is empty. In that case, creation of the link will fail because a hard link can't target a directory.
-                string linkName = ArchivingUtils.SanitizeEntryFilePath(LinkName, preserveDriveRoot: false);
+                string linkName = ArchivingUtils.SanitizeEntryFilePath(
+                    LinkName,
+                    preserveDriveRoot: false
+                );
                 string? linkDestination = GetFullDestinationPath(
-                                            destinationDirectoryPath,
-                                            Path.Join(destinationDirectoryPath, linkName));
+                    destinationDirectoryPath,
+                    Path.Join(destinationDirectoryPath, linkName)
+                );
                 if (linkDestination is null)
                 {
-                    throw new IOException(SR.Format(SR.TarExtractingResultsLinkOutside, linkName, destinationDirectoryPath));
+                    throw new IOException(
+                        SR.Format(
+                            SR.TarExtractingResultsLinkOutside,
+                            linkName,
+                            destinationDirectoryPath
+                        )
+                    );
                 }
                 // Use the target path for creating the hard link.
                 linkTargetPath = linkDestination;
@@ -377,14 +485,25 @@ namespace System.Formats.Tar
         }
 
         // Returns the full destination path if the path is the destinationDirectory or a subpath. Otherwise, returns null.
-        private static string? GetFullDestinationPath(string destinationDirectoryFullPath, string qualifiedPath)
+        private static string? GetFullDestinationPath(
+            string destinationDirectoryFullPath,
+            string qualifiedPath
+        )
         {
-            Debug.Assert(Path.IsPathFullyQualified(qualifiedPath), $"{qualifiedPath} is not qualified");
-            Debug.Assert(PathInternal.EndsInDirectorySeparator(destinationDirectoryFullPath), "caller must ensure the path ends with a separator.");
+            Debug.Assert(
+                Path.IsPathFullyQualified(qualifiedPath),
+                $"{qualifiedPath} is not qualified"
+            );
+            Debug.Assert(
+                PathInternal.EndsInDirectorySeparator(destinationDirectoryFullPath),
+                "caller must ensure the path ends with a separator."
+            );
 
             string fullPath = Path.GetFullPath(qualifiedPath); // Removes relative segments
 
-            return fullPath.StartsWith(destinationDirectoryFullPath, PathInternal.StringComparison) ? fullPath : null;
+            return fullPath.StartsWith(destinationDirectoryFullPath, PathInternal.StringComparison)
+                ? fullPath
+                : null;
         }
 
         // Extracts the current entry into the filesystem, regardless of the entry type.
@@ -392,7 +511,12 @@ namespace System.Formats.Tar
         {
             VerifyDestinationPath(filePath, overwrite);
 
-            if (EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile or TarEntryType.ContiguousFile)
+            if (
+                EntryType
+                is TarEntryType.RegularFile
+                    or TarEntryType.V7RegularFile
+                    or TarEntryType.ContiguousFile
+            )
             {
                 ExtractAsRegularFile(filePath);
             }
@@ -403,7 +527,12 @@ namespace System.Formats.Tar
         }
 
         // Asynchronously extracts the current entry into the filesystem, regardless of the entry type.
-        private Task ExtractToFileInternalAsync(string filePath, string? linkTargetPath, bool overwrite, CancellationToken cancellationToken)
+        private Task ExtractToFileInternalAsync(
+            string filePath,
+            string? linkTargetPath,
+            bool overwrite,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -411,7 +540,12 @@ namespace System.Formats.Tar
             }
             VerifyDestinationPath(filePath, overwrite);
 
-            if (EntryType is TarEntryType.RegularFile or TarEntryType.V7RegularFile or TarEntryType.ContiguousFile)
+            if (
+                EntryType
+                is TarEntryType.RegularFile
+                    or TarEntryType.V7RegularFile
+                    or TarEntryType.ContiguousFile
+            )
             {
                 return ExtractAsRegularFileAsync(filePath, cancellationToken);
             }
@@ -424,7 +558,12 @@ namespace System.Formats.Tar
 
         private void CreateNonRegularFile(string filePath, string? linkTargetPath)
         {
-            Debug.Assert(EntryType is not TarEntryType.RegularFile or TarEntryType.V7RegularFile or TarEntryType.ContiguousFile);
+            Debug.Assert(
+                EntryType
+                    is not TarEntryType.RegularFile
+                        or TarEntryType.V7RegularFile
+                        or TarEntryType.ContiguousFile
+            );
 
             switch (EntryType)
             {
@@ -472,7 +611,10 @@ namespace System.Formats.Tar
                 case TarEntryType.GlobalExtendedAttributes:
                 case TarEntryType.LongPath:
                 case TarEntryType.LongLink:
-                    Debug.Assert(false, $"Metadata entry type should not be visible: '{EntryType}'");
+                    Debug.Assert(
+                        false,
+                        $"Metadata entry type should not be visible: '{EntryType}'"
+                    );
                     break;
 
                 case TarEntryType.MultiVolume:
@@ -480,7 +622,9 @@ namespace System.Formats.Tar
                 case TarEntryType.SparseFile:
                 case TarEntryType.TapeVolume:
                 default:
-                    throw new InvalidOperationException(SR.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType)
+                    );
             }
         }
 
@@ -520,7 +664,12 @@ namespace System.Formats.Tar
             Debug.Assert(!Path.Exists(destinationFileName));
 
             // Rely on FileStream's ctor for further checking destinationFileName parameter
-            using (FileStream fs = new FileStream(destinationFileName, CreateFileStreamOptions(isAsync: false)))
+            using (
+                FileStream fs = new FileStream(
+                    destinationFileName,
+                    CreateFileStreamOptions(isAsync: false)
+                )
+            )
             {
                 // Important: The DataStream will be written from its current position
                 DataStream?.CopyTo(fs);
@@ -531,14 +680,20 @@ namespace System.Formats.Tar
 
         // Asynchronously extracts the current entry as a regular file into the specified destination.
         // The assumption is that at this point there is no preexisting file or directory in that destination.
-        private async Task ExtractAsRegularFileAsync(string destinationFileName, CancellationToken cancellationToken)
+        private async Task ExtractAsRegularFileAsync(
+            string destinationFileName,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!Path.Exists(destinationFileName));
 
             cancellationToken.ThrowIfCancellationRequested();
 
             // Rely on FileStream's ctor for further checking destinationFileName parameter
-            FileStream fs = new FileStream(destinationFileName, CreateFileStreamOptions(isAsync: true));
+            FileStream fs = new FileStream(
+                destinationFileName,
+                CreateFileStreamOptions(isAsync: true)
+            );
             await using (fs.ConfigureAwait(false))
             {
                 if (DataStream != null)
@@ -551,7 +706,10 @@ namespace System.Formats.Tar
             AttemptSetLastWriteTime(destinationFileName, ModificationTime);
         }
 
-        private static void AttemptSetLastWriteTime(string destinationFileName, DateTimeOffset lastWriteTime)
+        private static void AttemptSetLastWriteTime(
+            string destinationFileName,
+            DateTimeOffset lastWriteTime
+        )
         {
             try
             {
@@ -565,21 +723,28 @@ namespace System.Formats.Tar
 
         private FileStreamOptions CreateFileStreamOptions(bool isAsync)
         {
-            FileStreamOptions fileStreamOptions = new()
-            {
-                Access = FileAccess.Write,
-                Mode = FileMode.CreateNew,
-                Share = FileShare.None,
-                PreallocationSize = Length,
-                Options = isAsync ? FileOptions.Asynchronous : FileOptions.None
-            };
+            FileStreamOptions fileStreamOptions =
+                new()
+                {
+                    Access = FileAccess.Write,
+                    Mode = FileMode.CreateNew,
+                    Share = FileShare.None,
+                    PreallocationSize = Length,
+                    Options = isAsync ? FileOptions.Asynchronous : FileOptions.None,
+                };
 
             if (!OperatingSystem.IsWindows())
             {
-                 const UnixFileMode OwnershipPermissions =
-                    UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute |
-                    UnixFileMode.GroupRead | UnixFileMode.GroupWrite | UnixFileMode.GroupExecute |
-                    UnixFileMode.OtherRead | UnixFileMode.OtherWrite |  UnixFileMode.OtherExecute;
+                const UnixFileMode OwnershipPermissions =
+                    UnixFileMode.UserRead
+                    | UnixFileMode.UserWrite
+                    | UnixFileMode.UserExecute
+                    | UnixFileMode.GroupRead
+                    | UnixFileMode.GroupWrite
+                    | UnixFileMode.GroupExecute
+                    | UnixFileMode.OtherRead
+                    | UnixFileMode.OtherWrite
+                    | UnixFileMode.OtherExecute;
 
                 // Restore permissions.
                 // For security, limit to ownership permissions, and respect umask (through UnixCreateMode).

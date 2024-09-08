@@ -28,10 +28,10 @@ namespace System.Data.Common.EntitySql
     /// <item>Translation from eSQL text commands to valid <see cref="DbExpression"/>s</item>
     /// </list>
     /// Queries can be formulated in O-Space, C-Space and S-Space and the services exposed by this class are agnostic of the especific typespace or
-    /// metadata instance passed as required parameter in the semantic analysis by the perspective parameter. It is assumed that the perspective and 
-    /// metadata was properly initialized. 
+    /// metadata instance passed as required parameter in the semantic analysis by the perspective parameter. It is assumed that the perspective and
+    /// metadata was properly initialized.
     /// Provided that the command is syntacticaly correct and meaningful within the given typespace, the result will be a valid <see cref="DbCommandTree"/> or
-    /// <see cref="DbExpression"/> otherwise EntityException will be thrown indicating the reason(s) why the given command cannot be accepted. 
+    /// <see cref="DbExpression"/> otherwise EntityException will be thrown indicating the reason(s) why the given command cannot be accepted.
     /// It is also possible that MetadataException and MappingException be thrown if mapping or metadata related problems are encountered during compilation.
     /// </remarks>
     /// <list>
@@ -58,23 +58,40 @@ namespace System.Data.Common.EntitySql
         /// </remarks>
         /// <seealso cref="ParserOptions"/>
         /// <seealso cref="DbCommandTree"/>
-        internal static ParseResult Compile(string commandText,
-                                            Perspective perspective,
-                                            ParserOptions parserOptions,
-                                            IEnumerable<DbParameterReferenceExpression> parameters)
+        internal static ParseResult Compile(
+            string commandText,
+            Perspective perspective,
+            ParserOptions parserOptions,
+            IEnumerable<DbParameterReferenceExpression> parameters
+        )
         {
-            ParseResult result = CompileCommon(commandText, perspective,  parserOptions,  
+            ParseResult result = CompileCommon(
+                commandText,
+                perspective,
+                parserOptions,
                 (astCommand, validatedParserOptions) =>
                 {
-                    var parseResultInternal = AnalyzeCommandSemantics(astCommand, perspective, validatedParserOptions, parameters);
+                    var parseResultInternal = AnalyzeCommandSemantics(
+                        astCommand,
+                        perspective,
+                        validatedParserOptions,
+                        parameters
+                    );
 
-                    Debug.Assert(parseResultInternal != null, "parseResultInternal != null post-condition FAILED");
-                    Debug.Assert(parseResultInternal.CommandTree != null, "parseResultInternal.CommandTree != null post-condition FAILED");
+                    Debug.Assert(
+                        parseResultInternal != null,
+                        "parseResultInternal != null post-condition FAILED"
+                    );
+                    Debug.Assert(
+                        parseResultInternal.CommandTree != null,
+                        "parseResultInternal.CommandTree != null post-condition FAILED"
+                    );
 
                     TypeHelpers.AssertEdmType(parseResultInternal.CommandTree);
 
                     return parseResultInternal;
-                });
+                }
+            );
 
             return result;
         }
@@ -96,27 +113,35 @@ namespace System.Data.Common.EntitySql
         /// </remarks>
         /// <seealso cref="ParserOptions"/>
         /// <seealso cref="DbExpression"/>
-        internal static DbLambda CompileQueryCommandLambda(string queryCommandText,
-                                                           Perspective perspective,
-                                                           ParserOptions parserOptions,
-                                                           IEnumerable<DbParameterReferenceExpression> parameters,
-                                                           IEnumerable<DbVariableReferenceExpression> variables)
+        internal static DbLambda CompileQueryCommandLambda(
+            string queryCommandText,
+            Perspective perspective,
+            ParserOptions parserOptions,
+            IEnumerable<DbParameterReferenceExpression> parameters,
+            IEnumerable<DbVariableReferenceExpression> variables
+        )
         {
-            return CompileCommon(queryCommandText, perspective, parserOptions, (astCommand, validatedParserOptions) =>
-            {
-                DbLambda lambda = AnalyzeQueryExpressionSemantics(astCommand, 
-                                                                  perspective,
-                                                                  validatedParserOptions, 
-                                                                  parameters, 
-                                                                  variables);
+            return CompileCommon(
+                queryCommandText,
+                perspective,
+                parserOptions,
+                (astCommand, validatedParserOptions) =>
+                {
+                    DbLambda lambda = AnalyzeQueryExpressionSemantics(
+                        astCommand,
+                        perspective,
+                        validatedParserOptions,
+                        parameters,
+                        variables
+                    );
 
+                    TypeHelpers.AssertEdmType(lambda.Body.ResultType);
 
-                TypeHelpers.AssertEdmType(lambda.Body.ResultType);
+                    Debug.Assert(lambda != null, "lambda != null post-condition FAILED");
 
-                Debug.Assert(lambda != null, "lambda != null post-condition FAILED");
-
-                return lambda;
-            });
+                    return lambda;
+                }
+            );
         }
 
         #region Private
@@ -151,16 +176,22 @@ namespace System.Data.Common.EntitySql
 
             if (null == astExpr)
             {
-                throw EntityUtil.EntitySqlError(commandText, System.Data.Entity.Strings.InvalidEmptyQuery, 0);
+                throw EntityUtil.EntitySqlError(
+                    commandText,
+                    System.Data.Entity.Strings.InvalidEmptyQuery,
+                    0
+                );
             }
 
             return astExpr;
         }
 
-        private static TResult CompileCommon<TResult>(string commandText,
-                                                      Perspective perspective,
-                                                      ParserOptions parserOptions,
-                                                      Func<AST.Node, ParserOptions, TResult> compilationFunction)
+        private static TResult CompileCommon<TResult>(
+            string commandText,
+            Perspective perspective,
+            ParserOptions parserOptions,
+            Func<AST.Node, ParserOptions, TResult> compilationFunction
+        )
             where TResult : class
         {
             TResult result = null;
@@ -206,21 +237,36 @@ namespace System.Data.Common.EntitySql
         /// </remarks>
         /// <seealso cref="ParserOptions"/>
         /// <seealso cref="DbCommandTree"/>
-        private static ParseResult AnalyzeCommandSemantics(AST.Node astExpr,
-                                                           Perspective perspective,
-                                                           ParserOptions parserOptions,
-                                                           IEnumerable<DbParameterReferenceExpression> parameters)
+        private static ParseResult AnalyzeCommandSemantics(
+            AST.Node astExpr,
+            Perspective perspective,
+            ParserOptions parserOptions,
+            IEnumerable<DbParameterReferenceExpression> parameters
+        )
         {
-            ParseResult result = AnalyzeSemanticsCommon(astExpr, perspective, parserOptions, parameters, null/*variables*/, 
+            ParseResult result = AnalyzeSemanticsCommon(
+                astExpr,
+                perspective,
+                parserOptions,
+                parameters,
+                null /*variables*/
+                ,
                 (analyzer, astExpression) =>
                 {
                     var parseResultInternal = analyzer.AnalyzeCommand(astExpression);
 
-                    Debug.Assert(parseResultInternal != null, "parseResultInternal != null post-condition FAILED");
-                    Debug.Assert(parseResultInternal.CommandTree != null, "parseResultInternal.CommandTree != null post-condition FAILED");
+                    Debug.Assert(
+                        parseResultInternal != null,
+                        "parseResultInternal != null post-condition FAILED"
+                    );
+                    Debug.Assert(
+                        parseResultInternal.CommandTree != null,
+                        "parseResultInternal.CommandTree != null post-condition FAILED"
+                    );
 
                     return parseResultInternal;
-                });
+                }
+            );
 
             return result;
         }
@@ -242,32 +288,37 @@ namespace System.Data.Common.EntitySql
         /// </remarks>
         /// <seealso cref="ParserOptions"/>
         /// <seealso cref="DbExpression"/>
-        private static DbLambda AnalyzeQueryExpressionSemantics(AST.Node astQueryCommand,
-                                                                Perspective perspective,
-                                                                ParserOptions parserOptions,
-                                                                IEnumerable<DbParameterReferenceExpression> parameters,
-                                                                IEnumerable<DbVariableReferenceExpression> variables)
+        private static DbLambda AnalyzeQueryExpressionSemantics(
+            AST.Node astQueryCommand,
+            Perspective perspective,
+            ParserOptions parserOptions,
+            IEnumerable<DbParameterReferenceExpression> parameters,
+            IEnumerable<DbVariableReferenceExpression> variables
+        )
         {
             return AnalyzeSemanticsCommon(
-                astQueryCommand, 
-                perspective, 
-                parserOptions, 
-                parameters, 
-                variables, 
+                astQueryCommand,
+                perspective,
+                parserOptions,
+                parameters,
+                variables,
                 (analyzer, astExpr) =>
                 {
                     DbLambda lambda = analyzer.AnalyzeQueryCommand(astExpr);
                     Debug.Assert(null != lambda, "null != lambda post-condition FAILED");
                     return lambda;
-                });
+                }
+            );
         }
 
-        private static TResult AnalyzeSemanticsCommon<TResult>(AST.Node astExpr,
-                                                               Perspective perspective,
-                                                               ParserOptions parserOptions,
-                                                               IEnumerable<DbParameterReferenceExpression> parameters,
-                                                               IEnumerable<DbVariableReferenceExpression> variables,
-                                                               Func<SemanticAnalyzer, AST.Node, TResult> analysisFunction)
+        private static TResult AnalyzeSemanticsCommon<TResult>(
+            AST.Node astExpr,
+            Perspective perspective,
+            ParserOptions parserOptions,
+            IEnumerable<DbParameterReferenceExpression> parameters,
+            IEnumerable<DbVariableReferenceExpression> variables,
+            Func<SemanticAnalyzer, AST.Node, TResult> analysisFunction
+        )
             where TResult : class
         {
             TResult result = null;
@@ -283,7 +334,11 @@ namespace System.Data.Common.EntitySql
                 //
                 // Invoke semantic analysis
                 //
-                SemanticAnalyzer analyzer = (new SemanticAnalyzer(SemanticResolver.Create(perspective, parserOptions, parameters, variables)));
+                SemanticAnalyzer analyzer = (
+                    new SemanticAnalyzer(
+                        SemanticResolver.Create(perspective, parserOptions, parameters, variables)
+                    )
+                );
                 result = analysisFunction(analyzer, astExpr);
             }
             //
@@ -291,14 +346,20 @@ namespace System.Data.Common.EntitySql
             //
             catch (System.Data.MetadataException metadataException)
             {
-                throw EntityUtil.EntitySqlError(System.Data.Entity.Strings.GeneralExceptionAsQueryInnerException("Metadata"), metadataException);
+                throw EntityUtil.EntitySqlError(
+                    System.Data.Entity.Strings.GeneralExceptionAsQueryInnerException("Metadata"),
+                    metadataException
+                );
             }
             //
             // Wrap MappingException as EntityException inner exception
             //
             catch (System.Data.MappingException mappingException)
             {
-                throw EntityUtil.EntitySqlError(System.Data.Entity.Strings.GeneralExceptionAsQueryInnerException("Mapping"), mappingException);
+                throw EntityUtil.EntitySqlError(
+                    System.Data.Entity.Strings.GeneralExceptionAsQueryInnerException("Mapping"),
+                    mappingException
+                );
             }
 
             return result;

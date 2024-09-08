@@ -27,7 +27,9 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void Constructor_Data_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new DataObject(string.Empty, string.Empty, string.Empty, null));
+            Assert.Throws<ArgumentNullException>(
+                () => new DataObject(string.Empty, string.Empty, string.Empty, null)
+            );
         }
 
         [Fact]
@@ -39,7 +41,12 @@ namespace System.Security.Cryptography.Xml.Tests
 
             var doc = new XmlDocument();
 
-            var dataObject = new DataObject(idValue, mimeTypeValue, encodingValue, doc.CreateElement("Object"));
+            var dataObject = new DataObject(
+                idValue,
+                mimeTypeValue,
+                encodingValue,
+                doc.CreateElement("Object")
+            );
 
             Assert.Equal(idValue, dataObject.Id);
             Assert.Equal(mimeTypeValue, dataObject.MimeType);
@@ -51,10 +58,7 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             const string idValue = "testId";
 
-            var dataObject = new DataObject
-            {
-                Id = idValue
-            };
+            var dataObject = new DataObject { Id = idValue };
 
             Assert.Equal(idValue, dataObject.Id);
         }
@@ -64,10 +68,7 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             const string mimeTypeValue = "testMimeType";
 
-            var dataObject = new DataObject
-            {
-                MimeType = mimeTypeValue
-            };
+            var dataObject = new DataObject { MimeType = mimeTypeValue };
 
             Assert.Equal(mimeTypeValue, dataObject.MimeType);
         }
@@ -77,10 +78,7 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             const string encodingValue = "testEncoding";
 
-            var dataObject = new DataObject
-            {
-                Encoding = encodingValue
-            };
+            var dataObject = new DataObject { Encoding = encodingValue };
 
             Assert.Equal(encodingValue, dataObject.Encoding);
         }
@@ -103,15 +101,30 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 Id = idValue,
                 MimeType = mimeTypeValue,
-                Encoding = encodingValue
+                Encoding = encodingValue,
             };
 
-            XmlElement testElement = CreateTestElement("Object", idValue, mimeTypeValue, encodingValue, 0);
+            XmlElement testElement = CreateTestElement(
+                "Object",
+                idValue,
+                mimeTypeValue,
+                encodingValue,
+                0
+            );
             XmlElement dataObjectXml = dataObject.GetXml();
 
-            Assert.Equal(testElement.GetAttribute(IdAttributeName), dataObjectXml.GetAttribute(IdAttributeName));
-            Assert.Equal(testElement.GetAttribute(MimeTypeAttributeName), dataObjectXml.GetAttribute(MimeTypeAttributeName));
-            Assert.Equal(testElement.GetAttribute(EncodingAttributeName), dataObjectXml.GetAttribute(EncodingAttributeName));
+            Assert.Equal(
+                testElement.GetAttribute(IdAttributeName),
+                dataObjectXml.GetAttribute(IdAttributeName)
+            );
+            Assert.Equal(
+                testElement.GetAttribute(MimeTypeAttributeName),
+                dataObjectXml.GetAttribute(MimeTypeAttributeName)
+            );
+            Assert.Equal(
+                testElement.GetAttribute(EncodingAttributeName),
+                dataObjectXml.GetAttribute(EncodingAttributeName)
+            );
             Assert.Equal(testElement.ChildNodes.Count, dataObjectXml.ChildNodes.Count);
         }
 
@@ -129,7 +142,13 @@ namespace System.Security.Cryptography.Xml.Tests
             const string encodingValue = "testEncoding";
             const int childCount = 0;
 
-            XmlElement element = CreateTestElement("Object", idValue, mimeTypeValue, encodingValue, childCount);
+            XmlElement element = CreateTestElement(
+                "Object",
+                idValue,
+                mimeTypeValue,
+                encodingValue,
+                childCount
+            );
 
             var dataObject = new DataObject();
             dataObject.LoadXml(element);
@@ -140,13 +159,28 @@ namespace System.Security.Cryptography.Xml.Tests
             Assert.Equal(childCount, dataObject.Data.Count);
         }
 
-        private static XmlElement CreateTestElement(string name, string idValue, string mimeTypeValue, string encodingValue, int childs)
+        private static XmlElement CreateTestElement(
+            string name,
+            string idValue,
+            string mimeTypeValue,
+            string encodingValue,
+            int childs
+        )
         {
             var doc = new XmlDocument();
             XmlElement element = doc.CreateElement(name, SignedXml.XmlDsigNamespaceUrl);
-            XmlAttribute idAttribute = doc.CreateAttribute(IdAttributeName, SignedXml.XmlDsigNamespaceUrl);
-            XmlAttribute mimeTypeAttribute = doc.CreateAttribute(MimeTypeAttributeName, SignedXml.XmlDsigNamespaceUrl);
-            XmlAttribute encodingAttribute = doc.CreateAttribute(EncodingAttributeName, SignedXml.XmlDsigNamespaceUrl);
+            XmlAttribute idAttribute = doc.CreateAttribute(
+                IdAttributeName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            XmlAttribute mimeTypeAttribute = doc.CreateAttribute(
+                MimeTypeAttributeName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
+            XmlAttribute encodingAttribute = doc.CreateAttribute(
+                EncodingAttributeName,
+                SignedXml.XmlDsigNamespaceUrl
+            );
             idAttribute.Value = idValue;
             mimeTypeAttribute.Value = mimeTypeValue;
             encodingAttribute.Value = encodingValue;

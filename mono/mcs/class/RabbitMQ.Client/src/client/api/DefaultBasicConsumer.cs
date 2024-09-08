@@ -131,8 +131,6 @@ namespace RabbitMQ.Client
             m_running = false;
         }
 
-
-
         ///<summary>Default implementation - sets the ConsumerTag
         ///property and sets IsRunning to true.</summary>
         public virtual void HandleBasicConsumeOk(string consumerTag)
@@ -163,13 +161,15 @@ namespace RabbitMQ.Client
         /// this method in this class does NOT acknowledge such
         /// messages.
         ///</remarks>
-        public virtual void HandleBasicDeliver(string consumerTag,
-                                               ulong deliveryTag,
-                                               bool redelivered,
-                                               string exchange,
-                                               string routingKey,
-                                               IBasicProperties properties,
-                                               byte[] body)
+        public virtual void HandleBasicDeliver(
+            string consumerTag,
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            IBasicProperties properties,
+            byte[] body
+        )
         {
             // Nothing to do here.
         }

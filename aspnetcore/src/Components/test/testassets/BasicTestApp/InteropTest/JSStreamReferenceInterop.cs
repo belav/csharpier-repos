@@ -9,14 +9,18 @@ namespace BasicTestApp.InteropTest;
 public class JSStreamReferenceInterop
 {
     [JSInvokable]
-    public static async Task<string> JSToDotNetStreamParameterAsync(IJSStreamReference jsStreamReference)
+    public static async Task<string> JSToDotNetStreamParameterAsync(
+        IJSStreamReference jsStreamReference
+    )
     {
         using var dataReferenceStream = await jsStreamReference.OpenReadStreamAsync();
         return await ValidateStreamValuesAsync(dataReferenceStream);
     }
 
     [JSInvokable]
-    public static async Task<string> JSToDotNetStreamWrapperObjectParameterAsync(JSStreamReferenceWrapper jsStreamReferenceWrapper)
+    public static async Task<string> JSToDotNetStreamWrapperObjectParameterAsync(
+        JSStreamReferenceWrapper jsStreamReferenceWrapper
+    )
     {
         if (jsStreamReferenceWrapper.StrVal != "SomeStr")
         {
@@ -28,7 +32,8 @@ public class JSStreamReferenceInterop
         }
         else
         {
-            using var dataWrapperReferenceStream = await jsStreamReferenceWrapper.JSStreamReferenceVal.OpenReadStreamAsync();
+            using var dataWrapperReferenceStream =
+                await jsStreamReferenceWrapper.JSStreamReferenceVal.OpenReadStreamAsync();
             return await ValidateStreamValuesAsync(dataWrapperReferenceStream);
         }
     }

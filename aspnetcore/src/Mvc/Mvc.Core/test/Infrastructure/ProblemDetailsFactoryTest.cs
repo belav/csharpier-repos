@@ -30,7 +30,8 @@ public class ProblemDetailsFactoryTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal("some-trace", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -51,7 +52,8 @@ public class ProblemDetailsFactoryTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal("some-trace", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -60,7 +62,12 @@ public class ProblemDetailsFactoryTest
         // Act
         var title = "Some title";
         var detail = "some detail";
-        var problemDetails = Factory.CreateProblemDetails(GetHttpContext(), statusCode: 406, title: title, detail: detail);
+        var problemDetails = Factory.CreateProblemDetails(
+            GetHttpContext(),
+            statusCode: 406,
+            title: title,
+            detail: detail
+        );
 
         // Assert
         Assert.Equal(406, problemDetails.Status);
@@ -74,7 +81,8 @@ public class ProblemDetailsFactoryTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal("some-trace", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -97,14 +105,16 @@ public class ProblemDetailsFactoryTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal("some-trace", kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
-           problemDetails.Errors,
-           kvp =>
-           {
-               Assert.Equal("some-key", kvp.Key);
-               Assert.Equal(new[] { "some-value" }, kvp.Value);
-           });
+            problemDetails.Errors,
+            kvp =>
+            {
+                Assert.Equal("some-key", kvp.Key);
+                Assert.Equal(new[] { "some-value" }, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -113,7 +123,11 @@ public class ProblemDetailsFactoryTest
         // Act
         var modelState = new ModelStateDictionary();
         modelState.AddModelError("some-key", "some-value");
-        var problemDetails = Factory.CreateValidationProblemDetails(GetHttpContext(), modelState, 422);
+        var problemDetails = Factory.CreateValidationProblemDetails(
+            GetHttpContext(),
+            modelState,
+            422
+        );
 
         // Assert
         Assert.Equal(422, problemDetails.Status);
@@ -127,14 +141,16 @@ public class ProblemDetailsFactoryTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal("some-trace", kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
-           problemDetails.Errors,
-           kvp =>
-           {
-               Assert.Equal("some-key", kvp.Key);
-               Assert.Equal(new[] { "some-value" }, kvp.Value);
-           });
+            problemDetails.Errors,
+            kvp =>
+            {
+                Assert.Equal("some-key", kvp.Key);
+                Assert.Equal(new[] { "some-value" }, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -145,7 +161,12 @@ public class ProblemDetailsFactoryTest
         var instance = "some instance";
         var modelState = new ModelStateDictionary();
         modelState.AddModelError("some-key", "some-value");
-        var problemDetails = Factory.CreateValidationProblemDetails(GetHttpContext(), modelState, title: title, instance: instance);
+        var problemDetails = Factory.CreateValidationProblemDetails(
+            GetHttpContext(),
+            modelState,
+            title: title,
+            instance: instance
+        );
 
         // Assert
         Assert.Equal(400, problemDetails.Status);
@@ -159,22 +180,21 @@ public class ProblemDetailsFactoryTest
             {
                 Assert.Equal("traceId", kvp.Key);
                 Assert.Equal("some-trace", kvp.Value);
-            });
+            }
+        );
         Assert.Collection(
-           problemDetails.Errors,
-           kvp =>
-           {
-               Assert.Equal("some-key", kvp.Key);
-               Assert.Equal(new[] { "some-value" }, kvp.Value);
-           });
+            problemDetails.Errors,
+            kvp =>
+            {
+                Assert.Equal("some-key", kvp.Key);
+                Assert.Equal(new[] { "some-value" }, kvp.Value);
+            }
+        );
     }
 
     private static DefaultHttpContext GetHttpContext()
     {
-        return new DefaultHttpContext
-        {
-            TraceIdentifier = "some-trace",
-        };
+        return new DefaultHttpContext { TraceIdentifier = "some-trace" };
     }
 
     private static ProblemDetailsFactory GetProblemDetails()

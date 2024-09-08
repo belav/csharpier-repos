@@ -16,7 +16,9 @@ internal static class HeaderEncoding
         }
         else
         {
-            return new ReadOnlySpan<byte>(pBytes, byteCount).GetAsciiOrUTF8StringNonNullCharacters(Encoding.UTF8);
+            return new ReadOnlySpan<byte>(pBytes, byteCount).GetAsciiOrUTF8StringNonNullCharacters(
+                Encoding.UTF8
+            );
         }
     }
 }

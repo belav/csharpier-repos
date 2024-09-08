@@ -8,32 +8,30 @@ namespace System.ComponentModel
     /// </summary>
     public abstract class EventDescriptor : MemberDescriptor
     {
-        internal const string RequiresUnreferencedCodeMessage = "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code.";
+        internal const string RequiresUnreferencedCodeMessage =
+            "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code.";
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the
         /// specified name and attribute array.
         /// </summary>
-        protected EventDescriptor(string name, Attribute[]? attrs) : base(name, attrs)
-        {
-        }
+        protected EventDescriptor(string name, Attribute[]? attrs)
+            : base(name, attrs) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with the name and attributes in
         /// the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
         /// </summary>
-        protected EventDescriptor(MemberDescriptor descr) : base(descr)
-        {
-        }
+        protected EventDescriptor(MemberDescriptor descr)
+            : base(descr) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.EventDescriptor'/> class with
         /// the name in the specified <see cref='System.ComponentModel.MemberDescriptor'/> and the
         /// attributes in both the <see cref='System.ComponentModel.MemberDescriptor'/> and the <see cref='System.Attribute'/> array.
         /// </summary>
-        protected EventDescriptor(MemberDescriptor descr, Attribute[]? attrs) : base(descr, attrs)
-        {
-        }
+        protected EventDescriptor(MemberDescriptor descr, Attribute[]? attrs)
+            : base(descr, attrs) { }
 
         /// <summary>
         /// When overridden in a derived class, gets the type of the component this event is bound to.

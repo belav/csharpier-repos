@@ -308,29 +308,26 @@ namespace System.Security.Cryptography.Tests.Symmetric
                 // we're still happy on Desktop tests, and we can validate the default
                 // behavior of the LegalBlockSizes property.
                 LegalBlockSizesValue = new KeySizes[]
-                    {
-                        new KeySizes(5*8, -99*8, 0*8),
-                        new KeySizes(13*8, 22*8, 6*8),
-                        new KeySizes(101*8, 104*8, 1*8),
-                    };
+                {
+                    new KeySizes(5 * 8, -99 * 8, 0 * 8),
+                    new KeySizes(13 * 8, 22 * 8, 6 * 8),
+                    new KeySizes(101 * 8, 104 * 8, 1 * 8),
+                };
 
                 // Desktop's SymmetricAlgorithm reads from the property correctly, but
                 // we'll set the field here, anyways, to validate the default behavior
                 // of the LegalKeySizes property.
                 LegalKeySizesValue = new KeySizes[]
-                    {
-                        new KeySizes(5*8, -99*8, 0*8),
-                        new KeySizes(13*8, 22*8, 6*8),
-                        new KeySizes(101*8, 104*8, 1*8),
-                    };
+                {
+                    new KeySizes(5 * 8, -99 * 8, 0 * 8),
+                    new KeySizes(13 * 8, 22 * 8, 6 * 8),
+                    new KeySizes(101 * 8, 104 * 8, 1 * 8),
+                };
             }
 
             public bool IsDisposed
             {
-                get
-                {
-                    return KeyValue == null && IVValue == null;
-                }
+                get { return KeyValue == null && IVValue == null; }
             }
 
             public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV)
@@ -429,8 +426,11 @@ namespace System.Security.Cryptography.Tests.Symmetric
         }
 
         private class GenerateIvNotImplementedException : Exception { }
+
         private class GenerateKeyNotImplementedException : Exception { }
+
         private class CreateDecryptorNotImplementedException : Exception { }
+
         private class CreateEncryptorNotImplementedException : Exception { }
     }
 }

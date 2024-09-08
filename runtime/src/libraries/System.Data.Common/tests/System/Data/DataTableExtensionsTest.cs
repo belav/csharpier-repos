@@ -28,7 +28,10 @@ namespace System.Data.Tests
         [Fact]
         public void AsDataView_NullTable_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("table", () => DataTableExtensions.AsDataView(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "table",
+                () => DataTableExtensions.AsDataView(null)
+            );
         }
 
         [Fact]
@@ -48,13 +51,18 @@ namespace System.Data.Tests
         [Fact]
         public void AsDataView_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => DataTableExtensions.AsDataView<DataRow>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => DataTableExtensions.AsDataView<DataRow>(null)
+            );
         }
 
         [Fact]
         public void AsDataView_Source_Succeeds()
         {
-            DataView dv = _dt.AsEnumerable().Where(r => r.Field<string>("alias").Length > 6).AsDataView();
+            DataView dv = _dt.AsEnumerable()
+                .Where(r => r.Field<string>("alias").Length > 6)
+                .AsDataView();
             Assert.NotNull(dv);
             Assert.Equal(_dt, dv.Table);
             dv.Sort = "name";

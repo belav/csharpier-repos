@@ -28,9 +28,7 @@ namespace System.Web.Http
         [Fact]
         public void Constructor_Throws_IfHttpServerIsNull()
         {
-            Assert.ThrowsArgumentNull(
-                () => new DefaultHttpBatchHandler(null),
-                "httpServer");
+            Assert.ThrowsArgumentNull(() => new DefaultHttpBatchHandler(null), "httpServer");
         }
 
         [Fact]
@@ -38,8 +36,14 @@ namespace System.Web.Http
         {
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(new HttpServer());
             return Assert.ThrowsArgumentNullAsync(
-                () => batchHandler.CreateResponseMessageAsync(null, new HttpRequestMessage(), CancellationToken.None),
-                "responses");
+                () =>
+                    batchHandler.CreateResponseMessageAsync(
+                        null,
+                        new HttpRequestMessage(),
+                        CancellationToken.None
+                    ),
+                "responses"
+            );
         }
 
         [Fact]
@@ -47,8 +51,14 @@ namespace System.Web.Http
         {
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(new HttpServer());
             return Assert.ThrowsArgumentNullAsync(
-                () => batchHandler.CreateResponseMessageAsync(new HttpResponseMessage[0], null, CancellationToken.None),
-                "request");
+                () =>
+                    batchHandler.CreateResponseMessageAsync(
+                        new HttpResponseMessage[0],
+                        null,
+                        CancellationToken.None
+                    ),
+                "request"
+            );
         }
 
         [Fact]
@@ -58,10 +68,14 @@ namespace System.Web.Http
             HttpResponseMessage[] responses = new HttpResponseMessage[]
             {
                 new HttpResponseMessage(HttpStatusCode.OK),
-                new HttpResponseMessage(HttpStatusCode.BadRequest)
+                new HttpResponseMessage(HttpStatusCode.BadRequest),
             };
 
-            HttpResponseMessage response = await batchHandler.CreateResponseMessageAsync(responses, new HttpRequestMessage(), CancellationToken.None);
+            HttpResponseMessage response = await batchHandler.CreateResponseMessageAsync(
+                responses,
+                new HttpRequestMessage(),
+                CancellationToken.None
+            );
 
             MultipartContent content = Assert.IsType<MultipartContent>(response.Content);
             List<HttpResponseMessage> nestedResponses = new List<HttpResponseMessage>();
@@ -81,7 +95,8 @@ namespace System.Web.Http
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(new HttpServer());
             return Assert.ThrowsArgumentNullAsync(
                 () => batchHandler.ProcessBatchAsync(null, CancellationToken.None),
-                "request");
+                "request"
+            );
         }
 
         [Fact]
@@ -93,19 +108,29 @@ namespace System.Web.Http
                 var tmpContent = new StringContent(String.Empty);
                 request.RegisterForDispose(tmpContent);
                 expectedResourcesForDisposal.Add(tmpContent);
-                return new HttpResponseMessage { Content = new StringContent(request.RequestUri.AbsoluteUri) };
+                return new HttpResponseMessage
+                {
+                    Content = new StringContent(request.RequestUri.AbsoluteUri),
+                };
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
             HttpRequestMessage batchRequest = new HttpRequestMessage
             {
                 Content = new MultipartContent("mixed")
                 {
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Get, "http://example.com/")),
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Post, "http://example.org/"))
-                }
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Get, "http://example.com/")
+                    ),
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Post, "http://example.org/")
+                    ),
+                },
             };
 
-            var response = await batchHandler.ProcessBatchAsync(batchRequest, CancellationToken.None);
+            var response = await batchHandler.ProcessBatchAsync(
+                batchRequest,
+                CancellationToken.None
+            );
             var resourcesForDisposal = batchRequest.GetResourcesForDisposal();
 
             foreach (var expectedResource in expectedResourcesForDisposal)
@@ -123,7 +148,8 @@ namespace System.Web.Http
                 () => batchHandler.ExecutionOrder = (BatchExecutionOrder)20,
                 "value",
                 20,
-                typeof(BatchExecutionOrder));
+                typeof(BatchExecutionOrder)
+            );
         }
 
         [Fact]
@@ -132,7 +158,8 @@ namespace System.Web.Http
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(new HttpServer());
             return Assert.ThrowsArgumentNullAsync(
                 () => batchHandler.ExecuteRequestMessagesAsync(null, CancellationToken.None),
-                "requests");
+                "requests"
+            );
         }
 
         [Fact]
@@ -140,16 +167,22 @@ namespace System.Web.Http
         {
             MockHttpServer server = new MockHttpServer(request =>
             {
-                return new HttpResponseMessage { Content = new StringContent(request.RequestUri.AbsoluteUri) };
+                return new HttpResponseMessage
+                {
+                    Content = new StringContent(request.RequestUri.AbsoluteUri),
+                };
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Post, "http://example.org/")
+                new HttpRequestMessage(HttpMethod.Post, "http://example.org/"),
             };
 
-            var responses = await batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None);
+            var responses = await batchHandler.ExecuteRequestMessagesAsync(
+                requests,
+                CancellationToken.None
+            );
 
             Assert.Equal(2, responses.Count);
             Assert.Equal("http://example.com/", await responses[0].Content.ReadAsStringAsync());
@@ -175,11 +208,12 @@ namespace System.Web.Http
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
                 new HttpRequestMessage(HttpMethod.Post, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Put, "http://example.com/")
+                new HttpRequestMessage(HttpMethod.Put, "http://example.com/"),
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(
-                () => batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None));
+                () => batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None)
+            );
 
             Assert.Equal(2, responses.Count);
             foreach (var response in responses)
@@ -204,12 +238,12 @@ namespace System.Web.Http
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server)
             {
-                ExecutionOrder = BatchExecutionOrder.NonSequential
+                ExecutionOrder = BatchExecutionOrder.NonSequential,
             };
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Post, "http://example.com/")
+                new HttpRequestMessage(HttpMethod.Post, "http://example.com/"),
             };
 
             await batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None);
@@ -235,12 +269,12 @@ namespace System.Web.Http
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server)
             {
-                ExecutionOrder = BatchExecutionOrder.Sequential
+                ExecutionOrder = BatchExecutionOrder.Sequential,
             };
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Post, "http://example.com/")
+                new HttpRequestMessage(HttpMethod.Post, "http://example.com/"),
             };
 
             await batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None);
@@ -256,7 +290,8 @@ namespace System.Web.Http
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(new HttpServer());
             return Assert.ThrowsArgumentNullAsync(
                 () => batchHandler.ParseBatchRequestsAsync(null, CancellationToken.None),
-                "request");
+                "request"
+            );
         }
 
         [Fact]
@@ -267,12 +302,19 @@ namespace System.Web.Http
             {
                 Content = new MultipartContent("mixed")
                 {
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Get, "http://example.com/")),
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Post, "http://example.com/values"))
-                }
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Get, "http://example.com/")
+                    ),
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Post, "http://example.com/values")
+                    ),
+                },
             };
 
-            IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(request, CancellationToken.None);
+            IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(
+                request,
+                CancellationToken.None
+            );
 
             Assert.Equal(2, requests.Count);
             Assert.Equal(HttpMethod.Get, requests[0].Method);
@@ -289,13 +331,20 @@ namespace System.Web.Http
             {
                 Content = new MultipartContent("mixed")
                 {
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Get, "http://example.com/")),
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Post, "https://example.com/values"))
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Get, "http://example.com/")
+                    ),
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Post, "https://example.com/values")
+                    ),
                 },
-                RequestUri = new Uri("https://example.com/")
+                RequestUri = new Uri("https://example.com/"),
             };
 
-            IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(request, CancellationToken.None);
+            IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(
+                request,
+                CancellationToken.None
+            );
 
             Assert.Equal(2, requests.Count);
             Assert.Equal(HttpMethod.Get, requests[0].Method);
@@ -312,15 +361,22 @@ namespace System.Web.Http
             {
                 Content = new MultipartContent("mixed")
                 {
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Get, "http://example.com/")),
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Post, "http://example.com/values"))
-                }
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Get, "http://example.com/")
+                    ),
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Post, "http://example.com/values")
+                    ),
+                },
             };
             request.Properties.Add("foo", "bar");
             request.SetRouteData(new HttpRouteData(new HttpRoute()));
             request.RegisterForDispose(new StringContent(String.Empty));
 
-            IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(request, CancellationToken.None);
+            IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(
+                request,
+                CancellationToken.None
+            );
 
             Assert.Equal(2, requests.Count);
             Assert.Equal(HttpMethod.Get, requests[0].Method);
@@ -342,9 +398,7 @@ namespace System.Web.Http
         public void ValidateRequest_Throws_IfRequestIsNull()
         {
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(new HttpServer());
-            Assert.ThrowsArgumentNull(
-                () => batchHandler.ValidateRequest(null),
-                "request");
+            Assert.ThrowsArgumentNull(() => batchHandler.ValidateRequest(null), "request");
         }
 
         [Fact]
@@ -354,10 +408,13 @@ namespace System.Web.Http
             HttpRequestMessage request = new HttpRequestMessage();
 
             HttpResponseException errorResponse = Assert.Throws<HttpResponseException>(
-                () => batchHandler.ValidateRequest(request));
+                () => batchHandler.ValidateRequest(request)
+            );
             Assert.Equal(HttpStatusCode.BadRequest, errorResponse.Response.StatusCode);
-            Assert.Equal("The 'Content' property on the batch request cannot be null.",
-                (await errorResponse.Response.Content.ReadAsAsync<HttpError>()).Message);
+            Assert.Equal(
+                "The 'Content' property on the batch request cannot be null.",
+                (await errorResponse.Response.Content.ReadAsAsync<HttpError>()).Message
+            );
         }
 
         [Fact]
@@ -369,10 +426,13 @@ namespace System.Web.Http
             request.Content.Headers.ContentType = null;
 
             HttpResponseException errorResponse = Assert.Throws<HttpResponseException>(
-                () => batchHandler.ValidateRequest(request));
+                () => batchHandler.ValidateRequest(request)
+            );
             Assert.Equal(HttpStatusCode.BadRequest, errorResponse.Response.StatusCode);
-            Assert.Equal("The batch request must have a \"Content-Type\" header.",
-                (await errorResponse.Response.Content.ReadAsAsync<HttpError>()).Message);
+            Assert.Equal(
+                "The batch request must have a \"Content-Type\" header.",
+                (await errorResponse.Response.Content.ReadAsAsync<HttpError>()).Message
+            );
         }
 
         [Fact]
@@ -384,10 +444,13 @@ namespace System.Web.Http
             request.Content.Headers.ContentType = new MediaTypeHeaderValue("text/json");
 
             HttpResponseException errorResponse = Assert.Throws<HttpResponseException>(
-                () => batchHandler.ValidateRequest(request));
+                () => batchHandler.ValidateRequest(request)
+            );
             Assert.Equal(HttpStatusCode.BadRequest, errorResponse.Response.StatusCode);
-            Assert.Equal("The batch request of media type 'text/json' is not supported.",
-                (await errorResponse.Response.Content.ReadAsAsync<HttpError>()).Message);
+            Assert.Equal(
+                "The batch request of media type 'text/json' is not supported.",
+                (await errorResponse.Response.Content.ReadAsAsync<HttpError>()).Message
+            );
         }
 
         private class MockHttpServer : HttpServer
@@ -407,7 +470,10 @@ namespace System.Web.Http
                 _action = action;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return _action(request);
             }

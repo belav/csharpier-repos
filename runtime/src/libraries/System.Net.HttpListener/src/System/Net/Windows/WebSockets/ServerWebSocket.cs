@@ -9,11 +9,13 @@ namespace System.Net.WebSockets
 {
     internal sealed class ServerWebSocket : WebSocketBase
     {
-        internal static WebSocket Create(Stream innerStream,
+        internal static WebSocket Create(
+            Stream innerStream,
             string? subProtocol,
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
-            ArraySegment<byte> internalBuffer)
+            ArraySegment<byte> internalBuffer
+        )
         {
             if (!WebSocketProtocolComponent.IsSupported)
             {
@@ -21,28 +23,45 @@ namespace System.Net.WebSockets
             }
 
             HttpWebSocket.ValidateInnerStream(innerStream);
-            HttpWebSocket.ValidateOptions(subProtocol, receiveBufferSize, HttpWebSocket.MinSendBufferSize, keepAliveInterval);
+            HttpWebSocket.ValidateOptions(
+                subProtocol,
+                receiveBufferSize,
+                HttpWebSocket.MinSendBufferSize,
+                keepAliveInterval
+            );
             WebSocketValidate.ValidateArraySegment(internalBuffer, nameof(internalBuffer));
-            WebSocketBuffer.Validate(internalBuffer.Count, receiveBufferSize, HttpWebSocket.MinSendBufferSize, true);
+            WebSocketBuffer.Validate(
+                internalBuffer.Count,
+                receiveBufferSize,
+                HttpWebSocket.MinSendBufferSize,
+                true
+            );
 
-            return new ServerWebSocket(innerStream,
+            return new ServerWebSocket(
+                innerStream,
                 subProtocol,
                 receiveBufferSize,
                 keepAliveInterval,
-                internalBuffer);
+                internalBuffer
+            );
         }
-
 
         private readonly SafeHandle _sessionHandle;
         private readonly Interop.WebSocket.Property[] _properties;
 
-        public ServerWebSocket(Stream innerStream,
+        public ServerWebSocket(
+            Stream innerStream,
             string? subProtocol,
             int receiveBufferSize,
             TimeSpan keepAliveInterval,
-            ArraySegment<byte> internalBuffer)
-            : base(innerStream, subProtocol, keepAliveInterval,
-                WebSocketBuffer.CreateServerBuffer(internalBuffer, receiveBufferSize))
+            ArraySegment<byte> internalBuffer
+        )
+            : base(
+                innerStream,
+                subProtocol,
+                keepAliveInterval,
+                WebSocketBuffer.CreateServerBuffer(internalBuffer, receiveBufferSize)
+            )
         {
             _properties = InternalBuffer.CreateProperties(false);
             SafeHandle sessionHandle = CreateWebSocketHandle();
@@ -71,7 +90,8 @@ namespace System.Net.WebSockets
             Debug.Assert(_properties != null, "'_properties' MUST NOT be NULL.");
             return WebSocketProtocolComponent.WebSocketCreateServerHandle(
                 _properties,
-                _properties.Length);
+                _properties.Length
+            );
         }
     }
 }

@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -61,7 +59,9 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         // Make sure we can compute static field layout now so we can fail early
                         DefType defType = (DefType)target;
-                        defType.ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizesAndFields);
+                        defType.ComputeStaticFieldLayout(
+                            StaticLayoutKind.StaticRegionSizesAndFields
+                        );
                     }
                     break;
                 case ReadyToRunHelperId.VirtualCall:
@@ -70,12 +70,17 @@ namespace ILCompiler.DependencyAnalysis
                         // Make sure we aren't trying to callvirt Object.Finalize
                         MethodDesc method = (MethodDesc)target;
                         if (method.IsFinalizer)
-                            ThrowHelper.ThrowInvalidProgramException(ExceptionStringID.InvalidProgramCallVirtFinalize, method);
+                            ThrowHelper.ThrowInvalidProgramException(
+                                ExceptionStringID.InvalidProgramCallVirtFinalize,
+                                method
+                            );
 
                         // Method should be in fully canonical form. Otherwise we're being wasteful and generate more
                         // helpers than needed.
-                        Debug.Assert(!method.IsCanonicalMethod(CanonicalFormKind.Any) ||
-                            method.GetCanonMethodTarget(CanonicalFormKind.Specific) == method);
+                        Debug.Assert(
+                            !method.IsCanonicalMethod(CanonicalFormKind.Any)
+                                || method.GetCanonMethodTarget(CanonicalFormKind.Specific) == method
+                        );
                     }
                     break;
             }
@@ -83,26 +88,31 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override bool IsVisibleFromManagedCode => false;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public ReadyToRunHelperId Id => _id;
-        public object Target =>  _target;
+        public object Target => _target;
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             switch (_id)
             {
                 case ReadyToRunHelperId.VirtualCall:
-                    sb.Append("__VirtualCall_").Append(nameMangler.GetMangledMethodName((MethodDesc)_target));
+                    sb.Append("__VirtualCall_")
+                        .Append(nameMangler.GetMangledMethodName((MethodDesc)_target));
                     break;
                 case ReadyToRunHelperId.GetNonGCStaticBase:
-                    sb.Append("__GetNonGCStaticBase_").Append(nameMangler.GetMangledTypeName((TypeDesc)_target));
+                    sb.Append("__GetNonGCStaticBase_")
+                        .Append(nameMangler.GetMangledTypeName((TypeDesc)_target));
                     break;
                 case ReadyToRunHelperId.GetGCStaticBase:
-                    sb.Append("__GetGCStaticBase_").Append(nameMangler.GetMangledTypeName((TypeDesc)_target));
+                    sb.Append("__GetGCStaticBase_")
+                        .Append(nameMangler.GetMangledTypeName((TypeDesc)_target));
                     break;
                 case ReadyToRunHelperId.GetThreadStaticBase:
-                    sb.Append("__GetThreadStaticBase_").Append(nameMangler.GetMangledTypeName((TypeDesc)_target));
+                    sb.Append("__GetThreadStaticBase_")
+                        .Append(nameMangler.GetMangledTypeName((TypeDesc)_target));
                     break;
                 case ReadyToRunHelperId.DelegateCtor:
                     ((DelegateCreationInfo)_target).AppendMangledName(nameMangler, sb);
@@ -122,19 +132,28 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
         {
-            if (_id == ReadyToRunHelperId.VirtualCall || _id == ReadyToRunHelperId.ResolveVirtualFunction)
+            if (
+                _id == ReadyToRunHelperId.VirtualCall
+                || _id == ReadyToRunHelperId.ResolveVirtualFunction
+            )
             {
                 var targetMethod = (MethodDesc)_target;
 
                 DependencyList dependencyList = new DependencyList();
 
 #if !SUPPORT_JIT
-                factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref dependencyList, factory, targetMethod);
+                factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                    ref dependencyList,
+                    factory,
+                    targetMethod
+                );
 
                 if (!factory.VTable(targetMethod.OwningType).HasFixedSlots)
-
                 {
-                    dependencyList.Add(factory.VirtualMethodUse((MethodDesc)_target), "ReadyToRun Virtual Method Call");
+                    dependencyList.Add(
+                        factory.VirtualMethodUse((MethodDesc)_target),
+                        "ReadyToRun Virtual Method Call"
+                    );
                 }
 #endif
 
@@ -150,17 +169,28 @@ namespace ILCompiler.DependencyAnalysis
                     MethodDesc targetMethod = info.TargetMethod;
 
 #if !SUPPORT_JIT
-                    factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(ref dependencyList, factory, targetMethod);
+                    factory.MetadataManager.GetDependenciesDueToVirtualMethodReflectability(
+                        ref dependencyList,
+                        factory,
+                        targetMethod
+                    );
 
                     if (!factory.VTable(info.TargetMethod.OwningType).HasFixedSlots)
                     {
                         dependencyList ??= new DependencyList();
-                        dependencyList.Add(factory.VirtualMethodUse(info.TargetMethod), "ReadyToRun Delegate to virtual method");
+                        dependencyList.Add(
+                            factory.VirtualMethodUse(info.TargetMethod),
+                            "ReadyToRun Delegate to virtual method"
+                        );
                     }
 #endif
                 }
 
-                factory.MetadataManager.GetDependenciesDueToDelegateCreation(ref dependencyList, factory, info.PossiblyUnresolvedTargetMethod);
+                factory.MetadataManager.GetDependenciesDueToDelegateCreation(
+                    ref dependencyList,
+                    factory,
+                    info.PossiblyUnresolvedTargetMethod
+                );
 
                 return dependencyList;
             }
@@ -187,8 +217,16 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     return new NativeSequencePoint[]
                     {
-                        new NativeSequencePoint(0, string.Empty, WellKnownLineNumber.DebuggerStepThrough),
-                        new NativeSequencePoint(debuggerStepInOffset, string.Empty, WellKnownLineNumber.DebuggerStepIn)
+                        new NativeSequencePoint(
+                            0,
+                            string.Empty,
+                            WellKnownLineNumber.DebuggerStepThrough
+                        ),
+                        new NativeSequencePoint(
+                            debuggerStepInOffset,
+                            string.Empty,
+                            WellKnownLineNumber.DebuggerStepIn
+                        ),
                     };
                 }
             }
@@ -215,16 +253,24 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.GetNonGCStaticBase:
                 case ReadyToRunHelperId.GetGCStaticBase:
                 case ReadyToRunHelperId.GetThreadStaticBase:
-                    return comparer.Compare((TypeDesc)_target, (TypeDesc)((ReadyToRunHelperNode)other)._target);
+                    return comparer.Compare(
+                        (TypeDesc)_target,
+                        (TypeDesc)((ReadyToRunHelperNode)other)._target
+                    );
                 case ReadyToRunHelperId.VirtualCall:
                 case ReadyToRunHelperId.ResolveVirtualFunction:
-                    return comparer.Compare((MethodDesc)_target, (MethodDesc)((ReadyToRunHelperNode)other)._target);
+                    return comparer.Compare(
+                        (MethodDesc)_target,
+                        (MethodDesc)((ReadyToRunHelperNode)other)._target
+                    );
                 case ReadyToRunHelperId.DelegateCtor:
-                    return ((DelegateCreationInfo)_target).CompareTo((DelegateCreationInfo)((ReadyToRunHelperNode)other)._target, comparer);
+                    return ((DelegateCreationInfo)_target).CompareTo(
+                        (DelegateCreationInfo)((ReadyToRunHelperNode)other)._target,
+                        comparer
+                    );
                 default:
                     throw new NotImplementedException();
             }
-
         }
 #endif
     }

@@ -12,8 +12,7 @@ namespace System.IO.Tests
     {
         protected override bool IsDirectoryTest => true;
 
-        protected override FileSystemInfo GetFileSystemInfo(string path) =>
-            new DirectoryInfo(path);
+        protected override FileSystemInfo GetFileSystemInfo(string path) => new DirectoryInfo(path);
 
         protected override void CreateFileOrDirectory(string path, bool createOpposite = false)
         {
@@ -56,8 +55,12 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CreateSymbolicLink_PathToTarget_RelativeToLinkPath()
         {
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false)).Dispose();
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true)).Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false))
+                .Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true))
+                .Dispose();
         }
     }
 }

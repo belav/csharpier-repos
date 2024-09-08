@@ -13,7 +13,7 @@ namespace System.Tests
         [InlineData("000102FDfeFF")]
         public static void KnownByteSequence(string value)
         {
-            byte[] knownSequence = {0x00, 0x01, 0x02, 0xFD, 0xFE, 0xFF};
+            byte[] knownSequence = { 0x00, 0x01, 0x02, 0xFD, 0xFE, 0xFF };
             TestSequence(knownSequence, value);
         }
 
@@ -112,10 +112,12 @@ namespace System.Tests
                 string hex = Convert.ToHexString(data);
                 Assert.Equal(data, Convert.FromHexString(hex.ToLowerInvariant()));
                 Assert.Equal(data, Convert.FromHexString(hex.ToUpperInvariant()));
-                string mixedCase1 = hex.Substring(0, hex.Length / 2).ToUpperInvariant() +
-                                    hex.Substring(hex.Length / 2).ToLowerInvariant();
-                string mixedCase2 = hex.Substring(0, hex.Length / 2).ToLowerInvariant() +
-                                    hex.Substring(hex.Length / 2).ToUpperInvariant();
+                string mixedCase1 =
+                    hex.Substring(0, hex.Length / 2).ToUpperInvariant()
+                    + hex.Substring(hex.Length / 2).ToLowerInvariant();
+                string mixedCase2 =
+                    hex.Substring(0, hex.Length / 2).ToLowerInvariant()
+                    + hex.Substring(hex.Length / 2).ToUpperInvariant();
                 Assert.Equal(data, Convert.FromHexString(mixedCase1));
                 Assert.Equal(data, Convert.FromHexString(mixedCase2));
                 Assert.Throws<FormatException>(() => Convert.FromHexString(hex + "  "));

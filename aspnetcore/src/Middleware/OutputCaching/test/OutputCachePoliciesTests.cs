@@ -137,7 +137,10 @@ public class OutputCachePoliciesTests
     [InlineData(false, false, false)]
     public async Task PredicatePolicy_Filters(bool filter, bool enabled, bool expected)
     {
-        IOutputCachePolicy predicate = new PredicatePolicy(c => ValueTask.FromResult(filter), enabled ? EnableCachePolicy.Enabled : EnableCachePolicy.Disabled);
+        IOutputCachePolicy predicate = new PredicatePolicy(
+            c => ValueTask.FromResult(filter),
+            enabled ? EnableCachePolicy.Enabled : EnableCachePolicy.Disabled
+        );
         var context = TestUtils.CreateUninitializedContext();
 
         await predicate.CacheRequestAsync(context, default);
@@ -274,7 +277,9 @@ public class OutputCachePoliciesTests
         var context = TestUtils.CreateUninitializedContext();
         var value = "value";
 
-        IOutputCachePolicy policy = new SetCacheKeyPrefixPolicy((context, cancellationToken) => ValueTask.FromResult(value));
+        IOutputCachePolicy policy = new SetCacheKeyPrefixPolicy(
+            (context, cancellationToken) => ValueTask.FromResult(value)
+        );
 
         await policy.CacheRequestAsync(context, default);
 
@@ -288,10 +293,16 @@ public class OutputCachePoliciesTests
         var key = "key";
         var value = "value";
 
-        IOutputCachePolicy policy = new VaryByValuePolicy((context, CancellationToken) => ValueTask.FromResult(new KeyValuePair<string, string>(key, value)));
+        IOutputCachePolicy policy = new VaryByValuePolicy(
+            (context, CancellationToken) =>
+                ValueTask.FromResult(new KeyValuePair<string, string>(key, value))
+        );
 
         await policy.CacheRequestAsync(context, default);
 
-        Assert.Contains(new KeyValuePair<string, string>(key, value), context.CacheVaryByRules.VaryByValues);
+        Assert.Contains(
+            new KeyValuePair<string, string>(key, value),
+            context.CacheVaryByRules.VaryByValues
+        );
     }
 }

@@ -13,7 +13,8 @@ internal static partial class FileUtilities
 {
     private static readonly HashSet<string> s_assemblyExtensions = new HashSet<string>(
         new[] { ".dll", ".exe", ".winmd" },
-        StringComparer.OrdinalIgnoreCase);
+        StringComparer.OrdinalIgnoreCase
+    );
 
     public static Version GetFileVersion(string sourcePath)
     {
@@ -21,7 +22,12 @@ internal static partial class FileUtilities
 
         if (fvi != null)
         {
-            return new Version(fvi.FileMajorPart, fvi.FileMinorPart, fvi.FileBuildPart, fvi.FilePrivatePart);
+            return new Version(
+                fvi.FileMajorPart,
+                fvi.FileMinorPart,
+                fvi.FileBuildPart,
+                fvi.FilePrivatePart
+            );
         }
 
         return null;

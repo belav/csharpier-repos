@@ -11,9 +11,7 @@ namespace ApiExplorerWebSite;
 public class ApiExplorerResponseTypeOverrideOnActionController : Controller
 {
     [HttpGet("Controller")]
-    public void GetController()
-    {
-    }
+    public void GetController() { }
 
     [HttpGet("Action")]
     [Produces<Customer>]

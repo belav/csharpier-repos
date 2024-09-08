@@ -20,7 +20,10 @@ public static class RequestDecompressionServiceExtensions
     {
         ArgumentNullException.ThrowIfNull(services);
 
-        services.TryAddSingleton<IRequestDecompressionProvider, DefaultRequestDecompressionProvider>();
+        services.TryAddSingleton<
+            IRequestDecompressionProvider,
+            DefaultRequestDecompressionProvider
+        >();
         return services;
     }
 
@@ -30,13 +33,19 @@ public static class RequestDecompressionServiceExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="RequestDecompressionOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddRequestDecompression(this IServiceCollection services, Action<RequestDecompressionOptions> configureOptions)
+    public static IServiceCollection AddRequestDecompression(
+        this IServiceCollection services,
+        Action<RequestDecompressionOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);
 
         services.Configure(configureOptions);
-        services.TryAddSingleton<IRequestDecompressionProvider, DefaultRequestDecompressionProvider>();
+        services.TryAddSingleton<
+            IRequestDecompressionProvider,
+            DefaultRequestDecompressionProvider
+        >();
         return services;
     }
 }

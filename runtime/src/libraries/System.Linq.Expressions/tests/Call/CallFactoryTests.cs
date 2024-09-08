@@ -23,14 +23,23 @@ namespace System.Linq.Expressions.Tests
         public static void CheckCallFactoryOptimisedInstanceNullArgumentList()
         {
             var instance = Expression.Constant(new MS());
-            var expr = Expression.Call(instance, typeof(MS).GetMethod(nameof(MS.I0)), default(Expression[]));
+            var expr = Expression.Call(
+                instance,
+                typeof(MS).GetMethod(nameof(MS.I0)),
+                default(Expression[])
+            );
             AssertInstanceMethodCall(0, expr);
         }
 
         [Fact]
         public static void CheckCallFactoryOptimizationInstance2()
         {
-            MethodCallExpression expr = Expression.Call(Expression.Parameter(typeof(MS)), typeof(MS).GetMethod("I2"), Expression.Constant(0), Expression.Constant(1));
+            MethodCallExpression expr = Expression.Call(
+                Expression.Parameter(typeof(MS)),
+                typeof(MS).GetMethod("I2"),
+                Expression.Constant(0),
+                Expression.Constant(1)
+            );
 
             AssertInstanceMethodCall(2, expr);
         }
@@ -38,7 +47,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void CheckCallFactoryOptimizationInstance3()
         {
-            MethodCallExpression expr = Expression.Call(Expression.Parameter(typeof(MS)), typeof(MS).GetMethod("I3"), Expression.Constant(0), Expression.Constant(1), Expression.Constant(2));
+            MethodCallExpression expr = Expression.Call(
+                Expression.Parameter(typeof(MS)),
+                typeof(MS).GetMethod("I3"),
+                Expression.Constant(0),
+                Expression.Constant(1),
+                Expression.Constant(2)
+            );
 
             AssertInstanceMethodCall(3, expr);
         }
@@ -49,7 +64,10 @@ namespace System.Linq.Expressions.Tests
             const int N = 4;
 
             ParameterExpression obj = Expression.Parameter(typeof(MS));
-            ConstantExpression[] args = Enumerable.Range(0, N).Select(i => Expression.Constant(i)).ToArray();
+            ConstantExpression[] args = Enumerable
+                .Range(0, N)
+                .Select(i => Expression.Constant(i))
+                .ToArray();
 
             MethodCallExpression expr = Expression.Call(obj, typeof(MS).GetMethod("I" + N), args);
 
@@ -102,12 +120,18 @@ namespace System.Linq.Expressions.Tests
 
         [Fact]
         public static void CheckCallFactoryOptimisedStaticNullArgumentList() =>
-            AssertStaticMethodCall(0, Expression.Call(typeof(MS).GetMethod(nameof(MS.S0)), default(Expression[])));
+            AssertStaticMethodCall(
+                0,
+                Expression.Call(typeof(MS).GetMethod(nameof(MS.S0)), default(Expression[]))
+            );
 
         [Fact]
         public static void CheckCallFactoryOptimizationStatic1()
         {
-            MethodCallExpression expr = Expression.Call(typeof(MS).GetMethod("S1"), Expression.Constant(0));
+            MethodCallExpression expr = Expression.Call(
+                typeof(MS).GetMethod("S1"),
+                Expression.Constant(0)
+            );
 
             AssertStaticMethodCall(1, expr);
         }
@@ -115,8 +139,17 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void CheckCallFactoryOptimizationStatic2()
         {
-            MethodCallExpression expr1 = Expression.Call(typeof(MS).GetMethod("S2"), Expression.Constant(0), Expression.Constant(1));
-            MethodCallExpression expr2 = Expression.Call(null, typeof(MS).GetMethod("S2"), Expression.Constant(0), Expression.Constant(1));
+            MethodCallExpression expr1 = Expression.Call(
+                typeof(MS).GetMethod("S2"),
+                Expression.Constant(0),
+                Expression.Constant(1)
+            );
+            MethodCallExpression expr2 = Expression.Call(
+                null,
+                typeof(MS).GetMethod("S2"),
+                Expression.Constant(0),
+                Expression.Constant(1)
+            );
 
             AssertStaticMethodCall(2, expr1);
             AssertStaticMethodCall(2, expr2);
@@ -125,8 +158,19 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void CheckCallFactoryOptimizationStatic3()
         {
-            MethodCallExpression expr1 = Expression.Call(typeof(MS).GetMethod("S3"), Expression.Constant(0), Expression.Constant(1), Expression.Constant(2));
-            MethodCallExpression expr2 = Expression.Call(null, typeof(MS).GetMethod("S3"), Expression.Constant(0), Expression.Constant(1), Expression.Constant(2));
+            MethodCallExpression expr1 = Expression.Call(
+                typeof(MS).GetMethod("S3"),
+                Expression.Constant(0),
+                Expression.Constant(1),
+                Expression.Constant(2)
+            );
+            MethodCallExpression expr2 = Expression.Call(
+                null,
+                typeof(MS).GetMethod("S3"),
+                Expression.Constant(0),
+                Expression.Constant(1),
+                Expression.Constant(2)
+            );
 
             AssertStaticMethodCall(3, expr1);
             AssertStaticMethodCall(3, expr2);
@@ -135,7 +179,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void CheckCallFactoryOptimizationStatic4()
         {
-            MethodCallExpression expr = Expression.Call(typeof(MS).GetMethod("S4"), Expression.Constant(0), Expression.Constant(1), Expression.Constant(2), Expression.Constant(3));
+            MethodCallExpression expr = Expression.Call(
+                typeof(MS).GetMethod("S4"),
+                Expression.Constant(0),
+                Expression.Constant(1),
+                Expression.Constant(2),
+                Expression.Constant(3)
+            );
 
             AssertStaticMethodCall(4, expr);
         }
@@ -143,7 +193,14 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void CheckCallFactoryOptimizationStatic5()
         {
-            MethodCallExpression expr = Expression.Call(typeof(MS).GetMethod("S5"), Expression.Constant(0), Expression.Constant(1), Expression.Constant(2), Expression.Constant(3), Expression.Constant(4));
+            MethodCallExpression expr = Expression.Call(
+                typeof(MS).GetMethod("S5"),
+                Expression.Constant(0),
+                Expression.Constant(1),
+                Expression.Constant(2),
+                Expression.Constant(3),
+                Expression.Constant(4)
+            );
 
             AssertStaticMethodCall(5, expr);
         }
@@ -153,7 +210,10 @@ namespace System.Linq.Expressions.Tests
         {
             const int N = 6;
 
-            ConstantExpression[] args = Enumerable.Range(0, N).Select(i => Expression.Constant(i)).ToArray();
+            ConstantExpression[] args = Enumerable
+                .Range(0, N)
+                .Select(i => Expression.Constant(i))
+                .ToArray();
 
             MethodCallExpression expr = Expression.Call(typeof(MS).GetMethod("S" + N), args);
 
@@ -191,7 +251,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression instance = Expression.Parameter(typeof(int[]));
             ConstantExpression[] args = new[] { Expression.Constant(0) };
             MethodCallExpression expr = Expression.ArrayIndex(instance, args);
-            MethodInfo method = typeof(int[]).GetMethod("Get", BindingFlags.Public | BindingFlags.Instance);
+            MethodInfo method = typeof(int[]).GetMethod(
+                "Get",
+                BindingFlags.Public | BindingFlags.Instance
+            );
 
             AssertCallIsOptimized(expr, instance, method, args);
         }
@@ -202,7 +265,10 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression instance = Expression.Parameter(typeof(int[,]));
             ConstantExpression[] args = new[] { Expression.Constant(0), Expression.Constant(0) };
             MethodCallExpression expr = Expression.ArrayIndex(instance, args);
-            MethodInfo method = typeof(int[,]).GetMethod("Get", BindingFlags.Public | BindingFlags.Instance);
+            MethodInfo method = typeof(int[,]).GetMethod(
+                "Get",
+                BindingFlags.Public | BindingFlags.Instance
+            );
 
             AssertCallIsOptimized(expr, instance, method, args);
         }
@@ -223,13 +289,18 @@ namespace System.Linq.Expressions.Tests
 
         private static void AssertCallIsOptimized(MethodInfo method)
         {
-            ParameterExpression instance = method.IsStatic ? null : Expression.Parameter(method.DeclaringType);
+            ParameterExpression instance = method.IsStatic
+                ? null
+                : Expression.Parameter(method.DeclaringType);
 
             int n = method.GetParameters().Length;
 
             // Expression[] overload
             {
-                ConstantExpression[] args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
                 MethodCallExpression expr = Expression.Call(instance, method, args);
 
                 AssertCallIsOptimized(expr, instance, method, args);
@@ -237,14 +308,22 @@ namespace System.Linq.Expressions.Tests
 
             // IEnumerable<Expression> overload
             {
-                List<ConstantExpression> args = Enumerable.Range(0, n).Select(i => Expression.Constant(i)).ToList();
+                List<ConstantExpression> args = Enumerable
+                    .Range(0, n)
+                    .Select(i => Expression.Constant(i))
+                    .ToList();
                 MethodCallExpression expr = Expression.Call(instance, method, args);
 
                 AssertCallIsOptimized(expr, instance, method, args);
             }
         }
 
-        private static void AssertCallIsOptimized(MethodCallExpression expr, Expression instance, MethodInfo method, IReadOnlyList<Expression> args)
+        private static void AssertCallIsOptimized(
+            MethodCallExpression expr,
+            Expression instance,
+            MethodInfo method,
+            IReadOnlyList<Expression> args
+        )
         {
             int n = method.GetParameters().Length;
 
@@ -338,7 +417,10 @@ namespace System.Linq.Expressions.Tests
 
             for (int argNum = 1; argNum != 7; ++argNum)
             {
-                ConstantExpression[] args = Enumerable.Range(0, argNum).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, argNum)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
 
                 expr = Expression.Call(typeof(MS).GetMethod("S" + argNum), args);
 
@@ -351,17 +433,26 @@ namespace System.Linq.Expressions.Tests
         public static void UpdateInstanceNull()
         {
             ConstantExpression instance = Expression.Constant(new MS());
-            MethodCallExpression expr = Expression.Call(instance, typeof(MS).GetMethod(nameof(MS.I0)));
+            MethodCallExpression expr = Expression.Call(
+                instance,
+                typeof(MS).GetMethod(nameof(MS.I0))
+            );
             Assert.Same(expr, expr.Update(instance, null));
 
             for (int argNum = 1; argNum != 6; ++argNum)
             {
-                ConstantExpression[] args = Enumerable.Range(0, argNum).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, argNum)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
 
                 expr = Expression.Call(instance, typeof(MS).GetMethod("I" + argNum), args);
 
                 // Should attempt to create new expression, and fail due to incorrect arguments.
-                AssertExtensions.Throws<ArgumentException>("method", () => expr.Update(instance, null));
+                AssertExtensions.Throws<ArgumentException>(
+                    "method",
+                    () => expr.Update(instance, null)
+                );
             }
         }
 
@@ -370,12 +461,21 @@ namespace System.Linq.Expressions.Tests
         {
             for (int argNum = 0; argNum != 7; ++argNum)
             {
-                ConstantExpression[] args = Enumerable.Range(0, argNum).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, argNum)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
 
-                MethodCallExpression expr = Expression.Call(typeof(MS).GetMethod("S" + argNum), args);
+                MethodCallExpression expr = Expression.Call(
+                    typeof(MS).GetMethod("S" + argNum),
+                    args
+                );
 
                 // Should attempt to create new expression, and fail due to incorrect arguments.
-                AssertExtensions.Throws<ArgumentException>("method", () => expr.Update(null, args.Append(Expression.Constant(-1))));
+                AssertExtensions.Throws<ArgumentException>(
+                    "method",
+                    () => expr.Update(null, args.Append(Expression.Constant(-1)))
+                );
             }
         }
 
@@ -385,12 +485,22 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression instance = Expression.Constant(new MS());
             for (int argNum = 0; argNum != 6; ++argNum)
             {
-                ConstantExpression[] args = Enumerable.Range(0, argNum).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, argNum)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
 
-                MethodCallExpression expr = Expression.Call(instance, typeof(MS).GetMethod("I" + argNum), args);
+                MethodCallExpression expr = Expression.Call(
+                    instance,
+                    typeof(MS).GetMethod("I" + argNum),
+                    args
+                );
 
                 // Should attempt to create new expression, and fail due to incorrect arguments.
-                AssertExtensions.Throws<ArgumentException>("method", () => expr.Update(instance, args.Append(Expression.Constant(-1))));
+                AssertExtensions.Throws<ArgumentException>(
+                    "method",
+                    () => expr.Update(instance, args.Append(Expression.Constant(-1)))
+                );
             }
         }
 
@@ -399,9 +509,15 @@ namespace System.Linq.Expressions.Tests
         {
             for (int argNum = 1; argNum != 7; ++argNum)
             {
-                ConstantExpression[] args = Enumerable.Range(0, argNum).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, argNum)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
 
-                MethodCallExpression expr = Expression.Call(typeof(MS).GetMethod("S" + argNum), args);
+                MethodCallExpression expr = Expression.Call(
+                    typeof(MS).GetMethod("S" + argNum),
+                    args
+                );
 
                 ConstantExpression[] newArgs = new ConstantExpression[argNum];
                 for (int i = 0; i != argNum; ++i)
@@ -419,9 +535,16 @@ namespace System.Linq.Expressions.Tests
             ConstantExpression instance = Expression.Constant(new MS());
             for (int argNum = 1; argNum != 6; ++argNum)
             {
-                ConstantExpression[] args = Enumerable.Range(0, argNum).Select(i => Expression.Constant(i)).ToArray();
+                ConstantExpression[] args = Enumerable
+                    .Range(0, argNum)
+                    .Select(i => Expression.Constant(i))
+                    .ToArray();
 
-                MethodCallExpression expr = Expression.Call(instance, typeof(MS).GetMethod("I" + argNum), args);
+                MethodCallExpression expr = Expression.Call(
+                    instance,
+                    typeof(MS).GetMethod("I" + argNum),
+                    args
+                );
 
                 ConstantExpression[] newArgs = new ConstantExpression[argNum];
                 for (int i = 0; i != argNum; ++i)
@@ -437,7 +560,10 @@ namespace System.Linq.Expressions.Tests
         {
             // Tests the call of Update to Expression.Call factories.
 
-            MethodCallExpression res = node.Update(new VisitorObj().Visit(node.Object), node.Arguments);
+            MethodCallExpression res = node.Update(
+                new VisitorObj().Visit(node.Object),
+                node.Arguments
+            );
 
             Assert.NotSame(node, res);
 
@@ -458,9 +584,7 @@ namespace System.Linq.Expressions.Tests
             return (MethodCallExpression)new VisitorObj().Visit(node);
         }
 
-        class NopVisitor : ExpressionVisitor
-        {
-        }
+        class NopVisitor : ExpressionVisitor { }
 
         class VisitorArgs : ExpressionVisitor
         {
@@ -482,18 +606,29 @@ namespace System.Linq.Expressions.Tests
     public class MS
     {
         public void I0() { }
+
         public void I1(int a) { }
+
         public void I2(int a, int b) { }
+
         public void I3(int a, int b, int c) { }
+
         public void I4(int a, int b, int c, int d) { }
+
         public void I5(int a, int b, int c, int d, int e) { }
 
         public static void S0() { }
+
         public static void S1(int a) { }
+
         public static void S2(int a, int b) { }
+
         public static void S3(int a, int b, int c) { }
+
         public static void S4(int a, int b, int c, int d) { }
+
         public static void S5(int a, int b, int c, int d, int e) { }
+
         public static void S6(int a, int b, int c, int d, int e, int f) { }
     }
 }

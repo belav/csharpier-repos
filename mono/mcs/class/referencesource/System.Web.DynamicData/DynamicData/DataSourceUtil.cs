@@ -1,25 +1,30 @@
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Data;
     using System.Globalization;
     using System.Web.Resources;
     using System.Web.UI;
     using System.Web.UI.WebControls;
-    using System.Collections;
-    using System.Data;
 
-    static class DataSourceUtil {
-
+    static class DataSourceUtil
+    {
         private static object s_lock = new object();
         private static Dictionary<Type, TypeCode> s_typeToTypeCodeMap;
-        
-        internal static TypeCode TypeCodeFromType(Type type) {
-            if (s_typeToTypeCodeMap == null) {
-                lock (s_lock) {
-                    if (s_typeToTypeCodeMap == null) {
 
-                        // 
-                        Dictionary<Type, TypeCode> typeNameToTypeCode = new Dictionary<Type, TypeCode>();
+        internal static TypeCode TypeCodeFromType(Type type)
+        {
+            if (s_typeToTypeCodeMap == null)
+            {
+                lock (s_lock)
+                {
+                    if (s_typeToTypeCodeMap == null)
+                    {
+                        //
+                        Dictionary<Type, TypeCode> typeNameToTypeCode =
+                            new Dictionary<Type, TypeCode>();
                         typeNameToTypeCode[typeof(Boolean)] = TypeCode.Boolean;
                         typeNameToTypeCode[typeof(String)] = TypeCode.String;
                         typeNameToTypeCode[typeof(Byte)] = TypeCode.Byte;
@@ -33,7 +38,7 @@ namespace System.Web.DynamicData {
                         typeNameToTypeCode[typeof(Char)] = TypeCode.Char;
 
                         // We don't support columns of type 'sqlvariant', which show up as Object
-                        // 
+                        //
                         typeNameToTypeCode[typeof(Object)] = TypeCode.DBNull;
 
                         // We don't support byte arrays.  This include columns of type 'timestamp'
@@ -57,12 +62,15 @@ namespace System.Web.DynamicData {
             return TypeCode.Object;
         }
 
-        internal static void SetParameterTypeCodeAndDbType(Parameter parameter, MetaColumn column) {
+        internal static void SetParameterTypeCodeAndDbType(Parameter parameter, MetaColumn column)
+        {
             // If it's a Guid, use a DbType, since TypeCode doesn't support it.  For everything else, use TypeCode
-            if (column.ColumnType == typeof(Guid)) {
+            if (column.ColumnType == typeof(Guid))
+            {
                 parameter.DbType = DbType.Guid;
             }
-            else {
+            else
+            {
                 parameter.Type = column.TypeCode;
             }
         }

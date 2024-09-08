@@ -19,45 +19,61 @@ namespace SharedTypes.ComInterfaces
         void MethodOut(out StatelessAllShapesType param);
         void MethodRef(ref StatelessAllShapesType param);
         StatelessAllShapesType Return();
+
         [PreserveSig]
         StatelessAllShapesType ReturnPreserveSig();
         void Arrays(
             int size,
+            [MarshalUsing(CountElementName = nameof(size))] StatelessAllShapesType[] param,
+            [MarshalUsing(CountElementName = nameof(size))] in StatelessAllShapesType[] paramIn,
+            [MarshalUsing(CountElementName = nameof(size))] out StatelessAllShapesType[] paramOut,
+            [MarshalUsing(CountElementName = nameof(size))] ref StatelessAllShapesType[] paramRef,
             [MarshalUsing(CountElementName = nameof(size))]
-            StatelessAllShapesType[] param,
+            [In]
+                StatelessAllShapesType[] paramContentsIn,
             [MarshalUsing(CountElementName = nameof(size))]
-            in StatelessAllShapesType[] paramIn,
+            [Out]
+                StatelessAllShapesType[] paramContentsOut,
             [MarshalUsing(CountElementName = nameof(size))]
-            out StatelessAllShapesType[] paramOut,
-            [MarshalUsing(CountElementName = nameof(size))]
-            ref StatelessAllShapesType[] paramRef,
-            [MarshalUsing(CountElementName = nameof(size))]
-            [In] StatelessAllShapesType[] paramContentsIn,
-            [MarshalUsing(CountElementName = nameof(size))]
-            [Out] StatelessAllShapesType[] paramContentsOut,
-            [MarshalUsing(CountElementName = nameof(size))]
-            [In, Out] StatelessAllShapesType[] paramContentsInOut);
-
+            [In, Out]
+                StatelessAllShapesType[] paramContentsInOut
+        );
     }
 
     [NativeMarshalling(typeof(AllStatelessMarshallerShapes))]
-    internal class StatelessAllShapesType
-    {
-    }
+    internal class StatelessAllShapesType { }
 
-    internal struct StatelessAllShapesNative
-    {
-    }
+    internal struct StatelessAllShapesNative { }
 
-    [CustomMarshaller(typeof(StatelessAllShapesType), MarshalMode.Default, typeof(AllStatelessMarshallerShapes))]
-    internal unsafe static class AllStatelessMarshallerShapes
+    [CustomMarshaller(
+        typeof(StatelessAllShapesType),
+        MarshalMode.Default,
+        typeof(AllStatelessMarshallerShapes)
+    )]
+    internal static unsafe class AllStatelessMarshallerShapes
     {
-        public static ref nint GetPinnableReference(StatelessAllShapesType managed) => throw new NotImplementedException();
+        public static ref nint GetPinnableReference(StatelessAllShapesType managed) =>
+            throw new NotImplementedException();
+
         public static int BufferSize => 32;
-        public static StatelessAllShapesNative* ConvertToUnmanaged(StatelessAllShapesType managed, Span<byte> buffer) => throw new NotImplementedException();
-        public static StatelessAllShapesNative* ConvertToUnmanaged(StatelessAllShapesType managed) => throw new NotImplementedException();
-        public static StatelessAllShapesType ConvertToManaged(StatelessAllShapesNative* unmanaged) => throw new NotImplementedException();
-        public static StatelessAllShapesType ConvertToManagedFinally(StatelessAllShapesNative* unmanaged) => throw new NotImplementedException();
+
+        public static StatelessAllShapesNative* ConvertToUnmanaged(
+            StatelessAllShapesType managed,
+            Span<byte> buffer
+        ) => throw new NotImplementedException();
+
+        public static StatelessAllShapesNative* ConvertToUnmanaged(
+            StatelessAllShapesType managed
+        ) => throw new NotImplementedException();
+
+        public static StatelessAllShapesType ConvertToManaged(
+            StatelessAllShapesNative* unmanaged
+        ) => throw new NotImplementedException();
+
+        public static StatelessAllShapesType ConvertToManagedFinally(
+            StatelessAllShapesNative* unmanaged
+        ) => throw new NotImplementedException();
+
         public static void Free(StatelessAllShapesNative* unmanaged) { }
     }
 }

@@ -25,15 +25,86 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(IdAttrsMultipleDocs) { Attribute = new VariationAttribute("attributes from multiple elements") { Priority = 1 } });
-            AddChild(new TestVariation(IdAttrs) { Attribute = new VariationAttribute("attributes from multiple documents") { Priority = 1 } });
-            AddChild(new TestVariation(OneElementNonNS) { Attribute = new VariationAttribute("All non-namespace attributes in one element") { Priority = 1 } });
-            AddChild(new TestVariation(OneElementNS) { Attribute = new VariationAttribute("All namespace attributes in one element") { Priority = 1 } });
-            AddChild(new TestVariation(OneElement) { Attribute = new VariationAttribute("All attributes in one element") { Priority = 0 } });
-            AddChild(new TestVariation(OneDocument) { Attribute = new VariationAttribute("All attributes in one document") { Priority = 1 } });
-            AddChild(new TestVariation(IdAttrsNulls) { Attribute = new VariationAttribute("All attributes in one document + nulls") { Priority = 1 } });
-            AddChild(new TestVariation(DuplicateAttributeInside) { Attribute = new VariationAttribute("Duplicate attribute in sequence") { Priority = 3 } });
-            AddChild(new TestVariation(EmptySequence) { Attribute = new VariationAttribute("Empty sequence") { Priority = 1 } });
+            AddChild(
+                new TestVariation(IdAttrsMultipleDocs)
+                {
+                    Attribute = new VariationAttribute("attributes from multiple elements")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(IdAttrs)
+                {
+                    Attribute = new VariationAttribute("attributes from multiple documents")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OneElementNonNS)
+                {
+                    Attribute = new VariationAttribute(
+                        "All non-namespace attributes in one element"
+                    )
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OneElementNS)
+                {
+                    Attribute = new VariationAttribute("All namespace attributes in one element")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OneElement)
+                {
+                    Attribute = new VariationAttribute("All attributes in one element")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(OneDocument)
+                {
+                    Attribute = new VariationAttribute("All attributes in one document")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(IdAttrsNulls)
+                {
+                    Attribute = new VariationAttribute("All attributes in one document + nulls")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DuplicateAttributeInside)
+                {
+                    Attribute = new VariationAttribute("Duplicate attribute in sequence")
+                    {
+                        Priority = 3,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(EmptySequence)
+                {
+                    Attribute = new VariationAttribute("Empty sequence") { Priority = 1 },
+                }
+            );
         }
 
         // From the same element
@@ -51,8 +122,12 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
-            IEnumerable<XAttribute> allAttributes = doc.Root.Attributes().Concat(doc.Root.Attributes());
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
+            IEnumerable<XAttribute> allAttributes = doc
+                .Root.Attributes()
+                .Concat(doc.Root.Attributes());
             try
             {
                 if (_runWithEvents)
@@ -67,17 +142,19 @@ namespace XLinqTests
                 }
                 TestLog.Compare(false, "exception expected here");
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
         }
 
         //[Variation(Priority = 1, Desc = "Empty sequence")]
         public void EmptySequence()
         {
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
-            IEnumerable<XAttribute> noAttributes = doc.Descendants().Where(x => !x.HasAttributes).Attributes();
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
+            IEnumerable<XAttribute> noAttributes = doc.Descendants()
+                .Where(x => !x.HasAttributes)
+                .Attributes();
             TestLog.Compare(noAttributes.IsEmpty(), "should be empty sequence");
 
             var ms1 = new MemoryStream();
@@ -103,9 +180,14 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
             XElement e = XElement.Parse(@"<X id='z'><Z xmlns='a' id='z'/></X>");
-            IEnumerable<XAttribute> allAttributes = doc.Descendants().Attributes().Concat(e.Descendants().Attributes()).Where(a => a.Name == "id");
+            IEnumerable<XAttribute> allAttributes = doc.Descendants()
+                .Attributes()
+                .Concat(e.Descendants().Attributes())
+                .Where(a => a.Name == "id");
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -122,8 +204,12 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
-            IEnumerable<XAttribute> allAttributes = doc.Descendants().Attributes().Where(a => a.Name == "id");
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
+            IEnumerable<XAttribute> allAttributes = doc.Descendants()
+                .Attributes()
+                .Where(a => a.Name == "id");
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -140,8 +226,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>");
-            IEnumerable<XAttribute> allAttributes = doc.Descendants().Attributes().Where(a => a.Name == "id").InsertNulls(1);
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D id='x' datrt='dat'/></A>"
+            );
+            IEnumerable<XAttribute> allAttributes = doc.Descendants()
+                .Attributes()
+                .Where(a => a.Name == "id")
+                .InsertNulls(1);
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -159,7 +250,9 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>");
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>"
+            );
             IEnumerable<XAttribute> allAttributes = doc.Descendants().Attributes();
             if (_runWithEvents)
             {
@@ -177,7 +270,9 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>");
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>"
+            );
             IEnumerable<XAttribute> allAttributes = doc.Root.Element("{nbs}B").Attributes();
             if (_runWithEvents)
             {
@@ -195,8 +290,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>");
-            IEnumerable<XAttribute> allAttributes = doc.Root.Element("{nbs}B").Attributes().Where(a => a.IsNamespaceDeclaration);
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>"
+            );
+            IEnumerable<XAttribute> allAttributes = doc
+                .Root.Element("{nbs}B")
+                .Attributes()
+                .Where(a => a.IsNamespaceDeclaration);
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -214,8 +314,13 @@ namespace XLinqTests
         {
             int count = 0;
             _runWithEvents = (bool)Params[0];
-            XDocument doc = XDocument.Parse(@"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>");
-            IEnumerable<XAttribute> allAttributes = doc.Root.Element("{nbs}B").Attributes().Where(a => !a.IsNamespaceDeclaration);
+            XDocument doc = XDocument.Parse(
+                @"<A id='a' xmlns:p1='nsp1'><B id='b' xmlns='nbs' xmlns:p='nsp' p:x='xx'>text</B><C/><p1:D datrt='dat'/></A>"
+            );
+            IEnumerable<XAttribute> allAttributes = doc
+                .Root.Element("{nbs}B")
+                .Attributes()
+                .Where(a => !a.IsNamespaceDeclaration);
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc);
@@ -238,7 +343,9 @@ namespace XLinqTests
             IEnumerable<XAttribute> copyAllAttributes = allAttributes.ToList();
 
             // calculate parents + make copy
-            IEnumerable<XElement> parents = allAttributes.Select(a => a == null ? null : a.Parent).ToList();
+            IEnumerable<XElement> parents = allAttributes
+                .Select(a => a == null ? null : a.Parent)
+                .ToList();
 
             // calculate the expected results for the parents of the processed elements
             var expectedAttrsForParent = new Dictionary<XElement, List<ExpectedValue>>();
@@ -246,7 +353,13 @@ namespace XLinqTests
             {
                 if (p != null)
                 {
-                    expectedAttrsForParent.TryAdd(p, p.Attributes().Except(copyAllAttributes.Where(x => x != null)).Select(a => new ExpectedValue(true, a)).ToList());
+                    expectedAttrsForParent.TryAdd(
+                        p,
+                        p.Attributes()
+                            .Except(copyAllAttributes.Where(x => x != null))
+                            .Select(a => new ExpectedValue(true, a))
+                            .ToList()
+                    );
                 }
             }
 
@@ -277,10 +390,20 @@ namespace XLinqTests
                     if (parent != null)
                     {
                         TestLog.Compare(parent.Attribute(a.Name), null, "Attribute lookup");
-                        TestLog.Compare(parent.Attributes().Where(x => x.Name == a.Name).IsEmpty(), "Attributes node");
+                        TestLog.Compare(
+                            parent.Attributes().Where(x => x.Name == a.Name).IsEmpty(),
+                            "Attributes node"
+                        );
 
                         // Compare the rest of the elements
-                        TestLog.Compare(expectedAttrsForParent[parent].EqualAllAttributes(parent.Attributes(), Helpers.MyAttributeComparer), "The rest of the attributes");
+                        TestLog.Compare(
+                            expectedAttrsForParent[parent]
+                                .EqualAllAttributes(
+                                    parent.Attributes(),
+                                    Helpers.MyAttributeComparer
+                                ),
+                            "The rest of the attributes"
+                        );
                     }
                 }
             }

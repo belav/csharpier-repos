@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="SessionViewState.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.Text;
 using System.Web;
 using System.Web.SessionState;
-using System.Web.Util;
 using System.Web.UI;
-using System.Security.Permissions;
+using System.Web.Util;
 
 namespace System.Web.UI.MobileControls
 {
@@ -24,16 +24,16 @@ namespace System.Web.UI.MobileControls
      * Session-based view state.
      *
      * When saving view state on the server as session data, some critical problems
-     * arise. The core issue behind most of these is how to handle the user 
+     * arise. The core issue behind most of these is how to handle the user
      * clicking the Back button. When the user does this, there is no corresponding
      * notification to the server, and the client and server session state are thrown
-     * out of sync. 
+     * out of sync.
      *
      * This class attempts to alleviate this by storing a small history of view states
-     * in session data. 
+     * in session data.
      *
      * To save session view state, construct a new object, set the ViewState and ActiveForm
-     * properties, and call Save. You'll get back a reference that contains the 
+     * properties, and call Save. You'll get back a reference that contains the
      * state reference to write out.
      *
      * To load session view state, construct a new object, and call Load. The class will
@@ -42,28 +42,25 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class SessionViewState
     {
         private static readonly String ViewStateKey = "ViewState";
         private Object _state;
 
-        internal SessionViewState() {
-        }
+        internal SessionViewState() { }
 
-        internal /*public*/ Object ViewState
+        internal /*public*/
+        Object ViewState
         {
-            get
-            {
-                return _state;
-            }
-            set
-            {
-                _state = value;
-            }
+            get { return _state; }
+            set { _state = value; }
         }
 
-        internal /*public*/ Pair Save(MobilePage page)
+        internal /*public*/
+        Pair Save(MobilePage page)
         {
             SessionViewStateHistory history = (SessionViewStateHistory)page.Session[ViewStateKey];
             if (history == null)
@@ -74,13 +71,14 @@ namespace System.Web.UI.MobileControls
 
             SessionViewStateHistoryItem historyItem = new SessionViewStateHistoryItem();
             SaveTo(historyItem);
-            #if TRACE
+#if TRACE
             historyItem.Url = page.Request.FilePath;
-            #endif
+#endif
             return history.Push(historyItem);
         }
 
-        internal /*public*/ void Load(MobilePage page, Pair id)
+        internal /*public*/
+        void Load(MobilePage page, Pair id)
         {
             _state = null;
 
@@ -105,8 +103,9 @@ namespace System.Web.UI.MobileControls
             _state = historyItem.ViewState;
         }
 
-        #if TRACE
-        internal /*public*/ void Dump(MobilePage page, out ArrayList arr)
+#if TRACE
+        internal /*public*/
+        void Dump(MobilePage page, out ArrayList arr)
         {
             SessionViewStateHistory history;
             if ((page is IRequiresSessionState) && !(page is IReadOnlySessionState))
@@ -127,22 +126,18 @@ namespace System.Web.UI.MobileControls
                 arr = new ArrayList();
             }
         }
-        #endif
+#endif
 
-        [
-            Serializable
-        ]
+        [Serializable]
         private class SessionViewStateHistoryItem : ISerializable
         {
-            #if TRACE
+#if TRACE
             public String Url;
             public String Id;
-            #endif
+#endif
             public Object ViewState;
 
-            public SessionViewStateHistoryItem()
-            {
-            }
+            public SessionViewStateHistoryItem() { }
 
             public SessionViewStateHistoryItem(SerializationInfo info, StreamingContext context)
             {
@@ -157,7 +152,7 @@ namespace System.Web.UI.MobileControls
                 }
             }
 
-            [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter=true)]
+            [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
             {
                 if (ViewState != null)
@@ -175,9 +170,7 @@ namespace System.Web.UI.MobileControls
 
         // Session view state history. This is the history record kept in each session.
 
-        [
-            Serializable
-        ]
+        [Serializable]
         private class SessionViewStateHistory
         {
             private int _historySize;
@@ -193,7 +186,8 @@ namespace System.Web.UI.MobileControls
                 if (_historySize < 1)
                 {
                     throw new Exception(
-                        SR.GetString(SR.SessionViewState_InvalidSessionStateHistory));
+                        SR.GetString(SR.SessionViewState_InvalidSessionStateHistory)
+                    );
                 }
 
                 _history = new SessionViewStateHistoryItem[_historySize];
@@ -211,24 +205,23 @@ namespace System.Web.UI.MobileControls
                     _historyUsed++;
                 }
 
-                #if TRACE
+#if TRACE
                 item.Id = _currentHistoryID.ToString(CultureInfo.InvariantCulture);
-                #endif
-                
+#endif
                 return id;
             }
 
             public SessionViewStateHistoryItem Find(Pair id)
             {
                 // First make sure that the page is from the current session.
-                DateTime uniqueID = (DateTime) id.First;
+                DateTime uniqueID = (DateTime)id.First;
                 if (DateTime.Compare(uniqueID, _sessionUniqueID) != 0)
                 {
                     return null;
                 }
 
                 // Now check if we actually still have it.
-                int historyID = (int) id.Second;
+                int historyID = (int)id.Second;
                 int distance = _currentHistoryID - historyID;
 
                 if (distance <= 0)
@@ -244,8 +237,8 @@ namespace System.Web.UI.MobileControls
                 }
                 else
                 {
-                    int foundIndex = (_currentHistoryIndex + _historySize - distance) % 
-                                     _historySize;
+                    int foundIndex =
+                        (_currentHistoryIndex + _historySize - distance) % _historySize;
                     // Make the found item the top of the stack.
                     _currentHistoryIndex = (foundIndex + 1) % _historySize;
                     _currentHistoryID = historyID + 1;
@@ -254,7 +247,7 @@ namespace System.Web.UI.MobileControls
                 }
             }
 
-            #if TRACE
+#if TRACE
             public void Dump(out ArrayList arr)
             {
                 arr = new ArrayList();
@@ -270,7 +263,14 @@ namespace System.Web.UI.MobileControls
                     SessionViewStateHistoryItem item = _history[n];
                     if (item != null)
                     {
-                        arr.Add(String.Format(CultureInfo.InvariantCulture, "{0}({1})", item.Url, item.Id));
+                        arr.Add(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}({1})",
+                                item.Url,
+                                item.Id
+                            )
+                        );
                     }
                     else
                     {
@@ -278,8 +278,7 @@ namespace System.Web.UI.MobileControls
                     }
                 }
             }
-            #endif
+#endif
         }
-
     }
 }

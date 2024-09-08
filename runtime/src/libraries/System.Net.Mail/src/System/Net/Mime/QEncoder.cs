@@ -27,7 +27,8 @@ namespace System.Net.Mime
         protected override bool LineBreakNeeded(byte b)
         {
             // Fold if we're before a whitespace and encoding another character would be too long
-            int lengthAfterAddingCharAndFooter = WriteState.CurrentLineLength + SizeOfQEncodedChar + WriteState.FooterLength;
+            int lengthAfterAddingCharAndFooter =
+                WriteState.CurrentLineLength + SizeOfQEncodedChar + WriteState.FooterLength;
             bool isWhitespace = b == ' ' || b == '\t' || b == '\r' || b == '\n';
             if (lengthAfterAddingCharAndFooter >= WriteState.MaxLineLength && isWhitespace)
             {
@@ -52,7 +53,8 @@ namespace System.Net.Mime
             }
 
             int numberOfCharsToAppend = count * SizeOfQEncodedChar;
-            return WriteState.CurrentLineLength + numberOfCharsToAppend + _writeState.FooterLength > WriteState.MaxLineLength;
+            return WriteState.CurrentLineLength + numberOfCharsToAppend + _writeState.FooterLength
+                > WriteState.MaxLineLength;
         }
 
         protected override int GetCodepointSize(string value, int i)

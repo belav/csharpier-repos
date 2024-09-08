@@ -16,7 +16,9 @@ namespace System.Threading
             {
                 Debug.Assert(waitableObject != null);
 
-                IntPtr handle = GCHandle.ToIntPtr(GCHandle.Alloc(waitableObject, GCHandleType.Normal));
+                IntPtr handle = GCHandle.ToIntPtr(
+                    GCHandle.Alloc(waitableObject, GCHandleType.Normal)
+                );
 
                 // SafeWaitHandle treats -1 and 0 as invalid, and the handle should not be these values anyway
                 Debug.Assert(handle != IntPtr.Zero);

@@ -10,14 +10,15 @@ namespace System.ServiceModel.Description
     using System.Xml;
     using System.Xml.Serialization;
 
-    [XmlRoot(ElementName = MetadataStrings.MetadataExchangeStrings.Location, Namespace = MetadataStrings.MetadataExchangeStrings.Namespace)]
+    [XmlRoot(
+        ElementName = MetadataStrings.MetadataExchangeStrings.Location,
+        Namespace = MetadataStrings.MetadataExchangeStrings.Namespace
+    )]
     public class MetadataLocation
     {
         string location;
 
-        public MetadataLocation()
-        {
-        }
+        public MetadataLocation() { }
 
         public MetadataLocation(string location)
         {
@@ -34,7 +35,9 @@ namespace System.ServiceModel.Description
                 {
                     Uri uri;
                     if (!Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out uri))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxMetadataReferenceInvalidLocation, value));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(SR.SFxMetadataReferenceInvalidLocation, value)
+                        );
                 }
 
                 this.location = value;

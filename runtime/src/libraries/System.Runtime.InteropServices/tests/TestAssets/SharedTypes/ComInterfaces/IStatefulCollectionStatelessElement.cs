@@ -11,41 +11,59 @@ namespace SharedTypes.ComInterfaces
     {
         void Method(
             [MarshalUsing(CountElementName = nameof(size))] StatefulCollection<StatelessType> p,
-            int size);
+            int size
+        );
         void MethodIn(
-            [MarshalUsing(CountElementName = nameof(size))] in StatefulCollection<StatelessType> pIn,
-            in int size);
+            [MarshalUsing(CountElementName = nameof(size))]
+                in StatefulCollection<StatelessType> pIn,
+            in int size
+        );
         void MethodRef(
-            [MarshalUsing(CountElementName = nameof(size))] ref StatefulCollection<StatelessType> pRef,
-            int size);
+            [MarshalUsing(CountElementName = nameof(size))]
+                ref StatefulCollection<StatelessType> pRef,
+            int size
+        );
         void MethodOut(
-            [MarshalUsing(CountElementName = nameof(size))] out StatefulCollection<StatelessType> pOut,
-            out int size);
+            [MarshalUsing(CountElementName = nameof(size))]
+                out StatefulCollection<StatelessType> pOut,
+            out int size
+        );
+
         [return: MarshalUsing(CountElementName = nameof(size))]
         StatefulCollection<StatelessType> Return(int size);
+
         [PreserveSig]
         [return: MarshalUsing(CountElementName = nameof(size))]
         StatefulCollection<StatelessType> ReturnPreserveSig(int size);
     }
 
     [NativeMarshalling(typeof(StatefulCollectionMarshaller<,>))]
-    internal class StatefulCollection<T>
-    {
-    }
+    internal class StatefulCollection<T> { }
 
     [ContiguousCollectionMarshaller]
-    [CustomMarshaller(typeof(StatefulCollection<>), MarshalMode.Default, typeof(StatefulCollectionMarshaller<,>.Default))]
-    static unsafe class StatefulCollectionMarshaller<T, TUnmanagedElement> where TUnmanagedElement : unmanaged
+    [CustomMarshaller(
+        typeof(StatefulCollection<>),
+        MarshalMode.Default,
+        typeof(StatefulCollectionMarshaller<,>.Default)
+    )]
+    static unsafe class StatefulCollectionMarshaller<T, TUnmanagedElement>
+        where TUnmanagedElement : unmanaged
     {
         public ref struct Default
         {
             public byte* ToUnmanaged() => throw null;
+
             public System.ReadOnlySpan<T> GetManagedValuesSource() => throw null;
+
             public System.Span<TUnmanagedElement> GetUnmanagedValuesDestination() => throw null;
 
             public void FromUnmanaged(byte* value) => throw null;
+
             public System.Span<T> GetManagedValuesDestination(int numElements) => throw null;
-            public System.ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(int numElements) => throw null;
+
+            public System.ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(
+                int numElements
+            ) => throw null;
 
             public void Free() => throw null;
 

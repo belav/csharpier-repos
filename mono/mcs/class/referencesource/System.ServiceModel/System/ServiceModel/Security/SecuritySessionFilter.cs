@@ -17,17 +17,28 @@ namespace System.ServiceModel.Security
 
     sealed class SecuritySessionFilter : HeaderFilter
     {
-        static readonly string SessionContextIdsProperty = String.Format(CultureInfo.InvariantCulture, "{0}/SecuritySessionContextIds", DotNetSecurityStrings.Namespace);
+        static readonly string SessionContextIdsProperty = String.Format(
+            CultureInfo.InvariantCulture,
+            "{0}/SecuritySessionContextIds",
+            DotNetSecurityStrings.Namespace
+        );
         UniqueId securityContextTokenId;
         SecurityStandardsManager standardsManager;
         string[] excludedActions;
         bool isStrictMode;
 
-        public SecuritySessionFilter(UniqueId securityContextTokenId, SecurityStandardsManager standardsManager, bool isStrictMode, params string[] excludedActions)
+        public SecuritySessionFilter(
+            UniqueId securityContextTokenId,
+            SecurityStandardsManager standardsManager,
+            bool isStrictMode,
+            params string[] excludedActions
+        )
         {
             if (securityContextTokenId == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("securityContextTokenId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("securityContextTokenId")
+                );
             }
 
             this.excludedActions = excludedActions;
@@ -38,10 +49,7 @@ namespace System.ServiceModel.Security
 
         public UniqueId SecurityContextTokenId
         {
-            get
-            {
-                return this.securityContextTokenId;
-            }
+            get { return this.securityContextTokenId; }
         }
 
         static bool ShouldExcludeMessage(Message message, string[] excludedActions)
@@ -63,13 +71,15 @@ namespace System.ServiceModel.Security
 
         internal static bool CanHandleException(Exception e)
         {
-            return ((e is XmlException)
-                    || (e is FormatException)
-                    || (e is SecurityTokenException)
-                    || (e is MessageSecurityException)
-                    || (e is ProtocolException)
-                    || (e is InvalidOperationException)
-                    || (e is ArgumentException));
+            return (
+                (e is XmlException)
+                || (e is FormatException)
+                || (e is SecurityTokenException)
+                || (e is MessageSecurityException)
+                || (e is ProtocolException)
+                || (e is InvalidOperationException)
+                || (e is ArgumentException)
+            );
         }
 
         public override bool Match(Message message)
@@ -85,7 +95,14 @@ namespace System.ServiceModel.Security
                 contextIds = new List<UniqueId>(1);
                 try
                 {
-                    if (!this.standardsManager.TryGetSecurityContextIds(message, message.Version.Envelope.UltimateDestinationActorValues, this.isStrictMode, contextIds))
+                    if (
+                        !this.standardsManager.TryGetSecurityContextIds(
+                            message,
+                            message.Version.Envelope.UltimateDestinationActorValues,
+                            this.isStrictMode,
+                            contextIds
+                        )
+                    )
                     {
                         return false;
                     }
@@ -93,7 +110,8 @@ namespace System.ServiceModel.Security
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (!CanHandleException(e)) throw;
+                    if (!CanHandleException(e))
+                        throw;
                     return false;
                 }
                 message.Properties.Add(SessionContextIdsProperty, contextIds);
@@ -127,7 +145,11 @@ namespace System.ServiceModel.Security
 
         protected internal override IMessageFilterTable<FilterData> CreateFilterTable<FilterData>()
         {
-            return new SecuritySessionFilterTable<FilterData>(this.standardsManager, this.isStrictMode, this.excludedActions);
+            return new SecuritySessionFilterTable<FilterData>(
+                this.standardsManager,
+                this.isStrictMode,
+                this.excludedActions
+            );
         }
 
         class SecuritySessionFilterTable<FilterData> : IMessageFilterTable<FilterData>
@@ -138,46 +160,46 @@ namespace System.ServiceModel.Security
             string[] excludedActions;
             bool isStrictMode;
 
-            public SecuritySessionFilterTable(SecurityStandardsManager standardsManager, bool isStrictMode, string[] excludedActions)
+            public SecuritySessionFilterTable(
+                SecurityStandardsManager standardsManager,
+                bool isStrictMode,
+                string[] excludedActions
+            )
             {
                 if (standardsManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("standardsManager");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "standardsManager"
+                    );
                 }
                 if (excludedActions == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("excludedActions");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "excludedActions"
+                    );
                 }
                 this.standardsManager = standardsManager;
                 this.excludedActions = new string[excludedActions.Length];
                 excludedActions.CopyTo(this.excludedActions, 0);
                 this.isStrictMode = isStrictMode;
-                contextMappings = new Dictionary<UniqueId, KeyValuePair<MessageFilter, FilterData>>();
+                contextMappings =
+                    new Dictionary<UniqueId, KeyValuePair<MessageFilter, FilterData>>();
                 filterMappings = new Dictionary<MessageFilter, FilterData>();
             }
 
             public ICollection<MessageFilter> Keys
             {
-                get
-                {
-                    return this.filterMappings.Keys;
-                }
+                get { return this.filterMappings.Keys; }
             }
 
             public ICollection<FilterData> Values
             {
-                get
-                {
-                    return this.filterMappings.Values;
-                }
+                get { return this.filterMappings.Values; }
             }
 
             public FilterData this[MessageFilter filter]
             {
-                get
-                {
-                    return this.filterMappings[filter];
-                }
+                get { return this.filterMappings[filter]; }
                 set
                 {
                     if (this.filterMappings.ContainsKey(filter))
@@ -217,7 +239,9 @@ namespace System.ServiceModel.Security
             public void CopyTo(KeyValuePair<MessageFilter, FilterData>[] array, int arrayIndex)
             {
                 int pos = arrayIndex;
-                foreach (KeyValuePair<MessageFilter, FilterData> entry in this.contextMappings.Values)
+                foreach (
+                    KeyValuePair<MessageFilter, FilterData> entry in this.contextMappings.Values
+                )
                 {
                     array[pos] = entry;
                     ++pos;
@@ -236,7 +260,10 @@ namespace System.ServiceModel.Security
 
             public IEnumerator<KeyValuePair<MessageFilter, FilterData>> GetEnumerator()
             {
-                return ((ICollection<KeyValuePair<MessageFilter, FilterData>>)this.contextMappings.Values).GetEnumerator();
+                return (
+                    (ICollection<KeyValuePair<MessageFilter, FilterData>>)
+                        this.contextMappings.Values
+                ).GetEnumerator();
             }
 
             public void Add(MessageFilter filter, FilterData data)
@@ -244,26 +271,57 @@ namespace System.ServiceModel.Security
                 SecuritySessionFilter sessionFilter = filter as SecuritySessionFilter;
                 if (sessionFilter == null)
                 {
-                    Fx.Assert(String.Format(CultureInfo.InvariantCulture, "Unknown filter type {0}", filter.GetType()));
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.UnknownFilterType, filter.GetType())));
+                    Fx.Assert(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "Unknown filter type {0}",
+                            filter.GetType()
+                        )
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.UnknownFilterType, filter.GetType())
+                        )
+                    );
                 }
                 if (sessionFilter.standardsManager != this.standardsManager)
                 {
                     Fx.Assert("Standards manager of filter does not match that of filter table");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.StandardsManagerDoesNotMatch)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.StandardsManagerDoesNotMatch))
+                    );
                 }
                 if (sessionFilter.isStrictMode != this.isStrictMode)
                 {
-                    Fx.Assert("Session filter's isStrictMode differs from filter table's isStrictMode");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.FilterStrictModeDifferent)));
+                    Fx.Assert(
+                        "Session filter's isStrictMode differs from filter table's isStrictMode"
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(SR.GetString(SR.FilterStrictModeDifferent))
+                    );
                 }
                 if (this.contextMappings.ContainsKey(sessionFilter.SecurityContextTokenId))
                 {
-                    Fx.Assert(SR.GetString(SR.SecuritySessionIdAlreadyPresentInFilterTable, sessionFilter.SecurityContextTokenId));
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecuritySessionIdAlreadyPresentInFilterTable, sessionFilter.SecurityContextTokenId)));
+                    Fx.Assert(
+                        SR.GetString(
+                            SR.SecuritySessionIdAlreadyPresentInFilterTable,
+                            sessionFilter.SecurityContextTokenId
+                        )
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SecuritySessionIdAlreadyPresentInFilterTable,
+                                sessionFilter.SecurityContextTokenId
+                            )
+                        )
+                    );
                 }
                 this.filterMappings.Add(filter, data);
-                this.contextMappings.Add(sessionFilter.SecurityContextTokenId, new KeyValuePair<MessageFilter, FilterData>(filter, data));
+                this.contextMappings.Add(
+                    sessionFilter.SecurityContextTokenId,
+                    new KeyValuePair<MessageFilter, FilterData>(filter, data)
+                );
             }
 
             public bool ContainsKey(MessageFilter filter)
@@ -297,8 +355,12 @@ namespace System.ServiceModel.Security
                 if (!message.Properties.TryGetValue(SessionContextIdsProperty, out propertyValue))
                 {
                     contextIds = new List<UniqueId>(1);
-                    return this.standardsManager.TryGetSecurityContextIds(message, message.Version.Envelope.UltimateDestinationActorValues,
-                        isStrictMode, contextIds);
+                    return this.standardsManager.TryGetSecurityContextIds(
+                        message,
+                        message.Version.Envelope.UltimateDestinationActorValues,
+                        isStrictMode,
+                        contextIds
+                    );
                 }
                 else
                 {
@@ -325,7 +387,8 @@ namespace System.ServiceModel.Security
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (!SecuritySessionFilter.CanHandleException(e)) throw;
+                    if (!SecuritySessionFilter.CanHandleException(e))
+                        throw;
                     return false;
                 }
                 for (int i = 0; i < contextIds.Count; ++i)
@@ -338,7 +401,6 @@ namespace System.ServiceModel.Security
                 }
                 return false;
             }
-
 
             public bool GetMatchingValue(Message message, out FilterData data)
             {

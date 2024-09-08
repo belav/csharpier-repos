@@ -51,11 +51,15 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                 }
                 else
                 {
-                    var connectionDisconnectToken = Server.DisconnectListener.GetTokenForConnection(Request.UConnectionId);
+                    var connectionDisconnectToken = Server.DisconnectListener.GetTokenForConnection(
+                        Request.UConnectionId
+                    );
 
                     if (connectionDisconnectToken.CanBeCanceled)
                     {
-                        _requestAbortSource = CancellationTokenSource.CreateLinkedTokenSource(connectionDisconnectToken);
+                        _requestAbortSource = CancellationTokenSource.CreateLinkedTokenSource(
+                            connectionDisconnectToken
+                        );
                         _disconnectToken = _requestAbortSource.Token;
                     }
                     else
@@ -74,7 +78,19 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
         {
             // This is the base GUID used by HTTP.SYS for generating the activity ID.
             // HTTP.SYS overwrites the first 8 bytes of the base GUID with RequestId to generate ETW activity ID.
-            var guid = new Guid(0xffcb4c93, 0xa57f, 0x453c, 0xb6, 0x3f, 0x84, 0x71, 0xc, 0x79, 0x67, 0xbb);
+            var guid = new Guid(
+                0xffcb4c93,
+                0xa57f,
+                0x453c,
+                0xb6,
+                0x3f,
+                0x84,
+                0x71,
+                0xc,
+                0x79,
+                0x67,
+                0xbb
+            );
             *((ulong*)&guid) = Request.RequestId;
             return guid;
         }
@@ -92,11 +108,15 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
             {
                 throw new InvalidOperationException("Upgrade requires HTTP/1.1.");
             }
-            throw new InvalidOperationException("This request cannot be upgraded because it has a body.");
+            throw new InvalidOperationException(
+                "This request cannot be upgraded because it has a body."
+            );
         }
         if (Response.HasStarted)
         {
-            throw new InvalidOperationException("This request cannot be upgraded, the response has already started.");
+            throw new InvalidOperationException(
+                "This request cannot be upgraded, the response has already started."
+            );
         }
 
         // Set the status code and reason phrase
@@ -157,9 +177,7 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
             {
                 _requestAbortSource.Cancel();
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
             catch (Exception ex)
             {
                 Log.AbortError(Logger, ex);
@@ -182,7 +200,9 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
         context.Abort();
     }
 
-    internal CancellationTokenRegistration RegisterForCancellation(CancellationToken cancellationToken)
+    internal CancellationTokenRegistration RegisterForCancellation(
+        CancellationToken cancellationToken
+    )
     {
         return cancellationToken.Register(AbortDelegate, this);
     }
@@ -192,8 +212,11 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
     {
         try
         {
-            var statusCode = PInvoke.HttpCancelHttpRequest(Server.RequestQueue.Handle,
-                Request.RequestId, default);
+            var statusCode = PInvoke.HttpCancelHttpRequest(
+                Server.RequestQueue.Handle,
+                Request.RequestId,
+                default
+            );
 
             // Either the connection has already dropped, or the last write is in progress.
             // The requestId becomes invalid as soon as the last Content-Length write starts.
@@ -225,7 +248,8 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                     (void*)pBuffer,
                     (uint)buffer.Length,
                     bytesReturned: null,
-                    IntPtr.Zero);
+                    IntPtr.Zero
+                );
 
                 if (statusCode == ErrorCodes.ERROR_SUCCESS)
                 {
@@ -247,9 +271,18 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
 
         try
         {
-            var streamError = new HTTP_REQUEST_PROPERTY_STREAM_ERROR() { ErrorCode = (uint)errorCode };
-            var statusCode = HttpApi.HttpSetRequestProperty(Server.RequestQueue.Handle, Request.RequestId, HTTP_REQUEST_PROPERTY.HttpRequestPropertyStreamError, &streamError,
-                (uint)sizeof(HTTP_REQUEST_PROPERTY_STREAM_ERROR), IntPtr.Zero);
+            var streamError = new HTTP_REQUEST_PROPERTY_STREAM_ERROR()
+            {
+                ErrorCode = (uint)errorCode,
+            };
+            var statusCode = HttpApi.HttpSetRequestProperty(
+                Server.RequestQueue.Handle,
+                Request.RequestId,
+                HTTP_REQUEST_PROPERTY.HttpRequestPropertyStreamError,
+                &streamError,
+                (uint)sizeof(HTTP_REQUEST_PROPERTY_STREAM_ERROR),
+                IntPtr.Zero
+            );
         }
         catch (ObjectDisposedException)
         {
@@ -278,11 +311,15 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
         ArgumentNullException.ThrowIfNull(destination);
         if (Request.HasRequestBodyStarted)
         {
-            throw new InvalidOperationException("This request cannot be delegated, the request body has already started.");
+            throw new InvalidOperationException(
+                "This request cannot be delegated, the request body has already started."
+            );
         }
         if (Response.HasStarted)
         {
-            throw new InvalidOperationException("This request cannot be delegated, the response has already started.");
+            throw new InvalidOperationException(
+                "This request cannot be delegated, the response has already started."
+            );
         }
 
         var source = Server.RequestQueue;
@@ -295,18 +332,21 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
             {
                 PropertyId = HTTP_DELEGATE_REQUEST_PROPERTY_ID.DelegateRequestDelegateUrlProperty,
                 PropertyInfo = uriPointer,
-                PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix)
+                PropertyInfoLength = (uint)
+                    System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix),
             };
 
             // Passing 0 for delegateUrlGroupId allows http.sys to find the right group for the
             // URL passed in via the property above. If we passed in the receiver's URL group id
             // instead of 0, then delegation would fail if the receiver restarted.
-            statusCode = PInvoke.HttpDelegateRequestEx(source.Handle,
-                                                           destination.Queue.Handle,
-                                                           Request.RequestId,
-                                                           DelegateUrlGroupId: 0,
-                                                           PropertyInfoSetSize: 1,
-                                                           property);
+            statusCode = PInvoke.HttpDelegateRequestEx(
+                source.Handle,
+                destination.Queue.Handle,
+                Request.RequestId,
+                DelegateUrlGroupId: 0,
+                PropertyInfoSetSize: 1,
+                property
+            );
         }
 
         if (statusCode != ErrorCodes.ERROR_SUCCESS)

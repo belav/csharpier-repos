@@ -59,7 +59,8 @@ public class FileProviderRazorProjectFileSystemTest
                 Assert.Equal("/", file.BasePath);
                 Assert.Equal(Path.Combine("BasePath", "File3.cshtml"), file.PhysicalPath);
                 Assert.Equal("File3.cshtml", file.RelativePhysicalPath);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -67,25 +68,19 @@ public class FileProviderRazorProjectFileSystemTest
     {
         // Arrange
         var fileProvider = new TestFileProvider("BasePath");
-        var directory1 = new TestDirectoryFileInfo
-        {
-            Name = "Level1-Dir1",
-        };
+        var directory1 = new TestDirectoryFileInfo { Name = "Level1-Dir1" };
         var file1 = fileProvider.AddFile("File1.cshtml", "content");
-        var directory2 = new TestDirectoryFileInfo
-        {
-            Name = "Level1-Dir2",
-        };
+        var directory2 = new TestDirectoryFileInfo { Name = "Level1-Dir2" };
         fileProvider.AddDirectoryContent("/", new IFileInfo[] { directory1, file1, directory2 });
 
         var file2 = fileProvider.AddFile("/Level1-Dir1/File2.cshtml", "content");
         var file3 = fileProvider.AddFile("/Level1-Dir1/File3.cshtml", "content");
         var file4 = fileProvider.AddFile("/Level1-Dir1/File4.txt", "content");
-        var directory3 = new TestDirectoryFileInfo
-        {
-            Name = "Level2-Dir1"
-        };
-        fileProvider.AddDirectoryContent("/Level1-Dir1", new IFileInfo[] { file2, directory3, file3, file4 });
+        var directory3 = new TestDirectoryFileInfo { Name = "Level2-Dir1" };
+        fileProvider.AddDirectoryContent(
+            "/Level1-Dir1",
+            new IFileInfo[] { file2, directory3, file3, file4 }
+        );
         var file5 = fileProvider.AddFile(Path.Combine("Level1-Dir2", "File5.cshtml"), "content");
         fileProvider.AddDirectoryContent("/Level1-Dir2", new IFileInfo[] { file5 });
         fileProvider.AddDirectoryContent("/Level1/Level2", new IFileInfo[0]);
@@ -96,35 +91,55 @@ public class FileProviderRazorProjectFileSystemTest
         var razorFiles = fileSystem.EnumerateItems("/");
 
         // Assert
-        Assert.Collection(razorFiles.OrderBy(f => f.FilePath),
-             file =>
-             {
-                 Assert.Equal("/File1.cshtml", file.FilePath);
-                 Assert.Equal("/", file.BasePath);
-                 Assert.Equal(Path.Combine("BasePath", "File1.cshtml"), file.PhysicalPath);
-                 Assert.Equal("File1.cshtml", file.RelativePhysicalPath);
-             },
+        Assert.Collection(
+            razorFiles.OrderBy(f => f.FilePath),
+            file =>
+            {
+                Assert.Equal("/File1.cshtml", file.FilePath);
+                Assert.Equal("/", file.BasePath);
+                Assert.Equal(Path.Combine("BasePath", "File1.cshtml"), file.PhysicalPath);
+                Assert.Equal("File1.cshtml", file.RelativePhysicalPath);
+            },
             file =>
             {
                 Assert.Equal("/Level1-Dir1/File2.cshtml", file.FilePath);
                 Assert.Equal("/", file.BasePath);
-                Assert.Equal(Path.Combine("BasePath", "Level1-Dir1", "File2.cshtml"), file.PhysicalPath);
-                Assert.Equal(Path.Combine("Level1-Dir1", "File2.cshtml"), file.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine("BasePath", "Level1-Dir1", "File2.cshtml"),
+                    file.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Level1-Dir1", "File2.cshtml"),
+                    file.RelativePhysicalPath
+                );
             },
             file =>
             {
                 Assert.Equal("/Level1-Dir1/File3.cshtml", file.FilePath);
                 Assert.Equal("/", file.BasePath);
-                Assert.Equal(Path.Combine("BasePath", "Level1-Dir1", "File3.cshtml"), file.PhysicalPath);
-                Assert.Equal(Path.Combine("Level1-Dir1", "File3.cshtml"), file.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine("BasePath", "Level1-Dir1", "File3.cshtml"),
+                    file.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Level1-Dir1", "File3.cshtml"),
+                    file.RelativePhysicalPath
+                );
             },
             file =>
             {
                 Assert.Equal("/Level1-Dir2/File5.cshtml", file.FilePath);
                 Assert.Equal("/", file.BasePath);
-                Assert.Equal(Path.Combine("BasePath", "Level1-Dir2", "File5.cshtml"), file.PhysicalPath);
-                Assert.Equal(Path.Combine("Level1-Dir2", "File5.cshtml"), file.RelativePhysicalPath);
-            });
+                Assert.Equal(
+                    Path.Combine("BasePath", "Level1-Dir2", "File5.cshtml"),
+                    file.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Level1-Dir2", "File5.cshtml"),
+                    file.RelativePhysicalPath
+                );
+            }
+        );
     }
 
     [Fact]
@@ -132,25 +147,19 @@ public class FileProviderRazorProjectFileSystemTest
     {
         // Arrange
         var fileProvider = new TestFileProvider("BasePath");
-        var directory1 = new TestDirectoryFileInfo
-        {
-            Name = "Level1-Dir1",
-        };
+        var directory1 = new TestDirectoryFileInfo { Name = "Level1-Dir1" };
         var file1 = fileProvider.AddFile("/File1.cshtml", "content");
-        var directory2 = new TestDirectoryFileInfo
-        {
-            Name = "Level1-Dir2",
-        };
+        var directory2 = new TestDirectoryFileInfo { Name = "Level1-Dir2" };
         fileProvider.AddDirectoryContent("/", new IFileInfo[] { directory1, file1, directory2 });
 
         var file2 = fileProvider.AddFile("/Level1-Dir1/File2.cshtml", "content");
         var file3 = fileProvider.AddFile("/Level1-Dir1/File3.cshtml", "content");
         var file4 = fileProvider.AddFile("/Level1-Dir1/File4.txt", "content");
-        var directory3 = new TestDirectoryFileInfo
-        {
-            Name = "Level2-Dir1"
-        };
-        fileProvider.AddDirectoryContent("/Level1-Dir1", new IFileInfo[] { file2, directory3, file3, file4 });
+        var directory3 = new TestDirectoryFileInfo { Name = "Level2-Dir1" };
+        fileProvider.AddDirectoryContent(
+            "/Level1-Dir1",
+            new IFileInfo[] { file2, directory3, file3, file4 }
+        );
         var file5 = fileProvider.AddFile(Path.Combine("Level1-Dir2", "File5.cshtml"), "content");
         fileProvider.AddDirectoryContent("/Level1-Dir2", new IFileInfo[] { file5 });
         fileProvider.AddDirectoryContent("/Level1/Level2", new IFileInfo[0]);
@@ -161,21 +170,35 @@ public class FileProviderRazorProjectFileSystemTest
         var razorFiles = fileSystem.EnumerateItems("/Level1-Dir1");
 
         // Assert
-        Assert.Collection(razorFiles.OrderBy(f => f.FilePath),
+        Assert.Collection(
+            razorFiles.OrderBy(f => f.FilePath),
             file =>
             {
                 Assert.Equal("/File2.cshtml", file.FilePath);
                 Assert.Equal("/Level1-Dir1", file.BasePath);
-                Assert.Equal(Path.Combine("BasePath", "Level1-Dir1", "File2.cshtml"), file.PhysicalPath);
-                Assert.Equal(Path.Combine("Level1-Dir1", "File2.cshtml"), file.RelativePhysicalPath);
+                Assert.Equal(
+                    Path.Combine("BasePath", "Level1-Dir1", "File2.cshtml"),
+                    file.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Level1-Dir1", "File2.cshtml"),
+                    file.RelativePhysicalPath
+                );
             },
             file =>
             {
                 Assert.Equal("/File3.cshtml", file.FilePath);
                 Assert.Equal("/Level1-Dir1", file.BasePath);
-                Assert.Equal(Path.Combine("BasePath", "Level1-Dir1", "File3.cshtml"), file.PhysicalPath);
-                Assert.Equal(Path.Combine("Level1-Dir1", "File3.cshtml"), file.RelativePhysicalPath);
-            });
+                Assert.Equal(
+                    Path.Combine("BasePath", "Level1-Dir1", "File3.cshtml"),
+                    file.PhysicalPath
+                );
+                Assert.Equal(
+                    Path.Combine("Level1-Dir1", "File3.cshtml"),
+                    file.RelativePhysicalPath
+                );
+            }
+        );
     }
 
     [Fact]
@@ -241,16 +264,17 @@ public class FileProviderRazorProjectFileSystemTest
 
     private static FileProviderRazorProjectFileSystem GetRazorProjectFileSystem(
         TestFileProvider fileProvider,
-        string contentRootPath = "BasePath")
+        string contentRootPath = "BasePath"
+    )
     {
-        var options = Options.Create(new MvcRazorRuntimeCompilationOptions
-        {
-            FileProviders = { fileProvider }
-        });
+        var options = Options.Create(
+            new MvcRazorRuntimeCompilationOptions { FileProviders = { fileProvider } }
+        );
         var compilationFileProvider = new RuntimeCompilationFileProvider(options);
         var fileSystem = new FileProviderRazorProjectFileSystem(
             compilationFileProvider,
-            Mock.Of<IWebHostEnvironment>(e => e.ContentRootPath == contentRootPath));
+            Mock.Of<IWebHostEnvironment>(e => e.ContentRootPath == contentRootPath)
+        );
         return fileSystem;
     }
 }

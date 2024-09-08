@@ -33,8 +33,18 @@ namespace Microsoft.Win32.SystemEventsTests
                 }
 
                 // locate the hwnd used by SystemEvents in this domain
-                var windowClassNameField = typeof(SystemEvents).GetField("s_className", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic) ??  // corefx
-                                           typeof(SystemEvents).GetField("className", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);      // desktop
+                var windowClassNameField =
+                    typeof(SystemEvents).GetField(
+                        "s_className",
+                        System.Reflection.BindingFlags.Static
+                            | System.Reflection.BindingFlags.NonPublic
+                    )
+                    ?? // corefx
+                    typeof(SystemEvents).GetField(
+                        "className",
+                        System.Reflection.BindingFlags.Static
+                            | System.Reflection.BindingFlags.NonPublic
+                    ); // desktop
                 Assert.NotNull(windowClassNameField);
                 var windowClassName = windowClassNameField.GetValue(null) as string;
                 Assert.NotNull(windowClassName);
@@ -47,8 +57,16 @@ namespace Microsoft.Win32.SystemEventsTests
         internal static void WaitForSystemEventsWindow()
         {
             // wait for the window to be created
-            var windowReadyField = typeof(SystemEvents).GetField("s_eventWindowReady", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic) ??  // corefx
-                                   typeof(SystemEvents).GetField("eventWindowReady", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);      // desktop
+            var windowReadyField =
+                typeof(SystemEvents).GetField(
+                    "s_eventWindowReady",
+                    System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic
+                )
+                ?? // corefx
+                typeof(SystemEvents).GetField(
+                    "eventWindowReady",
+                    System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic
+                ); // desktop
             Assert.NotNull(windowReadyField);
             var windowReadyEvent = windowReadyField.GetValue(null) as ManualResetEvent;
             if (windowReadyEvent != null)

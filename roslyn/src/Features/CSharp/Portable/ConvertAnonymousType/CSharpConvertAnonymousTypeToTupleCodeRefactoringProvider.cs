@@ -12,41 +12,70 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertAnonymousType
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertAnonymousTypeToTuple), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertAnonymousTypeToTuple
+        ),
+        Shared
+    ]
     internal class CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider
         : AbstractConvertAnonymousTypeToTupleCodeRefactoringProvider<
             ExpressionSyntax,
             TupleExpressionSyntax,
-            AnonymousObjectCreationExpressionSyntax>
+            AnonymousObjectCreationExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertAnonymousTypeToTupleCodeRefactoringProvider() { }
 
-        protected override int GetInitializerCount(AnonymousObjectCreationExpressionSyntax anonymousType)
-            => anonymousType.Initializers.Count;
+        protected override int GetInitializerCount(
+            AnonymousObjectCreationExpressionSyntax anonymousType
+        ) => anonymousType.Initializers.Count;
 
-        protected override TupleExpressionSyntax ConvertToTuple(AnonymousObjectCreationExpressionSyntax anonCreation)
-            => SyntaxFactory.TupleExpression(
-                    SyntaxFactory.Token(SyntaxKind.OpenParenToken).WithTriviaFrom(anonCreation.OpenBraceToken),
+        protected override TupleExpressionSyntax ConvertToTuple(
+            AnonymousObjectCreationExpressionSyntax anonCreation
+        ) =>
+            SyntaxFactory
+                .TupleExpression(
+                    SyntaxFactory
+                        .Token(SyntaxKind.OpenParenToken)
+                        .WithTriviaFrom(anonCreation.OpenBraceToken),
                     ConvertInitializers(anonCreation.Initializers),
-                    SyntaxFactory.Token(SyntaxKind.CloseParenToken).WithTriviaFrom(anonCreation.CloseBraceToken))
-                            .WithPrependedLeadingTrivia(anonCreation.GetLeadingTrivia());
+                    SyntaxFactory
+                        .Token(SyntaxKind.CloseParenToken)
+                        .WithTriviaFrom(anonCreation.CloseBraceToken)
+                )
+                .WithPrependedLeadingTrivia(anonCreation.GetLeadingTrivia());
 
-        private static SeparatedSyntaxList<ArgumentSyntax> ConvertInitializers(SeparatedSyntaxList<AnonymousObjectMemberDeclaratorSyntax> initializers)
-            => SyntaxFactory.SeparatedList(initializers.Select(ConvertInitializer), initializers.GetSeparators());
+        private static SeparatedSyntaxList<ArgumentSyntax> ConvertInitializers(
+            SeparatedSyntaxList<AnonymousObjectMemberDeclaratorSyntax> initializers
+        ) =>
+            SyntaxFactory.SeparatedList(
+                initializers.Select(ConvertInitializer),
+                initializers.GetSeparators()
+            );
 
-        private static ArgumentSyntax ConvertInitializer(AnonymousObjectMemberDeclaratorSyntax declarator)
-            => SyntaxFactory.Argument(ConvertName(declarator.NameEquals), default, declarator.Expression)
-                            .WithTriviaFrom(declarator);
+        private static ArgumentSyntax ConvertInitializer(
+            AnonymousObjectMemberDeclaratorSyntax declarator
+        ) =>
+            SyntaxFactory
+                .Argument(ConvertName(declarator.NameEquals), default, declarator.Expression)
+                .WithTriviaFrom(declarator);
 
-        private static NameColonSyntax? ConvertName(NameEqualsSyntax? nameEquals)
-            => nameEquals == null
+        private static NameColonSyntax? ConvertName(NameEqualsSyntax? nameEquals) =>
+            nameEquals == null
                 ? null
                 : SyntaxFactory.NameColon(
                     nameEquals.Name,
-                    SyntaxFactory.Token(SyntaxKind.ColonToken).WithTriviaFrom(nameEquals.EqualsToken));
+                    SyntaxFactory
+                        .Token(SyntaxKind.ColonToken)
+                        .WithTriviaFrom(nameEquals.EqualsToken)
+                );
     }
 }
